@@ -1,0 +1,23 @@
+{
+ "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
+ "patches": [
+  {
+   "file": "sidecar-sfx1017.json",
+   "tag": "sfx1017",
+   "title": "sfx1017: Sidecar mods (recommended)",
+   "description": "External voice machines (PLAITS, DAISYSP) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels), and the TEENSY folder in the sample browser.",
+   "output": "Analog-Rytm_MKII_OS1.73_sfx1017.syx",
+   "output_sha256": "118671e8daa5989061d00934e4b6e9d02f9293f14a7e60164c40a4cc2ed5f415",
+   "source_commit": "4acd4c2a1e4749a5854007c6304638645c2e83e6"
+  },
+  {
+   "file": "sidecar-rui1017.json",
+   "tag": "rui1017",
+   "title": "rui1017: sfx1017 + remote UI (early)",
+   "description": "Everything in sfx1017, plus the early remote UI page (hold TRK, press YES). The Sidecar does not serve remote UI pages yet: the page stays blank and returns to the normal screen within about a second.",
+   "output": "Analog-Rytm_MKII_OS1.73_rui1017.syx",
+   "output_sha256": "c795ed5f472c4eae1563e63e1b6414eb907de1c96991d831196d15ef58f2ae67",
+   "source_commit": "4acd4c2a1e4749a5854007c6304638645c2e83e6"
+  }
+ ]
+}

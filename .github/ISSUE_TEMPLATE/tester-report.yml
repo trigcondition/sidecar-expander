@@ -1,0 +1,47 @@
+name: Tester report
+description: Something you tried with a Sidecar build, and what happened
+title: "[test] "
+labels: ["tester-report"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for testing. One finding per report, please. Don't attach firmware files (.syx).
+  - type: dropdown
+    id: rytm-build
+    attributes:
+      label: Rytm mod build
+      options: [sfx1017, rui1017, stock OS 1.73 (no mods), other]
+    validations: { required: true }
+  - type: dropdown
+    id: sidecar
+    attributes:
+      label: Sidecar hardware
+      options: [Teensy 4.1, Raspberry Pi 4B, none]
+    validations: { required: true }
+  - type: input
+    id: sidecar-build
+    attributes:
+      label: Sidecar build
+      description: The commit in the file name (sidecar-teensy41-xxxxxxxx.hex / sidecar-pi4-sd-xxxxxxxx.zip)
+  - type: textarea
+    id: steps
+    attributes:
+      label: What you did
+      description: Steps, pages, settings. Was the sequencer running?
+    validations: { required: true }
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened, and what you expected
+    validations: { required: true }
+  - type: dropdown
+    id: recovered
+    attributes:
+      label: Did the Rytm keep working?
+      options: [yes, "needed a power cycle", "needed a reflash", "not recovered yet"]
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: From the Teensy console or sidecar.local, if you have them
+      render: text

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidecar | Expander</title>
+<style>
+  :root { --bg:#f6f6f4; --fg:#1d1d1b; --mut:#6b6b66; --line:#d9d9d4; --card:#fff; --acc:#2a6df4; --warn:#b5520b; --ok:#1d8a4a; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#141414; --fg:#e6e6e3; --mut:#8d8d88; --line:#2c2c2a; --card:#1c1c1b; --acc:#6f9cff; --warn:#e3964f; --ok:#4cc27f; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.4 system-ui, sans-serif; }
+  main { max-width:1100px; margin:0 auto; padding:16px; display:grid; gap:12px; }
+  header { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  h1 { font-size:16px; margin:0; font-weight:600; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--mut); display:inline-block; }
+  .dot.on { background:var(--ok); }
+  #state { color:var(--mut); }
+  .spacer { flex:1; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+  h2 { font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--mut); margin:0 0 8px; font-weight:600; }
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  .row label { color:var(--mut); min-width:90px; }
+  button, select, input { font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:4px 10px; }
+  button { cursor:pointer; }
+  button:hover:not(:disabled) { border-color:var(--acc); }
+  button.primary { background:var(--acc); border-color:var(--acc); color:#fff; }
+  :disabled { opacity:.45; cursor:not-allowed; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:12px; }
+  #status { font:12px ui-monospace, monospace; color:var(--mut); }
+  #status b { color:var(--fg); font-weight:600; }
+  #log { height:46vh; min-height:220px; overflow:auto; margin:0; padding:8px; background:var(--bg); border:1px solid var(--line);
+         border-radius:6px; font:12px/1.45 ui-monospace, monospace; white-space:pre-wrap; word-break:break-all; }
+  #log .me { color:var(--acc); }
+  #log .bad { color:var(--warn); }
+  #cmd { flex:1; min-width:180px; font-family:ui-monospace, monospace; }
+  .note { color:var(--mut); font-size:12px; }
+  #nosupport { display:none; border-color:var(--warn); color:var(--warn); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Sidecar | Expander</h1>
+    <span class="dot" id="dot"></span><span id="state">not connected</span>
+    <span class="spacer"></span>
+    <button class="primary" id="connect">Connect</button>
+    <button id="disconnect" disabled>Disconnect</button>
+  </header>
+
+  <section id="nosupport">This page needs WebSerial: use Chrome or Edge on a desktop, opened from localhost or https.</section>
+
+  <div id="status">cpu <b data-k="cpu">-</b> % · peak <b data-k="peak">-</b> % · underruns <b data-k="underruns">-</b> ·
+    ob <b data-k="ob">-</b> · fifo <b data-k="fifo">-</b> (min <b data-k="fifoMin">-</b> max <b data-k="fifoMax">-</b>
+    target <b data-k="target">-</b>) · xruns <b data-k="xruns">-</b> · notes <b data-k="notesOn">-</b>
+    (<b data-k="notes">-</b> channel mask <b data-k="chans">-</b>) · out <b data-k="out">-</b></div>
+
+  <div class="grid">
+    <section>
+      <h2>Controls</h2>
+      <div class="row"><label>MIDI notes</label>
+        <button data-cmd="notes=1">On</button><button data-cmd="notes=0">Off</button><button data-cmd="notes">Show</button></div>
+      <div class="row"><label>Output</label>
+        <button data-cmd="out=main">Main</button><button data-cmd="out=tracks">Tracks</button><button data-cmd="out">Show</button></div>
+      <div class="row"><label title="Sidecar | Expander (Mini) builds (teensy/host_uac2.sh): the computer's USB audio OUT 1..12 to the Rytm's Overbridge inputs">Computer audio</label>
+        <button data-cmd="mac=on">On</button><button data-cmd="mac=off">Off</button><button data-cmd="mac">Show</button></div>
+      <div class="row"><label>Machine</label>
+        <select id="mvoice"></select>
+        <select id="mname"><option>plaits</option><option>juno</option><option>daisy</option><option>dsps</option>
+          <option>grain</option><option>dd</option><option>fm</option></select>
+        <button id="mset">Set</button></div>
+      <div class="row"><label>FIFO target</label>
+        <input id="fifo" type="number" min="24" step="8" value="256" style="width:90px">
+        <button id="fifoset">Set</button><button data-cmd="fifo">Show</button></div>
+      <p class="note">Output and FIFO are the USB host build's; the serial build answers them with a note.</p>
+    </section>
+
+    <section>
+      <h2>USB</h2>
+      <p class="note">Audio mode needs a Sidecar | Expander (Mini) build (teensy/host_uac2.sh). A change re-enumerates the Teensy (the page reconnects
+        by itself); the Rytm keeps streaming. The mode is kept across reboots.</p>
+      <div class="row"><label>Audio mode</label>
+        <select id="usbmode"><option value="multi">multi (20 in / 12 out)</option><option value="stereo">stereo (MAIN L/R)</option>
+          <option value="off">off (Serial + MIDI)</option><option value="overbridge" disabled>overbridge (later, opt-in)</option></select>
+        <button data-cmd="usbmode">Show</button> <span id="usbmodestate" class="note"></span></div>
+      <div class="row"><label>Storage</label><button disabled>Browse card</button></div>
+    </section>
+  </div>
+
+  <section>
+    <h2>Console</h2>
+    <div class="row">
+      <input id="cmd" placeholder="console line, e.g. notes   (sent as :line, at most 63 characters)" maxlength="63" autocomplete="off">
+      <button id="send">Send</button>
+      <span class="spacer"></span>
+      <input id="filter" placeholder="filter" style="width:140px">
+      <button id="pause">Pause</button><button id="clear">Clear</button>
+    </div>
+    <pre id="log"></pre>
+  </section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>

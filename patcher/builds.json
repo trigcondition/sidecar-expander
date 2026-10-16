@@ -1,0 +1,16 @@
+{
+  "comment": "The Rytm mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. Only list hardware-verified builds.",
+  "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
+  "builds": [
+    {
+      "tag": "sfx1017",
+      "title": "sfx1017: Sidecar mods (recommended)",
+      "description": "External voice machines (PLAITS, DAISYSP) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels), and the TEENSY folder in the sample browser."
+    },
+    {
+      "tag": "rui1017",
+      "title": "rui1017: sfx1017 + remote UI (early)",
+      "description": "Everything in sfx1017, plus the early remote UI page (hold TRK, press YES). The Sidecar does not serve remote UI pages yet: the page stays blank and returns to the normal screen within about a second."
+    }
+  ]
+}
