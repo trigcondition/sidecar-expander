@@ -26,6 +26,7 @@ Designed, with parts built.
 - **The Teensy recorder:** first with PSRAM, then a lean version without it.
 - **User effects (UFX1..UFX4):** loadable send effects, per project, like user machines.
 - **New send effects:** Clouds-style granular texture, a BBD delay, and amp modelling with NAM captures.
+- **Real Overbridge through the Sidecar (opt-in).** The Sidecar forwards the instrument's own Overbridge traffic to your computer and presents itself as the connected instrument, so the official Overbridge software works through it while the Sidecar keeps adding its voices and effects. Nothing is stored in the Sidecar: it mirrors the identity of whatever is plugged into its host port at runtime. Off by default, enabled in the settings behind a clear warning (unofficial; Overbridge updates may break it; firmware updates are blocked through it). The class-compliant multichannel mode stays the default.
 
 ## Later
 
