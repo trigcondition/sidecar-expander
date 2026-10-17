@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-or-later
-"""Generate patcher/patches/*.json and patches/index.json from a rytm-mods build.
+"""Generate public/patcher/patches/*.json and patches/index.json from a rytm-mods build.
 
     scripts/make_patches.py --mods ../rytm-mods-release --dir ../rytm-mods/build/sidecar-1017 \
         --commit <rytm-mods commit of the build> [--elekloader DIR] [TAG ...]
@@ -8,7 +8,7 @@
 --dir holds the stock .syx and our Analog-Rytm_MKII_OS1.73_<tag>.syx builds (git-ignored
 there; never copied here). Each patch is made by rytm-mods' tools/release_patch.py, which
 refuses unless the records rebuild our .syx byte for byte and carry no stock bytes. TAGs
-default to every build in patcher/builds.json.
+default to every build in public/patcher/builds.json.
 """
 import argparse
 import json
@@ -17,7 +17,8 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
-OUT = HERE / "patcher" / "patches"
+PATCHER = HERE / "public" / "patcher"   # served at /patcher/ on the Pages site
+OUT = PATCHER / "patches"
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--mods", required=True, help="a rytm-mods checkout with tools/release_patch.py")
@@ -27,7 +28,7 @@ ap.add_argument("--elekloader", help="elekloader checkout (default: <mods>/vendo
 ap.add_argument("tags", nargs="*")
 a = ap.parse_args()
 
-cfg = json.loads((HERE / "patcher" / "builds.json").read_text())
+cfg = json.loads((PATCHER / "builds.json").read_text())
 builds = [b for b in cfg["builds"] if not a.tags or b["tag"] in a.tags]
 if a.tags and len(builds) != len(a.tags):
     sys.exit("unknown tag(s): %s" % (set(a.tags) - {b["tag"] for b in builds}))

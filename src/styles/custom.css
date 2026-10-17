@@ -1,0 +1,75 @@
+/* Sidecar | Expander: black and white with one green accent. */
+:root {
+  --sc-green: #1fa64a;
+  --sl-font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sc-wordmark: 'Archivo Black', 'Arial Black', system-ui, sans-serif;
+
+  /* dark theme (Starlight's default): neutral greys, a brighter green for contrast on black */
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #ececec;
+  --sl-color-gray-2: #c8c8c8;
+  --sl-color-gray-3: #8f8f8f;
+  --sl-color-gray-4: #5c5c5c;
+  --sl-color-gray-5: #383838;
+  --sl-color-gray-6: #1c1c1c;
+  --sl-color-black: #0e0e0e;
+  --sl-color-accent-low: #0d3b1c;
+  --sl-color-accent: #2dbd5c;
+  --sl-color-accent-high: #8be3a6;
+}
+:root[data-theme='light'] {
+  --sl-color-white: #0e0e0e;
+  --sl-color-gray-1: #1c1c1c;
+  --sl-color-gray-2: #383838;
+  --sl-color-gray-3: #5c5c5c;
+  --sl-color-gray-4: #8f8f8f;
+  --sl-color-gray-5: #c8c8c8;
+  --sl-color-gray-6: #ececec;
+  --sl-color-gray-7: #f6f6f6;
+  --sl-color-black: #ffffff;
+  --sl-color-accent-low: #d3f2dc;
+  --sl-color-accent: #15843b;
+  --sl-color-accent-high: #0b5226;
+}
+
+/* the wordmark in the header */
+.sc-title { display: flex; align-items: center; gap: .55rem; text-decoration: none; color: var(--sl-color-white); white-space: nowrap; }
+.sc-title .sc-word { font-family: var(--sc-wordmark); font-size: 1.45rem; line-height: 1; letter-spacing: -.01em; }
+.sc-title .sc-sub { font-size: .62rem; letter-spacing: .32em; font-weight: 600; color: var(--sl-color-gray-3); border-left: 1px solid var(--sl-color-gray-5); padding-left: .55rem; }
+.sc-title .sc-word b { color: var(--sl-color-accent); font-weight: inherit; }
+
+/* the home page */
+.sc-hero { text-align: center; padding: 1rem 0 0; }
+.sc-hero .sc-big { font-family: var(--sc-wordmark); font-size: clamp(3.2rem, 13vw, 6.5rem); line-height: .95; margin: 0; color: var(--sl-color-white); letter-spacing: -.02em; }
+.sc-hero .sc-rule { display: flex; align-items: center; gap: 1rem; justify-content: center; margin: .6rem auto 0; max-width: 34rem;
+  font-size: clamp(.8rem, 3vw, 1.15rem); letter-spacing: .5em; font-weight: 600; color: var(--sl-color-white); }
+.sc-hero .sc-rule::before, .sc-hero .sc-rule::after { content: ''; flex: 1; height: 1px; background: var(--sl-color-white); }
+.sc-hero .sc-tag { color: var(--sl-color-gray-2); margin-top: 1.2rem; font-size: 1.05rem; }
+.sc-diagram { width: 100%; max-width: 640px; height: auto; display: block; margin: 1.5rem auto .5rem; }
+.sc-diagram .ink { fill: none; stroke: var(--sl-color-white); stroke-width: 3; stroke-linejoin: round; }
+.sc-diagram .inkfill { fill: var(--sl-color-white); }
+.sc-diagram .paper { fill: var(--sl-color-black); }
+.sc-diagram .green { fill: none; stroke: var(--sl-color-accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.sc-diagram .greenfill { fill: var(--sl-color-accent); }
+.sc-diagram text { font-family: var(--sl-font); font-weight: 700; fill: var(--sl-color-white); }
+.sc-diagram text.lab { font-size: 22px; }
+.sc-diagram text.or { font-size: 18px; }
+.sc-diagram text.g { fill: var(--sl-color-accent); font-size: 18px; letter-spacing: .25em; }
+.sc-links { list-style: none; padding: 0; margin: 2rem auto; max-width: 40rem; border-top: 1px solid var(--sl-color-gray-5); }
+.sc-links li { border-bottom: 1px solid var(--sl-color-gray-5); margin: 0 !important; }
+.sc-links a { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: .85rem 0; text-decoration: none; color: var(--sl-color-white); }
+.sc-links a b { font-weight: 700; white-space: nowrap; }
+.sc-links a:hover b { color: var(--sl-color-accent); }
+.sc-links small { color: var(--sl-color-gray-3); text-align: right; }
+.sc-note { color: var(--sl-color-gray-3); font-size: .85rem; text-align: center; max-width: 40rem; margin: 0 auto; }
+
+/* status badges in tables */
+.sc-ok, .sc-test, .sc-plan { font-size: .75rem; font-weight: 700; padding: .05rem .4rem; border-radius: .25rem; white-space: nowrap; }
+.sc-ok { background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); }
+.sc-test { border: 1px solid var(--sl-color-gray-4); color: var(--sl-color-gray-2); }
+.sc-plan { color: var(--sl-color-gray-3); border: 1px dashed var(--sl-color-gray-4); }
+
+/* the home page carries its own wordmark: hide the page title band */
+main:has(.sc-hero) .content-panel:first-child { display: none; }
+main:has(.sc-hero) .content-panel { border-top: 0; }

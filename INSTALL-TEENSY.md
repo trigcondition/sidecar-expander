@@ -1,5 +1,7 @@
 # Install: Teensy 4.1
 
+> Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
+
 The Teensy 4.1 version of Sidecar | Expander. It works together with the Rytm mods: patch and flash those first ([PATCHER.md](PATCHER.md)).
 
 ## You need

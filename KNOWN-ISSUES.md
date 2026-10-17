@@ -1,5 +1,7 @@
 # Known issues
 
+> Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
+
 First tester release (builds `sfx1017` / `rui1017`). Please report anything not listed here, using the Tester report form under Issues.
 
 ## Rytm mods

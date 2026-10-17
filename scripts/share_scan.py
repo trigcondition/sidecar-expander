@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-or-later
-"""Share-readiness scan of everything that would ship: the repo's files and the dist/ artifacts.
+"""Share-readiness scan of everything that would ship: the repo's files, the built site (_site/) and the dist/ artifacts.
 
     scripts/share_scan.py [--stock STOCK.syx] [--names NAME ...]
 
@@ -21,7 +21,8 @@ import sys
 import zipfile
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(HERE, "patcher"))
+PATCHER = os.path.join(HERE, "public", "patcher")   # served at /patcher/
+sys.path.insert(0, PATCHER)
 import sidecar_patch as sp  # noqa: E402
 
 NOTICE_FILES = {"THIRD_PARTY_LICENSES", "LICENSE"}
@@ -32,7 +33,7 @@ GUI_EXT = {".html", ".js", ".hex", ".img"}
 
 def files():
     for root, dirs, fs in os.walk(HERE):
-        dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", "tests")]
+        dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", "tests", "node_modules", ".astro", ".shots")]
         for f in fs:
             p = os.path.join(root, f)
             yield os.path.relpath(p, HERE), p
@@ -79,7 +80,9 @@ def main():
             bad.append(f"{rel}: local path {m[:60].decode(errors='replace')}")
         mails = sorted(set(EMAIL.findall(data)))
         if mails:
-            (notes if top in NOTICE_FILES or top == "licenses" or rel.endswith(("COPYING.linux", "LICENCE.broadcom"))
+            # the site's bundled third-party scripts (Pagefind's translation credits) count as notices too
+            vendored = rel.startswith((os.path.join("_site", "pagefind") + os.sep, os.path.join("_site", "_astro") + os.sep))
+            (notes if top in NOTICE_FILES or top == "licenses" or vendored or rel.endswith(("COPYING.linux", "LICENCE.broadcom"))
              else bad).append(f"{rel}: e-mail {', '.join(m.decode() for m in mails[:4])}")
         if b"\xf0\x00\x20\x3c" in data and rel.endswith((".syx", ".bin", ".img", ".hex", ".zip")):
             bad.append(f"{rel}: holds an Elektron SysEx header")
@@ -95,7 +98,7 @@ def main():
         for sid in st.stored:
             b = st.section(sid)
             grams |= {b[i:i + 4] for i in range(len(b) - 3)}
-        pdir = os.path.join(HERE, "patcher", "patches")
+        pdir = os.path.join(PATCHER, "patches")
         for f in sorted(os.listdir(pdir)):
             if not f.startswith("sidecar-"):
                 continue
@@ -105,7 +108,7 @@ def main():
                 if len(op) == 2:
                     b = bytes.fromhex(op[1])
                     hits += sum(1 for i in range(len(b) - 3) if b[i:i + 4] in grams)
-            (bad if hits else notes).append(f"patcher/patches/{f}: {hits} literal windows found in stock "
+            (bad if hits else notes).append(f"public/patcher/patches/{f}: {hits} literal windows found in stock "
                                             f"({doc['stats']['literal_bytes']} literal bytes)")
     for n in notes:
         print("note ", n)

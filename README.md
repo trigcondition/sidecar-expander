@@ -6,7 +6,7 @@ Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small co
 
 > **First public tester release. Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 
-Site with the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
+Documentation, the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
 
 ## What works now
 
@@ -56,6 +56,14 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 ## Feedback
 
 Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (`sfx1017` / `rui1017`, and the Teensy or Pi build from `BUILD-INFO`), what you did, and what happened. Logs from the web console or `sidecar.local` help a lot.
+
+## This repository
+
+- `src/content/docs/`: the documentation site (Astro Starlight; `npm ci && npm run build` builds it into `_site/`).
+- `public/patcher/`: the Rytm mod patcher (browser page and Python script), served at `/patcher/`.
+- `public/console/`: the Teensy web console, served at `/console/`.
+- `scripts/`: the release scripts (patch files, console sync, packaging, share scan).
+- `.github/workflows/pages.yml`: builds and deploys the site to GitHub Pages (manual trigger).
 
 ## Credits and licences
 
