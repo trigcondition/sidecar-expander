@@ -13,8 +13,8 @@ Sidecar is in public testing. Each feature below is marked:
 
 The current tester builds of the Rytm mods are `sfx1021` (the default) and `rui1021` (with the remote UI, for the Pi with the 1021 kernel).
 
-:::caution[The 1021 Rytm builds are not yet confirmed on a real Rytm]
-`sfx1021` and `rui1021` pass our emulator tests, but nobody has run them on a real Rytm yet. A "hardware" mark below means the feature worked on a real Rytm with an earlier build of the same line (1017 to 1020); what is new in 1021 is marked "in testing". Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
+:::note
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages (`rui1021`) and the Pi's latest fixes were tested on a real Rytm on 2026-10-18; other "hardware" marks come from the 1017 to 1020 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
 :::
 
 ## On both Sidecars
@@ -38,9 +38,10 @@ The current tester builds of the Rytm mods are `sfx1021` (the default) and `rui1
 
 | Feature | Status |
 |---|---|
-| Sidecar pages on the Rytm's screen (TRK + YES), with the Pi | <span class="sc-ok">hardware</span> with `rui1019` and its kernel (the earlier font) |
-| Text in the Rytm's own font, stock layout, the full SIDECAR status page, faster knob response | <span class="sc-test">in testing</span> (1021, Pi with the 1021 kernel) |
-| The remote UI with the Teensy | <span class="sc-test">untested</span> |
+| Sidecar pages on the Rytm's screen (TRK + YES) with the Pi (1021 kernel) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Sidecar pages with the Teensy (1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Text in the Rytm's own font, the stock look, very responsive knobs; status as two pages SIDECAR + SYSTEM | <span class="sc-ok">hardware</span> (2026-10-18) |
+| PLAY/STOP while a page is open | not yet: every key goes to the Sidecar (fix in progress) |
 
 ## Raspberry Pi 4B only
 
@@ -48,12 +49,14 @@ The current tester builds of the Rytm mods are `sfx1021` (the default) and `rui1
 |---|---|
 | RINGS, CLOUDSEED and STUTTER send effects | <span class="sc-ok">hardware</span> |
 | Multitrack recorder to the SD card (up to 23 sources) | <span class="sc-ok">hardware</span> (5-minute take, 13 files) |
-| Web page at `http://sidecar.local`: status, sound, send FX, record, machines, files, log | <span class="sc-ok">hardware</span> |
+| Web page at `http://sidecar.local`: status, sound, send FX, record, machines, files, log | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
 | Sample pool and presets per project, the Pool & presets page | <span class="sc-test">in testing</span> (simulator; not yet checked by ear) |
-| File browser with folder upload | <span class="sc-ok">hardware</span> |
-| 5" HDMI touch display: status, settings, screensaver, brightness | <span class="sc-ok">hardware</span> |
+| File browser with folder upload, also large sample folders (summary line, Retry failed) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> (2026-10-18): the digital voices stop and resume |
+| 5" HDMI touch display: status, settings, screensaver, brightness | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
+| Display: hide the touch test, brightness down to 5 % | <span class="sc-test">in testing</span> (new) |
 | Boots from its own SD card, no computer needed | <span class="sc-ok">hardware</span> with a computer attached; a cold power cycle straight into the engine <span class="sc-test">in testing</span> |
-| Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joined; off in the package, no setup page yet) |
+| Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package, no setup page yet); rejoin watchdog <span class="sc-test">in testing</span> (new) |
 | Computer audio and MIDI over USB-C | <span class="sc-test">in testing</span> |
 
 ## Teensy 4.1 only

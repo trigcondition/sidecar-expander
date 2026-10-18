@@ -26,10 +26,10 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 | Build | What |
 |---|---|
 | `sfx1021` (default, recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
-| `rui1021` | everything in `sfx1021`, plus the remote UI (TRK + YES): the SIDECAR status page and voice pages on the Rytm's screen, in the Rytm's own font. **Pi only, and only with the 1021 Pi kernel**: an older kernel draws the pages without text. Untested with the Teensy, so Teensy users pick `sfx1021` |
+| `rui1021` | everything in `sfx1021`, plus the remote pages (TRK + YES): SIDECAR and SYSTEM status pages and voice pages on the Rytm's screen, in the Rytm's own font. Tested on the Pi (1021 kernel) and the Teensy (1021 firmware); an older Pi kernel draws the pages without text. While a page is open PLAY/STOP go to the Sidecar: leave with TRK + YES |
 
-:::caution[Not yet confirmed on a real Rytm]
-The 1021 builds pass our emulator tests, but nobody has run them on a real Rytm yet. The earlier builds they grow from (1017 to 1020) were tested on hardware; see [What works now](/sidecar-expander/introduction/what-works-now/) for the details. Keep the stock file at hand to go back.
+:::note
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. `rui1021` ran on a real Rytm with the Pi and the Teensy on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
 :::
 
 ## Option A: in the browser

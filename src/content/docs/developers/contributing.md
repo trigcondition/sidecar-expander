@@ -15,7 +15,7 @@ Use the **Tester report** form under [Issues](https://github.com/trigcondition/s
 - what you did, what you expected, what happened;
 - a log: the Teensy console's log, or the Log tab of `sidecar.local`.
 
-The items under "Not yet confirmed on hardware" in [Known issues](/sidecar-expander/using/troubleshooting/#not-yet-confirmed-on-hardware) are especially welcome.
+The items under "Not yet confirmed on hardware" in [Known issues](/sidecar-expander/using/troubleshooting/#still-in-testing) are especially welcome.
 
 ## Source code
 

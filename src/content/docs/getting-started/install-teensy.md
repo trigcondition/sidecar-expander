@@ -74,7 +74,11 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## Which Rytm build
 
-Use `sfx1021` with the Teensy. The remote UI in `rui1021` was built and tested for the Raspberry Pi; the Teensy firmware carries the same remote UI code, but it has not been tried on a Teensy, so expect it not to work there yet.
+`sfx1021` (the default) or `rui1021`. The remote pages of `rui1021` work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+
+## User machine space on the Teensy
+
+The Teensy has 32 KB of plugin code space. The six starter machines fit together, but only **one** of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) fits at a time: a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). Smaller packages and a clearer reason on the Rytm are in progress. The Pi has no such limit.
 
 ## Check that it works
 

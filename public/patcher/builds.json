@@ -1,16 +1,16 @@
 {
-  "comment": "The Rytm mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. The first build is the default. The 1021 builds are emulator-tested, not yet hardware-verified: say so in the descriptions.",
+  "comment": "The Rytm mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. The first build is the default.",
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
       "tag": "sfx1021",
       "title": "sfx1021: Sidecar mods (default, recommended)",
-      "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. For the Teensy and the Pi. Tested in the emulator; not yet confirmed on a real Rytm."
+      "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. For the Teensy and the Pi."
     },
     {
       "tag": "rui1021",
-      "title": "rui1021: sfx1021 + remote UI (Pi with the 1021 kernel only)",
-      "description": "Everything in sfx1021, plus the remote UI: hold TRK, press YES for the SIDECAR status page and the voice pages, in the Rytm's own font. Needs the Raspberry Pi with the 1021 kernel (an older kernel shows the pages without text). Untested with the Teensy: use sfx1021 there. Tested in the emulator; not yet confirmed on a real Rytm."
+      "title": "rui1021: sfx1021 + remote pages (tested on Pi and Teensy)",
+      "description": "Everything in sfx1021, plus the remote pages: hold TRK, press YES for the SIDECAR and SYSTEM status pages and the voice pages, in the Rytm's own font. Tested on hardware with the Pi (1021 kernel) and the Teensy (1021 firmware); an older Pi kernel shows the pages without text. While a page is open PLAY/STOP go to the Sidecar: leave with TRK + YES."
     }
   ]
 }

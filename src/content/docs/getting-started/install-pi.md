@@ -102,7 +102,7 @@ The release's `plugins/` folder holds six starter machines as Pi packages: `sc_a
 
 ## The remote UI
 
-The `rui1021` Rytm build's remote UI (TRK + YES on the Rytm) needs this release's kernel (1021). With an older kernel the pages open without any text. The 1021 Rytm builds are emulator-tested and not yet confirmed on a real Rytm.
+The `rui1021` Rytm build's remote pages (TRK + YES on the Rytm) need this release's kernel (1021); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## Wi-Fi (off by default)
 

@@ -120,28 +120,28 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-test">in testing</span> (build `rui1021`, Raspberry Pi with the 1021 kernel; the remote UI itself worked on hardware with `rui1019`)
+<span class="sc-ok">hardware</span> (build `rui1021`, tested 2026-10-18 with the Pi on the 1021 kernel and with the Teensy on the 1021 firmware)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
-- **TRK + YES** (hold TRK, press YES) opens it. The first page is the SIDECAR status page; then one page per voice whose machine has a page (PLAITS first).
+- **TRK + YES** (hold TRK, press YES) opens it. The first pages are the status pages SIDECAR and SYSTEM; then one page per voice whose machine has a page (PLAITS first).
 - **LEFT / UP**: the previous page. **RIGHT / DOWN / PAGE**: the next. **NO**: back to SIDECAR.
+- While a page is open **every key goes to the Sidecar**, so PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes the keys the Sidecar does not use on to the Rytm is in progress.
 - The **encoders** A..H change the shown voice's parameters. Such an edit holds until the Rytm's own value moves (its knob, a p-lock, another sound). It is not saved in the kit.
 - The pads keep playing.
 - **Leave** with TRK + YES again. The page also closes by itself 1 second after the Sidecar stops answering.
 
 Since 1021 every letter on these pages is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places: the title bar, the labels and the bottom bar look like the Rytm's own pages. The Sidecar sends the graphics and the text items; no font data of the Rytm is in Sidecar. A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later (it was 75 ms).
 
-**The SIDECAR status page** shows the 8 voices with their machines, FX1 and FX2 with their TYPE and PRE / POST, the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the three render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key).
+**The status pages.** **SIDECAR** shows the 8 voices with their machines, and FX1 and FX2 with their TYPE and PRE / POST. **SYSTEM** shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key). The Teensy has no recorder and no network, so its SYSTEM page leaves those out.
 
-![The SIDECAR status page: 8 voices, FX1/FX2, U1..U5, REC, stream state, three core loads, ETH UP and the address](../../../assets/rytm/remote-status.png)
+![The SIDECAR page: voices 1-8 with their machines, FX1 and FX2](../../../assets/rytm/remote-status-sidecar.png)
+![The SYSTEM page: U1..U5, REC 1:15, OB OK, UND 0, three core loads, ETH UP and the address](../../../assets/rytm/remote-status-system.png)
 
-**A voice page** (RIGHT from the status page) is laid out like a stock knob page: the dials in the same places, the labels on the same rows. ENG shows the model's name where the dial would be.
+**A voice page** (RIGHT from the status pages) is laid out like a stock knob page: the dials in the same places, the labels on the same rows. ENG shows the model's name where the dial would be.
 
 ![A PLAITS voice page: ENG with the model VA, HRM, TIM, MOR, the decay curve, LPG, TUN, LEV, and V1 HRM:70 in the bottom bar](../../../assets/rytm/remote-plaits.png)
 
-<small>Screenshots: `rui1021` in the emulator with the 1021 host code. <span class="sc-test">in testing</span>: not yet on a real Rytm.</small>
+<small>Screenshots: `rui1021` in the emulator with the 1021 host code (mock values). The remote UI itself is <span class="sc-ok">hardware</span>-tested: on a real Rytm the text is the Rytm's own and it responds at once.</small>
 
-- It needs the Pi with the 1021 kernel: an older kernel opens the pages without text.
-- With the Teensy the remote UI is untested; use `sfx1021` there.
-- Keys, pads and PLAY/STOP keep working while a page is open.
+- It needs the 1021 Sidecar: the Pi with the 1021 kernel, or the Teensy with the 1021 firmware. An older Pi kernel opens the pages without text.

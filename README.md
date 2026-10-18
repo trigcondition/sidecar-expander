@@ -6,7 +6,9 @@ Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small co
 
 > **Public tester release (the 1021 line). Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
-> **The 1021 Rytm builds (`sfx1021`, `rui1021`) are not yet confirmed on a real Rytm.** They pass our emulator tests; the builds they grow from (1017 to 1020) were tested on hardware. See [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
+> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+>
+> The remote pages of `rui1021` were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. A few parts are still in testing: see [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
 
 Documentation, the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
 
@@ -18,7 +20,7 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
   - P1 is ROUT: PRE returns through the Rytm's analog distortion and compressor; POST returns clean.
   - P2..P5 show each effect's own labels; list knobs step one item a detent.
 - **SIDECAR folder.** The Sidecar's SD card appears as a folder in the Rytm's own sample browser (it was called TEENSY before 1021).
-- **Remote UI (`rui1021`, Pi only).** TRK + YES opens the SIDECAR status page and voice pages on the Rytm's screen, in the Rytm's own font.
+- **Remote pages (`rui1021`, Pi and Teensy).** TRK + YES opens the SIDECAR and SYSTEM status pages and the voice pages on the Rytm's screen, in the Rytm's own font.
 - **Raspberry Pi version only:**
   - a sample pool and presets per project, with a Pool & presets page on the web page;
   - a multitrack recorder to the SD card;
@@ -30,7 +32,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 ## Requirements
 
-- **An Analog Rytm MKII running OS 1.73, and only OS 1.73.** The mods are built against that exact OS. The patcher refuses any other file.
+- **An Analog Rytm MKII running OS 1.73, and only OS 1.73.** The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The mods are built against that exact OS. The patcher refuses any other file.
   - If your Rytm runs an older OS, update it to 1.73 first.
   - **OS 1.74 is not supported yet.** A port to 1.74 is planned. We have not tested going back from 1.74 to 1.73 and cannot promise that it works, so please do not downgrade for this release.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode.
@@ -52,7 +54,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 ## Install
 
-1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `sfx1021` (the default). Pick `rui1021` only with a Raspberry Pi running the 1021 kernel: it adds the remote UI, which is untested with the Teensy.
+1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `sfx1021` (the default), or `rui1021` for the remote pages too (tested with the Pi on the 1021 kernel and the Teensy on the 1021 firmware).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar:**
    - Teensy: [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
@@ -61,19 +63,23 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 ## Tested on hardware or in the emulator
 
-Checked on a real Rytm MKII with a Sidecar attached (with the 1017 to 1020 builds):
+Checked on a real Rytm MKII with a Sidecar attached.
+
+On 2026-10-18, with the 1021 builds:
+- the remote UI (`rui1021`) on the Pi (1021 kernel) and on the Teensy (1021 firmware): the Rytm's own font, the stock look, very responsive; the SIDECAR and SYSTEM status pages and the voice pages;
+- Pi: folder upload of large sample folders (no more network errors; a summary line and Retry failed), unplugging and replugging the USB cable between Pi and Rytm (the digital voices stop and resume), restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
+
+Earlier (1017 to 1020 builds):
 - the voices heard: PLAITS, DAISYSP, JUNO, 6-OP FM, DIGIDRUM, DSP SAMPLE;
 - the send effects on the Pi (with labels, PRE/POST, STUTTER) and on the Teensy, live (CHORUS, COMB);
-- the Pi recorder (a 5-minute take), user machines loading, the web page's tabs and folder upload, the touch display, joining a Wi-Fi network;
-- the remote UI with `rui1019` and its Pi kernel (the earlier font).
+- the Pi recorder (a 5-minute take), user machines loading, the web page's tabs, the touch display.
 
-Tested in the emulator or the simulator only, not yet on a real Rytm:
-- **the 1021 Rytm builds as a whole** (`sfx1021`, `rui1021`), including the SIDECAR folder name, the NO SIDECAR popup and the remote UI in the Rytm's font;
-- the Pi sample pool and presets (not yet checked by ear);
+Still in testing (emulator or simulator only, not yet reported from a real Rytm):
+- the Pi sample pool and presets by ear;
 - the CRUSH and RINGMOD send effects;
-- stepped list knobs;
 - slot fingerprints when a project is shared with another Sidecar;
-- a cold power cycle of the Pi straight into the engine on its SD card.
+- a cold power cycle of the Pi straight into the engine on its SD card;
+- the `sfx1021` build on its own (the same mods as `rui1021` without the remote pages), the SIDECAR folder name and the NO SIDECAR popup, stepped list knobs.
 
 ## USB ID
 

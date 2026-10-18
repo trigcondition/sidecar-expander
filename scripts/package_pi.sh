@@ -59,6 +59,8 @@ for p in sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain; do
   [ "$(head -c 4 "$wt/plugins/$p/$p.a64.rmp")" = RMPA ] || { echo "$p.a64.rmp is not an RMPA package"; exit 1; }
   cp "$wt/plugins/$p/$p.a64.rmp" "$out/"
 done
+# the internal test plugins (rytm.sine_test, rytm.fault_test: crashes on purpose) must never ship
+! grep -l -a -E 'rytm\.(sine|fault|state|v2)_test|fault_test|sine_test' "$out"/*.rmp || { echo "a test plugin is in the package"; exit 1; }
 cp "$here/scripts/plugins-LICENSE.txt" "$out/LICENSE.txt"
 ( cd "$out" && shasum -a 256 *.rmp > SHA256SUMS )
 echo "source commit: $full" > "$out/BUILD-INFO-plugins.txt"

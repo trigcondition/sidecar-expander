@@ -40,15 +40,23 @@ sidebar:
 
 ### Raspberry Pi 4B
 
-- Wi-Fi is off in the tester release; Ethernet has no DHCP client (fixed 169.254.61.60, or `ip=`).
+- Wi-Fi is off in the SD card package (see the install page to turn it on); Ethernet has no DHCP client (fixed 169.254.61.60, or `ip=`).
 - The web page has no password.
 - Only the Pi 4B is supported. The Pi 5, Pi 3 and Pi 400 are untested.
 
-### Not yet confirmed on hardware
+### Remote pages
+
+- While a remote page is open every key goes to the Sidecar, so PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes unused keys on to the Rytm is in progress.
+
+### Teensy: user machine space
+
+- The 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). The Pi has no such limit.
+
+### Still in testing
 
 Results from testers are welcome:
 - a cold power cycle of the Pi straight into the engine, with no computer attached;
-- unplugging and replugging the Sidecar (or its power) while the Rytm plays: the Rytm should keep running, and the names and labels should come back.
+- the Pi's sample pool and presets by ear, CRUSH and RINGMOD, slot fingerprints in a project shared with another Sidecar.
 
 ## Reporting
 

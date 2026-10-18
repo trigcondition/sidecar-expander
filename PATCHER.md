@@ -16,7 +16,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
-1. Pick the mod build. `sfx1021` is the default and the recommended one; `rui1021` adds the remote UI and needs the Raspberry Pi with the 1021 kernel. The 1021 builds are emulator-tested and not yet confirmed on a real Rytm.
+1. Pick the mod build. `sfx1021` is the default and the recommended one; `rui1021` adds the remote pages (tested with the Pi on the 1021 kernel and the Teensy on the 1021 firmware). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 2. Drop your stock `.syx` on the page, or click to choose it.
 3. Press **Patch**, then **Save**.
 

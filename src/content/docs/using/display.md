@@ -15,21 +15,23 @@ The Sidecar wordmark with a progress bar, drawn within a third of a second of th
 
 ## Home
 
-![The display's home screen: tracks 1-8 with their machines, status with REC and the core loads, the project's U1..U5](../../../assets/ui/display-home.png)
+![The display's home screen with the touch test: tracks 1-8, status with REC and the core loads, the touch test, the project's U1..U5](../../../assets/ui/display-home.png)
+![The home screen with the touch test hidden: a SIDECAR panel with the network, web page, link and recorder in its place](../../../assets/ui/display-home-hidden.png)
 
-<small>Screenshot: the 1021 display rendered off-device with mock data.</small>
+<small>Screenshots: the 1021 display rendered off-device with mock data. The restyled display is <span class="sc-ok">hardware</span>-tested.</small>
 
 
 - The title bar, with **Rytm connected** (green) or **Rytm not connected** (red).
 - **Tracks:** voices 1-8 with their current machine.
 - **Project:** the Rytm's project and its U1..U5 machines as the Rytm shows them (`!NAME` missing, `NAME...` loading, `---` empty).
 - **Status:** Overbridge blocks, underruns (red once nonzero), load bars for the render cores, and `REC` while recording.
+- **Touch test:** a tap button and a slider to check the touch panel. Once touch works, press **Touch works – hide**: a **SIDECAR** panel (network, web page, link, recorder) takes its place. The About page has a Show / Hide toggle to bring it back; the choice is stored as `touchtest=` in `/.rytm/display.txt`.
 
 ## Settings
 
 ![Settings, Sound page: MIDI notes, output, computer audio, FIFO target; per voice the machine and a test drone](../../../assets/ui/display-sound.png)
 ![Settings, Send FX page: FX 1 in green, FX 2 in white, the 12 tracks' send levels, Kill tails](../../../assets/ui/display-sendfx.png)
-![Settings, About page: web address, IP, link, build, screensaver and brightness](../../../assets/ui/display-about.png)
+![Settings, About page: web address, IP, link, build, screensaver, the touch test toggle and brightness](../../../assets/ui/display-about.png)
 
 <small>Screenshots: the 1021 display rendered off-device with mock data.</small>
 
@@ -40,14 +42,14 @@ The **Settings** button (top right) opens the settings pages and becomes **Home*
 |---|---|
 | **Sound** | MIDI notes, output (Main/Tracks), computer audio, the buffer target; per voice: machine and test drone |
 | **Send FX** | both effects' TYPE and the 12 send levels (read only: the Rytm's kit owns them; **FX 1 green, FX 2 white**), and **Kill tails** |
-| **About** | the web address, IP, network, the build, the screensaver and brightness |
+| **About** | the web address, IP, network, the build, the screensaver, the touch test (show / hide) and brightness |
 
 The display, the web page and the console share one state: a change on one shows on all.
 
 ## Screensaver and brightness
 
 - **Screensaver:** after 1 hour without a touch (default) the screen goes black. Choose Off, 15 min, 1 h or 4 h. Any touch wakes it; that touch only wakes the screen. Rytm activity does not keep it awake.
-- **Brightness:** 10 to 100 %. It dims the picture (the panel has no software backlight control).
+- **Brightness:** 5 to 100 %. It dims the picture (the panel has no software backlight control); even the darkest setting stays readable, so you can always find the slider again.
 - Both are stored on the card (`/.rytm/display.txt`) and can be set from the web page too.
 
 ## Touch

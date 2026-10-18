@@ -9,6 +9,7 @@ co=${1:?usage: package_teensy.sh RYTM_TEENSY_CHECKOUT COMMIT}
 commit=${2:?usage: package_teensy.sh RYTM_TEENSY_CHECKOUT COMMIT}
 here=$(cd "$(dirname "$0")/.." && pwd)
 PLUGINS="sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain"
+rm -rf "$here/dist/teensy"                          # no hex of an earlier commit left next to the new one
 "$co/tools/release/teensy_hex.sh" "$here/dist/teensy" "$commit"
 out="$here/dist/teensy/plugins"
 rm -rf "$out"; mkdir -p "$out"
@@ -18,6 +19,8 @@ for p in $PLUGINS; do
   [ "$(head -c 4 "$co/plugins/$p/$p.rmp")" = RMP1 ] || { echo "$p.rmp is not an RMP1 package"; exit 1; }
   cp "$co/plugins/$p/$p.rmp" "$out/"
 done
+# the internal test plugins (rytm.sine_test, rytm.fault_test: crashes on purpose) must never ship
+! grep -l -a -E 'rytm\.(sine|fault|state|v2)_test|fault_test|sine_test' "$out"/*.rmp || { echo "a test plugin is in the package"; exit 1; }
 cp "$here/scripts/plugins-LICENSE.txt" "$out/LICENSE.txt"
 ( cd "$out" && shasum -a 256 *.rmp > SHA256SUMS )
 echo "source commit: $(git -C "$co" rev-parse HEAD)" > "$out/BUILD-INFO-plugins.txt"

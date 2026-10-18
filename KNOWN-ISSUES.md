@@ -2,18 +2,24 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Tester release, the 1021 line (Rytm builds `sfx1021` / `rui1021`). Please report anything not listed here, using the Tester report form under Issues.
+Tester release, the 1021 line (Rytm builds `sfx1021` / `rui1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
-## Not yet confirmed on hardware
+## Still in testing
 
-- **The 1021 Rytm builds have not run on a real Rytm yet.** They pass our emulator tests, and the 1017 to 1020 builds they grow from were tested on hardware. If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back; nothing new is stored in your projects.
-- Emulator or simulator only so far: the SIDECAR folder name and the NO SIDECAR popup, the remote UI in the Rytm's own font (`rui1021`), stepped list knobs, the CRUSH and RINGMOD effects, the Pi's sample pool and presets (not yet checked by ear), slot fingerprints in a project shared with another Sidecar, and a cold power cycle of the Pi straight into the engine on its SD card.
-- Unplugging and replugging the Sidecar (or its power) while the Rytm plays: the Rytm should keep running, and the names and labels should come back.
+Tested on hardware on 2026-10-18: the remote pages (`rui1021`) with the Pi and the Teensy, Pi folder upload of large folders, unplugging and replugging the USB cable between Pi and Rytm, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot. Not yet reported from a real Rytm:
+- the Pi's sample pool and presets by ear;
+- the CRUSH and RINGMOD send effects;
+- slot fingerprints in a project shared with another Sidecar;
+- a cold power cycle of the Pi straight into the engine on its SD card;
+- new since the last test: hiding the display's touch test, display brightness down to 5 %, the Wi-Fi rejoin watchdog.
+
+If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back; nothing new is stored in your projects.
 
 ## Rytm mods
 
-- **OS 1.73 only.** There are no patch files for other OS versions. **OS 1.74 is not supported yet**; a port is planned. We have not tested going back from 1.74 to 1.73 and cannot promise that it works.
-- **The remote UI (`rui1021`) needs the Raspberry Pi with the 1021 kernel.** An older Pi kernel opens the pages without any text. With the Teensy the remote UI is untested: use `sfx1021`.
+- **While a remote page is open, every key goes to the Sidecar** (`rui1021`). PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes the keys the Sidecar does not use on to the Rytm is in progress.
+- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. We have not tested going back from 1.74 to 1.73 and cannot promise that it works.
+- **The remote pages need a 1021 Sidecar:** the Pi with the 1021 kernel or the Teensy with the 1021 firmware. An older Pi kernel opens the pages without any text.
 - The slot menu (FUNC + CHRO, YES on a U slot) can hold the screen for up to 2 seconds while it waits for the Sidecar; with no Sidecar it then shows **NO SIDECAR**.
 - **User FX slots are not available yet.** The SEND FX TYPE list offers only the built-in effects.
 - **P2..P5 show numbers instead of names** when the Sidecar's firmware is older than the Rytm build. Update the Sidecar.
@@ -30,8 +36,9 @@ Tester release, the 1021 line (Rytm builds `sfx1021` / `rui1021`). Please report
 
 ## Teensy 4.1
 
+- **User machine space:** the Teensy's 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). Smaller packages and a clearer reason on the Rytm are in progress. The Pi has no such limit.
+- The Teensy's SYSTEM remote page has no recorder and no network line: the Teensy has neither.
 - The large send effects (RINGS, CLOUDSEED, STUTTER) run only on the Raspberry Pi version.
-- The Teensy firmware is built from the 1021 line, but its new parts were not retested on hardware (the remote UI was tested with the Pi only).
 - The web console's user machine and SD card tabs are in testing.
 - The computer-audio modes (USB audio to and from your computer) are not part of this release.
 
