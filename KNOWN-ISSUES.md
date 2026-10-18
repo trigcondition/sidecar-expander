@@ -33,7 +33,7 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 ## Teensy 4.1
 
-- **User machine space:** the Teensy's 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). Smaller packages and a clearer reason on the Rytm are in progress. The Pi has no such limit.
+- **User machine space:** the Sidecar Mini's 32 KB plugin code space fits only one of the old large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!ROOM`. The new, smaller NoisePlethora packages (prime, fibo, phase, fm, pw, ring, noise, walk, atari; the same sounds) fit two at a time, some three. The Pi has no such limit.
 - The Teensy's SYSTEM remote page has no recorder and no network line: the Teensy has neither.
 - The large send effects (RINGS, CLOUDSEED, STUTTER) run only on the Raspberry Pi version.
 - The web console's user machine and SD card tabs are in testing.

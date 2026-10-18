@@ -26,6 +26,7 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 - **Pi display:** restyled with the web page; the home page's touch test can be hidden (**Touch works – hide**, a toggle on the About page, `touchtest=` in `/.rytm/display.txt`); brightness 5-100 %, with the darkest setting still readable.
 - **Pi Wi-Fi:** joins on the first boot (tested on hardware), and a watchdog rejoins after a dropout.
 - **Restyled web page and Teensy console:** black and white with one green accent.
+- **Reasons instead of a bare "!".** A machine that cannot play now shows why: for example `!ROOM` when there's no code space left, `!CRSH` after a crash, `!TIME` after a timeout and `!MISS` for a missing package. The web console shows the full reason, such as "no room: needs N B, M B free".
 - **Pi: computer audio and MIDI over USB-C.** Plug the Pi's USB-C into a computer: the Rytm's tracks arrive as a multi-channel audio device, with MIDI both ways. Switched on in the web page's Sound tab. (Tested on hardware.)
 - **Pi: sample pool and presets.** The Pi now has the Teensy's per-project sample pool, the JUNO and FM lists, and user machine presets, with a **Pool & presets** page on `sidecar.local`. (Tested on hardware.)
 

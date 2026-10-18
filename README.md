@@ -19,7 +19,7 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
 | | Sidecar Mini (Teensy 4.1) | Sidecar (Raspberry Pi 4B) |
 |---|---|---|
 | Built-in machines, samples from the card, remote pages | yes | yes |
-| User machines | a few: 32 KB of plugin code space (one large NoisePlethora package at a time) | many |
+| User machines | a few: 32 KB of plugin code space (two or three of the smaller NoisePlethora packages) | many |
 | Send effects | CHORUS, COMB, CRUSH, RINGMOD | those, plus RINGS, CLOUDSEED, STUTTER |
 | Recorder | planned | yes, multitrack to the SD card |
 | Display, Wi-Fi, web page | no (a web console over USB) | yes |

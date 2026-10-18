@@ -50,7 +50,7 @@ sidebar:
 
 ### Teensy: user machine space
 
-- The 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). The Pi has no such limit.
+- The 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!ROOM`. Use the new, smaller NoisePlethora packages instead (prime, fibo, phase, fm, pw, ring, noise, walk, atari): any two fit together, some three. The Pi has no such limit.
 
 ### Still in testing
 

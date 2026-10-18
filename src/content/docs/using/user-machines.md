@@ -55,14 +55,21 @@ When nothing fits, the web page says what is wanted: "a machine with fingerprint
 
 ## !NAME on the Rytm
 
-A `!` before a machine name means it cannot play:
+A `!` before a machine name means it cannot play. Instead of a bare `!`, the Rytm shows the reason in front of a short name:
 
-- **MISSING**: the package is not installed, or not in the version range the slot needs;
-- **BAD**: the package failed its checks;
-- **NO ROOM**: it does not fit in the memory left;
-- **MUTED**: it crashed or ran over its CPU budget;
-- **LOADING**: it is being loaded;
-- or the track's sound was made for another machine than the slot now plays. The track stays silent until a trig with a matching sound.
+| On the Rytm | Reason |
+|---|---|
+| `!ROOM NAME` | no code space left: the package does not fit in the memory that is left (on the Sidecar Mini the 32 KB plugin space) |
+| `!CRSH NAME` | it crashed and was muted |
+| `!TIME NAME` | it took too long (a timeout, or over its CPU budget three times in a row) and was muted |
+| `!MISS NAME` | the package is not installed, or not in the version range the slot needs |
+| `!BAD NAME` | the package failed its checks |
+| `!SAFE NAME` | the Sidecar started in safe mode and did not load user machines |
+| `NAME...` | it is being loaded |
+
+The web console (Sidecar Mini) and the web page (Sidecar) show the full reason in the slot list, for example "no room: needs N B, M B free" or "muted: timed out".
+
+A machine name with a plain `!` and no reason means the track's sound was made for another machine than the slot now plays. The track stays silent until a trig with a matching sound.
 
 ## Limits
 

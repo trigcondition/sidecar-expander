@@ -19,7 +19,7 @@ Start with the Mini, make projects on it, and move up to the full Sidecar later.
 | Start-up | about a second | about 11 seconds from the SD card |
 | Voices | 8 | 8 |
 | Built-in machines | all | all |
-| User machines (U1..U5) | yes, RMP1 packages; 32 KB of plugin code space: the six starter machines fit together, but only one large NoisePlethora package at a time | yes, RMPA packages; no such limit |
+| User machines (U1..U5) | yes, RMP1 packages; 32 KB of plugin code space: the six starter machines fit together; two or three of the smaller NoisePlethora packages | yes, RMPA packages; no such limit |
 | Samples from the card (SIDECAR folder, sample pool) | yes | yes |
 | Send effects | CHORUS, COMB, CRUSH, RINGMOD | those, plus RINGS, CLOUDSEED, STUTTER |
 | Remote pages on the Rytm's screen (`rui1022`) | yes (SIDECAR, SYSTEM without recorder and network, voice pages) | yes |

@@ -65,7 +65,8 @@ What the machine list shows per slot:
 | nothing yet (no Sidecar) | `USER n` |
 | empty | `USER n ---` |
 | ready | the machine's name |
-| missing, bad, no room, muted, loading | `!` + the name |
+| missing, bad, no room, crashed, timed out | `!` + the reason + the name: `!MISS`, `!BAD`, `!ROOM`, `!CRSH`, `!TIME` (see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm)) |
+| loading | the name + `...` |
 | ready, but this sound was made for another machine | `!` + the name, and the track stays silent |
 
 Sounds remember which machine they were made for (a fingerprint). A sound saved with machine A stays silent if its slot now holds machine B, rather than playing B with A's settings.
