@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-<span class="sc-test">in testing</span>: built and tested on hardware with a computer, not part of the tester release.
+<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release, tested with multi-channel audio and MIDI. On the **Sidecar Mini (Teensy)**: <span class="sc-test">in testing</span>, not part of this release yet.
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Teensy's micro-USB, or the Pi's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 

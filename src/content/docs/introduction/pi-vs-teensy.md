@@ -27,7 +27,7 @@ Start with the Mini, make projects on it, and move up to the full Sidecar later.
 | Display | none | optional 5" HDMI touch display |
 | Web UI | the console in Chrome or Edge over USB (WebSerial) | its own page at `sidecar.local` over Ethernet or Wi-Fi |
 | Wi-Fi | none | yes (off in the SD card package) |
-| Computer audio over USB | in testing | in testing |
+| Computer audio and MIDI over USB | not in this release | yes, multi-channel (tested on hardware) |
 | Power | from its micro-USB port | its own 5 V 3 A supply |
 | Latency, voice after the Rytm's own drum | about 3.8 ms | about 4.7 ms |
 

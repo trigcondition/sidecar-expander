@@ -36,7 +36,7 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 - The Teensy's SYSTEM remote page has no recorder and no network line: the Teensy has neither.
 - The large send effects (RINGS, CLOUDSEED, STUTTER) run only on the Raspberry Pi version.
 - The web console's user machine and SD card tabs are in testing.
-- The computer-audio modes (USB audio to and from your computer) are not part of this release.
+- Computer audio (USB audio to and from your computer, with MIDI) is in this release on the **Sidecar (Pi 4B)**, tested on hardware with multi-channel audio and MIDI. On the **Sidecar Mini (Teensy)** it is not part of this release yet.
 
 ## Raspberry Pi 4B
 

@@ -68,6 +68,6 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Recorder on the Mini | <span class="sc-plan">planned</span> |
 | Web console over WebSerial: log, status, commands | <span class="sc-ok">hardware</span> |
 | Console tabs for user machines and the SD card | <span class="sc-test">in testing</span> |
-| USB audio to a computer (multi-channel or stereo) and MIDI pass-through | <span class="sc-test">in testing</span>; not in the tester release |
+| USB audio to a computer (multi-channel or stereo) and MIDI pass-through | <span class="sc-test">in testing</span>; not in this Sidecar Mini release (on the Pi it is) |
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).
