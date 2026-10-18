@@ -13,7 +13,7 @@ sidebar:
 - The stock file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - The official **Transfer** app on a computer, to send the patched OS.
 - Recommended: a **DIN MIDI interface**, for the recovery route that works even when the OS does not boot.
-- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the **Overbridge** mode.
+- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the **Overbridge** mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 
 ## Option A: Sidecar Mini (Teensy 4.1)
 

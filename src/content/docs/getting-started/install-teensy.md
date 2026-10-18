@@ -25,7 +25,7 @@ The Teensy version works together with the Rytm mods. Patch and flash those firs
 
 - Plug the Rytm straight into the host cable. Do not use a hub.
 - The Rytm has its own power. The Teensy is powered from its micro-USB port.
-- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode.
+- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 
 ## Load the firmware
 

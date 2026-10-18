@@ -50,14 +50,14 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | RINGS, CLOUDSEED and STUTTER send effects | <span class="sc-ok">hardware</span> |
 | Multitrack recorder to the SD card (up to 23 sources) | <span class="sc-ok">hardware</span> (5-minute take, 13 files) |
 | Web page at `http://sidecar.local`: status, sound, send FX, record, machines, files, log | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
-| Sample pool and presets per project, the Pool & presets page | <span class="sc-test">in testing</span> (simulator; not yet checked by ear) |
+| Sample pool and presets per project, the Pool & presets page | <span class="sc-ok">hardware</span> |
 | File browser with folder upload, also large sample folders (summary line, Retry failed) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> (2026-10-18): the digital voices stop and resume |
 | 5" HDMI touch display: status, settings, screensaver, brightness | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
-| Display: hide the touch test, brightness down to 5 % | <span class="sc-test">in testing</span> (new) |
+| Display: hide the touch test, brightness down to 5 % | <span class="sc-ok">hardware</span> |
 | Boots from its own SD card, no computer needed | <span class="sc-ok">hardware</span>, also from a cold power cycle |
 | Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package, no setup page yet); rejoin watchdog <span class="sc-test">in testing</span> (new) |
-| Computer audio and MIDI over USB-C | <span class="sc-test">in testing</span> |
+| Computer audio and MIDI over USB-C | <span class="sc-ok">hardware</span> (multi-channel audio and MIDI) |
 
 ## Sidecar Mini (Teensy 4.1) only
 

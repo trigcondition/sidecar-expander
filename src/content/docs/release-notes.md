@@ -25,7 +25,7 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 - **Pi display:** restyled with the web page; the home page's touch test can be hidden (**Touch works – hide**, a toggle on the About page, `touchtest=` in `/.rytm/display.txt`); brightness 5-100 %, with the darkest setting still readable.
 - **Pi Wi-Fi:** joins on the first boot (tested on hardware), and a watchdog rejoins after a dropout.
 - **Restyled web page and Teensy console:** black and white with one green accent.
-- **Pi: sample pool and presets.** The Pi now has the Teensy's per-project sample pool, the JUNO and FM lists, and user machine presets, with a **Pool & presets** page on `sidecar.local`. (Simulator-tested; not yet checked by ear.)
+- **Pi: sample pool and presets.** The Pi now has the Teensy's per-project sample pool, the JUNO and FM lists, and user machine presets, with a **Pool & presets** page on `sidecar.local`. (Tested on hardware.)
 
 ## From 1020 (fixes from the 1019 hardware test)
 
@@ -49,7 +49,7 @@ Tested on a real Rytm MKII on 2026-10-18 (1021 builds): the remote pages with th
 
 Earlier (1017 to 1020 builds): the voices PLAITS, DAISYSP, JUNO, 6-OP FM, DIGIDRUM and DSP SAMPLE heard; send FX on the Pi (labels, PRE/POST, STUTTER) and on the Teensy, live (CHORUS, COMB); the Pi recorder (5-minute take); user machines loading; the web page's tabs; the touch display.
 
-Also confirmed on hardware: stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Still in testing: the Pi's pool and presets by ear, and the newest display and Wi-Fi changes (touch test hiding, 5 % brightness, rejoin watchdog).
+Also confirmed on hardware: stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Also on hardware: the Pi's pool and presets, hiding the touch test, 5 % brightness, multi-channel computer audio and MIDI over the Pi's USB-C. Still in testing: the Wi-Fi rejoin watchdog.
 
 ## Known limits in this release
 

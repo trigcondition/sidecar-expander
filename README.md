@@ -47,7 +47,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 - **An Analog Rytm MKII running OS 1.73, and only OS 1.73.** The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The mods are built against that exact OS. The patcher refuses any other file.
   - If your Rytm runs an older OS, update it to 1.73 first.
   - **OS 1.74 is not supported yet.** A port to 1.74 is planned. We have not tested going back from 1.74 to 1.73 and cannot promise that it works, so please do not downgrade for this release.
-- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode.
+- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - One of:
   - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
   - **Sidecar: a Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Sidecar package follows on 2026-10-20.)
@@ -87,7 +87,6 @@ Earlier (1017 to 1020 builds):
 - the Pi recorder (a 5-minute take), user machines loading, the web page's tabs, the touch display.
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
-- the Pi sample pool and presets by ear;
 - the `sfx1021` build on its own (the same mods as `rui1021` without the remote pages), the SIDECAR folder name and the NO SIDECAR popup.
 
 ## USB ID
