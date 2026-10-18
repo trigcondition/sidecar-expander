@@ -7,6 +7,8 @@ sidebar:
 
 Part of the tester release: the `rui1022` Rytm build with a 1021 Sidecar (Pi kernel or Teensy firmware).
 
+For examples of what the pages can show (the connect screen, SCOPE and meters, sample waveforms, the recorder, machine graphics), see [The remote UI](/sidecar-expander/using/rytm-side/#examples-what-the-remote-ui-can-show). New pages and graphics are Sidecar code only; the Rytm needs no new flash for them.
+
 The Rytm side of the remote UI is a dumb terminal: it blits a 1 KB frame at its 20 Hz UI tick and reports keys and encoders. All layout and drawing is Sidecar code in `core/ui`, shared by the Pi, the Teensy and the Mac.
 
 ## The canvas

@@ -148,3 +148,35 @@ Since 1021 every letter on these pages is drawn by the Rytm itself, in its own f
 <small>Screenshots: `rui1021` in the emulator with the 1021 host code (mock values). The remote UI itself is <span class="sc-ok">hardware</span>-tested: on a real Rytm the text is the Rytm's own and it responds at once.</small>
 
 - It needs the 1021 Sidecar: the Pi with the 1021 kernel, or the Teensy with the 1021 firmware. An older Pi kernel opens the pages without text.
+
+### Examples: what the remote UI can show
+
+<span class="sc-test">in testing</span>: built and tested in the emulator, not yet on a real Rytm; not part of the tester release yet.
+
+All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so new pages, layouts and graphics come with a Sidecar update (the Pi's SD card or a Teensy upload) and **do not need a new Rytm flash**. Only a new kind of building block on the Rytm side, like the connect screen below, needs one.
+
+**Connect screen** (needs the `rui1023` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
+
+![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, TRK + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
+![The connect screen on the Pi with its network address](../../../assets/rytm/remote-connect-ip.png)
+
+**SCOPE and meters.** The Rytm's output (or one Sidecar voice, or the inputs) as a scope, with a level meter per track and a 1-second peak hold. Knob A: the source, B: the timebase (21 ms to 1.4 s), C: the gain.
+
+![The SCOPE page: a waveform and twelve track meters](../../../assets/rytm/remote-scope.png)
+
+**Sample waveform** on the DSP SAMPLE and GRAIN pages: the sample with its start and end, loop brackets, reverse and slice lines, following the knobs as you turn them. On GRAIN: the grain window and its spread.
+
+![DSP SAMPLE: the waveform with the start/end region and the loop brackets](../../../assets/rytm/remote-wave-sample.png)
+![GRAIN: the waveform with the grain window](../../../assets/rytm/remote-wave-grain.png)
+
+**Recorder** (Pi): YES records and stops, knob A arms. The take's time in large digits, the take name, the card's free space and hours left, and the meters.
+
+![The REC page while recording](../../../assets/rytm/remote-rec.png)
+
+**Machine graphics.** 6-OP FM shows the algorithm of the patch PAT picks (operators, carriers on the output line, feedback); JUNO shows its envelope and filter curve.
+
+![6-OP FM: the algorithm diagram](../../../assets/rytm/remote-fm.png)
+![JUNO: the envelope and the filter curve](../../../assets/rytm/remote-juno.png)
+
+<small>Screenshots: the emulator with the Sidecar's host code (mock values); the text is drawn by the emulated Rytm in its own font.</small>
+
