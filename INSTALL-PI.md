@@ -1,8 +1,8 @@
-# Install: Raspberry Pi 4B
+# Install: Sidecar (Raspberry Pi 4B)
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-The Raspberry Pi 4B version of Sidecar | Expander (the package follows on 2026-10-20). It runs bare-metal: there is no Linux and no login, and it boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([PATCHER.md](PATCHER.md)).
+Sidecar, the full Raspberry Pi 4B version of Sidecar | Expander, (the package follows on 2026-10-20). It runs bare-metal: there is no Linux and no login, and it boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([PATCHER.md](PATCHER.md)).
 
 ## You need
 

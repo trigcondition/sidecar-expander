@@ -1,5 +1,5 @@
 ---
-title: Install on the Teensy 4.1
+title: Install Sidecar Mini (Teensy 4.1)
 description: Wiring, loading the firmware, the SD card and the first check.
 sidebar:
   order: 1

@@ -2,18 +2,20 @@
 title: Release notes
 description: What is in the 1021 tester release, what changed since 1017, and what is tested on hardware.
 ---
-Tester release of Sidecar | Expander. Teensy 4.1 and the Rytm mods: Monday 2026-10-19. Raspberry Pi 4B SD card package: Tuesday 2026-10-20.
+Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
 | Part | Build |
 |---|---|
 | Rytm mods | `sfx1021` (default, for the Teensy and the Pi), `rui1021` (adds the remote pages; tested on the Pi and the Teensy). Patch your own stock OS 1.73 file: see [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/) |
-| Teensy 4.1 | `sidecar-teensy41-<commit>.hex`, the USB-host build; `BUILD-INFO-teensy.txt` names the commit |
-| Raspberry Pi 4B | `sidecar-pi4-sd-<commit>.zip`, the SD card file set; `BUILD-INFO-pi.txt` names the commit and the kernel |
+| Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build; `BUILD-INFO-teensy.txt` names the commit |
+| Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
 
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
 
 ## New in 1021
+
+- **Two names:** the Teensy 4.1 build is **Sidecar Mini**, the cheap way to get started; the Raspberry Pi 4B build is the full **Sidecar**. Projects move from the Mini to the Sidecar (same per-project files; install the Pi version of each user machine). See [Sidecar Mini or Sidecar?](/sidecar-expander/introduction/pi-vs-teensy/)
 
 - **SIDECAR everywhere on the Rytm.** The sample browser's folder is now **SIDECAR** (was TEENSY), and the slot menu's popup reads **NO SIDECAR** when no Sidecar answers.
 - **Remote pages in the Rytm's own font** (`rui1021`, Pi and Teensy; tested on hardware). Every letter on the Sidecar's pages is drawn by the Rytm itself, with its own font, at the stock screens' sizes and places. The layout follows the stock pages: dials, labels, title and bottom bar in the same spots.

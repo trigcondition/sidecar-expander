@@ -1,11 +1,11 @@
 ---
-title: Install on the Raspberry Pi 4B
+title: Install Sidecar (Raspberry Pi 4B)
 description: The SD card, first boot, the display, and sidecar.local over Ethernet.
 sidebar:
   order: 2
 ---
 
-The Pi version runs **bare metal**: there is no Linux and no login. It boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
+Sidecar, the full version on the Raspberry Pi 4B, runs **bare metal**: there is no Linux and no login. It boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
 ## You need
 

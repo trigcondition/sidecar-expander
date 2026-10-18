@@ -17,7 +17,7 @@ The current tester builds of the Rytm mods are `sfx1021` (the default) and `rui1
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages (`rui1021`) and the Pi's latest fixes were tested on a real Rytm on 2026-10-18; other "hardware" marks come from the 1017 to 1020 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
 :::
 
-## On both Sidecars
+## On both: Sidecar Mini and Sidecar
 
 | Feature | Status |
 |---|---|
@@ -39,11 +39,11 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Feature | Status |
 |---|---|
 | Sidecar pages on the Rytm's screen (TRK + YES) with the Pi (1021 kernel) | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Sidecar pages with the Teensy (1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Sidecar pages with Sidecar Mini (Teensy, 1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Text in the Rytm's own font, the stock look, very responsive knobs; status as two pages SIDECAR + SYSTEM | <span class="sc-ok">hardware</span> (2026-10-18) |
 | PLAY/STOP while a page is open | not yet: every key goes to the Sidecar (fix in progress) |
 
-## Raspberry Pi 4B only
+## Sidecar (Raspberry Pi 4B) only
 
 | Feature | Status |
 |---|---|
@@ -59,11 +59,13 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package, no setup page yet); rejoin watchdog <span class="sc-test">in testing</span> (new) |
 | Computer audio and MIDI over USB-C | <span class="sc-test">in testing</span> |
 
-## Teensy 4.1 only
+## Sidecar Mini (Teensy 4.1) only
 
 | Feature | Status |
 |---|---|
 | Runs on a stock board, no PSRAM needed | <span class="sc-ok">hardware</span> |
+| More and bigger user machines on a Teensy with PSRAM | <span class="sc-plan">planned</span> (high priority) |
+| Recorder on the Mini | <span class="sc-plan">planned</span> |
 | Web console over WebSerial: log, status, commands | <span class="sc-ok">hardware</span> |
 | Console tabs for user machines and the SD card | <span class="sc-test">in testing</span> |
 | USB audio to a computer (multi-channel or stereo) and MIDI pass-through | <span class="sc-test">in testing</span>; not in the tester release |

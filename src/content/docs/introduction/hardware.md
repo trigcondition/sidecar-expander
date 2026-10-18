@@ -1,6 +1,6 @@
 ---
 title: Hardware you need
-description: The Rytm, the board, the cables and the cards for a Teensy or a Pi Sidecar.
+description: The Rytm, the board, the cables and the cards for Sidecar Mini (Teensy 4.1) or Sidecar (Raspberry Pi 4B).
 sidebar:
   order: 3
 ---
@@ -15,15 +15,15 @@ sidebar:
 - Recommended: a **DIN MIDI interface**, for the recovery route that works even when the OS does not boot.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the **Overbridge** mode.
 
-## Option A: Teensy 4.1
+## Option A: Sidecar Mini (Teensy 4.1)
 
 - A **Teensy 4.1** (PJRC). A stock board is enough.
 - A **USB host cable** for the Teensy's 5-pin USB host header. It needs 5 male header pins soldered to the host pads.
 - A **micro-USB data cable**, for power and for loading the firmware.
 - Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's slot, for samples and patch banks.
-- Optional: **PSRAM** chips on the Teensy's underside. Nothing needs them: everything works on a stock board. PSRAM adds headroom for samples, and the recorder on the Teensy will use it.
+- Optional: **PSRAM** chips on the Teensy's underside. Nothing needs them: everything works on a stock board. PSRAM adds headroom for samples; support for more and bigger user machines with PSRAM is planned (high priority), and the recorder on the Mini will use it too.
 
-## Option B: Raspberry Pi 4B
+## Option B: Sidecar (Raspberry Pi 4B)
 
 - A **Raspberry Pi 4 Model B**, 2 GB or more.
 - The official **USB-C power supply** (5.1 V, 3 A), or one as good.

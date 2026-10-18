@@ -1,13 +1,13 @@
 ---
 title: What Sidecar is
-description: A voice and feature expander for the Analog Rytm MKII, hosted on a Teensy 4.1 or a Raspberry Pi 4B.
+description: A voice and feature expander for the Analog Rytm MKII, hosted on a Teensy 4.1 (Sidecar Mini) or a Raspberry Pi 4B (Sidecar).
 sidebar:
   order: 1
 ---
 
 Sidecar | Expander adds digital voices, send effects, recording and a web UI to the **Analog Rytm MKII**.
 
-A small computer sits on the Rytm's USB port: a **Teensy 4.1** or a **Raspberry Pi 4B**. It acts as the Rytm's USB host in Overbridge mode. The Rytm streams its tracks to the Sidecar, and the Sidecar sends its own voices and effects back into the Rytm. Everything comes out of the Rytm's own outputs, through its analog path.
+A small computer sits on the Rytm's USB port: a **Teensy 4.1** (**Sidecar Mini**, the cheap way to start) or a **Raspberry Pi 4B** (**Sidecar**, the full version). It acts as the Rytm's USB host in Overbridge mode. The Rytm streams its tracks to the Sidecar, and the Sidecar sends its own voices and effects back into the Rytm. Everything comes out of the Rytm's own outputs, through its analog path.
 
 A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive the Sidecar. You play and edit everything from the Rytm: pick a Sidecar machine on a track, turn its knobs, p-lock them, and send tracks to the Sidecar's effects.
 
@@ -35,4 +35,4 @@ This is a tester release. It is not made, endorsed or supported by the instrumen
 
 - [What works now](/sidecar-expander/introduction/what-works-now/)
 - [Hardware you need](/sidecar-expander/introduction/hardware/)
-- [Pi or Teensy?](/sidecar-expander/introduction/pi-vs-teensy/)
+- [Sidecar Mini or Sidecar?](/sidecar-expander/introduction/pi-vs-teensy/)

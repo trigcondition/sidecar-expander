@@ -2,7 +2,7 @@
 
 **A voice and feature expander for the Analog Rytm MKII.**
 
-Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: a Teensy 4.1 or a Raspberry Pi 4B. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
+Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
 > **Public tester release (the 1021 line). Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
@@ -12,6 +12,18 @@ Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small co
 
 Documentation, the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
 
+## Sidecar Mini or Sidecar
+
+**Sidecar Mini** (Teensy 4.1) is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card and the remote pages on the Rytm. Recording is planned for the Mini, and a Teensy with PSRAM fitted will get room for more and bigger user machines (planned, high priority). **Sidecar** (Raspberry Pi 4B) has everything: many user machines, the heavy effects, the recorder, the display and Wi-Fi. Make projects on the Mini and move up later: the Sidecar's per-project files are the same on both; only the user machine packages differ (`.rmp` for the Mini, `.a64.rmp` for the Pi).
+
+| | Sidecar Mini (Teensy 4.1) | Sidecar (Raspberry Pi 4B) |
+|---|---|---|
+| Built-in machines, samples from the card, remote pages | yes | yes |
+| User machines | a few: 32 KB of plugin code space (one large NoisePlethora package at a time) | many |
+| Send effects | CHORUS, COMB, CRUSH, RINGMOD | those, plus RINGS, CLOUDSEED, STUTTER |
+| Recorder | planned | yes, multitrack to the SD card |
+| Display, Wi-Fi, web page | no (a web console over USB) | yes |
+
 ## What works now
 
 - **External voice machines on every track.** PLAITS, DAISYSP, DIGIDRUM, JUNO, 6-OP FM and DSP SAMPLE run on the Sidecar, and their audio returns on the track's own channel.
@@ -20,8 +32,8 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
   - P1 is ROUT: PRE returns through the Rytm's analog distortion and compressor; POST returns clean.
   - P2..P5 show each effect's own labels; list knobs step one item a detent.
 - **SIDECAR folder.** The Sidecar's SD card appears as a folder in the Rytm's own sample browser (it was called TEENSY before 1021).
-- **Remote pages (`rui1021`, Pi and Teensy).** TRK + YES opens the SIDECAR and SYSTEM status pages and the voice pages on the Rytm's screen, in the Rytm's own font.
-- **Raspberry Pi version only:**
+- **Remote pages (`rui1021`, Sidecar Mini and Sidecar).** TRK + YES opens the SIDECAR and SYSTEM status pages and the voice pages on the Rytm's screen, in the Rytm's own font.
+- **Sidecar (Raspberry Pi 4B) only:**
   - a sample pool and presets per project, with a Pool & presets page on the web page;
   - a multitrack recorder to the SD card;
   - an HDMI touch display (800x480);
@@ -37,8 +49,8 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
   - **OS 1.74 is not supported yet.** A port to 1.74 is planned. We have not tested going back from 1.74 to 1.73 and cannot promise that it works, so please do not downgrade for this release.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode.
 - One of:
-  - **Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
-  - **Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Pi package follows on 2026-10-20.)
+  - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
+  - **Sidecar: a Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Sidecar package follows on 2026-10-20.)
 - The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
 
@@ -57,8 +69,8 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `sfx1021` (the default), or `rui1021` for the remote pages too (tested with the Pi on the 1021 kernel and the Teensy on the 1021 firmware).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar:**
-   - Teensy: [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
-   - Pi 4B: [INSTALL-PI.md](INSTALL-PI.md).
+   - Sidecar Mini (Teensy 4.1): [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
+   - Sidecar (Pi 4B): [INSTALL-PI.md](INSTALL-PI.md).
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
 
 ## Tested on hardware or in the emulator
@@ -93,7 +105,7 @@ Please report what you find with the **Tester report** form under [Issues](https
 
 - `src/content/docs/`: the documentation site (Astro Starlight; `npm ci && npm run build` builds it into `_site/`).
 - `public/patcher/`: the Rytm mod patcher (browser page and Python script), served at `/patcher/`.
-- `public/console/`: the Teensy web console, served at `/console/`.
+- `public/console/`: the Sidecar Mini (Teensy) web console, served at `/console/`.
 - `scripts/`: the release scripts (patch files, console sync, packaging, share scan).
 - `RELEASE-NOTES.md`: what is in this release; `KNOWN-ISSUES.md`: what does not work yet.
 - `.github/workflows/pages.yml`: builds and deploys the site to GitHub Pages (manual trigger).
