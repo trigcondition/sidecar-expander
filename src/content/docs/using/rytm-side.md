@@ -120,7 +120,7 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-ok">hardware</span> (part of the release in `rui1022`; the pages were tested 2026-10-18 with the Pi on the 1021 kernel and the Teensy on the 1021 firmware)
+<span class="sc-ok">hardware</span> (part of the release in `rui1022`; the pages were tested 2026-10-18 with the Pi and the Teensy, and `rui1022`'s key handling with the Pi)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 

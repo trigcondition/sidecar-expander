@@ -78,6 +78,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 Checked on a real Rytm MKII with a Sidecar attached.
 
 On 2026-10-18, with the 1021 builds:
+- `rui1022`'s key handling with the Pi (rytm-teensy 466542f): only the page's keys and knobs go to the Sidecar; PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page; every checklist item correct;
 - the remote pages (`rui1021`) on the Pi (1021 kernel) and on the Teensy (1021 firmware): the Rytm's own font, the stock look, very responsive; the SIDECAR and SYSTEM status pages and the voice pages;
 - Pi: folder upload of large sample folders (no more network errors; a summary line and Retry failed), unplugging and replugging the USB cable between Pi and Rytm (the digital voices stop and resume), restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
 
@@ -87,7 +88,7 @@ Earlier (1017 to 1020 builds):
 - the Pi recorder (a 5-minute take), user machines loading, the web page's tabs, the touch display.
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
-- the key handling of `rui1022` (only the page's keys and knobs go to the Sidecar; tested in the emulator), the `sfx1021` build on its own (the same mods without the remote pages), the SIDECAR folder name and the NO SIDECAR popup.
+- the `sfx1021` build on its own (the same mods without the remote pages), the SIDECAR folder name and the NO SIDECAR popup.
 
 ## USB ID
 

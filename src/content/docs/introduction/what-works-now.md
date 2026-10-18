@@ -41,7 +41,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Sidecar pages on the Rytm's screen (TRK + YES) with the Pi (1021 kernel) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Sidecar pages with Sidecar Mini (Teensy, 1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Text in the Rytm's own font, the stock look, very responsive knobs; status as two pages SIDECAR + SYSTEM | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Only the page's keys and knobs go to the Sidecar: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page (new in `rui1022`) | part of the release; tested in the emulator |
+| Only the page's keys and knobs go to the Sidecar: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page (new in `rui1022`) | <span class="sc-ok">hardware</span> (2026-10-18, with the Pi) |
 
 ## Sidecar (Raspberry Pi 4B) only
 

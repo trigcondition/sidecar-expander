@@ -6,7 +6,7 @@ Tester release, the 1021 line (Rytm builds `rui1022`, the default, and `sfx1021`
 
 ## Still in testing
 
-Tested on hardware on 2026-10-18: the remote pages (`rui1021`, the base of `rui1022`) with the Pi and the Teensy, Pi folder upload of large folders, unplugging and replugging the USB cable between Pi and Rytm, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot; also stepped list knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Not yet reported from a real Rytm:
+Tested on hardware on 2026-10-18: the remote pages with the Pi and the Teensy, `rui1022`'s key handling with the Pi, Pi folder upload of large folders, unplugging and replugging the USB cable between Pi and Rytm, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot; also stepped list knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Not yet reported from a real Rytm:
 - new since the last test: the Wi-Fi rejoin watchdog.
 
 If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back; nothing new is stored in your projects.
