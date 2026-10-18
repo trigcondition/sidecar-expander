@@ -39,4 +39,4 @@ Ideas we intend to build; not designed in detail yet.
 - **Remote pages in the browser:** the same pages the Rytm shows, on the web page.
 - **Performance features:** an arpeggiator, Sidecar LFOs, beat repeat variations, more polyphony, master effects.
 - **More sampler tools:** stereo recording to the card, resample in one click, sample chopping, larger sample banks.
-- **Digitakt and Analog Four support**, using the same engine and the same approach to mods.
+- **Support for other Elektron boxes, such as Analog Four, Digitakt, Syntakt, etc.**, using the same engine and the same approach to mods.
