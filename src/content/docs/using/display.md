@@ -9,14 +9,15 @@ The Pi can drive an **800x480 HDMI display with USB touch** (tested with a 5" HD
 
 ## Boot screen
 
-"SIDECAR | EXPANDER" with a progress bar, drawn within a third of a second of the engine starting. The home screen follows a few seconds later.
+The Sidecar wordmark with a progress bar, drawn within a third of a second of the engine starting. The home screen follows a few seconds later.
+
+![The boot screen: the Sidecar | Expander wordmark over a green progress bar](../../../assets/ui/display-boot.png)
 
 ## Home
 
-<!-- SCREENSHOT-PENDING: The display's home screen -->
-:::note[Screenshot coming]
-The display's home screen: the screens are being restyled for this release; the picture follows when that is done.
-:::
+![The display's home screen: tracks 1-8 with their machines, status with REC and the core loads, the project's U1..U5](../../../assets/ui/display-home.png)
+
+<small>Screenshot: the 1021 display rendered off-device with mock data.</small>
 
 
 - The title bar, with **Rytm connected** (green) or **Rytm not connected** (red).
@@ -26,10 +27,11 @@ The display's home screen: the screens are being restyled for this release; the 
 
 ## Settings
 
-<!-- SCREENSHOT-PENDING: The display's settings screen -->
-:::note[Screenshot coming]
-The display's settings screen: the screens are being restyled for this release; the picture follows when that is done.
-:::
+![Settings, Sound page: MIDI notes, output, computer audio, FIFO target; per voice the machine and a test drone](../../../assets/ui/display-sound.png)
+![Settings, Send FX page: FX 1 in green, FX 2 in white, the 12 tracks' send levels, Kill tails](../../../assets/ui/display-sendfx.png)
+![Settings, About page: web address, IP, link, build, screensaver and brightness](../../../assets/ui/display-about.png)
+
+<small>Screenshots: the 1021 display rendered off-device with mock data.</small>
 
 
 The **Settings** button (top right) opens the settings pages and becomes **Home**. Every control is at least 48 px high.
@@ -37,7 +39,7 @@ The **Settings** button (top right) opens the settings pages and becomes **Home*
 | Page | |
 |---|---|
 | **Sound** | MIDI notes, output (Main/Tracks), computer audio, the buffer target; per voice: machine and test drone |
-| **Send FX** | both effects' TYPE and the 12 send levels (read only: the Rytm's kit owns them), and **Kill tails** |
+| **Send FX** | both effects' TYPE and the 12 send levels (read only: the Rytm's kit owns them; **FX 1 green, FX 2 white**), and **Kill tails** |
 | **About** | the web address, IP, network, the build, the screensaver and brightness |
 
 The display, the web page and the console share one state: a change on one shows on all.

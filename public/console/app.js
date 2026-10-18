@@ -1,5 +1,8 @@
 // The page: one WebSerial port, the log, the console lines (voiceloop.ino console_line).
 import { StreamParser, parseStatus } from "./stream.js";
+import { parseReply } from "./proto.js";
+import { Link } from "./link.js";
+import { initManage } from "./manage.js";
 
 const $ = (id) => document.getElementById(id);
 const TEENSY = { usbVendorId: 0x16c0 }; // PJRC
@@ -21,6 +24,13 @@ function usbmodeLine(text) {
   usbmodePending = false;
 }
 function addLine(text, cls) {
+  if (!cls) {   // the web console's replies ('@', webui.h): to the link; shown only with "replies" ticked, data never
+    const o = parseReply(text);
+    if (o) {
+      link.reply(o);
+      if (o.t === "d" || !$("replies").checked) return;
+    }
+  }
   if (!cls) usbmodeLine(text);
   if (!cls) Object.entries(parseStatus(text)).forEach(([k, v]) => {
     const el = document.querySelector(`#status [data-k="${k}"]`);
@@ -29,11 +39,13 @@ function addLine(text, cls) {
   if (paused) { held.push([text, cls]); return; }
   show(text, cls);
 }
+const PERIODIC = /^(cpu \d|usb host: ob |midi notes \d)/;   // the 2-second stats lines (the Status tab reads them)
 function show(text, cls) {
   const log = $("log");
   const div = document.createElement("div");
   div.textContent = text;
   if (cls) div.className = cls;
+  else if (PERIODIC.test(text)) div.className = "stats";
   const f = $("filter").value.toLowerCase();
   if (f && !text.toLowerCase().includes(f)) div.hidden = true;
   const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 4;
@@ -50,6 +62,21 @@ $("pause").onclick = () => {
   $("pause").textContent = paused ? "Resume" : "Pause";
   if (!paused) { held.forEach(([t, c]) => show(t, c)); held = []; }
 };
+$("showstats").onchange = (e) => $("log").classList.toggle("showstats", e.target.checked);
+
+// --- tabs: #status, #sound, ... (deep links); the last one remembered ------
+const TABS = [...document.querySelectorAll("#tabs a")].map((a) => a.dataset.tab);
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch { return null; } };
+function showTab(t) {
+  if (!TABS.includes(t)) t = "status";
+  document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.dataset.tab === t));
+  document.querySelectorAll(".tab").forEach((d) => d.classList.toggle("on", d.id === "tab-" + t));
+  store("sidecar.teensy.tab", t);
+  if (t === "log") $("log").scrollTop = $("log").scrollHeight;
+}
+window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
+showTab(location.hash.slice(1) || store("sidecar.teensy.tab") || "status");
+
 $("clear").onclick = () => { $("log").textContent = ""; held = []; };
 
 // --- connection ----------------------------------------------------------
@@ -73,7 +100,8 @@ async function open(p) {
   setState(true, "connected");
   addLine("-- connected", "me");
   readLoop(p);
-  if (usbmodePending) setTimeout(() => send("usbmode"), 300);   // back after a mode change: confirm it
+  manage.connected(true);
+  if (usbmodePending) setTimeout(() => send("usbmode").catch(() => {}), 300);   // back after a mode change: confirm it
 }
 
 async function readLoop(p) {
@@ -109,32 +137,44 @@ async function close(byUser) {
   setState(false, byUser ? "not connected" : "waiting for the device to come back");
   addLine(byUser ? "-- disconnected" : "-- connection lost", byUser ? "me" : "bad");
   if (byUser) wanted = null;
+  manage.connected(false);
 }
 
-async function send(line) {
+// Every write goes through one queue (a console line never lands inside a frame, and the writer lock is never held twice).
+let wq = Promise.resolve();
+function write(bytes) {
+  const p = wq.then(async () => {
+    if (!port || !port.writable) throw new Error("not connected");
+    const w = port.writable.getWriter();
+    try { await w.write(bytes); } finally { w.releaseLock(); }
+  });
+  wq = p.catch(() => {});
+  return p;
+}
+async function send(line, quiet = false) {
   line = line.trim();
   if (!line) return;
   if (line.startsWith(":")) line = line.slice(1);
-  if (line.length > 63) { addLine(`not sent: over 63 characters`, "bad"); return; }
-  if (!port || !port.writable) { addLine(`not connected: ${line}`, "bad"); return; }
-  const w = port.writable.getWriter();
-  addLine("> :" + line, "me");
+  if (line.length > 63) { addLine(`not sent: over 63 characters`, "bad"); throw new Error("over 63 characters"); }
+  if (!port || !port.writable) { if (!quiet) addLine(`not connected: ${line}`, "bad"); throw new Error("not connected"); }
+  if (!quiet || $("replies").checked) addLine("> :" + line, "me");
   try {
-    await w.write(new TextEncoder().encode(":" + line + "\n"));
+    await write(new TextEncoder().encode(":" + line + "\n"));
   } catch (e) {
     addLine(`write: ${e.message}`, "bad");
-  } finally {
-    w.releaseLock();
+    throw e;
   }
 }
+const link = new Link({ line: (t) => send(t, true), bytes: write, connected: () => !!(port && port.writable) });
+const manage = initManage(link, addLine);
 
 // --- controls ------------------------------------------------------------
-document.querySelectorAll("[data-cmd]").forEach((b) => (b.onclick = () => send(b.dataset.cmd)));
+document.querySelectorAll("[data-cmd]").forEach((b) => (b.onclick = () => send(b.dataset.cmd).catch(() => {})));
 for (let v = 0; v < 8; ++v) $("mvoice").add(new Option(`voice ${v}`, v));
-$("mset").onclick = () => send(`notemach=${$("mvoice").value}:${$("mname").value}`);
-$("fifoset").onclick = () => send(`fifo=${$("fifo").value | 0}`);
-$("usbmode").onchange = () => { usbmodePending = true; $("usbmodestate").textContent = "re-enumerating…"; send(`usbmode=${$("usbmode").value}`); };
-$("send").onclick = () => { send($("cmd").value); $("cmd").select(); };
+$("mset").onclick = () => send(`notemach=${$("mvoice").value}:${$("mname").value}`).catch(() => {});
+$("fifoset").onclick = () => send(`fifo=${$("fifo").value | 0}`).catch(() => {});
+$("usbmode").onchange = () => { usbmodePending = true; $("usbmodestate").textContent = "re-enumerating…"; send(`usbmode=${$("usbmode").value}`).catch(() => {}); };
+$("send").onclick = () => { send($("cmd").value).catch(() => {}); $("cmd").select(); };
 $("cmd").onkeydown = (e) => { if (e.key === "Enter") $("send").click(); };
 $("disconnect").onclick = () => close(true);
 

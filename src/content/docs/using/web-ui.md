@@ -23,10 +23,12 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 
 The page has no password. Use it on a direct cable or a network you trust.
 
-<!-- SCREENSHOT-PENDING: The Pi's page at sidecar.local (Status, Machines and Pool & presets tabs) -->
-:::note[Screenshot coming]
-The Pi's page at sidecar.local (Status, Machines and Pool & presets tabs): the page is being restyled for this release; the picture follows when that is done.
-:::
+![sidecar.local, Status tab: CPU of the render cores, FIFO, underruns, the stream, Rytm attached, USB-C, temperature](../../../assets/ui/pi-status.png)
+![sidecar.local, User machines tab: the project's U1..U5 and the six installed starter machines with their size, CPU and fit](../../../assets/ui/pi-machines.png)
+![sidecar.local, Pool & presets tab: the project's sample pool, the JUNO and 6-OP FM lists, user machine presets](../../../assets/ui/pi-pool-presets.png)
+![sidecar.local in dark mode, Send FX tab: FX 1 and FX 2 with their TYPE, return and the 12 send levels](../../../assets/ui/pi-sendfx.png)
+
+<small>Screenshots: the restyled 1021 pages with mock data (`mock_web.py` for the Pi page; the Teensy console before Connect).</small>
 
 ### The file browser
 
@@ -54,10 +56,10 @@ Open the [console](/sidecar-expander/console/) in **Chrome or Edge on a desktop 
 
 The tester release's console shows the log, the status and the commands; the Machines and Files tabs are <span class="sc-test">in testing</span>.
 
-<!-- SCREENSHOT-PENDING: The Teensy web console (Status and Machines tabs) -->
-:::note[Screenshot coming]
-The Teensy web console (Status and Machines tabs): the page is being restyled for this release; the picture follows when that is done.
-:::
+![The Teensy web console before Connect, Status tab](../../../assets/ui/teensy-status.png)
+![The Teensy web console, User machines tab: drop .rmp packages to install](../../../assets/ui/teensy-machines.png)
+
+<small>Screenshots: the restyled 1021 pages with mock data (`mock_web.py` for the Pi page; the Teensy console before Connect).</small>
 
 **Teensy rules:** card writes, deletes and installs wait for the Rytm's transport to stop (the page shows "paused" and continues). Reads go on during play, slowly. `/`, `/Samples` and `/.rytm` are protected.
 
