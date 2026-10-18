@@ -46,7 +46,7 @@ sidebar:
 
 ### Remote pages
 
-- With `rui1022` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. On the status pages no knob is caught: a turn edits the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
+- With `rui1025` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 
 ### Teensy: user machine space
 
@@ -60,4 +60,4 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1022` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1025` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.

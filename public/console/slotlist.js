@@ -13,6 +13,8 @@ export function slotSrc(s) {
   if (s.collision) return { text: `fingerprint ${fp} matches several machines: pick one`, cls: "bad" };
   if (s.unknown && s.src !== "empty") return { text: `needs a machine with fingerprint ${fp}${nm}`, cls: "bad" };
   if (s.state === "MISSING") return { text: `missing: install ${s.name || s.id}${s.ver ? " " + s.ver : ""}`, cls: "bad" };
+  // why the device could not play it, in words ("no room: needs 23288 B, 584 B free", "muted: timed out")
+  if (s.why && s.state && s.state !== "READY") return { text: s.why, cls: "bad" };
   let t = SRCTXT[s.src || "none"] || "";
   if (s.updated) t = "updated from the project's sounds";
   if (s.src === "empty" && fp) t += ` · its sounds use fingerprint ${fp}${nm}`;

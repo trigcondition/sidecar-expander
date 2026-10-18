@@ -50,7 +50,7 @@ To go back, load any other Teensy 4.1 program the same way. The Teensy's bootloa
 
 ## SD card (optional)
 
-A FAT32 or exFAT microSD card in the Teensy's built-in slot. Create `/Samples/` yourself; the Teensy creates `/.rytm/` on first boot.
+A FAT32 or exFAT microSD card in the Teensy's built-in slot. Create `/Samples/` yourself; the Teensy creates `/.rytm/` on first boot. **For recording without PSRAM, use a fast card** (A1/A2, U3/V30); takes go to `/Recordings`.
 
 | Folder | What |
 |---|---|
@@ -66,7 +66,7 @@ With no card the Teensy still runs. The SIDECAR folder on the Rytm is then empty
 - **out=tracks**: each voice returns on its own track's channel. The mods expect this.
 - **notes off**: the Rytm's MIDI notes do not trigger the voices. The mods trigger them.
 
-Both can be changed from the [web console](/sidecar-expander/using/web-ui/#the-teensy-web-console), but the defaults are right for the mods.
+Both can be changed from the [web console](/sidecar-expander/using/web-ui/#the-sidecar-mini-web-console), but the defaults are right for the mods.
 
 ## Starter user machines
 
@@ -74,7 +74,7 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## Which Rytm build
 
-`rui1022` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+`rui1025` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## User machine space on the Teensy
 

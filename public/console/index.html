@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sidecar | Expander</title>
+<title>Sidecar Mini | Expander</title>
 <style>
   /* the wordmark face: Archivo Black (c) 2017 The Archivo Black Project Authors, SIL Open Font License 1.1
      (http://scripts.sil.org/OFL), subset to the letters of "Sidecar"; offline, no external files */
@@ -22,6 +22,7 @@
   h1 { margin:0; font-size:inherit; font-weight:inherit; }
   .sc-title { display:flex; align-items:center; gap:.55rem; white-space:nowrap; color:var(--fg); }
   .sc-word { font-family:var(--word); font-size:23px; line-height:1; letter-spacing:-.01em; }
+  .sc-mini { font-size:10px; letter-spacing:.32em; font-weight:700; color:var(--acc); line-height:16px; margin-left:-.1rem; }
   .sc-sub { font-size:10px; letter-spacing:.32em; font-weight:600; color:var(--mut); border-left:1px solid var(--line); padding-left:.55rem; line-height:16px; }
   .dot { width:9px; height:9px; border-radius:50%; background:var(--mut); display:inline-block; }
   .dot.on { background:var(--ok); }
@@ -94,6 +95,34 @@
   nav a:hover { color:var(--fg); }
   nav a.on { color:var(--fg); border-bottom-color:var(--acc); font-weight:700; }
   .tab { display:none; min-width:0; }
+  /* Record (as the Pi page's) */
+  #rec-go { min-width:120px; font-weight:600; }
+  #rec-go.on { background:var(--err); border-color:var(--err); color:#fff; }
+  #rec-go.armed { border-color:var(--err); color:var(--err); }
+  #rec-time { font:600 22px var(--mono); font-variant-numeric:tabular-nums; }
+  #rec-time.on { color:var(--err); }
+  button.on { border-color:var(--acc); color:var(--acc); font-weight:600; }
+  /* choice groups: the device's current state filled, a click pending, then confirmed */
+  .seg { display:inline-flex; max-width:100%; }
+  .seg button { border-radius:0; margin-left:-1px; min-width:56px; }
+  .seg button:first-child { border-radius:var(--r) 0 0 var(--r); margin-left:0; }
+  .seg button:last-child { border-radius:0 var(--r) var(--r) 0; }
+  .seg button:focus-visible { position:relative; z-index:1; }
+  .seg button[aria-checked="true"] { background:var(--acc); border-color:var(--acc); color:var(--on-acc); font-weight:600; }
+  .seg button[aria-checked="true"]:hover:not(:disabled) { background:var(--acc-high); border-color:var(--acc-high); color:var(--card); }
+  .seg.pending button { cursor:progress; }
+  .seg button.pend { animation:pend .8s ease-in-out infinite alternate; }
+  @keyframes pend { from { opacity:1; } to { opacity:.45; } }
+  @media (prefers-reduced-motion: reduce) { .seg button.pend { animation:none; opacity:.6; } }
+  .fb { font-size:12px; color:var(--ok); } .fb.err { color:var(--warn); }
+  #rec-warn { color:var(--warn); }
+  #rec-levels { display:grid; grid-template-columns:repeat(13, minmax(0, 1fr)); gap:4px; align-items:end; }
+  #rec-levels .lv { display:flex; flex-direction:column; align-items:center; gap:3px; opacity:.45; }
+  #rec-levels .lv.on { opacity:1; }
+  #rec-levels .lv i { display:block; width:100%; height:0; max-height:90px; background:var(--acc); border-radius:2px; transition:height .12s; }
+  #rec-levels .lv { height:110px; justify-content:flex-end; }
+  #rec-levels .lv.hot i { background:var(--err); }
+  #rec-levels .lv span { font-size:9px; color:var(--mut); white-space:nowrap; overflow:hidden; max-width:100%; }
   .tab.on { display:grid; gap:12px; }
   #log .stats { display:none; } #log.showstats .stats { display:block; }
   @media (max-width:640px) { nav a { padding:6px 8px; } main { padding:10px; } }
@@ -102,7 +131,7 @@
 <body>
 <main>
   <header>
-    <h1 class="sc-title" aria-label="Sidecar | Expander" translate="no"><span class="sc-word" aria-hidden="true">Sidecar</span><span class="sc-sub" aria-hidden="true">EXPANDER</span></h1>
+    <h1 class="sc-title" aria-label="Sidecar Mini | Expander" translate="no"><span class="sc-word" aria-hidden="true">Sidecar</span><span class="sc-mini" aria-hidden="true">MINI</span><span class="sc-sub" aria-hidden="true">EXPANDER</span></h1>
     <span class="dot" id="dot"></span><span id="state">not connected</span>
     <span class="spacer"></span>
     <button class="primary" id="connect">Connect</button>
@@ -110,7 +139,7 @@
   </header>
 
   <nav id="tabs">
-    <a href="#status" data-tab="status">Status</a><a href="#sound" data-tab="sound">Sound</a><a href="#usb" data-tab="usb">USB</a><a href="#machines" data-tab="machines">User machines</a><a href="#files" data-tab="files">Files</a><a href="#log" data-tab="log">Log &amp; console</a><a href="#about" data-tab="about">About</a>
+    <a href="#status" data-tab="status">Status</a><a href="#sound" data-tab="sound">Sound</a><a href="#record" data-tab="record">Record</a><a href="#usb" data-tab="usb">USB</a><a href="#machines" data-tab="machines">User machines</a><a href="#files" data-tab="files">Files</a><a href="#log" data-tab="log">Log &amp; console</a><a href="#about" data-tab="about">About</a>
   </nav>
 
   <section id="nosupport">This page needs WebSerial: use Chrome or Edge on a desktop, opened from localhost or https.</section>
@@ -126,33 +155,69 @@
   <div class="tab" id="tab-sound">
     <section>
       <h2>Sound</h2>
-      <div class="row"><label>MIDI notes</label>
-        <button data-cmd="notes=1">On</button><button data-cmd="notes=0">Off</button><button data-cmd="notes">Show</button></div>
-      <div class="row"><label>Output</label>
-        <button data-cmd="out=main">Main</button><button data-cmd="out=tracks">Tracks</button><button data-cmd="out">Show</button></div>
-      <div class="row"><label title="Sidecar | Expander (Mini) builds (teensy/host_uac2.sh): the computer's USB audio OUT 1..12 to the Rytm's Overbridge inputs">Computer audio</label>
-        <button data-cmd="mac=on">On</button><button data-cmd="mac=off">Off</button><button data-cmd="mac">Show</button></div>
-      <div class="row"><label>Machine</label>
+      <div class="row"><label id="l-notes">MIDI notes</label>
+        <div class="seg" role="radiogroup" aria-labelledby="l-notes" data-key="notes"><button type="button" role="radio" aria-checked="false" data-cmd="notes=1" data-val="true">On</button><button type="button" role="radio" aria-checked="false" data-cmd="notes=0" data-val="false">Off</button></div>
+        <span class="fb" data-fb="notes" role="status" aria-live="polite"></span></div>
+      <div class="row"><label id="l-out">Output</label>
+        <div class="seg" role="radiogroup" aria-labelledby="l-out" data-key="out"><button type="button" role="radio" aria-checked="false" data-cmd="out=main" data-val="main">Main</button><button type="button" role="radio" aria-checked="false" data-cmd="out=tracks" data-val="tracks">Tracks</button></div>
+        <span class="fb" data-fb="out" role="status" aria-live="polite"></span></div>
+      <div class="row"><label id="l-fxsrc" title="what the Rytm sends on Overbridge IN L/R (channels 10/11): its AUDIO IN, or the delay + reverb return (needs the rui1024 Rytm build)">IN L/R source</label>
+        <div class="seg" role="radiogroup" aria-labelledby="l-fxsrc" data-key="fxsrc"><button type="button" role="radio" aria-checked="false" data-cmd="fxin=0" data-val="in">Inputs</button><button type="button" role="radio" aria-checked="false" data-cmd="fxin=1" data-val="fx">FX return</button></div>
+        <span class="fb" data-fb="fxsrc" role="status" aria-live="polite"></span><span id="fxin-note" class="note"></span></div>
+      <p class="note" id="fxin-warn" hidden>Never send channels 10/11 back into the Rytm through Overbridge (computer audio, a mixer loop): that is a feedback loop.</p>
+      <div class="row"><label id="l-mac" title="Sidecar Mini builds (teensy/host_uac2.sh): the computer's USB audio OUT 1..12 to the Rytm's Overbridge inputs">Computer audio</label>
+        <div class="seg" role="radiogroup" aria-labelledby="l-mac" data-key="mac"><button type="button" role="radio" aria-checked="false" data-cmd="mac=on" data-val="true">On</button><button type="button" role="radio" aria-checked="false" data-cmd="mac=off" data-val="false">Off</button></div>
+        <span class="fb" data-fb="mac" role="status" aria-live="polite"></span></div>
+      <div class="row"><label for="mvoice">Machine</label>
         <select id="mvoice"></select>
-        <select id="mname"><option>plaits</option><option>juno</option><option>daisy</option><option>dsps</option>
+        <select id="mname" aria-label="machine"><option>plaits</option><option>juno</option><option>daisy</option><option>dsps</option>
           <option>grain</option><option>dd</option><option>fm</option></select>
-        <button id="mset">Set</button></div>
-      <div class="row"><label>FIFO target</label>
+        <button id="mset">Set</button><span class="note" id="mcur"></span>
+        <span class="fb" data-fb="mach" role="status" aria-live="polite"></span></div>
+      <div class="row"><label for="fifo">FIFO target</label>
         <input id="fifo" type="number" min="24" step="8" value="256" style="width:90px">
-        <button id="fifoset">Set</button><button data-cmd="fifo">Show</button></div>
+        <button id="fifoset">Set</button><span class="note" id="fifocur"></span>
+        <span class="fb" data-fb="fifo" role="status" aria-live="polite"></span></div>
       <p class="note">Output and FIFO are the USB host build's; the serial build answers them with a note.</p>
+    </section>
+  </div>
+
+  <div class="tab" id="tab-record">
+    <section>
+      <h2>Record</h2>
+      <div class="row"><button id="rec-go" disabled>&#9679; Record</button><span id="rec-time">0:00:00</span><span id="rec-state" class="note"></span>
+        <span class="spacer"></span><span id="rec-free" class="note"></span></div>
+      <div id="rec-warn" class="msg"></div>
+      <div class="row"><label id="l-rm">Start and stop</label><div class="seg" role="radiogroup" aria-labelledby="l-rm"><button type="button" role="radio" aria-checked="false" data-rm="manual">Manual</button><button type="button" role="radio" aria-checked="false" data-rm="arm">Arm: PLAY starts, STOP ends</button></div></div>
+      <div class="row"><label id="l-rmode">Channels</label><div class="seg" role="radiogroup" aria-labelledby="l-rmode"><button type="button" role="radio" aria-checked="false" data-rmode="stereo">Stereo (MAIN L/R)</button><button type="button" role="radio" aria-checked="false" data-rmode="stems">Stems (12 Overbridge channels)</button></div>
+        <span id="rec-stems-note" class="note"></span></div>
+      <div class="row"><label id="l-rbits">Bit depth</label><div class="seg" role="radiogroup" aria-labelledby="l-rbits"><button type="button" role="radio" aria-checked="false" data-rbits="24">24-bit</button><button type="button" role="radio" aria-checked="false" data-rbits="16">16-bit</button></div>
+        <span class="fb" id="rec-fb" role="status" aria-live="polite"></span></div>
+      <div class="row"><label>Take name</label><input id="rec-name" maxlength="24" value="take" style="width:160px" autocomplete="off">
+        <span class="note">_001, _002, ... in /Recordings</span></div>
+      <div id="rec-card" class="note"></div>
+      <p class="note">Recording without PSRAM needs a fast SD card (A1/A2, U3/V30 class): the Teensy's own buffer holds only
+        57 ms of 24-bit stereo (85 ms at 16-bit). On a slower card, or if "the card fell behind" shows, record 16-bit.</p>
+      <div id="rec-msg" class="msg"></div>
+    </section>
+    <section>
+      <h2>Levels</h2>
+      <div id="rec-levels"></div>
+      <p class="note">The peak of the last half second while armed or recording, on the channels the take records. One WAV a
+        channel (MASTER as a stereo file), all starting on the same frame and the same length, so they line up in a DAW;
+        the same layout as the Sidecar (Pi). The takes are in <a href="#files">Files</a>, /Recordings.</p>
     </section>
   </div>
 
   <div class="tab" id="tab-usb">
     <section>
       <h2>USB</h2>
-      <p class="note">Audio mode needs a Sidecar | Expander (Mini) build (teensy/host_uac2.sh). A change re-enumerates the Teensy (the page reconnects
+      <p class="note">Audio mode needs a Sidecar Mini build (teensy/host_uac2.sh). A change re-enumerates the Teensy (the page reconnects
         by itself); the Rytm keeps streaming. The mode is kept across reboots.</p>
       <div class="row"><label>Audio mode</label>
-        <select id="usbmode"><option value="multi">multi (20 in / 12 out)</option><option value="stereo">stereo (MAIN L/R)</option>
+        <select id="usbmode" aria-label="USB audio mode"><option value="multi">multi (20 in / 12 out)</option><option value="stereo">stereo (MAIN L/R)</option>
           <option value="off">off (Serial + MIDI)</option><option value="overbridge" disabled>overbridge (later, opt-in)</option></select>
-        <button data-cmd="usbmode">Show</button> <span id="usbmodestate" class="note"></span></div>
+        <span id="usbmodestate" class="note"></span></div>
       <div class="row"><label>Card</label><a href="#files">Browse the SD card</a></div>
       <div class="row"><label title="the micro-USB port as a USB disk for the SD card">Disk mode</label>
         <button id="diskmode" disabled title="not in this firmware yet: docs/webui-protocol.md, Disk mode">USB disk mode (next step)</button></div>
@@ -228,7 +293,7 @@
   <div class="tab" id="tab-about">
   <section>
     <h2>About</h2>
-    <p>Sidecar | Expander (Teensy 4.1), over WebSerial. Chrome or Edge on a desktop; <code>?mock</code> runs against a fake device.</p>
+    <p>Sidecar Mini | Expander (Teensy 4.1), over WebSerial. Chrome or Edge on a desktop; <code>?mock</code> runs against a fake device.</p>
     <p class="note">The page talks to the Teensy's console (<code>:</code> lines) and its web console frames
       (docs/webui-protocol.md). Card writes and installs wait while the Rytm's transport runs.</p>
   </section>

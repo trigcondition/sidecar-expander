@@ -5,7 +5,12 @@ sidebar:
   order: 8
 ---
 
-<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release, tested with multi-channel audio and MIDI. On the **Sidecar Mini (Teensy)**: <span class="sc-test">in testing</span>, not part of this release yet.
+<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release, tested with multi-channel audio and MIDI. On the **Sidecar Mini (Teensy)**: stereo USB audio to the computer, <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW); part of this release.
+
+<!-- MINI-USB-AUDIO-DETAILS: the mode setting on the Mini follows from the mini-usbaudio branch's docs/usb-audio-midi.md once it is merged into the test line. -->
+:::note[Sidecar Mini computer audio]
+The Mini sends the Rytm's stereo MAIN to the computer over its micro-USB port. How to choose the mode on the Mini is filled in here once its firmware is final.
+:::
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Teensy's micro-USB, or the Pi's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 

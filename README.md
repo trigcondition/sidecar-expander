@@ -4,38 +4,40 @@
 
 Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Public tester release (the 1021 line). Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
+> **Public tester release (the test line). Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 >
-> The remote pages are part of this release (`rui1022`, the default build) and were tested on a real Rytm with Sidecar Mini and Sidecar on 2026-10-18. A few parts are still in testing: see [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
+> The remote pages are part of this release (`rui1025`, the default build): the connect screen, the status pages, SCOPE, the REC page with playback and the voice pages, tested on a real Rytm on 2026-10-18. A few parts are still in testing: see [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
 
 Documentation, the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
 
 ## Sidecar Mini or Sidecar
 
-**Sidecar Mini** (Teensy 4.1) is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card and the remote pages on the Rytm. Recording is planned for the Mini, and a Teensy with PSRAM fitted will get room for more and bigger user machines (planned, high priority). **Sidecar** (Raspberry Pi 4B) has everything: many user machines, the heavy effects, the recorder, the display and Wi-Fi. Make projects on the Mini and move up later: the Sidecar's per-project files are the same on both; only the user machine packages differ (`.rmp` for the Mini, `.a64.rmp` for the Pi).
+**Sidecar Mini** (Teensy 4.1) is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card, the send effects including HALO, the remote pages on the Rytm, and stereo recording to its card (with a fast SD card). A Teensy with PSRAM fitted gets room for more and bigger user machines and stems recording (in testing). **Sidecar** (Raspberry Pi 4B) has everything: many user machines, the heavy effects, the recorder, the display and Wi-Fi. Make projects on the Mini and move up later: the Sidecar's per-project files are the same on both; only the user machine packages differ (`.rmp` for the Mini, `.a64.rmp` for the Pi).
 
 | | Sidecar Mini (Teensy 4.1) | Sidecar (Raspberry Pi 4B) |
 |---|---|---|
 | Built-in machines, samples from the card, remote pages | yes | yes |
 | User machines | a few: 32 KB of plugin code space (two or three of the smaller NoisePlethora packages) | many |
-| Send effects | CHORUS, COMB, CRUSH, RINGMOD | those, plus RINGS, CLOUDSEED, STUTTER |
-| Recorder | planned | yes, multitrack to the SD card |
+| Send effects | CHORUS, COMB, CRUSH, RINGMOD, HALO | those, plus RINGS, CLOUDSEED, STUTTER |
+| Recorder | stereo with a fast SD card; stems with PSRAM (in testing) | multitrack to the SD card, with playback |
 | Display, Wi-Fi, web page | no (a web console over USB) | yes |
 
 ## What works now
 
 - **External voice machines on every track.** PLAITS, DAISYSP, DIGIDRUM, JUNO, 6-OP FM and DSP SAMPLE run on the Sidecar, and their audio returns on the track's own channel.
 - **User machines.** Five slots U1..U5 play loadable machine plugins; six starter machines (ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN) come with the release.
-- **SEND FX 1/2.** AMPLITUDE 2 has two per-track sends to the Sidecar's effects. The SEND FX 1/2 pages behind DELAY / REVERB carry TYPE and P1..P5 (CHORUS, COMB, CRUSH, RINGMOD; on the Pi also RINGS, CLOUDSEED, STUTTER).
+- **SEND FX 1/2.** AMPLITUDE 2 has two per-track sends to the Sidecar's effects. The SEND FX 1/2 pages behind DELAY / REVERB carry TYPE and P1..P5 (CHORUS, COMB, CRUSH, RINGMOD, the new HALO plate reverb with FREEZE and SHIMMER; on the Pi also RINGS, CLOUDSEED, STUTTER).
   - P1 is ROUT: PRE returns through the Rytm's analog distortion and compressor; POST returns clean.
   - P2..P5 show each effect's own labels; list knobs step one item a detent.
 - **SIDECAR folder.** The Sidecar's SD card appears as a folder in the Rytm's own sample browser (it was called TEENSY before 1021).
-- **Remote pages (`rui1022`, Sidecar Mini and Sidecar).** TRK + YES opens the SIDECAR and SYSTEM status pages and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
+- **Remote pages (`rui1025`, Sidecar Mini and Sidecar).** A connect screen when the Sidecar comes up; TRK + YES opens the SIDECAR and SYSTEM status pages, SCOPE with meters, the REC page with playback (Pi) and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
+- **Sidecar Mini recorder:** stereo to the Teensy's card (needs a fast SD card: A1/A2, U3/V30).
 - **Sidecar (Raspberry Pi 4B) only:**
   - a sample pool and presets per project, with a Pool & presets page on the web page;
-  - a multitrack recorder to the SD card;
+  - a multitrack recorder to the SD card, with playback from the Rytm's REC page;
+  - computer audio and MIDI over USB-C;
   - an HDMI touch display (800x480);
   - a web page at `http://sidecar.local` over a direct Ethernet cable;
   - boots from its own SD card.
@@ -49,7 +51,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
   - **OS 1.74 is not supported yet**; it will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - One of:
-  - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
+  - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples; for recording without PSRAM a fast card: A1/A2, U3/V30). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
   - **Sidecar: a Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Sidecar package follows on 2026-10-20.)
 - The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
@@ -66,7 +68,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 ## Install
 
-1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `rui1022` (the default: the mods plus the remote pages), or `sfx1021` for the mods without the remote pages.
+1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `rui1025` (the default: the mods plus the remote pages), or `sfx1021` for the mods without the remote pages.
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar:**
    - Sidecar Mini (Teensy 4.1): [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
@@ -77,18 +79,22 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 Checked on a real Rytm MKII with a Sidecar attached.
 
-On 2026-10-18, with the 1021 builds:
-- `rui1022`'s key handling with the Pi (rytm-teensy 466542f): only the page's keys and knobs go to the Sidecar; PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page; every checklist item correct;
-- the remote pages (`rui1021`) on the Pi (1021 kernel) and on the Teensy (1021 firmware): the Rytm's own font, the stock look, very responsive; the SIDECAR and SYSTEM status pages and the voice pages;
-- Pi: folder upload of large sample folders (no more network errors; a summary line and Retry failed), unplugging and replugging the USB cable between Pi and Rytm (the digital voices stop and resume), restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
+On 2026-10-18, with the test line:
+- the connect screen (`rui1025`), SCOPE and meters, the REC page (arm, record, stop) and playback on the Pi (one glitch when picking takes with C, being fixed), the status pages SIDECAR and SYSTEM catching every knob, the key pass-through (rui1022 and later);
+- the remote pages on the Pi and on the Teensy: the Rytm's own font, the stock look, very responsive;
+- the Sidecar Mini recorder, stereo with a fast card: 24-bit for 70.8 s and 16-bit for 62.4 s, 0 dropped blocks, worst card write 10 ms and 3.1 ms;
+- the FX return on IN L/R (`rui1025`: echoes seen on SCOPE's FX source, on the Mini) and the Mini's stereo USB audio to the computer (heard in a DAW);
+- HALO heard, and measured on the Teensy: about 5.7 % CPU per slot, two HALOs about 16 %, HALO with CHORUS about 11 %;
+- the smaller NoisePlethora packages and the slot reasons !ROOM, !CRSH, !TIME; the web UIs' buttons that show the device's state (Mini console); the "Sidecar Mini" USB name;
+- Pi: folder upload of large sample folders, computer audio and MIDI over USB-C, unplugging and replugging the USB cable, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
 
-Earlier (1017 to 1020 builds):
-- the voices heard: PLAITS, DAISYSP, JUNO, 6-OP FM, DIGIDRUM, DSP SAMPLE;
-- the send effects on the Pi (with labels, PRE/POST, STUTTER) and on the Teensy, live (CHORUS, COMB);
-- the Pi recorder (a 5-minute take), user machines loading, the web page's tabs, the touch display.
+Earlier (1017 to 1022 builds): all the voices heard; the send effects on the Pi and the Teensy; the Pi recorder (a 5-minute take); user machines; stepped knobs and slot fingerprints; the Pi's cold boot.
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
-- the `sfx1021` build on its own (the same mods without the remote pages), the SIDECAR folder name and the NO SIDECAR popup.
+- the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN);
+- voice pages only for tracks on a Sidecar machine;
+- the PSRAM plugin code space and stems recording on a Mini with PSRAM;
+- the Pi's Wi-Fi settings page;
 
 ## USB ID
 
@@ -96,7 +102,7 @@ The Sidecar's own USB device port (the Pi's USB-C, for computer audio and MIDI) 
 
 ## Feedback
 
-Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (`rui1022` / `sfx1021`, and the Teensy or Pi build from `BUILD-INFO`), what you did, and what happened. Logs from the web console or `sidecar.local` help a lot.
+Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (`rui1025` / `sfx1021`, and the Teensy or Pi build from `BUILD-INFO`), what you did, and what happened. Logs from the web console or `sidecar.local` help a lot.
 
 ## This repository
 

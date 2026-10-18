@@ -11,63 +11,67 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-The current tester builds of the Rytm mods are `rui1022` (the default: the mods plus the remote pages) and `sfx1021` (the mods without the remote pages).
+The current tester builds of the Rytm mods are `rui1025` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). The Sidecar firmware is the test line (sidecar-1023).
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages and the Pi's latest fixes were tested on a real Rytm on 2026-10-18; other "hardware" marks come from the 1017 to 1020 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from today's test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
 :::
 
 ## On both: Sidecar Mini and Sidecar
 
 | Feature | Status |
 |---|---|
-| EXT machines PLAITS and DAISYSP on every track | <span class="sc-ok">hardware</span> |
-| EXT machines DSP SAMPLE, DIGIDRUM, JUNO, 6-OP FM | <span class="sc-ok">hardware</span> (heard from the modded Rytm) |
+| EXT machines PLAITS, DAISYSP, DSP SAMPLE, DIGIDRUM, JUNO, 6-OP FM on every track | <span class="sc-ok">hardware</span> |
 | Each voice returns on its own track and plays through the track's analog filter and amp | <span class="sc-ok">hardware</span> |
-| SEND FX 1/2 pages: AMPLITUDE 2 sends, TYPE, P1 ROUTE (PRE/POST), P2..P5 with the effect's labels | <span class="sc-ok">hardware</span> |
-| CHORUS and COMB send effects | <span class="sc-ok">hardware</span> (Pi, and the Teensy live) |
-| CRUSH and RINGMOD send effects | <span class="sc-ok">hardware</span> |
-| The sample browser folder, LOAD TO PROJ into the Sidecar's sample pool | <span class="sc-ok">hardware</span> (as TEENSY); the new name **SIDECAR** <span class="sc-test">in testing</span> (1021) |
-| The **NO SIDECAR** popup in the slot menu (was NO TEENSY) | <span class="sc-test">in testing</span> (1021) |
-| User machines in slots U1..U5 | <span class="sc-ok">hardware</span> (loading on the Pi and the Mini), slot menu fixes too |
-| Slot fingerprints when a project is shared with another Sidecar (slot prints) | <span class="sc-ok">hardware</span> |
-| Stepped list knobs (STUTTER ENG and LEN, ENG / PAT / list knobs step one item a detent) | <span class="sc-ok">hardware</span> |
-| Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> (Pi) |
+| SEND FX 1/2 pages: AMPLITUDE 2 sends, TYPE, P1 ROUTE (PRE/POST), P2..P5 with the effect's labels, stepped lists | <span class="sc-ok">hardware</span> |
+| CHORUS, COMB, CRUSH, RINGMOD send effects | <span class="sc-ok">hardware</span> |
+| HALO plate reverb (DCY with FREEZE, MOD, TONE, SHIM) | <span class="sc-ok">hardware</span> (2026-10-18: heard; on the Mini about 5.7 % CPU per slot) |
+| The SIDECAR folder in the sample browser, LOAD TO PROJ into the Sidecar's sample pool | <span class="sc-ok">hardware</span> |
+| User machines in slots U1..U5, slot fingerprints, slot reasons on the Rytm (!ROOM, !CRSH, !TIME) | <span class="sc-ok">hardware</span> |
+| Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1022`)
+## The remote pages (`rui1025`)
 
 | Feature | Status |
 |---|---|
-| Sidecar pages on the Rytm's screen (TRK + YES) with the Pi (1021 kernel) | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Sidecar pages with Sidecar Mini (Teensy, 1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Text in the Rytm's own font, the stock look, very responsive knobs; status as two pages SIDECAR + SYSTEM | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Only the page's keys and knobs go to the Sidecar: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page (new in `rui1022`) | <span class="sc-ok">hardware</span> (2026-10-18, with the Pi) |
+| Remote pages on the Rytm's screen (TRK + YES) in the Rytm's own font, on the Pi and the Mini | <span class="sc-ok">hardware</span> |
+| Status pages SIDECAR + SYSTEM (they catch every knob) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Key pass-through: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo reach the Rytm on a page | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Connect screen when the Sidecar comes up | <span class="sc-ok">hardware</span> (2026-10-18) |
+| SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
+| REC page: arm, record, stop (Pi) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
+| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1025` | <span class="sc-test">in testing</span> |
+| DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
+| FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18, SCOPE on the Mini) |
 
 ## Sidecar (Raspberry Pi 4B) only
 
 | Feature | Status |
 |---|---|
 | RINGS, CLOUDSEED and STUTTER send effects | <span class="sc-ok">hardware</span> |
-| Multitrack recorder to the SD card (up to 23 sources) | <span class="sc-ok">hardware</span> (5-minute take, 13 files) |
-| Web page at `http://sidecar.local`: status, sound, send FX, record, machines, files, log | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
+| Multitrack recorder to the SD card (up to 23 sources) | <span class="sc-ok">hardware</span> |
+| Web page at `http://sidecar.local`, with choice buttons that show the device's state | <span class="sc-ok">hardware</span> |
 | Sample pool and presets per project, the Pool & presets page | <span class="sc-ok">hardware</span> |
-| File browser with folder upload, also large sample folders (summary line, Retry failed) | <span class="sc-ok">hardware</span> (2026-10-18) |
-| Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> (2026-10-18): the digital voices stop and resume |
-| 5" HDMI touch display: status, settings, screensaver, brightness | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
-| Display: hide the touch test, brightness down to 5 % | <span class="sc-ok">hardware</span> |
-| Boots from its own SD card, no computer needed | <span class="sc-ok">hardware</span>, also from a cold power cycle |
-| Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package, no setup page yet); rejoin watchdog <span class="sc-test">in testing</span> (new) |
-| Computer audio and MIDI over USB-C | <span class="sc-ok">hardware</span> (multi-channel audio and MIDI) |
+| File browser with folder upload, also large sample folders | <span class="sc-ok">hardware</span> |
+| Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> |
+| 5" HDMI touch display; hide the touch test; brightness down to 5 % | <span class="sc-ok">hardware</span> |
+| Boots from its own SD card, also from a cold power cycle | <span class="sc-ok">hardware</span> |
+| Computer audio and MIDI over USB-C | <span class="sc-ok">hardware</span> |
+| Wi-Fi: join a network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package) |
+| Wi-Fi settings on the web page: scan, connect and save, 90 s fallback (the Pi restarts on a join) | <span class="sc-test">in testing</span> |
 
 ## Sidecar Mini (Teensy 4.1) only
 
 | Feature | Status |
 |---|---|
 | Runs on a stock board, no PSRAM needed | <span class="sc-ok">hardware</span> |
-| More and bigger user machines on a Teensy with PSRAM | <span class="sc-plan">planned</span> (high priority) |
-| Recorder on the Mini | <span class="sc-plan">planned</span> |
-| Web console over WebSerial: log, status, commands | <span class="sc-ok">hardware</span> |
-| Console tabs for user machines and the SD card | <span class="sc-test">in testing</span> |
-| USB audio to a computer (multi-channel or stereo) and MIDI pass-through | <span class="sc-test">in testing</span>; not in this Sidecar Mini release (on the Pi it is) |
+| Recorder, stereo, with a fast card (24-bit 70.8 s and 16-bit 62.4 s, 0 drops) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| Web console: status, sound, record, user machines, files; choice buttons that show the device's state | <span class="sc-ok">hardware</span> |
+| "Sidecar Mini" as its USB name | <span class="sc-ok">hardware</span> |
+| Smaller NoisePlethora packages | <span class="sc-ok">hardware</span> |
+| PSRAM: a second plugin code space for more and bigger user machines | <span class="sc-test">in testing</span> (testers with PSRAM) |
+| Recorder stems with PSRAM | <span class="sc-test">in testing</span> |
+| Computer audio: stereo USB audio to the computer | <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW) |
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).

@@ -1,17 +1,36 @@
 ---
 title: Release notes
-description: What is in the 1021 tester release, what changed since 1017, and what is tested on hardware.
+description: What is in the tester release (the test line), what changed since 1017, and what is tested on hardware.
 ---
 Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
 | Part | Build |
 |---|---|
-| Rytm mods | `rui1022` (default: the mods plus the remote pages, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/) |
-| Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build; `BUILD-INFO-teensy.txt` names the commit |
-| Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set; `BUILD-INFO-pi.txt` names the commit and the kernel |
+| Rytm mods | `rui1025` (default: the mods plus the remote pages, the connect screen and the FX return on IN L/R, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/) |
+| Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build of the test line (sidecar-1023); `BUILD-INFO-teensy.txt` names the commit |
+| Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set of the test line; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
 
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
+
+## New in the test line (1023)
+
+Tested on hardware on 2026-10-18 unless marked "in testing".
+
+- **FX return on IN L/R** (`rui1025`): the Rytm's delay + reverb return on the Overbridge IN L/R instead of its audio inputs (Sound tab: IN L/R source); the recorder names those files FX_L / FX_R and SCOPE shows the source FX. Never send those channels back into the Rytm through the computer.
+- **Sidecar Mini computer audio:** stereo USB audio to the computer.
+- **Voice pages follow a machine change at once** (`rui1025`; in testing).
+- **Connect screen** (`rui1025`): when the Sidecar comes up, the Rytm shows CONNECTED, the voices and effects, and the Pi's address for 3 seconds. Transport and pads keep working under it.
+- **SCOPE and meters:** the Rytm's output, a voice or the inputs as a live waveform, with twelve peak meters.
+- **REC page** (Pi): arm, record and stop from the Rytm; the take's time in large digits, the free space and the meters.
+- **Playback** (Pi): one channel of a take into the Rytm's MAIN, from the REC page (B, C, D) or the web page's Record tab. Picking another take with C while one plays can glitch once; a fix is on the way.
+- **Status pages catch every knob;** SCOPE and REC use their own encoders.
+- **Sidecar Mini recorder:** the Rytm's Overbridge stream to the Teensy's card, stereo on a stock Teensy with a fast SD card (A1/A2, U3/V30): 24-bit for 70.8 s and 16-bit for 62.4 s with 0 dropped blocks. Stems with PSRAM are in testing.
+- **HALO:** a lush modulated plate reverb with FREEZE (DCY at 127) and SHIMMER, on both Sidecars, 8 KB of RAM per slot. Knobs DCY, MOD, TONE, SHIM. On the Mini about 5.7 % CPU per slot.
+- **Smaller NoisePlethora packages** and the slot reasons !ROOM, !CRSH, !TIME on the Rytm.
+- **Web UIs:** choice buttons as segmented toggles that show the device's own state (pending, confirmed or put back).
+- **"Sidecar Mini"** as the Teensy's USB name.
+- In testing: the DSP SAMPLE waveform page and machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud); voice pages only for tracks on a Sidecar machine; the PSRAM plugin code space on the Mini; the Pi's Wi-Fi settings page (scan, connect and save, 90 s fallback).
 
 ## New in 1021
 
@@ -48,20 +67,22 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 
 ## Tested on hardware or in the emulator
 
-Tested on a real Rytm MKII on 2026-10-18 (1021 builds): `rui1022`'s key handling with the Pi (every checklist item correct); the remote pages with the Pi (1021 kernel) and the Teensy (1021 firmware), in the Rytm's font, very responsive, SIDECAR + SYSTEM; Pi folder upload of large sample folders; unplugging and replugging the USB cable between Pi and Rytm (the digital voices stop and resume); restarting the Rytm and the Pi; the restyled web page and display; Wi-Fi joining on the first boot.
+Tested on a real Rytm MKII on 2026-10-18 (the test line): the connect screen, SCOPE and meters, the REC page and playback on the Pi, the status pages catching every knob, the key pass-through, the Mini recorder (stereo, fast card), HALO (heard; measured on the Teensy), the smaller NoisePlethora packages with their slot reasons, the web UIs' state buttons, the "Sidecar Mini" USB name, folder upload, the Pi's computer audio and MIDI, the FX return on IN L/R (SCOPE on the Mini), the Mini's stereo USB audio (heard in a DAW); the remote pages on the Pi and the Teensy.
 
-Earlier (1017 to 1020 builds): the voices PLAITS, DAISYSP, JUNO, 6-OP FM, DIGIDRUM and DSP SAMPLE heard; send FX on the Pi (labels, PRE/POST, STUTTER) and on the Teensy, live (CHORUS, COMB); the Pi recorder (5-minute take); user machines loading; the web page's tabs; the touch display.
+Earlier (1017 to 1022 builds): all the voices heard; send FX on the Pi and the Teensy; the Pi recorder (5-minute take); user machines; the web page's tabs; the touch display; stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away.
 
-Also confirmed on hardware: stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Also on hardware: the Pi's pool and presets, hiding the touch test, 5 % brightness, multi-channel computer audio and MIDI over the Pi's USB-C. Still in testing: the Wi-Fi rejoin watchdog.
+Still in testing: the waveform page and machine graphics, voice pages only for Sidecar machines, the PSRAM code space and stems on the Mini, the Pi's Wi-Fi settings page.
 
 ## Known limits in this release
 
-- Teensy: only one large NoisePlethora package (NP VOICES / CLUST1 / CLUST2) fits in the 32 KB plugin code space at a time.
+- Teensy: only one of the old large NoisePlethora packages fits in the 32 KB plugin code space at a time; the new smaller ones fit two or three.
+- Recording on a Mini without PSRAM needs a fast SD card.
+- REC page playback: picking another take with C while one plays can glitch once.
 
 ## Upgrading from the 1017 release
 
-1. Patch your stock OS 1.73 file again with `rui1022` (or `sfx1021`) and flash it.
+1. Patch your stock OS 1.73 file again with `rui1025` (or `sfx1021`) and flash it.
 2. Load the new Teensy `.hex`, or copy the new Pi card files over the old ones.
-3. The 1021 Rytm builds need a 1021 Sidecar for the new names and the remote UI; an older Sidecar shows numbers instead of the effects' names.
+3. The Rytm builds need the matching Sidecar firmware for the new names, the remote pages and the connect screen; an older Sidecar shows numbers instead of the effects' names.
 
 See [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/) for what does not work yet.

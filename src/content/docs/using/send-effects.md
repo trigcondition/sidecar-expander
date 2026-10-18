@@ -18,12 +18,13 @@ The Sidecar's two send effects take the Rytm's voices, each at its track's send 
 
 ## Which effects where
 
-| TYPE | Teensy | Pi | Status |
+| TYPE | Sidecar Mini | Sidecar (Pi) | Status |
 |---|---|---|---|
 | CHORUS | yes | yes | <span class="sc-ok">hardware</span> |
 | COMB | yes | yes | <span class="sc-ok">hardware</span> |
-| CRUSH | yes | yes | <span class="sc-test">in testing</span> |
-| RINGMOD | yes | yes | <span class="sc-test">in testing</span> |
+| CRUSH | yes | yes | <span class="sc-ok">hardware</span> |
+| RINGMOD | yes | yes | <span class="sc-ok">hardware</span> |
+| HALO | yes | yes | <span class="sc-ok">hardware</span> (heard; measured on the Mini) |
 | RINGS | - | yes | <span class="sc-ok">hardware</span> |
 | CLOUDSEED | - | yes | <span class="sc-ok">hardware</span> |
 | STUTTER | - | yes | <span class="sc-ok">hardware</span> |
@@ -75,6 +76,23 @@ A ring modulator: the input times a carrier on each side.
 | P3 | SPRD | the right carrier up to a fifth higher |
 | P4 | SHPE | carrier from sine to near square |
 | P5 | LFO | 0 off; else the carrier swept ±6 semitones at 0.1 to 10 Hz |
+
+## HALO
+
+A small, lush, modulated plate reverb written for the Sidecar: very long smooth tails, FREEZE and SHIMMER, wide stereo, the kind of space the Rytm's own reverb cannot make. It runs on Sidecar Mini and Sidecar alike, in 8 KB of RAM per slot.
+
+| Knob | Label | Range |
+|---|---|---|
+| P2 | DCY | decay, 0.3 to 30 s; at 127 **FRZ**: FREEZE holds the tail forever (no new input) |
+| P3 | MOD | modulation, 0 still to 127 deep |
+| P4 | TONE | the tail's low-pass (1.2 to 10 kHz) and the input's high-pass (250 down to 30 Hz) |
+| P5 | SHIM | octave-up shimmer, 0 off to 127 |
+
+On the Mini (measured with `:sendfxbench`): HALO alone about 5.7 % CPU per slot, two HALOs about 16 %, HALO with CHORUS about 11 %.
+
+![SEND FX 1 set to HALO: TYPE and ROUTE as text, P2..P5 named DCY, MOD, TONE, SHIM](../../../assets/rytm/sendfx1-halo.png)
+
+<small>Screenshot: the SEND FX 1 page in the emulator with HALO's labels from the Sidecar.</small>
 
 ## RINGS (Pi)
 

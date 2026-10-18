@@ -36,7 +36,7 @@ export function parseRmp(b) {
 }
 
 // The reasons a package will not install or play, from the Teensy's own numbers (`:mem`, `:plugins`):
-// limits = {arena: [size, used], state_limit, store: [size, free], api}. [] = it fits.
+// limits = {arena: [size, used], parena: [size, used] (PSRAM fitted only), state_limit, store: [size, free], api}. [] = it fits.
 export function fitProblems(p, limits) {
   const out = [];
   if (p.error) return [p.error];
@@ -44,7 +44,9 @@ export function fitProblems(p, limits) {
   if (p.size > RMP.MAX_PKG) out.push(`the package is ${p.size} B, over the store's 64 KB limit`);
   if (limits) {
     if (limits.api != null && p.api > limits.api) out.push(`built for plugin API ${p.api}, the firmware has ${limits.api}`);
-    const [asz] = limits.arena || [];
+    const [isz] = limits.arena || [];
+    const [psz] = limits.parena || [];   // the PSRAM code arena (PSRAM fitted): the larger of the two decides
+    const asz = Math.max(isz || 0, psz || 0);
     if (asz && p.code > asz) out.push(`code + data ${p.code} B, over the ${asz} B code arena`);
     if (limits.state_limit && p.state > limits.state_limit)
       out.push(`per-voice state ${p.state} B, over the ${limits.state_limit} B a voice has (PSRAM would add room)`);
@@ -58,5 +60,8 @@ export function fitProblems(p, limits) {
 export function arenaNote(p, limits) {
   const [asz, aused] = (limits && limits.arena) || [];
   if (!asz) return "";
-  return p.code > asz - aused ? `needs ${p.code} B of the arena; ${asz - aused} B are free with this project's slots loaded` : "";
+  const [psz, pused] = (limits && limits.parena) || [0, 0];   // PSRAM fitted: what overflows the internal arena goes there
+  if (p.code <= asz - aused || p.code <= psz - pused) return "";
+  return psz ? `needs ${p.code} B of the arena; ${asz - aused} B (internal) and ${psz - pused} B (PSRAM) are free with this project's slots loaded`
+    : `needs ${p.code} B of the arena; ${asz - aused} B are free with this project's slots loaded`;
 }

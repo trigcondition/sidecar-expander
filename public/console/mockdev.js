@@ -33,13 +33,17 @@ function noise(n, seed) {
 }
 
 export class MockDevice {
-  constructor(say, { rate = 450, framed = false } = {}) {
+  constructor(say, { rate = 450, framed = false, psram = false, oldRytm = false, now = () => Date.now() } = {}) {
     this.say = say;          // (line) -> void
     this.rate = rate;
     this.framed = framed;
     this.transport = false;
+    this.old = oldRytm;      // a Rytm build without 0030-fx-in: never answers the fxin 26
     this.st = { notes: false, out: "tracks", fifo: 256, mac: true, usbmode: "multi", mach: Array(8).fill("plaits") };
     this.inbuf = new Uint8Array(0);
+    this.now = now;
+    // the recorder (rec_mini.h): stereo in a 32 KB ring without PSRAM, stems with it
+    this.rec = { state: 0, arm: false, psram, mask: [0], bits: 24, prefix: "take", take: "", t0: 0, frames: 0, n: 0, error: "" };
     this.fs = new Map();
     const dir = (p) => this.fs.set(p, { dir: true, m: "2026-10-12 09:30" });
     const file = (p, data) => this.fs.set(p, { dir: false, data, m: "2026-10-14 21:05" });
@@ -107,6 +111,8 @@ export class MockDevice {
     if (p === "mem") return this.later(() => this.mem());
     if (p === "df") return this.later(() => this.j({ t: "df", st: "ok", total_kb: Math.floor(this.cardTotal / 1024), free_kb: Math.floor((this.cardTotal - this.used()) / 1024), type: "exFAT", ms: 412 }), 4096);
     if (p === "plugins") return this.plugins();
+    if (p === "rec" || p.startsWith("rec=")) return this.recCmd(p);
+    if (p === "fxin" || /^fxin=[01?]$/.test(p)) return this.fxinCmd(p);
     if (p.startsWith("plugin=")) return this.pluginCmd(p.slice(7));
     if ((m = /^notemach=([0-7]):(.*)$/.exec(p))) {
       if (NAMES.includes(m[2])) { st.mach[m[1]] = m[2]; say(`notes: voice ${m[1]} plays ${m[2]}`); }
@@ -126,6 +132,69 @@ export class MockDevice {
     else if (p === "notes") say(`MIDI notes ${st.notes ? "on" : "off"}: voices 0..7 play ${st.mach.join(" ")}`);
     else say(`console: unknown command "${p}" (notes=1|0, notemach=V:NAME, notes, out=main|tracks, out, fifo=N, fifo, cap=MS, mac=on|off, usbmode=multi|stereo|off, mem, df, plugins, plugin=...)`);
   }
+
+  // IN L/R source (core::fxin): ?old = a Rytm without 0030 (never answers); else it answers the 26 after 200 ms
+  fxinCmd(p) {
+    const f = this.fxin || (this.fxin = { want: 0, rytm: this.old ? -1 : 0 });
+    if (p[4] === "=" && p[5] !== "?") {
+      f.want = +p[5];
+      if (f.rytm >= 0) setTimeout(() => { f.rytm = f.want; }, 200);
+    }
+    const state = f.rytm === 1 ? "on" : f.rytm === 0 ? "off" : "unsupported";
+    this.say(`fxin: IN L/R source ${f.want ? "FX return" : "inputs"}, the Rytm ${state}`);
+    this.j({ t: "fxin", fxin: { want: f.want, state, rytm: f.rytm } });
+  }
+
+  recJson() {
+    const r = this.rec, stems = r.mask.length > 1;
+    if (r.state === 2) r.frames = Math.floor(((this.now() - r.t0) / 1000) * 48000);
+    const fb = (r.bits / 8) * (stems ? 12 : 2), ringKB = r.psram ? (stems ? 64 : 768) : 16;
+    const free = Math.floor((this.cardTotal - this.used()) / 1048576) - (r.state >= 2 ? Math.floor((r.frames * fb) / 1048576) : 0);
+    const pk = (id) => (r.state && r.mask.includes(id) ? Math.floor(200 + Math.random() * 600) : 0);
+    this.j({ t: "rec", state: r.state, arm: r.arm ? 1 : 0, ready: 1, psram: r.psram ? 1 : 0, maxs: r.psram ? 14 : 2, bits: r.bits,
+      mode: stems ? "stems" : "stereo", prefix: r.prefix, take: r.take, ch: r.mask, frames: r.frames, bytes: Math.floor((r.frames * fb) / 1024),
+      drops: 0, silence: 0, cardKBps: r.frames ? 9800 : 0, needKBps: Math.floor((fb * 48000) / 1024), worstWriteMs: r.frames ? 6 : 0, worstWriteUs: r.frames ? 6200 : 0,
+      writes: Math.floor((r.frames * fb) / (r.psram ? 16384 : 4096)), busy: Math.floor(r.frames / 4800), ringMs: Math.floor((ringKB * 1024 * 1000) / (48000 * (r.bits / 8) * (stems ? 1 : 2))),
+      ringKB, blockKB: r.psram ? 16 : 4, ringMax: r.frames ? 31 : 0, freeMB: free, totalMB: Math.floor(this.cardTotal / 1048576), error: r.error,
+      peak: Array.from({ length: 13 }, (_, i) => pk(i)) });
+  }
+  recStart() {
+    const r = this.rec;
+    r.n += 1;
+    r.take = `${r.prefix}_${String(r.n).padStart(3, "0")}`;
+    r.state = 2; r.t0 = this.now(); r.frames = 0; r.error = "";
+    this.fs.set("/Recordings", { dir: true, m: "2026-10-18 20:00" });
+    this.fs.set("/Recordings/" + r.take, { dir: true, m: "2026-10-18 20:00" });
+    this.say(`rec: ${r.take} started: ${r.mask.length > 1 ? 12 : 1} files, ${r.bits}-bit`);
+  }
+  recEnd() {
+    const r = this.rec;
+    if (r.state < 2) return;
+    r.frames = Math.floor(((this.now() - r.t0) / 1000) * 48000);
+    const names = r.mask.map((id) => `${String(id).padStart(2, "0")}_${["MASTER", "MAIN_L", "MAIN_R", "BD", "SD", "RS-CP", "BT", "LT", "MT-HT", "CH-OH", "CY-CB", this.fxin?.rytm === 1 ? "FX_L" : "IN_L", this.fxin?.rytm === 1 ? "FX_R" : "IN_R"][id]}.wav`);
+    for (const n of names) this.fs.set(`/Recordings/${r.take}/${n}`, { dir: false, data: new Uint8Array(512), m: "2026-10-18 20:01" });
+    this.say(`rec: ${r.take} stopped: ${r.frames} frames`);
+    r.state = r.arm ? 1 : 0;
+  }
+  recCmd(p) {
+    const r = this.rec, v = p.slice(4);
+    let err = "";
+    if (p === "rec") return this.recJson();
+    if (v === "start") { if (r.state >= 2) err = "a take is running"; else { r.arm = false; this.recStart(); } }
+    else if (v === "arm") { if (r.state >= 2) err = "a take is running"; else { r.arm = true; r.state = 1; } }
+    else if (v === "stop") { r.arm = false; if (r.state === 1) r.state = 0; else this.recEnd(); }
+    else if (r.state) err = "busy: stop first";
+    else if (v === "mode:stereo") r.mask = [0];
+    else if (v === "mode:stems") { if (r.psram) r.mask = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; else err = "stems need PSRAM: stereo (MASTER) only on this Teensy"; }
+    else if (v === "bits:16" || v === "bits:24") r.bits = +v.slice(5);
+    else if (v.startsWith("name:")) { if (/^[A-Za-z0-9_-]{1,24}$/.test(v.slice(5))) r.prefix = v.slice(5); else err = "name: 1..24 of A-Z a-z 0-9 _ -"; }
+    else err = "rec=start|stop|arm|mode:stereo|mode:stems|ch:LIST|bits:16|24|name:PREFIX";
+    if (err) this.say(`${p}: ${err}`);
+    this.say(`rec: ${["idle", "armed", "recording", "finishing"][r.state]}${r.arm ? " (PLAY/STOP)" : ""}, ${r.bits}-bit, prefix ${r.prefix}`);
+    this.recJson();
+  }
+  // the Rytm's PLAY / STOP (the tests; mockTransport in the page)
+  recTransport(on) { const r = this.rec; if (r.arm && on && r.state === 1) this.recStart(); else if (r.arm && !on && r.state === 2) this.recEnd(); }
 
   used() { let n = this.cardUsed; for (const v of this.fs.values()) if (!v.dir) n += v.data.length; return n; }
   storeUsed() { let n = 3 * 65536; for (const b of this.store.values()) n += Math.ceil(b.length / 65536) * 65536; return n; }

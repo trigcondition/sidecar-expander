@@ -121,14 +121,14 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-ok">hardware</span> (part of the release in `rui1022`; the pages were tested 2026-10-18 with the Pi and the Teensy, and `rui1022`'s key handling with the Pi)
+<span class="sc-ok">hardware</span> (part of the release in `rui1025`, on Sidecar Mini and Sidecar)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
-- **TRK + YES** (hold TRK, press YES) opens it. The first pages are the status pages SIDECAR and SYSTEM; then one page per voice whose machine has a page (PLAITS first).
+- **TRK + YES** (hold TRK, press YES) opens it. The first pages are the status pages SIDECAR and SYSTEM; RIGHT goes on to one page per track that plays a Sidecar machine; LEFT from SIDECAR goes to SCOPE and (on the Pi) REC.
 - **LEFT / UP**: the previous page. **RIGHT / DOWN / PAGE**: the next. **NO**: back to SIDECAR.
 - A page catches **only the keys and knobs it uses**. PLAY, STOP and RECORD always reach the Rytm (FUNC + PLAY / STOP too); the pads, MUTE / CHRO / SCNE / PERF, FILL, the trig keys, BANK and tap tempo work as on the stock screen. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) stay with the Sidecar.
-- On the SIDECAR and SYSTEM pages no knob is caught: a turn edits the stock parameter of the stock page underneath (you see it after leaving). LEVEL always sets the track level.
+- The SIDECAR and SYSTEM pages catch every knob, so nothing changes underneath while you look at them. SCOPE and REC use their own encoders.
 - With a Sidecar firmware older than the key masks, the page catches every key and knob except PLAY, STOP and RECORD.
 - The **encoders** A..H change the shown voice's parameters. Such an edit holds until the Rytm's own value moves (its knob, a p-lock, another sound). It is not saved in the kit.
 - The pads keep playing.
@@ -145,35 +145,36 @@ Since 1021 every letter on these pages is drawn by the Rytm itself, in its own f
 
 ![A PLAITS voice page: ENG with the model VA, HRM, TIM, MOR, the decay curve, LPG, TUN, LEV, and V1 HRM:70 in the bottom bar](../../../assets/rytm/remote-plaits.png)
 
-<small>Screenshots: `rui1021` in the emulator with the 1021 host code (mock values). The remote UI itself is <span class="sc-ok">hardware</span>-tested: on a real Rytm the text is the Rytm's own and it responds at once.</small>
+<small>Screenshots: `rui1025` in the emulator with the test line's host code (mock values); on a real Rytm the text is the Rytm's own and it responds at once.</small>
 
-- It needs the 1021 Sidecar: the Pi with the 1021 kernel, or the Teensy with the 1021 firmware. An older Pi kernel opens the pages without text.
+- It needs the test line's Sidecar firmware (Pi kernel or Mini firmware). An older Pi kernel opens the pages without text.
 
-### Examples: what the remote UI can show
+### More pages
 
-<span class="sc-test">in testing</span>: built and tested in the emulator, not yet on a real Rytm; not part of the tester release yet.
+Most of these are tested on hardware and part of this release; each says which.
 
 All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so new pages, layouts and graphics come with a Sidecar update (the Pi's SD card or a Teensy upload) and **do not need a new Rytm flash**. Only a new kind of building block on the Rytm side, like the connect screen below, needs one.
 
-**Connect screen** (needs the `rui1023` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
+**Connect screen** <span class="sc-ok">hardware</span> (the `rui1025` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
 
 ![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, TRK + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
 ![The connect screen on the Pi with its network address](../../../assets/rytm/remote-connect-ip.png)
 
-**SCOPE and meters.** The Rytm's output (or one Sidecar voice, or the inputs) as a scope, with a level meter per track and a 1-second peak hold. Knob A: the source, B: the timebase (21 ms to 1.4 s), C: the gain.
+**SCOPE and meters** <span class="sc-ok">hardware</span>. The Rytm's output (or one Sidecar voice, or the inputs) as a scope, with a level meter per track and a 1-second peak hold. Knob A: the source, B: the timebase (21 ms to 1.4 s), C: the gain.
 
 ![The SCOPE page: a waveform and twelve track meters](../../../assets/rytm/remote-scope.png)
 
-**Sample waveform** on the DSP SAMPLE and GRAIN pages: the sample with its start and end, loop brackets, reverse and slice lines, following the knobs as you turn them. On GRAIN: the grain window and its spread.
+**Sample waveform** <span class="sc-test">in testing</span> on the DSP SAMPLE and GRAIN pages: the sample with its start and end, loop brackets, reverse and slice lines, following the knobs as you turn them. On GRAIN: the grain window and its spread.
 
 ![DSP SAMPLE: the waveform with the start/end region and the loop brackets](../../../assets/rytm/remote-wave-sample.png)
 ![GRAIN: the waveform with the grain window](../../../assets/rytm/remote-wave-grain.png)
 
-**Recorder** (Pi): YES records and stops, knob A arms. The take's time in large digits, the take name, the card's free space and hours left, and the meters.
+**Recorder and playback** <span class="sc-ok">hardware</span> (Pi): YES records and stops, knob A arms; B picks a channel and plays it into the MAIN, C the take, D the level. See [The recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm).
 
-![The REC page while recording](../../../assets/rytm/remote-rec.png)
+![The REC page, armed](../../../assets/rytm/remote-rec.png)
+![The REC page playing a channel of a take](../../../assets/rytm/remote-play.png)
 
-**Machine graphics.** 6-OP FM shows the algorithm of the patch PAT picks (operators, carriers on the output line, feedback); JUNO shows its envelope and filter curve.
+**Machine graphics** <span class="sc-test">in testing</span>. 6-OP FM shows the algorithm of the patch PAT picks (operators, carriers on the output line, feedback); JUNO shows its envelope and filter curve.
 
 ![6-OP FM: the algorithm diagram](../../../assets/rytm/remote-fm.png)
 ![JUNO: the envelope and the filter curve](../../../assets/rytm/remote-juno.png)

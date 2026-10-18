@@ -13,7 +13,7 @@ class FakePort extends EventTarget {
     let ctl, timer;
     const say = (s) => ctl && ctl.enqueue(enc.encode(s + "\r\n"));
     // one device across re-enumerations (its card, store and an open transfer stay); its output goes to this open
-    if (!this.dev) this.dev = new MockDevice(() => {});
+    if (!this.dev) this.dev = new MockDevice(() => {}, { psram: new URLSearchParams(location.search).has("psram"), oldRytm: new URLSearchParams(location.search).has("oldrytm") });
     const dev = (window.mockDevice = this.dev);
     dev.say = say;
     const st = dev.st;
@@ -41,7 +41,7 @@ export function mockSerial(log) {
   const port = new FakePort(serial);
   serial.requestPort = async () => port;
   serial.getPorts = async () => [];
-  window.mockTransport = (on) => { if (window.mockDevice) window.mockDevice.transport = !!on; };
+  window.mockTransport = (on) => { if (window.mockDevice) { window.mockDevice.transport = !!on; window.mockDevice.recTransport(!!on); } };
   window.mockUnplug = () => port.stop && port.stop();
   // WebSerial's 'connect' event has the port as its target
   window.mockReplug = () => {

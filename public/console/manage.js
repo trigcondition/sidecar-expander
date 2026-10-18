@@ -44,6 +44,7 @@ export function initManage(link, log) {
     ["flash", "Program flash", "the firmware image"],
     ["store", "Plugin store", "installed packages (LittleFS in flash)"],
     ["arena", "Code arena", "plugin code + data while loaded (DTCM, executable)"],
+    ["parena", "Code arena (PSRAM)", "plugin code + data that did not fit the internal arena (PSRAM fitted only; cached, slower on a miss)"],
     ["sd", "SD card", ""],
   ];
   function drawMem() {
@@ -124,7 +125,8 @@ export function initManage(link, log) {
       sl.append(el("div", { class: "slot " + (s.state || "").toLowerCase() },
         el("b", {}, `U${s.slot}`),
         el("span", {}, s.id ? `${s.name || s.id}` : "empty"),
-        el("span", { class: "note" }, s.id ? `${s.state} ${s.ver}` : ""),
+        el("span", { class: "note", title: s.place ? "where the machine's code runs from: the internal arena (fastest) or PSRAM" : "" },
+          s.id ? `${s.state} ${s.ver}${s.place ? (s.place === "psram" ? " · PSRAM" : " · arena") : ""}` : ""),
         (() => { const w = slotSrc(s); return el("span", { class: "src " + w.cls }, w.text); })(),
         s.id ? el("button", { class: "small", title: `U${s.slot} empty in this project (stays empty: nothing fills it)`, onclick: () => act(`U${s.slot} cleared`, () => link.plugin(`clr:${s.slot}`)) }, "Clear") : null));
     }
@@ -134,6 +136,7 @@ export function initManage(link, log) {
       : "older Rytm firmware: slots fill from the sounds' tags as they play";
     const L = state.limits;
     $("plsum").textContent = L ? `Project ${L.project || "-"} · code arena ${fmtBytes(L.arena[1])} of ${fmtBytes(L.arena[0])} used · ` +
+      (L.parena ? `PSRAM code arena ${fmtBytes(L.parena[1])} of ${fmtBytes(L.parena[0])} used · ` : "") +
       `state up to ${fmtBytes(L.state_limit)} a voice · store ${fmtBytes(L.store[1])} free of ${fmtBytes(L.store[0])}` +
       (L.safe_mode ? " · SAFE MODE (user machines off this boot)" : "") + (L.transport ? " · transport running: installs wait for stop" : "") : "";
   }
