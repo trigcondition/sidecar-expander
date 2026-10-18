@@ -9,7 +9,7 @@ Flags:
   are reported separately, as expected), local paths (/Users/, /home/, /private/, /var/folders/);
 - firmware: .syx/.bin files, SysEx OS file headers, and, with --stock, any patch literal that holds 4 consecutive
   bytes of a decoded stock section (the same rule release_patch.py enforces);
-- "Elektron" in GUI files (.html/.js, and the strings of the .hex and Pi images).
+- "Elektron" in GUI files (.html/.js, and the strings of the .hex and Pi images); in the docs site's pages only a note.
 Exit status 1 when anything outside the expected notices is found.
 """
 import argparse
@@ -96,8 +96,10 @@ def main():
             bad.append(f"{rel}: holds an Elektron SysEx header")
         ext = os.path.splitext(rel)[1]
         if ext in GUI_EXT or rel.endswith(".zip"):
+            # the docs site's pages may name the maker in prose (compatibility, nominative use); the device GUIs may not
+            site_page = rel.startswith("_site" + os.sep) and not rel.startswith(tuple(os.path.join("_site", d) + os.sep for d in ("console", "patcher")))
             for m in set(re.findall(rb"[^\x00-\x1f\"<>]{0,40}elektron[^\x00-\x1f\"<>]{0,40}", data, re.I)):
-                bad.append(f"{rel}: 'Elektron' in a GUI/binary string: {m.decode(errors='replace').strip()!r}")
+                (notes if site_page else bad).append(f"{rel}: 'Elektron' in {'a docs page' if site_page else 'a GUI/binary string'}: {m.decode(errors='replace').strip()!r}")
             if ext in (".html", ".js") and re.search(rb"overbridge", data, re.I):
                 notes.append(f"{rel}: mentions 'Overbridge' (a trademark; consider neutral wording in the GUI)")
     if a.stock:
