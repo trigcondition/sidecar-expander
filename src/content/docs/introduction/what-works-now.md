@@ -26,12 +26,12 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Each voice returns on its own track and plays through the track's analog filter and amp | <span class="sc-ok">hardware</span> |
 | SEND FX 1/2 pages: AMPLITUDE 2 sends, TYPE, P1 ROUTE (PRE/POST), P2..P5 with the effect's labels | <span class="sc-ok">hardware</span> |
 | CHORUS and COMB send effects | <span class="sc-ok">hardware</span> (Pi, and the Teensy live) |
-| CRUSH and RINGMOD send effects | <span class="sc-test">in testing</span> |
+| CRUSH and RINGMOD send effects | <span class="sc-ok">hardware</span> |
 | The sample browser folder, LOAD TO PROJ into the Sidecar's sample pool | <span class="sc-ok">hardware</span> (as TEENSY); the new name **SIDECAR** <span class="sc-test">in testing</span> (1021) |
 | The **NO SIDECAR** popup in the slot menu (was NO TEENSY) | <span class="sc-test">in testing</span> (1021) |
-| User machines in slots U1..U5 | <span class="sc-ok">hardware</span> (loading on the Pi); slot menu fixes <span class="sc-test">in testing</span> |
-| Slot fingerprints when a project is shared with another Sidecar (slot prints) | <span class="sc-test">in testing</span> |
-| Stepped list knobs (STUTTER ENG and LEN, ENG / PAT / list knobs step one item a detent) | <span class="sc-test">in testing</span> |
+| User machines in slots U1..U5 | <span class="sc-ok">hardware</span> (loading on the Pi and the Mini), slot menu fixes too |
+| Slot fingerprints when a project is shared with another Sidecar (slot prints) | <span class="sc-ok">hardware</span> |
+| Stepped list knobs (STUTTER ENG and LEN, ENG / PAT / list knobs step one item a detent) | <span class="sc-ok">hardware</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> (Pi) |
 
 ## The remote UI (`rui1021`)
@@ -55,7 +55,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> (2026-10-18): the digital voices stop and resume |
 | 5" HDMI touch display: status, settings, screensaver, brightness | <span class="sc-ok">hardware</span> (restyled, 2026-10-18) |
 | Display: hide the touch test, brightness down to 5 % | <span class="sc-test">in testing</span> (new) |
-| Boots from its own SD card, no computer needed | <span class="sc-ok">hardware</span> with a computer attached; a cold power cycle straight into the engine <span class="sc-test">in testing</span> |
+| Boots from its own SD card, no computer needed | <span class="sc-ok">hardware</span>, also from a cold power cycle |
 | Wi-Fi: join a WPA2 network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package, no setup page yet); rejoin watchdog <span class="sc-test">in testing</span> (new) |
 | Computer audio and MIDI over USB-C | <span class="sc-test">in testing</span> |
 

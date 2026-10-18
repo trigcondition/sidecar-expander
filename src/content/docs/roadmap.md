@@ -6,15 +6,20 @@ tableOfContents: true
 
 This roadmap has no dates on purpose. Items move up when they are ready and tested on real hardware, and the order within a group can change with tester feedback. For what works today, see [What works now](/sidecar-expander/introduction/what-works-now/).
 
+## Done
+
+Finished and confirmed on real hardware.
+
+- **Hardware confirmation of the current line:** stepped knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, and the cold power cycle of the Pi.
+- **Remote UI, first pages:** the SIDECAR status page and machine pages (PLAITS first) drawn on the Rytm's screen, with the encoders editing the voice.
+- **Robustness when the Sidecar goes away:** the Rytm keeps running and nothing waits on a missing host.
+
 ## Now
 
 Being finished and tested on hardware.
 
-- **Hardware confirmation of the current line:** stepped knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, and the cold power cycle of the Pi.
 - **Wi-Fi settings and first setup without a cable** (Pi): join a network from the web page and the display; set up a new Sidecar without an Ethernet cable.
 - **Pairing code and access control** for the web page, so a Sidecar on a shared network is not open to everyone.
-- **Remote UI, first pages:** the SIDECAR status page and machine pages (PLAITS first) drawn on the Rytm's screen, with the encoders editing the voice.
-- **Robustness when the Sidecar goes away:** the Rytm keeps running and nothing waits on a missing host.
 
 ## Next
 

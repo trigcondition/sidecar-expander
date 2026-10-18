@@ -88,10 +88,7 @@ Earlier (1017 to 1020 builds):
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
 - the Pi sample pool and presets by ear;
-- the CRUSH and RINGMOD send effects;
-- slot fingerprints when a project is shared with another Sidecar;
-- a cold power cycle of the Pi straight into the engine on its SD card;
-- the `sfx1021` build on its own (the same mods as `rui1021` without the remote pages), the SIDECAR folder name and the NO SIDECAR popup, stepped list knobs.
+- the `sfx1021` build on its own (the same mods as `rui1021` without the remote pages), the SIDECAR folder name and the NO SIDECAR popup.
 
 ## USB ID
 

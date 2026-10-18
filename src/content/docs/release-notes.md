@@ -49,7 +49,7 @@ Tested on a real Rytm MKII on 2026-10-18 (1021 builds): the remote pages with th
 
 Earlier (1017 to 1020 builds): the voices PLAITS, DAISYSP, JUNO, 6-OP FM, DIGIDRUM and DSP SAMPLE heard; send FX on the Pi (labels, PRE/POST, STUTTER) and on the Teensy, live (CHORUS, COMB); the Pi recorder (5-minute take); user machines loading; the web page's tabs; the touch display.
 
-Still in testing: the Pi's pool and presets by ear, CRUSH and RINGMOD, slot fingerprints in a shared project, a cold power cycle of the Pi straight into the engine on its SD card, and the newest display and Wi-Fi changes (touch test hiding, 5 % brightness, rejoin watchdog).
+Also confirmed on hardware: stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Still in testing: the Pi's pool and presets by ear, and the newest display and Wi-Fi changes (touch test hiding, 5 % brightness, rejoin watchdog).
 
 ## Known limits in this release
 
