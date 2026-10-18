@@ -9,7 +9,7 @@ sidebar:
 
 - An **Analog Rytm MKII running OS 1.73**, and only OS 1.73. The mods are built against that exact OS, and the patcher refuses any other file.
   - An older OS: update to 1.73 first.
-  - OS 1.74 or newer: not supported yet. The first version is based on Analog Rytm MKII OS 1.73; OS 1.74 will be supported after testing. Going back from 1.74 to 1.73 is untested, so we cannot promise it works; please do not downgrade for this release.
+  - OS 1.74 or newer: not supported yet. The first version is based on Analog Rytm MKII OS 1.73; OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - The stock file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - The official **Transfer** app on a computer, to send the patched OS.
 - Recommended: a **DIN MIDI interface**, for the recovery route that works even when the OS does not boot.

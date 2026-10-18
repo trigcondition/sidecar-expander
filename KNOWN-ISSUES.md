@@ -2,19 +2,20 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Tester release, the 1021 line (Rytm builds `sfx1021` / `rui1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Tester release, the 1021 line (Rytm builds `rui1022`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
 ## Still in testing
 
-Tested on hardware on 2026-10-18: the remote pages (`rui1021`) with the Pi and the Teensy, Pi folder upload of large folders, unplugging and replugging the USB cable between Pi and Rytm, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot; also stepped list knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Not yet reported from a real Rytm:
+Tested on hardware on 2026-10-18: the remote pages (`rui1021`, the base of `rui1022`) with the Pi and the Teensy, Pi folder upload of large folders, unplugging and replugging the USB cable between Pi and Rytm, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot; also stepped list knobs, slot fingerprints, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away. Not yet reported from a real Rytm:
 - new since the last test: the Wi-Fi rejoin watchdog.
 
 If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back; nothing new is stored in your projects.
 
 ## Rytm mods
 
-- **While a remote page is open, every key goes to the Sidecar** (`rui1021`). PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes the keys the Sidecar does not use on to the Rytm is in progress.
-- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. We have not tested going back from 1.74 to 1.73 and cannot promise that it works.
+- **Remote pages and knobs:** on the SIDECAR and SYSTEM status pages no knob is caught, so turning one edits the stock parameter of the stock page underneath (you see it after leaving). Voice pages catch their knobs. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) do nothing on the Rytm while a page is open.
+- **rui1022 with an older Sidecar firmware** (before the key masks) catches every key and knob except PLAY, STOP and RECORD.
+- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - **The remote pages need a 1021 Sidecar:** the Pi with the 1021 kernel or the Teensy with the 1021 firmware. An older Pi kernel opens the pages without any text.
 - The slot menu (FUNC + CHRO, YES on a U slot) can hold the screen for up to 2 seconds while it waits for the Sidecar; with no Sidecar it then shows **NO SIDECAR**.
 - **User FX slots are not available yet.** The SEND FX TYPE list offers only the built-in effects.

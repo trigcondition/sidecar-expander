@@ -120,13 +120,15 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-ok">hardware</span> (build `rui1021`, tested 2026-10-18 with the Pi on the 1021 kernel and with the Teensy on the 1021 firmware)
+<span class="sc-ok">hardware</span> (part of the release in `rui1022`; the pages were tested 2026-10-18 with the Pi on the 1021 kernel and the Teensy on the 1021 firmware)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
 - **TRK + YES** (hold TRK, press YES) opens it. The first pages are the status pages SIDECAR and SYSTEM; then one page per voice whose machine has a page (PLAITS first).
 - **LEFT / UP**: the previous page. **RIGHT / DOWN / PAGE**: the next. **NO**: back to SIDECAR.
-- While a page is open **every key goes to the Sidecar**, so PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes the keys the Sidecar does not use on to the Rytm is in progress.
+- A page catches **only the keys and knobs it uses**. PLAY, STOP and RECORD always reach the Rytm (FUNC + PLAY / STOP too); the pads, MUTE / CHRO / SCNE / PERF, FILL, the trig keys, BANK and tap tempo work as on the stock screen. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) stay with the Sidecar.
+- On the SIDECAR and SYSTEM pages no knob is caught: a turn edits the stock parameter of the stock page underneath (you see it after leaving). LEVEL always sets the track level.
+- With a Sidecar firmware older than the key masks, the page catches every key and knob except PLAY, STOP and RECORD.
 - The **encoders** A..H change the shown voice's parameters. Such an edit holds until the Rytm's own value moves (its knob, a p-lock, another sound). It is not saved in the kit.
 - The pads keep playing.
 - **Leave** with TRK + YES again. The page also closes by itself 1 second after the Sidecar stops answering.

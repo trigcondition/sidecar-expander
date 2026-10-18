@@ -74,7 +74,7 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## Which Rytm build
 
-`sfx1021` (the default) or `rui1021`. The remote pages of `rui1021` work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+`rui1022` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## User machine space on the Teensy
 

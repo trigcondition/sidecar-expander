@@ -6,19 +6,20 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 
 | Part | Build |
 |---|---|
-| Rytm mods | `sfx1021` (default, for the Teensy and the Pi), `rui1021` (adds the remote pages; tested on the Pi and the Teensy). Patch your own stock OS 1.73 file: see PATCHER.md |
+| Rytm mods | `rui1022` (default: the mods plus the remote pages, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see PATCHER.md |
 | Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build; `BUILD-INFO-teensy.txt` names the commit |
 | Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
 
-> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
+> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
 
 ## New in 1021
 
 - **Two names:** the Teensy 4.1 build is **Sidecar Mini**, the cheap way to get started; the Raspberry Pi 4B build is the full **Sidecar**. Projects move from the Mini to the Sidecar (same per-project files; install the Pi version of each user machine). See [Sidecar Mini or Sidecar?](https://trigcondition.github.io/sidecar-expander/introduction/pi-vs-teensy/)
 
 - **SIDECAR everywhere on the Rytm.** The sample browser's folder is now **SIDECAR** (was TEENSY), and the slot menu's popup reads **NO SIDECAR** when no Sidecar answers.
-- **Remote pages in the Rytm's own font** (`rui1021`, Pi and Teensy; tested on hardware). Every letter on the Sidecar's pages is drawn by the Rytm itself, with its own font, at the stock screens' sizes and places. The layout follows the stock pages: dials, labels, title and bottom bar in the same spots.
+- **Remote pages that leave the Rytm playable** (`rui1022`, new): a page catches only the keys and knobs it uses. PLAY, STOP and RECORD always reach the Rytm; the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar. On the status pages the knobs edit the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
+- **Remote pages in the Rytm's own font** (Pi and Teensy; tested on hardware). Every letter on the Sidecar's pages is drawn by the Rytm itself, with its own font, at the stock screens' sizes and places. The layout follows the stock pages: dials, labels, title and bottom bar in the same spots.
 - **Two status pages:** SIDECAR (the 8 voices and their machines, FX1 / FX2 with TYPE and PRE / POST) and SYSTEM (U1..U5, the recorder, the Rytm's audio stream and underruns, the render cores' load, and the network address, never a network name or key). The Teensy has no recorder or network, so its SYSTEM page leaves them out.
 - **A faster remote UI.** A knob turn shows at once (the Rytm echoes the value in the bottom bar itself), and the Sidecar's frame follows about 25 ms after a turn (was 75 ms). Fast turns never jump back.
 - **Pi: large folder uploads** no longer fail with network errors; one summary line and a Retry failed button. (Tested on hardware.)
@@ -54,12 +55,11 @@ Also confirmed on hardware: stepped list knobs, slot fingerprints in a shared pr
 
 ## Known limits in this release
 
-- While a remote page is open every key goes to the Sidecar: PLAY/STOP work again after TRK + YES. A fix is in progress.
 - Teensy: only one large NoisePlethora package (NP VOICES / CLUST1 / CLUST2) fits in the 32 KB plugin code space at a time.
 
 ## Upgrading from the 1017 release
 
-1. Patch your stock OS 1.73 file again with `sfx1021` (or `rui1021`) and flash it.
+1. Patch your stock OS 1.73 file again with `rui1022` (or `sfx1021`) and flash it.
 2. Load the new Teensy `.hex`, or copy the new Pi card files over the old ones.
 3. The 1021 Rytm builds need a 1021 Sidecar for the new names and the remote UI; an older Sidecar shows numbers instead of the effects' names.
 

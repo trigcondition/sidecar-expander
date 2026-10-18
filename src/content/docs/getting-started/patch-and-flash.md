@@ -26,10 +26,10 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 | Build | What |
 |---|---|
 | `sfx1021` (default, recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
-| `rui1021` | everything in `sfx1021`, plus the remote pages (TRK + YES): SIDECAR and SYSTEM status pages and voice pages on the Rytm's screen, in the Rytm's own font. Tested on the Pi (1021 kernel) and the Teensy (1021 firmware); an older Pi kernel draws the pages without text. While a page is open PLAY/STOP go to the Sidecar: leave with TRK + YES |
+| `rui1022` (default, recommended) | everything in `sfx1021`, plus the remote pages (TRK + YES): SIDECAR and SYSTEM status pages and voice pages on the Rytm's screen, in the Rytm's own font, on Sidecar Mini and Sidecar. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar. Needs a 1021 Sidecar; an older Pi kernel draws the pages without text |
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. `rui1021` ran on a real Rytm with the Pi and the Teensy on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it. The remote pages ran on a real Rytm with Sidecar Mini and Sidecar on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
 :::
 
 ## Option A: in the browser
@@ -63,7 +63,7 @@ shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 | Build | SHA-256 |
 |---|---|
 | sfx1021 | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
-| rui1021 | `d8ba01908709c74cbbfd639469e48f57930f83975fe864c7d9a7ffafc772cccf` |
+| rui1022 | `effe51ca3476b9c27ed558f16c26a92ae55b4fb3e0c8fa82bfd9d704ab7c21d5` |
 
 ## Send it to the Rytm
 

@@ -2,21 +2,21 @@
  "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
  "patches": [
   {
-   "file": "sidecar-sfx1021.json",
-   "tag": "sfx1021",
-   "title": "sfx1021: Sidecar mods (default, recommended)",
-   "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. For the Teensy and the Pi.",
-   "output": "Analog-Rytm_MKII_OS1.73_sfx1021.syx",
-   "output_sha256": "e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e",
-   "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"
+   "file": "sidecar-rui1022.json",
+   "tag": "rui1022",
+   "title": "rui1022: Sidecar mods + remote pages (default, recommended)",
+   "description": "Everything in sfx1021, plus the remote pages: hold TRK, press YES for the SIDECAR and SYSTEM status pages and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual. Needs a 1021 Sidecar; an older Pi kernel shows the pages without text.",
+   "output": "Analog-Rytm_MKII_OS1.73_rui1022.syx",
+   "output_sha256": "effe51ca3476b9c27ed558f16c26a92ae55b4fb3e0c8fa82bfd9d704ab7c21d5",
+   "source_commit": "b0ecbd475f1858dcaabf3f4d5aa5ae019de9dba9"
   },
   {
-   "file": "sidecar-rui1021.json",
-   "tag": "rui1021",
-   "title": "rui1021: sfx1021 + remote pages (tested on Pi and Teensy)",
-   "description": "Everything in sfx1021, plus the remote pages: hold TRK, press YES for the SIDECAR and SYSTEM status pages and the voice pages, in the Rytm's own font. Tested on hardware with the Pi (1021 kernel) and the Teensy (1021 firmware); an older Pi kernel shows the pages without text. While a page is open PLAY/STOP go to the Sidecar: leave with TRK + YES.",
-   "output": "Analog-Rytm_MKII_OS1.73_rui1021.syx",
-   "output_sha256": "d8ba01908709c74cbbfd639469e48f57930f83975fe864c7d9a7ffafc772cccf",
+   "file": "sidecar-sfx1021.json",
+   "tag": "sfx1021",
+   "title": "sfx1021: Sidecar mods without the remote pages",
+   "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same as rui1022 without the remote pages.",
+   "output": "Analog-Rytm_MKII_OS1.73_sfx1021.syx",
+   "output_sha256": "e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e",
    "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"
   }
  ]

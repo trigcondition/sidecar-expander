@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-<span class="sc-test">in testing</span>: in the core's remote UI branch and the `rui` Rytm builds; not in the tester release.
+Part of the tester release: the `rui1022` Rytm build with a 1021 Sidecar (Pi kernel or Teensy firmware).
 
 The Rytm side of the remote UI is a dumb terminal: it blits a 1 KB frame at its 20 Hz UI tick and reports keys and encoders. All layout and drawing is Sidecar code in `core/ui`, shared by the Pi, the Teensy and the Mac.
 

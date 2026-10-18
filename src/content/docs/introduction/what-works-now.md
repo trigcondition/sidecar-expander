@@ -11,10 +11,10 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-The current tester builds of the Rytm mods are `sfx1021` (the default) and `rui1021` (with the remote UI, for the Pi with the 1021 kernel).
+The current tester builds of the Rytm mods are `rui1022` (the default: the mods plus the remote pages) and `sfx1021` (the mods without the remote pages).
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages (`rui1021`) and the Pi's latest fixes were tested on a real Rytm on 2026-10-18; other "hardware" marks come from the 1017 to 1020 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages and the Pi's latest fixes were tested on a real Rytm on 2026-10-18; other "hardware" marks come from the 1017 to 1020 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
 :::
 
 ## On both: Sidecar Mini and Sidecar
@@ -34,14 +34,14 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Stepped list knobs (STUTTER ENG and LEN, ENG / PAT / list knobs step one item a detent) | <span class="sc-ok">hardware</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> (Pi) |
 
-## The remote UI (`rui1021`)
+## The remote pages (`rui1022`)
 
 | Feature | Status |
 |---|---|
 | Sidecar pages on the Rytm's screen (TRK + YES) with the Pi (1021 kernel) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Sidecar pages with Sidecar Mini (Teensy, 1021 firmware): SIDECAR, SYSTEM (no recorder or network on the Teensy) and voice pages | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Text in the Rytm's own font, the stock look, very responsive knobs; status as two pages SIDECAR + SYSTEM | <span class="sc-ok">hardware</span> (2026-10-18) |
-| PLAY/STOP while a page is open | not yet: every key goes to the Sidecar (fix in progress) |
+| Only the page's keys and knobs go to the Sidecar: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo work on the page (new in `rui1022`) | part of the release; tested in the emulator |
 
 ## Sidecar (Raspberry Pi 4B) only
 

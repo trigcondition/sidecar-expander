@@ -40,7 +40,7 @@ Portable C++17, built from one source for the Teensy, the Pi and the Mac (tests,
 | `fx/` | the send effects (`SendFx`, header-only, no allocation) and their knob labels |
 | `pool/`, `presets/` | the card index, the per-project sample pool, the JUNO and DX7 libraries |
 | `user/` | the user machine glue for the Pi and the Mac (scan, slots, loading) |
-| `ui/` | the remote UI: 1-bit canvas, fonts, widgets, page declarations, the remote host (in testing) |
+| `ui/` | the remote UI: 1-bit canvas, fonts, widgets, page declarations, the remote host |
 
 Rules: one engine per program; one `render_voices` call per 12-frame block, or disjoint voice ranges on several cores (the Pi); the render path never allocates, blocks or logs; every new SysEx message goes through `sysex.*` with a test against the protocol reference.
 

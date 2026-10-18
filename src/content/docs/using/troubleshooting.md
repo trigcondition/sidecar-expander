@@ -24,7 +24,7 @@ sidebar:
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
 - **The remote UI (`rui` builds) is early.** TRK + YES opens the page, but the Sidecar does not serve pages in the tester release. The page stays blank and returns within a second.
-- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 is not supported yet (a port is planned); going back from 1.74 to 1.73 is untested, so we cannot promise it works.
+- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 
@@ -46,7 +46,7 @@ sidebar:
 
 ### Remote pages
 
-- While a remote page is open every key goes to the Sidecar, so PLAY and STOP do nothing until you leave with TRK + YES. A fix that passes unused keys on to the Rytm is in progress.
+- With `rui1022` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. On the status pages no knob is caught: a turn edits the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 
 ### Teensy: user machine space
 
@@ -60,4 +60,4 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`sfx1021` / `rui1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1022` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
