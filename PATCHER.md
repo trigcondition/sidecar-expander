@@ -16,7 +16,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
-1. Pick the mod build. `sfx1017` is the recommended one.
+1. Pick the mod build. `sfx1021` is the default and the recommended one; `rui1021` adds the remote UI and needs the Raspberry Pi with the 1021 kernel. The 1021 builds are emulator-tested and not yet confirmed on a real Rytm.
 2. Drop your stock `.syx` on the page, or click to choose it.
 3. Press **Patch**, then **Save**.
 
@@ -26,20 +26,20 @@ The file is read and patched by JavaScript in the page itself. Nothing is upload
 
 Python 3.8 or newer, with no extra packages. From a copy of this repository:
 
-    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.73.syx public/patcher/patches/sidecar-sfx1017.json
+    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.73.syx public/patcher/patches/sidecar-sfx1021.json
 
-This writes `Analog-Rytm_MKII_OS1.73_sfx1017.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
+This writes `Analog-Rytm_MKII_OS1.73_sfx1021.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
 
 ## Check the result
 
 Both patchers check the result themselves and save nothing if it is wrong. To check it yourself:
 
-    shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1017.syx
+    shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 
 | Build | Output file | SHA-256 |
 |---|---|---|
-| sfx1017 | `Analog-Rytm_MKII_OS1.73_sfx1017.syx` | `118671e8daa5989061d00934e4b6e9d02f9293f14a7e60164c40a4cc2ed5f415` |
-| rui1017 | `Analog-Rytm_MKII_OS1.73_rui1017.syx` | `c795ed5f472c4eae1563e63e1b6414eb907de1c96991d831196d15ef58f2ae67` |
+| sfx1021 | `Analog-Rytm_MKII_OS1.73_sfx1021.syx` | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
+| rui1021 | `Analog-Rytm_MKII_OS1.73_rui1021.syx` | `d8ba01908709c74cbbfd639469e48f57930f83975fe864c7d9a7ffafc772cccf` |
 
 (`public/patcher/patches/index.json` lists the same values.)
 
@@ -47,7 +47,7 @@ Both patchers check the result themselves and save nothing if it is wrong. To ch
 
 Send the patched file as an OS update, exactly as you would send an official one:
 
-- **Elektron Transfer** (USB): drop the `.syx` on Transfer while the Rytm is connected and confirm on the unit.
+- **Transfer** (USB): drop the `.syx` on Transfer while the Rytm is connected and confirm on the unit.
 - **STARTUP menu** (DIN MIDI): hold FUNC while you power on, press TRIG 4 (OS UPGRADE), and send the file from Transfer's legacy OS upgrade mode, or any SysEx tool, through a DIN MIDI interface. This route works even if the OS does not boot. It is slow: about 16 minutes or more.
 
 Read [README.md](README.md#risks-and-recovery) before you flash. The same section covers going back to stock.

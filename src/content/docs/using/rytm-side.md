@@ -29,9 +29,14 @@ What each knob does is on [Voices and machines](/sidecar-expander/using/machines
 
 Names from the Sidecar's card show on the Rytm: DSP SAMPLE's SMP shows the pool sample's name, JUNO's and 6-OP FM's PAT show the patch name.
 
-## The TEENSY folder
+## The SIDECAR folder
 
-The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) shows a folder **TEENSY** at the +Drive root. Inside it is the Sidecar's card, on the Pi as well as the Teensy: folders and WAV files with their sizes, and the JUNO and DX7 banks.
+The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) shows a folder **SIDECAR** at the +Drive root (called TEENSY before the 1021 builds). Inside it is the Sidecar's card, on the Pi as well as the Teensy: folders and WAV files with their sizes, and the JUNO and DX7 banks.
+
+![The +Drive root in the sample browser: Factory, incoming and SIDECAR](../../../assets/rytm/drive-root.png)
+![Inside SIDECAR: the Sidecar card's folders and files with their sizes](../../../assets/rytm/drive-sidecar.png)
+
+<small>Screenshots: `sfx1021` in the emulator, with a stand-in Sidecar listing two entries. <span class="sc-test">in testing</span> (the TEENSY name was checked on hardware; SIDECAR is new in 1021)</small>
 
 - **LOAD TO PROJ** on a Sidecar file adds it to the project's **Sidecar pool** (stored on the Sidecar, one pool per project). Nothing is copied into the Rytm.
 - DSP SAMPLE's **SMP** knob then picks from that pool: 0 is OFF, N is pool slot N.
@@ -45,7 +50,11 @@ To choose which machine a slot plays from the Rytm:
 
 1. Open the track menu: **FUNC + CHRO**. Five items `U1 <name>` .. `U5 <name>` follow SAVE TRACK.
 2. Move to a slot and press **YES**. Each YES steps that slot to the next installed machine; after the last it clears the slot.
-3. A popup shows the answer: READY, LOADING, NOT INSTALLED, NO ROOM, STOP TO INSTALL, NOT ON CARD, BAD, or NO TEENSY (no Sidecar answered).
+3. A popup shows the answer: READY, LOADING, NOT INSTALLED, NO ROOM, STOP TO INSTALL, NOT ON CARD, BAD, or NO SIDECAR (no Sidecar answered, after about 2 seconds; NO TEENSY before 1021).
+
+![The track menu with the NO SIDECAR popup over the slot item U1](../../../assets/rytm/no-sidecar.png)
+
+<small>Screenshot: `sfx1021` in the emulator, no Sidecar attached. <span class="sc-test">in testing</span></small>
 
 The slot menu can hold the screen for up to 2 seconds while it waits for the Sidecar.
 
@@ -86,11 +95,17 @@ The Sidecar runs two send effects, **SEND FX 1** and **SEND FX 2**. Every track 
 - Some knobs show a zone name and a number, for example RINGS P3 `MODAL 12`.
 - With a Sidecar older than the mods, P2..P5 show numbers instead of names. Update the Sidecar.
 
+![SEND FX 1 with RINGS: TYPE and ROUTE as text, P2..P5 named PTCH, CHORD, BRIT, DCY](../../../assets/rytm/sendfx1-rings.png)
+![SEND FX 2 with STUTTER: the stepped ENG and LEN knobs show their choice as text](../../../assets/rytm/sendfx2-stutter.png)
+![SEND FX 2 with CHORUS, right after a TYPE step](../../../assets/rytm/sendfx2-chorus.png)
+
+<small>Screenshots: `sfx1021` in the emulator, with the Sidecar's labels sent by a stand-in host. The SEND FX pages and labels are <span class="sc-ok">hardware</span> (with the Pi); the stepped TYPE, ROUTE and STUTTER knobs are <span class="sc-test">in testing</span>.</small>
+
 Each effect's knobs are on [Send effects](/sidecar-expander/using/send-effects/).
 
 ## Stepped knobs
 
-<span class="sc-test">in testing</span> (from `sfx1019`)
+<span class="sc-test">in testing</span> (in `sfx1021`)
 
 Knobs that pick from a list step **one item per detent**, like the Rytm's own FILTER TYPE knob, and show the item's name where the dial was:
 
@@ -105,7 +120,7 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-test">in testing</span> (builds `rui1017` / `rui1019`)
+<span class="sc-test">in testing</span> (build `rui1021`, Raspberry Pi with the 1021 kernel; the remote UI itself worked on hardware with `rui1019`)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
@@ -115,4 +130,18 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 - The pads keep playing.
 - **Leave** with TRK + YES again. The page also closes by itself 1 second after the Sidecar stops answering.
 
-In the current tester release the Sidecar does not serve pages yet, so the page stays blank and closes within a second. Keys, pads and PLAY/STOP keep working.
+Since 1021 every letter on these pages is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places: the title bar, the labels and the bottom bar look like the Rytm's own pages. The Sidecar sends the graphics and the text items; no font data of the Rytm is in Sidecar. A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later (it was 75 ms).
+
+**The SIDECAR status page** shows the 8 voices with their machines, FX1 and FX2 with their TYPE and PRE / POST, the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the three render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key).
+
+![The SIDECAR status page: 8 voices, FX1/FX2, U1..U5, REC, stream state, three core loads, ETH UP and the address](../../../assets/rytm/remote-status.png)
+
+**A voice page** (RIGHT from the status page) is laid out like a stock knob page: the dials in the same places, the labels on the same rows. ENG shows the model's name where the dial would be.
+
+![A PLAITS voice page: ENG with the model VA, HRM, TIM, MOR, the decay curve, LPG, TUN, LEV, and V1 HRM:70 in the bottom bar](../../../assets/rytm/remote-plaits.png)
+
+<small>Screenshots: `rui1021` in the emulator with the 1021 host code. <span class="sc-test">in testing</span>: not yet on a real Rytm.</small>
+
+- It needs the Pi with the 1021 kernel: an older kernel opens the pages without text.
+- With the Teensy the remote UI is untested; use `sfx1021` there.
+- Keys, pads and PLAY/STOP keep working while a page is open.

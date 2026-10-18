@@ -19,6 +19,7 @@ Sidecar stands on open-source work. Thank you to everyone behind these projects.
 | [digidrum](https://github.com/soejrd/digidrum) | MIT | the DIGIDRUM machines |
 | Teensyduino, USBHost_t36, SdFat, littlefs | MIT, LGPL-2.1, BSD | the Teensy build |
 | FatFs | BSD-style | the Pi's file system |
+| Circle addon/wlan (from Plan 9) and wpa_supplicant (hostap) | GPL-2.0; BSD-3-Clause | the Pi's Wi-Fi (off in the package) |
 | [Astro Starlight](https://starlight.astro.build) | MIT | this site |
 | [Archivo Black](https://github.com/Omnibus-Type/ArchivoBlack) | OFL-1.1 | the wordmark |
 

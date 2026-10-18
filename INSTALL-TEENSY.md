@@ -11,6 +11,7 @@ The Teensy 4.1 version of Sidecar | Expander. It works together with the Rytm mo
 - A **micro-USB cable**, for power and for loading the firmware. Use a data cable, not a charge-only one.
 - Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's own card slot, for samples.
 - The release file `sidecar-teensy41-<commit>.hex` from the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page, and its `.sha256`.
+- Optional: the release's `plugins/` folder (the starter user machines).
 
 ## Wiring
 
@@ -52,12 +53,12 @@ A FAT32 or exFAT microSD card in the Teensy's built-in slot. Create `/Samples/` 
 
 | Folder | What |
 |---|---|
-| `/Samples/` | your samples (WAV), browsable from the Rytm's sample browser under **TEENSY** |
+| `/Samples/` | your samples (WAV), browsable from the Rytm's sample browser under **SIDECAR** |
 | `/JUNO/`, `/DX7/` | patch banks for the JUNO and 6-OP FM machines (optional) |
 | `/.rytm/` | the Sidecar's own state (created and managed by the firmware; do not edit) |
 | `/MACHINES/`, `/PRESETS/` | plugin exports and presets (created when used) |
 
-With no card the Teensy still runs. The TEENSY folder on the Rytm is then empty.
+With no card the Teensy still runs. The SIDECAR folder on the Rytm is then empty.
 
 ## Defaults
 
@@ -75,10 +76,18 @@ You can change both from the web console, but the defaults are right for the mod
 
 Use it to check that the Rytm is streaming. The log shows `ob: streaming` and `MIDI attached`. The console is also how you get logs for a tester report.
 
+## Starter user machines
+
+The release's `plugins/` folder holds six starter machines as Teensy packages: `sc_acid.rmp`, `sc_wavepad.rmp`, `sc_metal.rmp`, `sc_snare.rmp`, `sc_pluck.rmp`, `sc_grain.rmp` (MIT; check them against `SHA256SUMS`). Install them from the web console, tab **Machines**: they go into the Teensy's own plugin store, and installing waits until the Rytm's transport is stopped. The Pi's `.a64.rmp` files do not load on the Teensy. The console's Machines tab is in testing on the Teensy.
+
+## Which Rytm build
+
+Use `sfx1021` with the Teensy. The remote UI in `rui1021` was built and tested for the Raspberry Pi; the Teensy firmware carries the same remote UI code, but it has not been tried on a Teensy, so expect it not to work there yet.
+
 ## Check that it works
 
 1. Power the Teensy, then plug in the Rytm (with the patched OS).
-2. On the Rytm, pick an external machine (PLAITS or DAISYSP) on a track and play it.
-3. Open the sample browser: FUNC+SMPL, DOWN, FUNC+YES. **TEENSY** appears at the +Drive root.
+2. On the Rytm (with `sfx1021`), pick an external machine (PLAITS or DAISYSP) on a track and play it.
+3. Open the sample browser: FUNC+SMPL, DOWN, FUNC+YES. **SIDECAR** appears at the +Drive root.
 
 If something is off, see [KNOWN-ISSUES.md](KNOWN-ISSUES.md), then open a tester report.

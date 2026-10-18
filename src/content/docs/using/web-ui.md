@@ -16,11 +16,17 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 | **Send FX** | the two effects' TYPE and the tracks' send levels as the Rytm's kit sets them (read only); Kill tails |
 | **Record** | the [recorder](/sidecar-expander/using/recorder/) |
 | **Machines** | [user machines](/sidecar-expander/using/user-machines/): installed list, upload, delete, rescan, the project's U1..U5, export and import of the slot list, memory bars |
+| **Pool & presets** | the project's sample pool, the JUNO and FM lists, and user machine presets <span class="sc-test">in testing</span> (1021) |
 | **Files** | the file browser (below) |
 | **Log** | the live log and a command line for the console commands |
 | **About** | address, build, versions |
 
 The page has no password. Use it on a direct cable or a network you trust.
+
+<!-- SCREENSHOT-PENDING: The Pi's page at sidecar.local (Status, Machines and Pool & presets tabs) -->
+:::note[Screenshot coming]
+The Pi's page at sidecar.local (Status, Machines and Pool & presets tabs): the page is being restyled for this release; the picture follows when that is done.
+:::
 
 ### The file browser
 
@@ -47,6 +53,11 @@ Open the [console](/sidecar-expander/console/) in **Chrome or Edge on a desktop 
 | **About** | the build |
 
 The tester release's console shows the log, the status and the commands; the Machines and Files tabs are <span class="sc-test">in testing</span>.
+
+<!-- SCREENSHOT-PENDING: The Teensy web console (Status and Machines tabs) -->
+:::note[Screenshot coming]
+The Teensy web console (Status and Machines tabs): the page is being restyled for this release; the picture follows when that is done.
+:::
 
 **Teensy rules:** card writes, deletes and installs wait for the Rytm's transport to stop (the page shows "paused" and continues). Reads go on during play, slowly. `/`, `/Samples` and `/.rytm` are protected.
 

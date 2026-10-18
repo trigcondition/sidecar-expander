@@ -76,13 +76,13 @@ The Teensy 4.1 runs the same core in one Arduino sketch, `voiceloop`, built with
 The mods patch the Rytm's MAIN OS 1.73 image and nothing else (the bootloader, FPGA and other sections are untouched; the build checks they come back byte-identical).
 
 - **elekloader** provides the code space: its Rytm core (`core-ar2`) appends a blob to the OS that is copied at early boot into a fixed 128 KB DDR area, where the larger mods live. Each mod is built as an elekloader module whose patch sites are pinned to the stock bytes they replace.
-- **Patch sites, conceptually:** small detours at a few firmware entry points hand control to mod code: a hidden machine slot becomes an EXT machine (its source silenced, its trig and knob values reported); a page's key press cycles to an extra page; the sample browser's directory model gains the TEENSY folder; the SysEx router passes our messages to the mods; the screen and key path gain the remote page. Reports go out over the Rytm's own USB MIDI sender, without waiting on a busy USB link.
+- **Patch sites, conceptually:** small detours at a few firmware entry points hand control to mod code: a hidden machine slot becomes an EXT machine (its source silenced, its trig and knob values reported); a page's key press cycles to an extra page; the sample browser's directory model gains the SIDECAR folder; the SysEx router passes our messages to the mods; the screen and key path gain the remote page. Reports go out over the Rytm's own USB MIDI sender, without waiting on a busy USB link.
 
 | Mod | What |
 |---|---|
 | 0021 ext | the EXT machines, their pages and reports, the user slots and the slot menu, sound fingerprints |
 | 0022 router | the host-link SysEx router (from the looper experiment) |
-| 0023 drive | the TEENSY folder in the sample browser, the per-project pool |
+| 0023 drive | the SIDECAR folder in the sample browser, the per-project pool |
 | 0025 sendfx report | sends the send levels and the FX values to the host; stores the effect knobs |
 | 0026 remote UI | the remote page: blit and input only |
 | 0027 elekloader | builds the image with elekloader's core and DDR area |

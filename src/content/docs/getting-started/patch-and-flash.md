@@ -25,8 +25,12 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 
 | Build | What |
 |---|---|
-| `sfx1017` (recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), user slots, and the TEENSY folder in the sample browser |
-| `rui1017` | everything in `sfx1017`, plus the early remote UI page (TRK + YES). The Sidecar does not serve remote pages in this release: the page stays blank and closes within a second |
+| `sfx1021` (default, recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
+| `rui1021` | everything in `sfx1021`, plus the remote UI (TRK + YES): the SIDECAR status page and voice pages on the Rytm's screen, in the Rytm's own font. **Pi only, and only with the 1021 Pi kernel**: an older kernel draws the pages without text. Untested with the Teensy, so Teensy users pick `sfx1021` |
+
+:::caution[Not yet confirmed on a real Rytm]
+The 1021 builds pass our emulator tests, but nobody has run them on a real Rytm yet. The earlier builds they grow from (1017 to 1020) were tested on hardware; see [What works now](/sidecar-expander/introduction/what-works-now/) for the details. Keep the stock file at hand to go back.
+:::
 
 ## Option A: in the browser
 
@@ -43,23 +47,23 @@ The file is read and patched by JavaScript in the page itself. Nothing is upload
 Python 3.8 or newer, no extra packages. From a copy of the repository:
 
 ```sh
-python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.73.syx public/patcher/patches/sidecar-sfx1017.json
+python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.73.syx public/patcher/patches/sidecar-sfx1021.json
 ```
 
-This writes `Analog-Rytm_MKII_OS1.73_sfx1017.syx` next to the stock file (`-o` chooses another path).
+This writes `Analog-Rytm_MKII_OS1.73_sfx1021.syx` next to the stock file (`-o` chooses another path).
 
 ## Check the result
 
 Both patchers check the result themselves and save nothing if it is wrong. To check it yourself:
 
 ```sh
-shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1017.syx
+shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 ```
 
 | Build | SHA-256 |
 |---|---|
-| sfx1017 | `118671e8daa5989061d00934e4b6e9d02f9293f14a7e60164c40a4cc2ed5f415` |
-| rui1017 | `c795ed5f472c4eae1563e63e1b6414eb907de1c96991d831196d15ef58f2ae67` |
+| sfx1021 | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
+| rui1021 | `d8ba01908709c74cbbfd639469e48f57930f83975fe864c7d9a7ffafc772cccf` |
 
 ## Send it to the Rytm
 

@@ -2,7 +2,7 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-The Raspberry Pi 4B version of Sidecar | Expander (available from 2026-10-20). It runs bare-metal: there is no Linux and no login, and it boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([PATCHER.md](PATCHER.md)).
+The Raspberry Pi 4B version of Sidecar | Expander (the package follows on 2026-10-20). It runs bare-metal: there is no Linux and no login, and it boots straight into the engine from its SD card. It works together with the Rytm mods, so patch and flash those first ([PATCHER.md](PATCHER.md)).
 
 ## You need
 
@@ -13,7 +13,7 @@ The Raspberry Pi 4B version of Sidecar | Expander (available from 2026-10-20). I
 - Optional:
   - an **800x480 HDMI display** (a USB touch panel works too);
   - an **Ethernet cable** to your computer, for the status page.
-- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi4-sd-<commit>.zip` and its `.sha256`.
+- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi4-sd-<commit>.zip` and its `.sha256`, and the `plugins/` folder (optional, the starter user machines).
 
 ## Make the SD card
 
@@ -94,12 +94,40 @@ For another display, change the `hdmi_cvt` line to its resolution, and add `widt
   - If your computer's port has a manual address, set it to 169.254.61.59, netmask 255.255.0.0. Or set `ip=` and `netmask=` in `cmdline.txt` to fit your network.
 - The Pi has no DHCP client, so a router network only works with a matching `ip=`.
 - `sidecar.local` is answered by the Pi itself (mDNS). If a second Sidecar is on the same network, it becomes `sidecar-1.local`.
-- **Wi-Fi and Bluetooth are off.** The engine has no radio support at all.
+- **Wi-Fi is off** in the package; see [Wi-Fi](#wi-fi-off-by-default). There is no Bluetooth.
 - The page has no password. Use it on a direct cable or a network you trust.
+
+## Starter user machines
+
+The release's `plugins/` folder holds six starter machines as Pi packages: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.
+
+## The remote UI
+
+The `rui1021` Rytm build's remote UI (TRK + YES on the Rytm) needs this release's kernel (1021). With an older kernel the pages open without any text. The 1021 Rytm builds are emulator-tested and not yet confirmed on a real Rytm.
+
+## Wi-Fi (off by default)
+
+The SD card package has **Wi-Fi off**: it ships no Wi-Fi settings and no Wi-Fi chip firmware. Wi-Fi is in testing (a join has worked on hardware; there is no setup page yet). The network is either Ethernet or Wi-Fi, chosen at boot. To try it:
+
+1. Put the Pi 4's Wi-Fi chip firmware in a folder `/firmware/` on the card: `brcmfmac43455-sdio.bin`, `brcmfmac43455-sdio.clm_blob` and `brcmfmac43455-sdio.txt`. They come from the Raspberry Pi firmware-nonfree repository (`cypress/cyfmac43455-sdio-minimal.bin` and `cypress/cyfmac43455-sdio.clm_blob`, renamed, and `brcm/brcmfmac43455-sdio.txt`), under their own licences.
+2. Boot with Ethernet, open `sidecar.local` and, in the command line, enter `wifi=scan` to list the networks, then `wifi=join:<network>:<passphrase>`. The Pi stores a derived key in `/.rytm/wifi.txt`, never the passphrase itself, and never logs it. Reboot: the Pi joins with DHCP and stays `sidecar.local`.
+3. `wifi=off` goes back to Ethernet at the next boot. To forget the network, delete `/.rytm/wifi.txt` from the card.
+
+You can also write `/.rytm/wifi.txt` by hand:
+
+```
+on=1
+country=GB
+band=2g
+ssid=YOUR-NETWORK
+psk=YOUR-PASSPHRASE
+```
+
+`country=` is your two-letter country code; `band=` is `2g` (the default; 5 GHz DFS channels did not get an address in our test), `5g` or `any`. A file written by hand holds the passphrase in plain text, so prefer `wifi=join`. Never share a card, a log or a screenshot that contains this file. The web page has no password: on a shared network anyone can open it.
 
 ## Updating, and going back
 
-- To update, copy the new release's files over the old ones on the card.
+- To update, copy the new release's files over the old ones on the card. Your samples, recordings, `/Plugins/` and `/.rytm/` stay. Each package's `BUILD-INFO-pi.txt` names the kernel it carries.
 - To stop using Sidecar, reformat the card or use it for something else. Nothing on the Pi itself is changed.
 
 ## Check that it works

@@ -26,6 +26,7 @@ export default defineConfig({
         { label: 'Getting started', items: [{ autogenerate: { directory: 'getting-started' } }] },
         { label: 'Using Sidecar', items: [{ autogenerate: { directory: 'using' } }] },
         { label: 'Developers', items: [{ autogenerate: { directory: 'developers' } }] },
+        { label: 'Release notes', link: '/release-notes/' },
         { label: 'Roadmap', link: '/roadmap/' },
         { label: 'About', items: [{ autogenerate: { directory: 'about' } }] },
         {

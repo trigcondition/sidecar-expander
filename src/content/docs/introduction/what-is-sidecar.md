@@ -19,7 +19,7 @@ This is a tester release. It is not made, endorsed or supported by the instrumen
 
 | Part | Runs on | Does |
 |---|---|---|
-| **Rytm mods** | the Rytm (patched OS 1.73) | external (EXT) machines on every track, the SEND FX pages, the user slot menu, the TEENSY folder in the sample browser, the remote UI page. Built on elekloader. |
+| **Rytm mods** | the Rytm (patched OS 1.73) | external (EXT) machines on every track, the SEND FX pages, the user slot menu, the SIDECAR folder in the sample browser, the remote UI page. Built on elekloader. |
 | **The engine** | Teensy 4.1 or Pi 4B | renders up to 8 voices, the two send effects, the sample pool, the user machines; on the Pi also the recorder, the display and the web page. |
 | **The patcher** | your browser or Python | patches your own stock OS 1.73 file. We never distribute firmware. |
 | **The web tools** | your browser | the Pi's page at `sidecar.local`, or the Teensy's console over WebSerial. |

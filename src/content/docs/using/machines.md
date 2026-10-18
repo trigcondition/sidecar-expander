@@ -35,7 +35,7 @@ A Juno-106 style poly-synth voice, our own implementation following the open AMY
 | ATK, DEC, REL | the envelope |
 | LEN | the gate; 127 holds until the note-off or the next trig |
 
-Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch. Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the TEENSY folder and LOAD TO PROJ to build the project's JUNO list.
+Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch. Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the SIDECAR folder and LOAD TO PROJ to build the project's JUNO list.
 
 ## 6-OP FM
 
@@ -50,7 +50,7 @@ Plaits' six-operator FM engine playing DX7 voices.
 | LEV | output level |
 | LEN | the gate, as JUNO's |
 
-Put packed 32-voice DX7 banks (4104-byte `.syx`) in `/DX7`. In the TEENSY folder each bank is a folder of its 32 voices; LOAD TO PROJ on a voice adds it to the project's FM list. Banks are found by their content, so renaming or moving a bank keeps the list working.
+Put packed 32-voice DX7 banks (4104-byte `.syx`) in `/DX7`. In the SIDECAR folder each bank is a folder of its 32 voices; LOAD TO PROJ on a voice adds it to the project's FM list. Banks are found by their content, so renaming or moving a bank keeps the list working.
 
 ## DAISYSP
 
@@ -91,7 +91,7 @@ A sample from the Sidecar's card, played through a resonator.
 | TUN, LEV | tuning, level |
 | Page 2 (SD SAMPLE) | TUN FIN SMP MOD STA END LOP LEV |
 
-- **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the TEENSY folder.
+- **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder.
 - **MOD** is the playback mode: ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default). On a Teensy without PSRAM, samples stream from the card and play once (ONE).
 

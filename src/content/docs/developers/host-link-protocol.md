@@ -33,7 +33,7 @@ Audio never goes over SysEx: the Overbridge stream carries it.
 | Cmd | Dir | |
 |---|---|---|
 | `10` | R→H | the Rytm's project name; the pool, JUNO and FM lists are per project |
-| `0D` / `0E` | R→H / H→R | list a TEENSY folder / a page of 6 entries (folders and files, sizes, names) |
+| `0D` / `0E` | R→H / H→R | list a SIDECAR folder / a page of 6 entries (folders and files, sizes, names) |
 | `0F` | R→H | LOAD TO PROJ on a Sidecar file: add it to the project's pool (or JUNO / FM list) |
 | `12` | R→H | assign pool slot N to a file |
 | `13` | R→H | ask for the pool table and names now |

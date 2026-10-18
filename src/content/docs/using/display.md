@@ -13,12 +13,24 @@ The Pi can drive an **800x480 HDMI display with USB touch** (tested with a 5" HD
 
 ## Home
 
+<!-- SCREENSHOT-PENDING: The display's home screen -->
+:::note[Screenshot coming]
+The display's home screen: the screens are being restyled for this release; the picture follows when that is done.
+:::
+
+
 - The title bar, with **Rytm connected** (green) or **Rytm not connected** (red).
 - **Tracks:** voices 1-8 with their current machine.
 - **Project:** the Rytm's project and its U1..U5 machines as the Rytm shows them (`!NAME` missing, `NAME...` loading, `---` empty).
 - **Status:** Overbridge blocks, underruns (red once nonzero), load bars for the render cores, and `REC` while recording.
 
 ## Settings
+
+<!-- SCREENSHOT-PENDING: The display's settings screen -->
+:::note[Screenshot coming]
+The display's settings screen: the screens are being restyled for this release; the picture follows when that is done.
+:::
+
 
 The **Settings** button (top right) opens the settings pages and becomes **Home**. Every control is at least 48 px high.
 

@@ -12,7 +12,7 @@ The Pi version runs **bare metal**: there is no Linux and no login. It boots str
 - A Raspberry Pi 4 Model B (2 GB or more), its 5.1 V 3 A USB-C supply, and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: an 800x480 HDMI display (USB touch works too) and an Ethernet cable.
-- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi4-sd-<commit>.zip` and its `.sha256`.
+- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi4-sd-<commit>.zip` and its `.sha256`, and the `plugins/` folder (optional, the starter user machines).
 
 ## Make the SD card
 
@@ -61,7 +61,7 @@ How it finds each other:
 - `sidecar.local` is answered by the Pi itself (mDNS). A second Sidecar on the same network becomes `sidecar-1.local`.
 - The page has no password. Use it on a direct cable or a network you trust.
 
-Wi-Fi is in testing; see [Wi-Fi](/sidecar-expander/using/wifi/).
+Wi-Fi is off in the package; see [Wi-Fi (off by default)](#wi-fi-off-by-default) below and [Wi-Fi](/sidecar-expander/using/wifi/).
 
 ## Options (`cmdline.txt`)
 
@@ -96,9 +96,37 @@ disable_overscan=1
 
 For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
+## Starter user machines
+
+The release's `plugins/` folder holds six starter machines as Pi packages: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.
+
+## The remote UI
+
+The `rui1021` Rytm build's remote UI (TRK + YES on the Rytm) needs this release's kernel (1021). With an older kernel the pages open without any text. The 1021 Rytm builds are emulator-tested and not yet confirmed on a real Rytm.
+
+## Wi-Fi (off by default)
+
+The SD card package has **Wi-Fi off**: it ships no Wi-Fi settings and no Wi-Fi chip firmware. Wi-Fi is in testing (a join has worked on hardware; there is no setup page yet). The network is either Ethernet or Wi-Fi, chosen at boot. To try it:
+
+1. Put the Pi 4's Wi-Fi chip firmware in a folder `/firmware/` on the card: `brcmfmac43455-sdio.bin`, `brcmfmac43455-sdio.clm_blob` and `brcmfmac43455-sdio.txt`. They come from the Raspberry Pi firmware-nonfree repository (`cypress/cyfmac43455-sdio-minimal.bin` and `cypress/cyfmac43455-sdio.clm_blob`, renamed, and `brcm/brcmfmac43455-sdio.txt`), under their own licences.
+2. Boot with Ethernet, open `sidecar.local` and, in the command line, enter `wifi=scan` to list the networks, then `wifi=join:<network>:<passphrase>`. The Pi stores a derived key in `/.rytm/wifi.txt`, never the passphrase itself, and never logs it. Reboot: the Pi joins with DHCP and stays `sidecar.local`.
+3. `wifi=off` goes back to Ethernet at the next boot. To forget the network, delete `/.rytm/wifi.txt` from the card.
+
+You can also write `/.rytm/wifi.txt` by hand:
+
+```
+on=1
+country=GB
+band=2g
+ssid=YOUR-NETWORK
+psk=YOUR-PASSPHRASE
+```
+
+`country=` is your two-letter country code; `band=` is `2g` (the default; 5 GHz DFS channels did not get an address in our test), `5g` or `any`. A file written by hand holds the passphrase in plain text, so prefer `wifi=join`. Never share a card, a log or a screenshot that contains this file. The web page has no password: on a shared network anyone can open it.
+
 ## Updating and going back
 
-- To update, copy the new release's files over the old ones on the card.
+- To update, copy the new release's files over the old ones on the card. Your samples, recordings, `/Plugins/` and `/.rytm/` stay. Each package's `BUILD-INFO-pi.txt` names the kernel it carries.
 - To stop using Sidecar, reformat the card. Nothing on the Pi itself is changed.
 
 ## Check that it works

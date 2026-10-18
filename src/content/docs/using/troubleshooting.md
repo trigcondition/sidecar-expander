@@ -24,7 +24,7 @@ sidebar:
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
 - **The remote UI (`rui` builds) is early.** TRK + YES opens the page, but the Sidecar does not serve pages in the tester release. The page stays blank and returns within a second.
-- **OS 1.73 only.** Patch files for other OS versions do not exist, and the Rytm cannot be downgraded.
+- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 is not supported yet (a port is planned); going back from 1.74 to 1.73 is untested, so we cannot promise it works.
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 
@@ -52,4 +52,4 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`sfx1017` / `rui1017`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`sfx1021` / `rui1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
