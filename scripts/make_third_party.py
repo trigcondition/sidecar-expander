@@ -75,6 +75,11 @@ sections = [
     ("FatFs (ChaN), Circle addon", "BSD-style 1-clause.", text(CI, "addon", "fatfs", "LICENSE.txt")),
     ("Circle SDCard driver emmc.cpp (John Cronin)", "MIT.", header(CI, "addon", "SDCard", "emmc.cpp")),
     ("LVGL 9.4.0", "MIT.", text(LV, "LICENCE.txt")),
+    ("Circle Wi-Fi driver (addon/wlan: the BCM4343x driver from Plan 9)", "Plan 9 software, released under the GNU GPL version 2 (text below). Used only "
+     "when Wi-Fi is turned on; the SD card package ships Wi-Fi off and no Wi-Fi chip firmware.",
+     text(CI, "addon", "wlan", "Plan9License")),
+    ("wpa_supplicant (hostap, Jouni Malinen and contributors), Circle addon/wlan/hostap", "BSD-3-Clause.",
+     text(CI, "addon", "wlan", "hostap", "COPYING")),
     ("Montserrat font (built into LVGL)", "SIL Open Font License 1.1, Copyright 2011 The Montserrat Project "
      "Authors (https://github.com/JulietaUla/Montserrat).", ""),
     ("Font Awesome 5 Free symbols (built into LVGL)", "Icons: CC BY 4.0; font: SIL OFL 1.1 "

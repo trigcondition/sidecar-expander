@@ -2,22 +2,22 @@
  "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
  "patches": [
   {
-   "file": "sidecar-sfx1017.json",
-   "tag": "sfx1017",
-   "title": "sfx1017: Sidecar mods (recommended)",
-   "description": "External voice machines (PLAITS, DAISYSP) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels), and the TEENSY folder in the sample browser.",
-   "output": "Analog-Rytm_MKII_OS1.73_sfx1017.syx",
-   "output_sha256": "118671e8daa5989061d00934e4b6e9d02f9293f14a7e60164c40a4cc2ed5f415",
-   "source_commit": "4acd4c2a1e4749a5854007c6304638645c2e83e6"
+   "file": "sidecar-sfx1021.json",
+   "tag": "sfx1021",
+   "title": "sfx1021: Sidecar mods (default, recommended)",
+   "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. For the Teensy and the Pi. Tested in the emulator; not yet confirmed on a real Rytm.",
+   "output": "Analog-Rytm_MKII_OS1.73_sfx1021.syx",
+   "output_sha256": "e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e",
+   "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"
   },
   {
-   "file": "sidecar-rui1017.json",
-   "tag": "rui1017",
-   "title": "rui1017: sfx1017 + remote UI (early)",
-   "description": "Everything in sfx1017, plus the early remote UI page (hold TRK, press YES). The Sidecar does not serve remote UI pages yet: the page stays blank and returns to the normal screen within about a second.",
-   "output": "Analog-Rytm_MKII_OS1.73_rui1017.syx",
-   "output_sha256": "c795ed5f472c4eae1563e63e1b6414eb907de1c96991d831196d15ef58f2ae67",
-   "source_commit": "4acd4c2a1e4749a5854007c6304638645c2e83e6"
+   "file": "sidecar-rui1021.json",
+   "tag": "rui1021",
+   "title": "rui1021: sfx1021 + remote UI (Pi with the 1021 kernel only)",
+   "description": "Everything in sfx1021, plus the remote UI: hold TRK, press YES for the SIDECAR status page and the voice pages, in the Rytm's own font. Needs the Raspberry Pi with the 1021 kernel (an older kernel shows the pages without text). Untested with the Teensy: use sfx1021 there. Tested in the emulator; not yet confirmed on a real Rytm.",
+   "output": "Analog-Rytm_MKII_OS1.73_rui1021.syx",
+   "output_sha256": "d8ba01908709c74cbbfd639469e48f57930f83975fe864c7d9a7ffafc772cccf",
+   "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"
   }
  ]
 }

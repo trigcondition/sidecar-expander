@@ -1,16 +1,16 @@
 {
-  "comment": "The Rytm mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. Only list hardware-verified builds.",
+  "comment": "The Rytm mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. The first build is the default. The 1021 builds are emulator-tested, not yet hardware-verified: say so in the descriptions.",
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
-      "tag": "sfx1017",
-      "title": "sfx1017: Sidecar mods (recommended)",
-      "description": "External voice machines (PLAITS, DAISYSP) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels), and the TEENSY folder in the sample browser."
+      "tag": "sfx1021",
+      "title": "sfx1021: Sidecar mods (default, recommended)",
+      "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. For the Teensy and the Pi. Tested in the emulator; not yet confirmed on a real Rytm."
     },
     {
-      "tag": "rui1017",
-      "title": "rui1017: sfx1017 + remote UI (early)",
-      "description": "Everything in sfx1017, plus the early remote UI page (hold TRK, press YES). The Sidecar does not serve remote UI pages yet: the page stays blank and returns to the normal screen within about a second."
+      "tag": "rui1021",
+      "title": "rui1021: sfx1021 + remote UI (Pi with the 1021 kernel only)",
+      "description": "Everything in sfx1021, plus the remote UI: hold TRK, press YES for the SIDECAR status page and the voice pages, in the Rytm's own font. Needs the Raspberry Pi with the 1021 kernel (an older kernel shows the pages without text). Untested with the Teensy: use sfx1021 there. Tested in the emulator; not yet confirmed on a real Rytm."
     }
   ]
 }

@@ -29,6 +29,11 @@ NOTICE_FILES = {"THIRD_PARTY_LICENSES", "LICENSE"}
 EMAIL = re.compile(rb"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PATHS = re.compile(rb"/(?:Users|home|private|var/folders)/[^\s\"'<>]*")
 GUI_EXT = {".html", ".js", ".hex", ".img"}
+# the SysEx header as a SysEx message has it: F0 00 20 3C, then data bytes (all below 0x80). The 4 bytes alone also
+# occur by chance inside machine code (an AArch64 ADD after an ADRP), which is not a message.
+SYSEX = re.compile(rb"\xf0\x00\x20\x3c[\x00-\x7f]{16}")
+# e-mail addresses that third-party code compiles into our binaries as its own copyright notice
+BINARY_NOTICES = {b"j@w1.fi"}   # wpa_supplicant (hostap), the Pi's Wi-Fi; listed in THIRD_PARTY_LICENSES
 
 
 def files():
@@ -79,12 +84,15 @@ def main():
         for m in set(PATHS.findall(data)):
             bad.append(f"{rel}: local path {m[:60].decode(errors='replace')}")
         mails = sorted(set(EMAIL.findall(data)))
+        if rel.endswith((".img", ".hex", ".zip")) and mails and set(mails) <= BINARY_NOTICES:
+            notes.append(f"{rel}: third-party notice e-mail {', '.join(m.decode() for m in mails)}")
+            mails = []
         if mails:
             # the site's bundled third-party scripts (Pagefind's translation credits) count as notices too
             vendored = rel.startswith((os.path.join("_site", "pagefind") + os.sep, os.path.join("_site", "_astro") + os.sep))
             (notes if top in NOTICE_FILES or top == "licenses" or vendored or rel.endswith(("COPYING.linux", "LICENCE.broadcom"))
              else bad).append(f"{rel}: e-mail {', '.join(m.decode() for m in mails[:4])}")
-        if b"\xf0\x00\x20\x3c" in data and rel.endswith((".syx", ".bin", ".img", ".hex", ".zip")):
+        if rel.endswith((".syx", ".bin", ".img", ".hex", ".zip")) and SYSEX.search(data):
             bad.append(f"{rel}: holds an Elektron SysEx header")
         ext = os.path.splitext(rel)[1]
         if ext in GUI_EXT or rel.endswith(".zip"):
