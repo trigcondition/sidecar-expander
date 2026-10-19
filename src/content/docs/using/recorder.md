@@ -51,7 +51,7 @@ Known: picking another take with C while one plays can glitch once; a fix is on 
 
 ### The FX return on IN L/R
 
-<span class="sc-ok">hardware</span> (2026-10-18, the rui1026 Rytm build: echoes seen on SCOPE's FX source, on the Sidecar Mini). The Rytm can put its own delay + reverb return on the Overbridge IN L/R instead of its audio inputs: **Sound** tab, **IN L/R source: FX return**. The recorder then names those files `11_FX_L` / `12_FX_R`, and the SCOPE page calls the source FX. **Never send these two channels back into the Rytm through the computer's audio** (a loop on your mixer): the effect would feed itself. The page warns while the switch is on.
+<span class="sc-ok">hardware</span> (2026-10-18: echoes seen on SCOPE's FX source, on the Sidecar Mini). The Rytm can put its own delay + reverb return on the Overbridge IN L/R instead of its audio inputs: **Sound** tab, **IN L/R source: FX return**. The recorder then names those files `11_FX_L` / `12_FX_R`, and the SCOPE page calls the source FX. **Never send these two channels back into the Rytm through the computer's audio** (a loop on your mixer): the effect would feed itself. The page warns while the switch is on.
 
 ## Sidecar Mini (Teensy)
 

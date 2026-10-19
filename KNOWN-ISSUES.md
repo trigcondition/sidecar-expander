@@ -2,13 +2,13 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.1.0 (Rytm builds `rui1026`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Sidecar 0.1.0 (Rytm builds `rui1027`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
 ## Still in testing
 
 Not yet reported from a real Rytm (emulator or simulator only):
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud);
-- voice pages only for tracks on a Sidecar machine (with `rui1026` at once on a machine change);
+- voice pages only for tracks on a Sidecar machine (with `rui1027` at once on a machine change);
 - the PSRAM plugin code space and recording stems on a Sidecar Mini with PSRAM (see below);
 - the Wi-Fi settings page on the Pi (scan, connect and save, the 90 s fallback) and the Wi-Fi rejoin watchdog;
 
@@ -57,6 +57,7 @@ In testing: nothing of the PSRAM path has run on PSRAM hardware yet. With one or
 
 ## Raspberry Pi 4B
 
+- **The Rytm does not connect after many replugs** of the USB cable (the log says `Cannot set device address`): restart the Pi. A fix is planned.
 - **Wi-Fi is off** in the SD card package. Use a direct Ethernet cable for `sidecar.local`, or set up Wi-Fi yourself as in INSTALL-PI.md.
 - Ethernet has no DHCP client: the address is fixed (169.254.61.60), or set with `ip=` in `cmdline.txt`.
 - The web page has no password.

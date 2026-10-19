@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.1.0**. The Rytm builds are `rui1026` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
+This is **Sidecar 0.1.0**. The Rytm builds are `rui1027` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from today's test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
@@ -33,7 +33,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Voices released and FX tails cleared on every reconnect | <span class="sc-test">in testing</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1026`)
+## The remote pages (`rui1027`)
 
 | Feature | Status |
 |---|---|
@@ -44,7 +44,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
 | REC page: arm, record, stop (Pi and Mini) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1026` | <span class="sc-test">in testing</span> |
+| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1027` | <span class="sc-test">in testing</span> |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
 | LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |

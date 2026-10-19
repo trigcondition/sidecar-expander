@@ -50,3 +50,9 @@ The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Ry
 ## A stock Rytm
 
 A Rytm without the mods only plays its Overbridge MAIN inputs. The Sidecar's voices can still be heard: set `out=main` (all voices summed on MAIN, faded in, limited at -12 dBFS) and `notes=on` (MIDI channel N plays voice N). Each voice's machine is set with `notemach=V:NAME`. This is a test mode; the mods give the full experience.
+
+## Recording the Sidecar's audio in OBS (macOS)
+
+- Allow OBS to use audio inputs: **System Settings → Privacy & Security → Microphone**, switch OBS on, then restart OBS.
+- The Sidecar (Pi) presents 12 inputs, the Sidecar Mini 2 (the stereo release build). OBS takes **channels 1-2**, which are the Rytm's MAIN L/R.
+- For more channels at once, use a DAW, or combine devices in an aggregate device (Audio MIDI Setup).

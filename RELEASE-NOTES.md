@@ -2,13 +2,13 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
-**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1026** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
+**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
 
 Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
 | Part | Build |
 |---|---|
-| Rytm mods | `rui1026` (default: the mods plus the remote pages, the connect screen and the FX return on IN L/R, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see PATCHER.md |
+| Rytm mods | `rui1027` (default: the mods plus the remote pages, the connect screen and the FX return on IN L/R, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see PATCHER.md |
 | Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build of the test line (sidecar-1023); `BUILD-INFO-teensy.txt` names the commit |
 | Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set of the test line; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
@@ -34,16 +34,16 @@ From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one numbe
 - **MINOR** (0.2.0): new features (and, before 1.0, anything that changes how a setup behaves);
 - **1.0.0** comes after the testers' feedback.
 
-The Rytm builds keep their own names (`rui1026`). Each version's release notes name the Rytm build it needs: flash that one, not just the newest.
+The Rytm builds keep their own names (`rui1027`). Each version's release notes name the Rytm build it needs: flash that one, not just the newest.
 
 ## New in the test line (1023)
 
 Tested on hardware on 2026-10-18 unless marked "in testing".
 
-- **FX return on IN L/R** (`rui1026`): the Rytm's delay + reverb return on the Overbridge IN L/R instead of its audio inputs (Sound tab: IN L/R source); the recorder names those files FX_L / FX_R and SCOPE shows the source FX. Never send those channels back into the Rytm through the computer.
+- **FX return on IN L/R** (`rui1027`): the Rytm's delay + reverb return on the Overbridge IN L/R instead of its audio inputs (Sound tab: IN L/R source); the recorder names those files FX_L / FX_R and SCOPE shows the source FX. Never send those channels back into the Rytm through the computer.
 - **Sidecar Mini computer audio:** stereo USB audio to the computer.
-- **Voice pages follow a machine change at once** (`rui1026`; in testing).
-- **Connect screen** (`rui1026`): when the Sidecar comes up, the Rytm shows CONNECTED, the voices and effects, and the Pi's address for 3 seconds. Transport and pads keep working under it.
+- **Voice pages follow a machine change at once** (`rui1027`; in testing).
+- **Connect screen** (`rui1027`): when the Sidecar comes up, the Rytm shows CONNECTED, the voices and effects, and the Pi's address for 3 seconds. Transport and pads keep working under it.
 - **SCOPE and meters:** the Rytm's output, a voice or the inputs as a live waveform, with twelve peak meters.
 - **REC page** (Pi and Sidecar Mini): arm, record and stop from the Rytm; the take's time in large digits, the free space and the meters.
 - **Playback** (Pi): one channel of a take into the Rytm's MAIN, from the REC page (B, C, D) or the web page's Record tab. Picking another take with C while one plays can glitch once; a fix is on the way.
@@ -107,7 +107,7 @@ Still in testing: the waveform page and machine graphics, voice pages only for S
 
 ## Upgrading from the 1017 release
 
-1. Patch your stock OS 1.73 file again with `rui1026` (or `sfx1021`) and flash it.
+1. Patch your stock OS 1.73 file again with `rui1027` (or `sfx1021`) and flash it.
 2. Load the new Teensy `.hex`, or copy the new Pi card files over the old ones.
 3. The Rytm builds need the matching Sidecar firmware for the new names, the remote pages and the connect screen; an older Sidecar shows numbers instead of the effects' names.
 

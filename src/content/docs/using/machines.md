@@ -35,7 +35,11 @@ A Juno-106 style poly-synth voice, our own implementation following the open AMY
 | ATK, DEC, REL | the envelope |
 | LEN | the gate; 127 holds until the note-off or the next trig |
 
-Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch. Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the SIDECAR folder and LOAD TO PROJ to build the project's JUNO list.
+Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch.
+
+**Presets (JUNO and 6-OP FM).** PAT steps through the project's list, up to 127 patches, and can be p-locked. Add patches with **LOAD TO PROJ** from the SIDECAR folder in the Rytm's sample browser (the `/JUNO` and `/DX7` folders of `.syx` files on the Sidecar's card), or with **Save current** on the web page's Pool & presets tab. Without a project list, PAT shows the factory list (JUNO A11..B88, the FM ROM voices). The lists and the patch libraries live on each Sidecar's own card: copy them when you move a project between a Mini and a Pi. <span class="sc-ok">hardware</span> (PAT presets on the Pi)
+
+Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the SIDECAR folder and LOAD TO PROJ to build the project's JUNO list.
 
 ## 6-OP FM
 

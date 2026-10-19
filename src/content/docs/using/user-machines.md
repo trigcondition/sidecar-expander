@@ -73,12 +73,12 @@ A machine name with a plain `!` and no reason means the track's sound was made f
 
 ## Limits
 
-| | Teensy 4.1 | Pi 4B |
+| | Sidecar Mini (Teensy 4.1) | Sidecar (Pi 4B) |
 |---|---|---|
 | Code space for loaded machines | 32 KB in all | 4 MB code + 4 MB data |
 | State per voice | 16 KB (more with PSRAM) | 64 KB |
 | Installed machines listed on the Rytm | up to 32 | up to 32 |
-| Presets (`/PRESETS/<id>/`) | yes | not yet |
-| Sample pool access | yes | not yet |
+| Presets (`/PRESETS/<id>/`, the PRE knob, up to 127 a machine) | yes | yes |
+| Sample pool access (`pool_info` / `pool_read`) | yes | yes, from the sample RAM |
 
 Writing your own: [Writing user machines](/sidecar-expander/developers/writing-user-machines/).

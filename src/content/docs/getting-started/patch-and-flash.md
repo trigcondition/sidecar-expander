@@ -26,7 +26,7 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 | Build | What |
 |---|---|
 | `sfx1021` (default, recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
-| `rui1026` (default, recommended) | everything in `sfx1021`, plus the remote pages: a connect screen when the Sidecar comes up, the Rytm's FX return on IN L/R for recording and SCOPE, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the REC page (with playback on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar. The page catches only the keys and knobs it uses: PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work as usual |
+| `rui1027` (default, recommended) | everything in `sfx1021`, plus the remote pages: a connect screen when the Sidecar comes up, the Rytm's FX return on IN L/R for recording and SCOPE, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the REC page (with playback on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar. The page catches only the keys and knobs it uses: PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work as usual |
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it. The remote pages ran on a real Rytm with Sidecar Mini and Sidecar on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
@@ -63,7 +63,10 @@ shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 | Build | SHA-256 |
 |---|---|
 | sfx1021 | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
-| rui1026 | `9f8efd682ad5530c2a488b46edb4da55c962cb8d00a84dd1fcdb84826a5f1ff1` |
+**Until the final `rui1027` is published, the patcher offers `rui1026`** (the same remote pages without the SRC view); its result's sha256 is `9f8efd682ad5530c2a488b46edb4da55c962cb8d00a84dd1fcdb84826a5f1ff1`. <!-- RUI1027-PENDING: remove this sentence when the patcher offers rui1027 -->
+
+<!-- RUI1027-PENDING: replace with the final rui1027 sha256 once published, and switch public/patcher/builds.json from rui1027 to rui1027 (make_patches.py + test_patcher.sh) -->
+| rui1027 | *sha256 to come with the final build* |
 
 ## Send it to the Rytm
 

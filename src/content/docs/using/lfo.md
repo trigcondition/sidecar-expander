@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-<span class="sc-test">in testing</span> (new in 0.1.0 with the `rui1026` Rytm build)
+<span class="sc-test">in testing</span> (new in 0.1.0)
 
 The Sidecar has its own LFOs: **8 on the Sidecar (Pi)**, **4 on the Sidecar Mini**. Each one modulates one parameter of a Sidecar voice or a send effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs.
 
