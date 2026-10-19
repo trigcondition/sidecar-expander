@@ -79,7 +79,7 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## User machine space on the Teensy
 
-The Teensy has 32 KB of plugin code space. The six starter machines fit together, but only **one** of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) fits at a time: a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). Smaller packages and a clearer reason on the Rytm are in progress. The Pi has no such limit.
+The Teensy has 32 KB of plugin code space. The six starter machines fit together, and so do two (some three) of the smaller NoisePlethora packages; only one of the old large ones (NP VOICES, NP CLUST1, NP CLUST2) fits at a time. When a machine does not fit, the Rytm shows `!ROOM` (<span class="sc-ok">hardware</span>). With PSRAM a second code space takes more (in testing). The Pi has no such limit.
 
 ## Check that it works
 

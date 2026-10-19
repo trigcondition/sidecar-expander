@@ -6,7 +6,7 @@ Sidecar Mini, the Teensy 4.1 version of Sidecar | Expander: the cheap way to get
 
 ## You need
 
-- A **Teensy 4.1** (PJRC). A stock board is enough: no PSRAM chips are needed.
+- A **Teensy 4.1** (PJRC). A stock board is enough: no PSRAM chips are needed (only GRAIN and stems recording need PSRAM).
 - A **USB host cable** on the Teensy's 5-pin USB host header. PJRC sells one (the "USB Host Cable for Teensy 4.1"). It needs 5 male header pins soldered to the Teensy's host pads.
 - A **micro-USB cable**, for power and for loading the firmware. Use a data cable, not a charge-only one.
 - Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's own card slot, for samples.
@@ -87,12 +87,12 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## User machine space on the Teensy
 
-The Teensy has 32 KB of plugin code space. The six starter machines fit together, but only **one** of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) fits at a time: a second shows `!` (no room). Use one per project (ATARI fits next to NP CLUST1). Smaller packages and a clearer reason on the Rytm are in progress. The Pi has no such limit.
+The Teensy has 32 KB of plugin code space. The six starter machines fit together, and so do two (some three) of the smaller NoisePlethora packages; only one of the old large ones (NP VOICES, NP CLUST1, NP CLUST2) fits at a time. When a machine does not fit, the Rytm shows `!ROOM` (tested on hardware). With PSRAM a second code space takes more (in testing). The Pi has no such limit.
 
 ## Check that it works
 
 1. Power the Teensy, then plug in the Rytm (with the patched OS).
-2. On the Rytm (with `sfx1021`), pick an external machine (PLAITS or DAISYSP) on a track and play it.
+2. On the Rytm, pick an external machine (PLAITS or DAISYSP) on a track and play it.
 3. Open the sample browser: FUNC+SMPL, DOWN, FUNC+YES. **SIDECAR** appears at the +Drive root.
 
 If something is off, see [KNOWN-ISSUES.md](KNOWN-ISSUES.md), then open a tester report.

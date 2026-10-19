@@ -14,7 +14,7 @@ Sidecar is in public testing. Each feature below is marked:
 This is **Sidecar 0.1.0**. The Rytm builds are `rui1027` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from today's test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
+The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 :::
 
 ## On both: Sidecar Mini and Sidecar
@@ -44,8 +44,10 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
 | REC page: arm, record, stop (Pi and Mini) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1027` | <span class="sc-test">in testing</span> |
+| Voice pages only for tracks on a Sidecar machine; they follow a machine change at once | <span class="sc-test">in testing</span> |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
+| SRC view (`rui1027`): the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's | <span class="sc-test">in testing</span> |
+| Voice pages named by track (BD, SD, ...), meters and SCOPE in track order, JUNO pages per track, PAT presets | <span class="sc-ok">hardware</span> (Pi) |
 | LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
 | NO on SIDECAR leaves; unused user-machine knobs as hatched boxes; preset names at once | <span class="sc-test">in testing</span> |
@@ -60,7 +62,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Web page at `http://sidecar.local`, with choice buttons that show the device's state | <span class="sc-ok">hardware</span> |
 | Sample pool and presets per project, the Pool & presets page | <span class="sc-ok">hardware</span> |
 | File browser with folder upload, also large sample folders | <span class="sc-ok">hardware</span> |
-| Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> |
+| Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> (after many replugs the Pi may need a restart: known issue, fix planned) |
 | 5" HDMI touch display; hide the touch test; brightness down to 5 % | <span class="sc-ok">hardware</span> |
 | DSI touchscreens: the official 7" display (v1) and compatibles such as the OSOYOO 7" DSI V4.0 | expected, being confirmed (Touch Display 2: not supported) |
 | Boots from its own SD card, also from a cold power cycle | <span class="sc-ok">hardware</span> |
@@ -72,7 +74,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 
 | Feature | Status |
 |---|---|
-| Runs on a stock board, no PSRAM needed | <span class="sc-ok">hardware</span> |
+| Runs on a stock board, no PSRAM needed (except GRAIN and stems) | <span class="sc-ok">hardware</span> |
 | Recorder, stereo, with a fast card (24-bit 70.8 s and 16-bit 62.4 s, 0 drops) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Web console: status, sound, record, user machines, files; choice buttons that show the device's state | <span class="sc-ok">hardware</span> |
 | "Sidecar Mini" as its USB name | <span class="sc-ok">hardware</span> |

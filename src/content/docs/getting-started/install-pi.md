@@ -106,7 +106,7 @@ The remote pages of the `rui1027` Rytm build (TRK + YES on the Rytm) need this r
 
 ## Wi-Fi (off by default)
 
-The SD card package has **Wi-Fi off**: it ships no Wi-Fi settings and no Wi-Fi chip firmware. Wi-Fi is in testing (a join has worked on hardware; there is no setup page yet). The network is either Ethernet or Wi-Fi, chosen at boot. To try it:
+The SD card package has **Wi-Fi off**: it ships no Wi-Fi settings and no Wi-Fi chip firmware. Joining works on hardware; the **Wi-Fi settings** section on the web page's Status tab (scan, Connect and save, a 90 s fallback) is in testing. The network is either Ethernet or Wi-Fi, chosen at boot. To try it:
 
 1. Put the Pi 4's Wi-Fi chip firmware in a folder `/firmware/` on the card: `brcmfmac43455-sdio.bin`, `brcmfmac43455-sdio.clm_blob` and `brcmfmac43455-sdio.txt`. They come from the Raspberry Pi firmware-nonfree repository (`cypress/cyfmac43455-sdio-minimal.bin` and `cypress/cyfmac43455-sdio.clm_blob`, renamed, and `brcm/brcmfmac43455-sdio.txt`), under their own licences.
 2. Boot with Ethernet, open `sidecar.local` and, in the command line, enter `wifi=scan` to list the networks, then `wifi=join:<network>:<passphrase>`. The Pi stores a derived key in `/.rytm/wifi.txt`, never the passphrase itself, and never logs it. Reboot: the Pi joins with DHCP and stays `sidecar.local`.

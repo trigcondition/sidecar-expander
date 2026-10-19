@@ -22,7 +22,7 @@ sidebar:
 - A **USB host cable** for the Teensy's 5-pin USB host header. It needs 5 male header pins soldered to the host pads.
 - A **micro-USB data cable**, for power and for loading the firmware.
 - Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's slot, for samples and patch banks. **To record on a Mini without PSRAM, use a fast card** (A1/A2, U3/V30): the Teensy's own buffer is small.
-- Optional: **PSRAM** chips on the Teensy's underside. Nothing needs them: everything works on a stock board. PSRAM adds headroom for samples, a second plugin code space for more and bigger user machines, and stems recording (both in testing: see KNOWN-ISSUES for what PSRAM testers can run).
+- Optional: **PSRAM** chips on the Teensy's underside. Almost nothing needs them: everything works on a stock board except GRAIN (DSP SAMPLE's MOD) and stems recording. PSRAM adds headroom for samples, a second plugin code space for more and bigger user machines, and stems recording (both in testing: see KNOWN-ISSUES for what PSRAM testers can run).
 
 ## Option B: Sidecar (Raspberry Pi 4B)
 

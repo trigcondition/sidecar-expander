@@ -25,7 +25,7 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 
 | Build | What |
 |---|---|
-| `sfx1021` (default, recommended) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
+| `sfx1021` (option: without the remote pages) | EXT machines on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's labels), stepped list knobs, user slots, and the SIDECAR folder in the sample browser. For the Teensy and the Pi |
 | `rui1027` (default, recommended) | everything in `sfx1021`, plus the remote pages: a connect screen when the Sidecar comes up, the Rytm's FX return on IN L/R for recording and SCOPE, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the REC page (with playback on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar. The page catches only the keys and knobs it uses: PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work as usual |
 
 :::note

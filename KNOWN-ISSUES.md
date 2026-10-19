@@ -7,12 +7,13 @@ Sidecar 0.1.0 (Rytm builds `rui1027`, the default, and `sfx1021`). The first ver
 ## Still in testing
 
 Not yet reported from a real Rytm (emulator or simulator only):
+- the SRC view (`rui1027`): the Sidecar's machine page on the Rytm's own SRC page;
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud);
 - voice pages only for tracks on a Sidecar machine (with `rui1027` at once on a machine change);
 - the PSRAM plugin code space and recording stems on a Sidecar Mini with PSRAM (see below);
 - the Wi-Fi settings page on the Pi (scan, connect and save, the 90 s fallback) and the Wi-Fi rejoin watchdog;
 
-If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back; nothing new is stored in your projects.
+If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 
 ## Rytm mods and remote pages
 

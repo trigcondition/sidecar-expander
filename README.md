@@ -33,6 +33,7 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
   - P2..P5 show each effect's own labels; list knobs step one item a detent.
 - **LFOs** (in testing): 8 on the Pi, 4 on the Mini, on voice parameters and the send effects, saved per kit, with a DESIGN wave; the LFO page opens with TRK + LFO.
 - **SIDECAR folder.** The Sidecar's SD card appears as a folder in the Rytm's own sample browser (it was called TEENSY before 1021).
+- **SRC view (`rui1027`, in testing).** On a track with a Sidecar machine, the Rytm's own SRC page shows the Sidecar's machine page with its graphics, while every key and knob stays the Rytm's.
 - **Remote pages (`rui1027`, Sidecar Mini and Sidecar).** A connect screen when the Sidecar comes up; TRK + YES opens the SIDECAR and SYSTEM status pages, SCOPE with meters, the REC page (with playback on the Pi) and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
 - **Sidecar Mini recorder:** stereo to the Teensy's card (needs a fast SD card: A1/A2, U3/V30).
 - **Sidecar (Raspberry Pi 4B) only:**
@@ -52,7 +53,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
   - **OS 1.74 is not supported yet**; it will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - One of:
-  - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples; for recording without PSRAM a fast card: A1/A2, U3/V30). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
+  - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed, except for GRAIN and stems recording) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples; for recording without PSRAM a fast card: A1/A2, U3/V30). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
   - **Sidecar: a Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Sidecar package follows on 2026-10-20.)
 - The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
@@ -61,7 +62,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 - This is **unofficial**. It is not made, endorsed or supported by Elektron. Running modified firmware may affect the support or warranty you get for your unit. You use it at your own risk.
 - **Back up first.** Use Transfer to back up your projects, kits, sounds and samples before you flash anything.
-- **Going back to stock:** send the stock `Analog-Rytm_MKII_OS1.73.syx` the same way you sent the patched one. Nothing new is stored in your projects, so they stay compatible both ways.
+- **Going back to stock:** send the stock `Analog-Rytm_MKII_OS1.73.syx` the same way you sent the patched one. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 - **If the Rytm does not boot:** hold **FUNC** while you power it on to get the STARTUP menu, press **TRIG 4 (OS UPGRADE)**, and send the stock 1.73 file over **DIN MIDI**: Transfer's legacy OS upgrade mode through a MIDI interface. This route is served by the Rytm's bootloader, so it works without a booting OS. It is slow: about 16 minutes or more.
 - **Known stock behaviour:** after an OS upgrade, the Rytm can stay on "Success! Rebooting" and never restart by itself. A power cycle is fine: switch it off and on.
 - Do not switch the Rytm off while it writes an update, except in the "Success! Rebooting" case above.
@@ -87,11 +88,12 @@ On 2026-10-18, with the test line:
 - the FX return on IN L/R (echoes seen on SCOPE's FX source, on the Mini) and the Mini's stereo USB audio to the computer (heard in a DAW);
 - HALO heard, and measured on the Teensy: about 5.7 % CPU per slot, two HALOs about 16 %, HALO with CHORUS about 11 %;
 - the smaller NoisePlethora packages and the slot reasons !ROOM, !CRSH, !TIME; the web UIs' buttons that show the device's state (Mini console); the "Sidecar Mini" USB name;
-- Pi: folder upload of large sample folders, computer audio and MIDI over USB-C, unplugging and replugging the USB cable, restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
+- Pi: folder upload of large sample folders, computer audio and MIDI over USB-C, unplugging and replugging the USB cable (after many replugs the Pi may need a restart: known issue), restarting the Rytm and the Pi, the restyled web page and display, Wi-Fi joining on the first boot.
 
 Earlier (1017 to 1022 builds): all the voices heard; the send effects on the Pi and the Teensy; the Pi recorder (a 5-minute take); user machines; stepped knobs and slot fingerprints; the Pi's cold boot.
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
+- the SRC view (`rui1027`);
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN);
 - voice pages only for tracks on a Sidecar machine;
 - the PSRAM plugin code space and stems recording on a Mini with PSRAM;

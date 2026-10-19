@@ -2,7 +2,7 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
-**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
+**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027** (its sha256 follows with the final build) (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
 
 Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
@@ -13,13 +13,16 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 | Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set of the test line; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
 
-> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
+> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 
 ## New in 0.1.0
 
 Tested on hardware: the connect screen, SCOPE, the REC page and playback, HALO, the FX return on IN L/R, the Sidecar Mini's stereo USB audio and the Mini recorder. The rest of this list is being tested now (in testing).
 
 - **LFOs** (in testing): 8 on the Pi, 4 on the Mini, global and routable to a voice's parameters (V1..V8) or the send FX's P2..P5 (FX1 / FX2); saved per kit; waves SINE, TRI, SAW+, SAW-, SQR, S&H, RND and **DESIGN** (16 steps, each HOLD, RAMP or SMTH, with presets); free or synced rates; retrig FREE / TRIG / PLAY. The **LFO page** on the Rytm opens with **TRK + LFO**; both web UIs have an LFO tab. The LFOs never touch the Rytm's own parameters (no MIDI CC).
+- **SRC view** (`rui1027`, in testing): on a track with a Sidecar machine (JUNO, 6-OP FM, PLAITS, DSP SAMPLE and GRAIN), the Rytm's own SRC page shows the Sidecar's machine page with its graphics, drawn from the Rytm's own values. Every key and knob stays the Rytm's (edits, p-locks, kits, saving); the bottom bar names the last knob turned. The machine list, popups, PERF and holding TRK or BANK show the stock screen.
+- **Voice pages by track** (tested on hardware on the Pi): pages are named BD, SD, ... instead of V1..V8; meters and SCOPE sources in track order. Twelve tracks can choose a Sidecar machine and eight sound at once; RS/CP, MT/HT, CH/OH and CY/CB share a voice like the Rytm's own pairs.
+- **JUNO / FM presets** (tested on hardware on the Pi): PAT steps through the project's list (up to 127, p-lockable), filled with LOAD TO PROJ or Save current; otherwise the factory list.
 - **REC page channel picking** (Pi, in testing): the trig keys choose the recorded channels (T1..T8 tracks, T9 MAIN, T10 / T11 IN or FX L / R; blue recorded, orange not). Playback: B pushed plays, B turned picks the channel, C the take, D the level.
 - **Remote pages** (in testing): NO on SIDECAR leaves; DSP SAMPLE's MOD is a stepped list again (ONE LOOP SLICE GRAIN STRCH PLUCK WAVE; GRAIN shows POS SIZ DNS); unused knobs of user machines as hatched boxes; JUNO / FM preset names appear at once; the machine pages follow the Rytm instantly; the Rytm reports its active kit (for the per-kit LFOs).
 - **Sidecar Mini:** stereo USB audio to the computer (tested on hardware) with USB MIDI back (in testing); a slimmer memory layout; the recorder's 32 KB buffer is shared with USB audio, so USB audio pauses while the recorder is armed or records (without PSRAM). The 20 / 12 multichannel mode is not in this release (in development). Recording without PSRAM needs a fast SD card.
@@ -36,7 +39,7 @@ From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one numbe
 
 The Rytm builds keep their own names (`rui1027`). Each version's release notes name the Rytm build it needs: flash that one, not just the newest.
 
-## New in the test line (1023)
+## Earlier in the 0.1.0 line
 
 Tested on hardware on 2026-10-18 unless marked "in testing".
 
@@ -60,7 +63,7 @@ Tested on hardware on 2026-10-18 unless marked "in testing".
 - **Two names:** the Teensy 4.1 build is **Sidecar Mini**, the cheap way to get started; the Raspberry Pi 4B build is the full **Sidecar**. Projects move from the Mini to the Sidecar (same per-project files; install the Pi version of each user machine). See [Sidecar Mini or Sidecar?](https://trigcondition.github.io/sidecar-expander/introduction/pi-vs-teensy/)
 
 - **SIDECAR everywhere on the Rytm.** The sample browser's folder is now **SIDECAR** (was TEENSY), and the slot menu's popup reads **NO SIDECAR** when no Sidecar answers.
-- **Remote pages that leave the Rytm playable** (`rui1022`, new; tested on hardware with the Pi): a page catches only the keys and knobs it uses. PLAY, STOP and RECORD always reach the Rytm; the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar. On the status pages the knobs edit the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
+- **Remote pages that leave the Rytm playable** (from `rui1022`; tested on hardware with the Pi): a page catches only the keys and knobs it uses. PLAY, STOP and RECORD always reach the Rytm; the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar. On the status pages the knobs edit the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 - **Remote pages in the Rytm's own font** (Pi and Teensy; tested on hardware). Every letter on the Sidecar's pages is drawn by the Rytm itself, with its own font, at the stock screens' sizes and places. The layout follows the stock pages: dials, labels, title and bottom bar in the same spots.
 - **Two status pages:** SIDECAR (the 8 voices and their machines, FX1 / FX2 with TYPE and PRE / POST) and SYSTEM (U1..U5, the recorder, the Rytm's audio stream and underruns, the render cores' load, and the network address, never a network name or key). The Mini has no network line.
 - **A faster remote UI.** A knob turn shows at once (the Rytm echoes the value in the bottom bar itself), and the Sidecar's frame follows about 25 ms after a turn (was 75 ms). Fast turns never jump back.
@@ -94,7 +97,7 @@ Tested on a real Rytm MKII on 2026-10-18 (the test line): the connect screen, SC
 
 Earlier (1017 to 1022 builds): all the voices heard; send FX on the Pi and the Teensy; the Pi recorder (5-minute take); user machines; the web page's tabs; the touch display; stepped list knobs, slot fingerprints in a shared project, the slot menu fixes, CRUSH and RINGMOD, a cold power cycle of the Pi, and the Rytm keeps running when the Sidecar goes away.
 
-Still in testing: the waveform page and machine graphics, voice pages only for Sidecar machines, the PSRAM code space and stems on the Mini, the Pi's Wi-Fi settings page.
+Still in testing: the SRC view, the LFOs, the waveform page and machine graphics, voice pages only for Sidecar machines, the PSRAM code space and stems on the Mini, the Pi's Wi-Fi settings page.
 
 ## Known limits in this release
 
