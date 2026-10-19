@@ -104,6 +104,26 @@ The release's `plugins/` folder holds six starter machines as Pi packages: `sc_a
 
 The remote pages of the `rui1027` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
+## Wi-Fi without a cable: sidecar-wifi.txt
+
+<span class="sc-test">in testing</span> To set up Wi-Fi with no Ethernet cable and no web page, put a text file called `sidecar-wifi.txt` at the **root of the Pi's SD card** (the top folder, next to `Plugins`; it shows in the Mac Finder and Windows Explorer). Three lines are enough:
+
+```
+ssid=MyNetwork
+psk=MyPassword
+```
+
+1. Make sure the Wi-Fi chip firmware is on the card in `/firmware/` (see [below](#wi-fi-off-by-default)).
+2. Save `sidecar-wifi.txt` at the card root, put the card in the Pi and power it on. The Pi reads the file at the **next boot**, before Wi-Fi starts.
+3. The Pi joins the network (DHCP, `sidecar.local`). It stores only the **derived key**, never your password, in `/.rytm/wifi.txt`, and then **deletes `sidecar-wifi.txt`** from the card (if it cannot delete it, it overwrites the contents and renames it `sidecar-wifi.used`).
+4. If the network does not come up within **90 seconds** (wrong password, not found, no address), the Pi falls back to its previous setting (Ethernet when Wi-Fi was off) and restarts, so a typo cannot lock you out.
+
+Options (one per line): `band=2g`, `band=5g` or `band=any` (2.4 GHz is the default), and `open=1` for an open network without a password (leave `psk=` out). `password=` works as another name for `psk=`. Lines starting with `#` are comments; spaces around `=` and quotes around the values are fine. The password is 8 to 63 characters, or a 64-digit hex key; the network name is 1 to 32 characters.
+
+If the file cannot be used, the Pi deletes it anyway and writes **`sidecar-wifi-error.txt`** at the card root with a short reason (for example "password must be 8-63 characters"); it never contains your network name or password. Fix the file and try again; a successful import removes the error file.
+
+The alternative is the web page's **Wi-Fi settings** (Status tab, over Ethernet). **Never share the card, or a photo of it, while `sidecar-wifi.txt` is on it**: the password is in it in plain text until the next boot.
+
 ## Wi-Fi (off by default)
 
 The SD card package has **Wi-Fi off**: it ships no Wi-Fi settings and no Wi-Fi chip firmware. Joining works on hardware; the **Wi-Fi settings** section on the web page's Status tab (scan, Connect and save, a 90 s fallback) is in testing. The network is either Ethernet or Wi-Fi, chosen at boot. To try it:

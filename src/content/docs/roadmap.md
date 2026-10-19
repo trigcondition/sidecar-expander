@@ -28,7 +28,7 @@ Finished and confirmed on real hardware.
 
 Being finished and tested on hardware.
 
-- **Wi-Fi settings** (Pi, in testing): scan, connect and save from the web page, with a 90 s fallback; next, first setup without a cable and from the display.
+- **Wi-Fi settings** (Pi, in testing): scan, connect and save from the web page, with a 90 s fallback; first setup without a cable with `sidecar-wifi.txt` at the card root; next, from the display.
 - **The SRC view** (in testing, `rui1027`): the Sidecar's machine page on the Rytm's own SRC page.
 - **LFOs** (in testing): 8 on the Pi, 4 on the Mini, per kit, with the DESIGN wave and the LFO page.
 - **PSRAM code space on the Mini** (in testing with PSRAM testers): more and bigger user machines on a Teensy with PSRAM fitted.

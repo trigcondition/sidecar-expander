@@ -99,6 +99,8 @@ Still in testing (emulator or simulator only, not yet reported from a real Rytm)
 - the PSRAM plugin code space and stems recording on a Mini with PSRAM;
 - the Pi's Wi-Fi settings page;
 
+**Wi-Fi without a cable** (Pi, in testing): create `sidecar-wifi.txt` at the card root with `ssid=MyNetwork` and `psk=MyPassword` (optional `band=2g|5g|any`, default 2.4 GHz; `open=1` for an open network). The Pi imports it at the next boot, stores only the derived key, deletes the file, and falls back to its previous setting after 90 s if the network does not come up. Errors are written to `sidecar-wifi-error.txt`. Details: INSTALL-PI.md. Never share the card while the file is on it.
+
 ## USB ID
 
 The Sidecar's own USB device port (the Pi's USB-C, for computer audio and MIDI) presents itself as `1209:0001`. That is a shared **test** ID from pid.codes, not a product ID of our own: another test device on your computer may use it too, and a computer may remember the wrong driver name for it. A proper ID is planned before a final release. Plugging the Rytm into the Sidecar's host port does not depend on it.
