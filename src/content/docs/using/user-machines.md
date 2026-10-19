@@ -26,9 +26,9 @@ Six machines of our own (MIT licence), ready to install:
 
 ## Install
 
-**On the Pi:** open `sidecar.local`, tab **Machines**, and upload the `.a64.rmp` files (or copy them into `/Plugins/` on the card). Each package is checked (header, size, CRC, API version, target) before it goes in place. Press **Rescan** if you copied files by hand.
+**On the Pi:** open `sidecar.local`, tab **User machines**, and upload the `.a64.rmp` files (or copy them into `/Plugins/` on the card). Each package is checked (header, size, CRC, API version, target) before it goes in place. Press **Rescan** if you copied files by hand.
 
-**On the Teensy:** open the [web console](/sidecar-expander/console/), tab **Machines**, and upload the `.rmp` files. They go into the Teensy's own plugin store (4 MB of flash). Installing waits for the Rytm's transport to stop (STOP TO INSTALL).
+**On the Teensy:** open the [web console](/sidecar-expander/console/), tab **User machines**, and upload the `.rmp` files. They go into the Teensy's own plugin store (4 MB of flash). Installing waits for the Rytm's transport to stop (STOP TO INSTALL).
 
 The installed list shows each machine's name, version, size, fingerprint, memory, CPU (measured once it has played), the slots that use it, and whether it fits.
 

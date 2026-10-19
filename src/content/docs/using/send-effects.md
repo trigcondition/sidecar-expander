@@ -14,7 +14,7 @@ The Sidecar's two send effects take the Rytm's voices, each at its track's send 
 - **Every knob's 0 is a usable default**, so a fresh kit sounds sensible. There is no level or mix knob: the sends set the level.
 - Changes are smoothed over 10 ms. A TYPE change, or a change of a zone that swaps the algorithm (RINGS' model, CLOUDSEED's character), fades out, clears and fades in: a short gap, no click.
 - The paired tracks that share a voice (RS/CP, MT/HT, CH/OH, CY/CB) send at the louder of their two send levels.
-- The return is soft-limited (-6 dBFS PRE, -12 dBFS POST). A runaway or invalid value clears the effect instead of blasting.
+- The return is soft-limited (-6 dBFS PRE, -12 dBFS POST), except STUTTER's, which returns at unity. A runaway or invalid value clears the effect instead of blasting.
 
 ## Which effects where
 
@@ -85,7 +85,7 @@ A small, lush, modulated plate reverb written for the Sidecar: very long smooth 
 |---|---|---|
 | P2 | DCY | decay, 0.3 to 30 s; at 127 **FRZ**: FREEZE holds the tail forever (no new input) |
 | P3 | MOD | modulation, 0 still to 127 deep |
-| P4 | TONE | the tail's low-pass (1.2 to 10 kHz) and the input's high-pass (250 down to 30 Hz) |
+| P4 | TONE | the tail's low-pass (1.2 to 10 kHz) and the input's high-pass (30 up to 250 Hz: thinner when bright) |
 | P5 | SHIM | octave-up shimmer, 0 off to 127 |
 
 On the Mini (measured with `:sendfxbench`): HALO alone about 5.7 % CPU per slot, two HALOs about 16 %, HALO with CHORUS about 11 %.

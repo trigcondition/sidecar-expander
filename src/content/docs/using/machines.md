@@ -20,7 +20,7 @@ The Mutable Instruments Plaits macro oscillator, curated to 17 models.
 | DEC, LPG | the decay and colour of the low-pass gate, pinged by each trig |
 | TUN | semitones from the centre (64) |
 | LEV | output level |
-| Page 2 | FM FIN AUX TMD MMD VEL GLD VOL: frequency modulation, fine tune, the aux output, timbre and morph modulation, velocity, glide and volume |
+| Page 2 | TMD MMD FM AUX / FIN VEL GLD VOL (as the Rytm shows them): timbre and morph modulation, frequency modulation, the aux output, fine tune, velocity, glide and volume |
 
 The drum models are left out (DIGIDRUM plays drums), and the six-op FM models are their own machine (6-OP FM).
 
@@ -67,7 +67,7 @@ Physical-model resonators from DaisySP, excited by the Rytm.
 | INP | the exciter: INT (internal), NAT (the track's own analog voice), NOISE, or another analog voice's output |
 | EXC | exciter amount |
 | TUN, LEV | tuning, level |
-| Page 2 | EXCITER: XTN XDC FB OUT XP4 XLV XP5 WID. OUT at 64 or above sends the resonance to MAIN; below, back to the voice |
+| Page 2 | EXCITER: OUT FB XLV XTN / XDC XP4 XP5 WID (as the Rytm shows them). OUT at 64 or above sends the resonance to MAIN; below, back to the voice |
 
 With INP on an analog voice, an analog drum rings a Sidecar resonator.
 
@@ -97,7 +97,7 @@ A sample from the Sidecar's card, played through a resonator.
 
 - **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder.
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
-- On the Pi, samples play from memory (256 MB by default). On a Teensy without PSRAM, samples stream from the card and play once (ONE).
+- On the Pi, samples play from memory (256 MB by default). On a Teensy without PSRAM, samples stream from the card and play once (ONE), or loop with LOP above 0; MOD is ignored.
 
 ## GRAIN
 

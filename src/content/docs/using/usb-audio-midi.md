@@ -43,7 +43,7 @@ The Rytm is the clock. On the Sidecar (Pi) the multichannel mode is the default;
 
 ## MIDI pass-through
 
-The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Rytm: notes, CCs, clock and transport, program changes, SysEx dumps. Two filters stay in place:
+The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Rytm: notes, CCs, clock and transport, program changes, and on the Sidecar (Pi) SysEx dumps (the Sidecar Mini blocks all of the maker's SysEx on the way to the Rytm, dumps included). Two filters stay in place:
 
 - the Sidecar's own messages to and from the Rytm are not passed on;
 - OS update messages are never passed to the Rytm. Update the Rytm with the Sidecar unplugged.

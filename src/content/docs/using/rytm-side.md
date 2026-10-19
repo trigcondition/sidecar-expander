@@ -17,8 +17,8 @@ The SRC page shows the machine's eight knobs. They behave like any Rytm knob: tu
 
 | Machine | SRC knobs (A..H) | Page 2 |
 |---|---|---|
-| PLAITS | ENG HRM TIM MOR DEC LPG TUN LEV | FM FIN AUX TMD MMD VEL GLD VOL |
-| DAISYSP | ENG STR BRI DMP INP EXC TUN LEV | EXCITER: XTN XDC FB OUT XP4 XLV XP5 WID |
+| PLAITS | ENG HRM TIM MOR DEC LPG TUN LEV | TMD MMD FM AUX / FIN VEL GLD VOL |
+| DAISYSP | ENG STR BRI DMP INP EXC TUN LEV | EXCITER: OUT FB XLV XTN / XDC XP4 XP5 WID |
 | DSP SAMPLE | ENG STR BRI DMP MIX FB TUN LEV | SD SAMPLE: TUN FIN SMP MOD STA END LOP LEV |
 | DIGIDRUM | ENG and the engine's seven controls (named per engine) | the stock sample layer |
 | JUNO | PAT CUT RES ENV ATK DEC REL LEN | the stock page, muted |

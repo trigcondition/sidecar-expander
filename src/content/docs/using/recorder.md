@@ -30,7 +30,7 @@ The Pi records the Rytm's Overbridge channels, its own voices and the send effec
 The display shows a red `REC h:mm:ss` while recording.
 
 - **Files:** `/Recordings/<name>_<NNN>/<NN>_<SOURCE>.wav`, 48 kHz, 24-bit (or 16-bit), mono or stereo. Every file of a take starts on the same frame and has the same length.
-- **Power loss:** the files are synced every 2 seconds. After a power cut the next boot repairs the headers, and the take opens up to its last sync.
+- **Power loss:** one file is synced every 2 seconds, in turn (so each file every 2 s times the number of files). After a power cut the next boot repairs the headers, and the take opens up to its last sync.
 - **Limits:** a take stops before any file reaches 4 GB (FAT32): about 4 hours for a stereo 24-bit file. A full card stops the take and closes the files.
 - **Card speed:** all 23 sources at 24-bit need about 3.6 MB/s. Use a fast card; the page shows whether it keeps up.
 - **Latency:** the round trip to the Rytm (about 6 ms) is not compensated between the Rytm's channels and the Sidecar's voices.

@@ -9,7 +9,7 @@ sidebar:
 
 | Symptom | Check |
 |---|---|
-| No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (Teensy console, `sidecar.local` Log tab) |
+| No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (Teensy console, `sidecar.local` Log & console tab) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
@@ -36,7 +36,7 @@ sidebar:
 - **The Rytm connects only after a reboot or many retries, or the Teensy drops off the computer:** solder the Teensy 4.1's USB host header (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
 
 - RINGS, CLOUDSEED and STUTTER run only on the Pi.
-- The console's Machines and Files tabs are in testing.
+- The console's User machines and Files tabs are in testing.
 - USB audio to a computer: stereo in this release (2 in / 2 out); the multichannel mode comes later.
 
 ### Raspberry Pi 4B
