@@ -108,7 +108,7 @@ The release's `plugins/` folder holds six starter machines as Pi packages: `sc_a
 
 ## The remote UI
 
-The remote pages of the `rui1027` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+The remote pages of the `rui1027d` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## Wi-Fi without a cable: sidecar-wifi.txt
 
@@ -149,6 +149,8 @@ psk=YOUR-PASSPHRASE
 ```
 
 `country=` is your two-letter country code; `band=` is `2g` (the default; 5 GHz DFS channels did not get an address in our test), `5g` or `any`. A file written by hand holds the passphrase in plain text, so prefer `wifi=join`. Never share a card, a log or a screenshot that contains this file. The web page has no password: on a shared network anyone can open it.
+
+**First setup without a cable** (in testing): a `sidecar-wifi.txt` file at the card's root with `ssid=` and `psk=` lines is imported at boot (only the key is stored, the file is deleted; a problem goes to `sidecar-wifi-error.txt`). The Wi-Fi chip firmware in `/firmware/` is needed as above.
 
 ## Updating and going back
 

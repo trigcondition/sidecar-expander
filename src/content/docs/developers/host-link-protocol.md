@@ -72,7 +72,7 @@ TYPE ids are stable: 0 OFF, 1 CHORUS, 2 COMB, 6 RINGS, 8 CLOUDSEED, 15 STUTTER, 
 
 ## Remote UI: `29`, `2A`, `30`..`3F`
 
-Part of the release (the `rui1027` Rytm build). Every message carries `<ver 1>`.
+Part of the release (the `rui1027d` Rytm build). Every message carries `<ver 1>`.
 
 | Cmd | Dir | Payload |
 |---|---|---|

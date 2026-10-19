@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-Part of the tester release: the `rui1027` Rytm build with the test line's Sidecar firmware (Pi kernel or Sidecar Mini firmware).
+Part of the tester release: the `rui1027d` Rytm build with the test line's Sidecar firmware (Pi kernel or Sidecar Mini firmware).
 
 For examples of what the pages can show (the connect screen, SCOPE and meters, sample waveforms, the recorder, machine graphics), see [The remote UI](/sidecar-expander/using/rytm-side/#more-pages). New pages and graphics are Sidecar code only; the Rytm needs no new flash for them.
 
@@ -72,7 +72,7 @@ A new built-in page is a `Cell` array, a `Page`, and one row in the machine tabl
 
 ## The host
 
-- `30 on` (TRK + YES) opens SIDECAR; the pages are SIDECAR, SYSTEM, then one page per track on a Sidecar machine (titled by the track, BD..CB, decided by the `33` reports), then the pages drawn by code: LFO, REC, SCOPE. TRK + LFO opens the LFO page (`30` page 1). LEFT / UP previous, RIGHT / DOWN / PAGE next, NO back to SIDECAR, NO on SIDECAR leaves (`3A 0 0`).
+- `30 on` (TRK + YES) opens SIDECAR. With a Rytm that has the SRC view (`rui1027d`: it sent a `29` / `2A` / `2B`) the list is SIDECAR, SYSTEM and the live pages LFO, REC, SCOPE, and the machine pages show in the SRC view only; with an older build the pages are SIDECAR, SYSTEM, then one page per track on a Sidecar machine (titled by the track, BD..CB, decided by the `33` reports), then the pages drawn by code: LFO, REC, SCOPE. TRK + LFO opens the LFO page (`30` page 1). LEFT / UP previous, RIGHT / DOWN / PAGE next, NO back to SIDECAR, NO on SIDECAR leaves (`3A 0 0`).
 - An encoder changes the voice's parameter through the same path as a knob report. The edit holds over the Rytm's later reports of the same value and gives way when the Rytm's own value moves.
 - At most every 25 ms, and 8 ms after a key or a turn: changed widgets are redrawn, the frame diffed, changed tiles sent as `38` runs with the changed `3D` text items and one `39` (the turned knob's cell and the bottom bar first); `37` goes out before a frame when the mask changes, `3F` binds each numeric encoder to the bottom bar; nothing when nothing changed; a `3C` keepalive after 250 ms of silence.
 - **The SRC view:** when the stock SRC page shows a track with a Sidecar machine (`29 t 1`), the host draws that track's page over it from the `2A` values, without catching any key or knob; a track whose machine has no page gets nothing, and `3A 0 0` gives the screen back.

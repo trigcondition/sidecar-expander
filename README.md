@@ -4,11 +4,11 @@
 
 Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.1.0, the first public tester release** (Rytm build `rui1027`). **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
+> **Sidecar 0.1.0, the first public tester release** (Rytm build `rui1027d`). **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 >
-> The remote pages are part of this release (`rui1027`, the default build): the connect screen, the status pages, SCOPE, the REC page with playback and the voice pages, tested on a real Rytm on 2026-10-18. A few parts are still in testing: see [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
+> The remote pages are part of this release (`rui1027d`, the default build): the connect screen, the status pages, SCOPE, the REC page with playback and the voice pages, tested on a real Rytm on 2026-10-18. A few parts are still in testing: see [Tested on hardware or in the emulator](#tested-on-hardware-or-in-the-emulator).
 
 Documentation, the browser patcher and the web console: <https://trigcondition.github.io/sidecar-expander/>
 
@@ -34,8 +34,8 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
   - P2..P5 show each effect's own labels; list knobs step one item a detent.
 - **LFOs** (in testing): 8 on the Pi, 4 on the Mini, on voice parameters and the send effects, saved per kit, with a DESIGN wave; the LFO page opens with TRK + LFO.
 - **SIDECAR folder.** The Sidecar's SD card appears as a folder in the Rytm's own sample browser (it was called TEENSY before 1021).
-- **SRC view (`rui1027`, in testing).** On a track with a Sidecar machine, the Rytm's own SRC page shows the Sidecar's machine page with its graphics, while every key and knob stays the Rytm's.
-- **Remote pages (`rui1027`, Sidecar Mini and Sidecar).** A connect screen when the Sidecar comes up; TRK + YES opens the SIDECAR and SYSTEM status pages, SCOPE with meters, the REC page (with playback on the Pi) and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
+- **SRC view (`rui1027d`).** On a track with a Sidecar machine, the Rytm's own SRC page shows the Sidecar's machine page with its graphics, while every key and knob stays the Rytm's.
+- **Remote pages (`rui1027d`, Sidecar Mini and Sidecar).** A connect screen when the Sidecar comes up; TRK + YES opens the SIDECAR and SYSTEM status pages, SCOPE with meters, the REC page (with playback on the Pi) and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
 - **Sidecar Mini recorder:** stereo to the Teensy's card (needs a fast SD card: A1/A2, U3/V30).
 - **Sidecar (Raspberry Pi 4B) only:**
   - a sample pool and presets per project, with a Pool & presets page on the web page;
@@ -71,7 +71,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 
 ## Install
 
-1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `rui1027` (the default: the mods plus the remote pages), or `sfx1021` for the mods without the remote pages.
+1. **Patch your OS file:** with the browser patcher or the Python script, as in [PATCHER.md](PATCHER.md). Use `rui1027d` (the default: the mods plus the remote pages), or `sfx1021` for the mods without the remote pages.
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar:**
    - Sidecar Mini (Teensy 4.1): [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
@@ -94,7 +94,6 @@ On 2026-10-18, with the test line:
 Earlier (1017 to 1022 builds): all the voices heard; the send effects on the Pi and the Teensy; the Pi recorder (a 5-minute take); user machines; stepped knobs and slot fingerprints; the Pi's cold boot.
 
 Still in testing (emulator or simulator only, not yet reported from a real Rytm):
-- the SRC view (`rui1027`);
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN);
 - voice pages only for tracks on a Sidecar machine;
 - the PSRAM plugin code space and stems recording on a Mini with PSRAM;
@@ -108,11 +107,11 @@ The Sidecar's own USB device port (the Pi's USB-C, for computer audio and MIDI) 
 
 ## Feedback
 
-Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (`rui1027` / `sfx1021`, and the Teensy or Pi build from `BUILD-INFO`), what you did, and what happened. Logs from the web console or `sidecar.local` help a lot.
+Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (`rui1027d` / `sfx1021`, and the Teensy or Pi build from `BUILD-INFO`), what you did, and what happened. Logs from the web console or `sidecar.local` help a lot.
 
 ## Versioning
 
-From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one number for Sidecar and Sidecar Mini: PATCH releases fix, MINOR releases add features (and, before 1.0, may change how a setup behaves), 1.0.0 follows the testers' feedback. The Rytm builds keep their own names (`rui1027`); each version's release notes name the Rytm build it needs. The version shows on the SYSTEM page, the Pi's display and web page, and the Mini's console.
+From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one number for Sidecar and Sidecar Mini: PATCH releases fix, MINOR releases add features (and, before 1.0, may change how a setup behaves), 1.0.0 follows the testers' feedback. The Rytm builds keep their own names (`rui1027d`); each version's release notes name the Rytm build it needs. The version shows on the SYSTEM page, the Pi's display and web page, and the Mini's console.
 
 ## Publishing the site (GitHub Pages)
 

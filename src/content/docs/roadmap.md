@@ -18,6 +18,7 @@ Finished and confirmed on real hardware.
 - **SCOPE and meters:** the Rytm's input as a live waveform and twelve peak meters on its own screen.
 - **REC page and playback:** record, arm and stop from the Rytm (Pi and Mini); play a take's channel back into the MAIN (Pi).
 - **The Sidecar Mini recorder:** stereo on a stock Teensy with a fast card; stereo recording to the card on both Sidecars.
+- **The SRC view** (`rui1027d`): the Sidecar's machine page on the Rytm's own SRC page.
 - **Voice pages by track**, meters and SCOPE in track order, JUNO / FM presets on PAT.
 - **HALO:** a lush plate reverb with FREEZE and SHIMMER on both Sidecars.
 - **The FX return on IN L/R:** the Rytm's delay and reverb return recorded and scoped as its own channels.
@@ -29,7 +30,6 @@ Finished and confirmed on real hardware.
 Being finished and tested on hardware.
 
 - **Wi-Fi settings** (Pi, in testing): scan, connect and save from the web page, with a 90 s fallback; first setup without a cable with `sidecar-wifi.txt` at the card root; next, from the display.
-- **The SRC view** (in testing, `rui1027`): the Sidecar's machine page on the Rytm's own SRC page.
 - **LFOs** (in testing): 8 on the Pi, 4 on the Mini, per kit, with the DESIGN wave and the LFO page.
 - **PSRAM code space on the Mini** (in testing with PSRAM testers): more and bigger user machines on a Teensy with PSRAM fitted.
 - **Machine graphics and the sample waveform page** (in testing): the FM algorithm, the JUNO envelope, GRAIN's cloud, DSP SAMPLE's waveform with its markers.

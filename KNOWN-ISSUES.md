@@ -2,14 +2,13 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.1.0 (Rytm builds `rui1027`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Sidecar 0.1.0 (Rytm builds `rui1027d`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
 ## Still in testing
 
 Not yet reported from a real Rytm (emulator or simulator only):
-- the SRC view (`rui1027`): the Sidecar's machine page on the Rytm's own SRC page;
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud);
-- voice pages only for tracks on a Sidecar machine (with `rui1027` at once on a machine change);
+- voice pages only for tracks on a Sidecar machine (with `rui1027d` at once on a machine change);
 - the PSRAM plugin code space and recording stems on a Sidecar Mini with PSRAM (see below);
 - the Wi-Fi settings page on the Pi (scan, connect and save, the 90 s fallback) and the Wi-Fi rejoin watchdog;
 
@@ -17,7 +16,7 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 ## Rytm mods and remote pages
 
-- **SRC view** (in testing): A turn shows on the view after about 50-100 ms; edits made while holding a trig (p-locks) are not shown on the view, which shows the sound's own value; the hardware test of the final build is pending.
+- **SRC view:** A turn shows on the view after about 50-100 ms; edits made while holding a trig (p-locks) are not shown on the view, which shows the sound's own value.
 - **Wait for the Sidecar to connect before pressing PLAY** (the connect screen shows it). A freeze was seen once right after connecting and could not be reproduced.
 - **GRAIN as its own machine** in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD set to GRAIN.
 - **REC page playback (Pi):** picking another take with C while one plays can glitch once. A fix is on the way.

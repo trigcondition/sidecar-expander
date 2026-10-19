@@ -73,7 +73,10 @@ def main():
     for rel, path in sorted(files()):
         top = rel.split(os.sep)[0]
         if rel.endswith((".syx", ".bin")) and not rel.endswith("armstub8-rpi4.bin"):
-            bad.append(f"{rel}: firmware-like file type")
+            if rel.lower().endswith(".syx") and (os.sep + "JUNO" + os.sep in rel or os.sep + "DX7" + os.sep in rel):
+                notes.append(f"{rel}: starter content patch data (Juno-106 / DX7 dumps, MIT sources; see its NOTICE)")
+            else:
+                bad.append(f"{rel}: firmware-like file type")
         if rel == os.path.join("scripts", "share_scan.py"):
             continue                       # its own patterns
         data = payload(rel, path)

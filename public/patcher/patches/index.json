@@ -2,19 +2,19 @@
  "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
  "patches": [
   {
-   "file": "sidecar-rui1027.json",
-   "tag": "rui1027",
-   "title": "rui1027: Sidecar 0.1.0 mods + remote pages (default, recommended)",
+   "file": "sidecar-rui1027d.json",
+   "tag": "rui1027d",
+   "title": "rui1027d: Sidecar 0.1.0 mods + remote pages (default, recommended)",
    "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the LFO page (TRK + LFO), the REC page with playback and channel picking on the trig keys (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; the SRC view (the Sidecar machine's page on the Rytm's own SRC page); the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual.",
-   "output": "Analog-Rytm_MKII_OS1.73_rui1027.syx",
-   "output_sha256": "5d4a2ee06e5e7db0bf1b0bb6a32b59cfb97a709f71d123c8313078f5b5e8bc0b",
-   "source_commit": "9d05b9035989f5ac4bbd538104fa1f05781e8cb2"
+   "output": "Analog-Rytm_MKII_OS1.73_rui1027d.syx",
+   "output_sha256": "4843848805c0e08b3cf7c69bf5b68ca7e1453bb643d351709bdad9f59468dce8",
+   "source_commit": "4933c8514bd09ce0ec4e1ea6137a02dd7c3e323a"
   },
   {
    "file": "sidecar-sfx1021.json",
    "tag": "sfx1021",
    "title": "sfx1021: Sidecar mods without the remote pages",
-   "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1027 without the remote pages.",
+   "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1027d without the remote pages.",
    "output": "Analog-Rytm_MKII_OS1.73_sfx1021.syx",
    "output_sha256": "e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e",
    "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"

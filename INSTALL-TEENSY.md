@@ -89,7 +89,7 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## Which Rytm build
 
-`rui1027` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM, SCOPE, the REC page, the LFO page and the voice pages. The Mini has no network, so its SYSTEM page shows no network line; its recorder row shows IDLE, ARM or REC m:ss. Playback and channel picking on the REC page are the Pi's for now. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+`rui1027d` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM, SCOPE, the REC page, the LFO page and the voice pages. The Mini has no network, so its SYSTEM page shows no network line; its recorder row shows IDLE, ARM or REC m:ss. Playback and channel picking on the REC page are the Pi's for now. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## User machine space on the Teensy
 

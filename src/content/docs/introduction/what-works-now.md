@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.1.0**. The Rytm builds are `rui1027` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
+This is **Sidecar 0.1.0**. The Rytm builds are `rui1027d` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -33,7 +33,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Voices released and FX tails cleared on every reconnect | <span class="sc-test">in testing</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1027`)
+## The remote pages (`rui1027d`)
 
 | Feature | Status |
 |---|---|
@@ -44,9 +44,9 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
 | REC page: arm, record, stop (Pi and Mini) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Voice pages only for tracks on a Sidecar machine; they follow a machine change at once | <span class="sc-test">in testing</span> |
+| Machine pages only for tracks on a Sidecar machine, shown on the SRC page (not in the TRK + YES list) with `rui1027d`; they follow a machine change at once | <span class="sc-ok">hardware</span> (2026-10-19) |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
-| SRC view (`rui1027`): the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's | <span class="sc-test">in testing</span> |
+| SRC view (`rui1027d`): the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's, also after a USB replug | <span class="sc-ok">hardware</span> (2026-10-19) |
 | Voice pages named by track (BD, SD, ...), meters and SCOPE in track order, JUNO pages per track, PAT presets | <span class="sc-ok">hardware</span> (Pi) |
 | LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
@@ -66,9 +66,9 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | 5" HDMI touch display; hide the touch test; brightness down to 5 % | <span class="sc-ok">hardware</span> |
 | DSI touchscreens: the official 7" display (v1) and compatibles such as the OSOYOO 7" DSI V4.0 | expected, being confirmed (Touch Display 2: not supported) |
 | Boots from its own SD card, also from a cold power cycle | <span class="sc-ok">hardware</span> |
-| Computer audio and MIDI over USB-C | <span class="sc-ok">hardware</span> |
+| Computer audio and MIDI over USB-C: no clicks at the stream's start, 5 minutes clean | <span class="sc-ok">hardware</span> (2026-10-19) |
 | Wi-Fi: join a network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package) |
-| Wi-Fi settings on the web page: scan, connect and save, 90 s fallback (the Pi restarts on a join) | <span class="sc-test">in testing</span> |
+| Wi-Fi settings on the web page (scan, connect and save, 90 s fallback; the Pi restarts on a join) and first setup from `sidecar-wifi.txt` on the card | <span class="sc-test">in testing</span> (implemented, not yet run on hardware) |
 
 ## Sidecar Mini (Teensy 4.1) only
 

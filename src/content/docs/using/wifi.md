@@ -35,6 +35,12 @@ The alternative is the web page's **Wi-Fi settings** (Status tab, over Ethernet)
 - Wi-Fi uses DHCP, with the hostname `sidecar`, so `sidecar.local` works on your home network once the Pi has an address.
 - The Pi's Wi-Fi chip needs its firmware files on the card in `/firmware/`.
 - **The settings page** (Status tab, Wi-Fi section; in testing): on / off, scan, pick a network or type one, the password, **Connect and save**, **Forget network**. Connect and save restarts the Pi and tries the network; if it is not up within 90 seconds, the previous setting comes back and the Pi restarts on it, so a typo cannot lock you out. See [Web UI](/sidecar-expander/using/web-ui/#wi-fi-settings).
+- **Without a cable** (in testing; implemented, not yet run on hardware): put a text file `sidecar-wifi.txt` at the root of the Pi's card with
+  ```
+  ssid=YourNetwork
+  psk=YourPassword
+  ```
+  (optional `band=2g|5g|any`, `open=1` for an open network). At boot the Pi checks it, stores only the network's key, deletes the file and tries the network, with the same 90 s fallback; a problem is written to `sidecar-wifi-error.txt`.
 - From the console (the web page's command line, or serial): `wifi=join:<network>:<passphrase>`, then reboot. `wifi=scan` lists the networks, `wifi=off` returns to Ethernet at the next boot.
 - A watchdog rejoins after a dropout (in testing).
 - The passphrase is never written to the card in plain text and never logged: the Pi stores a derived key.
