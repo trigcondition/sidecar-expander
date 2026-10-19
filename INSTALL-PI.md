@@ -97,6 +97,12 @@ For another display, change the `hdmi_cvt` line to its resolution, and add `widt
 - **Wi-Fi is off** in the package; see [Wi-Fi](#wi-fi-off-by-default). There is no Bluetooth.
 - The page has no password. Use it on a direct cable or a network you trust.
 
+## Starter content
+
+The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-<version>.zip`, on the Releases page: extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
+
+On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
+
 ## Starter user machines
 
 The release's `plugins/` folder holds six starter machines as Pi packages: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.

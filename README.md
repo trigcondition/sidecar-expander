@@ -27,6 +27,7 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
 ## What works now
 
 - **External voice machines on every track.** PLAITS, DAISYSP, DIGIDRUM, JUNO, 6-OP FM and DSP SAMPLE run on the Sidecar, and their audio returns on the track's own channel.
+- **Starter content.** `sidecar-content-0.1.0.zip`: the Juno-106's 128 factory patches and three DX7 banks in the card's folder structure; extract to the Sidecar's card (already in the Pi's SD package).
 - **User machines.** Five slots U1..U5 play loadable machine plugins; six starter machines (ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN) come with the release.
 - **SEND FX 1/2.** AMPLITUDE 2 has two per-track sends to the Sidecar's effects. The SEND FX 1/2 pages behind DELAY / REVERB carry TYPE and P1..P5 (CHORUS, COMB, CRUSH, RINGMOD, the new HALO plate reverb with FREEZE and SHIMMER; on the Pi also RINGS, CLOUDSEED, STUTTER).
   - P1 is ROUT: PRE returns through the Rytm's analog distortion and compressor; POST returns clean.

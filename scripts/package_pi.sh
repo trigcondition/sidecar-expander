@@ -48,6 +48,29 @@ rm -rf "$here/dist/pi"; mkdir -p "$here/dist/pi"
 python3 "$wt/tools/release/pi_card.py" "$here/dist/pi" --commit "$full" --kernel "$KERNEL" --sdboot "$SDBOOT" \
   --fw "$CIRCLE_BUILD/fw" --cmdline "sdport=0"
 [ ! -e "$here/dist/pi/sd/wifi.txt" ] && [ ! -e "$here/dist/pi/sd/.rytm" ] || { echo "a Wi-Fi file is in the card set"; exit 1; }
+
+# the starter content (scripts/package_content.sh, from the same commit) on the card too: /JUNO/Factory, /DX7 and its
+# README / NOTICE as STARTER-CONTENT-README.txt / -NOTICE.txt; the zip and its .sha256 are written again with the folders
+"$here/scripts/package_content.sh" "$wt" >/dev/null
+csrc=$(ls -d "$here"/dist/content/sidecar-content-*/ | tail -1)
+cp -R "$csrc/JUNO" "$csrc/DX7" "$here/dist/pi/sd/"
+cp "$csrc/README.txt" "$here/dist/pi/sd/STARTER-CONTENT-README.txt"
+cp "$csrc/NOTICE.txt" "$here/dist/pi/sd/STARTER-CONTENT-NOTICE.txt"
+python3 - "$here/dist/pi" <<'PY'
+import glob, hashlib, os, sys, zipfile
+out = sys.argv[1]; sd = os.path.join(out, "sd")
+z = glob.glob(os.path.join(out, "sidecar-pi4-sd-*.zip"))[0]
+with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
+    for dp, dns, fns in os.walk(sd):
+        dns.sort()
+        for fn in sorted(fns):
+            p = os.path.join(dp, fn)
+            zi = zipfile.ZipInfo(os.path.relpath(p, sd), date_time=(2026, 1, 1, 0, 0, 0))
+            zi.compress_type = zipfile.ZIP_DEFLATED
+            zf.writestr(zi, open(p, "rb").read())
+open(z + ".sha256", "w").write(f"{hashlib.sha256(open(z, 'rb').read()).hexdigest()}  {os.path.basename(z)}\n")
+PY
+echo "starter content: $(basename "$csrc") added to the card set" >> "$here/dist/pi/BUILD-INFO-pi.txt"
 grep -qx 'sdport=0' "$here/dist/pi/sd/cmdline.txt" || { echo "cmdline.txt is not sdport=0"; exit 1; }
 
 # the starter user machines as Pi packages (RMPA, built in the rytm-circle image), next to the card set

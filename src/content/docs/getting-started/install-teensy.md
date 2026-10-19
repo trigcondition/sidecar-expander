@@ -69,6 +69,12 @@ With no card the Teensy still runs. The SIDECAR folder on the Rytm is then empty
 
 Both can be changed from the [web console](/sidecar-expander/using/web-ui/#the-sidecar-mini-web-console), but the defaults are right for the mods.
 
+## Starter content
+
+`sidecar-content-<version>.zip` on the Releases page holds `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with a README and the licence notice. Extract it to the **root** of the Teensy's microSD card (it only adds files; merge with your folders).
+
+On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
+
 ## Starter user machines
 
 The release's `plugins/` folder holds six starter machines as Teensy packages: `sc_acid.rmp`, `sc_wavepad.rmp`, `sc_metal.rmp`, `sc_snare.rmp`, `sc_pluck.rmp`, `sc_grain.rmp` (MIT; check them against `SHA256SUMS`). Install them from the web console, tab **Machines**: they go into the Teensy's own plugin store, and installing waits until the Rytm's transport is stopped. The Pi's `.a64.rmp` files do not load on the Teensy. The console's Machines tab is in testing on the Teensy.
