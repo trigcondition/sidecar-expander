@@ -34,7 +34,7 @@ Send effects are built into the core today (`core/fx/`). Loadable **user effects
 | | Pi 4 core 2 | Teensy |
 |---|---|---|
 | Whole send FX | two CLOUDSEEDs are about 13 % of the core | the small set is about 4-5 % |
-| Memory | about 4.7 MB of heap for all types in both slots | a few tens of KB |
+| Memory | about 4.8 MB of heap for all types in both slots | a few tens of KB |
 
 ## STUTTER, an insert
 

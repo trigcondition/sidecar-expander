@@ -2,7 +2,7 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
-**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027** (its sha256 follows with the final build) (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
+**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
 
 Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
@@ -24,7 +24,7 @@ Tested on hardware: the connect screen, SCOPE, the REC page and playback, HALO, 
 - **Voice pages by track** (tested on hardware on the Pi): pages are named BD, SD, ... instead of V1..V8; meters and SCOPE sources in track order. Twelve tracks can choose a Sidecar machine and eight sound at once; RS/CP, MT/HT, CH/OH and CY/CB share a voice like the Rytm's own pairs.
 - **JUNO / FM presets** (tested on hardware on the Pi): PAT steps through the project's list (up to 127, p-lockable), filled with LOAD TO PROJ or Save current; otherwise the factory list.
 - **REC page channel picking** (Pi, in testing): the trig keys choose the recorded channels (T1..T8 tracks, T9 MAIN, T10 / T11 IN or FX L / R; blue recorded, orange not). Playback: B pushed plays, B turned picks the channel, C the take, D the level.
-- **Remote pages** (in testing): NO on SIDECAR leaves; DSP SAMPLE's MOD is a stepped list again (ONE LOOP SLICE GRAIN STRCH PLUCK WAVE; GRAIN shows POS SIZ DNS); unused knobs of user machines as hatched boxes; JUNO / FM preset names appear at once; the machine pages follow the Rytm instantly; the Rytm reports its active kit (for the per-kit LFOs).
+- **Remote pages** (in testing): NO on SIDECAR leaves; DSP SAMPLE's MOD is a stepped list again (ONE LOOP SLICE GRAIN STRCH PLUCK WAVE; GRAIN shows POS SIZ DNS); unused knobs of user machines as hatched boxes on the Rytm's own SRC page and SMPL page 2; JUNO / FM preset names appear at once; the machine pages follow the Rytm instantly; the Rytm reports its active kit (for the per-kit LFOs).
 - **Sidecar Mini:** stereo USB audio to the computer (tested on hardware) with USB MIDI back (in testing); a slimmer memory layout; the recorder's 32 KB buffer is shared with USB audio, so USB audio pauses while the recorder is armed or records (without PSRAM). The 20 / 12 multichannel mode is not in this release (in development). Recording without PSRAM needs a fast SD card.
 - **Sidecar (Pi):** DSI touchscreens (the official 7" display v1 and compatibles such as the OSOYOO 7" DSI V4.0: expected, being confirmed; Touch Display 2 is not supported), the Wi-Fi settings page, the IN L/R source switch, computer audio and MIDI.
 - **Reconnect:** on every reconnect the voices are released and the FX tails cleared.
@@ -101,7 +101,8 @@ Still in testing: the SRC view, the LFOs, the waveform page and machine graphics
 
 ## Known limits in this release
 
-- GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD. On a Mini without PSRAM GRAIN stays silent (`!RAM`).
+- SRC view: a turn shows after about 50-100 ms; p-locks made while holding a trig are not shown (the view shows the sound's own value).
+- GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD. On a Mini without PSRAM, DSP SAMPLE streams from the card and plays once, so GRAIN needs PSRAM there.
 - Sidecar Mini: multichannel USB audio comes later; USB audio pauses while the recorder runs (without PSRAM).
 - Wait until the Sidecar has connected (the connect screen) before pressing PLAY: a freeze was seen once and not reproduced.
 - Teensy: only one of the old large NoisePlethora packages fits in the 32 KB plugin code space at a time; the new smaller ones fit two or three.

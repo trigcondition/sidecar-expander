@@ -23,7 +23,6 @@ sidebar:
 ### Rytm mods
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
-- **The remote UI (`rui` builds) is early.** TRK + YES opens the page, but the Sidecar does not serve pages in the tester release. The page stays blank and returns within a second.
 - **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
@@ -38,7 +37,7 @@ sidebar:
 
 - RINGS, CLOUDSEED and STUTTER run only on the Pi.
 - The console's Machines and Files tabs are in testing.
-- USB audio to a computer is not part of the tester release.
+- USB audio to a computer: stereo in this release (2 in / 2 out); the multichannel mode comes later.
 
 ### Raspberry Pi 4B
 
@@ -50,7 +49,7 @@ sidebar:
 
 ### Remote pages
 
-- With `rui1027` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
+- A remote page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 
 ### Teensy: user machine space
 

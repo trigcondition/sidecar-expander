@@ -9,7 +9,7 @@ User machines are **machine plugins**: small sound generators in `.rmp` files th
 
 One plugin source builds for both Sidecars, but the package is per board: **RMP1** for the Teensy, **RMPA** for the Pi. Each Sidecar refuses the other's package with a clear message.
 
-Status: loading and playing on the Pi <span class="sc-ok">hardware</span>; the slot menu fixes, slot fingerprints from the project (`sfx1019`) <span class="sc-test">in testing</span>.
+Status: loading and playing on the Pi <span class="sc-ok">hardware</span>; the slot menu fixes, slot fingerprints from the project <span class="sc-test">in testing</span>.
 
 ## The starter set
 

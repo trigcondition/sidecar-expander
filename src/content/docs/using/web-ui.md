@@ -17,7 +17,7 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 | **LFO** | the eight [LFOs](/sidecar-expander/using/lfo/): target, wave (with the DESIGN grid), rate, retrig, depth |
 | **Record** | the [recorder](/sidecar-expander/using/recorder/): record, arm, channels, and the takes with a play button per channel |
 | **User machines** | [user machines](/sidecar-expander/using/user-machines/): installed list, upload, delete, rescan, the project's U1..U5, export and import of the slot list, memory bars |
-| **Pool & presets** | the project's sample pool, the JUNO and FM lists, and user machine presets <span class="sc-ok">hardware</span> |
+| **Pool & presets** | the project's sample pool, the JUNO and FM lists, and user machine presets; **Save current** adds what a voice plays now to its list <span class="sc-ok">hardware</span> |
 | **Files** | the file browser (below) |
 | **Log & console** | the live log and a command line for the console commands |
 | **About** | address, build, versions |

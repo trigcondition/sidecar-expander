@@ -50,7 +50,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Voice pages named by track (BD, SD, ...), meters and SCOPE in track order, JUNO pages per track, PAT presets | <span class="sc-ok">hardware</span> (Pi) |
 | LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
-| NO on SIDECAR leaves; unused user-machine knobs as hatched boxes; preset names at once | <span class="sc-test">in testing</span> |
+| NO on SIDECAR leaves; unused user-machine knobs as hatched boxes on the Rytm's SRC / SMPL pages; preset names at once | <span class="sc-test">in testing</span> |
 | FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18, SCOPE on the Mini) |
 
 ## Sidecar (Raspberry Pi 4B) only

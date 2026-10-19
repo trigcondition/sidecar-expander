@@ -40,10 +40,7 @@ Both patchers check the result themselves and save nothing if it is wrong. To ch
 | Build | Output file | SHA-256 |
 |---|---|---|
 | sfx1021 | `Analog-Rytm_MKII_OS1.73_sfx1021.syx` | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
-**Until the final `rui1027` is published, the patcher offers `rui1026`** (the same remote pages without the SRC view); its result's sha256 is `9f8efd682ad5530c2a488b46edb4da55c962cb8d00a84dd1fcdb84826a5f1ff1`. <!-- RUI1027-PENDING: remove this sentence when the patcher offers rui1027 -->
-
-<!-- RUI1027-PENDING: replace with the final rui1027 sha256 once published, and switch public/patcher/builds.json from rui1027 to rui1027 (make_patches.py + test_patcher.sh) -->
-| rui1027 | `Analog-Rytm_MKII_OS1.73_rui1027.syx` | *sha256 to come with the final build* |
+| rui1027 | `Analog-Rytm_MKII_OS1.73_rui1027.syx` | `5d4a2ee06e5e7db0bf1b0bb6a32b59cfb97a709f71d123c8313078f5b5e8bc0b` |
 
 (`public/patcher/patches/index.json` lists the same values.)
 

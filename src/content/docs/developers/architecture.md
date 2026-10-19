@@ -41,6 +41,8 @@ Portable C++17, built from one source for the Teensy, the Pi and the Mac (tests,
 | `pool/`, `presets/` | the card index, the per-project sample pool, the JUNO and DX7 libraries |
 | `user/` | the user machine glue for the Pi and the Mac (scan, slots, loading) |
 | `ui/` | the remote UI: 1-bit canvas, fonts, widgets, page declarations, the remote host |
+| `lfo.*` | the Sidecar LFOs (8 on the Pi, 4 on the Mini) |
+| `rec/` | the recorder code shared by both Sidecars (WAV headers, names, the Mini's recorder) |
 
 Rules: one engine per program; one `render_voices` call per 12-frame block, or disjoint voice ranges on several cores (the Pi); the render path never allocates, blocks or logs; every new SysEx message goes through `sysex.*` with a test against the protocol reference.
 
@@ -59,7 +61,7 @@ A **bare-metal kernel on Circle** for the Pi 4: no Linux, four cores with fixed 
 - **USB-C gadget:** a composite USB Audio Class 2 + USB MIDI device of our own for a computer, on the Pi's USB-C port (in testing).
 - **Network and web:** Ethernet with a static link-local address, mDNS (`sidecar.local`, patched for macOS's lookups), Circle's HTTP server with at most 4 connections; Wi-Fi in testing (either/or with Ethernet).
 - **Display:** LVGL 9 on core 0's loop, an 800x480 frame buffer, USB HID touch with error recovery.
-- **Heap buffers:** the send effects (about 4.7 MB) and the core's large buffers are allocated from Circle's heap once at boot, so the kernel image stays small.
+- **Heap buffers:** the send effects (about 4.8 MB) and the core's large buffers are allocated from Circle's heap once at boot, so the kernel image stays small.
 - **Guard:** each voice's render is timed; a voice over budget three blocks running, or one that faults, is muted while the others play. A render core that misses 20 ms is fatal: a clean stop and a reboot. A hardware watchdog covers core 0.
 - **SD boot:** the card holds `sdboot.img`, a small loader patched from Circle's serial bootloader, and `engine.img` (the kernel with a checked header). sdboot checks the image and starts it after a 1 s window in which a development flasher can take over. Boot to the first audio: about 11.5 s.
 
@@ -84,7 +86,8 @@ The mods patch the Rytm's MAIN OS 1.73 image and nothing else (the bootloader, F
 | 0022 router | the host-link SysEx router (from the looper experiment) |
 | 0023 drive | the SIDECAR folder in the sample browser, the per-project pool |
 | 0025 sendfx report | sends the send levels and the FX values to the host; stores the effect knobs |
-| 0026 remote UI | the remote page: blit and input only |
+| 0026 remote UI | the remote pages: frames, text in the Rytm's fonts (`3D` / `3E`), local echo (`3F`), catch mask (`37`), hello and connect screen (`35` / `36`), machine reports (`33`), trig LEDs (`34`), active kit (`3B`), TRK + LFO, the SRC view (`29` / `2A`) |
+| 0014 hidden machines, 0028 hello, 0030 FX in | the hidden machine slots, the Rytm's hello to the host, the FX return on IN L/R (`26` / `27`) |
 | 0027 elekloader | builds the image with elekloader's core and DDR area |
 | 0029 sendfx UI | AMPLITUDE 2 and the SEND FX 1/2 pages, labels and stepped knobs |
 

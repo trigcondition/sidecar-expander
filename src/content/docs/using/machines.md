@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-The Sidecar renders up to **8 voices**, one per Rytm voice. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
+The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
 All knobs are 0..127 with the Rytm's fine resolution. List knobs (ENG, PAT, MOD) split their range into equal zones, one per item.
 
@@ -101,7 +101,7 @@ A sample from the Sidecar's card, played through a resonator.
 
 ## GRAIN
 
-DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Pi, or a Sidecar Mini with PSRAM; on a Mini without PSRAM the voice stays silent and the Rytm shows `!RAM`. Each Pi render core can sound up to 32 grains. GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD.
+DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Pi, or a Sidecar Mini with PSRAM; on a Mini without PSRAM DSP SAMPLE streams from the card and plays once (ONE), whatever MOD says. Each Pi render core can sound up to 32 grains. GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD.
 
 For a stand-alone granular machine with its own built-in sample, see the GRAIN user machine in the starter set ([User machines](/sidecar-expander/using/user-machines/)).
 

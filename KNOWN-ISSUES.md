@@ -17,6 +17,7 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 ## Rytm mods and remote pages
 
+- **SRC view** (in testing): A turn shows on the view after about 50-100 ms; edits made while holding a trig (p-locks) are not shown on the view, which shows the sound's own value; the hardware test of the final build is pending.
 - **Wait for the Sidecar to connect before pressing PLAY** (the connect screen shows it). A freeze was seen once right after connecting and could not be reproduced.
 - **GRAIN as its own machine** in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD set to GRAIN.
 - **REC page playback (Pi):** picking another take with C while one plays can glitch once. A fix is on the way.
@@ -42,8 +43,8 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 - **The Rytm connects only after a reboot or many retries?** Solder the Teensy 4.1's USB host header (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
 - **Multichannel USB audio** (20 in / 12 out) is not in this release; the Mini is a stereo interface. While the recorder is armed or records (without PSRAM), USB audio pauses (`USB OFF` on the REC page).
-- **GRAIN** (DSP SAMPLE's MOD) needs PSRAM on the Mini; without it the voice is silent and shows `!RAM`.
-- **Recording without PSRAM needs a fast SD card** (A1/A2, U3/V30). The Teensy's own buffer holds 57 ms of 24-bit stereo (85 ms at 16-bit); a slow card falls behind and the console says so. Record 16-bit, or use a faster card.
+- **GRAIN** (DSP SAMPLE's MOD): GRAIN (and the other memory modes) needs PSRAM on the Mini; without PSRAM, DSP SAMPLE streams the sample from the card and plays it once, whatever MOD says.
+- **Recording without PSRAM needs a fast SD card** (A1/A2, U3/V30). The release build's recorder buffer (32 KB, shared with USB audio) holds about 114 ms of 24-bit stereo (170 ms at 16-bit); a slow card falls behind and the console says so. Record 16-bit, or use a faster card.
 - **User machine space:** the 32 KB plugin code space fits only one of the old large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!ROOM`. The new, smaller NoisePlethora packages (prime, fibo, phase, fm, pw, ring, noise, walk, atari; the same sounds) fit two at a time, some three. The Pi has no such limit.
 - The REC page on the Mini records (stereo without PSRAM, stems with PSRAM) but has no playback or channel picking yet (those are the Pi's); the SYSTEM page has no network line (no network on the Mini).
 - The large send effects (RINGS, CLOUDSEED, STUTTER) run only on the Sidecar (Pi). HALO runs on both.

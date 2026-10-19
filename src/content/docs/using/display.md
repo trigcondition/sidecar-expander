@@ -31,7 +31,7 @@ The Sidecar wordmark with a progress bar, drawn within a third of a second of th
 
 
 - The title bar, with **Rytm connected** (green) or **Rytm not connected** (red).
-- **Tracks:** voices 1-8 with their current machine.
+- **Tracks:** the Sidecar's voices 1-8 with their current machine (numbered by voice: 1 BD, 2 BT, 3 SD, 4 LT, 5 CH/OH, 6 MT/HT, 7 CY/CB, 8 RS/CP).
 - **Project:** the Rytm's project and its U1..U5 machines as the Rytm shows them (`!ROOM NAME`, `!MISS NAME` etc. when it cannot play, with the reason; `NAME...` loading, `---` empty).
 - **Status:** Overbridge blocks, underruns (red once nonzero), load bars for the render cores, and `REC` while recording.
 - **Touch test:** a tap button and a slider to check the touch panel. Once touch works, press **Touch works – hide**: a **SIDECAR** panel (network, web page, link, recorder) takes its place. The About page has a Show / Hide toggle to bring it back; the choice is stored as `touchtest=` in `/.rytm/display.txt`.

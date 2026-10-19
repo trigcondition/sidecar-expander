@@ -24,19 +24,20 @@ The 20-in / 12-out multichannel mode on the Mini is **not in this release**; it 
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Teensy's micro-USB, or the Pi's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 
-## USB modes
+## What the computer sees
 
-| Mode | What the computer sees |
-|---|---|
-| **multi** | 12 channels in and out: the Rytm's MAIN L/R, its 8 voice outputs and its audio inputs; optionally the Sidecar's 8 voices on channels 13-20 |
-| **stereo** | the Rytm's MAIN L/R in and out |
-| **off** | MIDI only (and the Teensy's serial console) |
+| | Sidecar (Pi) | Sidecar Mini (release build) |
+|---|---|---|
+| Audio | 12 in / 12 out (UAC2); computer audio on or off on the Sound tab | stereo, 2 in / 2 out; `:usbmode=stereo` or `off` |
+| MIDI | yes | yes |
 
-The channel map is the same on both Sidecars, so a DAW template works for either:
+On the Pi a build option (`SIDECAR_CH_IN=20`) adds the Sidecar's 8 voices on inputs 13-20, in voice order; the release has 12.
+
+The Pi's channel map:
 
 | In (to the computer) | Out (from the computer) |
 |---|---|
-| 1-2 MAIN L/R, 3-10 BD SD RS BT LT MT CH CY, 11-12 audio in L/R, 13-20 the Sidecar's voices | 1-2 MAIN, 3-4 MAIN FX, 5-12 the voice inputs |
+| 1-2 MAIN L/R, 3-10 BD SD RS BT LT MT CH CY, 11-12 audio in L/R (or the FX return) | 1-2 MAIN, 3-4 MAIN FX, 5-12 the voice inputs |
 
 The Rytm is the clock. On the Sidecar (Pi) the multichannel mode is the default; the Mini offers stereo in this release (above). On the Pi, the USB-C device and computer audio are switched on the Sound page.
 

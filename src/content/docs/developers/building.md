@@ -20,7 +20,7 @@ pi/engine/build.sh kernel     # after a change: the kernel only -> pi/engine/ker
 ```
 
 - The kernel links Circle (GPLv3), so the image is distributed under the GPLv3 as a whole.
-- Build options: `PI_IP`, `PI_NETMASK` (the Ethernet defaults), `GADGET` (the USB-C device), `SIDECAR_CH_IN` (12 or 20 computer channels).
+- Build options: `PI_IP`, `PI_NETMASK` (the Ethernet defaults), `EMUHOST` (the emulator host), `GADGET` (the USB-C device), `SIDECAR_CH_IN` (12 or 20 computer channels), `SIDECAR_NAME` (the USB name).
 - Development flashing goes through Circle's serial bootloader into RAM (`pi/circle/flash.sh`); `pi/circle/sdboot.py install` writes a build to the card as `engine.img`, checked and with the previous one kept.
 - The SD card file set for a release: `scripts/package_pi.sh <checkout> <commit>` in this repository.
 
@@ -30,13 +30,18 @@ Arduino CLI with Teensyduino, `-O2`:
 
 ```sh
 RMP_EXTRA_FLAGS="-DRYTM_USB_HOST=1" teensy/run_sketch.sh voiceloop   # the host build: compile, upload, serial log
-teensy/host_uac2.sh                                                 # the host build with USB audio + MIDI (in testing)
+teensy/host_stereo.sh                                               # the Sidecar Mini release build: USB host + stereo USB audio + USB MIDI
+teensy/host_uac2.sh                                                 # the 20 in / 12 out USB audio build (in development)
 teensy/gate.sh quick|full                                           # sizes, golden renders, end-to-end checks
 ```
 
 - `-DRYTM_PLUGINS=0` builds without the machine plugins; `-DRYTM_NOTES=1 -DRYTM_OUT_MAIN=1` boots for a stock Rytm.
 - `run_sketch.sh` copies `core/` into a generated Arduino library on every build and fails a build that grows ITCM or shrinks the stack past its limits.
-- The release `.hex` (compile only, never uploads): `scripts/package_teensy.sh <checkout> <commit>` in this repository, which runs `tools/release/teensy_hex.sh`.
+- The release `.hex` (compile only, never uploads): `scripts/package_teensy.sh <checkout> <commit>` in this repository. It builds with `host_stereo.sh`'s flags by default (`BUILD=host` for the plain host build) and takes `tools/release/teensy_hex.sh` from the engine's `release-packaging` branch when the commit has none.
+
+## Version
+
+The `VERSION` file at the engine's root (`0.1.0`) is the only source of the version; `tools/gen_version.sh` writes it, with the short commit and a dirty flag, into the generated `core/version.h` on every build (Mac, Pi and Teensy). See [Versioning](/sidecar-expander/about/versioning/).
 
 ## Rytm mods
 
