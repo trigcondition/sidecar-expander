@@ -1,0 +1,22 @@
+---
+// One feature band on the landing page: a kicker, a title, the text (slot), a link, and screenshots.
+// pixel: the Rytm's 128x64 screen shots, scaled without smoothing.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Shot { src: ImageMetadata; alt: string; pixel?: boolean }
+interface Props { kicker: string; title: string; href?: string; more?: string; shots: Shot[]; flip?: boolean }
+const { kicker, title, href, more = 'Read more', shots, flip = false } = Astro.props;
+---
+<section class:list={['sc-feature', { flip }]}>
+  <div class="sc-feature-text">
+    <p class="sc-kicker">{kicker}</p>
+    <h2>{title}</h2>
+    <slot />
+    {href && <p><a class="sc-more" href={href}>{more} →</a></p>}
+  </div>
+  <div class:list={['sc-shots', `n${Math.min(shots.length, 4)}`]}>
+    {shots.map((s) => s.pixel
+      ? <Image src={s.src} alt={s.alt} class="pixel" format="png" />
+      : <Image src={s.src} alt={s.alt} widths={[480, 960]} sizes="(max-width: 50rem) 100vw, 30rem" />)}
+  </div>
+</section>

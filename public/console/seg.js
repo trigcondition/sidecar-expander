@@ -29,7 +29,9 @@ export class Pending {
 }
 
 // The console's answers (voiceloop.ino console_line, usb_host.h) as state. {state: {...}, periodic, reject: [keys]}
-// or null. state keys: notes (bool), out ("main"|"tracks"), mac (bool), fifo (n), mach ({voice: name}), machOk (voice).
+// or null. state keys: notes (bool), out ("main"|"tracks"), mac (bool), fifo (n), mach ({voice: name}), machOk (voice),
+// usbmode ("multi"|"stereo"|"off"), usbmulti (bool: the build has multi), uacin / uacout / uacconf / uacpaused (bool:
+// the Mini's USB audio paused while its recorder holds the shared memory). switching: a mode.
 export function parseDevState(line) {
   let m;
   const r = (state, extra) => ({ state, periodic: false, ...extra });
@@ -47,6 +49,14 @@ export function parseDevState(line) {
   if ((m = /^uac2: .*Overbridge inputs (on|off)\b/.exec(line))) return r({ mac: m[1] === "on" });
   if (/^uac2: not in this build/.test(line)) return { state: {}, periodic: false, reject: ["mac"], text: "not in this build" };
   if ((m = /^usb host: FIFO target (\d+) frames/.exec(line))) return r({ fifo: +m[1] });
+  // the USB audio mode (usb_host.h usbmode_show): the state, or a change under way (the device re-enumerates)
+  if ((m = /^usb: mode (multi|stereo|off), re-enumerating/.exec(line))) return { state: {}, periodic: false, switching: m[1] };
+  if ((m = /^usb: mode (multi|stereo|off)\b/.exec(line))) return r({ usbmode: m[1], usbmulti: !/multi not in this build/.test(line) });
+  if (/^usb: no mode /.test(line)) return { state: {}, periodic: false, reject: ["usbmode"], text: "not in this build" };
+  if (/^usb: a mode change is running/.test(line)) return { state: {}, periodic: false, reject: ["usbmode"], text: "a change is running" };
+  // the uac2 stats line: is the computer streaming (IN = the computer records, OUT = it plays to the Rytm)
+  if ((m = /^uac2: (480M|12M|not configured), alt in\/out (\d+)\/(\d+)/.exec(line)))
+    return r({ uacin: m[2] !== "0", uacout: m[3] !== "0", uacconf: m[1] !== "not configured", uacpaused: /, paused for the recorder\b/.test(line) }, { periodic: true });
   if ((m = /fifo \d+ \(min \d+ max \d+ target (\d+)\)/.exec(line))) return r({ fifo: +m[1] }, { periodic: true });
   if (/^console: unknown command "(out|mac|fifo)\b/.test(line)) {
     const k = /^console: unknown command "(\w+)/.exec(line)[1];

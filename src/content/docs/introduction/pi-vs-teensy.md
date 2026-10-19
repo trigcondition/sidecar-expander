@@ -21,13 +21,14 @@ Start with the Mini, make projects on it, and move up to the full Sidecar later.
 | Voices, built-in machines | 8, all | 8, all | 8, all |
 | User machines (U1..U5) | RMP1 packages in 32 KB of plugin code space: the six starter machines fit together | plus a PSRAM code space (1 MB) for more and bigger ones (in testing) | RMPA packages, no such limit |
 | Samples from the card (SIDECAR folder, sample pool) | yes | yes, more sample memory | yes |
+| LFOs | 4 | 4 | 8 |
 | Send effects | CHORUS, COMB, CRUSH, RINGMOD, HALO | the same | those, plus RINGS, CLOUDSEED, STUTTER |
-| Remote pages on the Rytm's screen | connect screen, SIDECAR, SYSTEM (no recorder or network line), SCOPE, voice pages | the same | the same, plus the REC page with playback |
+| Remote pages on the Rytm's screen | connect screen, SIDECAR, SYSTEM (no network line), SCOPE, LFO, REC (record, no playback), voice pages | the same | the same, plus playback and channel picking on the REC page |
 | Recorder | stereo (MAIN L/R) with a fast SD card | stereo and stems (12 channels, in testing) | up to 23 sources, with playback |
-| Display | none | none | optional 5" HDMI touch display |
+| Display | none | none | optional 800x480 touch display (HDMI; DSI expected) |
 | Web UI | the console in Chrome or Edge over USB (WebSerial) | the same | its own page at `sidecar.local` over Ethernet or Wi-Fi |
 | Wi-Fi | none | none | yes (off in the SD card package) |
-| Computer audio over USB | stereo | stereo | multi-channel, with MIDI |
+| Computer audio over USB | stereo, with USB MIDI (multichannel later) | the same | multi-channel, with MIDI |
 | Power | from its micro-USB port | the same | its own 5 V 3 A supply |
 | Latency, voice after the Rytm's own drum | about 3.8 ms | about 3.8 ms | about 4.7 ms |
 

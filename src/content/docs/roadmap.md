@@ -16,7 +16,7 @@ Finished and confirmed on real hardware.
 - **Status pages SIDECAR + SYSTEM** (they catch every knob) and **key pass-through**: on a remote page PLAY / STOP / RECORD, the pads, mutes and FILL reach the Rytm.
 - **Connect screen:** the Rytm shows CONNECTED, the voices and FX and the address when a Sidecar comes up.
 - **SCOPE and meters:** the Rytm's input as a live waveform and twelve peak meters on its own screen.
-- **REC page and playback** (Pi): record, arm and stop from the Rytm; play a take's channel back into the MAIN.
+- **REC page and playback:** record, arm and stop from the Rytm (Pi and Mini); play a take's channel back into the MAIN (Pi).
 - **The Sidecar Mini recorder:** stereo on a stock Teensy with a fast card.
 - **HALO:** a lush plate reverb with FREEZE and SHIMMER on both Sidecars.
 - **The FX return on IN L/R:** the Rytm's delay and reverb return recorded and scoped as its own channels.

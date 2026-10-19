@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-Part of the tester release: the `rui1025` Rytm build with the test line's Sidecar firmware (Pi kernel or Sidecar Mini firmware).
+Part of the tester release: the `rui1026` Rytm build with the test line's Sidecar firmware (Pi kernel or Sidecar Mini firmware).
 
 For examples of what the pages can show (the connect screen, SCOPE and meters, sample waveforms, the recorder, machine graphics), see [The remote UI](/sidecar-expander/using/rytm-side/#more-pages). New pages and graphics are Sidecar code only; the Rytm needs no new flash for them.
 

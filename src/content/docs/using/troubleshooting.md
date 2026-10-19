@@ -34,6 +34,8 @@ sidebar:
 
 ### Teensy 4.1
 
+- **The Rytm connects only after a reboot or many retries, or the Teensy drops off the computer:** solder the Teensy 4.1's USB host header (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
+
 - RINGS, CLOUDSEED and STUTTER run only on the Pi.
 - The console's Machines and Files tabs are in testing.
 - USB audio to a computer is not part of the tester release.
@@ -46,7 +48,7 @@ sidebar:
 
 ### Remote pages
 
-- With `rui1025` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
+- With `rui1026` a page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 
 ### Teensy: user machine space
 
@@ -60,4 +62,4 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1025` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1026` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.

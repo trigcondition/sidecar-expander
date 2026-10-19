@@ -23,6 +23,7 @@ Sidecar Mini, the Teensy 4.1 version of Sidecar | Expander: the cheap way to get
 ```
 
 - Plug the Rytm straight into the host cable. Do not use a hub.
+- **Solder the Teensy 4.1's USB host header** (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
 - The Rytm has its own power. The Teensy is powered from its micro-USB port.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode.
 
@@ -82,7 +83,7 @@ The release's `plugins/` folder holds six starter machines as Teensy packages: `
 
 ## Which Rytm build
 
-`rui1025` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM and the voice pages. The Teensy has no recorder and no network, so its SYSTEM page shows neither. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+`rui1026` (the default) or `sfx1021` (without the remote pages). The remote pages work with this firmware (tested on hardware): TRK + YES opens SIDECAR, SYSTEM, SCOPE, the REC page, the LFO page and the voice pages. The Mini has no network, so its SYSTEM page shows no network line; its recorder row shows IDLE, ARM or REC m:ss. Playback and channel picking on the REC page are the Pi's for now. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## User machine space on the Teensy
 

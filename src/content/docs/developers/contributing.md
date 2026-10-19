@@ -11,7 +11,7 @@ Sidecar is in public testing, and the most useful contribution right now is a go
 
 Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose):
 
-- the Rytm build (`rui1025` / `sfx1021`) and the Sidecar build (`BUILD-INFO` in the release);
+- the Rytm build (`rui1026` / `sfx1021`) and the Sidecar build (`BUILD-INFO` in the release);
 - what you did, what you expected, what happened;
 - a log: the Teensy console's log, or the Log tab of `sidecar.local`.
 

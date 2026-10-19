@@ -31,6 +31,8 @@ export function recModel(r, wantMode = "manual") {
     mode: r.mode,
     bits: r.bits,
     warn: [],
+    usb: !r.usbShared ? "" : r.usbPaused ? "USB audio to the computer is paused while the recorder is armed or records (they share the Teensy's memory); it is back when the take ends."
+      : "Recording here pauses the USB audio to the computer (they share the Teensy's memory); USB MIDI keeps running.",
     card: "",
     levels: [],
   };
@@ -82,6 +84,8 @@ export function initRec({ $, send, store, isTab }) {
     $("rec-free").textContent = v.free;
     $("rec-warn").textContent = v.warn.join(" · ");
     $("rec-card").textContent = v.card;
+    $("rec-usb").textContent = v.usb;
+    $("rec-usb").classList.toggle("bad", !!last.usbPaused);
     for (const l of v.levels) {
       const el = document.querySelector(`#rec-levels [data-id="${l.id}"]`);
       el.classList.toggle("on", l.on); el.classList.toggle("hot", l.hot);

@@ -139,7 +139,7 @@
   </header>
 
   <nav id="tabs">
-    <a href="#status" data-tab="status">Status</a><a href="#sound" data-tab="sound">Sound</a><a href="#record" data-tab="record">Record</a><a href="#usb" data-tab="usb">USB</a><a href="#machines" data-tab="machines">User machines</a><a href="#files" data-tab="files">Files</a><a href="#log" data-tab="log">Log &amp; console</a><a href="#about" data-tab="about">About</a>
+    <a href="#status" data-tab="status">Status</a><a href="#sound" data-tab="sound">Sound</a><a href="#record" data-tab="record">Record</a><a href="#lfo" data-tab="lfo">LFO</a><a href="#usb" data-tab="usb">USB</a><a href="#machines" data-tab="machines">User machines</a><a href="#files" data-tab="files">Files</a><a href="#log" data-tab="log">Log &amp; console</a><a href="#about" data-tab="about">About</a>
   </nav>
 
   <section id="nosupport">This page needs WebSerial: use Chrome or Edge on a desktop, opened from localhost or https.</section>
@@ -182,6 +182,12 @@
     </section>
   </div>
 
+  <div class="tab" id="tab-lfo">
+    <section><h2>LFOs</h2><p class="note">Four LFOs on the Sidecar's voices (V1..V8: any parameter) or its send FX (FX1 / FX2
+      P2..P5), on top of the Rytm's value; the value comes back when the LFO stops. Saved per kit, as the Rytm's own LFOs (switched with the Rytm's kit); the same on the Rytm's LFO page (TRK + YES).</p></section>
+    <div id="lfo-root" class="grid"></div>
+  </div>
+
   <div class="tab" id="tab-record">
     <section>
       <h2>Record</h2>
@@ -196,6 +202,7 @@
       <div class="row"><label>Take name</label><input id="rec-name" maxlength="24" value="take" style="width:160px" autocomplete="off">
         <span class="note">_001, _002, ... in /Recordings</span></div>
       <div id="rec-card" class="note"></div>
+      <div id="rec-usb" class="note"></div>
       <p class="note">Recording without PSRAM needs a fast SD card (A1/A2, U3/V30 class): the Teensy's own buffer holds only
         57 ms of 24-bit stereo (85 ms at 16-bit). On a slower card, or if "the card fell behind" shows, record 16-bit.</p>
       <div id="rec-msg" class="msg"></div>
@@ -212,12 +219,14 @@
   <div class="tab" id="tab-usb">
     <section>
       <h2>USB</h2>
-      <p class="note">Audio mode needs a Sidecar Mini build (teensy/host_uac2.sh). A change re-enumerates the Teensy (the page reconnects
-        by itself); the Rytm keeps streaming. The mode is kept across reboots.</p>
-      <div class="row"><label>Audio mode</label>
-        <select id="usbmode" aria-label="USB audio mode"><option value="multi">multi (20 in / 12 out)</option><option value="stereo">stereo (MAIN L/R)</option>
-          <option value="off">off (Serial + MIDI)</option><option value="overbridge" disabled>overbridge (later, opt-in)</option></select>
-        <span id="usbmodestate" class="note"></span></div>
+      <p class="note">Stereo: the Sidecar Mini is also a 2 in / 2 out USB audio interface on this port, 48 kHz. The computer records
+        the Rytm's MAIN L/R (with the Sidecar's voices as the Rytm plays them), and what it plays goes to the Rytm's MAIN input.
+        A change re-enumerates the Teensy (the page reconnects by itself); the Rytm keeps streaming. The mode is kept across
+        reboots. Multi (20 in / 12 out + MIDI) is the teensy/host_uac2.sh build.</p>
+      <div class="row"><label id="l-usbmode">Audio mode</label>
+        <div class="seg" role="radiogroup" aria-labelledby="l-usbmode" data-key="usbmode"><button type="button" role="radio" aria-checked="false" data-cmd="usbmode=stereo" data-val="stereo">Stereo</button><button type="button" role="radio" aria-checked="false" data-cmd="usbmode=multi" data-val="multi" title="20 in / 12 out: the teensy/host_uac2.sh build">Multi</button><button type="button" role="radio" aria-checked="false" data-cmd="usbmode=off" data-val="off">Off</button></div>
+        <span class="fb" data-fb="usbmode" role="status" aria-live="polite"></span><span id="usbmodestate" class="note"></span></div>
+      <div class="row"><label>Computer</label><span id="uacstate" class="note" role="status" aria-live="polite">-</span></div>
       <div class="row"><label>Card</label><a href="#files">Browse the SD card</a></div>
       <div class="row"><label title="the micro-USB port as a USB disk for the SD card">Disk mode</label>
         <button id="diskmode" disabled title="not in this firmware yet: docs/webui-protocol.md, Disk mode">USB disk mode (next step)</button></div>
@@ -293,6 +302,7 @@
   <div class="tab" id="tab-about">
   <section>
     <h2>About</h2>
+    <p>Version <b id="version">-</b> (read from the Teensy: the <code>version</code> console command)</p>
     <p>Sidecar Mini | Expander (Teensy 4.1), over WebSerial. Chrome or Edge on a desktop; <code>?mock</code> runs against a fake device.</p>
     <p class="note">The page talks to the Teensy's console (<code>:</code> lines) and its web console frames
       (docs/webui-protocol.md). Card writes and installs wait while the Rytm's transport runs.</p>

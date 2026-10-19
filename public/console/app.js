@@ -6,6 +6,7 @@ import { Link } from "./link.js";
 import { initManage } from "./manage.js";
 import { initRec } from "./rec.js";
 import { initFxin } from "./fxin.js";
+import { initLfo } from "./lfo.js";
 
 const $ = (id) => document.getElementById(id);
 const TEENSY = { usbVendorId: 0x16c0 }; // PJRC
@@ -16,29 +17,24 @@ let port = null, reader = null, wanted = null; // wanted: the last port's {usbVe
 let paused = false, held = [];
 let recUi = null;   // the Record tab (rec.js), made below
 let fxinUi = null;  // the IN L/R source switch (fxin.js), made below
+let lfoUi = null;   // the LFO tab (lfo.js), made below
 
 // --- log -----------------------------------------------------------------
-// The USB audio mode: a change is sent, the device re-enumerates, the page reconnects and asks again.
+// The USB audio mode: a change is sent, the device re-enumerates (the port goes away), the page reconnects and asks
+// again; its answer confirms the choice. Its own Pending (seg.js): 15 s, and kept over the disconnect.
 let usbmodePending = false;
-function usbmodeLine(text) {
-  const m = /^usb: mode (multi|stereo|off)\b(.*)$/.exec(text);
-  if (!m) return;
-  if (/re-enumerating/.test(m[2])) { $("usbmodestate").textContent = "re-enumerating…"; usbmodePending = true; return; }
-  $("usbmode").value = m[1];
-  $("usbmodestate").textContent = m[2].replace(/^ *\(unchanged\)/, "").trim();
-  usbmodePending = false;
-}
 function addLine(text, cls) {
   if (!cls) {   // the web console's replies ('@', webui.h): to the link; shown only with "replies" ticked, data never
     const o = parseReply(text);
     if (o) {
       if (o.t === "rec" && recUi) recUi.reply(o);
       if (o.t === "fxin" && fxinUi) fxinUi.reply(o);
+      if (o.t === "lfo" && lfoUi) lfoUi.show(o.lfo);
+      if (o.t === "version") { dev.version = o.version; dev.commit = o.commit; dev.dirty = !!o.dirty; paintDev(); }
       link.reply(o);
       if (o.t === "d" || !$("replies").checked) return;
     }
   }
-  if (!cls) usbmodeLine(text);
   if (!cls) devLine(text);
   if (!cls) Object.entries(parseStatus(text)).forEach(([k, v]) => {
     const el = document.querySelector(`#status [data-k="${k}"]`);
@@ -86,9 +82,11 @@ const fbText = (key, kind, text) => {
   if (kind !== "pending" && text) el._t = setTimeout(() => (el.textContent = ""), kind === "err" ? 5000 : 2500);
 };
 const pend = new Pending((key, kind, text) => { fbText(key, kind, text); paintDev(); });
+const upend = new Pending((key, kind, text) => { fbText(key, kind, text); if (kind !== "pending") usbmodePending = false; paintDev(); }, { ms: 15000 });
+const pendOf = (k) => (k === "usbmode" ? upend : pend);
 function paintDev() {
   document.querySelectorAll(".seg[data-key]").forEach((g) => {
-    const k = g.dataset.key, want = pend.want(k), cur = dev[k] === undefined ? undefined : String(dev[k]);
+    const k = g.dataset.key, want = pendOf(k).want(k), cur = dev[k] === undefined ? undefined : String(dev[k]);
     g.classList.toggle("pending", want !== undefined);
     g.setAttribute("aria-busy", String(want !== undefined));
     g.querySelectorAll("button").forEach((b) => {
@@ -100,12 +98,23 @@ function paintDev() {
   const v = $("mvoice").value, m = dev.mach[v];
   $("mcur").textContent = m ? `now: ${m}` : "";
   if (m && !pend.has("mach") && document.activeElement !== $("mname") && [...$("mname").options].some((o) => o.value === m)) $("mname").value = m;
+  const mb = document.querySelector('.seg[data-key="usbmode"] [data-val="multi"]');
+  if (mb) mb.hidden = dev.usbmulti === false;   // the stereo build: stereo / off
+  $("usbmodestate").textContent = upend.has("usbmode") ? "re-enumerating…" : dev.usbmode ? USBDESC[dev.usbmode] : "";
+  $("uacstate").textContent = dev.usbmode === "off" ? "no audio interface (mode off)"
+    : dev.uacconf === undefined ? "-" : !dev.uacconf ? "not configured"
+    : dev.uacpaused ? "paused while the recorder is armed or records (it shares the memory): the computer hears silence"
+    : dev.uacin || dev.uacout ? `audio open: ${[dev.uacin && "recording", dev.uacout && "playing"].filter(Boolean).join(" + ")}`
+    : "audio interface idle (no app has it open)";
+  $("version").textContent = dev.version ? `${dev.version} (${dev.commit}${dev.dirty ? "-dirty" : ""})` : "-";
   $("fifocur").textContent = dev.fifo !== undefined ? `now: ${dev.fifo} frames` : "";
   if (dev.fifo !== undefined && !pend.has("fifo") && document.activeElement !== $("fifo")) $("fifo").value = dev.fifo;
 }
+const USBDESC = { stereo: "2 in / 2 out, the Rytm's MAIN L/R", multi: "20 in / 12 out + MIDI", off: "Serial only, no audio" };
 function devLine(text) {
   const o = parseDevState(text);
   if (!o) return;
+  if (o.switching) { usbmodePending = true; if (!upend.has("usbmode")) upend.start("usbmode", o.switching); }
   for (const [k, v] of Object.entries(o.state)) {
     if (k === "mach") {
       Object.assign(dev.mach, v);
@@ -115,21 +124,23 @@ function devLine(text) {
       const asked = pend.want(k);
       dev.fifo = v;
       pend.report(k, asked, String(v) === asked ? undefined : `set to ${v} (the limit)`);
-    } else if (!(o.periodic && pend.has(k))) { dev[k] = v; pend.report(k, v); }
+    } else if (!(o.periodic && pend.has(k))) { dev[k] = v; pendOf(k).report(k, v); }
   }
-  (o.reject || []).forEach((k) => pend.fail(k, o.text));
+  (o.reject || []).forEach((k) => pendOf(k).fail(k, o.text));
   paintDev();
 }
-const askDev = () => ["notes", "out", "mac", "fifo", "usbmode", "fxin"].forEach((c) => send(c, true).catch(() => {}));
+const askDev = () => ["version", "notes", "out", "mac", "fifo", "usbmode", "fxin"].forEach((c) => send(c, true).catch(() => {}));
 function devConnected(on) {
   document.querySelectorAll(".seg[data-key] button, #mset, #fifoset").forEach((b) => (b.disabled = !on));
-  if (!on) { pend.failAll("disconnected"); Object.assign(dev, { notes: undefined, out: undefined, mac: undefined, fifo: undefined, fxsrc: undefined, mach: {} }); }
+  if (!on) { pend.failAll("disconnected"); Object.assign(dev, { version: undefined, commit: undefined, dirty: undefined, notes: undefined, out: undefined, mac: undefined, fifo: undefined, fxsrc: undefined, uacin: undefined, uacout: undefined, uacconf: undefined, mach: {} }); }
   else askDev();
   paintDev();
 }
 const devSend = (key, want, line) => {
-  pend.start(key, want);
-  send(line, true).catch((e) => pend.fail(key, e.message === "not connected" ? "not connected" : "not sent"));
+  const P = pendOf(key);
+  P.start(key, want);
+  if (key === "usbmode") usbmodePending = true;
+  send(line, true).catch((e) => P.fail(key, e.message === "not connected" ? "not connected" : "not sent"));
   if (key === "fxsrc") [400, 1500].forEach((ms) => setTimeout(() => fxinUi.poll(), ms));   // the Rytm's 27 comes after the 26
 };
 
@@ -143,6 +154,7 @@ function showTab(t) {
   store("sidecar.teensy.tab", t);
   if (t === "log") $("log").scrollTop = $("log").scrollHeight;
   if (t === "record" && recUi) recUi.shown();
+  if (t === "lfo" && port) send("lfo", true).catch(() => {});
   if ((t === "sound" || t === "usb") && port) askDev();
 }
 window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
@@ -248,6 +260,9 @@ fxinUi = initFxin({ $, send, isTab: () => !!(port && port.writable) && $("tab-so
     paintDev();
   } });
 recUi = initRec({ $, send, store, isTab: () => !!(port && port.writable) && $("tab-record").classList.contains("on") });
+// the LFO tab (lfo.js, core/lfo.h): ':lfo' answers @{"t":"lfo",...}, asked every second while the tab shows (the phase)
+lfoUi = initLfo({ root: $("lfo-root"), send: (l) => send(l, true), Pending, isOn: () => !!(port && port.writable) });
+setInterval(() => { if (!document.hidden && port && port.writable && $("tab-lfo").classList.contains("on")) send("lfo", true).catch(() => {}); }, 1000);
 
 // --- controls ------------------------------------------------------------
 document.querySelectorAll(".seg[data-key] button").forEach((b) => (b.onclick = () => devSend(b.closest(".seg").dataset.key, b.dataset.val, b.dataset.cmd)));
@@ -267,7 +282,6 @@ $("fifoset").onclick = () => {
   pend.start("fifo", n);
   send(`fifo=${n}`, true).catch(() => pend.fail("fifo", "not sent"));
 };
-$("usbmode").onchange = () => { usbmodePending = true; $("usbmodestate").textContent = "re-enumerating…"; send(`usbmode=${$("usbmode").value}`).catch(() => {}); };
 $("send").onclick = () => { send($("cmd").value).catch(() => {}); $("cmd").select(); };
 $("cmd").onkeydown = (e) => { if (e.key === "Enter") $("send").click(); };
 $("disconnect").onclick = () => close(true);

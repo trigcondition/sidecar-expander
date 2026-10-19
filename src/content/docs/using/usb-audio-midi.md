@@ -7,10 +7,20 @@ sidebar:
 
 <span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release, tested with multi-channel audio and MIDI. On the **Sidecar Mini (Teensy)**: stereo USB audio to the computer, <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW); part of this release.
 
-<!-- MINI-USB-AUDIO-DETAILS: the mode setting on the Mini follows from the mini-usbaudio branch's docs/usb-audio-midi.md once it is merged into the test line. -->
-:::note[Sidecar Mini computer audio]
-The Mini sends the Rytm's stereo MAIN to the computer over its micro-USB port. How to choose the mode on the Mini is filled in here once its firmware is final.
-:::
+## Sidecar Mini: stereo USB audio and MIDI
+
+<span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW). The Sidecar Mini release build is a **stereo** USB audio interface: 2 in / 2 out at 48 kHz, 24-bit, plus USB MIDI.
+
+| | |
+|---|---|
+| IN 1/2 (to the computer) | the Rytm's MAIN L/R, with the Sidecar's voices as the Rytm plays them |
+| OUT 1/2 (from the computer) | added to the Rytm's MAIN input |
+| USB MIDI | the Rytm's MIDI to the computer and back (<span class="sc-test">in testing</span>) |
+| Mode | `:usbmode=stereo` (the default) or `:usbmode=off`, on the console or its USB tab; kept across reboots |
+| While recording | without PSRAM the recorder and USB audio share one 32 KB buffer: while the recorder is armed or records, USB audio is **paused** (the device stays, the computer hears silence) and comes back when the take ends. USB MIDI keeps running. |
+
+The 20-in / 12-out multichannel mode on the Mini is **not in this release**; it is in development. On the Mini the computer sees the device as **Sidecar Mini**.
+
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Teensy's micro-USB, or the Pi's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 
@@ -28,7 +38,7 @@ The channel map is the same on both Sidecars, so a DAW template works for either
 |---|---|
 | 1-2 MAIN L/R, 3-10 BD SD RS BT LT MT CH CY, 11-12 audio in L/R, 13-20 the Sidecar's voices | 1-2 MAIN, 3-4 MAIN FX, 5-12 the voice inputs |
 
-The Rytm is the clock. On the Teensy the mode is chosen with `usbmode=multi|stereo|off` in the console and kept across reboots; a change makes the device disconnect and reconnect on the computer. On the Pi, the USB-C device and computer audio are switched on the Sound page.
+The Rytm is the clock. On the Sidecar (Pi) the multichannel mode is the default; the Mini offers stereo in this release (above). On the Pi, the USB-C device and computer audio are switched on the Sound page.
 
 ## MIDI pass-through
 

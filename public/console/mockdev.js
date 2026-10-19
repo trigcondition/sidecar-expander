@@ -33,13 +33,14 @@ function noise(n, seed) {
 }
 
 export class MockDevice {
-  constructor(say, { rate = 450, framed = false, psram = false, oldRytm = false, now = () => Date.now() } = {}) {
+  constructor(say, { rate = 450, framed = false, psram = false, oldRytm = false, multiUsb = false, now = () => Date.now() } = {}) {
     this.say = say;          // (line) -> void
     this.rate = rate;
     this.framed = framed;
     this.transport = false;
     this.old = oldRytm;      // a Rytm build without 0030-fx-in: never answers the fxin 26
-    this.st = { notes: false, out: "tracks", fifo: 256, mac: true, usbmode: "multi", mach: Array(8).fill("plaits") };
+    this.multiUsb = multiUsb;   // false: the Sidecar Mini's stereo build (stereo / off), true: the 20 / 12 build
+    this.st = { notes: false, out: "tracks", fifo: 256, mac: true, usbmode: multiUsb ? "multi" : "stereo", mach: Array(8).fill("plaits") };
     this.inbuf = new Uint8Array(0);
     this.now = now;
     // the recorder (rec_mini.h): stereo in a 32 KB ring without PSRAM, stems with it
@@ -108,11 +109,13 @@ export class MockDevice {
   console(p) {
     const st = this.st, say = this.say;
     let m;
+    if (p === "version") { say("version: Sidecar Mini 0.1.0 (abc1234)"); return this.j({ t: "version", version: "0.1.0", commit: "abc1234", dirty: false }); }
     if (p === "mem") return this.later(() => this.mem());
     if (p === "df") return this.later(() => this.j({ t: "df", st: "ok", total_kb: Math.floor(this.cardTotal / 1024), free_kb: Math.floor((this.cardTotal - this.used()) / 1024), type: "exFAT", ms: 412 }), 4096);
     if (p === "plugins") return this.plugins();
     if (p === "rec" || p.startsWith("rec=")) return this.recCmd(p);
     if (p === "fxin" || /^fxin=[01?]$/.test(p)) return this.fxinCmd(p);
+    if (p === "lfo" || p.startsWith("lfo=")) return this.lfoCmd(p);
     if (p.startsWith("plugin=")) return this.pluginCmd(p.slice(7));
     if ((m = /^notemach=([0-7]):(.*)$/.exec(p))) {
       if (NAMES.includes(m[2])) { st.mach[m[1]] = m[2]; say(`notes: voice ${m[1]} plays ${m[2]}`); }
@@ -121,16 +124,48 @@ export class MockDevice {
     else if (p === "out=main" || p === "out=tracks" || p === "out") { if (p[3]) st.out = p.slice(4); say(`output: ${st.out}`); }
     else if (/^fifo(=|$)/.test(p)) { if (p[4]) st.fifo = Math.max(24, Math.min(parseInt(p.slice(5)) || 0, 992)); say(`usb host: FIFO target ${st.fifo} frames`); }
     else if (/^usbmode(=|$)/.test(p)) {
-      const desc = { multi: "(Serial + MIDI + audio 20 in / 12 out)", stereo: "(Serial + MIDI + audio 2 in / 2 out)", off: "(Serial + MIDI, no audio)" };
+      // the Sidecar Mini (teensy/host_stereo.sh): stereo and off; multiUsb: the 20 / 12 build (host_uac2.sh)
+      const desc = this.multiUsb
+        ? { multi: "(Serial + MIDI + audio 20 in / 12 out)", stereo: "(Serial + MIDI + audio 2 in / 2 out)", off: "(Serial + MIDI, no audio)" }
+        : { stereo: "(Serial + audio 2 in / 2 out; multi not in this build)", off: "(Serial, no audio; multi not in this build)" };
       const v = p.slice(8);
-      if (!p[7]) say(`usb: mode ${st.usbmode} ${desc[st.usbmode]}`);
-      else if (!desc[v]) say(`usb: no mode "${v}" (multi, stereo, off)`);
+      if (!p[7]) {
+        say(`usb: mode ${st.usbmode} ${desc[st.usbmode]}`);
+        say(`uac2: 480M, alt in/out ${st.usbmode === "off" ? 0 : 1}/0, in 4000 pk 48000 fr (11/12/13 0/4000/0, ring 40, under 0 over 0), fb 48000.000 Hz base 48000.000 Hz, sof 8000, mac on`);
+      }
+      else if (!desc[v]) say(`usb: no mode "${v}" (${Object.keys(desc).join(", ")})`);
       else if (v === st.usbmode) say(`usb: mode ${v} (unchanged) ${desc[v]}`);
       else { st.usbmode = v; say(`usb: mode ${v}, re-enumerating (the serial port goes away for about a second)`); setTimeout(() => say(`usb: mode ${v} ${desc[v]}`), 1500); }
     }
     else if (/^mac(=|$)/.test(p)) { if (p[3]) st.mac = p.slice(4) === "on"; say(`uac2: the computer's OUT 1..12 to the Rytm's Overbridge inputs ${st.mac ? "on" : "off"} (MAIN L/R, MAIN FX L/R, BD SD RS BT LT MT CH CY)`); }
     else if (p === "notes") say(`MIDI notes ${st.notes ? "on" : "off"}: voices 0..7 play ${st.mach.join(" ")}`);
     else say(`console: unknown command "${p}" (notes=1|0, notemach=V:NAME, notes, out=main|tracks, out, fifo=N, fifo, cap=MS, mac=on|off, usbmode=multi|stereo|off, mem, df, plugins, plugin=...)`);
+  }
+
+  // the LFOs (core/lfo.cpp command / json, the Mini's four): the settings kept, the answer as the device's
+  lfoCmd(p) {
+    const TG = ["OFF", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "FX1", "FX2"];
+    const tri = Array.from({ length: 16 }, (_, k) => ((k < 8 ? -64 + k * 16 : 64 - (k - 8) * 16) + 64 > 127 ? 127 : (k < 8 ? -64 + k * 16 : 64 - (k - 8) * 16) + 64).toString(16).padStart(2, "0") + "1").join("");
+    const L = this.lfos || (this.lfos = Array.from({ length: 4 }, () => ({ tgt: "OFF", par: 0, wav: 0, rate: 64, sync: 0, trig: 0, dep: 32, base: 64, des: tri })));
+    const m = /^lfo=(\d):(\w+)(?::(.*))?$/.exec(p);
+    if (p !== "lfo") {
+      const o = m && L[+m[1] - 1], k = m && m[2], v = m && m[3];
+      const pre = { ramp: Array.from({ length: 16 }, (_, j) => Math.round(j * 127 / 15).toString(16).padStart(2, "0") + "1").join(""),
+        tri, steps: Array.from({ length: 16 }, (_, j) => (16 + (j & 3) * 32).toString(16).padStart(2, "0") + "0").join(""),
+        rnd: Array.from({ length: 16 }, () => (1 + Math.floor(Math.random() * 126)).toString(16).padStart(2, "0") + "2").join("") };
+      if (!o) { this.say(`lfo=N:KEY:VALUE (N 1..4; tgt par wav rate sync trig dep base st:I:V:S des:HEX pre:NAME off)`); return; }
+      if (k === "off") o.tgt = "OFF";
+      else if (k === "tgt" && v && TG.includes(v.toUpperCase())) { if (o.tgt !== v.toUpperCase()) o.par = TG.indexOf(v.toUpperCase()) < 9 ? 1 : 0; o.tgt = v.toUpperCase(); }
+      else if (k === "sync") { if (+v !== o.sync) o.rate = +v ? 8 : 64; o.sync = +v ? 1 : 0; }
+      else if (["par", "wav", "rate", "trig", "dep", "base"].includes(k)) o[k] = +v;
+      else if (k === "des" && /^[0-9a-f]{48}$/.test(v)) o.des = v;
+      else if (k === "pre" && pre[v]) { o.des = pre[v]; o.wav = 7; }
+      else { this.say(`lfo: cannot "${p}"`); return; }
+    }
+    this.say("lfo: " + L.map((o, i) => `L${i + 1} ${o.tgt} ${o.dep}`).join(", "));
+    const pn = (o) => (TG.indexOf(o.tgt) >= 9 ? `P${o.par + 2}` : TG.indexOf(o.tgt) ? ["ENG", "HRM", "TIM", "MOR", "DEC", "LPG", "TUN", "LEV"][o.par] || `P${o.par + 1}` : "-");
+    const np = (o) => { const t = TG.indexOf(o.tgt); return !t ? 0 : t < 9 ? 16 : 4; };
+    this.j({ t: "lfo", lfo: { n: 4, l: L.map((o, i) => ({ ...o, pn: pn(o), np: np(o), rn: "", ph: (Date.now() / (4 + i)) % 1000 | 0 })) } });
   }
 
   // IN L/R source (core::fxin): ?old = a Rytm without 0030 (never answers); else it answers the 26 after 200 ms
@@ -148,11 +183,11 @@ export class MockDevice {
   recJson() {
     const r = this.rec, stems = r.mask.length > 1;
     if (r.state === 2) r.frames = Math.floor(((this.now() - r.t0) / 1000) * 48000);
-    const fb = (r.bits / 8) * (stems ? 12 : 2), ringKB = r.psram ? (stems ? 64 : 768) : 16;
+    const fb = (r.bits / 8) * (stems ? 12 : 2), ringKB = r.psram ? (stems ? 64 : 768) : 32;   // no PSRAM: the pool shared with USB audio
     const free = Math.floor((this.cardTotal - this.used()) / 1048576) - (r.state >= 2 ? Math.floor((r.frames * fb) / 1048576) : 0);
     const pk = (id) => (r.state && r.mask.includes(id) ? Math.floor(200 + Math.random() * 600) : 0);
     this.j({ t: "rec", state: r.state, arm: r.arm ? 1 : 0, ready: 1, psram: r.psram ? 1 : 0, maxs: r.psram ? 14 : 2, bits: r.bits,
-      mode: stems ? "stems" : "stereo", prefix: r.prefix, take: r.take, ch: r.mask, frames: r.frames, bytes: Math.floor((r.frames * fb) / 1024),
+      mode: stems ? "stems" : "stereo", usbShared: r.psram ? 0 : 1, usbPaused: !r.psram && r.state ? 1 : 0, prefix: r.prefix, take: r.take, ch: r.mask, frames: r.frames, bytes: Math.floor((r.frames * fb) / 1024),
       drops: 0, silence: 0, cardKBps: r.frames ? 9800 : 0, needKBps: Math.floor((fb * 48000) / 1024), worstWriteMs: r.frames ? 6 : 0, worstWriteUs: r.frames ? 6200 : 0,
       writes: Math.floor((r.frames * fb) / (r.psram ? 16384 : 4096)), busy: Math.floor(r.frames / 4800), ringMs: Math.floor((ringKB * 1024 * 1000) / (48000 * (r.bits / 8) * (stems ? 1 : 2))),
       ringKB, blockKB: r.psram ? 16 : 4, ringMax: r.frames ? 31 : 0, freeMB: free, totalMB: Math.floor(this.cardTotal / 1048576), error: r.error,

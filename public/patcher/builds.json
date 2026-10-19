@@ -3,14 +3,14 @@
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
-      "tag": "rui1025",
-      "title": "rui1025: Sidecar mods + remote pages (default, recommended)",
-      "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the REC page (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; voice pages follow a machine change at once; the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual."
+      "tag": "rui1026",
+      "title": "rui1026: Sidecar 0.1.0 mods + remote pages (default, recommended)",
+      "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the LFO page (TRK + LFO), the REC page with playback and channel picking on the trig keys (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual."
     },
     {
       "tag": "sfx1021",
       "title": "sfx1021: Sidecar mods without the remote pages",
-      "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1025 without the remote pages."
+      "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1026 without the remote pages."
     }
   ]
 }

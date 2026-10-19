@@ -1,28 +1,51 @@
 ---
 title: Release notes
-description: What is in the tester release (the test line), what changed since 1017, and what is tested on hardware.
+description: "Sidecar 0.1.0: what is in it, what changed, what is tested on hardware, and the versioning scheme."
 ---
+**Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1026** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
+
 Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mods: Monday 2026-10-19. Sidecar (Raspberry Pi 4B) SD card package: Tuesday 2026-10-20.
 
 | Part | Build |
 |---|---|
-| Rytm mods | `rui1025` (default: the mods plus the remote pages, the connect screen and the FX return on IN L/R, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/) |
+| Rytm mods | `rui1026` (default: the mods plus the remote pages, the connect screen and the FX return on IN L/R, for Sidecar Mini and Sidecar), `sfx1021` (the mods without the remote pages). Patch your own stock OS 1.73 file: see [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/) |
 | Sidecar Mini (Teensy 4.1) | `sidecar-teensy41-<commit>.hex`, the USB-host build of the test line (sidecar-1023); `BUILD-INFO-teensy.txt` names the commit |
 | Sidecar (Raspberry Pi 4B) | `sidecar-pi4-sd-<commit>.zip`, the SD card file set of the test line; `BUILD-INFO-pi.txt` names the commit and the kernel |
 | Starter user machines | ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN: `.rmp` for the Teensy, `.a64.rmp` for the Pi (MIT) |
 
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; nothing new is stored in your projects.
 
+## New in 0.1.0
+
+Tested on hardware: the connect screen, SCOPE, the REC page and playback, HALO, the FX return on IN L/R, the Sidecar Mini's stereo USB audio and the Mini recorder. The rest of this list is being tested now (in testing).
+
+- **LFOs** (in testing): 8 on the Pi, 4 on the Mini, global and routable to a voice's parameters (V1..V8) or the send FX's P2..P5 (FX1 / FX2); saved per kit; waves SINE, TRI, SAW+, SAW-, SQR, S&H, RND and **DESIGN** (16 steps, each HOLD, RAMP or SMTH, with presets); free or synced rates; retrig FREE / TRIG / PLAY. The **LFO page** on the Rytm opens with **TRK + LFO**; both web UIs have an LFO tab. The LFOs never touch the Rytm's own parameters (no MIDI CC).
+- **REC page channel picking** (Pi, in testing): the trig keys choose the recorded channels (T1..T8 tracks, T9 MAIN, T10 / T11 IN or FX L / R; blue recorded, orange not). Playback: B pushed plays, B turned picks the channel, C the take, D the level.
+- **Remote pages** (in testing): NO on SIDECAR leaves; DSP SAMPLE's MOD is a stepped list again (ONE LOOP SLICE GRAIN STRCH PLUCK WAVE; GRAIN shows POS SIZ DNS); unused knobs of user machines as hatched boxes; JUNO / FM preset names appear at once; the machine pages follow the Rytm instantly; the Rytm reports its active kit (for the per-kit LFOs).
+- **Sidecar Mini:** stereo USB audio to the computer (tested on hardware) with USB MIDI back (in testing); a slimmer memory layout; the recorder's 32 KB buffer is shared with USB audio, so USB audio pauses while the recorder is armed or records (without PSRAM). The 20 / 12 multichannel mode is not in this release (in development). Recording without PSRAM needs a fast SD card.
+- **Sidecar (Pi):** DSI touchscreens (the official 7" display v1 and compatibles such as the OSOYOO 7" DSI V4.0: expected, being confirmed; Touch Display 2 is not supported), the Wi-Fi settings page, the IN L/R source switch, computer audio and MIDI.
+- **Reconnect:** on every reconnect the voices are released and the FX tails cleared.
+- **The version shows** on the SYSTEM page (`SYSTEM 0.1.0`), the Pi's display and web page, and the Mini's console.
+
+## Versioning
+
+From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one number for Sidecar and Sidecar Mini:
+- **PATCH** (0.1.1): fixes only;
+- **MINOR** (0.2.0): new features (and, before 1.0, anything that changes how a setup behaves);
+- **1.0.0** comes after the testers' feedback.
+
+The Rytm builds keep their own names (`rui1026`). Each version's release notes name the Rytm build it needs: flash that one, not just the newest.
+
 ## New in the test line (1023)
 
 Tested on hardware on 2026-10-18 unless marked "in testing".
 
-- **FX return on IN L/R** (`rui1025`): the Rytm's delay + reverb return on the Overbridge IN L/R instead of its audio inputs (Sound tab: IN L/R source); the recorder names those files FX_L / FX_R and SCOPE shows the source FX. Never send those channels back into the Rytm through the computer.
+- **FX return on IN L/R** (`rui1026`): the Rytm's delay + reverb return on the Overbridge IN L/R instead of its audio inputs (Sound tab: IN L/R source); the recorder names those files FX_L / FX_R and SCOPE shows the source FX. Never send those channels back into the Rytm through the computer.
 - **Sidecar Mini computer audio:** stereo USB audio to the computer.
-- **Voice pages follow a machine change at once** (`rui1025`; in testing).
-- **Connect screen** (`rui1025`): when the Sidecar comes up, the Rytm shows CONNECTED, the voices and effects, and the Pi's address for 3 seconds. Transport and pads keep working under it.
+- **Voice pages follow a machine change at once** (`rui1026`; in testing).
+- **Connect screen** (`rui1026`): when the Sidecar comes up, the Rytm shows CONNECTED, the voices and effects, and the Pi's address for 3 seconds. Transport and pads keep working under it.
 - **SCOPE and meters:** the Rytm's output, a voice or the inputs as a live waveform, with twelve peak meters.
-- **REC page** (Pi): arm, record and stop from the Rytm; the take's time in large digits, the free space and the meters.
+- **REC page** (Pi and Sidecar Mini): arm, record and stop from the Rytm; the take's time in large digits, the free space and the meters.
 - **Playback** (Pi): one channel of a take into the Rytm's MAIN, from the REC page (B, C, D) or the web page's Record tab. Picking another take with C while one plays can glitch once; a fix is on the way.
 - **Status pages catch every knob;** SCOPE and REC use their own encoders.
 - **Sidecar Mini recorder:** the Rytm's Overbridge stream to the Teensy's card, stereo on a stock Teensy with a fast SD card (A1/A2, U3/V30): 24-bit for 70.8 s and 16-bit for 62.4 s with 0 dropped blocks. Stems with PSRAM are in testing.
@@ -39,7 +62,7 @@ Tested on hardware on 2026-10-18 unless marked "in testing".
 - **SIDECAR everywhere on the Rytm.** The sample browser's folder is now **SIDECAR** (was TEENSY), and the slot menu's popup reads **NO SIDECAR** when no Sidecar answers.
 - **Remote pages that leave the Rytm playable** (`rui1022`, new; tested on hardware with the Pi): a page catches only the keys and knobs it uses. PLAY, STOP and RECORD always reach the Rytm; the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar. On the status pages the knobs edit the stock parameter underneath. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 - **Remote pages in the Rytm's own font** (Pi and Teensy; tested on hardware). Every letter on the Sidecar's pages is drawn by the Rytm itself, with its own font, at the stock screens' sizes and places. The layout follows the stock pages: dials, labels, title and bottom bar in the same spots.
-- **Two status pages:** SIDECAR (the 8 voices and their machines, FX1 / FX2 with TYPE and PRE / POST) and SYSTEM (U1..U5, the recorder, the Rytm's audio stream and underruns, the render cores' load, and the network address, never a network name or key). The Teensy has no recorder or network, so its SYSTEM page leaves them out.
+- **Two status pages:** SIDECAR (the 8 voices and their machines, FX1 / FX2 with TYPE and PRE / POST) and SYSTEM (U1..U5, the recorder, the Rytm's audio stream and underruns, the render cores' load, and the network address, never a network name or key). The Mini has no network line.
 - **A faster remote UI.** A knob turn shows at once (the Rytm echoes the value in the bottom bar itself), and the Sidecar's frame follows about 25 ms after a turn (was 75 ms). Fast turns never jump back.
 - **Pi: large folder uploads** no longer fail with network errors; one summary line and a Retry failed button. (Tested on hardware.)
 - **Pi display:** restyled with the web page; the home page's touch test can be hidden (**Touch works – hide**, a toggle on the About page, `touchtest=` in `/.rytm/display.txt`); brightness 5-100 %, with the darkest setting still readable.
@@ -75,13 +98,16 @@ Still in testing: the waveform page and machine graphics, voice pages only for S
 
 ## Known limits in this release
 
+- GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD. On a Mini without PSRAM GRAIN stays silent (`!RAM`).
+- Sidecar Mini: multichannel USB audio comes later; USB audio pauses while the recorder runs (without PSRAM).
+- Wait until the Sidecar has connected (the connect screen) before pressing PLAY: a freeze was seen once and not reproduced.
 - Teensy: only one of the old large NoisePlethora packages fits in the 32 KB plugin code space at a time; the new smaller ones fit two or three.
 - Recording on a Mini without PSRAM needs a fast SD card.
 - REC page playback: picking another take with C while one plays can glitch once.
 
 ## Upgrading from the 1017 release
 
-1. Patch your stock OS 1.73 file again with `rui1025` (or `sfx1021`) and flash it.
+1. Patch your stock OS 1.73 file again with `rui1026` (or `sfx1021`) and flash it.
 2. Load the new Teensy `.hex`, or copy the new Pi card files over the old ones.
 3. The Rytm builds need the matching Sidecar firmware for the new names, the remote pages and the connect screen; an older Sidecar shows numbers instead of the effects' names.
 

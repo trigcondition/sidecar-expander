@@ -2,13 +2,13 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Tester release, the test line (Rytm builds `rui1025`, the default, and `sfx1021`; Sidecar firmware sidecar-1023). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Sidecar 0.1.0 (Rytm builds `rui1026`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
 ## Still in testing
 
 Not yet reported from a real Rytm (emulator or simulator only):
 - the DSP SAMPLE waveform page and the machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud);
-- voice pages only for tracks on a Sidecar machine (with `rui1025` at once on a machine change);
+- voice pages only for tracks on a Sidecar machine (with `rui1026` at once on a machine change);
 - the PSRAM plugin code space and recording stems on a Sidecar Mini with PSRAM (see below);
 - the Wi-Fi settings page on the Pi (scan, connect and save, the 90 s fallback) and the Wi-Fi rejoin watchdog;
 
@@ -16,6 +16,8 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 ## Rytm mods and remote pages
 
+- **Wait for the Sidecar to connect before pressing PLAY** (the connect screen shows it). A freeze was seen once right after connecting and could not be reproduced.
+- **GRAIN as its own machine** in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD set to GRAIN.
 - **REC page playback (Pi):** picking another take with C while one plays can glitch once. A fix is on the way.
 - **The status pages catch every knob** (nothing happens underneath while you turn one). SCOPE and REC use their own encoders; voice pages catch their knobs. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) do nothing on the Rytm while a page is open; PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work.
 - **An older Sidecar firmware** (before the key masks) makes the page catch every key and knob except PLAY, STOP and RECORD; an older Pi kernel opens the pages without text and shows no connect screen.
@@ -37,9 +39,12 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 
 ## Sidecar Mini (Teensy 4.1)
 
+- **The Rytm connects only after a reboot or many retries?** Solder the Teensy 4.1's USB host header (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
+- **Multichannel USB audio** (20 in / 12 out) is not in this release; the Mini is a stereo interface. While the recorder is armed or records (without PSRAM), USB audio pauses (`USB OFF` on the REC page).
+- **GRAIN** (DSP SAMPLE's MOD) needs PSRAM on the Mini; without it the voice is silent and shows `!RAM`.
 - **Recording without PSRAM needs a fast SD card** (A1/A2, U3/V30). The Teensy's own buffer holds 57 ms of 24-bit stereo (85 ms at 16-bit); a slow card falls behind and the console says so. Record 16-bit, or use a faster card.
 - **User machine space:** the 32 KB plugin code space fits only one of the old large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!ROOM`. The new, smaller NoisePlethora packages (prime, fibo, phase, fm, pw, ring, noise, walk, atari; the same sounds) fit two at a time, some three. The Pi has no such limit.
-- The SYSTEM remote page has no recorder and no network line, and there is no REC page: the recorder is driven from the console.
+- The REC page on the Mini records (stereo without PSRAM, stems with PSRAM) but has no playback or channel picking yet (those are the Pi's); the SYSTEM page has no network line (no network on the Mini).
 - The large send effects (RINGS, CLOUDSEED, STUTTER) run only on the Sidecar (Pi). HALO runs on both.
 - Computer audio: the Mini sends stereo USB audio to the computer (tested on hardware); the Sidecar (Pi 4B) does multi-channel audio and MIDI.
 

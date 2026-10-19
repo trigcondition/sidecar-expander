@@ -92,12 +92,12 @@ A sample from the Sidecar's card, played through a resonator.
 | Page 2 (SD SAMPLE) | TUN FIN SMP MOD STA END LOP LEV |
 
 - **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder.
-- **MOD** is the playback mode: ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
+- **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default). On a Teensy without PSRAM, samples stream from the card and play once (ONE).
 
 ## GRAIN
 
-DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Pi, or a Teensy with PSRAM. Each Pi render core can sound up to 32 grains.
+DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Pi, or a Sidecar Mini with PSRAM; on a Mini without PSRAM the voice stays silent and the Rytm shows `!RAM`. Each Pi render core can sound up to 32 grains. GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD.
 
 For a stand-alone granular machine with its own built-in sample, see the GRAIN user machine in the starter set ([User machines](/sidecar-expander/using/user-machines/)).
 

@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-The current tester builds of the Rytm mods are `rui1025` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). The Sidecar firmware is the test line (sidecar-1023).
+This is **Sidecar 0.1.0**. The Rytm builds are `rui1026` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from today's test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back, and your projects stay compatible both ways.
@@ -28,9 +28,12 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | HALO plate reverb (DCY with FREEZE, MOD, TONE, SHIM) | <span class="sc-ok">hardware</span> (2026-10-18: heard; on the Mini about 5.7 % CPU per slot) |
 | The SIDECAR folder in the sample browser, LOAD TO PROJ into the Sidecar's sample pool | <span class="sc-ok">hardware</span> |
 | User machines in slots U1..U5, slot fingerprints, slot reasons on the Rytm (!ROOM, !CRSH, !TIME) | <span class="sc-ok">hardware</span> |
+| LFOs: 8 on the Pi, 4 on the Mini, on voice parameters and FX P2..P5, saved per kit | <span class="sc-test">in testing</span> |
+| DSP SAMPLE's MOD as a stepped list (ONE LOOP SLICE GRAIN STRCH PLUCK WAVE) | <span class="sc-test">in testing</span> |
+| Voices released and FX tails cleared on every reconnect | <span class="sc-test">in testing</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1025`)
+## The remote pages (`rui1026`)
 
 | Feature | Status |
 |---|---|
@@ -39,10 +42,13 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Key pass-through: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo reach the Rytm on a page | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Connect screen when the Sidecar comes up | <span class="sc-ok">hardware</span> (2026-10-18) |
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
-| REC page: arm, record, stop (Pi) | <span class="sc-ok">hardware</span> (2026-10-18) |
+| REC page: arm, record, stop (Pi and Mini) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1025` | <span class="sc-test">in testing</span> |
+| Voice pages only for tracks on a Sidecar machine; instant on a machine change with `rui1026` | <span class="sc-test">in testing</span> |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
+| LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
+| REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
+| NO on SIDECAR leaves; unused user-machine knobs as hatched boxes; preset names at once | <span class="sc-test">in testing</span> |
 | FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18, SCOPE on the Mini) |
 
 ## Sidecar (Raspberry Pi 4B) only
@@ -56,6 +62,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | File browser with folder upload, also large sample folders | <span class="sc-ok">hardware</span> |
 | Unplugging and replugging the USB cable to the Rytm; restarting the Rytm or the Pi | <span class="sc-ok">hardware</span> |
 | 5" HDMI touch display; hide the touch test; brightness down to 5 % | <span class="sc-ok">hardware</span> |
+| DSI touchscreens: the official 7" display (v1) and compatibles such as the OSOYOO 7" DSI V4.0 | expected, being confirmed (Touch Display 2: not supported) |
 | Boots from its own SD card, also from a cold power cycle | <span class="sc-ok">hardware</span> |
 | Computer audio and MIDI over USB-C | <span class="sc-ok">hardware</span> |
 | Wi-Fi: join a network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package) |
@@ -72,6 +79,7 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Smaller NoisePlethora packages | <span class="sc-ok">hardware</span> |
 | PSRAM: a second plugin code space for more and bigger user machines | <span class="sc-test">in testing</span> (testers with PSRAM) |
 | Recorder stems with PSRAM | <span class="sc-test">in testing</span> |
-| Computer audio: stereo USB audio to the computer | <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW) |
+| Computer audio: stereo USB audio to the computer | <span class="sc-ok">hardware</span> (heard in a DAW); paused while the recorder runs without PSRAM; multichannel later |
+| USB MIDI to the computer | <span class="sc-test">in testing</span> |
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).

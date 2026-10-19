@@ -17,7 +17,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
 1. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch it.
-1. Pick the mod build. `rui1025` is the default and the recommended one: the mods plus the remote pages. `sfx1021` is the same mods without the remote pages. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+1. Pick the mod build. `rui1026` is the default and the recommended one: the mods plus the remote pages. `sfx1021` is the same mods without the remote pages. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 2. Drop your stock `.syx` on the page, or click to choose it.
 3. Press **Patch**, then **Save**.
 
@@ -40,7 +40,7 @@ Both patchers check the result themselves and save nothing if it is wrong. To ch
 | Build | Output file | SHA-256 |
 |---|---|---|
 | sfx1021 | `Analog-Rytm_MKII_OS1.73_sfx1021.syx` | `e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e` |
-| rui1025 | `Analog-Rytm_MKII_OS1.73_rui1025.syx` | `be8de863529b5e2b5c86950e2c2abd758a4f310260d660cc93356cc313f124cb` |
+| rui1026 | `Analog-Rytm_MKII_OS1.73_rui1026.syx` | `9f8efd682ad5530c2a488b46edb4da55c962cb8d00a84dd1fcdb84826a5f1ff1` |
 
 (`public/patcher/patches/index.json` lists the same values.)
 

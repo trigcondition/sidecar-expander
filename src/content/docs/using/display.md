@@ -5,7 +5,16 @@ sidebar:
   order: 7
 ---
 
-The Pi can drive an **800x480 HDMI display with USB touch** (tested with a 5" HDMI LCD). Connect it before power-on: HDMI to the Pi's **micro-HDMI 0** (next to the power socket), touch to a free **USB-A** port.
+The Pi can drive an **800x480 display**: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on.
+
+| Display | Status |
+|---|---|
+| 5" / 7" HDMI LCD with USB touch (800x480): HDMI to the Pi's **micro-HDMI 0** (next to the power socket), touch to a free **USB-A** port | <span class="sc-ok">hardware</span> (a 5" HDMI LCD) |
+| Official Raspberry Pi 7" Touch Display (v1, DSI) | expected, being confirmed |
+| Compatible 7" DSI displays such as the OSOYOO 7" DSI V4.0 | expected, being confirmed |
+| Raspberry Pi Touch Display 2 | not supported |
+
+With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. Do not add `ignore_lcd=1`, `disable_touchscreen=1` or a `vc4-kms` overlay to `config.txt`.
 
 ## Boot screen
 

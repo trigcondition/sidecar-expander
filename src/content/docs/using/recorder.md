@@ -37,7 +37,7 @@ The display shows a red `REC h:mm:ss` while recording.
 
 ### The REC page on the Rytm
 
-<span class="sc-ok">hardware</span> (Pi). Open the remote pages (TRK + YES) and press LEFT twice from SIDECAR (SCOPE, then REC). **YES** records and stops; encoder **A** arms (right) or disarms (left). The page shows the take's time in large digits, its name, the card's free space and the hours left, and the meters with the recorded channels marked.
+<span class="sc-ok">hardware</span> (Pi and Sidecar Mini). Open the remote pages (TRK + YES) and press LEFT twice from SIDECAR (SCOPE, then REC). **YES** records and stops; encoder **A** arms (right) or disarms (left). The page shows the take's time in large digits, its name, the card's free space and the hours left, and the meters with the recorded channels marked.
 
 ![The REC page, armed: the take's time, TAKE-0008, 23 GB free, the meters, PLAY: REC](../../../assets/rytm/remote-rec.png)
 
@@ -51,7 +51,7 @@ Known: picking another take with C while one plays can glitch once; a fix is on 
 
 ### The FX return on IN L/R
 
-<span class="sc-ok">hardware</span> (2026-10-18, the rui1025 Rytm build: echoes seen on SCOPE's FX source, on the Sidecar Mini). The Rytm can put its own delay + reverb return on the Overbridge IN L/R instead of its audio inputs: **Sound** tab, **IN L/R source: FX return**. The recorder then names those files `11_FX_L` / `12_FX_R`, and the SCOPE page calls the source FX. **Never send these two channels back into the Rytm through the computer's audio** (a loop on your mixer): the effect would feed itself. The page warns while the switch is on.
+<span class="sc-ok">hardware</span> (2026-10-18, the rui1026 Rytm build: echoes seen on SCOPE's FX source, on the Sidecar Mini). The Rytm can put its own delay + reverb return on the Overbridge IN L/R instead of its audio inputs: **Sound** tab, **IN L/R source: FX return**. The recorder then names those files `11_FX_L` / `12_FX_R`, and the SCOPE page calls the source FX. **Never send these two channels back into the Rytm through the computer's audio** (a loop on your mixer): the effect would feed itself. The page warns while the switch is on.
 
 ## Sidecar Mini (Teensy)
 
@@ -66,6 +66,6 @@ The Mini records the Rytm's Overbridge IN stream to the Teensy's SD card, in the
 
 - Measured on hardware with a fast card: 24-bit stereo for 70.8 s and 16-bit for 62.4 s, 0 dropped blocks, worst card write 10 ms and 3.1 ms.
 - Without PSRAM the Teensy's own buffer is 16 KB: 57 ms of 24-bit stereo, 85 ms at 16-bit. A slow card falls behind; the dropped blocks are written as silence, so the files keep time, and the console says "the card fell behind". Record 16-bit, or use a faster card. PSRAM (a 768 KB buffer) removes the need.
-- Record from the console's **Record** tab: manual or armed (PLAY starts, STOP ends), stereo or stems, 16 or 24 bit. The takes are in `/Recordings` (Files tab).
-- The Mini has no REC page or playback on the Rytm (those are the Pi's); the SYSTEM page has no recorder line.
+- Record from the REC page or the console's **Record** tab: manual or armed (PLAY starts, STOP ends), stereo or stems, 16 or 24 bit. The takes are in `/Recordings` (Files tab).
+- The Mini has the **REC page** on the Rytm too: YES records and stops, encoder A arms; stereo MASTER without PSRAM, stems with PSRAM; `USB OFF` shows while USB audio is paused for the recorder. The SYSTEM page shows the recorder row (IDLE, ARM, REC m:ss). Playback and channel picking on the trig keys are the Pi's (the Mini's channel picking follows once stems work with PSRAM).
 - A power cut: the next boot gives the take being written its true length.

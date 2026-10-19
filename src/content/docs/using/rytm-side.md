@@ -121,22 +121,25 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-ok">hardware</span> (part of the release in `rui1025`, on Sidecar Mini and Sidecar)
+<span class="sc-ok">hardware</span> (part of the release in `rui1026`, on Sidecar Mini and Sidecar)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
 - **TRK + YES** (hold TRK, press YES) opens it. The first pages are the status pages SIDECAR and SYSTEM; RIGHT goes on to one page per track that plays a Sidecar machine; LEFT from SIDECAR goes to SCOPE and (on the Pi) REC.
-- **LEFT / UP**: the previous page. **RIGHT / DOWN / PAGE**: the next. **NO**: back to SIDECAR.
+- **LEFT / UP**: the previous page. **RIGHT / DOWN / PAGE**: the next. **NO**: back to SIDECAR; **NO on SIDECAR** leaves the remote pages (<span class="sc-test">in testing</span>).
+- **TRK + LFO** opens the remote pages straight on the [LFO page](/sidecar-expander/using/lfo/) (<span class="sc-test">in testing</span>).
 - A page catches **only the keys and knobs it uses**. PLAY, STOP and RECORD always reach the Rytm (FUNC + PLAY / STOP too); the pads, MUTE / CHRO / SCNE / PERF, FILL, the trig keys, BANK and tap tempo work as on the stock screen. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) stay with the Sidecar.
 - The SIDECAR and SYSTEM pages catch every knob, so nothing changes underneath while you look at them. SCOPE and REC use their own encoders.
 - With a Sidecar firmware older than the key masks, the page catches every key and knob except PLAY, STOP and RECORD.
 - The **encoders** A..H change the shown voice's parameters. Such an edit holds until the Rytm's own value moves (its knob, a p-lock, another sound). It is not saved in the kit.
 - The pads keep playing.
+- On a user machine's page, knobs the machine does not use show as hatched boxes, like the Rytm's own unused knobs (<span class="sc-test">in testing</span>).
+- JUNO's and 6-OP FM's preset names appear at once when a track switches to that machine, and the voice pages follow a machine change on the Rytm at once (<span class="sc-test">in testing</span>).
 - **Leave** with TRK + YES again. The page also closes by itself 1 second after the Sidecar stops answering.
 
 Since 1021 every letter on these pages is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places: the title bar, the labels and the bottom bar look like the Rytm's own pages. The Sidecar sends the graphics and the text items; no font data of the Rytm is in Sidecar. A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later (it was 75 ms).
 
-**The status pages.** **SIDECAR** shows the 8 voices with their machines, and FX1 and FX2 with their TYPE and PRE / POST. **SYSTEM** shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key). The Teensy has no recorder and no network, so its SYSTEM page leaves those out.
+**The status pages.** **SIDECAR** shows the 8 voices with their machines, and FX1 and FX2 with their TYPE and PRE / POST. **SYSTEM** shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key). The Sidecar Mini has no network, so its SYSTEM page has no network line; its recorder row shows IDLE, ARM or REC m:ss.
 
 ![The SIDECAR page: voices 1-8 with their machines, FX1 and FX2](../../../assets/rytm/remote-status-sidecar.png)
 ![The SYSTEM page: U1..U5, REC 1:15, OB OK, UND 0, three core loads, ETH UP and the address](../../../assets/rytm/remote-status-system.png)
@@ -145,7 +148,7 @@ Since 1021 every letter on these pages is drawn by the Rytm itself, in its own f
 
 ![A PLAITS voice page: ENG with the model VA, HRM, TIM, MOR, the decay curve, LPG, TUN, LEV, and V1 HRM:70 in the bottom bar](../../../assets/rytm/remote-plaits.png)
 
-<small>Screenshots: `rui1025` in the emulator with the test line's host code (mock values); on a real Rytm the text is the Rytm's own and it responds at once.</small>
+<small>Screenshots: `rui1026` in the emulator with the test line's host code (mock values); on a real Rytm the text is the Rytm's own and it responds at once.</small>
 
 - It needs the test line's Sidecar firmware (Pi kernel or Mini firmware). An older Pi kernel opens the pages without text.
 
@@ -155,7 +158,7 @@ Most of these are tested on hardware and part of this release; each says which.
 
 All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so new pages, layouts and graphics come with a Sidecar update (the Pi's SD card or a Teensy upload) and **do not need a new Rytm flash**. Only a new kind of building block on the Rytm side, like the connect screen below, needs one.
 
-**Connect screen** <span class="sc-ok">hardware</span> (the `rui1025` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
+**Connect screen** <span class="sc-ok">hardware</span> (the `rui1026` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
 
 ![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, TRK + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
 ![The connect screen on the Pi with its network address](../../../assets/rytm/remote-connect-ip.png)
@@ -169,10 +172,12 @@ All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so n
 ![DSP SAMPLE: the waveform with the start/end region and the loop brackets](../../../assets/rytm/remote-wave-sample.png)
 ![GRAIN: the waveform with the grain window](../../../assets/rytm/remote-wave-grain.png)
 
-**Recorder and playback** <span class="sc-ok">hardware</span> (Pi): YES records and stops, knob A arms; B picks a channel and plays it into the MAIN, C the take, D the level. See [The recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm).
+**Recorder and playback** <span class="sc-ok">hardware</span> (recording on the Pi and the Mini, playback on the Pi): YES records and stops, knob A arms; B picks a channel and plays it into the MAIN, C the take, D the level. See [The recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm).
 
 ![The REC page, armed](../../../assets/rytm/remote-rec.png)
 ![The REC page playing a channel of a take](../../../assets/rytm/remote-play.png)
+
+**Channel picking** (<span class="sc-test">in testing</span>, Pi; on the Mini once stems work with PSRAM): on the REC page the trig keys choose what the next take records: T1..T8 the tracks, T9 MAIN, T10 / T11 the inputs (or FX L / R with the FX return). Their lights show it: blue recorded, orange not. Not while a take records.
 
 **Machine graphics** <span class="sc-test">in testing</span>. 6-OP FM shows the algorithm of the patch PAT picks (operators, carriers on the output line, feedback); JUNO shows its envelope and filter curve.
 

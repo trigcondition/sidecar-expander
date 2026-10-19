@@ -102,7 +102,7 @@ The release's `plugins/` folder holds six starter machines as Pi packages: `sc_a
 
 ## The remote UI
 
-The remote pages of the `rui1025` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+The remote pages of the `rui1026` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 ## Wi-Fi (off by default)
 

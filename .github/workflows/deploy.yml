@@ -1,0 +1,38 @@
+# Build the site (Astro Starlight: the landing page at the root, the docs, public/patcher and public/console) and deploy
+# it to GitHub Pages at https://trigcondition.github.io/sidecar-expander/ on every push to main (or by hand).
+# One-time setup: Settings > Pages > Build and deployment > Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v6
+        with:
+          out-dir: _site        # astro.config.mjs outDir (dist/ holds the release packages locally)
+          package-manager: npm
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

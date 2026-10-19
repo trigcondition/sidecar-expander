@@ -14,6 +14,7 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 | **Status** | CPU of the render cores, buffer levels, underruns, the Overbridge stream, whether the Rytm is attached, USB-C, temperature; the **Wi-Fi** section (below) |
 | **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, a machine per voice and a test drone; **Display**: screensaver and brightness |
 | **Send FX** | the two effects' TYPE and the tracks' send levels as the Rytm's kit sets them (read only); Kill tails |
+| **LFO** | the eight [LFOs](/sidecar-expander/using/lfo/): target, wave (with the DESIGN grid), rate, retrig, depth |
 | **Record** | the [recorder](/sidecar-expander/using/recorder/): record, arm, channels, and the takes with a play button per channel |
 | **User machines** | [user machines](/sidecar-expander/using/user-machines/): installed list, upload, delete, rescan, the project's U1..U5, export and import of the slot list, memory bars |
 | **Pool & presets** | the project's sample pool, the JUNO and FM lists, and user machine presets <span class="sc-ok">hardware</span> |
@@ -58,6 +59,7 @@ Open the [console](/sidecar-expander/console/) in **Chrome or Edge on a desktop 
 |---|---|
 | **Status** | the live status line: CPU, the USB stream, FIFO, MIDI |
 | **Sound** | MIDI notes, output to tracks or MAIN, the IN L/R source, computer audio, a machine per voice, the FIFO target (segmented toggles that show the device's state) |
+| **LFO** | the four [LFOs](/sidecar-expander/using/lfo/) |
 | **Record** | the [Sidecar Mini recorder](/sidecar-expander/using/recorder/#sidecar-mini-teensy): record, arm, stereo or stems (stems with PSRAM), bit depth, the levels |
 | **USB** | the USB audio mode |
 | **User machines** | user machines: install, delete, rescan, the project's slots, export/import, the memory map (with a PSRAM code arena bar when PSRAM is fitted) |

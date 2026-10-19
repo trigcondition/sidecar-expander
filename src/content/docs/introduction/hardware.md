@@ -18,6 +18,7 @@ sidebar:
 ## Option A: Sidecar Mini (Teensy 4.1)
 
 - A **Teensy 4.1** (PJRC). A stock board is enough.
+- **Solder the Teensy 4.1's USB host header** (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
 - A **USB host cable** for the Teensy's 5-pin USB host header. It needs 5 male header pins soldered to the host pads.
 - A **micro-USB data cable**, for power and for loading the firmware.
 - Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's slot, for samples and patch banks. **To record on a Mini without PSRAM, use a fast card** (A1/A2, U3/V30): the Teensy's own buffer is small.
