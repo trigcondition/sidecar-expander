@@ -72,7 +72,9 @@ def main():
     bad, notes = [], []
     for rel, path in sorted(files()):
         top = rel.split(os.sep)[0]
-        if rel.endswith((".syx", ".bin")) and not rel.endswith("armstub8-rpi4.bin"):
+        # not Elektron firmware: Circle's armstub, and the Pi's Wi-Fi chip firmware (RPi-Distro, firmware/NOTICE)
+        wifi_fw = "/firmware/brcmfmac43455-sdio" in rel and rel.endswith(".bin")
+        if rel.endswith((".syx", ".bin")) and not rel.endswith("armstub8-rpi4.bin") and not wifi_fw:
             if rel.lower().endswith(".syx") and (os.sep + "JUNO" + os.sep in rel or os.sep + "DX7" + os.sep in rel):
                 notes.append(f"{rel}: starter content patch data (Juno-106 / DX7 dumps, MIT sources; see its NOTICE)")
             else:

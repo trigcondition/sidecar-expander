@@ -39,7 +39,7 @@ for i, (name, b) in enumerate(pat):
 src = open(res).read()
 d = os.path.join(root, "DX7"); os.makedirs(d)
 for k in range(3):
-    m = re.search(r'const uint8_t syx_bank_%d\[\] = \{(.*?)\};' % k, src, re.S)
+    m = re.search(r'const uint8_t syx_bank_%d\[\](?: PROGMEM)? = \{(.*?)\};' % k, src, re.S)   # the Teensy copy: PROGMEM
     data = [int(x) for x in re.findall(r'\d+', m.group(1))]
     assert len(data) == 4096 and all(0 <= x < 128 for x in data), len(data)
     cs = (-sum(data)) & 0x7F
