@@ -146,7 +146,7 @@ Every third-party component and its licence is listed in [THIRD_PARTY_LICENSES](
 
 ## Written offer for source code
 
-This tester release ships binaries, the patcher and documentation. The complete source follows in a later release, after tester feedback.
+The source is public: [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (the engine for Sidecar Mini and Sidecar) and [sidecar-mods](https://github.com/trigcondition/sidecar-mods) (the Rytm mods; it rebuilds the released build byte for byte from your own stock OS file).
 
 Until then, and for at least three years from the date you received a binary from this project, we will give anyone who asks a complete machine-readable copy of the **corresponding source code** for:
 - the Raspberry Pi engine (`engine.img` and `sdboot.img`), including Circle and our changes to it, under the GPL version 3;
