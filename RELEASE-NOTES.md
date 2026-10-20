@@ -10,7 +10,7 @@
 
 | Part | File |
 |---|---|
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-c6ae04d.zip`: copy its contents to a FAT32 card; the same card boots both boards. `BUILD-INFO-pi.txt` names the commit and both kernels |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-f4b85f8.zip`: copy its contents to a FAT32 card; the same card boots both boards. `BUILD-INFO-pi.txt` names the commit and both kernels |
 | Starter user machines (Pi) | `sidecar-pi-plugins-0.2.0.zip`: ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN as `.a64.rmp` (MIT), the same files as 0.1.0; they load on the Pi 4B and the Pi 5 |
 | Starter content | `sidecar-content-0.2.0.zip`: `/JUNO/Factory/` and `/DX7/`, the same patches as 0.1.0 (also on the card) |
 | Checksums | `SHA256SUMS` |
@@ -24,7 +24,7 @@
 - **Pi 5 HDMI display** (tested on hardware): the 800x480 UI scaled to the Pi 5 firmware's 1920x1080 picture, with USB touch. `hdmi_force_hotplug=1` (on the card) is needed; connect the display to micro-HDMI 0 before power-on. The picture is slightly soft (scaled).
 - **DSI displays found by themselves** (in testing): the official 7" display v1 and compatibles, on the Pi 4 through the firmware (as in 0.1.0) and on the Pi 5 driven by the engine (CAM/DISP 0 or 1, no `config.txt` line). With no DSI panel answering, the Sidecar uses HDMI. Not yet run on hardware.
 - **The web page over Wi-Fi** (in testing): the page is sent compressed (121 KB to 39 KB), a stalled connection is dropped after 3 s (was 5 s), the page sends at most 2 requests at once and retries a "503 busy". `/status` and the log count the connections.
-- **Power warning** (in testing): the Pi reads its supply's state (under-voltage, throttling; on the Pi 5 also the USB-PD current) at boot, on a change and once a minute: in the log, on the web page's **Power** tile with a warning, and in red on the display's bottom line (`POWER TOO WEAK: use 27 W adapter`).
+- **Power warning** (in testing): the Pi reads its supply's state (under-voltage, throttling; on the Pi 5 also the USB-PD current) at boot, on a change and once a minute: in the log, on the web page's **Power** tile with a warning, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).
 - **Wi-Fi firmware for both boards** on the card (`/firmware/`, the same Raspberry Pi files under each board's names, with the Cypress licence). Still no Wi-Fi settings on the card: Wi-Fi is off until you set it up.
 
 ### Hardware: Pi 4B or Pi 5
@@ -42,7 +42,6 @@
 
 - **Pi 5: no USB audio or MIDI to the computer.** Its USB-C gadget is left out of this build: even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer. Use a Pi 4B for computer audio.
 - **Pi 5: use the official 27 W supply directly.** Fed from a hub port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The power warning says so when it sees it.
-- **The power warning names the 27 W adapter on the Pi 4 too**: on a Pi 4 use its official 5.1 V 3 A supply.
 - **Pi 5 HDMI**: the firmware always sets 1920x1080, so the 800x480 UI is scaled (slightly soft). The `framebuffer_width`, `framebuffer_height` and `hdmi_*` mode lines under `[pi5]` do nothing on the Pi 5 and are harmless; only `hdmi_force_hotplug=1` matters.
 - **Pi 5 DSI** has not been run on hardware yet; Touch Display 2 is not supported on either board.
 - **Pi 5 updates** are by card swap only (no network update on the Pi 5 yet). If a Pi 5 shows its boot diagnostics screen, update its bootloader with Raspberry Pi Imager.
