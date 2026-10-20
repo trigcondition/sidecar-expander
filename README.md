@@ -2,9 +2,9 @@
 
 **A voice and feature expander for the Analog Rytm MKII.**
 
-Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
+Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B or Pi 5. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.1.0, the first public tester release** (Rytm build `rui1027d`). **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
+> **Sidecar 0.2.0** (Rytm build `rui1027d`): one SD card for the Raspberry Pi 4B and the Pi 5 ([release notes](RELEASE-NOTES.md)); Sidecar Mini stays at 0.1.0. **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 >
@@ -14,9 +14,9 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
 
 ## Sidecar Mini or Sidecar
 
-**Sidecar Mini** (Teensy 4.1) is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card, the send effects including HALO, the remote pages on the Rytm, and stereo recording to its card (with a fast SD card). A Teensy with PSRAM fitted gets room for more and bigger user machines and stems recording (in testing). **Sidecar** (Raspberry Pi 4B) has everything: many user machines, the heavy effects, the recorder, the display and Wi-Fi. Make projects on the Mini and move up later: the Sidecar's per-project files are the same on both; only the user machine packages differ (`.rmp` for the Mini, `.a64.rmp` for the Pi).
+**Sidecar Mini** (Teensy 4.1) is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card, the send effects including HALO, the remote pages on the Rytm, and stereo recording to its card (with a fast SD card). A Teensy with PSRAM fitted gets room for more and bigger user machines and stems recording (in testing). **Sidecar** (Raspberry Pi 4B or Pi 5) has everything: many user machines, the heavy effects, the recorder, the display and Wi-Fi. Make projects on the Mini and move up later: the Sidecar's per-project files are the same on both; only the user machine packages differ (`.rmp` for the Mini, `.a64.rmp` for the Pi).
 
-| | Sidecar Mini (Teensy 4.1) | Sidecar (Raspberry Pi 4B) |
+| | Sidecar Mini (Teensy 4.1) | Sidecar (Raspberry Pi 4B or Pi 5) |
 |---|---|---|
 | Built-in machines, samples from the card, remote pages | yes | yes |
 | User machines | a few: 32 KB of plugin code space (two or three of the smaller NoisePlethora packages) | many |
@@ -37,7 +37,7 @@ Documentation, the browser patcher and the web console: <https://trigcondition.g
 - **SRC view (`rui1027d`).** On a track with a Sidecar machine, the Rytm's own SRC page shows the Sidecar's machine page with its graphics, while every key and knob stays the Rytm's.
 - **Remote pages (`rui1027d`, Sidecar Mini and Sidecar).** A connect screen when the Sidecar comes up; TRK + YES opens the SIDECAR and SYSTEM status pages, SCOPE with meters, the REC page (with playback on the Pi) and the voice pages on the Rytm's screen, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP and RECORD always reach the Rytm, and the pads, mutes, FILL and tap tempo work as usual; keys that open stock screens stay with the Sidecar.
 - **Sidecar Mini recorder:** stereo to the Teensy's card (needs a fast SD card: A1/A2, U3/V30).
-- **Sidecar (Raspberry Pi 4B) only:**
+- **Sidecar (Raspberry Pi 4B and Pi 5) only:**
   - a sample pool and presets per project, with a Pool & presets page on the web page;
   - a multitrack recorder to the SD card, with playback from the Rytm's REC page;
   - computer audio and MIDI over USB-C;
@@ -55,7 +55,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - One of:
   - **Sidecar Mini: a Teensy 4.1** (no PSRAM needed, except for GRAIN and stems recording) with a USB host cable on its 5-pin host header (soldered pins), a micro-USB cable, and a microSD card (optional, for samples; for recording without PSRAM a fast card: A1/A2, U3/V30). See [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
-  - **Sidecar: a Raspberry Pi 4B** (2 GB or more) with a USB-C power supply, a blank microSD card, and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md). (The Sidecar package follows on 2026-10-20.)
+  - **Sidecar: a Raspberry Pi 4B** (2 GB or more, with a computer: also USB-C audio and MIDI) **or a Raspberry Pi 5** (standalone: no USB audio or MIDI to the computer yet; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
 - The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
 
@@ -75,7 +75,7 @@ See [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for what does not work yet.
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar:**
    - Sidecar Mini (Teensy 4.1): [INSTALL-TEENSY.md](INSTALL-TEENSY.md).
-   - Sidecar (Pi 4B): [INSTALL-PI.md](INSTALL-PI.md).
+   - Sidecar (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md).
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
 
 ## Tested on hardware or in the emulator

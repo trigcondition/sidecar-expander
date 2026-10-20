@@ -11,7 +11,7 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 
 | Tab | What |
 |---|---|
-| **Status** | CPU of the render cores, buffer levels, underruns, the Overbridge stream, whether the Rytm is attached, USB-C, temperature; the **Wi-Fi** section (below) |
+| **Status** | CPU of the render cores, buffer levels, underruns, the Overbridge stream, whether the Rytm is attached, USB-C, temperature, the **Power** tile (0.2.0, <span class="sc-test">in testing</span>: "too weak" with a warning when the supply is, e.g. a Pi 5 not on its 27 W adapter); the **Wi-Fi** section (below) |
 | **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, a machine per voice and a test drone; **Display**: screensaver and brightness |
 | **Send FX** | the two effects' TYPE and the tracks' send levels as the Rytm's kit sets them (read only); Kill tails |
 | **LFO** | the eight [LFOs](/sidecar-expander/using/lfo/): target, wave (with the DESIGN grid), rate, retrig, depth |

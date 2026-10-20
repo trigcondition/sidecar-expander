@@ -12,9 +12,11 @@ The Pi can drive an **800x480 display**: HDMI with USB touch, or a DSI touchscre
 | 5" / 7" HDMI LCD with USB touch (800x480): HDMI to the Pi's **micro-HDMI 0** (next to the power socket), touch to a free **USB-A** port | <span class="sc-ok">hardware</span> (a 5" HDMI LCD) |
 | Official Raspberry Pi 7" Touch Display (v1, DSI) | expected, being confirmed |
 | Compatible 7" DSI displays such as the OSOYOO 7" DSI V4.0 | expected, being confirmed |
+| Pi 5: HDMI LCD with USB touch on **micro-HDMI 0**: the 800x480 UI scaled to the firmware's 1920x1080 (slightly soft); `hdmi_force_hotplug=1` under `[pi5]` (on the card) | <span class="sc-ok">hardware</span> (2026-10-19, 0.2.0) |
+| Pi 5: official 7" Touch Display (v1) and compatibles on CAM/DISP 0 or 1, driven by the engine (no `config.txt` line; `dsi_rotate=180` in `cmdline.txt` turns it) | <span class="sc-test">in testing</span> (0.2.0, built, not yet run) |
 | Raspberry Pi Touch Display 2 | not supported |
 
-With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. Do not add `ignore_lcd=1`, `disable_touchscreen=1` or a `vc4-kms` overlay to `config.txt`.
+With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards). A weak supply shows in red on the bottom line: `POWER TOO WEAK: use 27 W adapter` (0.2.0). Do not add `ignore_lcd=1`, `disable_touchscreen=1` or a `vc4-kms` overlay to `config.txt`.
 
 ## Boot screen
 

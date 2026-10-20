@@ -1,6 +1,6 @@
 ---
 title: Sidecar Mini or Sidecar?
-description: Sidecar Mini (Teensy 4.1) and Sidecar (Raspberry Pi 4B) compared, and moving a project from one to the other.
+description: Sidecar Mini (Teensy 4.1) and Sidecar (Raspberry Pi 4B or Pi 5) compared, and moving a project from one to the other.
 sidebar:
   order: 4
 ---
@@ -9,11 +9,11 @@ There are two Sidecars. Both run the same engine core, play the same built-in ma
 
 - **Sidecar Mini** runs on a **Teensy 4.1**. It is the cheap way to get started: the built-in machines, a few user machines, samples streamed from its card, the send effects including HALO, the remote pages on the Rytm's screen, and stereo recording to its card.
 - **Sidecar Mini + PSRAM** is a Teensy 4.1 with PSRAM chips fitted. It adds a second plugin code space for more and bigger user machines and recording of stems (both in testing).
-- **Sidecar** runs on a **Raspberry Pi 4B**. It is the full version: many user machines, the heavy effects (RINGS, CLOUDSEED, STUTTER), the multitrack recorder with playback, the touch display, Wi-Fi and computer audio.
+- **Sidecar** runs on a **Raspberry Pi 4B** or, from 0.2.0, a **Raspberry Pi 5** (one SD card for both). It is the full version: many user machines, the heavy effects (RINGS, CLOUDSEED, STUTTER), the multitrack recorder with playback, the touch display, Wi-Fi and computer audio (computer audio and MIDI on the Pi 4B only for now: the Pi 5 is standalone).
 
 Start with the Mini, make projects on it, and move up to the full Sidecar later.
 
-| | Sidecar Mini (Teensy 4.1) | Sidecar Mini + PSRAM | Sidecar (Raspberry Pi 4B) |
+| | Sidecar Mini (Teensy 4.1) | Sidecar Mini + PSRAM | Sidecar (Raspberry Pi 4B / Pi 5) |
 |---|---|---|---|
 | Processor | one Cortex-M7 at 600 MHz | the same | four Cortex-A72 at 1.5 GHz, bare metal (no Linux) |
 | Memory | 1 MB RAM | 1 MB RAM + 8 or 16 MB PSRAM | 2 GB or more |

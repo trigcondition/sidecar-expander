@@ -1,6 +1,55 @@
-# Release notes: Sidecar 0.1.0
+# Release notes
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
+
+## Sidecar 0.2.0
+
+**Sidecar 0.2.0**: one SD card for the **Raspberry Pi 4B and the Raspberry Pi 5**, the Pi 5's HDMI display, DSI auto-detect, a faster web page over Wi-Fi and a power warning. It needs the same Rytm build as 0.1.0: **rui1027d** (or sfx1021 without the remote pages). A MINOR step (semantic versioning): new boards and features, nothing removed.
+
+**Sidecar Mini (Teensy 4.1) stays at 0.1.0.** 0.2.0 has no Teensy build: Sidecar Mini users keep (or download) `sidecar-teensy41-454d38b2.hex` and `sidecar-mini-plugins-0.1.0.zip` from the [0.1.0 release](https://github.com/trigcondition/sidecar-expander/releases/tag/v0.1.0). The Mini works with the same Rytm build.
+
+| Part | File |
+|---|---|
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-c6ae04d.zip`: copy its contents to a FAT32 card; the same card boots both boards. `BUILD-INFO-pi.txt` names the commit and both kernels |
+| Starter user machines (Pi) | `sidecar-pi-plugins-0.2.0.zip`: ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN as `.a64.rmp` (MIT), the same files as 0.1.0; they load on the Pi 4B and the Pi 5 |
+| Starter content | `sidecar-content-0.2.0.zip`: `/JUNO/Factory/` and `/DX7/`, the same patches as 0.1.0 (also on the card) |
+| Checksums | `SHA256SUMS` |
+| Sidecar Mini (Teensy 4.1) | unchanged: the 0.1.0 release's `sidecar-teensy41-454d38b2.hex` |
+| Rytm mods | unchanged: `rui1027d` / `sfx1021`, patched from your own stock OS 1.73 file (PATCHER.md) |
+
+### New in 0.2.0
+
+- **One card for the Pi 4B and the Pi 5** (in testing): `config.txt` has a `[pi4]` and a `[pi5]` section and each board reads only its own boot files (Pi 4: `sdboot.img` and `engine.img` as in 0.1.0; Pi 5: `kernel_2712.img`). The Pi 4 boots with exactly the 0.1.0 settings. The Pi 5 build itself is tested on hardware; the shared card is being tested on both boards now.
+- **Raspberry Pi 5** (tested on hardware) (2026-10-19): the Rytm over USB (replug included), the voices and send effects, the remote pages, `sidecar.local` over Ethernet and Wi-Fi. The Pi 5 is a **standalone** Sidecar for now: its USB-C port is power only (no USB audio or MIDI to the computer).
+- **Pi 5 HDMI display** (tested on hardware): the 800x480 UI scaled to the Pi 5 firmware's 1920x1080 picture, with USB touch. `hdmi_force_hotplug=1` (on the card) is needed; connect the display to micro-HDMI 0 before power-on. The picture is slightly soft (scaled).
+- **DSI displays found by themselves** (in testing): the official 7" display v1 and compatibles, on the Pi 4 through the firmware (as in 0.1.0) and on the Pi 5 driven by the engine (CAM/DISP 0 or 1, no `config.txt` line). With no DSI panel answering, the Sidecar uses HDMI. Not yet run on hardware.
+- **The web page over Wi-Fi** (in testing): the page is sent compressed (121 KB to 39 KB), a stalled connection is dropped after 3 s (was 5 s), the page sends at most 2 requests at once and retries a "503 busy". `/status` and the log count the connections.
+- **Power warning** (in testing): the Pi reads its supply's state (under-voltage, throttling; on the Pi 5 also the USB-PD current) at boot, on a change and once a minute: in the log, on the web page's **Power** tile with a warning, and in red on the display's bottom line (`POWER TOO WEAK: use 27 W adapter`).
+- **Wi-Fi firmware for both boards** on the card (`/firmware/`, the same Raspberry Pi files under each board's names, with the Cypress licence). Still no Wi-Fi settings on the card: Wi-Fi is off until you set it up.
+
+### Hardware: Pi 4B or Pi 5
+
+| | Raspberry Pi 4B | Raspberry Pi 5 |
+|---|---|---|
+| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface | **standalone**: no USB audio or MIDI to the computer yet |
+| Supply | official 5.1 V 3 A USB-C | official **27 W** USB-C, plugged in directly (not through a hub) |
+| HDMI display | 800x480, sharp | the UI scaled to 1920x1080: works, slightly soft |
+| DSI display | expected (firmware), being confirmed | in testing |
+| Wi-Fi | works | works (tested) |
+| Kernel update | card swap (or `sdboot.py` with `sdport` on) | card swap only |
+
+### Known issues in 0.2.0
+
+- **Pi 5: no USB audio or MIDI to the computer.** Its USB-C gadget is left out of this build: even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer. Use a Pi 4B for computer audio.
+- **Pi 5: use the official 27 W supply directly.** Fed from a hub port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The power warning says so when it sees it.
+- **The power warning names the 27 W adapter on the Pi 4 too**: on a Pi 4 use its official 5.1 V 3 A supply.
+- **Pi 5 HDMI**: the firmware always sets 1920x1080, so the 800x480 UI is scaled (slightly soft). The `framebuffer_width`, `framebuffer_height` and `hdmi_*` mode lines under `[pi5]` do nothing on the Pi 5 and are harmless; only `hdmi_force_hotplug=1` matters.
+- **Pi 5 DSI** has not been run on hardware yet; Touch Display 2 is not supported on either board.
+- **Pi 5 updates** are by card swap only (no network update on the Pi 5 yet). If a Pi 5 shows its boot diagnostics screen, update its bootloader with Raspberry Pi Imager.
+
+Everything from the 0.1.0 known issues still applies: see KNOWN-ISSUES.md.
+
+## Sidecar 0.1.0
 
 **Sidecar 0.1.0**, the first public tester release of Sidecar | Expander. It needs the Rytm build **rui1027d** (or sfx1021 without the remote pages). Version numbers follow semantic versioning from now on: see [Versioning](#versioning).
 
@@ -16,7 +65,7 @@ Tester release of Sidecar | Expander. Sidecar Mini (Teensy 4.1) and the Rytm mod
 
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The remote pages were tested on a real Rytm with the Pi and the Teensy on 2026-10-18. On OS 1.74, first flash the stock OS 1.73 `.syx` with Transfer, then patch it. Keep the stock OS file at hand to go back; where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 
-## New in 0.1.0
+### New in 0.1.0
 
 Tested on hardware on 2026-10-19: the SRC view (`rui1027d`, also after a USB replug), machine pages only on the SRC page, the Pi's USB audio (no clicks at the stream's start, 5 minutes clean), JUNO presets and PAT.
 
@@ -34,7 +83,7 @@ Tested on hardware: the connect screen, SCOPE, the REC page and playback, HALO, 
 - **Reconnect:** on every reconnect the voices are released and the FX tails cleared.
 - **The version shows** on the SYSTEM page (`SYSTEM 0.1.0`), the Pi's display and web page, and the Mini's console.
 
-## Versioning
+### Versioning
 
 From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one number for Sidecar and Sidecar Mini:
 - **PATCH** (0.1.1): fixes only;
@@ -43,7 +92,7 @@ From 0.1.0 on, Sidecar uses semantic versioning (`MAJOR.MINOR.PATCH`), one numbe
 
 The Rytm builds keep their own names (`rui1027d`). Each version's release notes name the Rytm build it needs: flash that one, not just the newest.
 
-## Earlier in the 0.1.0 line
+### Earlier in the 0.1.0 line
 
 Tested on hardware on 2026-10-18 unless marked "in testing".
 
@@ -62,7 +111,7 @@ Tested on hardware on 2026-10-18 unless marked "in testing".
 - **"Sidecar Mini"** as the Teensy's USB name.
 - In testing: the DSP SAMPLE waveform page and machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud); voice pages only for tracks on a Sidecar machine; the PSRAM plugin code space on the Mini; the Pi's Wi-Fi settings page (scan, connect and save, 90 s fallback).
 
-## New in 1021
+### New in 1021
 
 - **Two names:** the Teensy 4.1 build is **Sidecar Mini**, the cheap way to get started; the Raspberry Pi 4B build is the full **Sidecar**. Projects move from the Mini to the Sidecar (same per-project files; install the Pi version of each user machine). See [Sidecar Mini or Sidecar?](https://trigcondition.github.io/sidecar-expander/introduction/pi-vs-teensy/)
 
@@ -79,14 +128,14 @@ Tested on hardware on 2026-10-18 unless marked "in testing".
 - **Pi: computer audio and MIDI over USB-C.** Plug the Pi's USB-C into a computer: the Rytm's tracks arrive as a multi-channel audio device, with MIDI both ways. Switched on in the web page's Sound tab. (Tested on hardware.)
 - **Pi: sample pool and presets.** The Pi now has the Teensy's per-project sample pool, the JUNO and FM lists, and user machine presets, with a **Pool & presets** page on `sidecar.local`. (Tested on hardware.)
 
-## From 1020 (fixes from the 1019 hardware test)
+### From 1020 (fixes from the 1019 hardware test)
 
 - **The machine list's arrows no longer assign.** Moving through the list could fill every user slot with the same machine (METAL in every slot). The Rytm no longer reports a slot while a preview is open, and a choice clears the old tag.
 - The **6-OP FM** patch name no longer shows twice while scrolling.
 - A Sidecar with no `/Samples` folder on its card no longer crashes when the Rytm loads a project.
 - The Pi's send FX load figure on the console is right again (it read tens of percent for 1-2 %).
 
-## From 1019
+### From 1019
 
 - **Stepped list knobs.** Knobs that pick from a list step one item a detent, like the Rytm's FILTER TYPE, with the item's name where the dial was: ENG of PLAITS, DIGIDRUM, DAISYSP and DSP SAMPLE, DAISYSP's INP and OUT, DSP SAMPLE's MOD, the PAT knobs of JUNO and 6-OP FM, user machine lists, and on the SEND FX pages TYPE, ROUTE (PRE / POST) and selectors such as STUTTER's ENG and LEN.
 - **Slot fingerprints from the project.** A user slot finds its machine from the project's own sounds, also in a project made on another Sidecar.
@@ -95,7 +144,7 @@ Tested on hardware on 2026-10-18 unless marked "in testing".
 - **Pi Wi-Fi** (in testing): joins a WPA2 network from the console. Off in the SD card package.
 - The web page limits its connections so the engine never starves; the Teensy web console gained user machine tabs.
 
-## Tested on hardware or in the emulator
+### Tested on hardware or in the emulator
 
 Tested on a real Rytm MKII on 2026-10-18 (the test line): the connect screen, SCOPE and meters, the REC page and playback on the Pi, the status pages catching every knob, the key pass-through, the Mini recorder (stereo, fast card), HALO (heard; measured on the Teensy), the smaller NoisePlethora packages with their slot reasons, the web UIs' state buttons, the "Sidecar Mini" USB name, folder upload, the Pi's computer audio and MIDI, the FX return on IN L/R (SCOPE on the Mini), the Mini's stereo USB audio (heard in a DAW); the remote pages on the Pi and the Teensy.
 
@@ -103,7 +152,7 @@ Earlier (1017 to 1022 builds): all the voices heard; send FX on the Pi and the T
 
 Still in testing: the LFOs (per kit), the PSRAM code space, the Wi-Fi settings page and `sidecar-wifi.txt` (implemented, not yet run on hardware), the waveform page and machine graphics, voice pages only for Sidecar machines, the PSRAM code space and stems on the Mini, the Pi's Wi-Fi settings page.
 
-## Known limits in this release
+### Known limits in this release
 
 - SRC view: a turn shows after about 50-100 ms; p-locks made while holding a trig are not shown (the view shows the sound's own value).
 - GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD. On a Mini without PSRAM, DSP SAMPLE streams from the card and plays once, so GRAIN needs PSRAM there.
@@ -113,7 +162,7 @@ Still in testing: the LFOs (per kit), the PSRAM code space, the Wi-Fi settings p
 - Recording on a Mini without PSRAM needs a fast SD card.
 - REC page playback: picking another take with C while one plays can glitch once.
 
-## Upgrading from the 1017 release
+### Upgrading from the 1017 release
 
 1. Patch your stock OS 1.73 file again with `rui1027d` (or `sfx1021`) and flash it.
 2. Load the new Teensy `.hex`, or copy the new Pi card files over the old ones.

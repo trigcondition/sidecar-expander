@@ -5,7 +5,7 @@ sidebar:
   order: 9
 ---
 
-Joining: <span class="sc-ok">hardware</span> (the Pi joins on the first boot). The settings page: <span class="sc-test">in testing</span>.
+Joining: <span class="sc-ok">hardware</span> (the Pi joins on the first boot; on the Pi 5 too, 2026-10-19). The settings page: <span class="sc-test">in testing</span>. 0.2.0 sends the page compressed and limits it to 2 requests at once, so it loads faster over Wi-Fi (<span class="sc-test">in testing</span>). On a Pi 5 use the 27 W adapter directly: from a hub's port Wi-Fi and the page became slow ("503 busy").
 
 The SD card package has **Wi-Fi off**: start with a direct Ethernet cable for `sidecar.local`, then turn Wi-Fi on from the page.
 

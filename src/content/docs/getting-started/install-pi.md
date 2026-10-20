@@ -1,6 +1,6 @@
 ---
-title: Install Sidecar (Raspberry Pi 4B or Pi 5)
-description: One SD card for the Pi 4B and the Pi 5 - first boot, the display, and sidecar.local over Ethernet.
+title: Install Sidecar (Pi 4B and Pi 5, one card)
+description: One SD card for the Raspberry Pi 4B and the Raspberry Pi 5 - first boot, the display, and sidecar.local over Ethernet.
 sidebar:
   order: 2
 ---
@@ -12,11 +12,11 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: an 800x480 HDMI display (USB touch works too) and an Ethernet cable.
-- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi-sd-<commit>.zip` and its `.sha256` (one card for the Pi 4B and the Pi 5), and the `plugins/` folder (optional, the starter user machines).
+- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi-sd-<commit>.zip` (one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-<version>.zip` (the starter user machines).
 
 ## Make the SD card
 
-1. Check the download: `shasum -a 256 sidecar-pi-sd-*.zip` must match the `.sha256` file.
+1. Check the download: in the download folder, `shasum -a 256 -c SHA256SUMS --ignore-missing` must say `OK` for the zip (Windows: `certutil -hashfile <file> SHA256` and compare with `SHA256SUMS`).
 2. Format the card as **FAT32** with one partition (MBR):
    - macOS: Disk Utility > Erase, Format "MS-DOS (FAT)", Scheme "Master Boot Record".
    - Windows: the SD Association's "SD Card Formatter", or `format X: /FS:FAT32` for cards of 32 GB or less.
@@ -39,7 +39,7 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 ## Connect and power on
 
 ```
- Analog Rytm MKII [USB-B] ---- USB A-to-B ----> [USB-A] Raspberry Pi 4B [USB-C] <---- power supply
+ Analog Rytm MKII [USB-B] ---- USB A-to-B ----> [USB-A] Raspberry Pi 4B / 5 [USB-C] <---- power supply
                                                         [micro-HDMI 0] --> 800x480 display (optional)
                                                         [Ethernet] ------> computer (optional)
 ```
@@ -76,7 +76,7 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `display=0\|1` | 1 | the HDMI display and touch |
 | `web=0\|1` | 1 | the web page at `http://sidecar.local` |
 | `ip=`, `netmask=` | 169.254.61.60, 255.255.0.0 | the Pi's Ethernet address |
-| `width=`, `height=` | the display's | the frame buffer size, for a display other than 800x480 |
+| `width=`, `height=` | the display's | Pi 4: the frame buffer size, for a display other than 800x480; Pi 5: the UI's size (800x480 by default, scaled) |
 | `touchscreen=minx,maxx,miny,maxy` | | touch calibration, if the touch is off |
 | `screensaver=MIN`, `brightness=PCT` | 60, 100 | override the display settings at boot |
 | `recbuf=MB` | 64 | the recorder's memory; 0 turns recording off |
@@ -98,6 +98,8 @@ disable_overscan=1
 
 For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
+The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1` matters there (see [Raspberry Pi 5](#raspberry-pi-5)). A DSI display needs no line on either board.
+
 ## Starter content
 
 The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-<version>.zip`, on the Releases page: extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
@@ -106,7 +108,7 @@ On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` →
 
 ## Starter user machines
 
-The release's `plugins/` folder holds six starter machines as Pi packages: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.
+The release's `sidecar-pi-plugins-<version>.zip` holds six starter machines as Pi packages, the same files for the Pi 4B and the Pi 5: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.
 
 ## The remote UI
 
@@ -156,12 +158,24 @@ psk=YOUR-PASSPHRASE
 
 ## Raspberry Pi 5
 
-The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for each board, and each board only reads its own files. On the Pi 5 the voices, send effects, the Rytm over USB (replug included), the remote pages, `sidecar.local` and Wi-Fi work (tested on hardware); the user machines use the same `.rmp` files as on the Pi 4. What is different on the Pi 5 for now:
+The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for each board, and each board only reads its own files. On the Pi 5 the voices, send effects, the Rytm over USB (replug included), the remote pages, `sidecar.local` over Ethernet and Wi-Fi work (<span class="sc-ok">hardware</span>, 2026-10-19); the user machines use the same `.a64.rmp` files as on the Pi 4. The shared card itself is <span class="sc-test">in testing</span> on both boards.
 
-- **No USB audio or MIDI to the computer.** The Pi 5's USB-C port is power only in this version (on the Pi 4 it is also the Sidecar's audio and MIDI interface).
-- **HDMI display: in testing.** The card has the Pi 5's display lines (`[pi5]` in `config.txt`); connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. A picture on the Pi 5 is not confirmed yet; `sidecar.local` always works. `width=`/`height=` in `cmdline.txt` are not used on the Pi 5 (its `framebuffer_width`/`framebuffer_height` lines set the size).
-- **Updating**: copy the new release's files over the old ones (as on the Pi 4). Updating over the network on a Pi 5 is not tested.
-- Use the official 27 W USB-C supply. With a 3 A supply the Pi 5 limits its USB ports to 600 mA in total (enough with the Rytm on its own power).
+| | Raspberry Pi 4B | Raspberry Pi 5 |
+|---|---|---|
+| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone**: no USB audio or MIDI to the computer yet |
+| Supply | official 5.1 V 3 A USB-C | official **27 W** USB-C, plugged in **directly** |
+| HDMI display | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
+| DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
+| Wi-Fi | <span class="sc-ok">hardware</span> | <span class="sc-ok">hardware</span> |
+| Updating | copy the new files over the old ones | the same (no network update on the Pi 5) |
+
+What is different on the Pi 5 for now:
+
+- **No USB audio or MIDI to the computer.** The Pi 5's USB-C port is power only in this version (on the Pi 4 it is also the Sidecar's audio and MIDI interface): even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer, so it is left out.
+- **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its 800x480 UI to it, so the picture is slightly soft. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
+- **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
+- **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line (`POWER TOO WEAK: use 27 W adapter`).
+- **Updating**: copy the new release's files over the old ones (as on the Pi 4). There is no update over the network on a Pi 5 yet.
 - If the Pi 5 shows its boot diagnostics screen instead of starting, update its bootloader with Raspberry Pi Imager ("Misc utility images", "Bootloader"), then try again.
 - The serial console (for tester reports) is on the same pins as the Pi 4's (GPIO14/15, pins 8 and 10, 921600 baud).
 

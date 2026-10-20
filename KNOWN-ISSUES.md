@@ -2,7 +2,7 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.1.0 (Rytm builds `rui1027d`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Sidecar 0.2.0 (Raspberry Pi 4B and Pi 5; Sidecar Mini stays at 0.1.0; Rytm builds `rui1027d`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
 
 ## Still in testing
 
@@ -11,6 +11,7 @@ Not yet reported from a real Rytm (emulator or simulator only):
 - voice pages only for tracks on a Sidecar machine (with `rui1027d` at once on a machine change);
 - the PSRAM plugin code space and recording stems on a Sidecar Mini with PSRAM (see below);
 - the Wi-Fi settings page on the Pi (scan, connect and save, the 90 s fallback) and the Wi-Fi rejoin watchdog;
+- 0.2.0: the one card for the Pi 4B and the Pi 5, the Pi 5's DSI display, the web page's compression and request limits over Wi-Fi, the power warning;
 
 If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 
@@ -56,10 +57,16 @@ In testing: nothing of the PSRAM path has run on PSRAM hardware yet. With one or
 2. Run `:psram` and `:psram bench <id>` on the console with an installed NoisePlethora package as the id (stop the transport first: the bench pauses audio for about a second).
 3. Load a project with three or more NoisePlethora packages so one lands in PSRAM, play 8 voices for a minute, and report any `over budget`, `timed out` or `CRASHED` mutes and the underrun counters, with the outputs of step 2.
 
-## Raspberry Pi 4B
+## Raspberry Pi 4B and Pi 5
 
 - **The Rytm does not connect after many replugs** of the USB cable (the log says `Cannot set device address`): restart the Pi. A fix is planned.
 - **Wi-Fi is off** in the SD card package. Use a direct Ethernet cable for `sidecar.local`, or set up Wi-Fi yourself as in INSTALL-PI.md.
 - Ethernet has no DHCP client: the address is fixed (169.254.61.60), or set with `ip=` in `cmdline.txt`.
 - The web page has no password.
-- Only the Pi 4B is supported. The Pi 5, Pi 3 and Pi 400 are untested.
+- **Pi 5: no USB audio or MIDI to the computer.** Its USB-C port is power only in 0.2.0 (even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer). Use a Pi 4B for computer audio and MIDI.
+- **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 the warning names the 27 W adapter too: there, use the Pi 4's official 5.1 V 3 A supply.
+- **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
+- **Pi 5 DSI display:** in testing (built, not yet run on hardware). With no DSI panel answering, the Sidecar uses HDMI.
+- **Pi 5 updates:** by copying the new release over the card only (no network update on the Pi 5 yet). A Pi 5 that shows its boot diagnostics screen needs a bootloader update (Raspberry Pi Imager, "Misc utility images", "Bootloader").
+- **One card for both boards** is in testing on the Pi 4B and the Pi 5 (the Pi 4 reads exactly the 0.1.0 settings; the Pi 5 build is tested on hardware).
+- The Pi 3 and Pi 400 are untested.

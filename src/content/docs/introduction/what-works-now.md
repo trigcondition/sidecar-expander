@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.1.0**. The Rytm builds are `rui1027d` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
+This is **Sidecar 0.2.0** (Sidecar on the Raspberry Pi 4B and Pi 5, one SD card); **Sidecar Mini stays at 0.1.0**. The Rytm builds are `rui1027d` (the default: the mods plus the remote pages, the connect screen and the FX return on IN L/R) and `sfx1021` (the mods without the remote pages). 
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -53,7 +53,9 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | NO on SIDECAR leaves; unused user-machine knobs as hatched boxes on the Rytm's SRC / SMPL pages; preset names at once | <span class="sc-test">in testing</span> |
 | FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18, SCOPE on the Mini) |
 
-## Sidecar (Raspberry Pi 4B) only
+## Sidecar (Raspberry Pi 4B and Pi 5) only
+
+On the Pi 4B unless the row says Pi 5.
 
 | Feature | Status |
 |---|---|
@@ -69,6 +71,14 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Computer audio and MIDI over USB-C: no clicks at the stream's start, 5 minutes clean | <span class="sc-ok">hardware</span> (2026-10-19) |
 | Wi-Fi: join a network | <span class="sc-ok">hardware</span> (joins on the first boot; off in the package) |
 | Wi-Fi settings on the web page (scan, connect and save, 90 s fallback; the Pi restarts on a join) and first setup from `sidecar-wifi.txt` on the card | <span class="sc-test">in testing</span> (implemented, not yet run on hardware) |
+| The web page over Wi-Fi: sent compressed, stalled connections dropped after 3 s, at most 2 requests at once (0.2.0) | <span class="sc-test">in testing</span> |
+| Power warning: a weak supply in the log, on the web page's Power tile and in red on the display (0.2.0) | <span class="sc-test">in testing</span> |
+| One SD card for the Pi 4B and the Pi 5 (0.2.0) | <span class="sc-test">in testing</span> (the Pi 5 build is tested; the shared card is being tested on both boards) |
+| **Pi 5:** the Rytm over USB (replug included), voices, send effects, remote pages, `sidecar.local` over Ethernet | <span class="sc-ok">hardware</span> (2026-10-19) |
+| **Pi 5:** Wi-Fi (saved from the web page, connected) | <span class="sc-ok">hardware</span> (2026-10-19) |
+| **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
+| **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
+| **Pi 5:** USB audio and MIDI to the computer | not in 0.2.0 (USB-C is power only on the Pi 5) |
 
 ## Sidecar Mini (Teensy 4.1) only
 

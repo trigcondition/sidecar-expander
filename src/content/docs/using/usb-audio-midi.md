@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release, tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19). On the **Sidecar Mini (Teensy)**: stereo USB audio to the computer, <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW); part of this release.
+<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release (not on the **Pi 5** in 0.2.0: its USB-C port is power only), tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19). On the **Sidecar Mini (Teensy)**: stereo USB audio to the computer, <span class="sc-ok">hardware</span> (2026-10-18, heard in a DAW); part of this release.
 
 ## Sidecar Mini: stereo USB audio and MIDI
 

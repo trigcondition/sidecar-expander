@@ -1,13 +1,13 @@
 ---
 title: What Sidecar is
-description: A voice and feature expander for the Analog Rytm MKII, hosted on a Teensy 4.1 (Sidecar Mini) or a Raspberry Pi 4B (Sidecar).
+description: A voice and feature expander for the Analog Rytm MKII, hosted on a Teensy 4.1 (Sidecar Mini) or a Raspberry Pi 4B or Pi 5 (Sidecar).
 sidebar:
   order: 1
 ---
 
 Sidecar | Expander adds digital voices, send effects, recording and a web UI to the **Analog Rytm MKII**.
 
-A small computer sits on the Rytm's USB port: a **Teensy 4.1** (**Sidecar Mini**, the cheap way to start) or a **Raspberry Pi 4B** (**Sidecar**, the full version). It acts as the Rytm's USB host in Overbridge mode. The Rytm streams its tracks to the Sidecar, and the Sidecar sends its own voices and effects back into the Rytm. Everything comes out of the Rytm's own outputs, through its analog path.
+A small computer sits on the Rytm's USB port: a **Teensy 4.1** (**Sidecar Mini**, the cheap way to start) or a **Raspberry Pi 4B or Pi 5** (**Sidecar**, the full version; one SD card for both). It acts as the Rytm's USB host in Overbridge mode. The Rytm streams its tracks to the Sidecar, and the Sidecar sends its own voices and effects back into the Rytm. Everything comes out of the Rytm's own outputs, through its analog path.
 
 A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive the Sidecar. You play and edit everything from the Rytm: pick a Sidecar machine on a track, turn its knobs, p-lock them, and send tracks to the Sidecar's effects.
 
@@ -20,7 +20,7 @@ This is a tester release. It is not made, endorsed or supported by the instrumen
 | Part | Runs on | Does |
 |---|---|---|
 | **Rytm mods** | the Rytm (patched OS 1.73) | external (EXT) machines on every track, the SEND FX pages, the user slot menu, the SIDECAR folder in the sample browser, the remote UI page. Built on elekloader. |
-| **The engine** | Teensy 4.1 or Pi 4B | renders up to 8 voices, the two send effects, the sample pool, the user machines; on the Pi also the recorder, the display and the web page. |
+| **The engine** | Teensy 4.1, Pi 4B or Pi 5 | renders up to 8 voices, the two send effects, the sample pool, the user machines; on the Pi also the recorder, the display and the web page. |
 | **The patcher** | your browser or Python | patches your own stock OS 1.73 file. We never distribute firmware. |
 | **The web tools** | your browser | the Pi's page at `sidecar.local`, or the Teensy's console over WebSerial. |
 
