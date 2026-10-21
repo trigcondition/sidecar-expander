@@ -27,6 +27,18 @@ import piMachines from '../../assets/ui/pi-machines.png';
 import piLfo from '../../assets/ui/pi-lfo.png';
 import dispHome from '../../assets/ui/display-home-hidden.png';
 import dispFx from '../../assets/ui/display-sendfx.png';
+import seqMake from '../../assets/rytm/sc-seq-make.png';
+import seqHeld from '../../assets/rytm/sc-seq-held.png';
+import seqLock from '../../assets/rytm/sc-seq-lock-src.png';
+import touchSeq from '../../assets/touch/oled-seq-roll.png';
+import msChord from '../../assets/rytm/sc-multisample-chord.png';
+import wtPage from '../../assets/rytm/sc-wavetable.png';
+import grTouch from '../../assets/touch/oled-mach-granular.png';
+import bankTouch from '../../assets/touch/oled-mach-granular-bank-c.png';
+import songTouch from '../../assets/touch/classic-song-timeline.png';
+import insTouch from '../../assets/touch/oled-insfx-voice.png';
+import recTouch from '../../assets/touch/oled-rec-recording.png';
+import autoExt from '../../assets/rytm/sc-auto-ext.png';
 
 <div class="sc-hero">
   <p class="sc-big" translate="no">Sidecar</p>
@@ -105,6 +117,33 @@ import dispFx from '../../assets/ui/display-sendfx.png';
   <p>The Pi drives an 800x480 touch display: the tracks and their machines, the project's user slots, the send levels, the core loads and the recorder at a glance, with sound settings, screensaver and brightness by touch.</p>
 </Feature>
 
+<Feature kicker="Poly mode · 0.3 test line" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[
+  { src: seqMake, alt: 'The make prompt: MAKE LT A SIDECAR SEQ TRACK?', pixel: true },
+  { src: seqHeld, alt: 'The SEQ page with a step held: its chord on a keyboard', pixel: true },
+  { src: seqLock, alt: 'LOCK SRC: p-locks on seq steps', pixel: true },
+  { src: touchSeq, alt: 'The touchscreen piano roll' },
+]}>
+  <p>TRK + TRIG makes a track a Sidecar seq track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, p-locks on the Sidecar's parameters, step preview, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature flip kicker="Poly machines · 0.3 test line" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
+  { src: msChord, alt: 'MULTISAMPLE with a chord on the Rytm', pixel: true },
+  { src: wtPage, alt: 'WAVETABLE on the Rytm', pixel: true },
+  { src: grTouch, alt: 'GRANULAR on the touchscreen' },
+  { src: bankTouch, alt: 'Source bank C on the touchscreen' },
+]}>
+  <p>Three polyphonic machines with chords on four knobs: SFZ instruments streamed from the card, band-limited wavetables, and grains on samples or the Rytm's live audio. Their sources come in 8 banks of 128, chosen from a list on the Rytm's SRC page. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Inserts, sampling, songs · 0.3 test line" title="Inserts, a sampler and a song recorder" href="/sidecar-expander/using/insert-fx/" shots={[
+  { src: insTouch, alt: 'The INSERT FX page on the touchscreen' },
+  { src: autoExt, alt: 'The AUTO page on the Rytm', pixel: true },
+  { src: songTouch, alt: 'The song timeline on the touchscreen' },
+  { src: recTouch, alt: 'The REC page on the touchscreen' },
+]}>
+  <p>Two <a href="/sidecar-expander/using/insert-fx/">insert slots</a> on every Sidecar voice and three FX buses; a <a href="/sidecar-expander/using/sampling/">sampler and auto-sampler</a> that turns a patch, a Rytm track or an external synth into a MULTISAMPLE instrument; a <a href="/sidecar-expander/using/song-recorder/">song recorder</a> that captures a whole performance and replays it; and a <a href="/sidecar-expander/using/touchscreen/">touchscreen</a> with two themes, at 800x480 or 1024x600. <span class="sc-test">in testing</span></p>
+</Feature>
+
 </div>
 
 <section class="sc-compare">
@@ -144,6 +183,7 @@ import dispFx from '../../assets/ui/display-sendfx.png';
   <li><a href="/sidecar-expander/console/"><b>Sidecar Mini console</b><small>log and controls over WebSerial</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/releases"><b>Downloads</b><small>Sidecar Mini .hex, Sidecar SD card</small></a></li>
   <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.2.0</small></a></li>
+  <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3 test line)</small></a></li>
   <li><a href="/sidecar-expander/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
 </ul>

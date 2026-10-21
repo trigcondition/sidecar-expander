@@ -5,6 +5,10 @@ sidebar:
   order: 7
 ---
 
+:::note
+This page describes the 0.2.0 display. The 0.3 test line's touchscreen (themes, SEQ, PAT, VOICE, SONG, REC, 1024x600) is on [The touchscreen (0.3)](/sidecar-expander/using/touchscreen/).
+:::
+
 The Pi can drive an **800x480 display**: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on.
 
 | Display | Status |

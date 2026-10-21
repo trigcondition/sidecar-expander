@@ -41,6 +41,10 @@ The display shows a red `REC h:mm:ss` while recording.
 
 ![The REC page, armed: the take's time, TAKE-0008, 23 GB free, the meters, PLAY: REC](../../../assets/rytm/remote-rec.png)
 
+### The REC page on the touchscreen (0.3)
+
+<span class="sc-test">in testing</span> (Pi, 0.3 test line). The touchscreen has its own REC page: UP + T8 on the Rytm, or a tap on the home page's REC status. REC / STOP, ARM, the take's time, the 23 channels with a meter each (tap to record a channel or not, while idle) and the takes with delete. See [The touchscreen](/sidecar-expander/using/touchscreen/#rec-the-overbridge-recorder).
+
 ### Playback
 
 <span class="sc-ok">hardware</span> (Pi). One channel of one take plays into the Rytm's MAIN, on top of everything else. On the REC page: **B** turned picks the channel, **B** pushed plays and stops, **C** picks the take, **D** sets the level. On `sidecar.local`, the Record tab has a play button per channel of each take, and Stop. A take that starts recording stops playback; playback never runs while a take records.

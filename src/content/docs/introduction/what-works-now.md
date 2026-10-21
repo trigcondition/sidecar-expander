@@ -80,6 +80,20 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
 | **Pi 5:** USB audio and MIDI to the computer | not in 0.2.0 (USB-C is power only on the Pi 5) |
 
+## Next: the 0.3 test line (Sidecar on the Pi)
+
+Not in the 0.2.0 release. Rytm build `rui1039` with the Sidecar's 0.3 test build. Built and tested in the emulator and on the Mac; the sequencer has had a first round of use on a real Rytm.
+
+| Feature | Status |
+|---|---|
+| [Poly mode](/sidecar-expander/using/sequencer/): the Sidecar sequencer on seq tracks (TRK + TRIG), chords, 8 pages, p-locks, step preview | <span class="sc-test">in testing</span> (known bugs being fixed) |
+| [MULTISAMPLE, WAVETABLE, GRANULAR](/sidecar-expander/using/poly-machines/), chords on CHD / INV / SPR / VOI | <span class="sc-test">in testing</span> |
+| [Source banks A..H](/sidecar-expander/using/poly-machines/#source-banks-ah) and the bank list on the Rytm's SRC page | <span class="sc-test">in testing</span> |
+| [Insert FX and FX buses](/sidecar-expander/using/insert-fx/) | <span class="sc-test">in testing</span> |
+| [Sampler and auto-sampler](/sidecar-expander/using/sampling/) | <span class="sc-test">in testing</span> |
+| [Song recorder](/sidecar-expander/using/song-recorder/) | <span class="sc-test">in testing</span> |
+| [The touchscreen](/sidecar-expander/using/touchscreen/): OLED and CLASSIC themes, SEQ, PAT, VOICE, SONG, INSERT FX, REC; 800x480 and 1024x600; UP + T1..T10 from the Rytm | <span class="sc-test">in testing</span> |
+
 ## Sidecar Mini (Teensy 4.1) only
 
 | Feature | Status |
