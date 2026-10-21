@@ -5,8 +5,8 @@ sidebar:
   order: 7.1
 ---
 
-:::caution[0.3 test line]
-New in the 0.3 test line, Sidecar (Pi) only. Not in the 0.2.0 release (for 0.2.0 see [The display](/sidecar-expander/using/display/)). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel.
+:::caution[New in 0.3]
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build), Sidecar (Pi) only. For the 0.2.0 display see [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
 :::
 
 The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T10). <span class="sc-test">in testing</span>
@@ -101,7 +101,7 @@ The larger size gives the roll, the lists, the timeline and the meters more room
 |---|---|---|
 | 5" / 7" HDMI LCD with USB touch, 800x480 (Waveshare) | <span class="sc-ok">hardware</span> (the 5") | <span class="sc-ok">hardware</span>, scaled (slightly soft) |
 | 7" HDMI 1024x600 with USB touch (such as the GeeekPi EP-0194) | expected: needs `hdmi_cvt=1024 600 60 6 0 0 0` under `[pi4]` in `config.txt` | expected |
-| 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | used (the 0.3 SEQ page was tuned on it) | <span class="sc-test">in testing</span> (built, not yet run) |
+| 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
 | Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
 | Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
 

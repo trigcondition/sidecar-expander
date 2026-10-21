@@ -7,7 +7,7 @@ sidebar:
 
 User machines are **machine plugins**: small sound generators in `.rmp` files that you install on the Sidecar and play in the Rytm's slots **U1..U5**. Each project has its own choice of machine per slot.
 
-One plugin source builds for both Sidecars, but the package is per board: **RMP1** for the Teensy, **RMPA** for the Pi. Each Sidecar refuses the other's package with a clear message.
+A user machine is an **RMPA** package for the Pi. The Sidecar refuses other packages (such as the Sidecar Mini's RMP1) with a clear message.
 
 Status: loading and playing on the Pi <span class="sc-ok">hardware</span>; the slot menu fixes, slot fingerprints from the project <span class="sc-test">in testing</span>.
 
@@ -27,8 +27,6 @@ Six machines of our own (MIT licence), ready to install:
 ## Install
 
 **On the Pi:** open `sidecar.local`, tab **User machines**, and upload the `.a64.rmp` files (or copy them into `/Plugins/` on the card). Each package is checked (header, size, CRC, API version, target) before it goes in place. Press **Rescan** if you copied files by hand.
-
-**On the Teensy:** open the [web console](/sidecar-expander/console/), tab **User machines**, and upload the `.rmp` files. They go into the Teensy's own plugin store (4 MB of flash). Installing waits for the Rytm's transport to stop (STOP TO INSTALL).
 
 The installed list shows each machine's name, version, size, fingerprint, memory, CPU (measured once it has played), the slots that use it, and whether it fits.
 
@@ -59,7 +57,7 @@ A `!` before a machine name means it cannot play. Instead of a bare `!`, the Ryt
 
 | On the Rytm | Reason |
 |---|---|
-| `!ROOM NAME` | no code space left: the package does not fit in the memory that is left (on the Sidecar Mini the 32 KB plugin space) |
+| `!ROOM NAME` | no code space left: the package does not fit in the memory that is left |
 | `!CRSH NAME` | it crashed and was muted |
 | `!TIME NAME` | it took too long (a timeout, or over its CPU budget three times in a row) and was muted |
 | `!MISS NAME` | the package is not installed, or not in the version range the slot needs |
@@ -67,18 +65,18 @@ A `!` before a machine name means it cannot play. Instead of a bare `!`, the Ryt
 | `!SAFE NAME` | the Sidecar started in safe mode and did not load user machines |
 | `NAME...` | it is being loaded |
 
-The web console (Sidecar Mini) and the web page (Sidecar) show the full reason in the slot list, for example "no room: needs N B, M B free" or "muted: timed out".
+The web page shows the full reason in the slot list, for example "no room: needs N B, M B free" or "muted: timed out".
 
 A machine name with a plain `!` and no reason means the track's sound was made for another machine than the slot now plays. The track stays silent until a trig with a matching sound.
 
 ## Limits
 
-| | Sidecar Mini (Teensy 4.1) | Sidecar (Pi 4B) |
-|---|---|---|
-| Code space for loaded machines | 32 KB in all | 4 MB code + 4 MB data |
-| State per voice | 16 KB (more with PSRAM) | 64 KB |
-| Installed machines listed on the Rytm | up to 32 | up to 32 |
-| Presets (`/PRESETS/<id>/`, the PRE knob, up to 127 a machine) | yes | yes |
-| Sample pool access (`pool_info` / `pool_read`) | yes | yes, from the sample RAM |
+| | Sidecar (Pi) |
+|---|---|
+| Code space for loaded machines | 4 MB code + 4 MB data |
+| State per voice | 64 KB |
+| Installed machines listed on the Rytm | up to 32 |
+| Presets (`/PRESETS/<id>/`, the PRE knob, up to 127 a machine) | yes |
+| Sample pool access (`pool_info` / `pool_read`) | yes, from the sample RAM |
 
 Writing your own: [Writing user machines](/sidecar-expander/developers/writing-user-machines/).

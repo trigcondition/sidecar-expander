@@ -5,8 +5,8 @@ sidebar:
   order: 3.2
 ---
 
-:::caution[0.3 test line]
-New in the 0.3 test line (Rytm build `rui1039`, Sidecar on the Pi). Not in the 0.2.0 release. Built and tested in the emulator, with a first round of use on a real Rytm; the marks below say which. Sidecar (Pi) only: Sidecar Mini stays at 0.1.0 and has no poly mode.
+:::caution[New in 0.3]
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build). Built and tested in the emulator; first used on a real Rytm with a Pi 4. Sidecar (Pi) only.
 :::
 
 A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them.
@@ -108,7 +108,7 @@ The Rytm's own gestures act on the Sidecar's steps too, with one undo per level 
 | GRID REC, PAGE held + FUNC + RECORD / STOP / PLAY | the page: copy / paste / clear |
 | The same paste or clear again | undo |
 
-Paste on another pattern: select it (BANK + trig), then paste, as on the Rytm. Copying held steps is listed under [Limitations](#limitations).
+Paste on another pattern: select it (BANK + trig), then paste, as on the Rytm. Pattern and track copy / paste with seq tracks: <span class="sc-ok">hardware</span>. Copying held steps is listed under [Limitations](#limitations).
 
 ## The touchscreen from the Rytm
 
@@ -183,17 +183,18 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 
 ## Limitations
 
-- **Sidecar (Pi) only.** Sidecar Mini has no poly mode.
+- **Sidecar (Pi) only.**
 - **Analog tracks are not polyphonic.** A seq track must play 6-OP FM, MULTISAMPLE, WAVETABLE or GRANULAR. JUNO is mono in this build.
 - **Voices per machine** are capped (table above); a note past the cap steals the oldest.
 - **Shared voices.** RS/CP, MT/HT, CH/OH and CY/CB share one voice; a poly track is best on BD, SD, BT or LT.
 - **No analog p-locks on seq steps**: FLTR, AMP and the Rytm's own FX are not locked per step, and the Sidecar's LFOs are not locked per step.
-- **No trig conditions or probability yet**, no retrigs. FILL is seen but not used. The Rytm's swing does not apply to seq tracks.
+- **No trig conditions or probability yet**, no retrigs. FILL is seen but not used.
+- Seq tracks use the Sidecar's own swing, set per track.
 - The first steps after PLAY are late by the round trip (PLAY cannot be predicted); after that, and across pattern changes, notes are rendered ahead.
 - Steps live on the Sidecar's card. A stock OS, a SysEx or Transfer backup, or a project shared without the card's files does not carry them.
 - A project renamed or copied on the Rytm starts with empty seq tracks (the files are keyed by the project's name).
 - The SEQ page's playhead moves at most 4 times a second, to keep the Rytm's UI responsive.
-- Pi 5: the same engine, not yet confirmed on a Pi 5 with a Rytm.
+- First hardware use on a Pi 4. Nothing is confirmed on a Pi 5 yet.
 
 **Known bugs, being fixed:**
 

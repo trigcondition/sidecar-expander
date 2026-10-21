@@ -15,6 +15,7 @@
     "@astrojs/starlight": "0.42.6",
     "@fontsource/archivo-black": "5.3.0",
     "astro": "7.4.0",
-    "starlight-links-validator": "0.27.0"
+    "starlight-links-validator": "0.27.0",
+    "starlight-versions": "0.10.1"
   }
 }

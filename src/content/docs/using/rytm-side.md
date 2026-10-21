@@ -31,7 +31,7 @@ Names from the Sidecar's card show on the Rytm: DSP SAMPLE's SMP shows the pool 
 
 ## The SIDECAR folder
 
-The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) shows a folder **SIDECAR** at the +Drive root (called TEENSY before the 1021 builds). Inside it is the Sidecar's card, on the Pi as well as the Teensy: folders and WAV files with their sizes, and the JUNO and DX7 banks.
+The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) shows a folder **SIDECAR** at the +Drive root (called TEENSY before the 1021 builds). Inside it is the Sidecar's card: folders and WAV files with their sizes, and the JUNO and DX7 banks.
 
 ![The +Drive root in the sample browser: Factory, incoming and SIDECAR](../../../assets/rytm/drive-root.png)
 ![Inside SIDECAR: the Sidecar card's folders and files with their sizes](../../../assets/rytm/drive-sidecar.png)
@@ -121,7 +121,7 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 ## The remote UI
 
-<span class="sc-ok">hardware</span> (on Sidecar Mini and Sidecar; this release needs the `rui1027d` Rytm build)
+<span class="sc-ok">hardware</span> (this release needs the `rui1027d` Rytm build)
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on.
 
@@ -139,7 +139,7 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 
 Since 1021 every letter on these pages is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places: the title bar, the labels and the bottom bar look like the Rytm's own pages. The Sidecar sends the graphics and the text items; no font data of the Rytm is in Sidecar. A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later (it was 75 ms).
 
-**The status pages.** **SIDECAR** shows the eight Sidecar voices with their machines (numbered by voice: 1 BD, 2 BT, 3 SD, 4 LT, 5 CH/OH, 6 MT/HT, 7 CY/CB, 8 RS/CP), and FX1 and FX2 with their TYPE and PRE / POST. **SYSTEM** shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key). The Sidecar Mini has no network, so its SYSTEM page has no network line; its recorder row shows IDLE, ARM or REC m:ss.
+**The status pages.** **SIDECAR** shows the eight Sidecar voices with their machines (numbered by voice: 1 BD, 2 BT, 3 SD, 4 LT, 5 CH/OH, 6 MT/HT, 7 CY/CB, 8 RS/CP), and FX1 and FX2 with their TYPE and PRE / POST. **SYSTEM** shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key).
 
 ![The SIDECAR page: voices 1-8 with their machines, FX1 and FX2](../../../assets/rytm/remote-status-sidecar.png)
 ![The SYSTEM page: U1..U5, REC 1:15, OB OK, UND 0, three core loads, ETH UP and the address](../../../assets/rytm/remote-status-system.png)
@@ -150,7 +150,7 @@ Since 1021 every letter on these pages is drawn by the Rytm itself, in its own f
 
 <small>Screenshots: `rui1027d` in the emulator with the test line's host code (mock values); on a real Rytm the text is the Rytm's own and it responds at once.</small>
 
-- It needs the test line's Sidecar firmware (Pi kernel or Mini firmware). An older Pi kernel opens the pages without text.
+- It needs the test line's Sidecar firmware (the Pi kernel). An older Pi kernel opens the pages without text.
 
 ### Tracks and voices
 
@@ -172,7 +172,7 @@ On a track that plays a Sidecar machine with a page (JUNO, 6-OP FM, PLAITS, DSP 
 
 Most of these are tested on hardware and part of this release; each says which.
 
-All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so new pages, layouts and graphics come with a Sidecar update (the Pi's SD card or a Teensy upload) and **do not need a new Rytm flash**. Only a new kind of building block on the Rytm side, like the connect screen below, needs one.
+All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so new pages, layouts and graphics come with a Sidecar update (the Pi's SD card) and **do not need a new Rytm flash**. Only a new kind of building block on the Rytm side, like the connect screen below, needs one.
 
 **Connect screen** <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
 
@@ -188,12 +188,12 @@ All of these are drawn by the Sidecar. The Rytm only shows what it is sent, so n
 ![DSP SAMPLE: the waveform with the start/end region and the loop brackets](../../../assets/rytm/remote-wave-sample.png)
 ![GRAIN: the waveform with the grain window](../../../assets/rytm/remote-wave-grain.png)
 
-**Recorder and playback** <span class="sc-ok">hardware</span> (recording on the Pi and the Mini, playback on the Pi): YES records and stops, knob A arms; B picks a channel and plays it into the MAIN, C the take, D the level. See [The recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm).
+**Recorder and playback** <span class="sc-ok">hardware</span>: YES records and stops, knob A arms; B picks a channel and plays it into the MAIN, C the take, D the level. See [The recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm).
 
 ![The REC page, armed](../../../assets/rytm/remote-rec.png)
 ![The REC page playing a channel of a take](../../../assets/rytm/remote-play.png)
 
-**Channel picking** (<span class="sc-test">in testing</span>, Pi; on the Mini once stems work with PSRAM): on the REC page the trig keys choose what the next take records: T1..T8 the tracks, T9 MAIN, T10 / T11 the inputs (or FX L / R with the FX return). Their lights show it: blue recorded, orange not. Not while a take records.
+**Channel picking** (<span class="sc-test">in testing</span>): on the REC page the trig keys choose what the next take records: T1..T8 the tracks, T9 MAIN, T10 / T11 the inputs (or FX L / R with the FX return). Their lights show it: blue recorded, orange not. Not while a take records.
 
 **Machine graphics** <span class="sc-test">in testing</span>. 6-OP FM shows the algorithm of the patch PAT picks (operators, carriers on the output line, feedback); JUNO shows its envelope and filter curve.
 

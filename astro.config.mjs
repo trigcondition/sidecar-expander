@@ -4,6 +4,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
+import starlightVersions from 'starlight-versions';
 
 export default defineConfig({
   site: 'https://trigcondition.github.io',
@@ -20,7 +21,9 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/trigcondition/sidecar-expander' }],
       editLink: { baseUrl: 'https://github.com/trigcondition/sidecar-expander/edit/main/' },
       lastUpdated: false,
-      plugins: [starlightLinksValidator({ exclude: ['/sidecar-expander/patcher/', '/sidecar-expander/console/', '/sidecar-expander/patcher/**', '/sidecar-expander/console/**'] })],
+      plugins: [
+        starlightVersions({ current: { label: '0.3 (latest)' }, versions: [{ slug: '0.2', label: '0.2' }] }),
+        starlightLinksValidator({ exclude: ['/sidecar-expander/patcher/', '/sidecar-expander/console/', '/sidecar-expander/patcher/**', '/sidecar-expander/console/**'] })],
       sidebar: [
         { label: 'Introduction', items: [{ autogenerate: { directory: 'introduction' } }] },
         { label: 'Getting started', items: [{ autogenerate: { directory: 'getting-started' } }] },
@@ -33,7 +36,6 @@ export default defineConfig({
           label: 'Tools',
           items: [
             { label: 'Rytm patcher', link: '/patcher/' },
-            { label: 'Teensy web console', link: '/console/' },
           ],
         },
       ],

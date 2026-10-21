@@ -1,4 +1,5 @@
 ---
+slug: 0.2/introduction/pi-vs-teensy
 title: Sidecar Mini or Sidecar?
 description: Sidecar Mini (Teensy 4.1) and Sidecar (Raspberry Pi 4B or Pi 5) compared, and moving a project from one to the other.
 sidebar:

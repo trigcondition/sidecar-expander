@@ -1,11 +1,12 @@
 ---
+slug: 0.2/getting-started/install-teensy
 title: Install Sidecar Mini (Teensy 4.1)
 description: Wiring, loading the firmware, the SD card and the first check.
 sidebar:
   order: 1
 ---
 
-The Teensy version works together with the Rytm mods. Patch and flash those first ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
+The Teensy version works together with the Rytm mods. Patch and flash those first ([Patch and flash the Rytm](/sidecar-expander/0.2/getting-started/patch-and-flash/)).
 
 ## You need
 
@@ -67,7 +68,7 @@ With no card the Teensy still runs. The SIDECAR folder on the Rytm is then empty
 - **out=tracks**: each voice returns on its own track's channel. The mods expect this.
 - **notes off**: the Rytm's MIDI notes do not trigger the voices. The mods trigger them.
 
-Both can be changed from the [web console](/sidecar-expander/using/web-ui/#the-sidecar-mini-web-console), but the defaults are right for the mods.
+Both can be changed from the [web console](/sidecar-expander/0.2/using/web-ui/#the-sidecar-mini-web-console), but the defaults are right for the mods.
 
 ## Starter content
 
@@ -94,4 +95,4 @@ The Teensy has 32 KB of plugin code space. The six starter machines fit together
 3. On the Rytm, pick an EXT machine (PLAITS, say) on a track and play it.
 4. Open the sample browser: FUNC + SMPL, DOWN, FUNC + YES. **SIDECAR** appears at the +Drive root.
 
-If something is off, see [Troubleshooting](/sidecar-expander/using/troubleshooting/), then open a tester report.
+If something is off, see [Troubleshooting](/sidecar-expander/0.2/using/troubleshooting/), then open a tester report.

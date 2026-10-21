@@ -1,6 +1,6 @@
 ---
 title: Web UI
-description: The Pi's page at sidecar.local and the Teensy's web console, tab by tab, and the file browser.
+description: The Pi's page at sidecar.local, tab by tab, and the file browser.
 sidebar:
   order: 6
 ---
@@ -51,32 +51,3 @@ The page has no password. Use it on a direct cable or a network you trust.
 
 Uploading during play works, but a large upload can compete with sample streaming from the card. Prefer uploading while the sequencer is stopped.
 
-## The Sidecar Mini web console
-
-Open the [console](/sidecar-expander/console/) in **Chrome or Edge on a desktop computer** and press **Connect**. It talks to the Teensy over WebSerial through the micro-USB port. Nothing is sent to any server.
-
-| Tab | What |
-|---|---|
-| **Status** | the live status line: CPU, the USB stream, FIFO, MIDI |
-| **Sound** | MIDI notes, output to tracks or MAIN, the IN L/R source, computer audio, a machine per voice, the FIFO target (segmented toggles that show the device's state) |
-| **LFO** | the four [LFOs](/sidecar-expander/using/lfo/) |
-| **Record** | the [Sidecar Mini recorder](/sidecar-expander/using/recorder/#sidecar-mini-teensy): record, arm, stereo or stems (stems with PSRAM), bit depth, the levels |
-| **USB** | the USB audio mode |
-| **User machines** | user machines: install, delete, rescan, the project's slots, export/import, the memory map (with a PSRAM code arena bar when PSRAM is fitted) |
-| **Files** | the SD card: browse, upload with resume, download, new folder, delete |
-| **Log & console** | the log and the console commands |
-| **About** | the build |
-
-On the computer the Mini shows up as **Sidecar Mini** (USB name). <span class="sc-ok">hardware</span>
-
-![The Sidecar Mini console, Status tab](../../../assets/ui/mini-status.png)
-![The Sidecar Mini console, Sound tab](../../../assets/ui/mini-sound.png)
-![The Sidecar Mini console, Record tab: stereo or stems, bit depth, the levels, the fast-card note](../../../assets/ui/mini-record.png)
-![The Sidecar Mini console, USB tab](../../../assets/ui/mini-usb.png)
-![The Sidecar Mini console in dark mode on a phone, Status tab](../../../assets/ui/mini-status-mobile.png)
-
-<small>Screenshots: the test line's console with its built-in mock (`?mock`), not a real Teensy.</small>
-
-**Teensy rules:** card writes, deletes and installs wait for the Rytm's transport to stop (the page shows "paused" and continues). Reads go on during play, slowly. `/`, `/Samples` and `/.rytm` are protected.
-
-Use the console to check that the Rytm is streaming (`ob: streaming`, `MIDI attached`) and to copy logs for a tester report.

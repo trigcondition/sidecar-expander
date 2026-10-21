@@ -1,6 +1,6 @@
 ---
 title: Hardware you need
-description: The Rytm, the board, the cables and the cards for Sidecar Mini (Teensy 4.1) or Sidecar (Raspberry Pi 4B or Pi 5).
+description: The Rytm, the board, the cables and the cards for Sidecar (Raspberry Pi 4B or Pi 5).
 sidebar:
   order: 3
 ---
@@ -15,16 +15,12 @@ sidebar:
 - Recommended: a **DIN MIDI interface**, for the recovery route that works even when the OS does not boot.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the **Overbridge** mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 
-## Option A: Sidecar Mini (Teensy 4.1)
+## Sidecar (Raspberry Pi 4B or Pi 5)
 
-- A **Teensy 4.1** (PJRC). A stock board is enough.
-- **Solder the Teensy 4.1's USB host header** (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
-- A **USB host cable** for the Teensy's 5-pin USB host header. It needs 5 male header pins soldered to the host pads.
-- A **micro-USB data cable**, for power and for loading the firmware.
-- Optional: a **microSD card** (FAT32 or exFAT) in the Teensy's slot, for samples and patch banks. **To record on a Mini without PSRAM, use a fast card** (A1/A2, U3/V30): the Teensy's own buffer is small.
-- Optional: **PSRAM** chips on the Teensy's underside. Almost nothing needs them: everything works on a stock board except GRAIN (DSP SAMPLE's MOD) and stems recording. PSRAM adds headroom for samples, a second plugin code space for more and bigger user machines, and stems recording (both in testing: see KNOWN-ISSUES for what PSRAM testers can run).
+:::note[Sidecar Mini]
+Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/sidecar-expander/0.2/introduction/pi-vs-teensy/).
+:::
 
-## Option B: Sidecar (Raspberry Pi 4B or Pi 5)
 
 - A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**. One SD card set boots both.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, **27 W** for the Pi 5, plugged in directly (not through a hub).

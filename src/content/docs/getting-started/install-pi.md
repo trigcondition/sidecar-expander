@@ -108,7 +108,7 @@ On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` →
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-<version>.zip` holds six starter machines as Pi packages, the same files for the Pi 4B and the Pi 5: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi. The Teensy's `.rmp` files do not load on the Pi.
+The release's `sidecar-pi-plugins-<version>.zip` holds six starter machines as Pi packages, the same files for the Pi 4B and the Pi 5: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 

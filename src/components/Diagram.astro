@@ -1,9 +1,14 @@
 ---
 // The concept diagram, drawn for this site (generic outlines, no logos).
+// piOnly: the Raspberry Pi alone (0.3 docs; the 0.2 docs keep the Teensy OR the Pi).
+const { piOnly = false } = Astro.props;
 ---
 <svg class="sc-diagram" viewBox="0 0 640 470" role="img" aria-labelledby="sc-dt sc-dd" xmlns="http://www.w3.org/2000/svg">
 <title id="sc-dt">How Sidecar connects</title>
-<desc id="sc-dd">A Teensy 4.1 or a Raspberry Pi 4B or Pi 5 connects to the drum machine with one USB cable and adds digital voices and effects.</desc>
+{piOnly
+  ? <desc id="sc-dd">A Raspberry Pi 4B or Pi 5 connects to the drum machine with one USB cable and adds digital voices and effects.</desc>
+  : <desc id="sc-dd">A Teensy 4.1 or a Raspberry Pi 4B or Pi 5 connects to the drum machine with one USB cable and adds digital voices and effects.</desc>}
+{!piOnly && <Fragment>
 <text class="lab" x="150" y="38" text-anchor="middle">Teensy 4.1</text>
 <rect class="ink" x="48" y="58" width="204" height="84" rx="6"/>
 <rect class="ink" x="30" y="84" width="22" height="32" rx="3"/>
@@ -11,13 +16,14 @@
 <rect class="ink" x="128" y="84" width="34" height="32" rx="2"/>
 <rect class="inkfill" x="190" y="92" width="10" height="8"/><rect class="inkfill" x="210" y="92" width="10" height="8"/>
 <text class="or" x="320" y="104" text-anchor="middle">OR</text>
+</Fragment>}
 <text class="lab" x="495" y="38" text-anchor="middle">Raspberry Pi 4B / 5</text>
 <rect class="ink" x="400" y="52" width="196" height="118" rx="8"/>
 <circle class="inkfill" cx="425" cy="66" r="2.6"/><circle class="inkfill" cx="436" cy="66" r="2.6"/><circle class="inkfill" cx="447" cy="66" r="2.6"/><circle class="inkfill" cx="458" cy="66" r="2.6"/><circle class="inkfill" cx="469" cy="66" r="2.6"/><circle class="inkfill" cx="480" cy="66" r="2.6"/><circle class="inkfill" cx="491" cy="66" r="2.6"/><circle class="inkfill" cx="502" cy="66" r="2.6"/><circle class="inkfill" cx="513" cy="66" r="2.6"/><circle class="inkfill" cx="524" cy="66" r="2.6"/><circle class="inkfill" cx="535" cy="66" r="2.6"/><circle class="inkfill" cx="546" cy="66" r="2.6"/>
 <rect class="ink" x="440" y="88" width="48" height="48" rx="3"/>
 <rect class="ink" x="566" y="70" width="40" height="26" rx="2"/><rect class="ink" x="566" y="102" width="40" height="26" rx="2"/><rect class="ink" x="566" y="134" width="40" height="26" rx="2"/>
 <rect class="inkfill" x="420" y="150" width="14" height="10"/><rect class="inkfill" x="446" y="150" width="14" height="10"/><rect class="inkfill" x="472" y="150" width="14" height="10"/>
-<path class="green" d="M256 100 H290 Q308 100 308 120 V176"/>
+{!piOnly && <path class="green" d="M256 100 H290 Q308 100 308 120 V176"/>}
 <path class="green" d="M396 112 H350 Q332 112 332 130 V176"/>
 <rect class="greenfill" x="300" y="174" width="40" height="44" rx="8"/>
 <path d="M320 184 v22 m-7 -8 l7 8 l7 -8" fill="none" stroke="var(--sl-color-black)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

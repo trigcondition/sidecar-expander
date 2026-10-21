@@ -9,7 +9,7 @@ sidebar:
 
 | Symptom | Check |
 |---|---|
-| No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (Teensy console, `sidecar.local` Log & console tab) |
+| No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (`sidecar.local` Log & console tab) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
@@ -34,14 +34,6 @@ sidebar:
 
 - After an OS upgrade the Rytm can hang on **"Success! Rebooting"**. Power cycle it: the update is complete.
 
-### Teensy 4.1
-
-- **The Rytm connects only after a reboot or many retries, or the Teensy drops off the computer:** solder the Teensy 4.1's USB host header (5 V, D-, D+, GND, shield). Press-fit or unsoldered pins make the host port flaky: the Rytm connects only after a reboot or after many retries (the link comes up at full speed and drops), and the Teensy's own USB to the computer can drop when the host port's power switches on. Use a short, good USB cable to the Rytm.
-
-- RINGS, CLOUDSEED and STUTTER run only on the Pi.
-- The console's User machines and Files tabs are in testing.
-- USB audio to a computer: stereo in this release (2 in / 2 out); the multichannel mode comes later.
-
 ### Raspberry Pi 4B and Pi 5
 
 - **The Rytm does not connect after many replugs** (the log says `Cannot set device address`): restart the Pi. A fix is planned.
@@ -60,10 +52,6 @@ sidebar:
 
 - A remote page catches only the keys and knobs it uses; PLAY, STOP and RECORD always reach the Rytm. The status pages catch every knob. With a Sidecar firmware older than the key masks, every key except PLAY, STOP and RECORD goes to the Sidecar.
 
-### Teensy: user machine space
-
-- The 32 KB plugin code space fits only one of the large NoisePlethora packages (NP VOICES, NP CLUST1, NP CLUST2) at a time; a second shows `!ROOM`. Use the new, smaller NoisePlethora packages instead (prime, fibo, phase, fm, pw, ring, noise, walk, atari): any two fit together, some three. The Pi has no such limit.
-
 ### Still in testing
 
 Results from testers are welcome:
@@ -72,4 +60,4 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1027d` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from the Teensy console or `sidecar.local` helps a lot.
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm build (`rui1027d` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. A log from `sidecar.local` helps a lot.

@@ -1,0 +1,154 @@
+---
+slug: 0.2
+title: Home
+description: Sidecar | Expander adds digital voices, send effects, LFOs, recording, computer audio and its own pages on the Rytm's screen to the Analog Rytm MKII. Sidecar Mini (Teensy 4.1) or Sidecar (Raspberry Pi 4B or Pi 5) on the Rytm's USB port.
+template: splash
+tableOfContents: false
+editUrl: false
+---
+import Diagram from '../../../components/Diagram.astro';
+import Feature from '../../../components/Feature.astro';
+import plaits from '../../../assets/rytm/remote-plaits.png';
+import juno from '../../../assets/rytm/remote-juno.png';
+import fm from '../../../assets/rytm/remote-fm.png';
+import grain from '../../../assets/rytm/remote-wave-grain.png';
+import halo from '../../../assets/rytm/sendfx1-halo.png';
+import rings from '../../../assets/rytm/sendfx1-rings.png';
+import stutter from '../../../assets/rytm/sendfx2-stutter.png';
+import statusP from '../../../assets/rytm/remote-status-sidecar.png';
+import scope from '../../../assets/rytm/remote-scope.png';
+import lfoDesign from '../../../assets/rytm/remote-lfo-design.png';
+import connect from '../../../assets/rytm/remote-connect.png';
+import rec from '../../../assets/rytm/remote-rec.png';
+import play from '../../../assets/rytm/remote-play.png';
+import piRecord from '../../../assets/ui/pi-record.png';
+import piSound from '../../../assets/ui/pi-sound.png';
+import miniUsb from '../../../assets/ui/mini-usb.png';
+import piMachines from '../../../assets/ui/pi-machines.png';
+import piLfo from '../../../assets/ui/pi-lfo.png';
+import dispHome from '../../../assets/ui/display-home-hidden.png';
+import dispFx from '../../../assets/ui/display-sendfx.png';
+
+<div class="sc-hero">
+  <p class="sc-big" translate="no">Sidecar</p>
+  <div class="sc-rule">EXPANDER</div>
+  <p class="sc-tag">More voices, effects, LFOs, recording and pages for the Analog Rytm MKII, played and edited from the Rytm itself.</p>
+  <p class="sc-version">Version 0.2.0 · public tester release · Pi 4B and Pi 5</p>
+  <div class="sc-cta">
+    <a class="sc-btn primary" href="/sidecar-expander/0.2/getting-started/patch-and-flash/">Get started</a>
+    <a class="sc-btn" href="#features">What it does</a>
+  </div>
+</div>
+
+<Diagram />
+
+<p class="sc-lede">A small computer on the Rytm's USB port, <b>Sidecar Mini</b> on a Teensy 4.1 or the full <b>Sidecar</b> on a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
+
+<div id="features" class="sc-features">
+
+<Feature kicker="Voices" title="Digital machines on every track" href="/sidecar-expander/0.2/using/machines/" shots={[
+  { src: plaits, alt: 'A PLAITS voice page on the Rytm', pixel: true },
+  { src: juno, alt: 'The JUNO page with its envelope', pixel: true },
+  { src: fm, alt: 'The 6-OP FM page with its algorithm', pixel: true },
+  { src: grain, alt: 'The GRAIN view of DSP SAMPLE', pixel: true },
+]}>
+  <p>Pick PLAITS, JUNO, 6-OP FM, DAISYSP, DIGIDRUM or DSP SAMPLE in a track's machine list, like any Rytm machine. DSP SAMPLE plays from the Sidecar's card, with slices, loops and a granular mode. Five user slots load machine plugins: six starter machines come with the release.</p>
+</Feature>
+
+<Feature flip kicker="Send effects" title="Two send effects next to the Rytm's own" href="/sidecar-expander/0.2/using/send-effects/" shots={[
+  { src: halo, alt: 'SEND FX 1 set to HALO with DCY, MOD, TONE, SHIM', pixel: true },
+  { src: rings, alt: 'SEND FX 1 set to RINGS', pixel: true },
+  { src: stutter, alt: 'SEND FX 2 set to STUTTER', pixel: true },
+]}>
+  <p>Every track gets two more sends. <b>HALO</b>, a lush plate with FREEZE and SHIMMER, runs on both Sidecars with CHORUS, COMB, CRUSH and RINGMOD; the Pi adds RINGS, CLOUD SEED and STUTTER. Each effect's knobs carry their own names on the Rytm's pages, and PRE / POST decides whether the return goes through the Rytm's analog distortion and compressor.</p>
+</Feature>
+
+<Feature kicker="On the Rytm's screen" title="Pages the Sidecar draws for you" href="/sidecar-expander/0.2/using/rytm-side/#the-remote-ui" shots={[
+  { src: statusP, alt: 'The SIDECAR status page', pixel: true },
+  { src: scope, alt: 'SCOPE with twelve meters', pixel: true },
+  { src: lfoDesign, alt: 'The LFO design view with 16 steps', pixel: true },
+  { src: connect, alt: 'The connect screen', pixel: true },
+]}>
+  <p>Hold TRK and press YES: status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
+</Feature>
+
+<Feature flip kicker="Modulation" title="LFOs, with your own wave" href="/sidecar-expander/0.2/using/lfo/" shots={[
+  { src: piLfo, alt: 'The web page LFO tab' },
+]}>
+  <p>Eight LFOs on the Pi, four on the Mini, on any parameter of a Sidecar voice or effect, saved per kit. Free or synced to the Rytm, retriggered by a trig or PLAY, and a DESIGN wave of 16 steps you draw on the Rytm (TRK + LFO) or in the browser. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Recording" title="Record every track, play it back" href="/sidecar-expander/0.2/using/recorder/" shots={[
+  { src: rec, alt: 'The REC page, armed', pixel: true },
+  { src: play, alt: 'The REC page playing a channel of a take', pixel: true },
+  { src: piRecord, alt: 'The web page Record tab with takes' },
+]}>
+  <p>Record the Rytm's tracks, the Sidecar's voices and the effect returns to the SD card, one aligned WAV per source, from the Rytm's REC page or armed to PLAY. On the Pi, play a take's channel back into the Rytm's mix. The Rytm's own delay and reverb can be recorded as their own channels. Sidecar Mini records stereo to its card, from the same REC page.</p>
+</Feature>
+
+<Feature flip kicker="Computer audio" title="An audio interface for your DAW" href="/sidecar-expander/0.2/using/usb-audio-midi/" shots={[
+  { src: piSound, alt: 'The web page Sound tab' },
+  { src: miniUsb, alt: 'The Sidecar Mini console USB tab' },
+]}>
+  <p>With the Sidecar on the Rytm's USB port, its own USB port becomes a class-compliant audio and MIDI device for your computer: multi-channel on the Pi, stereo on the Mini. No driver needed.</p>
+</Feature>
+
+<Feature kicker="Web UI and plugins" title="Manage it from a browser" href="/sidecar-expander/0.2/using/web-ui/" shots={[
+  { src: piMachines, alt: 'The web page User machines tab' },
+]}>
+  <p>The Pi serves its own page at <code>sidecar.local</code>; the Mini has a console in Chrome or Edge over USB. Install user machines, see the CPU and memory, fill the sample pool, browse and upload whole sample folders, set up Wi-Fi. Nothing leaves your network.</p>
+</Feature>
+
+<Feature flip kicker="Touchscreen" title="A screen of its own" href="/sidecar-expander/0.2/using/display/" shots={[
+  { src: dispHome, alt: 'The display home screen' },
+  { src: dispFx, alt: 'The display Send FX page' },
+]}>
+  <p>The Pi drives an 800x480 touch display: the tracks and their machines, the project's user slots, the send levels, the core loads and the recorder at a glance, with sound settings, screensaver and brightness by touch.</p>
+</Feature>
+
+</div>
+
+<section class="sc-compare">
+  <p class="sc-kicker">Two Sidecars</p>
+  <h2>Sidecar Mini or Sidecar?</h2>
+  <div class="sc-cards">
+    <div class="sc-card">
+      <h3>Sidecar Mini</h3>
+      <p class="sc-card-sub">Teensy 4.1 · the cheap way to start</p>
+      <ul>
+        <li>All built-in machines, a few user machines</li>
+        <li>CHORUS, COMB, CRUSH, RINGMOD, HALO</li>
+        <li>Remote pages incl. REC, 4 LFOs</li>
+        <li>Stereo recording, stereo USB audio</li>
+        <li>PSRAM: more plugins, stems (in testing)</li>
+      </ul>
+    </div>
+    <div class="sc-card">
+      <h3>Sidecar</h3>
+      <p class="sc-card-sub">Raspberry Pi 4B or Pi 5 · everything</p>
+      <ul>
+        <li>Many user machines</li>
+        <li>Plus RINGS, CLOUD SEED, STUTTER</li>
+        <li>Remote pages, 8 LFOs, playback</li>
+        <li>23-source recorder, multi-channel USB audio</li>
+        <li>Touch display, web page, Wi-Fi</li>
+      </ul>
+    </div>
+  </div>
+  <p><a class="sc-more" href="/sidecar-expander/0.2/introduction/pi-vs-teensy/">Compare in detail →</a> Projects move from the Mini to the Sidecar.</p>
+</section>
+
+<ul class="sc-links">
+  <li><a href="/sidecar-expander/0.2/introduction/what-is-sidecar/"><b>Read me first</b><small>what it is, what works, risks</small></a></li>
+  <li><a href="/sidecar-expander/0.2/introduction/what-works-now/"><b>What works now</b><small>tested on hardware or in testing</small></a></li>
+  <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS 1.73 file, in the browser</small></a></li>
+  <li><a href="/sidecar-expander/console/"><b>Sidecar Mini console</b><small>log and controls over WebSerial</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-expander/releases"><b>Downloads</b><small>Sidecar Mini .hex, Sidecar SD card</small></a></li>
+  <li><a href="/sidecar-expander/0.2/release-notes/"><b>Release notes</b><small>0.2.0</small></a></li>
+  <li><a href="/sidecar-expander/0.2/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
+</ul>
+
+<p class="sc-note">The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.</p>
+
+<p class="sc-note">Unofficial tester release, not affiliated with or endorsed by the maker of the Analog Rytm; "Analog Rytm" and "Overbridge" are their trademarks, used only to say what this works with. Nothing you open here uploads your files. Code under the GNU GPL; see the <a href="/sidecar-expander/0.2/about/licence/">licence page</a> and the <a href="https://github.com/trigcondition/sidecar-expander/blob/main/THIRD_PARTY_LICENSES">third-party licences</a>.</p>

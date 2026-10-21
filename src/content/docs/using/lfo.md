@@ -7,7 +7,7 @@ sidebar:
 
 <span class="sc-test">in testing</span> (new in 0.1.0; saved per kit in `/.rytm/lfo/<project>/kNNN.txt` on the Sidecar's card)
 
-The Sidecar has its own LFOs: **8 on the Sidecar (Pi)**, **4 on the Sidecar Mini**. Each one modulates one parameter of a Sidecar voice or a send effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs.
+The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidecar voice or a send effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs.
 
 ## Targets
 
@@ -39,9 +39,8 @@ Hold **TRK** and press **LFO** to open the remote pages straight on the LFO page
 
 ## On the web page and the console
 
-The Pi's web page and the Sidecar Mini's console have an **LFO** tab with the same settings per LFO: target, parameter, wave, rate, sync, retrig, depth, and the design steps.
+The web page has an **LFO** tab with the same settings per LFO: target, parameter, wave, rate, sync, retrig, depth, and the design steps.
 
 ![The Pi page's LFO tab: LFO 1 on V3, LFO 2 on FX1 with a DESIGN wave, the design grid with HOLD / RAMP / SMTH and the presets](../../../assets/ui/pi-lfo.png)
-![The Sidecar Mini console's LFO tab: four LFOs](../../../assets/ui/mini-lfo.png)
 
 <small>Screenshots: the 0.1.0 web UIs with mock data.</small>

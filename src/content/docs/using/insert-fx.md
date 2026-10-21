@@ -5,8 +5,8 @@ sidebar:
   order: 2.1
 ---
 
-:::caution[0.3 test line]
-New in the 0.3 test line, Sidecar (Pi) only. Not in the 0.2.0 release. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
+:::caution[New in 0.3]
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
 :::
 
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>

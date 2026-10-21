@@ -18,18 +18,18 @@ The Sidecar's two send effects take the Rytm's voices, each at its track's send 
 
 ## Which effects where
 
-| TYPE | Sidecar Mini | Sidecar (Pi) | Status |
-|---|---|---|---|
-| CHORUS | yes | yes | <span class="sc-ok">hardware</span> |
-| COMB | yes | yes | <span class="sc-ok">hardware</span> |
-| CRUSH | yes | yes | <span class="sc-ok">hardware</span> |
-| RINGMOD | yes | yes | <span class="sc-ok">hardware</span> |
-| HALO | yes | yes | <span class="sc-ok">hardware</span> (heard; measured on the Mini) |
-| RINGS | - | yes | <span class="sc-ok">hardware</span> |
-| CLOUDSEED | - | yes | <span class="sc-ok">hardware</span> |
-| STUTTER | - | yes | <span class="sc-ok">hardware</span> |
+| TYPE | Status |
+|---|---|
+| CHORUS | <span class="sc-ok">hardware</span> |
+| COMB | <span class="sc-ok">hardware</span> |
+| CRUSH | <span class="sc-ok">hardware</span> |
+| RINGMOD | <span class="sc-ok">hardware</span> |
+| HALO | <span class="sc-ok">hardware</span> (heard) |
+| RINGS | <span class="sc-ok">hardware</span> |
+| CLOUDSEED | <span class="sc-ok">hardware</span> |
+| STUTTER | <span class="sc-ok">hardware</span> |
 
-The large effects need more memory than a Teensy has (CLOUDSEED alone uses 1.25 MB a slot), so a Teensy reports them as `!NAME` and keeps them silent. On the Pi both slots can run any effect, even two CLOUDSEEDs.
+Both slots can run any effect, even two CLOUDSEEDs (1.25 MB a slot).
 
 ## CHORUS
 
@@ -79,7 +79,7 @@ A ring modulator: the input times a carrier on each side.
 
 ## HALO
 
-A small, lush, modulated plate reverb written for the Sidecar: very long smooth tails, FREEZE and SHIMMER, wide stereo, the kind of space the Rytm's own reverb cannot make. It runs on Sidecar Mini and Sidecar alike, in 8 KB of RAM per slot.
+A small, lush, modulated plate reverb written for the Sidecar: very long smooth tails, FREEZE and SHIMMER, wide stereo, the kind of space the Rytm's own reverb cannot make. It uses 8 KB of RAM per slot.
 
 | Knob | Label | Range |
 |---|---|---|
@@ -87,8 +87,6 @@ A small, lush, modulated plate reverb written for the Sidecar: very long smooth 
 | P3 | MOD | modulation, 0 still to 127 deep |
 | P4 | TONE | the tail's low-pass (1.2 to 10 kHz) and the input's high-pass (30 up to 250 Hz: thinner when bright) |
 | P5 | SHIM | octave-up shimmer, 0 off to 127 |
-
-On the Mini (measured with `:sendfxbench`): HALO alone about 5.7 % CPU per slot, two HALOs about 16 %, HALO with CHORUS about 11 %.
 
 ![SEND FX 1 set to HALO: TYPE and ROUTE as text, P2..P5 named DCY, MOD, TONE, SHIM](../../../assets/rytm/sendfx1-halo.png)
 

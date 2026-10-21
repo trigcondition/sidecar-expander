@@ -39,7 +39,7 @@ A Juno-106 style poly-synth voice, our own implementation following the open AMY
 
 Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch.
 
-**Presets (JUNO and 6-OP FM).** The release's **starter content** (`sidecar-content-<version>.zip`, already on the Pi's SD card package) puts the Juno-106's 128 factory patches in `/JUNO/Factory/` and three DX7 banks in `/DX7/` on the card, ready for LOAD TO PROJ. PAT steps through the project's list, up to 127 patches, and can be p-locked. Add patches with **LOAD TO PROJ** from the SIDECAR folder in the Rytm's sample browser (the `/JUNO` and `/DX7` folders of `.syx` files on the Sidecar's card), or with **Save current** on the web page's Pool & presets tab. Without a project list, PAT shows the factory list (JUNO A11..B88, the FM ROM voices). The lists and the patch libraries live on each Sidecar's own card: copy them when you move a project between a Mini and a Pi. <span class="sc-ok">hardware</span> (PAT presets on the Pi)
+**Presets (JUNO and 6-OP FM).** The release's **starter content** (`sidecar-content-<version>.zip`, already on the Pi's SD card package) puts the Juno-106's 128 factory patches in `/JUNO/Factory/` and three DX7 banks in `/DX7/` on the card, ready for LOAD TO PROJ. PAT steps through the project's list, up to 127 patches, and can be p-locked. Add patches with **LOAD TO PROJ** from the SIDECAR folder in the Rytm's sample browser (the `/JUNO` and `/DX7` folders of `.syx` files on the Sidecar's card), or with **Save current** on the web page's Pool & presets tab. Without a project list, PAT shows the factory list (JUNO A11..B88, the FM ROM voices). The lists and the patch libraries live on the Sidecar's card. <span class="sc-ok">hardware</span> (PAT presets on the Pi)
 
 Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the SIDECAR folder and LOAD TO PROJ to build the project's JUNO list.
 
@@ -99,14 +99,14 @@ A sample from the Sidecar's card, played through a resonator.
 
 - **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder.
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
-- On the Pi, samples play from memory (256 MB by default). On a Teensy without PSRAM, samples stream from the card and play once (ONE), or loop with LOP above 0; MOD is ignored.
+- On the Pi, samples play from memory (256 MB by default).
 
 ## GRAIN
 
-DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Pi, or a Sidecar Mini with PSRAM; on a Mini without PSRAM DSP SAMPLE streams from the card and plays once (ONE), whatever MOD says. Each Pi render core can sound up to 32 grains. GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD.
+DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Each Pi render core can sound up to 32 grains. GRAIN as a machine of its own in the Rytm's SRC list is not available yet (the list is full): use DSP SAMPLE's MOD.
 
 For a stand-alone granular machine with its own built-in sample, see the GRAIN user machine in the starter set ([User machines](/sidecar-expander/using/user-machines/)).
 
 ## CPU
 
-Measured on the Pi 4, each voice costs about 0.2 % (DIGIDRUM) to 1.2 % (6-OP FM) of one core, so eight voices leave most of the Pi free. On the Teensy, eight PLAITS voices average about 5 % each, so the Teensy's budget is the limit for heavy models (MODAL peaks near 10 %). A voice that runs over its budget, or crashes, is muted on its own; the others keep playing.
+Measured on the Pi 4, each voice costs about 0.2 % (DIGIDRUM) to 1.2 % (6-OP FM) of one core, so eight voices leave most of the Pi free. A voice that runs over its budget, or crashes, is muted on its own; the others keep playing.

@@ -5,8 +5,8 @@ sidebar:
   order: 3.1
 ---
 
-:::caution[0.3 test line]
-New in the 0.3 test line (Rytm build `rui1039`, Sidecar on the Pi). Not in the 0.2.0 release. Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
+:::caution[New in 0.3]
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
 :::
 
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [seq tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
