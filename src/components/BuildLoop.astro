@@ -1,0 +1,66 @@
+---
+// The development loop on "How Sidecar is built": who does which step (drawn for this site, no logos).
+---
+<svg class="sc-diagram sc-loop" viewBox="0 0 640 400" role="img" aria-labelledby="bl-t bl-d" xmlns="http://www.w3.org/2000/svg">
+<title id="bl-t">The Sidecar development loop</title>
+<desc id="bl-d">Eight steps in a loop. The maintainer reports a problem or an idea, AI agents design or find the cause, write a failing test, fix it and test it in the Rytm emulator, build the Rytm and Pi firmware, install the Pi build and read its log; the maintainer flashes the Rytm and tests on the hardware, which starts the loop again.</desc>
+<defs>
+  <marker id="bl-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" class="inkfill"/>
+  </marker>
+</defs>
+<!-- row 1, left to right -->
+<rect class="greenfill" x="20" y="40" width="130" height="86" rx="8"/>
+<text class="bk" x="85" y="74" text-anchor="middle">1 Report</text>
+<text class="sm bk" x="85" y="98" text-anchor="middle">idea or bug,</text>
+<text class="sm bk" x="85" y="114" text-anchor="middle">seen on hardware</text>
+<rect class="ink" x="175" y="40" width="130" height="86" rx="8"/>
+<text x="240" y="74" text-anchor="middle">2 Translate</text>
+<text class="sm" x="240" y="98" text-anchor="middle">precise task,</text>
+<text class="sm" x="240" y="114" text-anchor="middle">questions back</text>
+<rect class="ink" x="330" y="40" width="130" height="86" rx="8"/>
+<text x="395" y="74" text-anchor="middle">3 Design</text>
+<text class="sm" x="395" y="98" text-anchor="middle">or find the</text>
+<text class="sm" x="395" y="114" text-anchor="middle">root cause</text>
+<rect class="ink" x="485" y="40" width="130" height="86" rx="8"/>
+<text x="550" y="74" text-anchor="middle">4 Test first</text>
+<text class="sm" x="550" y="98" text-anchor="middle">a test that fails</text>
+<text class="sm" x="550" y="114" text-anchor="middle">on the bug</text>
+<path class="arr" d="M152 83 H171" marker-end="url(#bl-a)"/>
+<path class="arr" d="M307 83 H326" marker-end="url(#bl-a)"/>
+<path class="arr" d="M462 83 H481" marker-end="url(#bl-a)"/>
+<path class="arr" d="M550 128 V180" marker-end="url(#bl-a)"/>
+<!-- row 2, right to left -->
+<rect class="ink" x="485" y="186" width="130" height="86" rx="8"/>
+<text x="550" y="220" text-anchor="middle">5 Fix</text>
+<text class="sm" x="550" y="244" text-anchor="middle">emulator runs,</text>
+<text class="sm" x="550" y="260" text-anchor="middle">screenshots</text>
+<rect class="ink" x="330" y="186" width="130" height="86" rx="8"/>
+<text x="395" y="220" text-anchor="middle">6 Build</text>
+<text class="sm" x="395" y="244" text-anchor="middle">Rytm .syx and</text>
+<text class="sm" x="395" y="260" text-anchor="middle">Pi kernel, checked</text>
+<rect class="ink" x="175" y="186" width="130" height="86" rx="8"/>
+<text x="240" y="220" text-anchor="middle">7 Install</text>
+<text class="sm" x="240" y="244" text-anchor="middle">Pi over serial,</text>
+<text class="sm" x="240" y="260" text-anchor="middle">read the log</text>
+<rect class="greenfill" x="20" y="186" width="130" height="86" rx="8"/>
+<text class="bk" x="85" y="220" text-anchor="middle">8 Flash, test</text>
+<text class="sm bk" x="85" y="244" text-anchor="middle">the Rytm by hand,</text>
+<text class="sm bk" x="85" y="260" text-anchor="middle">play it for real</text>
+<path class="arr" d="M483 229 H464" marker-end="url(#bl-a)"/>
+<path class="arr" d="M328 229 H309" marker-end="url(#bl-a)"/>
+<path class="arr" d="M173 229 H154" marker-end="url(#bl-a)"/>
+<path class="arr" d="M85 184 V130" marker-end="url(#bl-a)"/>
+<!-- legend -->
+<rect class="greenfill" x="120" y="318" width="22" height="22" rx="4"/>
+<text class="sm" x="152" y="335">the maintainer</text>
+<rect class="ink" x="330" y="318" width="22" height="22" rx="4"/>
+<text class="sm" x="362" y="335">AI agents</text>
+<text class="g" x="320" y="386" text-anchor="middle">REPEAT UNTIL IT PLAYS RIGHT</text>
+</svg>
+<style>
+.sc-loop text { font-size: 17px; }
+.sc-loop text.sm { font-size: 13px; font-weight: 400; }
+.sc-loop text.bk { fill: var(--sl-color-black); }
+.sc-loop .arr { fill: none; stroke: var(--sl-color-white); stroke-width: 2.5; }
+</style>

@@ -1,0 +1,115 @@
+---
+title: How Sidecar is built
+description: One maintainer, AI coding agents and an emulator of the Rytm. How a request or a bug report becomes a tested build, and who does which part.
+sidebar:
+  order: 0
+---
+import BuildLoop from '../../../components/BuildLoop.astro';
+
+Sidecar is built by one person with AI coding agents. The maintainer has the idea, owns the instrument and the
+hardware, makes the decisions and tests everything on a real Rytm. AI agents (Claude, in Claude Code) write and test
+nearly all of the code: the Rytm mods, the Pi engine, the touchscreen, the emulator they test on, and drafts of these
+docs. This page explains how that works, in plain words.
+
+## The loop
+
+<BuildLoop />
+
+Every feature and every bug fix goes around the same loop. Green steps are the maintainer's, the others are done by
+AI agents.
+
+### 1. Report
+
+The maintainer plays the Rytm with the Sidecar and reports what they see: "after leaving poly mode the trig keys play
+the snare", "all sound stops for a moment when I load a sample", or an idea: "the recorder should have a page on the
+touchscreen". Photos of the screens help a lot.
+
+### 2. Translate
+
+A coordinating agent turns the report into a precise task: what is wrong, what it should do instead, where in the code
+to look, and what counts as done. When something is unclear it asks first. A single question ("did you hold FUNC?")
+once saved a whole round of work. The work then goes to helper agents, each with one clear job and its own copy of the
+code (a separate git branch), so several can work at once without getting in each other's way.
+
+### 3. Design or find the cause
+
+For a new feature the agent writes a design first and checks it against how the Rytm already behaves, so the result
+feels like part of the instrument. When another Elektron box does something well (the Digitakt 2's sample banks, for
+example), its *behaviour and data layout* are studied; its code is never copied.
+
+For a bug the agent first finds the cause, and every finding is marked **measured** (seen in the emulator or on the
+hardware) or **inferred** (reasoned, not yet seen).
+
+### 4. A test that fails first
+
+Before fixing a bug, the agent writes a test that reproduces it: the test **fails on the old build and passes on the
+new one**. That proves the fix hits the real problem, and the test stays, so the bug cannot quietly come back.
+
+### 5. Fix, in the emulator
+
+This is what makes the whole approach possible. A separate project, an **emulator of the Analog Rytm MKII**, runs the
+Rytm's real operating system on a Mac (the owner's own stock OS file with the Sidecar's changes applied). It runs
+*headless*, without a window: a script presses keys and turns knobs ("hold TRK, press TRIG, press YES") and then checks
+what is on the screen, which LEDs are lit and what is in the Rytm's memory.
+
+- The same steps are often run on the **unmodified** Rytm OS too. That shows whether something is the Rytm's normal
+  behaviour or caused by Sidecar. Before a new key combination is used, it is checked that the stock Rytm does nothing
+  with it.
+- **End to end:** the emulated Rytm is connected to the real Sidecar engine, built for the Mac. The whole chain, Rytm
+  to Sidecar and back, is tested without any hardware.
+- **Screenshots:** every touchscreen page is rendered to an image on the Mac, in both themes and both screen sizes.
+  Automatic checks catch broken layouts and missed taps, and the agents look at the images themselves. That is how a
+  bank letter hidden by its highlight was caught before it reached the hardware.
+- **All suites, every time:** the Rytm side has about fourteen emulator test suites, the Pi side hundreds of tests.
+  They all run before a build is handed over.
+
+### 6. Build
+
+The Rytm changes are applied to the owner's own stock OS file and checked byte for byte: only the regions the changes
+claim may differ. The result is a `.syx` file with a checksum. The Pi engine is built as a kernel image.
+
+### 7. Install the Pi build and read its log
+
+The agent installs the Pi build over a serial cable (the upload is checked with a checksum and the previous build is
+kept as a fallback), restarts the Pi and reads its log over the same cable: did it boot, did it find the Rytm, does
+audio stream without dropouts? During the maintainer's tests it can read live counters and log lines, which is how,
+for example, lost pattern requests were found.
+
+### 8. Flash and test on the real Rytm
+
+The maintainer flashes the Rytm **by hand**. No agent ever writes to the Rytm. Then the real test: timing, USB, how it
+feels under the fingers, how bright the screen is at an angle. The emulator cannot judge any of that. What the
+maintainer finds goes back into step 1.
+
+## Who does what
+
+| | The maintainer | AI agents |
+|---|---|---|
+| Idea, direction, priorities | ✓ | |
+| What it should feel like; UI taste ("too busy", "lighter greys") | ✓ | proposals |
+| Hardware: buying, wiring, the case, the display | ✓ | advice and research |
+| Flashing the Rytm | ✓ | never |
+| Testing on the real instrument | ✓ | |
+| Designs, specifications | reviews and decides | writes |
+| Code: Rytm mods (C and 68k assembly), Pi engine (C++), touchscreen (C), web page, tools | | writes |
+| Reverse engineering the Rytm OS (in the emulator) | | does |
+| The emulator itself (Rust) | | writes |
+| Tests, builds, installing on the Pi, reading logs | | does |
+| These docs | reviews; decides what is published | drafts |
+| Publishing anything | decides | only when asked |
+
+## Ground rules
+
+- Nothing is flashed to a Rytm by an agent; the maintainer does it.
+- Nothing is pushed or published without the maintainer's explicit go.
+- Firmware files and anything derived from them never go into the code repositories.
+- Measured or inferred: every claim about the Rytm says which.
+- Other companies' code is never copied; behaviour may be studied, implementations are our own.
+
+## Why this matters
+
+A project like this (a reverse-engineered drum machine, a bare-metal Raspberry Pi engine, a touchscreen UI, an
+emulator to test it all) would normally take a team. Here it runs on a small hardware budget, with a Pi, a cable and a
+display, because the agents carry the volume of work and the emulator lets them test without the hardware. The
+maintainer's time goes to what only a musician with the instrument can do: decide what it should be, and check that it
+plays right.
