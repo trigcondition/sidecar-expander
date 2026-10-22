@@ -33,7 +33,13 @@ import touchSeq from '../../assets/touch/oled-seq-roll.png';
 import msChord from '../../assets/rytm/sc-multisample-chord.png';
 import wtPage from '../../assets/rytm/sc-wavetable.png';
 import grTouch from '../../assets/touch/oled-mach-granular.png';
-import bankTouch from '../../assets/touch/oled-mach-granular-bank-c.png';
+import poolTouch from '../../assets/touch/oled-pool-samples.png';
+import poolPage from '../../assets/touch/oled-pool-page-samples.png';
+import poolRytm from '../../assets/rytm/sc-pool-samples.png';
+import projTouch from '../../assets/touch/oled-project.png';
+import projRytm from '../../assets/rytm/sc-project-list.png';
+import statusTouch from '../../assets/touch/oled-status.png';
+import comboMap from '../../assets/touch/oled-combo-map.png';
 import songTouch from '../../assets/touch/classic-song-timeline.png';
 import insTouch from '../../assets/touch/oled-insfx-voice.png';
 import recTouch from '../../assets/touch/oled-rec-recording.png';
@@ -121,16 +127,16 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
   { src: seqLock, alt: 'LOCK SRC: p-locks on seq steps', pixel: true },
   { src: touchSeq, alt: 'The touchscreen piano roll' },
 ]}>
-  <p>TRK + TRIG makes a track a Sidecar seq track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, p-locks on the Sidecar's parameters, step preview, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
+  <p>TRK + TRIG makes a track a poly track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature flip kicker="Poly machines · 0.3 test line" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
   { src: msChord, alt: 'MULTISAMPLE with a chord on the Rytm', pixel: true },
   { src: wtPage, alt: 'WAVETABLE on the Rytm', pixel: true },
   { src: grTouch, alt: 'GRANULAR on the touchscreen' },
-  { src: bankTouch, alt: 'Source bank C on the touchscreen' },
+  { src: poolTouch, alt: 'The SAMPLES pool on the touchscreen' },
 ]}>
-  <p>Three polyphonic machines with chords on four knobs: SFZ instruments streamed from the card, band-limited wavetables, and grains on samples or the Rytm's live audio. Their sources come in 8 banks of 128, chosen from a list on the Rytm's SRC page. <span class="sc-test">in testing</span></p>
+  <p>Three polyphonic machines with chords on four knobs: SFZ instruments streamed from the card, band-limited wavetables, and grains on samples or the Rytm's live audio. They pick their sources from the project's <a href="/sidecar-expander/using/pools/">POOL</a>, chosen from a list on the Rytm's SRC page. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature kicker="Inserts, sampling, songs · 0.3 test line" title="Inserts, a sampler and a song recorder" href="/sidecar-expander/using/insert-fx/" shots={[
@@ -139,7 +145,23 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
   { src: songTouch, alt: 'The song timeline on the touchscreen' },
   { src: recTouch, alt: 'The REC page on the touchscreen' },
 ]}>
-  <p>Two <a href="/sidecar-expander/using/insert-fx/">insert slots</a> on every Sidecar voice and three FX buses; a <a href="/sidecar-expander/using/sampling/">sampler and auto-sampler</a> that turns a patch, a Rytm track or an external synth into a MULTISAMPLE instrument; a <a href="/sidecar-expander/using/song-recorder/">song recorder</a> that captures a whole performance and replays it; and a <a href="/sidecar-expander/using/touchscreen/">touchscreen</a> with two themes, at 800x480 or 1024x600. <span class="sc-test">in testing</span></p>
+  <p>Two <a href="/sidecar-expander/using/insert-fx/">insert slots</a> on every Sidecar voice, three FX buses and an <a href="/sidecar-expander/using/stereo-out/">OUT route</a> that sends a voice in stereo straight to the Rytm's main mix, before or after its master effects; a <a href="/sidecar-expander/using/sampling/">sampler and auto-sampler</a> that turns a patch, a Rytm track or an external synth into a MULTISAMPLE instrument; a <a href="/sidecar-expander/using/song-recorder/">song recorder</a> that captures a whole performance and replays it; and a <a href="/sidecar-expander/using/touchscreen/">touchscreen</a> with two themes, at 800x480 or 1024x600. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature flip kicker="Pools and projects · 0.3 test line" title="One pool per project, one file to move it" href="/sidecar-expander/using/pools/" shots={[
+  { src: poolRytm, alt: 'The bank list on the Rytm: SAMPLES, bank A', pixel: true },
+  { src: poolPage, alt: 'The POOL page on the touchscreen: SAMPLES, TABLES, INSTR' },
+  { src: projTouch, alt: 'The PROJECT page on the touchscreen' },
+  { src: projRytm, alt: 'The PROJECT page on the Rytm', pixel: true },
+]}>
+  <p>Samples, wavetables and instruments in three POOL lists of 8 banks; FUNC + YES loads a file into any row from the Rytm. Every sample is known by its fingerprint, so a moved file keeps playing and a missing one is flagged. A <a href="/sidecar-expander/using/projects-bundles/">bundle</a> carries a project with its samples to another Sidecar, through the touchscreen, the Rytm, the web page or a <a href="/sidecar-expander/using/storage/">USB stick</a>. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Finding your way · 0.3 test line" title="Every combo one key away" href="/sidecar-expander/using/key-combinations/" shots={[
+  { src: comboMap, alt: 'The UP + T map on the touchscreen while UP is held' },
+  { src: statusTouch, alt: 'SIDECAR STATUS on the touchscreen' },
+]}>
+  <p>Hold UP on the Rytm for the map of shortcuts; YES on the SIDECAR page opens a menu of every page. The touchscreen's keys carry their UP + T shortcut, and new pages show the scope, the status, the projects and the pools. <span class="sc-test">in testing</span></p>
 </Feature>
 
 </div>
@@ -153,6 +175,7 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
   <li><a href="https://github.com/trigcondition/sidecar-expander/releases"><b>Downloads</b><small>the Sidecar SD card</small></a></li>
   <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.2.0</small></a></li>
   <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3 test line)</small></a></li>
+  <li><a href="/sidecar-expander/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3 test line)</small></a></li>
   <li><a href="/sidecar-expander/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
 </ul>

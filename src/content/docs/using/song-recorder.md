@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Tested end to end in the emulator; not yet confirmed on a real Rytm.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Tested end to end in the emulator; not yet confirmed on a real Rytm.
 :::
 
 The Rytm's song mode is a list of patterns. The **song recorder** captures a whole performance instead: arm it, press PLAY on the Rytm and play. Pattern changes, knob moves on every track, mutes, scenes, PERF and the Sidecar's own send FX are recorded against the Rytm's step clock. Replay puts the Rytm back where the take began and plays it again. <span class="sc-test">in testing</span>
@@ -43,11 +43,11 @@ The touchscreen's SONG page is the take as a timeline (read only): bars and mark
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-The Rytm's SONG page is the last of the remote pages (LEFT from SIDECAR), listed once a take exists on the card or the touchscreen armed one.
+The Rytm's SONG page is in the SIDECAR MENU (TRK + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
 
-## With seq tracks and source banks
+## With poly tracks and the pools
 
-- [Seq tracks](/sidecar-expander/using/sequencer/) keep their notes in the pattern's file on the Sidecar; when a take changes pattern, they play that pattern's steps.
+- [Poly tracks](/sidecar-expander/using/sequencer/) keep their notes in the pattern's file on the Sidecar; when a take changes pattern, they play that pattern's steps.
 - GRANULAR SRC, WAVETABLE TBL and MULTISAMPLE INST are recorded with their bank, from the Sidecar's own reports (not the Rytm's CC / NRPN), and replayed as a knob turn.
 
 ## Limitations

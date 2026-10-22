@@ -97,7 +97,7 @@ A sample from the Sidecar's card, played through a resonator.
 | TUN, LEV | tuning, level |
 | Page 2 (SD SAMPLE) | TUN FIN SMP MOD STA END LOP LEV |
 
-- **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder.
+- **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder. In the 0.3 test line (Rytm build `rui1045`) SMP picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it opens the bank list, and FUNC + YES loads a file into a row.
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default).
 

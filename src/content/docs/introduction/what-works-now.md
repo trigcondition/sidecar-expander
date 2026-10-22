@@ -82,16 +82,23 @@ On the Pi 4B unless the row says Pi 5.
 
 ## Next: the 0.3 test line (Sidecar on the Pi)
 
-Not in the 0.2.0 release. Rytm build `rui1039` with the Sidecar's 0.3 test build. Built and tested in the emulator and on the Mac; the sequencer has had a first round of use on a real Rytm.
+Not in the 0.2.0 release. Rytm build `rui1045` with the Sidecar's 0.3 test build. Built and tested in the emulator and on the Mac; the sequencer and the touchscreen's OLED theme have had a first round of use on a real Rytm with a Pi 4 (build `rui1039`). Everything else in this table waits for its hardware run.
 
 | Feature | Status |
 |---|---|
-| [Poly mode](/sidecar-expander/using/sequencer/): the Sidecar sequencer on seq tracks (TRK + TRIG), chords, 8 pages, p-locks, step preview | <span class="sc-test">in testing</span> (known bugs being fixed) |
+| [Poly mode](/sidecar-expander/using/sequencer/): the Sidecar sequencer on poly tracks (TRK + TRIG), chords, 8 pages, p-locks, step preview | <span class="sc-test">in testing</span> (first used on hardware with `rui1039`) |
+| Poly mode: the TRIG view, trig conditions and probability, step copy / paste / clear, SAVE / RELOAD of patterns and tracks, DIRECT / TEMP JUMP, the poly track's menu | <span class="sc-test">in testing</span> (emulator) |
 | [MULTISAMPLE, WAVETABLE, GRANULAR](/sidecar-expander/using/poly-machines/), chords on CHD / INV / SPR / VOI | <span class="sc-test">in testing</span> |
-| [Source banks A..H](/sidecar-expander/using/poly-machines/#source-banks-ah) and the bank list on the Rytm's SRC page | <span class="sc-test">in testing</span> |
-| [Insert FX and FX buses](/sidecar-expander/using/insert-fx/) | <span class="sc-test">in testing</span> |
-| [Sampler and auto-sampler](/sidecar-expander/using/sampling/) | <span class="sc-test">in testing</span> |
+| [Pools](/sidecar-expander/using/pools/): SAMPLES, WAVETABLES, INSTRUMENTS in banks A..H, FUNC + YES into any row, the Rytm's POOL page, DSP SAMPLE on all eight banks | <span class="sc-test">in testing</span> (emulator) |
+| [The sample library](/sidecar-expander/using/pools/#the-sample-library): every sample known by its fingerprint, moved / missing / changed files | <span class="sc-test">in testing</span> (Mac) |
+| [Projects and bundles](/sidecar-expander/using/projects-bundles/): export and import from the touchscreen, the Rytm and the web page, the rename prompt | <span class="sc-test">in testing</span> (Mac, emulator) |
+| [Storage](/sidecar-expander/using/storage/): USB drives, NVMe on the Pi 5, `stor=bench` | <span class="sc-test">in testing</span> (Mac) |
+| [Stereo and the OUT route](/sidecar-expander/using/stereo-out/): TRK / PRE / POST, stereo samples, the streaming budget | <span class="sc-test">in testing</span> (Mac; the measurements on a Rytm are pending) |
+| [Insert FX and FX buses](/sidecar-expander/using/insert-fx/), TRK + FX | <span class="sc-test">in testing</span> |
+| [Sampler and auto-sampler](/sidecar-expander/using/sampling/), takes into the pool | <span class="sc-test">in testing</span> |
 | [Song recorder](/sidecar-expander/using/song-recorder/) | <span class="sc-test">in testing</span> |
-| [The touchscreen](/sidecar-expander/using/touchscreen/): OLED and CLASSIC themes, SEQ, PAT, VOICE, SONG, INSERT FX, REC; 800x480 and 1024x600; UP + T1..T10 from the Rytm | <span class="sc-test">in testing</span> |
+| [The touchscreen](/sidecar-expander/using/touchscreen/): OLED and CLASSIC themes, the STAGE look, navigation keys with their UP + T shortcuts, SEQ, PAT, VOICE, INSERT FX, SONG, REC with playback, SCOPE, STATUS, PROJECT, POOL; 800x480 and 1024x600 | <span class="sc-test">in testing</span> (OLED and SEQ used on a Pi 4 with a 7" DSI panel) |
+| On the Rytm: the SIDECAR MENU, the KEYS page and UP held for the combo map, TRK's LED blinking while a Sidecar page has the keys ([Key combinations](/sidecar-expander/using/key-combinations/)) | <span class="sc-test">in testing</span> (emulator) |
+| 7" HDMI 1024x600 display (GeeekPi EP-0194) | expected, to be confirmed |
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).

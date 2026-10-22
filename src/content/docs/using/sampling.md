@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac; first fixes after hardware reports are in; not yet confirmed on a real Rytm.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac; first fixes after hardware reports are in; not yet confirmed on a real Rytm.
 :::
 
 ## The sampler
@@ -24,7 +24,8 @@ One take to the card, from: <span class="sc-test">in testing</span>
 - **Length:** free (until stop; at most 120 s), or N bars cut exactly at the Rytm's clock.
 - **Processing:** free takes are trimmed and normalised to -1 dBFS; 24-bit 48 kHz WAV.
 - **Slices:** by transients or a grid of N, written as an `.sfz` slice map next to the WAV.
-- **Files:** `/Samples/<project>/<name>.wav` (and the slices). MULTISAMPLE can play the take (and its slices) at once; GRANULAR lists it under TAKES; DSP SAMPLE after the next boot.
+- **Files:** `/Samples/<project>/<name>.wav` (and the slices).
+- **Into the pool:** the take goes into the project's **SAMPLES** [POOL](/sidecar-expander/using/pools/), the first free row of the bank last shown (bank A by default, else the next bank with room); the page says `TAKE -> A012`. GRANULAR can play it at once, DSP SAMPLE after the next boot. Its slice map goes into **INSTRUMENTS** the same way, for MULTISAMPLE.
 
 **On the Rytm:** the remote page **SAMPLE**, next to SCOPE (UP + T7 opens it). A source, B start, C bars, D slices; **YES** arms, records and stops; A pushed cancels. The page shows the level, the take's time, the last take and the tempo.
 
@@ -34,7 +35,7 @@ One take to the card, from: <span class="sc-test">in testing</span>
 
 ## The auto-sampler
 
-Plays notes, records them, trims, finds loops and writes a MULTISAMPLE instrument (`/MULTISAMPLE/<name>/<name>.sfz` and its WAVs), ready for INST. <span class="sc-test">in testing</span>
+Plays notes, records them, trims, finds loops and writes a MULTISAMPLE instrument (`/MULTISAMPLE/<name>/<name>.sfz` and its WAVs). It goes into the project's **INSTRUMENTS** pool by itself, ready for INST. <span class="sc-test">in testing</span>
 
 | SRC | Plays | Records |
 |---|---|---|

@@ -40,6 +40,7 @@ The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) s
 
 - **LOAD TO PROJ** on a Sidecar file adds it to the project's **Sidecar pool** (stored on the Sidecar, one pool per project). Nothing is copied into the Rytm.
 - DSP SAMPLE's **SMP** knob then picks from that pool: 0 is OFF, N is pool slot N.
+- In the 0.3 test line the pool is the project's SAMPLES [POOL list](/sidecar-expander/using/pools/): LOAD TO PROJ puts the file into the first free row of bank A, and SMP reaches all eight banks.
 - LOAD TO PROJ on a JUNO patch or a DX7 voice adds it to the project's JUNO or FM list, which the PAT knob then steps through.
 
 ## User slots U1..U5

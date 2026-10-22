@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1039` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
 :::
 
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>
@@ -14,7 +14,9 @@ Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it go
 ## Signal flow
 
 ```
-Sidecar voice -> INSERT A -> INSERT B -> the Rytm's track (analog filter, amp)
+Sidecar voice -> INSERT A -> INSERT B -> OUT: TRK  the Rytm's track (analog filter, amp)
+                                           PRE  the Rytm's main mix, before its master FX (stereo)
+                                           POST the Rytm's main mix, after its master FX (stereo)
                                       \-> sends to bus 1, 2, 3
 bus 1 = SEND FX 1 -> its chain (A, B) -> PRE or POST
 bus 2 = SEND FX 2 -> its chain (A, B) -> PRE or POST
@@ -24,6 +26,7 @@ bus 3 = dry       -> its chain (A, B) -> PRE or POST (ROUTE)
 - Buses 1 and 2 **are** the two [send effects](/sidecar-expander/using/send-effects/): their TYPE, P1..P5 and the Rytm tracks' sends are unchanged. A kit without insert settings sounds exactly as before.
 - Bus 3 has no send effect of its own: a dry bus of the voices' sends through its two slots (a bus compressor, a shared filter, ...).
 - A voice's sends are taken after its inserts: the bus hears the inserted voice, not the Rytm's analog processing of it.
+- **The OUT route** decides where the voice goes after its inserts: its own track (**TRK**, the default) or the Rytm's main mix in stereo, before (**PRE**) or after (**POST**) the Rytm's master distortion and compressor. On PRE and POST the insert chain runs in stereo. See [Stereo and the OUT route](/sidecar-expander/using/stereo-out/).
 
 ## Effects
 
@@ -42,21 +45,20 @@ Changing TYPE crossfades without a click and loads the effect's defaults. Parame
 
 ## Editing
 
-- **On the Rytm:** the remote page **INSERT** (open the remote pages with TRK + YES, then LEFT from SIDECAR; listed once a track plays a Sidecar machine or a chain is set). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > sends`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); NO or YES goes back.
-- **On the touchscreen:** the **INSERT FX** page (UP + T6 on the Rytm, or Settings > Send FX > Inserts): the voice's two slots as dials with their values, V1..V8, the three sends and each bus's chain and return. It follows the Rytm's selected track.
-- **P-locks:** on a [seq track](/sidecar-expander/using/sequencer/#p-locks-on-seq-steps), hold trigs and press **FX** twice: the INS lock page (A..D INSERT A P1..P4, E..H INSERT B P1..P4).
+- **On the Rytm:** **TRK + FX** opens the remote page **INSERT** (or the SIDECAR MENU, or LEFT from SIDECAR). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back.
+- **On the touchscreen:** the **INSERT FX** page (FX, UP + T6 on the Rytm, or Settings > Send FX > Inserts): the voice's two slots as dials with their values, a key per track, the three sends, each bus's chain and return, and the **OUT** row (TRK / PRE / POST, LEV, PAN, WID). It follows the Rytm's selected track; the knobs are the Rytm's (`KNOBS ON RYTM`), the TYPE and OUT keys edit.
+- **P-locks:** on a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), hold trigs and press **FX** twice: the INS lock page (A..D INSERT A P1..P4, E..H INSERT B P1..P4).
 - **LFOs:** targets I1..I8 (the voices' chains) and B1..B3 (the buses' chains), on top of the knob or lock.
 
-![The touchscreen's INSERT FX page (OLED): V3, A FILTER, B DELAY, CUT RES MODE DRV TIME FDBK MOD MIX, the sends to B1..B3 and each bus's chain](../../../assets/touch/oled-insfx-voice.png)
+![The touchscreen's INSERT FX page (OLED): SD, A FILTER, B DELAY, CUT RES MODE DRV TIME FDBK MOD MIX, the sends to B1..B3 with each bus's chain, OUT POST with LEV, PAN and WID](../../../assets/touch/oled-insfx-voice.png)
 
 <small>Screenshot: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-Settings are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit.
+Settings, the OUT route included, are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit.
 
 ## Limitations
 
 - Sidecar (Pi) only.
-- No TRK + FX shortcut to the INSERT page yet: use LEFT / RIGHT on the remote pages, UP + T6, or the touchscreen.
 - The web page shows the chains (in its status) but has no editor for them yet.
-- Insert locks exist only on seq tracks.
+- Insert locks exist only on poly tracks.
 - CPU: 8 voices with two slots each cost about 1.3 to 2.2 % of a Pi 4 core (estimated from the Mac).
