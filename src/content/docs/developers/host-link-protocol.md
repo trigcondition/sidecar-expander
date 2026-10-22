@@ -78,7 +78,7 @@ Part of the release (the `rui1027d` Rytm build). Every message carries `<ver 1>`
 |---|---|---|
 | `29` | R→H | SRC view: `<track 0..11> <on>`: the stock SRC page of a Sidecar track shows or hides |
 | `2A` | R→H | SRC view values: `<track> <first> <n> {<int> <frac>}`: P1..P8 the SRC knobs A..H, P9..P16 the SMPL page; all 16 after each `29 t 1`, then the changed span each tick |
-| `30` | R→H | `<page> <on> <reason>`: the page opened or closed (0 user, 1 host, 2 timeout, 3 local escape); `page` 0 SIDECAR, 1 the LFO page (TRK + LFO, also sent again while open); a close is always 0 |
+| `30` | R→H | `<page> <on> <reason>`: the page opened or closed (0 user, 1 host, 2 timeout, 3 local escape); `page` 0 SIDECAR, 1 the LFO page (UP + LFO, or TRK + LFO before `rui1046`; also sent again while open); a close is always 0 |
 | `31` | R→H | `<code hi> <code lo> <down>`: every key while the page is open |
 | `32` | R→H | `<encoder> <delta + 64> <func>`: encoder turns summed per 50 ms tick |
 | `38` | H→R | `<seq> <col0> <page0> <ncols> <npages> <packed>`: a rectangle of 8x8 tiles of the 128x64 screen into staging |

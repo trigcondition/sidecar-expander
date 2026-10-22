@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of this release (not on the **Pi 5** in 0.2.0: its USB-C port is power only), tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19).
+<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of the 0.2.0 release and unchanged in the 0.3 test line, tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19). Not on the **Pi 5**: its USB-C port is power only (in 0.2.0 and in the 0.3 test line).
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Pi 4's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 
@@ -24,7 +24,9 @@ The Pi's channel map:
 |---|---|
 | 1-2 MAIN L/R, 3-10 BD SD RS BT LT MT CH CY, 11-12 audio in L/R (or the FX return) | 1-2 MAIN, 3-4 MAIN FX, 5-12 the voice inputs |
 
-The Rytm is the clock. The multichannel mode is the default. The USB-C device and computer audio are switched on the Sound page.
+The Rytm is the clock. The multichannel mode is the default. The USB-C device and computer audio are switched on the web page's Sound tab or the touchscreen's Settings > Sound.
+
+A voice on TRK is in its track's channel, as before. A voice on PRE / POST ([the OUT route](/sidecar-expander/using/stereo-out/), 0.3) leaves its track's channel; whether it shows in the MAIN L/R the Rytm sends back is still to be measured on a real Rytm ([Measurements](/sidecar-expander/using/stereo-out/#measurements-pending)).
 
 ## MIDI pass-through
 

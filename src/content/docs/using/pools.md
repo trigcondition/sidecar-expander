@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi or a real Rytm. Sidecar (Pi) only. The pools replace the per-machine source banks and the DSP SAMPLE pool of the earlier 0.3 test builds; projects made with those open with the template below.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi or a real Rytm. Sidecar (Pi) only. The pools replace the per-machine source banks and the DSP SAMPLE pool of the earlier 0.3 test builds; projects made with those open with the template below.
 :::
 
 Every project has three **POOL** lists: the sounds its tracks pick from, in fixed rows. The Rytm's knob stores a row, never a file name, so a kit or a p-lock plays the same row whatever you load. <span class="sc-test">in testing</span>
@@ -37,7 +37,7 @@ A new GRANULAR track points at A010 (empty, silent until you load something), WA
 
 ## Choosing and loading on the Rytm
 
-**The bank list.** On the SRC page of a GRANULAR, WAVETABLE or MULTISAMPLE track, turn **knob A**. On a DSP SAMPLE track, turn **SMP** (knob D of its SMPL page). The list opens: tabs `< A B C D E F G H >`, rows `A000 OFF`, `A001 name`, and the row under the cursor with its state.
+**The bank list.** On the SRC page of a GRANULAR, WAVETABLE or MULTISAMPLE track, turn **knob A**. On a DSP SAMPLE track, turn **SMP** (knob D of its SMPL page). Or press **UP + SRC** on any of these tracks: the list opens in one press. The list opens: tabs `< A B C D E F G H >`, rows `A000 OFF`, `A001 name`, and the row under the cursor with its state.
 
 | Key | In the list |
 |---|---|
@@ -58,7 +58,7 @@ The bank is part of the knob's value, so it is saved in the kit and in p-locks, 
 
 ## The POOL page on the Rytm
 
-A remote page for the whole pool: open the remote pages (TRK + YES), YES for the **SIDECAR MENU**, then **POOL**. Its header shows the list and the pool RAM.
+A remote page for the whole pool: **UP + T13** (with a touchscreen connected, its POOL page opens instead), or POOL in the **SIDECAR MENU** (UP + YES, then YES). Its header shows the list and the pool RAM.
 
 | Control | Does |
 |---|---|
@@ -76,9 +76,14 @@ A remote page for the whole pool: open the remote pages (TRK + YES), YES for the
 
 Rows show `RAM`, `LOADING`, `MISSING`, `CHANGED`, `LIVE`, `BUILT-IN` or the size, and `USED` for a row in use.
 
+![The POOL page on TABLES: A000 OFF, A001 BASIC BUILT-IN, A002 PWM, A003 VOCAL; D: SELECT, YES: DO](../../../assets/rytm/sc-pool-tables.png)
+![The POOL page on SAMPLES while the Rytm plays: A002 SNARE USED, 1 IN USE: STOP FIRST](../../../assets/rytm/sc-pool-playing.png)
 ![The POOL page: 2 SEL, A003 HAT marked, 2 NOT SEEN PLAYING](../../../assets/rytm/sc-pool-unused.png)
 ![The POOL page asking before unloading a row in use: 1 IN USE: YES AGAIN](../../../assets/rytm/sc-pool-ask.png)
 ![REPLACE: the browser in /SAMPLES/KIT aimed at row A002](../../../assets/rytm/sc-pool-replace.png)
+![After the replace: the row with its new file](../../../assets/rytm/sc-pool-replaced.png)
+
+<small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data.</small>
 
 ## On the touchscreen
 

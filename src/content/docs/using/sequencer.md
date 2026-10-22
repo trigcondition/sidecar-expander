@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps) are tested in the emulator. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key) are tested in the emulator. Sidecar (Pi) only.
 :::
 
 A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
@@ -31,7 +31,7 @@ A poly track needs a polyphonic Sidecar machine on its SRC page. The Rytm's make
 | WAVETABLE | 8 | 32 |
 | GRANULAR | 6 | 24 (and up to 64 grains per voice) |
 
-JUNO, PLAITS, DAISYSP, DSP SAMPLE, DIGIDRUM, user machines and the analog machines are mono: on those tracks TRK + TRIG explains why instead of making a poly track.
+JUNO, PLAITS, DAISYSP, DSP SAMPLE, DIGIDRUM, user machines and the analog machines are mono: on those tracks UP + TRIG explains why instead of making a poly track.
 
 ![The make prompt on the Rytm: MAKE LT A POLY TRACK? SIDECAR SEQUENCES IT. WAVETABLE, 8 POLY NOTES. PADS: CHRO FOR NOTES. YES: MAKE IT, NO: BACK](../../../assets/rytm/sc-seq-make.png)
 ![The explanation on a track that cannot be a poly track: POLY TRACKS NEED 6-OP FM, MULTISAMPLE, WAVETABLE OR GRANULAR (ON SRC)](../../../assets/rytm/sc-seq-explain.png)
@@ -39,12 +39,12 @@ JUNO, PLAITS, DAISYSP, DSP SAMPLE, DIGIDRUM, user machines and the analog machin
 ## Getting started
 
 1. Pick **6-OP FM**, **MULTISAMPLE**, **WAVETABLE** or **GRANULAR** on a track's SRC page (see [Poly machines](/sidecar-expander/using/poly-machines/)).
-2. Select the track (TRK + pad), hold **TRK** and press **TRIG**. The Rytm asks **MAKE BD A POLY TRACK?**
-3. Press **YES** (TRK may still be held). The track is a poly track, saved per project. The Rytm shows the Sidecar's SEQ page for it, and the touchscreen switches to its piano roll.
+2. Select the track (TRK + pad), hold **UP** and press **TRIG**. The Rytm asks **MAKE BD A POLY TRACK?**
+3. Press **YES** (UP may still be held). The track is a poly track, saved per project. The Rytm shows the Sidecar's SEQ page for it, and the touchscreen switches to its piano roll.
 4. Press **RECORD** (GRID REC) to edit steps on the trig keys. This is **seq mode**: the trig keys, PAGE and the knobs under a held trig are the Sidecar's.
 5. Press **PLAY**.
 
-To leave the SEQ page: TRK + TRIG again, or NO. Selecting a track that is no poly track closes it too, and the trig keys are the Rytm's again.
+To leave the SEQ page: UP + TRIG again, or NO. Selecting a track that is no poly track closes it too, and the trig keys are the Rytm's again.
 
 **The poly track's menu:** on the SEQ page with no trig held, press **YES**: **BACK TO THE SEQ**, **TURN OFF (STEPS KEPT)**, **LENGTH (KNOB C)**, **QUANTISE (KNOB D)**. UP / DOWN pick, YES confirms. TURN OFF asks once more; the steps stay on the card, and turning knob **B** up makes it a poly track again with its steps.
 
@@ -89,6 +89,11 @@ On a poly track, **TRIG** opens the SEQ page; with the page open, TRIG switches 
 
 Conditions are saved with the step and carried by copy, paste and undo. The touchscreen's piano roll marks them on its ruler.
 
+![The SEQ page with a step held: N C4, V96, L6.00, M+0 over MIN, INV1, S+22 (strum, selected), ALL 3, and BD S1 STRUM in the bottom bar](../../../assets/rytm/sc-trig-notes.png)
+![The TRIG view with a step held: NOTE VEL LEN MICRO / COND STRUM CHD INV as dials, COND selected, STEP COND:1:2](../../../assets/rytm/sc-trig-cond.png)
+
+<small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data.</small>
+
 ## P-locks on poly steps
 
 Hold one or more trigs and press a page key. The SEQ page becomes a lock page with the machine's knobs:
@@ -131,8 +136,10 @@ The Rytm's own gestures act on the Sidecar's steps too, with one undo per level 
 | FUNC + RECORD / STOP / PLAY (outside GRID REC) | the pattern: copy / paste / clear |
 | GRID REC, FUNC + RECORD / STOP / PLAY | the track: copy / paste / clear |
 | GRID REC, PAGE held + FUNC + RECORD / STOP / PLAY | the page: copy / paste / clear |
-| GRID REC, trigs held + FUNC + RECORD / STOP / PLAY | the held steps: copy / paste onto them (a shorter clipboard repeats) / clear |
+| GRID REC, trigs held + **UP** + RECORD / STOP / PLAY | the held steps: copy / paste onto them (a shorter clipboard repeats) / clear |
 | The same paste or clear again | undo |
+
+Held-step copy is one-handed: hold the trigs first, then UP, then RECORD, STOP or PLAY (UP first and then a trig would be a page request). On a poly track UP is taken at once while a trig is held; on a normal track UP + RECORD / STOP / PLAY stays the Rytm's own.
 
 Paste on another pattern: select it (BANK + trig), then paste, as on the Rytm. Pattern and track copy / paste with poly tracks: <span class="sc-ok">hardware</span>.
 
@@ -161,8 +168,11 @@ Hold **UP** and press a trig key to switch the touchscreen's page (no trig is pl
 | UP + T8 | REC |
 | UP + T9 | SCOPE |
 | UP + T10 | SIDECAR STATUS |
+| UP + T11 | SONG |
+| UP + T12 | PROJECT |
+| UP + T13 | POOL |
 
-SEQ, VOICE and the machine view follow the track you select on the Rytm.
+T8..T13 open on the touchscreen when it has the page, else on the Rytm's screen. SEQ, VOICE and the machine view follow the track you select on the Rytm.
 
 ## What the screens show
 
@@ -187,9 +197,9 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 
 | Keys | Where | Does |
 |---|---|---|
-| TRK + TRIG | any track | the SEQ page; on a track that is no poly track the make prompt (or why not) |
+| UP + TRIG | any track | the SEQ page; on a track that is no poly track the make prompt (or why not) |
 | YES / NO | make prompt | make the poly track / back |
-| TRK + TRIG or NO | SEQ page | leave |
+| UP + TRIG or NO | SEQ page | leave |
 | YES (no trig held) | SEQ page | the poly track's menu |
 | RECORD | poly track selected | GRID REC = seq mode |
 | TRIG | poly track | the SEQ page / the TRIG view |
@@ -199,11 +209,15 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 | trig held + YES | seq mode or SEQ page | step preview |
 | trig held + SRC / SMPL / FX / FX FX | seq mode | lock pages: P1..P8 / P9..P16 / send FX / inserts |
 | lock page: turn / NO / push | trig held | lock / clear all / clear that knob |
-| trig held + FUNC + RECORD / STOP / PLAY | seq mode | copy / paste / clear the held steps |
+| trig held + UP + RECORD / STOP / PLAY | seq mode | copy / paste / clear the held steps (one hand) |
 | PAGE / PAGE held / PAGE + trig | seq mode | next page / page map / jump to page |
 | FUNC + PAGE | seq mode, also over the page | SCALE |
 | RECORD + PLAY | poly track | live record on the Sidecar's grid |
-| UP + T1..T10 | anywhere | the touchscreen's pages (above) |
+| UP + T1..T13 | anywhere | the pages (above) |
+
+:::note[Older forms]
+TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 test builds, still work.
+:::
 
 ## Features
 

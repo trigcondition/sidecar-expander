@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi. Sidecar (Pi) only.
 :::
 
 The Sidecar keeps a project's files on its own card, found by the Rytm's project name. A **bundle** puts one project in one file, `<NAME> <YYYYMMDD-HHMM>.sidecar.zip`: move it to another Sidecar (Pi 4B or Pi 5) or keep it as a backup, and import it there with the same sounds in the same rows, the same poly tracks and songs. <span class="sc-test">in testing</span>
@@ -29,7 +29,7 @@ Three places drive the same job; one job runs at a time.
 
 ### The touchscreen: PROJECT
 
-Tap the **PROJECT** panel on HOME.
+Tap the **PROJECT** panel on HOME, or press **UP + T12** on the Rytm.
 
 - The list: every project on the card (the Rytm's current one `*`, an imported one the Rytm has not named yet `IMP.`), the size of its Sidecar files, when it was last used. Tap one; its details show on the right.
 - The picker at the top: **CARD** or a mounted **USB** stick. Export writes there; import looks there.
@@ -43,7 +43,7 @@ Tap the **PROJECT** panel on HOME.
 
 ### The Rytm: the PROJECT page
 
-Open the remote pages (TRK + YES), YES for the **SIDECAR MENU**, then **PROJECT** (or LEFT from SIDECAR: it is the last page).
+Press **UP + T12** (with a touchscreen connected, its PROJECT page opens instead), or pick PROJECT in the **SIDECAR MENU** (UP + YES, then YES). LEFT from SIDECAR also reaches it: it is the last page of the ring.
 
 | Control | Does |
 |---|---|
@@ -60,6 +60,10 @@ The trig LEDs show the keys: T1 blue, T2 green, T4 red, T5 amber when a stick is
 
 ![The Rytm's PROJECT page: LIVE SET* and JAM 1021 on the CARD, CARD 30G FREE, T1EXP T2IMP T3INF T4DEL](../../../assets/rytm/sc-project-list.png)
 ![The import summary on the Rytm: IMPORT AS JAM 1021 2? RYTM: SAVE AS JAM 1021 2. YES:IMPORT NO:BACK T3:MAC](../../../assets/rytm/sc-project-summary.png)
+![INFO on the Rytm: JAM 1021 2, 5 SIDECAR FILES 1K, NOT USED YET, IMPORTED (RYTM: NOT YET)](../../../assets/rytm/sc-project-info.png)
+![DELETE asks twice: DELETE JAM 1021 2? ITS SIDECAR FILES GO, ITS SAMPLES STAY. SURE? NO UNDO](../../../assets/rytm/sc-project-delete.png)
+
+<small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data.</small>
 
 ### The web page: Project tab
 
@@ -112,6 +116,8 @@ RENAMED ON THE RYTM?  FROM <OLD>  TO <NEW>
 n SIDECAR FILES THERE: YES MOVES THEM ACROSS
 YES: MOVE  NO: NEW PROJ
 ```
+
+![The rename prompt on the Rytm's PROJECT page: RENAMED ON THE RYTM? FROM LFOP 2 TO JAM 6, 5 SIDECAR FILES THERE, YES: MOVE, NO: NEW PROJ](../../../assets/rytm/sc-project-rename.png)
 
 - **YES** moves every per-project file (poly tracks, pool lists, songs, LFOs, inserts, slot maps) from the old name to the new one. Only names change on the card; nothing is copied or deleted. If a move fails half way, the files already moved go back.
 - **NO** (or no answer within two minutes) switches as before: the new name starts empty, the old project keeps its files.

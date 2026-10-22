@@ -1,76 +1,105 @@
 ---
 title: The display (Pi)
-description: "The 5-inch touch display: status, settings, screensaver, brightness and touch."
+description: "The Pi's touch display: which displays work, 800x480 and 1024x600, connecting HDMI and DSI, the boot screen, the OLED and CLASSIC themes and the STAGE look, the connection animation, screensaver, brightness and touch."
 sidebar:
   order: 7
 ---
 
-:::note
-This page describes the 0.2.0 display. The 0.3 test line's touchscreen (themes, SEQ, PAT, VOICE, SONG, REC, 1024x600) is on [The touchscreen (0.3)](/sidecar-expander/using/touchscreen/).
+:::caution[New in 0.3]
+The 0.3 test line (Sidecar (Pi)) redraws the whole display: two themes and the STAGE look, the 1024x600 size, a new boot screen and the connection animation. The pages themselves (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET) are on [The touchscreen](/sidecar-expander/using/touchscreen/). The 0.2.0 display is described in the [0.2 docs](/sidecar-expander/0.2/using/display/).
 :::
 
-The Pi can drive an **800x480 display**: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on.
+The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on: the screen is set up at boot. The display is optional; everything it shows is also on the Rytm or the web page.
 
-| Display | Status |
-|---|---|
-| 5" / 7" HDMI LCD with USB touch (800x480): HDMI to the Pi's **micro-HDMI 0** (next to the power socket), touch to a free **USB-A** port | <span class="sc-ok">hardware</span> (a 5" HDMI LCD) |
-| Official Raspberry Pi 7" Touch Display (v1, DSI) | expected, being confirmed |
-| Compatible 7" DSI displays such as the OSOYOO 7" DSI V4.0 | expected, being confirmed |
-| Pi 5: HDMI LCD with USB touch on **micro-HDMI 0**: the 800x480 UI scaled to the firmware's 1920x1080 (slightly soft); `hdmi_force_hotplug=1` under `[pi5]` (on the card) | <span class="sc-ok">hardware</span> (2026-10-19, 0.2.0) |
-| Pi 5: official 7" Touch Display (v1) and compatibles on CAM/DISP 0 or 1, driven by the engine (no `config.txt` line; `dsi_rotate=180` in `cmdline.txt` turns it) | <span class="sc-test">in testing</span> (0.2.0, built, not yet run) |
-| Raspberry Pi Touch Display 2 | not supported |
+## Which displays work
 
-With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards). A weak supply shows in red on the bottom line (0.2.0): `POWER TOO WEAK: use 15 W supply` on a Pi 4, `POWER TOO WEAK: use 27 W adapter` on a Pi 5. Do not add `ignore_lcd=1`, `disable_touchscreen=1` or a `vc4-kms` overlay to `config.txt`.
+| Display | Pi 4 | Pi 5 |
+|---|---|---|
+| 5" / 7" HDMI LCD with USB touch, 800x480 (Waveshare) | <span class="sc-ok">hardware</span> (the 5") | <span class="sc-ok">hardware</span>, scaled (slightly soft) |
+| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 | expected, to be confirmed: needs the `config.txt` lines below | expected |
+| 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
+| Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
+| Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
+
+**Connecting.** HDMI goes to the Pi's **micro-HDMI 0** (next to the power socket), USB touch to a USB-A port. With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards).
+
+- To turn a DSI display by 180 degrees: `lcd_rotate=2` under `[pi4]` in `config.txt` (Pi 4) or `dsi_rotate=180` in `cmdline.txt` (Pi 5). `dsitouch_inv=1`, `2` or `3` mirrors the DSI touch in x, y or both.
+- On the Pi 5 a 15-pin DSI display needs a 22-pin to 15-pin display cable.
+- On the Pi 5 the HDMI display needs `hdmi_force_hotplug=1` under `[pi5]` (it is on the card).
+- Do not add `ignore_lcd=1`, `disable_touchscreen=1` or a `vc4-kms` overlay to `config.txt`.
+
+## Screen sizes
+
+The UI has two sizes, each with its own layout in both themes: **800x480** and **1024x600** (OLED: 512x300 dots). On the larger size the roll, the lists, the timeline and the meters get more room; text and touch targets keep their size. The size follows the frame buffer the Pi's firmware sets from `config.txt`:
+
+- 800x480 or 1024x600: that layout, 1:1.
+- Any other size (Pi 4): the 800x480 layout in the middle, unscaled, with black borders.
+- Pi 5 on HDMI: the firmware picks the mode (1920x1080 measured), and the UI is scaled to it: the 1024x600 layout when the display prefers 1024x600, else 800x480.
+- To force a size: `res=800x480`, `res=1024x600` or `res=auto` in `cmdline.txt` or on its own line in `/.rytm/display.txt`; read at boot.
+
+**The GeeekPi EP-0194 (1024x600)** on a Pi 4: the HDMI block of `config.txt` becomes
+
+```
+[pi4]
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1024 600 60 6 0 0 0
+disable_overscan=1
+```
+
+Nothing else is needed: the frame buffer is then 1024x600 and the UI follows. On the Pi 5 only `hdmi_force_hotplug=1` matters (it is on the card); if the 1024x600 layout is not picked, put `res=1024x600` in `cmdline.txt`. The boot log's `display: EDID:` line says what the panel reports.
+
+![The CLASSIC home page at 1024x600](../../../assets/touch/wide-classic-home.png)
 
 ## Boot screen
 
-The Sidecar wordmark with a progress bar, drawn within a third of a second of the engine starting. The home screen follows a few seconds later.
+SIDECAR / EXPANDER in the dot-matrix font over a row of eight segments, drawn straight after the engine starts; a segment lights per boot stage (the SD card, the send FX, the card, the console, the render cores, USB, the display). The home page follows a few seconds later. With `uistyle=classic` in `cmdline.txt` the boot screen has the CLASSIC look; `display=0` turns it off with the display.
 
-![The boot screen: the Sidecar | Expander wordmark over a green progress bar](../../../assets/ui/display-boot.png)
+![The boot screen: SIDECAR / EXPANDER with three of eight segments lit](../../../assets/touch/oled-boot.png)
 
-## Home
+## Themes and looks
 
-![The display's home screen with the touch test: tracks 1-8, status with REC and the core loads, the touch test, the project's U1..U5](../../../assets/ui/display-home.png)
-![The home screen with the touch test hidden: a SIDECAR panel with the network, web page, link and recorder in its place](../../../assets/ui/display-home-hidden.png)
+Two themes, each with every page, switched with **Settings > Display > UI style** (applied at once, stored on the card):
 
-<small>Screenshots: the 1021 display rendered off-device with mock data. The restyled display is <span class="sc-ok">hardware</span>-tested.</small>
+- **OLED** (the default): the screen drawn as a zoomed-in dot-matrix OLED, 400x240 dots of 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings.
+- **CLASSIC**: the controls drawn as the Rytm's hardware: rubber keys, trig keys with LEDs, knob caps with LED rings, the teal FUNC key, black display windows.
 
+**LOOK: STUDIO / STAGE** (OLED): STUDIO is the dot look (the default); **STAGE** draws every dot as a whole cell, without the grid lines, and lifts every grey a step, for reading at an angle and on a stage.
 
-- The title bar, with **Rytm connected** (green) or **Rytm not connected** (red).
-- **Tracks:** the Sidecar's voices 1-8 with their current machine (numbered by voice: 1 BD, 2 BT, 3 SD, 4 LT, 5 CH/OH, 6 MT/HT, 7 CY/CB, 8 RS/CP).
-- **Project:** the Rytm's project and its U1..U5 machines as the Rytm shows them (`!ROOM NAME`, `!MISS NAME` etc. when it cannot play, with the reason; `NAME...` loading, `---` empty).
-- **Status:** Overbridge blocks, underruns (red once nonzero), load bars for the render cores, and `REC` while recording.
-- **Touch test:** a tap button and a slider to check the touch panel. Once touch works, press **Touch works – hide**: a **SIDECAR** panel (network, web page, link, recorder) takes its place. The About page has a Show / Hide toggle to bring it back; the choice is stored as `touchtest=` in `/.rytm/display.txt`.
+Pictures of both themes and the STAGE look: [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
 
-## Settings
+## The connection animation
 
-![Settings, Sound page: MIDI notes, output, computer audio, FIFO target; per voice the machine and a test drone](../../../assets/ui/display-sound.png)
-![Settings, Send FX page: FX 1 in green, FX 2 in white, the 12 tracks' send levels, Kill tails](../../../assets/ui/display-sendfx.png)
-![Settings, About page: web address, IP, link, build, screensaver, the touch test toggle and brightness](../../../assets/ui/display-about.png)
+When the Rytm's link comes up or drops, a banner slides over the top of the screen, modelled on the Rytm's own CONNECTED splash: it opens as a curtain from the left, the word slides in, a row of dots (CLASSIC: LEDs) sweeps across, lit left to right for **CONNECTED** (about 1.4 s) and put out right to left for **DISCONNECTED** (about 1.1 s), then the curtain leaves to the right. It plays only on a change of the link, never on a page change.
 
-<small>Screenshots: the 1021 display rendered off-device with mock data.</small>
+![The OLED connection banner: CONNECTED over the title bar](../../../assets/touch/oled-connected.png)
+![The CLASSIC banner: RYTM DISCONNECTED with the LED sweep](../../../assets/touch/classic-disconnected.png)
 
+## Settings > Display
 
-The **Settings** button (top right) opens the settings pages and becomes **Home**. Every control is at least 48 px high.
+![Settings > Display (OLED): UI STYLE OLED / CLASSIC, SCREENSAVER OFF / 15 MIN / 1 H / 4 H, TOUCH TEST, BRIGHTNESS 100 %, LOOK STUDIO / STAGE](../../../assets/touch/oled-settings-display.png)
 
-| Page | |
+<small>Screenshots: rendered off-device by the Sidecar's own UI code, with made-up data.</small>
+
+| Setting | |
 |---|---|
-| **Sound** | MIDI notes, output (Main/Tracks), computer audio, the buffer target; per voice: machine and test drone |
-| **Send FX** | both effects' TYPE and the 12 send levels (read only: the Rytm's kit owns them; **FX 1 green, FX 2 white**), and **Kill tails** |
-| **About** | the web address, IP, network, the build, the screensaver, the touch test (show / hide) and brightness |
+| **UI style** | OLED or CLASSIC (also `uistyle=oled\|classic` on the console or the web page) |
+| **Screensaver** | Off, 15 min, 1 h (default) or 4 h without a touch: the screen goes black. Any touch wakes it, and that touch only wakes the screen. Rytm activity does not keep it awake. |
+| **Touch test** | a tap counter and the raw touch readout. It leaves HOME after the first tap; it lives here from then on. |
+| **Brightness** | 5 to 100 %. It dims the picture (the panel has no software backlight control); even the darkest setting stays readable, so you can always find the slider again. |
+| **Look** | STUDIO or STAGE |
 
-The display, the web page and the console share one state: a change on one shows on all.
+All of these are stored on the card in `/.rytm/display.txt` and can be set from the web page too. `screensaver=`, `brightness=`, `touchtest=` and `uistyle=` in `cmdline.txt` override the file at boot.
 
-## Screensaver and brightness
+## Power warning
 
-- **Screensaver:** after 1 hour without a touch (default) the screen goes black. Choose Off, 15 min, 1 h or 4 h. Any touch wakes it; that touch only wakes the screen. Rytm activity does not keep it awake.
-- **Brightness:** 5 to 100 %. It dims the picture (the panel has no software backlight control); even the darkest setting stays readable, so you can always find the slider again.
-- Both are stored on the card (`/.rytm/display.txt`) and can be set from the web page too.
+A weak supply shows in the title bar in the alert look, with a short text naming the board's supply (the 15 W supply for a Pi 4, the 27 W adapter for a Pi 5), and on the web page's Power tile.
 
 ## Touch
 
-If touch is offset or mirrored, read the raw values from the touch readout and set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`. Touch errors on the panel's USB link are recovered automatically.
+If touch is offset or mirrored, read the raw values from the touch test and set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`. Touch errors on the panel's USB link are recovered automatically.
 
 ## Cost
 
-The display runs on the core that also handles USB, but the audio is interrupt-driven and does not wait for it. At rest an update takes about 0.3 ms. `display=0` in `cmdline.txt` turns it off.
+The display runs on the core that also handles USB, but the audio is interrupt-driven and does not wait for it. Only what changed is redrawn: a page change takes roughly 5 to 20 ms on a Pi 4 (estimated from the Mac), the meters and the clock far less. `display=0` in `cmdline.txt` turns the display off.

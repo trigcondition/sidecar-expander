@@ -11,7 +11,7 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
-- Optional: an 800x480 HDMI display (USB touch works too) and an Ethernet cable.
+- Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in the 0.3 test line 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
 - From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi-sd-<commit>.zip` (one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-<version>.zip` (the starter user machines).
 
 ## Make the SD card
@@ -77,6 +77,9 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `web=0\|1` | 1 | the web page at `http://sidecar.local` |
 | `ip=`, `netmask=` | 169.254.61.60, 255.255.0.0 | the Pi's Ethernet address |
 | `width=`, `height=` | the display's | Pi 4: the frame buffer size, for a display other than 800x480; Pi 5: the UI's size (800x480 by default, scaled) |
+| `res=800x480\|1024x600\|auto` | auto | 0.3: the UI's layout size ([Screen sizes](/sidecar-expander/using/display/#screen-sizes)) |
+| `uistyle=oled\|classic` | oled | 0.3: the touchscreen's theme, also for the boot screen |
+| `dsi=0` | | draw on HDMI even with a DSI display connected |
 | `touchscreen=minx,maxx,miny,maxy` | | touch calibration, if the touch is off |
 | `screensaver=MIN`, `brightness=PCT` | 60, 100 | override the display settings at boot |
 | `recbuf=MB` | 64 | the recorder's memory; 0 turns recording off |
@@ -96,7 +99,7 @@ hdmi_cvt=800 480 60 6 0 0 0
 disable_overscan=1
 ```
 
-For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
+For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. For a 1024x600 display (0.3 test line) the lines are on [The display](/sidecar-expander/using/display/#screen-sizes). Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
 The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1` matters there (see [Raspberry Pi 5](#raspberry-pi-5)). A DSI display needs no line on either board.
 
@@ -108,11 +111,22 @@ On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` →
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-<version>.zip` holds six starter machines as Pi packages, the same files for the Pi 4B and the Pi 5: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **Machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
+The release's `sidecar-pi-plugins-<version>.zip` holds six starter machines as Pi packages, the same files for the Pi 4B and the Pi 5: `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT; check them against `SHA256SUMS`). Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 
-The remote pages of the `rui1027d` Rytm build (TRK + YES on the Rytm) need this release's kernel (1021 or later); tested on hardware. With an older kernel the pages open without any text. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+Use a Rytm build and a Sidecar build of the same line:
+
+| Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
+|---|---|---|---|
+| 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
+| 0.3 test line | `rui1046` | the Sidecar's 0.3 test build | **UP + YES** (TRK + YES still works) |
+
+The 0.2.0 pairing is tested on hardware; with a kernel older than 1021 the pages open without any text. The 0.3 test line is tested in the emulator. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+
+:::caution[New in 0.3]
+With the 0.3 test build, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too ([Storage](/sidecar-expander/using/storage/)).
+:::
 
 ## Wi-Fi without a cable: sidecar-wifi.txt
 

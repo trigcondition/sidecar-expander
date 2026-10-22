@@ -86,7 +86,7 @@ The mods patch the Rytm's MAIN OS 1.73 image and nothing else (the bootloader, F
 | 0022 router | the host-link SysEx router (from the looper experiment) |
 | 0023 drive | the SIDECAR folder in the sample browser, the per-project pool |
 | 0025 sendfx report | sends the send levels and the FX values to the host; stores the effect knobs |
-| 0026 remote UI | the remote pages: frames, text in the Rytm's fonts (`3D` / `3E`), local echo (`3F`), catch mask (`37`), hello and connect screen (`35` / `36`), machine reports (`33`), trig LEDs (`34`), active kit (`3B`), TRK + LFO, the SRC view (`29` / `2A`) |
+| 0026 remote UI | the remote pages: frames, text in the Rytm's fonts (`3D` / `3E`), local echo (`3F`), catch mask (`37`), hello and connect screen (`35` / `36`), machine reports (`33`), trig LEDs (`34`), active kit (`3B`), UP + LFO (TRK + LFO before `rui1046`), the SRC view (`29` / `2A`) |
 | 0014 hidden machines, 0028 hello, 0030 FX in | the hidden machine slots, the Rytm's hello to the host, the FX return on IN L/R (`26` / `27`) |
 | 0027 elekloader | builds the image with elekloader's core and DDR area |
 | 0029 sendfx UI | AMPLITUDE 2 and the SEND FX 1/2 pages, labels and stepped knobs |

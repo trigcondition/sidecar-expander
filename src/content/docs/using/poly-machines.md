@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
 :::
 
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
@@ -87,7 +87,7 @@ A granular machine on card samples or on the Rytm's live audio.
 
 GRANULAR's SRC, WAVETABLE's TBL and MULTISAMPLE's INST each pick a row of their own POOL list: **8 banks, A..H, of 128 rows**, row 000 OFF in every bank. The row is part of the knob's value, so it is saved in the kit and in p-locks.
 
-- **On the Rytm:** turn **knob A** on the SRC page: the bank list opens (LEFT / RIGHT the bank, the knob or UP / DOWN the row, YES chooses, NO cancels, YES with trigs held locks it). **FUNC + YES** opens the card's browser aimed at the row: load a file into it.
+- **On the Rytm:** turn **knob A** on the SRC page, or press **UP + SRC**: the bank list opens (LEFT / RIGHT the bank, the knob or UP / DOWN the row, YES chooses, NO cancels, YES with trigs held locks it). **FUNC + YES** opens the card's browser aimed at the row: load a file into it.
 - **On the touchscreen:** the machine view (UP + T4), **POOL**: tap a row to play it, tap an empty row to fill it from FILES. **ALL POOLS** shows the three lists.
 - **On the web page:** the Pool tab, and +SMP / +WT / +INST and Fill bank on the Files tab.
 
@@ -95,6 +95,7 @@ The SRC page then shows the source's name; an empty row reads like `B005`, a mis
 
 ![GRANULAR's SRC page with the source's name from the Sidecar: ALPHA, and BD SRC:ALPHA in the bottom bar](../../../assets/rytm/sc-src-names.png)
 ![The touchscreen's GRANULAR view: the source's waveform, the grains, ALL POOLS and POOL](../../../assets/touch/oled-mach-granular.png)
+![The Rytm's POOL page on INST, the list MULTISAMPLE picks from: bank A with A000 OFF and empty rows](../../../assets/rytm/sc-pool-instr.png)
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 

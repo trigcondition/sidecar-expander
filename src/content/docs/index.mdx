@@ -25,7 +25,6 @@ import piSound from '../../assets/ui/pi-sound.png';
 import piMachines from '../../assets/ui/pi-machines.png';
 import piLfo from '../../assets/ui/pi-lfo.png';
 import dispHome from '../../assets/ui/display-home-hidden.png';
-import dispFx from '../../assets/ui/display-sendfx.png';
 import seqMake from '../../assets/rytm/sc-seq-make.png';
 import seqHeld from '../../assets/rytm/sc-seq-held.png';
 import seqLock from '../../assets/rytm/sc-seq-lock-src.png';
@@ -44,6 +43,10 @@ import songTouch from '../../assets/touch/classic-song-timeline.png';
 import insTouch from '../../assets/touch/oled-insfx-voice.png';
 import recTouch from '../../assets/touch/oled-rec-recording.png';
 import autoExt from '../../assets/rytm/sc-auto-ext.png';
+import upMap from '../../assets/rytm/sc-up-map.png';
+import menuTop from '../../assets/rytm/sc-menu-top.png';
+import touchHome from '../../assets/touch/oled-home.png';
+import touchClassic from '../../assets/touch/classic-home.png';
 
 <div class="sc-hero">
   <p class="sc-big" translate="no">Sidecar</p>
@@ -85,13 +88,13 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
   { src: lfoDesign, alt: 'The LFO design view with 16 steps', pixel: true },
   { src: connect, alt: 'The connect screen', pixel: true },
 ]}>
-  <p>Hold TRK and press YES: status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
+  <p>Hold UP and press YES (TRK + YES on the 0.2.0 release's Rytm build): status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
 </Feature>
 
 <Feature flip kicker="Modulation" title="LFOs, with your own wave" href="/sidecar-expander/using/lfo/" shots={[
   { src: piLfo, alt: 'The web page LFO tab' },
 ]}>
-  <p>Eight LFOs on any parameter of a Sidecar voice or effect, saved per kit. Free or synced to the Rytm, retriggered by a trig or PLAY, and a DESIGN wave of 16 steps you draw on the Rytm (TRK + LFO) or in the browser. <span class="sc-test">in testing</span></p>
+  <p>Eight LFOs on any parameter of a Sidecar voice or effect, saved per kit. Free or synced to the Rytm, retriggered by a trig or PLAY, and a DESIGN wave of 16 steps you draw on the Rytm (UP + LFO) or in the browser. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature kicker="Recording" title="Record every track, play it back" href="/sidecar-expander/using/recorder/" shots={[
@@ -115,10 +118,11 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
 </Feature>
 
 <Feature flip kicker="Touchscreen" title="A screen of its own" href="/sidecar-expander/using/display/" shots={[
-  { src: dispHome, alt: 'The display home screen' },
-  { src: dispFx, alt: 'The display Send FX page' },
+  { src: touchHome, alt: 'The touchscreen home page in the OLED theme' },
+  { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
+  { src: dispHome, alt: 'The 0.2.0 display home screen' },
 ]}>
-  <p>The Pi drives an 800x480 touch display: the tracks and their machines, the project's user slots, the send levels, the core loads and the recorder at a glance, with sound settings, screensaver and brightness by touch.</p>
+  <p>The Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In the 0.3 test line it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature kicker="Poly mode · 0.3 test line" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[
@@ -127,7 +131,7 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
   { src: seqLock, alt: 'LOCK SRC: p-locks on seq steps', pixel: true },
   { src: touchSeq, alt: 'The touchscreen piano roll' },
 ]}>
-  <p>TRK + TRIG makes a track a poly track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
+  <p>UP + TRIG makes a track a poly track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature flip kicker="Poly machines · 0.3 test line" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
@@ -158,10 +162,12 @@ import autoExt from '../../assets/rytm/sc-auto-ext.png';
 </Feature>
 
 <Feature kicker="Finding your way · 0.3 test line" title="Every combo one key away" href="/sidecar-expander/using/key-combinations/" shots={[
-  { src: comboMap, alt: 'The UP + T map on the touchscreen while UP is held' },
+  { src: upMap, alt: 'The combo map on the Rytm while UP is held', pixel: true },
+  { src: menuTop, alt: 'The SIDECAR MENU on the Rytm', pixel: true },
+  { src: comboMap, alt: 'The same map on the touchscreen' },
   { src: statusTouch, alt: 'SIDECAR STATUS on the touchscreen' },
 ]}>
-  <p>Hold UP on the Rytm for the map of shortcuts; YES on the SIDECAR page opens a menu of every page. The touchscreen's keys carry their UP + T shortcut, and new pages show the scope, the status, the projects and the pools. <span class="sc-test">in testing</span></p>
+  <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
 </Feature>
 
 </div>

@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Tested end to end in the emulator; not yet confirmed on a real Rytm.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Tested end to end in the emulator; not yet confirmed on a real Rytm.
 :::
 
 The Rytm's song mode is a list of patterns. The **song recorder** captures a whole performance instead: arm it, press PLAY on the Rytm and play. Pattern changes, knob moves on every track, mutes, scenes, PERF and the Sidecar's own send FX are recorded against the Rytm's step clock. Replay puts the Rytm back where the take began and plays it again. <span class="sc-test">in testing</span>
@@ -43,7 +43,7 @@ The touchscreen's SONG page is the take as a timeline (read only): bars and mark
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-The Rytm's SONG page is in the SIDECAR MENU (TRK + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
+**UP + T11** opens SONG: on the touchscreen when one is connected, else the Rytm's SONG page. The Rytm's SONG page is also in the SIDECAR MENU (UP + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
 
 ## With poly tracks and the pools
 

@@ -1,15 +1,15 @@
 ---
 title: The touchscreen (0.3)
-description: "The Pi's touchscreen in the 0.3 test line: the OLED and CLASSIC themes and the STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600, which displays work."
+description: "The Pi's touchscreen in the 0.3 test line: the OLED and CLASSIC themes and the STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600."
 sidebar:
   order: 7.1
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1045` with the Sidecar's 0.3 test build), Sidecar (Pi) only. For the 0.2.0 display see [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
 :::
 
-The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T10). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. <span class="sc-test">in testing</span>
+The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T13). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. <span class="sc-test">in testing</span>
 
 ## Themes and looks
 
@@ -30,28 +30,28 @@ Two themes, each with every page. Switch with **Settings > Display > UI style** 
 
 ## Navigation
 
-A column of keys on the right (CLASSIC: in the title bar) in both themes: **HOME, SEQ, PAT, VOICE, FX, SONG, REC, SET**. Each key is captioned with the trig key that opens it from the Rytm with **UP** held (T1 HOME, T2 SEQ, T3 PAT, T4 VOICE, T5 SET, T6 FX, T8 REC). Every page lights its own key or its parent's (SCOPE lights VOICE, STATUS lights HOME), never SET for a page that is not a setting.
+A column of keys on the right (CLASSIC: in the title bar) in both themes: **HOME, SEQ, PAT, VOICE, FX, SONG, REC, SET**. Each key is captioned with the trig key that opens it from the Rytm with **UP** held (T1 HOME, T2 SEQ, T3 PAT, T4 VOICE, T5 SET, T6 FX, T8 REC, T11 SONG). Every page lights its own key or its parent's (SCOPE lights VOICE, STATUS lights HOME), never SET for a page that is not a setting.
 
-**Hold UP** on the Rytm: the touchscreen shows the UP + T map until you let go (the Rytm shows its KEYS page). See [Key combinations](/sidecar-expander/using/key-combinations/).
+**Hold UP** on the Rytm: the touchscreen shows the map of every UP + key until you let go (the Rytm shows the same map). See [Key combinations](/sidecar-expander/using/key-combinations/).
 
-![The UP + T map over the home page while UP is held on the Rytm](../../../assets/touch/oled-combo-map.png)
+![The combo map over the home page while UP is held on the Rytm: T1 HOME .. T13 POOL, YES PAGES, TRIG SEQ, SRC LIST, LFO LFOS, FX INSERT FX](../../../assets/touch/oled-combo-map.png)
 
 ## Pages
 
 | Page | Open with | Shows |
 |---|---|---|
 | **HOME** | HOME, UP + T1 | the voices by track (a poly track marked POLY TRACK), **NOW** (the pattern, the transport, the recorder, one health line), the project's U1..U5, the network |
-| **SEQ** | SEQ, UP + T2, TRK + TRIG on the Rytm | the piano roll of a poly track (below) |
+| **SEQ** | SEQ, UP + T2, UP + TRIG on the Rytm | the piano roll of a poly track (below) |
 | **PAT** | PAT, UP + T3 | the Rytm's own pattern (read only): 12 tracks x 16 steps (or all 64), trigs by velocity, micro timing, conditions, p-lock lanes and a step card |
 | **VOICE** | VOICE, UP + T4, a voice on HOME | the selected track: its machine, P1..P8 as dials with the Rytm's labels and their values, the machine's panel (the 6-OP FM algorithm, MULTISAMPLE's zones and envelope, DAISYSP's mode), a p-lock heatmap |
 | **Machine view** | UP + T4 on a GRANULAR, WAVETABLE or MULTISAMPLE track | GRANULAR's grains over the source, WAVETABLE's frames, MULTISAMPLE's zones over a keyboard; **POOL** and **ALL POOLS** |
-| **POOL** | POOL in the machine view, ALL POOLS, Settings > Pool | the project's [POOL lists](/sidecar-expander/using/pools/#on-the-touchscreen): banks A..H, rows with their states, the pool RAM |
+| **POOL** | UP + T13, POOL in the machine view, ALL POOLS, Settings > Pool | the project's [POOL lists](/sidecar-expander/using/pools/#on-the-touchscreen): banks A..H, rows with their states, the pool RAM |
 | **INSERT FX** | FX, UP + T6 | the selected voice's two insert slots, its sends, its [OUT route](/sidecar-expander/using/stereo-out/) and the three buses ([Insert FX](/sidecar-expander/using/insert-fx/)) |
-| **SONG** | SONG | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
+| **SONG** | SONG, UP + T11 | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
 | **REC** | REC, UP + T8 | the Overbridge recorder and its takes, with playback (below) |
 | **SCOPE** | UP + T9, a tap on VOICE's scope | a scope of one channel over eleven level meters (below) |
 | **SIDECAR STATUS** | UP + T10, a tap on HOME's NOW panel | voices, CPU, links, versions and the sample library (below) |
-| **PROJECT** | a tap on HOME's PROJECT panel | the card's projects, export and import of [bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project) |
+| **PROJECT** | UP + T12, a tap on HOME's PROJECT panel | the card's projects, export and import of [bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project) |
 | **SET** | SET, UP + T5 | Settings: Sound, Send FX, Display, Pool, About, and a SERVICE tab (test signals, buffer settings) |
 
 The sampler and the auto-sampler (UP + T7) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
@@ -121,46 +121,12 @@ The PROJECT page lists the card's projects and exports and imports bundles, to t
 
 ### The connection animation
 
-When the Rytm's link comes up or drops, a banner slides over the top of the screen, modelled on the Rytm's own CONNECTED splash: it opens as a curtain from the left, the word slides in, a row of dots (CLASSIC: LEDs) sweeps across, lit left to right for **CONNECTED** (about 1.4 s) and put out right to left for **DISCONNECTED** (about 1.1 s), then the curtain leaves to the right. It plays only on a change of the link, never on a page change.
-
-![The OLED connection banner: CONNECTED over the title bar](../../../assets/touch/oled-connected.png)
-![The CLASSIC banner: RYTM DISCONNECTED with the LED sweep](../../../assets/touch/classic-disconnected.png)
+A banner slides over the top of the screen when the Rytm's link comes up or drops: see [The display](/sidecar-expander/using/display/#the-connection-animation).
 
 <small>Screenshots: rendered off-device by the Sidecar's own UI code, with made-up data.</small>
 
-## Screen sizes
+## Screen sizes and displays
 
-The UI has two sizes, each with its own layout in both themes: **800x480** and **1024x600** (OLED: 512x300 dots). On the larger size the roll, the lists, the timeline and the meters get more room; text and touch targets keep their size. The size follows the frame buffer the Pi's firmware sets from `config.txt`:
-
-- 800x480 or 1024x600: that layout, 1:1.
-- Any other size (Pi 4): the 800x480 layout in the middle, unscaled, with black borders.
-- Pi 5 on HDMI: the firmware picks the mode (1920x1080 measured), and the UI is scaled to it: the 1024x600 layout when the display prefers 1024x600, else 800x480.
-- To force a size: `res=800x480`, `res=1024x600` or `res=auto` in `cmdline.txt` or on its own line in `/.rytm/display.txt`; read at boot.
+The UI has two sizes, **800x480** and **1024x600**, each with its own layout in both themes. Which displays work, how the size is picked and the `config.txt` lines for a 1024x600 panel are on [The display](/sidecar-expander/using/display/).
 
 ![SEQ at 1024x600 (OLED)](../../../assets/touch/wide-oled-seq-roll.png)
-![The CLASSIC home page at 1024x600](../../../assets/touch/wide-classic-home.png)
-
-## Which displays work
-
-| Display | Pi 4 | Pi 5 |
-|---|---|---|
-| 5" / 7" HDMI LCD with USB touch, 800x480 (Waveshare) | <span class="sc-ok">hardware</span> (the 5") | <span class="sc-ok">hardware</span>, scaled (slightly soft) |
-| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 | expected, to be confirmed: needs the `config.txt` lines below | expected |
-| 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
-| Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
-| Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
-
-**The GeeekPi EP-0194 (1024x600)** on a Pi 4: the HDMI block of `config.txt` becomes
-
-```
-[pi4]
-hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_mode=87
-hdmi_cvt=1024 600 60 6 0 0 0
-disable_overscan=1
-```
-
-Nothing else is needed: the frame buffer is then 1024x600 and the UI follows. On the Pi 5 only `hdmi_force_hotplug=1` matters (it is on the card); if the 1024x600 layout is not picked, put `res=1024x600` in `cmdline.txt`. The boot log's `display: EDID:` line says what the panel reports.
-
-HDMI goes to the Pi's micro-HDMI 0, USB touch to a USB-A port. With a DSI display and HDMI both connected, the Sidecar draws on the DSI display. `dsi=0` in `cmdline.txt` keeps it on HDMI. To turn a DSI display by 180 degrees: `lcd_rotate=2` under `[pi4]` in `config.txt` (Pi 4) or `dsi_rotate=180` in `cmdline.txt` (Pi 5); `dsitouch_inv=1`, `2` or `3` mirrors the DSI touch in x, y or both. On the Pi 5 a 15-pin DSI display needs a 22-pin to 15-pin display cable. USB touch calibration: see [The display](/sidecar-expander/using/display/#touch).
