@@ -15,6 +15,14 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 
 A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive the Sidecar. You play and edit everything from the Rytm: pick a Sidecar machine on a track, turn its knobs, p-lock them, and send tracks to the Sidecar's effects. The Sidecar's own pages open on the Rytm's screen with one key held: **UP** in the 0.3 test line (TRK in the 0.2.0 release).
 
+## A screen is optional
+
+**You do not need a touchscreen.** The Rytm's own screen and keys drive everything:
+
+- **On the Rytm:** the Sidecar draws its pages on the Rytm's display, in the Rytm's font: status, the machines, the sequencer, POLY CONFIG, the inserts and the OUT route, the pools, projects, songs, the recorder and the scope. **Hold UP** for the map of every shortcut; UP + YES opens the Sidecar's pages.
+- **In a browser:** the Sidecar's web page at `sidecar.local`, on a phone or a laptop, covers the setup: Wi-Fi, user machines, the pools, projects and bundles, poly tracks.
+- **A touchscreen (optional)** on the Pi adds what a big screen does best: the piano roll, the scope, the voices and the status at a glance. See [The touchscreen](/sidecar-expander/using/touchscreen/).
+
 :::caution[Unofficial, experimental software]
 This is a tester release. It is not made, endorsed or supported by the instrument's maker. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you install anything.
 :::

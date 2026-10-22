@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested on the Mac; **not yet measured on a real Rytm** (see [Measurements](#measurements-pending)). Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). Built and tested on the Mac; **not yet measured on a real Rytm** (see [Measurements](#measurements-pending)). Sidecar (Pi) only.
 :::
 
 Every Sidecar voice normally comes back on its own Rytm track, in mono, through the track's analog filter and amp. The **OUT** route can send it past the track instead: straight onto the Rytm's main mix, in stereo. <span class="sc-test">in testing</span>
@@ -48,7 +48,7 @@ LEV, PAN and WID are [LFO](/sidecar-expander/using/lfo/) targets: **O1..O8**.
 
 ## Where to set it
 
-- **On the Rytm:** the remote **INSERT** page (**UP + FX**; TRK + FX, the older form, still works). The TRACK view's strip ends in the OUT box (`OUT POST`). Press **YES twice** (TRACK > BUS > OUT) for the **OUT view**: A OUT, B LEV, C PAN, D WID, E DEC (DSP SAMPLE only). The line under the title says what is left out. YES or NO goes back.
+- **On the Rytm:** **UP + AMP** opens the remote **INSERT** page straight on the selected track's **OUT view** (again while open: back to that view). Or **UP + FX** for the INSERT page (TRK + FX, the older form, still works). The TRACK view's strip ends in the OUT box (`OUT POST`). Press **YES twice** (TRACK > BUS > OUT) for the **OUT view**: A OUT, B LEV, C PAN, D WID, E DEC (DSP SAMPLE only). The line under the title says what is left out. YES or NO goes back.
 - **On the touchscreen:** the **INSERT FX** page (UP + T6): the **OUT** row. Tap the key to step TRK > PRE > POST; LEV, PAN and WID with their values, and the voice's L / R meters while it is on PRE / POST.
 - **On the console:** `out=V3:post`, `out=V3:lev:100`, `out=V3:pan:64`, `out=V3:wid:64`, `out=V3:dec:off`, `out=list`.
 

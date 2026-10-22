@@ -12,7 +12,7 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 | Tab | What |
 |---|---|
 | **Status** | CPU of the render cores, buffer levels, underruns, the Overbridge stream, whether the Rytm is attached, USB-C, temperature, the **Power** tile ("too weak" with a warning when the supply is, e.g. a Pi 5 not on its 27 W adapter), the SD card speed test, the **Wi-Fi** section and the **Storage** section (below) |
-| **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, a machine per voice and a test drone; **Display**: screensaver and brightness (the UI style through the console, `uistyle=oled` or `uistyle=classic`) |
+| **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, a machine per voice and a test drone; **Display**: screensaver and brightness (the UI style through the console, `uistyle=oled` or `uistyle=classic`); in 0.3 **Poly tracks** (below) |
 | **Send FX** | the two effects' TYPE and the tracks' send levels as the Rytm's kit sets them (read only); Kill tails |
 | **LFO** | the eight [LFOs](/sidecar-expander/using/lfo/): target, wave (with the DESIGN grid), rate, retrig, depth |
 | **Record** | the [recorder](/sidecar-expander/using/recorder/): record, arm, channels, and the takes with a play button per channel |
@@ -38,8 +38,12 @@ The page has no password. Use it on a direct cable or a network you trust.
 <small>Screenshots: the 0.2 page with mock data (`mock_web.py`: made-up addresses, takes and machines).</small>
 
 :::caution[New in 0.3]
-The Sidecar's 0.3 test build (Sidecar (Pi) only) adds the **Pool** and **Project** tabs, the **Storage** section and the sample library's line on the Status tab, and the Files tab's pool buttons. The 0.2.0 tab **Pool & presets** is now **Presets**. <span class="sc-test">in testing</span> (Mac, with the mock page)
+The Sidecar's 0.3 test build (Sidecar (Pi) only) adds the **Pool** and **Project** tabs, **Sound > Poly tracks**, the **Storage** section and the sample library's line on the Status tab, and the Files tab's pool buttons. The 0.2.0 tab **Pool & presets** is now **Presets**. <span class="sc-test">in testing</span> (Mac, with the mock page)
 :::
+
+### Poly tracks
+
+**Sound > Poly tracks** has a row per poly track: **VOICES**, **ALLOCATION**, **UNISON**, **DETUNE**, **SPREAD** and **Set**, and a line with the instances the config resolves to. It sets the same [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) as the Rytm's track menu (FUNC + CHRO) and the touchscreen's POLY tool. <span class="sc-test">in testing</span>
 
 ### Pool
 

@@ -8,7 +8,7 @@ sidebar:
 The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
 :::caution[New in 0.3]
-The 0.3 test line (Rytm build `rui1046` with the Sidecar's 0.3 test build, Sidecar (Pi) only) adds to every machine on this page:
+The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build, Sidecar (Pi) only) adds to every machine on this page:
 
 - three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on 6-OP FM: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
 - two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK, as before) or in stereo on the Rytm's main mix (PRE / POST);

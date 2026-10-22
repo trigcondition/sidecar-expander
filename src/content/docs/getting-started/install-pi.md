@@ -88,6 +88,8 @@ Example: `sdport=0 display=0` for a Pi without a display.
 
 ## The display
 
+A display is **optional**. Without one the Sidecar works the same: its pages are drawn on the Rytm's own screen (UP + YES; hold UP for the map of every shortcut) and the web page at `sidecar.local` covers the setup. A touchscreen adds the piano roll, the scope and the status at a glance. For a Pi without a display you can set `display=0` (above).
+
 `config.txt` sets HDMI to 800x480 at 60 Hz:
 
 ```
@@ -120,7 +122,7 @@ Use a Rytm build and a Sidecar build of the same line:
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
 | 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
-| 0.3 test line | `rui1046` | the Sidecar's 0.3 test build | **UP + YES** (TRK + YES still works) |
+| 0.3 test line | `rui1048` | the Sidecar's 0.3 test build | **UP + YES** (TRK + YES still works) |
 
 The 0.2.0 pairing is tested on hardware; with a kernel older than 1021 the pages open without any text. The 0.3 test line is tested in the emulator. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 

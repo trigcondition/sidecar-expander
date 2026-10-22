@@ -26,7 +26,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, **27 W** for the Pi 5, plugged in directly (not through a hub).
 - A **microSD card**, 1 GB or more. A fast, larger card is better for the recorder.
 - A **USB A-to-B cable** from the Pi to the Rytm.
-- Optional: a **touch display**: an 800x480 HDMI display with USB touch (tested with a 5" HDMI LCD), a 7" DSI display compatible with the official display v1 (tested with the OSOYOO 7" DSI on a Pi 4), or in the 0.3 test line a 1024x600 HDMI display. See [The display](/sidecar-expander/using/display/#which-displays-work).
+- Optional: a **touch display**. Not needed to play or edit: the Sidecar's pages open on the Rytm's own screen, and the web page covers setup ([A screen is optional](/sidecar-expander/introduction/what-is-sidecar/#a-screen-is-optional)). It adds the piano roll, the scope and the status at a glance. Displays: an 800x480 HDMI display with USB touch (tested with a 5" HDMI LCD), a 7" DSI display compatible with the official display v1 (tested with the OSOYOO 7" DSI on a Pi 4), or in the 0.3 test line a 1024x600 HDMI display. See [The display](/sidecar-expander/using/display/#which-displays-work).
 - Optional (0.3 test line): a **USB stick** formatted FAT32 (MBR) for project bundles, in a blue USB 3 port of the Pi 4; see [Storage](/sidecar-expander/using/storage/).
 - Optional: an **Ethernet cable** straight to your computer, for the web page at `sidecar.local`.
 
@@ -41,5 +41,6 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 
 ## What you do not need
 
+- No touchscreen: the Rytm's screen and keys drive everything, and a phone or laptop browser covers setup.
 - No hub: plug the Rytm straight into the Sidecar.
 - No change to the Rytm's hardware. Everything the Rytm runs comes from the patched OS file, and you can go back to stock at any time.

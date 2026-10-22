@@ -126,19 +126,19 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on. Every letter is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places; no font data of the Rytm is in Sidecar. New pages, layouts and graphics come with a Sidecar update (the Pi's SD card) and **do not need a new Rytm flash**; only a new kind of building block on the Rytm side does.
 
 :::caution[New in 0.3]
-The 0.3 test line (Rytm build `rui1046` with the Sidecar's 0.3 test build) makes **UP the Sidecar key** and adds the SIDECAR MENU, the KEYS page and the combo map, the SAMPLE, AUTO, SEQ, INSERT, SONG, POOL and PROJECT pages, and TRK's LED blinking while a page has the keys. Built and tested in the emulator; not yet confirmed on a real Rytm. With the 0.2.0 release's `rui1027d` the key is TRK (TRK + YES) and the page list is SIDECAR, SYSTEM, LFO, REC and SCOPE.
+The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build) makes **UP the Sidecar key** and adds the SIDECAR MENU, the KEYS page and the combo map, the SAMPLE, AUTO, SEQ, POLY CONFIG, INSERT (with UP + AMP for its OUT view), SONG, POOL and PROJECT pages, and TRK's LED blinking while a page has the keys. Built and tested in the emulator; not yet confirmed on a real Rytm. With the 0.2.0 release's `rui1027d` the key is TRK (TRK + YES) and the page list is SIDECAR, SYSTEM, LFO, REC and SCOPE.
 :::
 
 ### Opening, moving, leaving
 
 - **UP + YES** (hold UP, press YES) opens the remote pages on **SIDECAR**; UP + YES again leaves. TRK + YES still works.
 - **YES on SIDECAR** opens the **SIDECAR MENU**: every page with its shortcut. UP / DOWN pick a page, YES opens it. A page with nothing to show now is marked with `-` and answers `NOT HERE NOW`.
-- **UP + a trig key** opens a page directly (UP + T7 SAMPLE, T8 REC, T9 SCOPE, T10 SIDECAR, T11 SONG, T12 PROJECT, T13 POOL), and **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT. See [Key combinations](/sidecar-expander/using/key-combinations/).
+- **UP + a trig key** opens a page directly (UP + T7 SAMPLE, T8 REC, T9 SCOPE, T10 SIDECAR, T11 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
 - **LEFT / RIGHT**: the previous / next page in the ring. **NO**: back a level (a page > SIDECAR > leave).
 - **Hold UP alone** on the main screen: the combo map, until you let go.
 - The page also closes by itself 1 second after the Sidecar stops answering.
 
-![The SIDECAR MENU, top: SEQ (UP+TRIG), SAMPLE (UP+T7), AUTO SAMPLE, SONG (UP+T11), REC (UP+T8), SCOPE (UP+T9)](../../../assets/rytm/sc-menu-top.png)
+![The SIDECAR MENU, top: SEQ (UP+TRIG), POLY CONFIG (FUNC+CHRO), SAMPLE (UP+T7), AUTO SAMPLE, SONG (UP+T11), REC (UP+T8)](../../../assets/rytm/sc-menu-top.png)
 ![The SIDECAR MENU, end: INSERT FX (UP+FX), POOL (UP+T13), PROJECT (UP+T12), STATUS (UP+T10), SYSTEM, KEYS (ALL COMBOS) (HOLD UP)](../../../assets/rytm/sc-menu-end.png)
 
 <small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data. No firmware data. On the Rytm the text is the Rytm's own.</small>

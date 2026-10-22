@@ -47,6 +47,7 @@ import upMap from '../../assets/rytm/sc-up-map.png';
 import menuTop from '../../assets/rytm/sc-menu-top.png';
 import touchHome from '../../assets/touch/oled-home.png';
 import touchClassic from '../../assets/touch/classic-home.png';
+import polyCfg from '../../assets/rytm/sc-poly-config.png';
 
 <div class="sc-hero">
   <p class="sc-big" translate="no">Sidecar</p>
@@ -62,6 +63,8 @@ import touchClassic from '../../assets/touch/classic-home.png';
 <Diagram piOnly />
 
 <p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
+
+<p class="sc-lede"><b>No screen needed.</b> The Rytm's own screen and keys drive everything: the Sidecar draws its pages on the Rytm's display, and holding UP shows the map of every shortcut. The web page on a phone or laptop covers setup. A touchscreen is an optional extra for the piano roll, the scope and the status at a glance.</p>
 
 <div id="features" class="sc-features">
 
@@ -117,21 +120,21 @@ import touchClassic from '../../assets/touch/classic-home.png';
   <p>The Pi serves its own page at <code>sidecar.local</code>. Install user machines, see the CPU and memory, fill the sample pool, browse and upload whole sample folders, set up Wi-Fi. Nothing leaves your network.</p>
 </Feature>
 
-<Feature flip kicker="Touchscreen" title="A screen of its own" href="/sidecar-expander/using/display/" shots={[
+<Feature flip kicker="Touchscreen (optional)" title="A screen of its own, if you want one" href="/sidecar-expander/using/display/" shots={[
   { src: touchHome, alt: 'The touchscreen home page in the OLED theme' },
   { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
   { src: dispHome, alt: 'The 0.2.0 display home screen' },
 ]}>
-  <p>The Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In the 0.3 test line it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
+  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In the 0.3 test line it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature kicker="Poly mode · 0.3 test line" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[
-  { src: seqMake, alt: 'The make prompt: MAKE LT A SIDECAR SEQ TRACK?', pixel: true },
+  { src: seqMake, alt: 'The make prompt: MAKE BT A POLY TRACK? PLAITS, 4 NOTES', pixel: true },
+  { src: polyCfg, alt: 'POLY CONFIG on the Rytm: VOICES, ALLOCATION, UNISON, DETUNE, SPREAD', pixel: true },
   { src: seqHeld, alt: 'The SEQ page with a step held: its chord on a keyboard', pixel: true },
-  { src: seqLock, alt: 'LOCK SRC: p-locks on seq steps', pixel: true },
   { src: touchSeq, alt: 'The touchscreen piano roll' },
 ]}>
-  <p>UP + TRIG makes a track a poly track: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. The Rytm stays the master. <span class="sc-test">in testing</span></p>
+  <p>UP + TRIG makes a track on any Sidecar machine a poly track, PLAITS and JUNO included: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. Each track has a POLY CONFIG in the Rytm's own track menu (FUNC + CHRO): VOICES, ALLOCATION, UNISON with DETUNE and SPREAD. Probability can follow a fixed seed. The Rytm stays the master. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature flip kicker="Poly machines · 0.3 test line" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
@@ -167,7 +170,7 @@ import touchClassic from '../../assets/touch/classic-home.png';
   { src: comboMap, alt: 'The same map on the touchscreen' },
   { src: statusTouch, alt: 'SIDECAR STATUS on the touchscreen' },
 ]}>
-  <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
+  <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + AMP the OUT route, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
 </Feature>
 
 </div>

@@ -25,17 +25,34 @@ Finished and confirmed on real hardware.
 - **Computer audio on the Sidecar Mini:** stereo USB audio to the computer.
 - **Smaller NoisePlethora packages and slot reasons** (!ROOM, !CRSH, !TIME) on the Rytm.
 
-## Now: the 0.3 test line
+## Now: the road to 0.3.0
 
-Built and tested in the emulator and on the Mac; the hardware runs come next (see [What works now](/sidecar-expander/introduction/what-works-now/#next-the-03-test-line-sidecar-on-the-pi)).
+Built and tested in the emulator and on the Mac; the hardware runs come next (see [What works now](/sidecar-expander/introduction/what-works-now/#next-the-03-test-line-sidecar-on-the-pi)). What is in the 0.3 test line:
 
-- **Poly tracks:** the Sidecar's own sequencer on a Rytm track, with chords, 8 pages, trig conditions, p-locks and a piano roll on the touchscreen.
+- **Poly tracks on every Sidecar machine:** the Sidecar's own sequencer on a Rytm track, with chords, 8 pages, trig conditions, p-locks and a piano roll on the touchscreen; a per-track **POLY CONFIG** (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD) in the Rytm's own track menu; seeded randomness.
 - **Poly machines:** MULTISAMPLE, WAVETABLE and GRANULAR.
 - **Pools and the sample library, project bundles, storage** (USB drives, NVMe on the Pi 5).
-- **Insert FX, FX buses and the OUT route** (stereo to the Rytm's main mix, before or after its master effects).
+- **Insert FX, FX buses and the OUT route** (stereo to the Rytm's main mix, before or after its master effects; UP + AMP).
 - **Sampler, auto-sampler and the song recorder.**
-- **The touchscreen** in two themes and two sizes.
+- **The touchscreen** in two themes and two sizes (optional: everything also works from the Rytm's screen).
 - **UP as the Sidecar key**, the SIDECAR MENU, the KEYS page and the combo map.
+
+The agreed order from here to 0.3.0:
+
+1. **Hardware pass:** the current Rytm and Sidecar builds on a real Rytm, with a fixed test list (the UP combinations, pools, bundle export and import, poly tracks, the OUT view, storage speed, the trig LEDs) and the first stereo measurements.
+2. **Bug fixes before features:** whatever the hardware pass finds, plus the known ones (the Rytm freezing after a Pi brownout, red trig LEDs, files safe across a power cut).
+3. **Finish what is in flight:** the rest of the sequencer's top 8 with its Rytm keys and a RANDOM page, and **FREEZE** (an analog track auto-sampled into a multisample poly track, 2 round robins per note). See [Coming in 0.3](/sidecar-expander/using/sequencer/#coming-in-03). <span class="sc-plan">in progress</span>
+4. **Release 0.3.0** to testers.
+
+## After 0.3.0
+
+In order of value:
+
+1. **Stereo and the OUT route, the next phases** (after the measurements on a real Rytm).
+2. **A master FX chain.**
+3. **A slice editor** and a SAMPLE page.
+4. **The user-machine SDK** with declarative pages.
+5. **Analog Four MKII** with the Rytm on one Sidecar: the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned.
 
 ## Also now
 
@@ -73,6 +90,4 @@ Ideas we intend to build; not designed in detail yet.
 
 Ideas only, nothing built:
 
-- **More for poly tracks:** per-track speed and play direction, scales, seeded random notes, per-lock conditions, ratchets and a per-step arpeggiator, parameter slides.
 - **Machinedrum-style user machines:** research, paused.
-- **Analog Four MKII with the Rytm on one Sidecar**, after 0.3.0 is complete: the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned.

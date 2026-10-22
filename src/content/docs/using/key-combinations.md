@@ -1,24 +1,25 @@
 ---
 title: Key combinations
-description: "Every key combination the Sidecar adds to the Analog Rytm MKII, in one place: UP as the Sidecar key, UP + T1..T13 for the pages, UP + TRIG / SRC / LFO / FX / YES, one-handed step copy on poly tracks, the pools and the remote pages."
+description: "Every key combination the Sidecar adds to the Analog Rytm MKII, in one place: UP as the Sidecar key, UP + T1..T13 for the pages, UP + TRIG / SRC / LFO / FX / AMP / YES, POLY CONFIG in the track menu, one-handed step copy on poly tracks, the pools and the remote pages."
 sidebar:
   order: 1.1
 ---
 
 :::caution[New in 0.3]
-For the 0.3 test line: Rytm build `rui1046` with the Sidecar's 0.3 test build, Sidecar (Pi). Rows marked 0.2 also work with the 0.2.0 release's `rui1027d`, where the Sidecar key is still TRK (TRK + YES, TRK + LFO).
+For the 0.3 test line: Rytm build `rui1048` with the Sidecar's 0.3 test build, Sidecar (Pi) (UP as the Sidecar key since `rui1046`, UP + AMP since `rui1047`, POLY CONFIG in the track menu since `rui1048`; tested in the emulator). Rows marked 0.2 also work with the 0.2.0 release's `rui1027d`, where the Sidecar key is still TRK (TRK + YES, TRK + LFO).
 :::
 
 **UP is the Sidecar key.** Hold UP and press a second key. The stock Rytm leaves all of these combinations free, so nothing of the Rytm's own is lost. UP alone still moves the cursor in the Rytm's menus.
 
-- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen and lights T1..T13 in their pages' colours; a touchscreen shows the same map. Let go of UP to close it.
+- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen, in two columns, and lights T1..T13 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
+- **No touchscreen needed:** every page opened from T7..T13 and every UP + key combination works on the Rytm's own screen.
 - **The SIDECAR MENU** (UP + YES, then YES) lists every Sidecar page with its shortcut.
 - **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older forms.
 - While a Sidecar page has the Rytm's keys, **TRK's LED blinks** slowly.
 
 "Hold" means: hold the first key, then press the second. "T1".."T16" are the trig keys.
 
-![The Rytm's combo map while UP is held: T1 HOME .. T13 POOL, then YES PAGES, TRIG SEQ, SRC LIST, LFO LFOS, FX INSERT FX](../../../assets/rytm/sc-up-map.png)
+![The Rytm's combo map while UP is held: T1-6 TOUCH, T7 SAMPLE, T8 REC, T9 SCOPE, T10 STATUS, T11 SONG, T12 PROJECT, T13 POOL, YES PAGES; TRIG SEQ, SRC LIST, LFO LFOS, FX INSERT FX, AMP OUT](../../../assets/rytm/sc-up-map.png)
 
 <small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data. No firmware data.</small>
 
@@ -56,6 +57,8 @@ For the 0.3 test line: Rytm build `rui1046` with the Sidecar's 0.3 test build, S
 | **UP + SRC** | a track on GRANULAR, WAVETABLE, MULTISAMPLE or DSP SAMPLE | the source list in one press: the machine's POOL bank list (DSP SAMPLE: on the SMPL page, knob D) |
 | **UP + LFO** | anywhere | the Sidecar's [LFO page](/sidecar-expander/using/lfo/) |
 | **UP + FX** | anywhere | the [INSERT page](/sidecar-expander/using/insert-fx/) |
+| **UP + AMP** | anywhere | the INSERT page on its **OUT view** for the selected track: the [OUT route](/sidecar-expander/using/stereo-out/) (OUT TRK / PRE / POST, LEV, PAN, WID, DEC); again while open: back to that view |
+| **FUNC + CHRO**, then **POLY CONFIG** | a track | the Rytm's own track menu; its last item opens the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD, GROUP) |
 | **trig held + UP + RECORD** | poly track | copy the held steps |
 | **trig held + UP + STOP** | poly track | paste onto the held steps |
 | **trig held + UP + PLAY** | poly track | clear the held steps |
@@ -64,8 +67,9 @@ For the 0.3 test line: Rytm build `rui1046` with the Sidecar's 0.3 test build, S
 - **Step copy is one-handed:** hold the trigs first, then UP, then RECORD, STOP or PLAY. UP first and then a trig is a page request (UP + Tn).
 - **On a normal track** UP + RECORD / STOP / PLAY stays the Rytm's own transport, and a held trig with UP or DOWN stays the Rytm's own trig popup.
 - On any other track UP + SRC is SRC alone.
+- **POLY CONFIG is no UP combination:** it sits where a Rytm user looks for a track's settings, as the last item of the track menu (FUNC + CHRO; FUNC + DOWN moves five rows). The KEYS page and the SIDECAR MENU name it.
 
-![KEYS, the UP combinations: UP+YES SIDECAR (YES: MENU), UP+TRIG SEQ (POLY TRACK), UP+SRC SOURCE LIST, UP+LFO SIDECAR LFOS, UP+FX INSERT FX, T+UP+REC COPY STEPS (SEQ)](../../../assets/rytm/sc-keys-combos.png)
+![KEYS, the UP combinations: UP+YES SIDECAR (YES: MENU), UP+TRIG SEQ (POLY TRACK), UP+SRC SOURCE LIST, UP+LFO SIDECAR LFOS, UP+FX INSERT FX, UP+AMP INSERT OUT VIEW](../../../assets/rytm/sc-keys-combos.png)
 
 :::note[Older forms still work]
 The TRK and FUNC forms of the earlier 0.3 test builds still work: **TRK + YES**, **TRK + TRIG**, **TRK + LFO**, **TRK + FX**, and **trig held + FUNC + RECORD / STOP / PLAY**. The KEYS page lists them after the UP forms.
@@ -118,7 +122,7 @@ See [Poly mode](/sidecar-expander/using/sequencer/).
 | **AMP**, AMP again | a track | AMPLITUDE 2: the track's sends to SEND FX 1 and 2. 0.2 |
 | **SRC** / **SMPL** again | the FX track | SEND FX 1 / SEND FX 2. 0.2 |
 | **STOP STOP** | anywhere | the Sidecar's send effects fade out and clear. 0.2 |
-| **FUNC + CHRO** | a track | the track menu with the user slots U1..U5. 0.2 |
+| **FUNC + CHRO** | a track | the track menu with the user slots U1..U5 (0.2), and in 0.3 POLY CONFIG as its last item |
 | **knob A** turned (or UP + SRC) | SRC page of GRANULAR, WAVETABLE, MULTISAMPLE | the [bank list](/sidecar-expander/using/pools/#choosing-and-loading-on-the-rytm) of the machine's POOL |
 | **SMP** (knob D) turned (or UP + SRC) | SMPL page of DSP SAMPLE | the bank list of SAMPLES |
 | **LEFT / RIGHT**, **YES**, **NO** | the bank list | the bank / choose / cancel |

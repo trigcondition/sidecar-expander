@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
 :::
 
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
@@ -32,6 +32,8 @@ Live chords: with CHRO on, chords played on the pads sound at once; with RECORD 
 | MULTISAMPLE | 16 | 64 |
 | WAVETABLE | 8 | 32 |
 | GRANULAR | 6 | 24 |
+
+**On a poly track** these machines (and 6-OP FM) allocate notes from their own pools: their [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) takes **VOICES** only (the most notes held at once; AUTO: the counts above). Every other Sidecar machine can be a poly track too, through the instance pool. <span class="sc-test">in testing</span>
 
 ![The MULTISAMPLE page on the Rytm with a chord: SIDECARTEST, A MIN, INV0, SPR1, AUTO, a keyboard with the chord's notes](../../../assets/rytm/sc-multisample-chord.png)
 

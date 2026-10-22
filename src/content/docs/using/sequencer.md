@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key) are tested in the emulator. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key, poly tracks on every Sidecar machine, POLY CONFIG, the seeded random) are tested in the emulator and on the Mac. Sidecar (Pi) only.
 :::
 
 A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
@@ -22,23 +22,33 @@ A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the
 
 ### Which machines
 
-A poly track needs a polyphonic Sidecar machine on its SRC page. The Rytm's make prompt says how many notes the machine plays.
+**Every Sidecar machine** can be a poly track: PLAITS, JUNO, DAISYSP, DIGIDRUM, DSP SAMPLE, 6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and user machines. Only the analog machines cannot: the Rytm's analog voice is mono. How many notes a track plays at once is its [POLY CONFIG](#poly-config); AUTO gives each machine its default:
 
-| Machine | Notes per voice | Notes in all (pool) |
+| Machine | VOICES on AUTO | Where the notes play |
 |---|---|---|
-| 6-OP FM | 6 | 24 |
-| MULTISAMPLE | 16 | 64 |
-| WAVETABLE | 8 | 32 |
-| GRANULAR | 6 | 24 (and up to 64 grains per voice) |
+| 6-OP FM | 6 | the machine's own pool |
+| MULTISAMPLE | 16 (its pool, as before; VOICES 1..8 caps it) | the machine's own pool |
+| WAVETABLE | 8 | the machine's own pool |
+| GRANULAR | 6 | the machine's own pool |
+| JUNO | 6 | the instance pool |
+| PLAITS, DAISYSP | 4 | the instance pool |
+| DIGIDRUM | 1 (mono: a new note cuts the old) | the voice, or the instance pool with VOICES above 1 |
+| DSP SAMPLE | 1 (mono only: one card stream a voice) | the voice |
+| user machines | 1 for a drum, else up to 4 (the package declares its maximum) | the instance pool, when the package allows it |
 
-JUNO, PLAITS, DAISYSP, DSP SAMPLE, DIGIDRUM, user machines and the analog machines are mono: on those tracks UP + TRIG explains why instead of making a poly track.
+- **The instance pool** holds 32 instances shared by the poly tracks, each with its own engine state, so a PLAITS track with VOICES 4 plays four PLAITS at once. They are rendered into the track's own channel, before its inserts, so the voice's CPU budget covers them: every built-in machine fits 8. A heavy user machine is cut to what fits (`CUT` on the pages).
+- **The note's pitch:** on PLAITS, JUNO, DAISYSP, DSP SAMPLE and the note machines the note is the pitch (plus TUN / FIN); DIGIDRUM takes it as an offset on PTCH; a user machine for a fixed-pitch drum ignores it.
+- A user machine package declares its voices (`max_voices`) and whether pitch matters; older packages stay mono.
+- A poly track's own Rytm trigs make no note; its pad in the normal pad mode still plays its voice.
 
-![The make prompt on the Rytm: MAKE LT A POLY TRACK? SIDECAR SEQUENCES IT. WAVETABLE, 8 POLY NOTES. PADS: CHRO FOR NOTES. YES: MAKE IT, NO: BACK](../../../assets/rytm/sc-seq-make.png)
-![The explanation on a track that cannot be a poly track: POLY TRACKS NEED 6-OP FM, MULTISAMPLE, WAVETABLE OR GRANULAR (ON SRC)](../../../assets/rytm/sc-seq-explain.png)
+The Rytm's make prompt names the machine and its notes, and where POLY CONFIG is.
+
+![The make prompt on the Rytm: MAKE BT A POLY TRACK? SIDECAR SEQUENCES IT. PLAITS, 4 NOTES. PADS: CHRO FOR NOTES. FUNC+CHRO: POLY CONFIG. YES: MAKE IT, NO: BACK](../../../assets/rytm/sc-seq-make.png)
+![On an analog track: BT PLAYS ANALOG: THE RYTM'S VOICE IS MONO. FOR A POLY TRACK PICK A SIDECAR MACHINE ON SRC](../../../assets/rytm/sc-seq-explain.png)
 
 ## Getting started
 
-1. Pick **6-OP FM**, **MULTISAMPLE**, **WAVETABLE** or **GRANULAR** on a track's SRC page (see [Poly machines](/sidecar-expander/using/poly-machines/)).
+1. Pick a **Sidecar machine** on a track's SRC page: PLAITS, JUNO, 6-OP FM, MULTISAMPLE and the rest (see [Machines](/sidecar-expander/using/machines/) and [Poly machines](/sidecar-expander/using/poly-machines/)).
 2. Select the track (TRK + pad), hold **UP** and press **TRIG**. The Rytm asks **MAKE BD A POLY TRACK?**
 3. Press **YES** (UP may still be held). The track is a poly track, saved per project. The Rytm shows the Sidecar's SEQ page for it, and the touchscreen switches to its piano roll.
 4. Press **RECORD** (GRID REC) to edit steps on the trig keys. This is **seq mode**: the trig keys, PAGE and the knobs under a held trig are the Sidecar's.
@@ -50,6 +60,44 @@ To leave the SEQ page: UP + TRIG again, or NO. Selecting a track that is no poly
 
 ![The poly track's menu: LT: POLY TRACK, BACK TO THE SEQ, TURN OFF (STEPS KEPT), LENGTH (KNOB C), QUANTISE (KNOB D)](../../../assets/rytm/sc-seq-menu.png)
 ![The turn-off prompt: LT: POLY TRACK OFF? ITS STEPS STAY SAVED. B UP: BACK ON. YES: TURN OFF, NO: KEEP](../../../assets/rytm/sc-seq-off.png)
+
+## POLY CONFIG
+
+Each poly track has a **POLY CONFIG**, named and modelled after the Analog Four MKII's. On the Rytm it is the last item of the Rytm's own **track menu**: **FUNC + CHRO**, then **POLY CONFIG** (after TRIGS SETUP, PAD SCALE, RELOAD TRACK, SAVE TRACK and the user slots U1..U5; FUNC + DOWN moves five rows) and **YES**. The Sidecar draws the page on the Rytm's screen; the SIDECAR MENU lists it too.
+
+| Knob | Setting | Values |
+|---|---|---|
+| **A** VOIC | **VOICES**: the most notes at once | AUTO (the machine's default), 1..8 |
+| **B** ALLC | **ALLOCATION**: which voice a new note takes | REASSIGN (the default: the same note held retriggers its voice), ROTATE, RESET |
+| **C** UNIS | **UNISON**: instances stacked per note | OFF, 2..8 |
+| **D** DTUN | **DETUNE** of the stack | 0..127 (127: ±50 cents at the stack's edges; FUNC: by 8) |
+| **E** SPRD | **SPREAD**: the stack across the stereo field | 0..127 (needs the voice on OUT [PRE / POST](/sidecar-expander/using/stereo-out/); FUNC: by 8) |
+| **F** GRP | **GROUP** | OFF, 1..4: stored, not played yet |
+
+- The line under the title says what the config resolves to now: `4 NOTES 4 INST 2.92%` (notes, instances, their share of a core), with `CUT` when the budget or the machine's maximum cut it.
+- 6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR allocate from their own pools: they take **VOICES** only, B..E read `-`.
+- On a Sidecar track that is no poly track yet, the page says so and **YES** makes it one. On an analog track it explains that the Rytm's voice is mono.
+- **NO** goes back to the Rytm's own screen.
+- **Where it is stored:** in the pattern, and as the track's default in the project. A track plays its pattern's config, else its default (the last one set on it), so a track keeps its voicing across patterns, and a pattern may still differ.
+- The same config is on the touchscreen's SEQ page (the **POLY** tool), the web page (**Sound > Poly tracks**) and the console (`seq=poly:T:voices=4,alloc=rotate,unison=2,detune=30,spread=64`).
+
+![POLY CONFIG on the Rytm: 3 NOTES 6 INST 4.38%, VOICES 3, ROTATE, UNISON 2, DETUNE 5, SPREAD 8, GROUP 1: STORED ONLY](../../../assets/rytm/sc-poly-config.png)
+![POLY CONFIG on a Sidecar track that is no poly track yet: PLAITS: NOT A POLY TRACK, YES: MAKE IT A POLY TRACK](../../../assets/rytm/sc-poly-new.png)
+![POLY CONFIG on 6-OP FM: 6 NOTES 6 INST, VOICES only (FM: VOICES ONLY)](../../../assets/rytm/sc-poly-fm.png)
+![POLY CONFIG on an analog track: RS PLAYS ANALOG: THE RYTM'S VOICE IS MONO](../../../assets/rytm/sc-poly-analog.png)
+![The touchscreen's SEQ page with the POLY tool: VOICES AUTO..8, ALLOCATION REASGN / ROTATE / RESET, UNISON, and the line POLY T9: FM 4 INST 4 NOTES 4.88%](../../../assets/touch/oled-seq-poly.png)
+
+<span class="sc-test">in testing</span> (emulator, `rui1048`)
+
+## Seeded randomness
+
+Every random choice the sequencer makes (today: a step's probability) comes from one **seed**, so it can repeat exactly.
+
+- **Per pattern:** **FREE** (the default: a new seed at each PLAY, kept through pauses and pattern changes) or a **fixed seed** 0..9999, saved with the pattern. With a fixed seed a 50 % step makes the same choices on every PLAY, after an edit and after a reload.
+- **Per track:** a track may have a seed of its own, and may make the same choices on every loop.
+- Set it on the console for now: `seq=seed:free`, `seq=seed:41`, `seq=tseed:T:N|follow`. A page for it on the Rytm comes with the rest of the sequencer (below).
+
+<span class="sc-test">in testing</span> (Mac)
 
 ## Entering notes
 
@@ -150,6 +198,8 @@ The Rytm's **SAVE PATTERN** and **RELOAD PATTERN** (the PATTERN menu, FUNC + SCN
 - SAVE keeps the working steps as the pattern's saved state (`pNNN.sqs`).
 - RELOAD brings the saved state back, keeping the working copy first (`pNNN.prv`). A pattern the Sidecar never saw saved keeps its steps.
 
+**Pattern files from 0.3 on.** A pattern that uses a new feature (a fixed seed, a track's own seed, a poly config) is saved in a newer format (`.sqp` version 4) and needs a 0.3 or later Sidecar; every other pattern is saved as before and still plays on an older Sidecar.
+
 **A pattern file that does not load is locked.** A file from a newer Sidecar, or a damaged one, is never written over: edits stay in memory and the footer says `A05 FROM NEWER SIDECAR: LOCKED` or `A05 FILE DAMAGED: LOCKED`.
 
 ## The touchscreen from the Rytm
@@ -213,6 +263,7 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 | PAGE / PAGE held / PAGE + trig | seq mode | next page / page map / jump to page |
 | FUNC + PAGE | seq mode, also over the page | SCALE |
 | RECORD + PLAY | poly track | live record on the Sidecar's grid |
+| FUNC + CHRO, POLY CONFIG, YES | a track | the track's [POLY CONFIG](#poly-config) |
 | UP + T1..T13 | anywhere | the pages (above) |
 
 :::note[Older forms]
@@ -221,7 +272,8 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 
 ## Features
 
-- Poly tracks on 6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR, up to 4 poly tracks at once.
+- Poly tracks on every Sidecar machine, up to 4 poly tracks at once, each with its POLY CONFIG (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD).
+- Probability from a seed: FREE, or fixed per pattern and per track.
 - Up to 8 notes per step, each with its own velocity, length and micro timing (1/96 of a step).
 - Chords by CHD, INV and STRUM, or played on the pads; chord stamp, strum, humanise and swing on the touchscreen.
 - Trig conditions (FILL, PRE, NEI, 1ST, A:B) and probability per step.
@@ -236,8 +288,12 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 ## Limitations
 
 - **Sidecar (Pi) only.**
-- **Analog tracks are not polyphonic.** A poly track must play 6-OP FM, MULTISAMPLE, WAVETABLE or GRANULAR. JUNO is mono in this build.
-- **Voices per machine** are capped (table above); a note past the cap steals the oldest.
+- **Analog tracks are not polyphonic.** A poly track must play a Sidecar machine. FREEZE (below) is planned for analog sounds.
+- **Voices** are capped by VOICES (at most 8) and the shared instance pool (32); a note past the cap steals one (the same pitch, then the quietest released tail, then the oldest).
+- DSP SAMPLE (and GRAIN) play one note at a time.
+- On 6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR, ALLOCATION and UNISON do not apply (VOICES only).
+- **GROUP** is stored, not played: tracks pooled into one instrument come later.
+- SPREAD needs the voice on OUT PRE or POST; on TRK the track is mono.
 - **Shared voices.** RS/CP, MT/HT, CH/OH and CY/CB share one voice; a poly track is best on BD, SD, BT or LT.
 - **No analog p-locks on poly steps**: FLTR, AMP and the Rytm's own FX are not locked per step, and the Sidecar's LFOs are not locked per step.
 - **No retrigs.** A FILL latched on the Rytm is not seen (only FILL held).
@@ -248,3 +304,20 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 - The files are keyed by the project's name. After a rename or SAVE PROJECT AS on the Rytm the Sidecar [asks whether to move them](/sidecar-expander/using/projects-bundles/#renamed-on-the-rytm).
 - The SEQ page's playhead moves at most 4 times a second, to keep the Rytm's UI responsive.
 - First hardware use on a Pi 4. Nothing is confirmed on a Pi 5 yet.
+
+## Coming in 0.3
+
+<span class="sc-plan">in progress</span> Not in the test builds yet. The rest of the sequencer's top 8, in build order, and FREEZE:
+
+1. **Speed ratios per track** (3/4, 2/3, 5/4 ...), for polyrhythms beyond the Rytm's own scale.
+2. **Play direction per track:** forward, reverse, pendulum, ping-pong, random, brownian.
+3. **Scale and key per pattern**, with scale-aware edits; live transpose after it.
+4. **Seeded random notes in a scale**, with a **modulatable SEED** (from the Sidecar's LFOs, and from the Rytm's scenes and PERF).
+5. **Conditions and probability per lock**, not only per step.
+6. **Chord-aware ratchets and a per-step arpeggiator.**
+7. **Parameter slides** between locks.
+8. **A tracker-style FX column** per step, with random and bounded jumps.
+
+**FREEZE** turns an analog track into a poly track: the auto-sampler samples the track's current sound over a range of notes, **2 round robins per note**, writes a multisample, and the track becomes a MULTISAMPLE poly track with it. The kit's analog sound stays as it was, so the track can go back. A quick way to play an analog sound polyphonically, not a replacement: locks and LFOs on the analog sound's own parameters are baked in.
+
+See the [roadmap](/sidecar-expander/roadmap/).

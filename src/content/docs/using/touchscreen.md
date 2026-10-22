@@ -6,10 +6,10 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
 :::
 
-The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T13). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. <span class="sc-test">in testing</span>
+The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T13). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. **It is optional:** without it the Sidecar's pages open on the Rytm's own screen, and the web page covers setup. <span class="sc-test">in testing</span>
 
 ## Themes and looks
 
@@ -71,12 +71,15 @@ The poly track's notes as bars, coloured by velocity, with note names when there
 | **KEY** | show a key and scale on the rows |
 | **SWING** | the track's swing, 50..80 |
 | **SNAP** | 1/16, 1/32, 1/64, FREE |
+| **POLY** | the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config): VOICES (AUTO, 1..8), ALLOCATION (REASSIGN / ROTATE / RESET), UNISON; the line above says what it resolves to (`POLY T9: FM 4 INST 4 NOTES 4.88%`) |
 | **UNDO / REDO** | 24 levels, kept per track and pattern |
 
 Drag on the grid scrolls; pinch zooms (1..8 pages across, row height). **While the Rytm plays** the roll opens in **VIEW**, so a stray touch changes nothing: tap DRAW to edit (it locks again after 10 s without a touch), and a long press adds or deletes a note. Each edit shows a short message. While playing, the view follows the playhead's page, 3 s after your last touch.
 
 ![SEQ while the Rytm plays: VIEW: TAP DRAW TO EDIT](../../../assets/touch/oled-seq-view.png)
 ![SEQ in the CLASSIC theme with the CHORD tool: MIN7 stamped, inversion R, strum 12](../../../assets/touch/classic-seq-chord.png)
+![SEQ with the POLY tool (OLED): VOICES 4, ROTATE, the line POLY T9 ROTATE: FM 4 INST 4 NOTES 4.88%](../../../assets/touch/oled-seq-poly.png)
+![The POLY tool in the CLASSIC theme](../../../assets/touch/classic-seq-poly.png)
 
 ### VOICE and the machine view
 
@@ -102,7 +105,7 @@ An oscilloscope of one Overbridge channel: TRACK (the Rytm's selected track, fol
 
 Read only, twice a second:
 
-- **VOICES:** each voice by its track, its machine and its share of a render core.
+- **VOICES:** each voice by its track, its machine and its share of a render core; a poly track's machine with its instances (`PLAITS X8`), and on the panel's title the instance pool in use (`INST 12/32`), one instance's cost and its memory.
 - **SEND FX:** FX 1 / FX 2 with their TYPE and PRE / POST.
 - **CPU:** cores 1..3, the longest block and pass, underruns, the buffer and the temperature.
 - **LINKS:** the Rytm, the Overbridge audio, USB-C, the network, the web page, the SD card, a [USB drive](/sidecar-expander/using/storage/) and an NVMe SSD with their free space, the display.

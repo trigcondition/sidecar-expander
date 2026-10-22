@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
 :::
 
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>
@@ -45,7 +45,7 @@ Changing TYPE crossfades without a click and loads the effect's defaults. Parame
 
 ## Editing
 
-- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU; TRK + FX, the older form, still works). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back.
+- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU; TRK + FX, the older form, still works). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view.
 ![The INSERT page's TRACK view on the Rytm: CRUSH in slot A, B empty, OUT POST; RATE BITS DRV MIX, SLOT TYPE BUS SEND; YES: BUSES, FUNC+G: TRACK](../../../assets/rytm/sc-insert-out-box.png)
 
 <small>Render of the Rytm-screen page: the Sidecar's own page code on the host, with made-up data.</small>

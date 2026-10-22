@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1046` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi. Sidecar (Pi) only.
+New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi. Sidecar (Pi) only.
 :::
 
 The Sidecar keeps a project's files on its own card, found by the Rytm's project name. A **bundle** puts one project in one file, `<NAME> <YYYYMMDD-HHMM>.sidecar.zip`: move it to another Sidecar (Pi 4B or Pi 5) or keep it as a backup, and import it there with the same sounds in the same rows, the same poly tracks and songs. <span class="sc-test">in testing</span>
