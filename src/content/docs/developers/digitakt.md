@@ -174,7 +174,8 @@ What it gives you for this experiment:
   emulator serves the host->device Overbridge stream with `--ob-link`. Both are built around the
   Rytm's 12-channel stream: whether they work in Digitakt mode is **(to verify)**. Extending the
   emulator's Overbridge link to the Digitakt's channel counts is a good way to work on Stage B
-  before touching a real device.
+  before touching a real device. The emulator is open source: if something in its Digitakt mode is missing or
+  broken, fix it with your agent and send the fix back as a pull request to analog-emu.
 
 The emulator does not replace the hardware run: USB timing, descriptors and levels still have
 to be measured on a real Digitakt.
@@ -324,7 +325,8 @@ sample format. Ask me to read it from the device, and note the source next to ea
 Without hardware, use the analog-emu emulator (github.com/trigcondition/analog-emu), which runs
 the Digitakt MK1's own OS 1.53 (I supply the OS file; never commit it): its virtual USB MIDI
 ports for Stage C, and its Overbridge link (built for the Rytm; Digitakt mode to verify) for
-Stage B. Hardware still decides.
+Stage B. If the emulator falls short for the Digitakt, fix the emulator first (a separate pull
+request to analog-emu). Hardware still decides.
 
 Hard rules: never flash or modify Digitakt firmware, and do not use firmware mod tools. No
 Elektron firmware, binaries, disassembly or decompiled code. Overwitch (GPL-3) may be read
