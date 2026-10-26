@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Sidecar has three code bases: the **engine** (one shared core with a Teensy, a Pi and a Mac port), the **Rytm mods** (built on elekloader), and the **web tools** (the patcher and the consoles). The source of the engine and the mods follows in a later release; until then the [written offer](/sidecar-expander/about/licence/#written-offer-for-source-code) applies.
+Sidecar has three code bases: the **engine** (one shared core with a Teensy, a Pi and a Mac port), the **Rytm mods** (built on elekloader), and the **web tools** (the patcher and the consoles). The source is public: the engine in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware), the mods in [sidecar-mods](https://github.com/trigcondition/sidecar-mods).
 
 ```
               USB (the Sidecar is the host, Overbridge mode)

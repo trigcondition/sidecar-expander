@@ -9,7 +9,7 @@ sidebar:
 Nothing on this page has been tried with a Digitakt yet. It is a map for developers who want to experiment, written against the **0.2.0** engine source. Anything marked **(to verify)** is not confirmed in that source: check it on your own device. None of the commands were run while this page was written.
 :::
 
-**Getting the source.** The engine is not public yet. The [written offer](/sidecar-expander/about/licence/#written-offer-for-source-code) gives you the 0.2.0 source (the `release-020` branch of the engine) on request. File paths below are relative to that source tree.
+**Getting the source.** The engine is public: [trigcondition/sidecar-firmware](https://github.com/trigcondition/sidecar-firmware). Work from the **`v0.2.0`** tag (`git clone https://github.com/trigcondition/sidecar-firmware && cd sidecar-firmware && git checkout -b digitakt v0.2.0`). File paths below are relative to that repository.
 
 ## 1. What the Sidecar is, and what "Digitakt support" can mean for now
 
@@ -32,11 +32,13 @@ inputs.** No firmware changes and no Digitakt UI integration.
 
 ---
 
-## 2. Getting set up on release-020
+## 2. Getting set up on v0.2.0
 
 ### Get the branch
 ```
-git fetch && git checkout release-020     # or: git worktree add ../sidecar-020 release-020
+git clone https://github.com/trigcondition/sidecar-firmware
+cd sidecar-firmware
+git checkout -b digitakt v0.2.0      # your branch, starting at the 0.2.0 release
 ```
 
 ### Host tools (Mac)
@@ -249,6 +251,9 @@ Digitakt's main path. Note-off and CC 16..31 work, latency is measured (the capt
 markers, `pi/circle/spike3/latency.py`), and all Rytm tests still pass.
 
 ### Stage D: out of scope (needs firmware work, not now)
+The Rytm's side of that work is public in [sidecar-mods](https://github.com/trigcondition/sidecar-mods)
+(patch sources and build; bring your own stock OS): read it to see what firmware integration
+involves, but none of it applies to a Digitakt as it is.
 - Machines chosen on the Digitakt's screen, a SIDECAR page, parameter reports, p-locks of
   Sidecar machines (on the Rytm all of these come from rytm-mods' SysEx).
 - Per-track audio into Digitakt tracks beyond what stock Overbridge allows.
@@ -290,9 +295,10 @@ markers, `pi/circle/spike3/latency.py`), and all Rytm tests still pass.
 - **Elektron USB IDs:** the host side already has the Rytm's ID in `ob_block.h`. Ask the
   maintainer how Digitakt IDs should be stored before you add them.
 - **Licence and contributions:** Sidecar's code is GPL-2.0-or-later; the Pi binary as a whole is
-  GPLv3 because it links Circle ([Licence](/sidecar-expander/about/licence/)). Follow the
-  [contributing guidelines](/sidecar-expander/developers/contributing/) and ask the maintainer
-  how they want contributions (branch, PR or patch) before you share code.
+  GPLv3 because it links Circle (`LICENSE`, `NOTICE`; [Licence](/sidecar-expander/about/licence/)).
+  The repository's `CONTRIBUTING.md` is the workflow: fork, a branch per change, tests with it
+  (`tools/run_portable_tests.sh`, `make -C core engines && make -C core test`), a focused pull
+  request against `main` that says what you tested it on.
 - **Safe power and levels.** Use the official Pi supply. Keep `core::MainOut`'s 200 ms fade-in
   and -12 dBFS limit on every path toward the Digitakt. **Turn speakers and headphones down
   before you test an untested audio path:** a wrong channel count or byte order shows up as
@@ -304,8 +310,7 @@ markers, `pi/circle/spike3/latency.py`), and all Rytm tests still pass.
 
 ```
 You are helping me experiment with Elektron Digitakt support in the "Sidecar", a bare-metal
-Raspberry Pi 4 (Circle) USB host for Elektron drum machines. Work on the release-020 branch
-(version 0.2.0). Read the page "Experimenting with the Digitakt" on the Sidecar docs site
+Raspberry Pi 4 (Circle) USB host for Elektron drum machines. The source is github.com/trigcondition/sidecar-firmware; work on a branch from the v0.2.0 tag. Read the page "Experimenting with the Digitakt" on the Sidecar docs site
 (developers section) first, then docs/research-rytm-usb.md,
 docs/pi-engine.md, docs/core.md, teensy/libraries/RytmHost/ob_block.h, pi/engine/ob_usb.cpp,
 pi/engine/output.h and core/notes.h. Treat anything marked "(to verify)" as unknown.

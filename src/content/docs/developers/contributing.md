@@ -19,7 +19,7 @@ The items under "Not yet confirmed on hardware" in [Known issues](/sidecar-expan
 
 ## Source code
 
-The engine and the Rytm mods are published after the tester round. Until then the [written offer](/sidecar-expander/about/licence/#written-offer-for-source-code) gives you the source on request. This repository holds the patcher, the web console, the documentation and the release scripts.
+The source is public: the engine in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (its `CONTRIBUTING.md`: fork, a branch, tests, a pull request against `main`), the Rytm mods in [sidecar-mods](https://github.com/trigcondition/sidecar-mods) (bring your own stock OS), the emulator in [analog-emu](https://github.com/trigcondition/analog-emu). This repository holds the patcher, the web console, the documentation and the release scripts.
 
 ## Guidelines
 

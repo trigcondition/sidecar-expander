@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::note
-The engine and mods repositories are not public yet. These are the commands as they work in them today.
+The commands as they work in the [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (engine) and [sidecar-mods](https://github.com/trigcondition/sidecar-mods) (Rytm mods) repositories.
 :::
 
 ## Pi engine
