@@ -157,6 +157,28 @@ display framework.
 
 ---
 
+## Testing without a Digitakt: the analog-emu emulator
+
+[analog-emu](https://github.com/trigcondition/analog-emu) runs the devices' own OS on emulated
+hardware, and it runs the **Digitakt MK1 (OS 1.53)** as well as the Rytm (it is a fork of
+rouletrro, a Digitakt MK1 emulator). You supply the OS file for your device; it is not included
+and must never be committed anywhere. Its `docs/INSTALL.md` goes from installing Rust to the
+first boot; see also [Emulator testing](/sidecar-expander/developers/emulator-testing/).
+
+What it gives you for this experiment:
+- the Digitakt's screen and keys on your Mac, to set up MIDI tracks and see what the OS does;
+- virtual USB MIDI ports (`rytm-emu usb in/out`), so a host on the Mac can receive the
+  Digitakt's MIDI notes (Stage C) without hardware;
+- the Sidecar engine's emulator link: the 0.2.0 engine can use an emulator over the network
+  instead of USB (`link=tcp`, `emuhost=` in `cmdline.txt`; see `pi/engine/kernel.cpp`), and the
+  emulator serves the host->device Overbridge stream with `--ob-link`. Both are built around the
+  Rytm's 12-channel stream: whether they work in Digitakt mode is **(to verify)**. Extending the
+  emulator's Overbridge link to the Digitakt's channel counts is a good way to work on Stage B
+  before touching a real device.
+
+The emulator does not replace the hardware run: USB timing, descriptors and levels still have
+to be measured on a real Digitakt.
+
 ## 4. Staged plan (smallest useful step first)
 
 ### Stage A: detect the Digitakt
@@ -298,6 +320,11 @@ make -C core test; make -C pi/engine/tests; the ob_block test; the Python and we
 Write a failing host test before each change. Keep the Rytm's behaviour identical: every
 existing test must still pass. Make small commits. Never guess a USB ID, channel count or
 sample format. Ask me to read it from the device, and note the source next to each constant.
+
+Without hardware, use the analog-emu emulator (github.com/trigcondition/analog-emu), which runs
+the Digitakt MK1's own OS 1.53 (I supply the OS file; never commit it): its virtual USB MIDI
+ports for Stage C, and its Overbridge link (built for the Rytm; Digitakt mode to verify) for
+Stage B. Hardware still decides.
 
 Hard rules: never flash or modify Digitakt firmware, and do not use firmware mod tools. No
 Elektron firmware, binaries, disassembly or decompiled code. Overwitch (GPL-3) may be read
