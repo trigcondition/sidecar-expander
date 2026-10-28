@@ -47,7 +47,7 @@ Six machines of our own (MIT licence), ready to install:
 - The knobs keep their values when TYPE changes: an SD after a BD plays with the BD's knob positions.
 - MD is a mono drum voice: the trig's note is not used (tune with the voice's own PTCH), and the velocity scales the hit. Loudness differs a lot between voices; use LEV.
 - Only the voice you are using costs CPU; the others in the machine cost nothing.
-- MD needs the 0.3 Sidecar software. An older one refuses the package ("format not supported") rather than show the wrong TYPE names.
+- MD is installed by the Sidecar's plugin library (coming). MD needs the 0.3 Sidecar software. An older one refuses the package ("format not supported") rather than show the wrong TYPE names.
 - Earlier test builds had three machines, MD-PI, MD-EFM and MD-TRX. MD replaces them.
 
 ## Install

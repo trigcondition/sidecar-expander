@@ -109,10 +109,11 @@ Not in the 0.2.0 release. Rytm build `rui1048` with the Sidecar's 0.3 test build
 | [The recorder](/sidecar-expander/using/recorder/): take names with the date (`<project>_<YYYY-MM-DD_HHMM>`, clock set by the web page), date columns and sorting, a scrollable touchscreen list, a big buffer, space reserved up front, a speed warning, recording to a USB drive | <span class="sc-test">in testing</span> (Mac; the all-channel take on a Pi is the next check) |
 | [Song recorder](/sidecar-expander/using/song-recorder/#undo-a-replay): UNDO REPLAY | <span class="sc-test">in testing</span> (Mac, emulator) |
 | [The RAM store](/sidecar-expander/using/storage/#saves-are-instant-and-safe-in-a-power-cut): no card access on kit and pattern changes, instant saves, a power cut keeps the last whole file | <span class="sc-ok">hardware</span> (2026-10-26) |
-| The Pi drops to 600 MHz above its temperature limit (75 °C); a heatsink or a fan is recommended ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)); CPU clock 1500 / 1200 / 1000 MHz | <span class="sc-test">in testing</span> |
+| The Pi drops to 600 MHz above its temperature limit (78 °C); a heatsink or a fan is recommended ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)); CPU clock 1500 / 1200 / 1000 MHz | <span class="sc-test">in testing</span> |
 | The Rytm MIDI bridge for hardware testing (off by default, for developers: [Testing](/sidecar-expander/developers/emulator-testing/#testing-on-a-real-rytm-the-midi-bridge)) | <span class="sc-test">in testing</span> (Mac) |
 | 7" HDMI 1024x600 display (GeeekPi EP-0194) | expected, to be confirmed |
-| The rest of the sequencer's top 8 (speed ratios, play direction, scale and key, seeded random notes with a modulatable SEED, per-lock conditions, chord-aware ratchets and arp, parameter slides, the FX column) and FREEZE ([Coming in 0.3](/sidecar-expander/using/sequencer/#coming-in-03)) | <span class="sc-plan">in progress</span> |
+| [More sequencer pages](/sidecar-expander/using/sequencer/#more-sequencer-pages-direction-speed-scale-random-ratchets-slides-fx-column): speed ratios, play direction, scale and key, seeded random notes with a modulatable SEED, per-lock conditions, chord-aware ratchets and arp, parameter slides, the FX column (Rytm build `rui1050` or later) | <span class="sc-test">in testing</span> (emulator, Mac) |
+| FREEZE ([Coming in 0.3](/sidecar-expander/using/sequencer/#coming-in-03)) | <span class="sc-plan">in progress</span> |
 
 ### Coming with the next Rytm firmware
 

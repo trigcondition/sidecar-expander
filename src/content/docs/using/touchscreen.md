@@ -52,7 +52,7 @@ A column of keys on the right (CLASSIC: in the title bar) in both themes: **HOME
 | **SCOPE** | UP + T9, a tap on VOICE's scope | a scope of one channel over eleven level meters (below) |
 | **SIDECAR STATUS** | UP + T10, a tap on HOME's NOW panel | voices, CPU, links, versions and the sample library (below) |
 | **PROJECT** | UP + T12, a tap on HOME's PROJECT panel | the card's projects, export and import of [bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project) |
-| **SET** | SET, UP + T5 | Settings: Sound, Send FX, Display, Pool, About, and a SERVICE tab (test signals, buffer settings) |
+| **SET** | SET, UP + T5 | Settings: Sound, Send FX, Display, Pool, About, and a System tab (test signals, buffer settings, the CPU clock) |
 
 The sampler and the auto-sampler (UP + T7) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
 

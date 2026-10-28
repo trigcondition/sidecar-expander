@@ -24,11 +24,11 @@ sidebar:
 
 ## Keeping it cool
 
-The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protects itself: above the temperature limit it drops its clock to **600 MHz**, and the Sidecar has far less room to render: expect dropouts. The limit is **75 °C**, set by `socmaxtemp=75` in `cmdline.txt`.
+The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protects itself: above the temperature limit it drops its clock to **600 MHz**, and the Sidecar has far less room to render: expect dropouts. The limit is **78 °C**, set by `socmaxtemp=78` in `cmdline.txt` (78 is the highest the Pi software allows; the Pi's own firmware still protects itself at 80 and 85 °C). The clock goes back to 1500 MHz when the chip is below 75 °C again; the temperature is checked every 4 seconds. New SD cards already have `socmaxtemp=78`. On a card you made earlier, open `cmdline.txt` on the card (it is one line) and add ` socmaxtemp=78` at the end, with a space before it, then put the card back and restart. Without it the Pi slows down at 60 °C.
 
 - **Use a heatsink or a fan**, especially in a closed case or with a display attached. This is the real fix.
 - **Watch the temperature:** the web page's Status tab, the touchscreen's STATUS page (UP + T10) and, once it passes 75 °C, a **HOT** warning there, a banner on the touchscreen and a popup on the Rytm (`SIDECAR RUNNING HOT / SEE STATUS`). The warning goes away below 70 °C.
-- **Lower the clock** while you find a fix: **Settings > System > CPU clock** (or `cpumhz=1200` / `cpumhz=1000` on the console) runs the Pi at 1200 or 1000 MHz instead of 1500. It runs cooler, and the Sidecar's voice budget follows the clock.
+- **Lower the clock** while you find a fix: on the touchscreen **Settings > System > CPU clock** (it is not on the web page; the console's `cpumhz=1200` / `cpumhz=1000` or the same word in `cmdline.txt` do the same) runs the Pi at 1200 or 1000 MHz instead of 1500. It runs cooler, and the Sidecar's voice budget follows the clock.
 - The fan of a case with its own display (such as the GeeekPi case) is controlled by the case, not by the Sidecar.
 
 ## Known issues

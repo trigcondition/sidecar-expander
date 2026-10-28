@@ -99,7 +99,7 @@ Every random choice the sequencer makes (today: a step's probability) comes from
 
 - **Per pattern:** **FREE** (the default: a new seed at each PLAY, kept through pauses and pattern changes) or a **fixed seed** 0..9999, saved with the pattern. With a fixed seed a 50 % step makes the same choices on every PLAY, after an edit and after a reload.
 - **Per track:** a track may have a seed of its own, and may make the same choices on every loop.
-- Set it on the console for now: `seq=seed:free`, `seq=seed:41`, `seq=tseed:T:N|follow`. A page for it on the Rytm comes with the rest of the sequencer (below).
+- Set it on the RANDOM page of the SEQ page ([below](#more-sequencer-pages-direction-speed-scale-random-ratchets-slides-fx-column)) or on the console: `seq=seed:free`, `seq=seed:41`, `seq=tseed:T:N|follow`.
 
 <span class="sc-test">in testing</span> (Mac)
 
@@ -366,18 +366,34 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 - The SEQ page's playhead moves at most 4 times a second, to keep the Rytm's UI responsive.
 - First hardware use on a Pi 4. Nothing is confirmed on a Pi 5 yet.
 
+## More sequencer pages: direction, speed, scale, random, ratchets, slides, FX column
+
+<span class="sc-test">in testing</span> (emulator and Mac; needs the Rytm build `rui1050` or later, and the Sidecar's 0.3 test build). On a poly track's SEQ page, with no trig held, **TRIG** cycles four pages: NOTES, **DEFAULTS**, **SCALE**, **RANDOM**, then NOTES again. With trigs held, TRIG cycles NOTES, **TRIG**, **RTRG**, **FX**.
+
+| Page | Knobs | What |
+|---|---|---|
+| **DEFAULTS** | A NOTE, B VEL, C LEN, D SWNG, **E DIR**, **F SPD**, **G TLEN** | the new steps' values, the track's play **direction**, its **speed** and its length |
+| **SCALE** | A KEY, B SCL, C QNT | the pattern's key, scale and quantise |
+| **RANDOM** | A SEED, B RNG, C WGHT, D MODE, E SRNG, F SQNT, G SAFF | seeded random notes and the modulatable seed |
+| **TRIG** (trigs held) | A NOTE, B VEL, C LEN, D MICR, E COND, F STRM, G CHD, H INV | the held step (as before) |
+| **RTRG** (trigs held) | A RATE, B CNT, C VCRV, D PCRV, E MODE, F OCT, G GATE | ratchets, rolls and a per-step arpeggiator |
+| **FX** (trigs held) | A CMD1, B VAL1, C CMD2, D VAL2 | the tracker-style FX column |
+
+- **Direction (DIR):** FWD, REV, PEND (pendulum, the ends once), PING (ping-pong, the ends twice), RND, BROWN (a random walk). RND and BROWN follow the seed, so a fixed seed plays the same order every time. Swing keeps its groove under any direction.
+- **Speed (SPD):** a ratio of the Rytm track's own step clock. A plain turn walks Elektron's 1/8, 1/4, 1/2, 3/4, 1, 3/2, 2; **FUNC** also gives 2/3, 5/4 and 7/8. Each track can run its own ratio, for polyrhythms beyond the Rytm's SCALE.
+- **Scale and key (SCALE):** KEY C..B; SCL CHR MAJ MIN DOR PENT PHR LYD MIX LOC HMIN MMIN PMAJ BLUES WHOLE; QNT **OFF** (only an aid: the roll's rows and the random notes keep to the scale), **EDIT** (the NOTE knob moves by scale degree, FUNC by semitone, and CHD / INV build chords that belong to the scale) or **PLAY** (also every note is quantised when it plays; the written notes stay).
+- **Random notes (RANDOM):** MODE **STEPS** (steps flagged random), **TRACK** (every step with notes gets new pitches; rhythm, velocity and length stay) or OFF. RNG is the range in octaves, WGHT how the notes are weighted (FLAT, ROOT, CHORD, LOW, HIGH, STEP). On a step, turn NOTE below its lowest value to show **RND**: the step's random flag. **SEED** (fully down: FREE) fixes the sequence; **SRNG** lets a machine knob move the seed: the seed follows a parameter of the track's voice **as it plays**, so a scene lock, a PERF macro or an LFO on it changes the notes. That knob is SEED on DAISYSP and DSP SAMPLE; PLAITS and the other machines have no free one (the page says `NO SEED SLOT ON IT`). The poly track's menu has **PRINT RND (THIS LOOP)**, which writes the loop that plays into the steps.
+- **Ratchets and arps (RTRG):** CNT repeats (2..16) inside the step, at a RATE or the note's length, with a velocity curve (VCRV) and a pitch curve (PCRV). MODE CHORD repeats the whole chord, WALK walks through it (a strummed ratchet), and UP DOWN UPDN RND PLAYED CONV make a per-step arpeggiator over OCT octaves.
+- **Conditions and slides per lock:** on a lock page (trigs held + SRC / SMPL / FX), a **long push** on a knob edits that lock's own condition (label `PAT?`: FILL, 1ST, A:B, a percentage), so one parameter can change on some loops only. **FUNC + push** makes the lock **slide** to that parameter's next lock. A short push still clears the lock, now when you let go.
+- **The FX column:** two commands a step. Timing and sound: RTG, DLY, CUT, CHN (a chance for the other command), RND, RNV, OCT, TRS, FIL. Order: JMP, JRN (a random jump), LOP (loop N times), SKP, DIR. They follow the seed too.
+- The poly track's menu adds **PLAY MODE** (the direction) and **PRINT RND**.
+- **Hold UP alone** (about 0.4 s) with a Sidecar page open: the map of UP combinations over the page, until you let go.
+
+Not built: changing the speed in the middle of a pattern.
+
 ## Coming in 0.3
 
-<span class="sc-plan">in progress</span> Not in the test builds yet. The rest of the sequencer's top 8, in build order, and FREEZE:
-
-1. **Speed ratios per track** (3/4, 2/3, 5/4 ...), for polyrhythms beyond the Rytm's own scale.
-2. **Play direction per track:** forward, reverse, pendulum, ping-pong, random, brownian.
-3. **Scale and key per pattern**, with scale-aware edits; live transpose after it.
-4. **Seeded random notes in a scale**, with a **modulatable SEED** (from the Sidecar's LFOs, and from the Rytm's scenes and PERF).
-5. **Conditions and probability per lock**, not only per step.
-6. **Chord-aware ratchets and a per-step arpeggiator.**
-7. **Parameter slides** between locks.
-8. **A tracker-style FX column** per step, with random and bounded jumps.
+<span class="sc-plan">in progress</span> Not in the test builds yet:
 
 **FREEZE** turns an analog track into a poly track: the auto-sampler samples the track's current sound over a range of notes, **2 round robins per note**, writes a multisample, and the track becomes a MULTISAMPLE poly track with it. The kit's analog sound stays as it was, so the track can go back. A quick way to play an analog sound polyphonically, not a replacement: locks and LFOs on the analog sound's own parameters are baked in.
 
