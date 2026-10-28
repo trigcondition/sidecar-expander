@@ -24,6 +24,32 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## MD: Machinedrum-style drums
+
+<span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
+
+| Knob | Page | |
+|---|---|---|
+| **P9 ENGINE** | SMPL | the family: FM, PI or TRX |
+| **P10 TYPE** | SMPL | the drum, from the list of that ENGINE |
+| **P11 LEV** | SMPL | the output level |
+| **P1..P8** | SRC | the voice's own controls |
+
+| ENGINE | TYPEs |
+|---|---|
+| FM | BD SD XT CP RS CB HH CY |
+| PI | BD SD MT ML MA RS RC CC HH |
+| TRX | BD SD XT CP RS CB CH OH CY MA CL XC B2 |
+
+- **The names follow.** Turn ENGINE and the TYPE list changes with it; turn TYPE and P1..P8 take the names of that drum's controls.
+- **Turning ENGINE keeps TYPE's place** in the list (the first stays the first, the last the last), so BD stays BD.
+- **P-lock ENGINE or TYPE per step** for a different drum on each step. The voice that is ringing fades out under the new hit, so there are no clicks.
+- The knobs keep their values when TYPE changes: an SD after a BD plays with the BD's knob positions.
+- MD is a mono drum voice: the trig's note is not used (tune with the voice's own PTCH), and the velocity scales the hit. Loudness differs a lot between voices; use LEV.
+- Only the voice you are using costs CPU; the others in the machine cost nothing.
+- MD needs the 0.3 Sidecar software. An older one refuses the package ("format not supported") rather than show the wrong TYPE names.
+- Earlier test builds had three machines, MD-PI, MD-EFM and MD-TRX. MD replaces them.
+
 ## Install
 
 **On the Pi:** open `sidecar.local`, tab **User machines**, and upload the `.a64.rmp` files (or copy them into `/Plugins/` on the card). Each package is checked (header, size, CRC, API version, target) before it goes in place. Press **Rescan** if you copied files by hand.

@@ -17,6 +17,7 @@ Sidecar stands on open-source work. Thank you to everyone behind these projects.
 | [DaisySP](https://github.com/electro-smith/DaisySP) | MIT | the DAISYSP and DSP SAMPLE resonators |
 | [AMY](https://github.com/shorepine/amy) | MIT | the Juno-106 model our JUNO voice follows |
 | [digidrum](https://github.com/soejrd/digidrum) | MIT | the DIGIDRUM machines |
+| [mdkit](https://github.com/soejrd/mdkit) | CC0 1.0 | the MD user machine (used with the developer's agreement) |
 | Teensyduino, USBHost_t36, SdFat, littlefs | MIT, LGPL-2.1, BSD | the Teensy build |
 | FatFs | BSD-style | the Pi's file system |
 | Circle addon/wlan (from Plan 9) and wpa_supplicant (hostap) | GPL-2.0; BSD-3-Clause | the Pi's Wi-Fi (off in the package) |

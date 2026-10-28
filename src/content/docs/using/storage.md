@@ -9,13 +9,22 @@ sidebar:
 New in 0.3 (until 0.3.0 is released: the test line with the Sidecar's 0.3 test build). Built and tested on the Mac; the drives are not yet measured on a Pi. Sidecar (Pi) only.
 :::
 
-The Sidecar boots from its **SD card**, which stays the place of record: projects, pools and samples live there. Besides it, it mounts **USB drives** as they are plugged in and, on the Pi 5, an **NVMe SSD**. In this build the extra drives are used for [bundles](/sidecar-expander/using/projects-bundles/#usb-sticks) and the storage bench. <span class="sc-test">in testing</span>
+The Sidecar boots from its **SD card**, which stays the place of record: projects, pools and samples live there. Besides it, it mounts **USB drives** as they are plugged in and, on the Pi 5, an **NVMe SSD**. In this build the extra drives are used for [bundles](/sidecar-expander/using/projects-bundles/#usb-sticks), the storage bench and [recording](/sidecar-expander/using/recorder/#recording-to-a-usb-drive). <span class="sc-test">in testing</span>
 
 | Drive | Name | Board |
 |---|---|---|
 | SD card | `SD` | Pi 4B, Pi 5 |
 | USB drives (up to three) | `USB`, `USB2`, `USB3` | Pi 4B, Pi 5 |
 | NVMe SSD on the PCIe connector | `NVME` | Pi 5 |
+
+## Saves are instant, and safe in a power cut
+
+<span class="sc-ok">hardware</span> (2026-10-26: no clicks on kit and pattern changes, a power cut after an edit kept everything). When a project loads, the Sidecar reads its small files (the poly patterns, the LFOs, the insert settings, the pool lists) into RAM. While you play:
+
+- A **kit or pattern change** reads from RAM, never from the card, so it cannot cause a dropout. The sample browser lists folders from a RAM index too.
+- An **edit** changes RAM at once and reaches the card a moment later, as a whole file (written beside the old one, then swapped in).
+- **A power cut** keeps the previous whole file. At worst the very last edit, not yet written, is lost; a file is never half written, and the next boot finishes any swap that was cut in the middle.
+- For a few seconds after the Rytm switches project, while the files load, edits to it are refused with a "loading" message instead of being lost.
 
 ## Formatting a USB drive
 
@@ -73,6 +82,6 @@ What to expect (estimates, to be measured on the Pi): SD card 15-22 MB/s read, 8
 
 - Sidecar (Pi) only. The drives are not yet measured on a Pi.
 - FAT32 with MBR only: exFAT and GPT are a build option that is off (tested on the Mac only).
-- In this build the extra drives hold bundles; projects, pools and samples play from the SD card. The [sample library](/sidecar-expander/using/pools/#the-sample-library) does not index USB drives.
+- In this build the extra drives hold bundles and recordings; projects, pools and samples play from the SD card. The [sample library](/sidecar-expander/using/pools/#the-sample-library) does not index USB drives.
 - NVMe is experimental (one queue, no power management): test SSDs only.
 - A drive pulled without eject can lose a write in progress.

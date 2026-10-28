@@ -39,6 +39,17 @@ The touchscreen's SONG page is the take as a timeline (read only): bars and mark
 2. Nothing is written until you **CONFIRM** (touchscreen) or press **YES** (Rytm). The Sidecar first backs up the Rytm's working kit, pattern and settings (`.backup-NNN.json`), then writes the take's start pattern and kit into the Rytm's **working** buffers (never a stored slot, never a save), sets the mutes and its own send FX, and checks what it wrote.
 3. Press **PLAY** on the Rytm. Pattern changes, knobs, mutes and scenes come at their recorded steps. STOP ends it. **CANCEL** / **NO** backs out at any point before PLAY.
 
+### Undo a replay
+
+A replay overwrites the Rytm's working kit, pattern, settings and mutes. **UNDO REPLAY** puts everything back, as it was before you confirmed. <span class="sc-test">in testing</span>
+
+- **Touchscreen:** the **UNDO REPLAY** key in the place of **< >** while it is offered. **Rytm:** **T5** on the SONG page (the page says `T5: UNDO REPLAY`).
+- **How it works:** when you confirm a replay with the Rytm stopped, the Sidecar first reads and saves every pattern the take visits (with the kit each links), about 0.3 s per pattern, then writes. One press of UNDO REPLAY puts back your kit, pattern, settings and mutes, and the Rytm ends on the pattern you were on.
+- **How long it is offered:** from the replay's first write until you change something (a knob, a mute, a pattern change on the Rytm, the Sidecar's send FX, ARM), until 30 seconds after the Rytm stops, or until you change project. After that T5 says `UNDO EXPIRED` for a second.
+- **At most 8 patterns.** A take that visits more is covered at its start only (the page says `UNDO will cover the start only`), and the undo ends when the replay leaves its start. If the Rytm switches to a pattern that was not saved (a chain on the Rytm, a pattern you select), the undo ends at once.
+- Press PLAY during an undo and it stops (it never writes into a playing pattern); the undo stays offered. The undo is not offered after a restart of the Sidecar. Trig edits you make on the Rytm are not seen by the Sidecar, so the 30-second limit covers them.
+- This is separate from the poly sequencer's UNDO: that one undoes notes, this one puts back the Rytm's kits and patterns.
+
 ![The Rytm's remote SONG page: TAKE-001 9 EV, BAR 3.16 A02 120.0 BPM, MIDI CONFIG OK, T1:ARM T2:REPLAY T4:CFG](../../../assets/rytm/sc-song.png)
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
