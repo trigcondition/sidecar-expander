@@ -124,6 +124,13 @@ YES: MOVE  NO: NEW PROJ
 - It is a **move**: after a SAVE PROJECT AS copy, YES leaves the original without its Sidecar files. Answer NO to keep them with the original (the copy starts empty), or export the original as a bundle first.
 - A NEW PROJECT made on the Rytm right after one with files is asked about too: answer NO.
 
+## Coming: projects by slot and the project trash
+
+<span class="sc-plan">coming</span> With the next Rytm firmware (not flashed yet; the Sidecar side follows it):
+
+- **Projects are kept by the Rytm's project slot, not by its name.** The Rytm has 128 project slots. A rename needs nothing from you. **SAVE AS** and **COPY + PASTE** of a project to another slot copy the project's Sidecar files by themselves, so the copy starts with the same poly tracks, pools, LFOs and songs. Your existing projects move to their slots without a question; where two projects share a name (two called PRESETS, say) it asks once. The rename prompt above stays only as a fallback for a name change the Rytm did not announce.
+- **A project trash.** When you clear or delete a project on the Rytm, its Sidecar files go to a trash instead of being lost. It keeps the last 64 and drops the oldest. Restore a project from the web page's Project tab or the touchscreen's PROJECT page.
+
 ## Limitations
 
 - Sidecar (Pi) only. Not yet run on a Pi: the hardware runs are next.

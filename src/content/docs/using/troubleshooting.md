@@ -19,7 +19,17 @@ sidebar:
 | The Pi does not start | the `# sidecar sdboot begin` block must stay in `config.txt`; use the official supply: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5 (a weak supply browns out with a display attached). A Pi 5 showing its boot diagnostics screen needs a bootloader update |
 | `POWER TOO WEAK` on the display, a Power warning on the web page | the supply is too weak: the official one, plugged in directly (Pi 5: the 27 W (5 V 5 A) adapter; Pi 4: the official 15 W (5.1 V 3 A) supply; the message names the board's own) |
 | Pi 5: the web page is slow over Wi-Fi, "503 busy" | power the Pi 5 from the 27 W adapter directly, not from a hub's port |
+| Clicks or muted voices when the Pi is hot | the temperature on the Status tab: see [Keeping it cool](#keeping-it-cool) |
 | Pi 5: no picture on HDMI | micro-HDMI 0 (next to USB-C), connected before power-on; `hdmi_force_hotplug=1` under `[pi5]` in `config.txt` |
+
+## Keeping it cool
+
+The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protects itself: above the temperature limit it drops its clock to **600 MHz**, and the Sidecar has far less room to render: expect dropouts. The limit is **75 °C**, set by `socmaxtemp=75` in `cmdline.txt`.
+
+- **Use a heatsink or a fan**, especially in a closed case or with a display attached. This is the real fix.
+- **Watch the temperature:** the web page's Status tab, the touchscreen's STATUS page (UP + T10) and, once it passes 75 °C, a **HOT** warning there, a banner on the touchscreen and a popup on the Rytm (`SIDECAR RUNNING HOT / SEE STATUS`). The warning goes away below 70 °C.
+- **Lower the clock** while you find a fix: **Settings > System > CPU clock** (or `cpumhz=1200` / `cpumhz=1000` on the console) runs the Pi at 1200 or 1000 MHz instead of 1500. It runs cooler, and the Sidecar's voice budget follows the clock.
+- The fan of a case with its own display (such as the GeeekPi case) is controlled by the case, not by the Sidecar.
 
 ## Known issues
 

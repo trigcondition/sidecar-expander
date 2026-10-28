@@ -102,7 +102,27 @@ Not in the 0.2.0 release. Rytm build `rui1048` with the Sidecar's 0.3 test build
 | [The touchscreen](/sidecar-expander/using/touchscreen/): OLED and CLASSIC themes, the STAGE look, navigation keys with their UP + T shortcuts, SEQ, PAT, VOICE, INSERT FX, SONG, REC with playback, SCOPE, STATUS, PROJECT, POOL; 800x480 and 1024x600 | <span class="sc-test">in testing</span> (OLED and SEQ used on a Pi 4 with a 7" DSI panel) |
 | On the Rytm: **UP as the Sidecar key** (UP + T1..T13, UP + YES / TRIG / SRC / LFO / FX / AMP, one-handed step copy with trig + UP + RECORD / STOP / PLAY; the TRK and FUNC forms kept), the SIDECAR MENU, the KEYS page and UP held for the combo map, TRK's LED blinking while a Sidecar page has the keys ([Key combinations](/sidecar-expander/using/key-combinations/)) | <span class="sc-test">in testing</span> (emulator, `rui1046` .. `rui1048`) |
 | [The recorder](/sidecar-expander/using/recorder/): stereo voice files and the PRE / POST sources for voices on the OUT route; the touchscreen's REC page with playback | <span class="sc-test">in testing</span> (Mac) |
+| Poly mode: [poly per pattern](/sidecar-expander/using/sequencer/#poly-tracks-belong-to-the-pattern) (a new pattern has none), TURN OFF closing the poly page at once, RESTORE n NOTES? when a track is made poly again | <span class="sc-ok">hardware</span> (first round; the newest build is being checked) |
+| Poly mode: [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit), Push 3 style: DATA walks the notes, A..E edit, select, delete, undo, a scrolling pitch window | <span class="sc-ok">hardware</span> (first round; the new screen is being checked) |
+| Poly SEQ page: YES goes to the Rytm (YES + PLAY / YES + SCENE quick saves), DOWN opens the track menu, FUNC then YES is UNDO; the poly SEQ, UP + FX, UP + AMP and UP + LFO pages replace the Rytm's page like SRC (no LEFT / RIGHT siblings) | <span class="sc-test">in testing</span> (Mac, emulator) |
+| [MD](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums): one user machine, 30 drums, ENGINE (FM / PI / TRX) and TYPE on the SMPL page, names that follow, click-free per-step locks | <span class="sc-test">in testing</span> (its three earlier machines played on hardware) |
+| [The recorder](/sidecar-expander/using/recorder/): take names with the date (`<project>_<YYYY-MM-DD_HHMM>`, clock set by the web page), date columns and sorting, a scrollable touchscreen list, a big buffer, space reserved up front, a speed warning, recording to a USB drive | <span class="sc-test">in testing</span> (Mac; the all-channel take on a Pi is the next check) |
+| [Song recorder](/sidecar-expander/using/song-recorder/#undo-a-replay): UNDO REPLAY | <span class="sc-test">in testing</span> (Mac, emulator) |
+| [The RAM store](/sidecar-expander/using/storage/#saves-are-instant-and-safe-in-a-power-cut): no card access on kit and pattern changes, instant saves, a power cut keeps the last whole file | <span class="sc-ok">hardware</span> (2026-10-26) |
+| The Pi drops to 600 MHz above its temperature limit (75 °C); a heatsink or a fan is recommended ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)); CPU clock 1500 / 1200 / 1000 MHz | <span class="sc-test">in testing</span> |
+| The Rytm MIDI bridge for hardware testing (off by default, for developers: [Testing](/sidecar-expander/developers/emulator-testing/#testing-on-a-real-rytm-the-midi-bridge)) | <span class="sc-test">in testing</span> (Mac) |
 | 7" HDMI 1024x600 display (GeeekPi EP-0194) | expected, to be confirmed |
 | The rest of the sequencer's top 8 (speed ratios, play direction, scale and key, seeded random notes with a modulatable SEED, per-lock conditions, chord-aware ratchets and arp, parameter slides, the FX column) and FREEZE ([Coming in 0.3](/sidecar-expander/using/sequencer/#coming-in-03)) | <span class="sc-plan">in progress</span> |
+
+### Coming with the next Rytm firmware
+
+<span class="sc-plan">coming</span> Not flashed yet; the Sidecar side is being built with it.
+
+- **Projects kept by the Rytm's slot**, copied automatically on SAVE AS and COPY + PASTE ([Projects and bundles](/sidecar-expander/using/projects-bundles/#coming-projects-by-slot-and-the-project-trash)).
+- **A project trash**, with restore on the web page and the touchscreen.
+- **Kits that follow SAVE and RELOAD** (the Sidecar's per-kit LFO and insert settings).
+- **NO + KIT / PATTERN reload** on the Sidecar pages too.
+- **Remote keys**, for hardware testing.
+- **Install with elekloader:** `rytm-sidecar-0.3.0.elemod` with the core 0.1, on OS 1.73 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/#coming-install-with-elekloader)).
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).

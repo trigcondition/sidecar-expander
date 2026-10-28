@@ -30,6 +30,17 @@ Nothing goes onto a real Rytm untested. A separate project, **rytm-emu**, emulat
 
 So the user docs mark features "hardware" only after a run on a real Rytm, and "in testing" when the emulator is the only evidence. See [What works now](/sidecar-expander/introduction/what-works-now/).
 
+## Testing on a real Rytm: the MIDI bridge
+
+With the Rytm plugged into the Sidecar, its USB port belongs to the Pi, so a computer's test tools cannot see it. The **Rytm MIDI bridge** (0.3.0, for developers) gives the tools the Rytm's USB MIDI over the network: the same raw byte stream the emulator serves with `--usb-midi-tcp`, on TCP port 7330. The Sidecar keeps working normally meanwhile.
+
+- **Off at every boot.** Turn it on for this boot from the web page (paired; Status tab, *Rytm MIDI bridge*, **Turn on for this boot**), which then shows a one-time **token**. It will not turn on with `paircode=0`.
+- **A relay on your computer** (`tools/rytm_bridge.py --pi sidecar.local`, standard library only) answers the Sidecar's challenge with the token and listens on `127.0.0.1:7321`. Point a tool at `tcp:127.0.0.1:7321` (`--port tcp:127.0.0.1:7321`) and it talks to the real Rytm.
+- **Blocked unless you allow it.** The bridge refuses the Rytm's OS upgrade messages and every +Drive write (put, delete, rename and so on); reads always pass. Two switches on the page allow either for the session. Both, and the bridge, go off again at the next boot.
+- **Trusted network only, and turn it off when you are done.** The stream is plain TCP; each turn-on makes a new token.
+
+<span class="sc-test">in testing</span>: tested against a fake Sidecar and on the Mac; not yet checked on hardware.
+
 ## The engine's own tests
 
 - `make -C core test`: the core's unit tests (protocol bytes against `sim/protocol.py`, the voices, the send FX, the user slots, the remote UI).

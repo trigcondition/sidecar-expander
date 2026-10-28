@@ -46,6 +46,10 @@ The watchdog test is refused from the web.
 
 The POST requests are accepted only from the page itself (same origin) and answer JSON: `{"ok":true}` or `{"ok":false,"code":N,"error":"..."}`.
 
+## `POST /time`
+
+Sets the Pi's clock (the Pi 4 has no real-time clock): `epoch=<seconds since 1970>` and optionally `tz=<minutes east of UTC>` (-840..840) in a form body; the answer is `{"ok":true}`. The web page sends it when it opens and when it is paired. The clock names the recorder's takes and dates the files and folders the Pi writes; `GET /fs/ls` lists each entry's date as `"t"`.
+
 ## `GET /lists`
 
 The project's sample pool and its JUNO and FM lists as JSON (the Pool & presets tab).

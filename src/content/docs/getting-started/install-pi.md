@@ -82,7 +82,9 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `dsi=0` | | draw on HDMI even with a DSI display connected |
 | `touchscreen=minx,maxx,miny,maxy` | | touch calibration, if the touch is off |
 | `screensaver=MIN`, `brightness=PCT` | 60, 100 | override the display settings at boot |
-| `recbuf=MB` | 64 | the recorder's memory; 0 turns recording off |
+| `recbuf=MB` | auto | the recorder's memory. Auto gives a Pi 4 256 MB (about 55 s of all channels) and a 1 GB board 64 MB; 0 turns recording off |
+| `cpumhz=1500\|1200\|1000` | 1500 | the CPU clock in MHz (also Settings > System > CPU clock). Lower is cooler: [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool) |
+| `socmaxtemp=C` | 75 on the release card | the temperature in °C above which the Pi slows itself down to 600 MHz |
 
 Example: `sdport=0 display=0` for a Pi without a display.
 

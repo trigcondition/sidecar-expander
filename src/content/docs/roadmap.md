@@ -30,7 +30,11 @@ Finished and confirmed on real hardware.
 Built and tested in the emulator and on the Mac; the hardware runs come next (see [What works now](/sidecar-expander/introduction/what-works-now/#next-the-03-test-line-sidecar-on-the-pi)). What is in the 0.3 test line:
 
 - **Poly tracks on every Sidecar machine:** the Sidecar's own sequencer on a Rytm track, with chords, 8 pages, trig conditions, p-locks and a piano roll on the touchscreen; a per-track **POLY CONFIG** (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD) in the Rytm's own track menu; seeded randomness.
+- **Poly per pattern and NOTE EDIT:** a track is poly in the patterns where you made it so; DATA walks and edits single notes, Push 3 style.
 - **Poly machines:** MULTISAMPLE, WAVETABLE and GRANULAR.
+- **MD:** one user machine with 30 Machinedrum-style drums.
+- **The recorder:** dated take names, a big buffer, a speed warning, recording to USB.
+- **UNDO REPLAY** for the song recorder, and the **RAM store** (instant saves, safe in a power cut).
 - **Pools and the sample library, project bundles, storage** (USB drives, NVMe on the Pi 5).
 - **Insert FX, FX buses and the OUT route** (stereo to the Rytm's main mix, before or after its master effects; UP + AMP).
 - **Sampler, auto-sampler and the song recorder.**
@@ -42,7 +46,8 @@ The agreed order from here to 0.3.0:
 1. **Hardware pass:** the current Rytm and Sidecar builds on a real Rytm, with a fixed test list (the UP combinations, pools, bundle export and import, poly tracks, the OUT view, storage speed, the trig LEDs) and the first stereo measurements.
 2. **Bug fixes before features:** whatever the hardware pass finds, plus the known ones (the Rytm freezing after a Pi brownout, red trig LEDs, files safe across a power cut).
 3. **Finish what is in flight:** the rest of the sequencer's top 8 with its Rytm keys and a RANDOM page, and **FREEZE** (an analog track auto-sampled into a multisample poly track, 2 round robins per note). See [Coming in 0.3](/sidecar-expander/using/sequencer/#coming-in-03). <span class="sc-plan">in progress</span>
-4. **Release 0.3.0** to testers.
+4. **With the next Rytm firmware:** projects kept by slot with a project trash, kits that follow SAVE and RELOAD, NO + KIT / PATTERN reload on the Sidecar pages, remote keys for hardware testing, and the install with elekloader.
+5. **Release 0.3.0** to testers.
 
 ## After 0.3.0
 

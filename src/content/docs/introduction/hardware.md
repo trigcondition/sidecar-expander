@@ -24,6 +24,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 
 - A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**. One SD card set boots both.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, **27 W** for the Pi 5, plugged in directly (not through a hub).
+- A **heatsink or a fan** (a case with a fan, or at least a heatsink on the SoC). The Pi runs the Sidecar's audio at full clock; above its temperature limit it slows itself down to 600 MHz, and the sound can drop out. See [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool).
 - A **microSD card**, 1 GB or more. A fast, larger card is better for the recorder.
 - A **USB A-to-B cable** from the Pi to the Rytm.
 - Optional: a **touch display**. Not needed to play or edit: the Sidecar's pages open on the Rytm's own screen, and the web page covers setup ([A screen is optional](/sidecar-expander/introduction/what-is-sidecar/#a-screen-is-optional)). It adds the piano roll, the scope and the status at a glance. Displays: an 800x480 HDMI display with USB touch (tested with a 5" HDMI LCD), a 7" DSI display compatible with the official display v1 (tested with the OSOYOO 7" DSI on a Pi 4), or in the 0.3 test line a 1024x600 HDMI display. See [The display](/sidecar-expander/using/display/#which-displays-work).

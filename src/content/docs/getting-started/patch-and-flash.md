@@ -74,6 +74,10 @@ Send the patched file as an OS update, exactly as you would send an official one
 
 After the update the Rytm may stay on "Success! Rebooting". That is stock behaviour: power cycle it.
 
+## Coming: install with elekloader
+
+<span class="sc-plan">coming</span> With the next Rytm firmware (0.3.0, not flashed yet), the Sidecar's Rytm mods also come as an **elekloader bundle**: one `rytm-sidecar-0.3.0.elemod` on top of the elekloader core 0.1, both on OS 1.73. You install the core once and the mod bundle after it, instead of patching a whole OS file. The same next firmware carries projects by slot, kits that follow SAVE and RELOAD, NO + KIT / PATTERN reload on the Sidecar pages and the remote keys used for hardware testing. This page is updated when it is released.
+
 ## How the patcher works
 
 A patch file describes the modified OS image as records against your decoded stock image:
