@@ -45,7 +45,9 @@ Changing TYPE crossfades without a click and loads the effect's defaults. Parame
 
 ## Editing
 
-- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU; TRK + FX, the older form, still works). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view.
+- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU; TRK + FX, the older form, still works). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view. **RIGHT**, from any of its views, opens the **EQ view**: a post EQ after the two slots, A HPF, B LPF, C LOW, D HIGH (LEFT or NO goes back; YES swaps between the voice's EQ and its bus's). The EQ has no p-locks.
+
+The INSERT page **replaces the Rytm's page** like SRC: no page dots and no LEFT / RIGHT siblings. Leave with **NO**, or press **UP + FX** again; **UP + AMP** again aims the OUT view at the track now selected.
 ![The INSERT page's TRACK view on the Rytm: CRUSH in slot A, B empty, OUT POST; RATE BITS DRV MIX, SLOT TYPE BUS SEND; YES: BUSES, FUNC+G: TRACK](../../../assets/rytm/sc-insert-out-box.png)
 
 <small>Render of the Rytm-screen page: the Sidecar's own page code on the host, with made-up data.</small>
@@ -58,7 +60,7 @@ Changing TYPE crossfades without a click and loads the effect's defaults. Parame
 
 <small>Screenshot: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-Settings, the OUT route included, are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit.
+Settings, the OUT route included, are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit. <span class="sc-plan">coming</span> With the next Rytm firmware they follow the Rytm's kit SAVE and RELOAD.
 
 ## Limitations
 

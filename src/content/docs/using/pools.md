@@ -58,7 +58,7 @@ The bank is part of the knob's value, so it is saved in the kit and in p-locks, 
 
 ## The POOL page on the Rytm
 
-A remote page for the whole pool: **UP + T13** (with a touchscreen connected, its POOL page opens instead), or POOL in the **SIDECAR MENU** (UP + YES, then YES). Its header shows the list and the pool RAM.
+A remote page for the whole pool: **UP + T13** (with a touchscreen connected, its POOL page opens instead), or POOL in the **SIDECAR MENU** (UP + YES, then YES). Its header shows the list and the pool RAM. The page **replaces the Rytm's page** like SRC: no page dots, and LEFT / RIGHT do nothing on it. Leave with **NO**.
 
 | Control | Does |
 |---|---|

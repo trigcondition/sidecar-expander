@@ -135,6 +135,7 @@ The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build) makes
 - **YES on SIDECAR** opens the **SIDECAR MENU**: every page with its shortcut. UP / DOWN pick a page, YES opens it. A page with nothing to show now is marked with `-` and answers `NOT HERE NOW`.
 - **UP + a trig key** opens a page directly (UP + T7 SAMPLE, T8 REC, T9 SCOPE, T10 SIDECAR, T11 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
 - **LEFT / RIGHT**: the previous / next page in the ring. **NO**: back a level (a page > SIDECAR > leave).
+- **Pages that replace the Rytm's page.** SEQ, INSERT (UP + FX, UP + AMP), LFO, POOL, POLY CONFIG, the SIDECAR MENU and KEYS take the Rytm's screen like the SRC view does: they have no page dots and no LEFT / RIGHT siblings. Leave with NO, or press the same UP + key again (UP + AMP again re-aims its OUT view at the selected track). On the LFO page LEFT / RIGHT step the LFO; on the INSERT page RIGHT opens the EQ view.
 - **Hold UP alone** on the main screen: the combo map, until you let go.
 - The page also closes by itself 1 second after the Sidecar stops answering.
 
@@ -160,7 +161,7 @@ The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build) makes
 | **PROJECT** | UP + T12 | the card's projects and [bundles](/sidecar-expander/using/projects-bundles/#the-rytm-the-project-page) |
 | **MENU**, **KEYS** | YES on SIDECAR; HOLD UP | the page list; every combination |
 
-The ring (LEFT / RIGHT) runs SIDECAR, SYSTEM, LFO, REC, SCOPE, SAMPLE, AUTO, POOL, SEQ, INSERT, SONG, PROJECT, leaving out the pages that have nothing to show (SEQ without a poly track, SONG without a take, and so on). MENU and KEYS are reached from SIDECAR and UP, not from the ring.
+The ring (LEFT / RIGHT) runs SIDECAR, SYSTEM, REC, SCOPE, SAMPLE, AUTO, SONG, PROJECT, leaving out the pages that have nothing to show (SONG without a take, and so on). LFO, POOL, SEQ and INSERT, MENU and KEYS are not in the ring: you open them with their own keys (above) and leave them with NO.
 
 **SIDECAR and SYSTEM.** SIDECAR shows the voices by their tracks (a poly track marked) with their machines, and FX1 and FX2 with their TYPE and PRE / POST. SYSTEM shows the user slots U1..U5 (`---` empty), the recorder (REC IDLE or the take's time), the Rytm's audio stream (OB OK / STOP, UND = underruns), the load of the render cores, and in the bottom bar the network (ETH UP or WIFI UP with the address; never a network name or key). Both catch every knob, so nothing changes underneath while you look.
 

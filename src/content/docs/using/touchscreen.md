@@ -72,9 +72,11 @@ The poly track's notes as bars, coloured by velocity, with note names when there
 | **SWING** | the track's swing, 50..80 |
 | **SNAP** | 1/16, 1/32, 1/64, FREE |
 | **POLY** | the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config): VOICES (AUTO, 1..8), ALLOCATION (REASSIGN / ROTATE / RESET), UNISON; the line above says what it resolves to (`POLY T9: FM 4 INST 4 NOTES 4.88%`) |
-| **UNDO / REDO** | 24 levels, kept per track and pattern |
+| **UNDO / REDO** | 24 levels, kept per track and pattern; the Rytm's [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit) (FUNC + YES) walks the same history |
 
 Drag on the grid scrolls; pinch zooms (1..8 pages across, row height). **While the Rytm plays** the roll opens in **VIEW**, so a stray touch changes nothing: tap DRAW to edit (it locks again after 10 s without a touch), and a long press adds or deletes a note. Each edit shows a short message. While playing, the view follows the playhead's page, 3 s after your last touch.
+
+When you edit with **NOTE EDIT** on the Rytm, the roll follows the same note: it selects it, shows the page it is on and scrolls its row into view, and the playhead does not move the window meanwhile. The step editor lists only the pattern's poly tracks (a track that is off answers "not a seq track").
 
 ![SEQ while the Rytm plays: VIEW: TAP DRAW TO EDIT](../../../assets/touch/oled-seq-view.png)
 ![SEQ in the CLASSIC theme with the CHORD tool: MIN7 stamped, inversion R, strum 12](../../../assets/touch/classic-seq-chord.png)
@@ -90,7 +92,7 @@ Drag on the grid scrolls; pinch zooms (1..8 pages across, row height). **While t
 
 The [recorder](/sidecar-expander/using/recorder/) on the touchscreen: REC / STOP, ARM, the take's time in segment digits, the take's name, 48 kHz and the bit depth, the card's free space and the time it holds. Below, the 23 channels in three columns (RYTM STEMS, SIDECAR VOICES in the Rytm's track order, MIX + RETURNS), each with a meter; tap a channel to record it or not (while idle). The title bar turns to the alert look while recording.
 
-**TAKES** lists the newest takes, with DEL (after a confirmation). **Playback:** tap a take's row to play it into the Rytm's MAIN (its MASTER mix if the take has one, else its first file); tap again to pause, once more to go on; tap another take to switch. **STOP** goes back to the start. The playing row shows `elapsed / length` and a progress bar. Playback continues when you leave the page, and ends at the take's end, when a recording starts or arms, or when the take is deleted.
+**TAKES** lists the newest 64 takes, newest first, with their date; **drag** the list to scroll it. Before REC or ARM the page warns if the selected channels may be more than the drive can write (you can go ahead anyway: [the speed warning](/sidecar-expander/using/recorder/#the-speed-warning)). **Playback:** tap a take's row to play it into the Rytm's MAIN (its MASTER mix if the take has one, else its first file); tap again to pause, once more to go on; tap another take to switch. **STOP** goes back to the start. The playing row shows `elapsed / length` and a progress bar. Playback continues when you leave the page, and ends at the take's end, when a recording starts or arms, or when the take is deleted.
 
 ![REC (OLED), TAKES: TAKE_002 playing at 21:00 / 1:02:05 with its progress bar, DEL per take](../../../assets/touch/oled-rec-playing.png)
 ![REC (CLASSIC), recording](../../../assets/touch/classic-rec-recording.png)

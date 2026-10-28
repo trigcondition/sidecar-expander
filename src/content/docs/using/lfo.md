@@ -7,7 +7,7 @@ sidebar:
 
 <span class="sc-test">in testing</span> (new in 0.1.0; saved per kit in `/.rytm/lfo/<project>/kNNN.txt` on the Sidecar's card)
 
-The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidecar voice or effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs.
+The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidecar voice or effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs. <span class="sc-plan">coming</span> With the next Rytm firmware the Sidecar's per-kit settings (LFOs, inserts) follow the Rytm's kit **SAVE** and **RELOAD**, the way poly patterns follow pattern SAVE and RELOAD.
 
 ## Targets
 
@@ -36,6 +36,7 @@ Two LFOs on one parameter add up. Selectors that are read only at a trig (6-OP F
 
 Hold **UP** and press **LFO** to open the remote pages straight on the LFO page, or pick LFO in the SIDECAR MENU (UP + YES, then YES). TRK + LFO, the older form, still works; with the 0.2.0 release's `rui1027d` it is the only one.
 
+- **The page replaces the Rytm's page** like SRC: no page dots and no siblings. **LEFT / RIGHT** step to the previous / next LFO (the same as knob A; in the design view they step the design step). Leave with **NO** (from the design view, NO goes to the main view first) or **UP + LFO** again; leaving drops the design view.
 - **Main view:** the wave over one cycle with a dot at the phase. A **LFO** (which one), B **TGT** (OFF, V1..V8, FX1, FX2, and in 0.3 I1..I8, B1..B3, O1..O8), C **PAR** (by name), D **DEP**, E **WAVE**, F **RATE** (FUNC: steps of 8), G **SYNC** (FREE / CLK), H **TRIG** (FREE / TRIG / PLAY).
 - **YES** opens the **design view**: the 16 steps with the playhead. The trig keys **T1..T16** pick a step, B sets its value, C its shape, D applies a preset. YES or NO goes back.
 

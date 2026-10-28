@@ -55,9 +55,9 @@ For the 0.3 test line: Rytm build `rui1048` with the Sidecar's 0.3 test build, S
 | **UP + YES** | anywhere | the Sidecar's remote pages (SIDECAR first); again: leave. YES on SIDECAR: the SIDECAR MENU |
 | **UP + TRIG** | any track | the SEQ page of a poly track; on another track, the make prompt (or why it cannot be one) |
 | **UP + SRC** | a track on GRANULAR, WAVETABLE, MULTISAMPLE or DSP SAMPLE | the source list in one press: the machine's POOL bank list (DSP SAMPLE: on the SMPL page, knob D) |
-| **UP + LFO** | anywhere | the Sidecar's [LFO page](/sidecar-expander/using/lfo/) |
-| **UP + FX** | anywhere | the [INSERT page](/sidecar-expander/using/insert-fx/) |
-| **UP + AMP** | anywhere | the INSERT page on its **OUT view** for the selected track: the [OUT route](/sidecar-expander/using/stereo-out/) (OUT TRK / PRE / POST, LEV, PAN, WID, DEC); again while open: back to that view |
+| **UP + LFO** | anywhere | the Sidecar's [LFO page](/sidecar-expander/using/lfo/); again: leave |
+| **UP + FX** | anywhere | the [INSERT page](/sidecar-expander/using/insert-fx/); again: leave |
+| **UP + AMP** | anywhere | the INSERT page on its **OUT view** for the selected track: the [OUT route](/sidecar-expander/using/stereo-out/) (OUT TRK / PRE / POST, LEV, PAN, WID, DEC); again while open: aims the OUT view at the track now selected |
 | **FUNC + CHRO**, then **POLY CONFIG** | a track | the Rytm's own track menu; its last item opens the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD, GROUP) |
 | **trig held + UP + RECORD** | poly track | copy the held steps |
 | **trig held + UP + STOP** | poly track | paste onto the held steps |
@@ -84,7 +84,9 @@ The TRK and FUNC forms of the earlier 0.3 test builds still work: **TRK + YES**,
 | **YES** | the SIDECAR page | the **SIDECAR MENU**: every page with its shortcut |
 | **UP / DOWN**, **YES** | the SIDECAR MENU | pick a page / open it |
 | **NO** | a remote page | back a level: page > SIDECAR > leave |
-| **LEFT / RIGHT** | a remote page | the previous / next page |
+| **LEFT / RIGHT** | a page in the ring (SIDECAR, SYSTEM, REC, SCOPE ...) | the previous / next page |
+| **LEFT / RIGHT** | the LFO page | the previous / next LFO (in the design view: the step) |
+| **RIGHT**, LEFT or NO | the INSERT page | the EQ view, and back |
 | **UP / DOWN** | the KEYS page | scroll |
 | **YES**, YES again | the INSERT page | the BUS view, then the OUT view ([OUT route](/sidecar-expander/using/stereo-out/#where-to-set-it)) |
 | **FUNC + G** | the INSERT page | another track |
@@ -93,6 +95,10 @@ The TRK and FUNC forms of the earlier 0.3 test builds still work: **TRK + YES**,
 | **T1 / T2 / T3 / T4** | the SONG page | arm / replay / marker / setup checklist ([Song recorder](/sidecar-expander/using/song-recorder/)) |
 
 PLAY, STOP and RECORD always reach the Rytm, also while a Sidecar page is open.
+
+**Pages that replace the Rytm's page.** The poly SEQ page, UP + FX, UP + AMP and UP + LFO (and POOL, POLY CONFIG, the SIDECAR MENU and KEYS) take the Rytm's screen like the SRC view does: no page dots, and LEFT / RIGHT do not jump to other Sidecar pages. Leave with **NO**, or press the same UP + key again.
+
+<span class="sc-plan">coming</span> With the next Rytm firmware, **NO + KIT** and **NO + PATTERN** (the Rytm's reload) also work on these pages.
 
 ## Poly tracks
 
@@ -110,7 +116,14 @@ PLAY, STOP and RECORD always reach the Rytm, also while a Sidecar page is open.
 | **PAGE held + FUNC + RECORD / STOP / PLAY** | GRID REC | the page: copy, paste, clear |
 | **PAGE** / PAGE held / **PAGE + trig** | poly track | next page / the page map on the trig LEDs / jump to that page |
 | **FUNC + PAGE** | poly track, also over the SEQ page | the Rytm's SCALE menu |
-| **YES** (no trig held) | the SEQ page | the poly track's menu: BACK, TURN OFF, LENGTH, QUANTISE |
+| **DOWN** (no trig held) | the SEQ page | the poly track's menu: BACK, TURN OFF, LENGTH, QUANTISE |
+| **YES + PLAY**, **YES + SCENE** | the SEQ page | the Rytm's own quick saves: YES is the Rytm's there |
+| **FUNC**, then **YES** | the SEQ page | UNDO |
+| **DATA** turned, pushed | the SEQ page of a poly track | [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit): walk the notes, select |
+| **A..E** | NOTE EDIT | POS, NUDG, LEN, PTCH, VEL of the note (or the selected notes) |
+| **FUNC + DATA** turned, pushed | NOTE EDIT | by step; select all / none |
+| **FUNC + NO** | NOTE EDIT | delete (two or more notes: press twice) |
+| **NO** | NOTE EDIT | clear the selection, then leave |
 | **RECORD + PLAY** | poly track | live recording on the Sidecar's grid |
 
 See [Poly mode](/sidecar-expander/using/sequencer/).
