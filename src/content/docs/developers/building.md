@@ -24,6 +24,23 @@ pi/engine/build.sh kernel     # after a change: the kernel only -> pi/engine/ker
 - Development flashing goes through Circle's serial bootloader into RAM (`pi/circle/flash.sh`); `pi/circle/sdboot.py install` writes a build to the card as `engine.img`, checked and with the previous one kept.
 - The SD card file set for a release: `scripts/package_pi.sh <checkout> <commit>` in this repository.
 
+### Pairing tools with the Sidecar
+
+Since 0.3.0 the Pi's network side is gated by the [pairing code](/sidecar-expander/using/web-ui/#pairing-a-browser): an 8-digit code drawn at every boot and shown only on the Rytm (SIDECAR MENU > WEB UI, the SIDECAR page's PAIR line, a 30 s popup) and the touchscreen's STATUS page. A card made by the release scripts has no `paircode=` in `cmdline.txt`, so the gate is on.
+
+- **`sdboot.py`** (installs, `ls`, `cmdline` over TCP 7310): run it once with the code; it keeps a client id and secret in `~/.config/sidecar/pair.json` (0600; `SIDECAR_PAIR_FILE` moves it) and authenticates by itself from then on:
+
+  ```sh
+  SIDECAR_PAIR_CODE=12345678 uv run --with pyserial python pi/circle/sdboot.py install
+  ```
+
+  Without the variable it asks on the terminal. An engine from before 0.3.0 has no gate; `sdboot.py` sees that from the engine's answer and goes on unauthenticated.
+- **HTTP scripts:** pair once with `curl -s -d code=12345678 -d remember=1 -d name=deploy http://sidecar.local/pair` (it answers a `token`, a `client` and a `secret`: keep the last two, the secret in a 0600 file). Later runs trade them for a token at `POST /pair/resume` (`-d client=<id> --data-urlencode secret@<file>`). Send the token as the `X-Sidecar-Auth` header, never in the URL (`?tok=` is refused). `/fs/*` reads also need `-H "Origin: http://sidecar.local"`.
+- **Open without the code:** `/`, `/health`, `/status`, `/log` and the pairing endpoints. The serial console (`:sdf`) is never gated.
+- **A unit with no display:** the engine writes this boot's code to `/sidecar-paircode.txt` at the card's root, or fix the code with `paircode=<8 digits>` in `cmdline.txt` (shown as FIXED on STATUS).
+- **The development bypass:** `paircode=0` in `cmdline.txt` turns the gate off. The engine says so at boot, once a minute, in `/health`, `/status` and on the STATUS page. Never on a shipped card: `sdboot.py cmdline` shows the line, `sdboot.py cmdline "<the line without paircode=0>"` writes it.
+- Revoking: SIDECAR MENU > WEB UI > FORGET DEVICES, the console's `pair=revoke`, or delete `/.rytm/pair.txt` from the card.
+
 ## Teensy firmware
 
 Arduino CLI with Teensyduino, `-O2`:

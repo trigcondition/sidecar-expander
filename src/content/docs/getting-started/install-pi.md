@@ -11,8 +11,15 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
-- Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in the 0.3 test line 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
-- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: `sidecar-pi-sd-<commit>.zip` (one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-<version>.zip` (the starter user machines).
+- Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
+- From the [Releases](https://github.com/trigcondition/sidecar-expander/releases) page: one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-<version>.zip` (the starter user machines).
+
+| Card zip | For |
+|---|---|
+| the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
+| the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+
+The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the picture either way (below).
 
 ## Make the SD card
 
@@ -61,7 +68,16 @@ How it finds each other:
 - If your computer's port has a manual address, set it to 169.254.61.59, netmask 255.255.0.0. Or set `ip=` and `netmask=` in `cmdline.txt` to fit your network.
 - There is no DHCP client on Ethernet, so a router network only works with a matching `ip=`.
 - `sidecar.local` is answered by the Pi itself (mDNS). A second Sidecar on the same network becomes `sidecar-1.local`.
-- The page has no password. Use it on a direct cable or a network you trust.
+- The page needs a paired browser ([below](#pair-your-browser-first-time)). The connection is plain HTTP: use a direct cable or a network you trust.
+
+### Pair your browser (first time)
+
+Since 0.3.0 the page is locked with a pairing code. The first time, the page asks for it:
+
+1. Find the 8-digit code. On the Rytm: a box in the middle of its screen when the Pi starts and when the Rytm connects (30 seconds), or any time in **SIDECAR MENU > WEB UI** (UP + YES, then YES on SIDECAR, then WEB UI), or on the SIDECAR page (**UP + T10**, the PAIR line). On a touchscreen: the STATUS page. The page's **Show it on the Rytm** button puts it back on the Rytm's screen.
+2. Type it on the page, keep **remember this device** ticked, press **Pair**.
+
+The browser stays paired after restarts. A new code is made at every start, but a paired browser does not need it again. Details: [Pairing a browser](/sidecar-expander/using/web-ui/#pairing-a-browser). For `sdboot.py` and scripts: [Pairing tools](/sidecar-expander/developers/building/#pairing-tools-with-the-sidecar).
 
 Wi-Fi is off in the package; see [Wi-Fi (off by default)](#wi-fi-off-by-default) below and [Wi-Fi](/sidecar-expander/using/wifi/).
 
@@ -85,6 +101,7 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `recbuf=MB` | auto | the recorder's memory. Auto gives a Pi 4 256 MB (about 55 s of all channels) and a 1 GB board 64 MB; 0 turns recording off |
 | `cpumhz=1500\|1200\|1000` | 1500 | the CPU clock in MHz (also the touchscreen's Settings > System > CPU clock, or `cpumhz=` on the console). Lower is cooler: [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool) |
 | `socmaxtemp=C` | 78 on new cards | the temperature in °C (40..78) above which the Pi slows itself down to 600 MHz; add it by hand to an older card |
+| `paircode=` | (none: a new code at every start) | development cards only: `paircode=0` turns the [pairing code](/sidecar-expander/using/web-ui/#pairing-a-browser) off. Never on a card you share |
 
 Example: `sdport=0 display=0` for a Pi without a display.
 
@@ -103,7 +120,7 @@ hdmi_cvt=800 480 60 6 0 0 0
 disable_overscan=1
 ```
 
-For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. For a 1024x600 display (0.3 test line) the lines are on [The display](/sidecar-expander/using/display/#screen-sizes). Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
+For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. For a 1024x600 display, use the 1024x600 card zip (or see [The display](/sidecar-expander/using/display/#screen-sizes) for the lines). Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
 The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1` matters there (see [Raspberry Pi 5](#raspberry-pi-5)). A DSI display needs no line on either board.
 
@@ -123,13 +140,13 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
+| 0.3.0 release | the Rytm firmware 0.3.0 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.3.0 SD card | **UP + YES** (TRK + YES still works) |
 | 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
-| 0.3 test line | `rui1048` | the Sidecar's 0.3 test build | **UP + YES** (TRK + YES still works) |
 
-The 0.2.0 pairing is tested on hardware; with a kernel older than 1021 the pages open without any text. The 0.3 test line is tested in the emulator. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+With a kernel older than 1021 the pages open without any text. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 :::caution[New in 0.3]
-With the 0.3 test build, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too ([Storage](/sidecar-expander/using/storage/)).
+With 0.3.0, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too ([Storage](/sidecar-expander/using/storage/)).
 :::
 
 ## Wi-Fi without a cable: sidecar-wifi.txt
@@ -190,7 +207,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 What is different on the Pi 5 for now:
 
 - **No USB audio or MIDI to the computer.** The Pi 5's USB-C port is power only in this version (on the Pi 4 it is also the Sidecar's audio and MIDI interface): even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer, so it is left out.
-- **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its 800x480 UI to it, so the picture is slightly soft. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
+- **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its UI to it, so the picture is slightly soft. The same holds for both card zips. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
 - **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).
 - **Updating**: copy the new release's files over the old ones (as on the Pi 4). There is no update over the network on a Pi 5 yet.

@@ -22,7 +22,7 @@ The Pi records the Rytm's Overbridge channels, its own voices and the effect ret
 | `23_PRE`, `24_POST` (0.3) | the voices routed PRE and POST, as the Sidecar sends them to the Rytm's main mix, stereo |
 
 :::caution[New in 0.3]
-With the [OUT route](/sidecar-expander/using/stereo-out/) (Sidecar 0.3 test build), a voice on PRE or POST when a take starts records its own `VOICEn` file in stereo, L and R as rendered, and two more sources hold the PRE and POST pairs. The route is read when the take is armed or started; a route change during a take does not change its files. <span class="sc-test">in testing</span> (Mac)
+With the [OUT route](/sidecar-expander/using/stereo-out/) (Sidecar 0.3.0), a voice on PRE or POST when a take starts records its own `VOICEn` file in stereo, L and R as rendered, and two more sources hold the PRE and POST pairs. The route is read when the take is armed or started; a route change during a take does not change its files. <span class="sc-test">in testing</span> (Mac)
 :::
 
 ## Recording from the web page
@@ -54,7 +54,7 @@ The Pi has no clock of its own. The web page sets the Pi's clock and time zone f
 
 ## The REC page on the touchscreen
 
-<span class="sc-test">in testing</span> (Pi, 0.3 test line). **UP + T8** on the Rytm, the REC key in the navigation column, or a tap on the home page's REC status.
+<span class="sc-test">in testing</span> (Pi, 0.3.0). **UP + T8** on the Rytm, the REC key in the navigation column, or a tap on the home page's REC status.
 
 - **The transport row:** REC / STOP, ARM / DISARM, the take's time in segment digits with the take's name, 48 kHz and the bit depth, the number of files, the card's free space and the time it holds at this selection, and **TAKES**.
 - **The channels**, in three columns: RYTM STEMS (BD .. CY/CB), SIDECAR VOICES (each named for its tracks, in the Rytm's track order, so a voice sits beside its track's stem) and MIX + RETURNS (MASTER, MAIN L / R, IN L / R or FX L / R, FX 1 / FX 2, then ALL / NONE). Each row has a meter (stereo sources: L over R) and a clip lamp. Tap a channel to record it or not, while idle.

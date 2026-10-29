@@ -45,8 +45,8 @@ The alternative is the web page's **Wi-Fi settings** (Status tab, over Ethernet)
 - A watchdog rejoins after a dropout (in testing).
 - The passphrase is never written to the card in plain text and never logged: the Pi stores a derived key.
 - WPA2-Personal only; no WPA3.
-- The web page has no password. On a shared network anyone can open it. Access control comes first on the [roadmap](/sidecar-expander/roadmap/).
+- Since 0.3.0 the web page needs a **paired browser**: on a shared network, nobody can use it without the code on your Rytm ([Pairing a browser](/sidecar-expander/using/web-ui/#pairing-a-browser)). The connection is plain HTTP, so on a network you do not trust, pair beforehand or use a cable.
 
 ## Coming
 
-Wi-Fi settings on the display and a pairing code. See the [roadmap](/sidecar-expander/roadmap/).
+Wi-Fi settings on the display. See the [roadmap](/sidecar-expander/roadmap/).

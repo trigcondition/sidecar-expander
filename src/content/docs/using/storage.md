@@ -6,10 +6,16 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line with the Sidecar's 0.3 test build). Built and tested on the Mac; the drives are not yet measured on a Pi. Sidecar (Pi) only.
+New in 0.3.0. Built and tested on the Mac; USB sticks have had first runs on a Pi 4, the drives' speeds are not measured on a Pi yet. Sidecar (Pi) only.
 :::
 
-The Sidecar boots from its **SD card**, which stays the place of record: projects, pools and samples live there. Besides it, it mounts **USB drives** as they are plugged in and, on the Pi 5, an **NVMe SSD**. In this build the extra drives are used for [bundles](/sidecar-expander/using/projects-bundles/#usb-sticks), the storage bench and [recording](/sidecar-expander/using/recorder/#recording-to-a-usb-drive). <span class="sc-test">in testing</span>
+The Sidecar boots from its **SD card**, which stays the place of record: projects, pools and samples live there. Besides it, it mounts **USB drives** as they are plugged in and, on the Pi 5, an **NVMe SSD**. In 0.3.0 a USB stick is used for:
+
+- **recordings:** record straight to the stick ([Recording to a USB drive](/sidecar-expander/using/recorder/#recording-to-a-usb-drive));
+- **bundles:** import a bundle from the stick. Export to a stick is off in 0.3.0: export to the card, then copy the bundle ([USB sticks](/sidecar-expander/using/projects-bundles/#usb-sticks));
+- the storage bench.
+
+**Samples stay on the SD card for now:** the machines play samples from the card only. <span class="sc-test">in testing</span>
 
 | Drive | Name | Board |
 |---|---|---|
@@ -82,6 +88,6 @@ What to expect (estimates, to be measured on the Pi): SD card 15-22 MB/s read, 8
 
 - Sidecar (Pi) only. The drives are not yet measured on a Pi.
 - FAT32 with MBR only: exFAT and GPT are a build option that is off (tested on the Mac only).
-- In this build the extra drives hold bundles and recordings; projects, pools and samples play from the SD card. The [sample library](/sidecar-expander/using/pools/#the-sample-library) does not index USB drives.
+- In 0.3.0 the extra drives hold recordings and bundles to import; projects, pools and samples play from the SD card. The [sample library](/sidecar-expander/using/pools/#the-sample-library) does not index USB drives.
 - NVMe is experimental (one queue, no power management): test SSDs only.
 - A drive pulled without eject can lose a write in progress.

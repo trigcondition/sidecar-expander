@@ -1,13 +1,53 @@
 ---
 title: Web UI
-description: "The Pi's page at sidecar.local, tab by tab: status with storage and the sample library, sound, send FX, LFO, record, user machines, and in 0.3 the Pool, Presets and Project tabs; the file browser."
+description: "The Pi's page at sidecar.local: pairing a browser with the code on the Rytm, then tab by tab: status with storage and the sample library, sound, send FX, LFO, record, user machines, the Pool, Presets and Project tabs; the file browser."
 sidebar:
   order: 6
 ---
 
 ## The Pi's page: sidecar.local
 
-The Pi serves its own page. Open <http://sidecar.local> from any browser on the same cable or network ([how to connect](/sidecar-expander/getting-started/install-pi/#first-boot-over-ethernet-sidecarlocal)). Nothing is sent anywhere else.
+The Pi serves its own page. Open <http://sidecar.local> from any browser on the same cable or network ([how to connect](/sidecar-expander/getting-started/install-pi/#first-boot-over-ethernet-sidecarlocal)). Nothing is sent anywhere else. Since 0.3.0 a browser must be **paired** first, once ([below](#pairing-a-browser)).
+
+## Pairing a browser
+
+<span class="sc-test">in testing</span> New in 0.3.0. The web page is locked with a **pairing code**, so a Sidecar on a shared network is not open to everyone. The code is 8 digits. The Sidecar makes a new one at every start, and shows it only on its own screens: the Rytm's screen and the touchscreen.
+
+**Pair a browser (once per browser):**
+
+1. Open `http://sidecar.local`. The page asks for the code.
+2. Read the code on the Rytm or the touchscreen (below). On the page, **Show it on the Rytm** puts it on the Rytm's screen (at most once every 10 seconds; the button says "Shown on the Rytm" or "Wait N s").
+3. Type the 8 digits, keep **remember this device** ticked, and press **Pair**.
+
+That browser stays paired, also after the Pi restarts: you do not type the code again. Pairing at `http://sidecar.local` does not carry over to the Pi's IP address (a browser treats them as two sites): pair at the address you use.
+
+**Where the code shows:**
+
+- **On the Rytm**, in a box in the middle of its screen for 30 seconds: when the Pi starts, and when the Rytm connects while no browser is paired yet. A key on the Rytm closes it.
+- **SIDECAR MENU > WEB UI** on the Rytm (UP + YES, then YES on SIDECAR, then WEB UI): **CODE**.
+- The **SIDECAR** page on the Rytm (**UP + T10**): its PAIR line.
+- The **touchscreen's STATUS** page: the LINKS panel's PAIR line.
+
+**SIDECAR MENU > WEB UI** on the Rytm:
+
+| Item | Does |
+|---|---|
+| **WEB UI** ON / OFF | the web page (and the install port) on the network. OFF: every page answers that the web UI is off on the Rytm. Kept across restarts |
+| **CODE** | this start's pairing code |
+| **PAIRED DEVICES** | how many browsers and tools are paired |
+| **NEW CODE** | a fresh code for this start; paired devices stay paired |
+| **FORGET DEVICES** | (YES twice) every paired browser and tool must pair again |
+
+On the web page, the Status tab's **Access** has **Forget this device** and **Forget every device**.
+
+**What stays open without pairing:** the page itself (with the pairing dialog), `/status` (the device's state: no codes, no Wi-Fi key), `/health` (is it running, the build) and the log (`/log`). Everything else (the tabs' settings, files, bundles, Wi-Fi, installs) needs a paired browser.
+
+- **Tools** such as `sdboot.py` (installs over the network) pair once with the code: see [First pairing for tools](/sidecar-expander/developers/building/#pairing-tools-with-the-sidecar).
+- A wrong code five times locks that computer out for a minute (longer each time). Paired browsers keep working.
+- Pairing is protection against people on the same network, not against someone holding the SD card. The connection is plain HTTP: on a network you do not trust, pair the devices you need beforehand, or use a direct cable.
+- **Development cards only:** `paircode=0` in `cmdline.txt` turns the pairing off. The Sidecar then warns at every start, once a minute in the log and on the STATUS page. Never use it on a card you share or take on stage.
+
+## The tabs
 
 | Tab | What |
 |---|---|
@@ -26,8 +66,6 @@ The Pi serves its own page. Open <http://sidecar.local> from any browser on the 
 
 The choice buttons are **segmented toggles that show the device's own state**: a click shows the choice as pending until the Sidecar confirms it, and a refused change is put back. <span class="sc-ok">hardware</span>
 
-The page has no password. Use it on a direct cable or a network you trust.
-
 ![sidecar.local, Status tab with the Wi-Fi section](../../../assets/ui/pi-status.png)
 ![sidecar.local, Sound tab: segmented toggles for MIDI notes, output, IN L/R source and computer audio; machine, drone, FIFO target; the display settings](../../../assets/ui/pi-sound.png)
 ![sidecar.local, Record tab: record and arm, bit depth, the channels, and two takes with a play button per channel](../../../assets/ui/pi-record.png)
@@ -38,7 +76,7 @@ The page has no password. Use it on a direct cable or a network you trust.
 <small>Screenshots: the 0.2 page with mock data (`mock_web.py`: made-up addresses, takes and machines).</small>
 
 :::caution[New in 0.3]
-The Sidecar's 0.3 test build (Sidecar (Pi) only) adds the **Pool** and **Project** tabs, **Sound > Poly tracks**, the **Storage** section and the sample library's line on the Status tab, and the Files tab's pool buttons. The 0.2.0 tab **Pool & presets** is now **Presets**. <span class="sc-test">in testing</span> (Mac, with the mock page)
+Sidecar 0.3.0 (Sidecar (Pi) only) adds the **Pool** and **Project** tabs, **Sound > Poly tracks**, the **Storage** section and the sample library's line on the Status tab, and the Files tab's pool buttons. The 0.2.0 tab **Pool & presets** is now **Presets**. <span class="sc-test">in testing</span> (Mac, with the mock page)
 :::
 
 ### Poly tracks
@@ -51,9 +89,10 @@ SAMPLES / WAVETABLES / INSTRUMENTS, banks A..H, the project and the pool RAM. Pe
 
 ### Project
 
-- **Projects**: every project on the card (the Rytm's current one marked `*`, an imported one the Rytm has not named yet `imp.`), with its Sidecar files and their size. **Download** (the browser saves the bundle), **To card** (`/Bundles/`), **To USB** (the stick's `/SIDECAR`), **Rytm file…** (the Rytm project file you exported with Elektron Transfer, for the project's next export), **Delete** (the project's Sidecar files; its samples stay).
-- **Bundles on the card** and **Import a bundle…** (or drop a `.sidecar.zip` on the list): checked, then a summary before anything is written.
-- **USB stick**: the mounted sticks with their free space, **Eject**, and the stick's bundles with **Import**.
+- **Projects**: every project on the card by its Rytm slot (the Rytm's current one marked `*`), with its Sidecar files and their size. **Download** (the browser saves the bundle), **To card** (`/Bundles/`), **Rytm file…** (the Rytm project file you exported with Elektron Transfer, for the project's next export), **Delete** (the project's Sidecar files go to the trash; its samples stay).
+- **Bundles on the card** and **Import a bundle…** (or drop a `.sidecar.zip` on the list): checked, then a summary before anything is written, with **to slot** to pick the Rytm slot it goes into. **Delete** removes a bundle or an unfinished `.part`.
+- **USB stick**: the mounted sticks with their free space, **Eject**, and the stick's bundles with **Import** and **Delete**. Export to a stick is off in 0.3.0 (no To USB button): export to the card, then copy the bundle.
+- **Trash**: the [project trash](/sidecar-expander/using/projects-bundles/#the-project-trash): **Restore**, **Remove…**, **Empty…**.
 - While a job runs the tab shows its phase and progress, and **WAITING (PLAYING)** or **WAITING (RECORDING)** while the Rytm plays or the recorder records.
 
 See [Projects and bundles](/sidecar-expander/using/projects-bundles/).
@@ -69,7 +108,7 @@ On the Status tab, **Storage**:
 
 ### Wi-Fi settings
 
-<span class="sc-test">in testing</span>. The Status tab's **Wi-Fi** section: on / off, a network list from a scan (signal, a lock for secured networks, the band), "Other network…", a password field (never pre-filled), **Connect and save**, **Forget network**, and the current connection. Sidecar uses one network at a time, so **Connect and save restarts the Pi** and tries the new network at that boot. If it is not up within 90 seconds (a wrong password, no address, not found), the previous setting comes back and the Pi restarts on it, so a typo cannot lock you out. The password is stored only as the network's key, never shown again. Wi-Fi stays off in the SD card package; turning it on here works over Ethernet. The page has no login yet, so anyone on the same network can change these settings. With no cable at all, use the card-root file instead: see [Wi-Fi without a cable: sidecar-wifi.txt](/sidecar-expander/using/wifi/#wi-fi-without-a-cable-sidecar-wifitxt).
+<span class="sc-test">in testing</span>. The Status tab's **Wi-Fi** section: on / off, a network list from a scan (signal, a lock for secured networks, the band), "Other network…", a password field (never pre-filled), **Connect and save**, **Forget network**, and the current connection. Sidecar uses one network at a time, so **Connect and save restarts the Pi** and tries the new network at that boot. If it is not up within 90 seconds (a wrong password, no address, not found), the previous setting comes back and the Pi restarts on it, so a typo cannot lock you out. The password is stored only as the network's key, never shown again. Wi-Fi stays off in the SD card package; turning it on here works over Ethernet. Only a [paired browser](#pairing-a-browser) can change these settings. With no cable at all, use the card-root file instead: see [Wi-Fi without a cable: sidecar-wifi.txt](/sidecar-expander/using/wifi/#wi-fi-without-a-cable-sidecar-wifitxt).
 
 ### The file browser
 
