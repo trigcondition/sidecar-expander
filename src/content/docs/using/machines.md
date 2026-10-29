@@ -12,7 +12,8 @@ Sidecar 0.3.0 (Sidecar (Pi) only) adds to every machine on this page:
 
 - three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on 6-OP FM: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
 - two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK, as before) or in stereo on the Rytm's main mix (PRE / POST);
-- the project's [POOL lists](/sidecar-expander/using/pools/) as the source of samples, wavetables and instruments.
+- the project's [POOL lists](/sidecar-expander/using/pools/) as the source of samples, wavetables and instruments;
+- **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/).
 :::
 
 All knobs are 0..127 with the Rytm's fine resolution. List knobs (ENG, PAT, MOD) split their range into equal zones, one per item.

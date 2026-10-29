@@ -120,6 +120,7 @@ Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on th
 | [Kits follow SAVE / RELOAD KIT](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys): the Sidecar's LFO and INSERT settings per kit | <span class="sc-test">in testing</span> (emulator; being checked on the Rytm) |
 | NO + KIT / PATTERN / TRACK reload also on the Sidecar pages; NO alone still goes back | <span class="sc-test">in testing</span> (emulator; being checked on the Rytm) |
 | [The pairing code](/sidecar-expander/using/web-ui/#pairing-a-browser), on by default: the code on the Rytm (SIDECAR MENU > WEB UI, UP + T10) and the touchscreen, **Show it on the Rytm**, WEB UI ON / OFF, NEW CODE, FORGET DEVICES | <span class="sc-test">in testing</span> (host tests; first use on the device) |
+| [CHOP](/sidecar-expander/using/chop/): a sample in up to 64 slices (GRID, TRANSIENT, LAZY, MANUAL), played from trigs, CHRO pads and poly tracks; the slice editor on the Rytm and the touchscreen | <span class="sc-test">in testing</span> (Mac, emulator) |
 | DSP SAMPLE picks its sample with SMP (knob D, SMPL page); FUNC + YES on its SRC page opens the browser | <span class="sc-test">in testing</span> |
 | No underruns with per-step patch changes (MD's TYPE locks) and pattern switches | <span class="sc-ok">hardware</span> (2026-10-29) |
 | No card reads on the control core while samples load into the pool (no underruns then); very short MULTISAMPLE trigs always sound | <span class="sc-test">in testing</span> |
