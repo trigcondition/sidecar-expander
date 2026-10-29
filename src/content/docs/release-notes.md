@@ -7,7 +7,7 @@ description: "Sidecar 0.3.0 (an early-tester release: poly tracks, projects by s
 
 **Sidecar 0.3.0 is an early-tester release.** It brings many new base features at once: poly tracks with the Sidecar's own sequencer, new machines, projects kept by the Rytm's slot, pools, bundles, inserts, a sampler, a song recorder, a pairing code for the web page and more. Most of it is tested in the emulator and on the Mac; a part of it has run on a real Rytm with a Pi 4 (see [What works now](/sidecar-expander/introduction/what-works-now/#new-in-030)). **Your feedback is what we need most**: what works, what does not, what feels clumsy ([how to report](#how-to-report)).
 
-It needs the **Rytm firmware 0.3.0**, built with elekloader from your own stock OS 1.73 file. Sidecar (Pi) only: **Sidecar Mini (Teensy 4.1) stays at 0.1.0** with its own Rytm build.
+It needs the **Rytm firmware 0.3.0**, made in the browser patcher (or with elekloader) from your own stock OS 1.73 file. **Your Rytm may run OS 1.74:** the patched file is a whole OS (1.73 plus the Sidecar mods), so sending it replaces 1.74 - no separate downgrade. You only need Elektron's stock OS 1.73 file as the input (from Elektron's download page). Your projects carry over: 1.74 only added Outbox support and did not change the project format. Sidecar (Pi) only: **Sidecar Mini (Teensy 4.1) stays at 0.1.0** with its own Rytm build.
 
 | Part | File |
 |---|---|

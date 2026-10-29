@@ -77,7 +77,7 @@ The 0.2.0 release used two patch builds of OS 1.73, `rui1027d` and `sfx1021`, ma
 | `rui1027d` (default, recommended) | everything in `sfx1021`, plus the remote pages: a connect screen when the Sidecar comes up, the Rytm's FX return on IN L/R for recording and SCOPE, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the REC page (with playback on the Pi) and the voice pages, in the Rytm's own font. The page catches only the keys and knobs it uses: PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work as usual |
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it. The remote pages ran on a real Rytm with the Sidecar on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
+The Sidecar mods are based on Analog Rytm MKII OS 1.73 (OS 1.74 support is planned). Your Rytm may run OS 1.74 or another version: the patched file is a whole OS (1.73 plus the mods), so sending it replaces what the Rytm runs - no separate downgrade first. You only need Elektron's stock OS 1.73 `.syx` as the input. Your projects carry over: 1.74 only added Outbox support and did not change the project format. The remote pages ran on a real Rytm with the Sidecar on 2026-10-18; see [What works now](/sidecar-expander/introduction/what-works-now/) for what is still in testing. Keep the stock file at hand to go back.
 :::
 
 ### Option A: in the browser
