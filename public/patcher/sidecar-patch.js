@@ -197,7 +197,106 @@
     }
   }
 
-  function packSection(data) {
+  // match / reuse events, as _match_events() / _reuse_events() emit them
+  function emitLength(w, length) {
+    if (length >= 1 && length <= 3) { w.ev((length >> 1) & 1, -1); w.ev(length & 1, -1); }
+    else { w.ev(0, -1); w.ev(0, -1); w.gamma(length - 2, -1); }
+  }
+  function emitMatch(w, off, count) {
+    const raw = off + BIAS;
+    w.ev(0, -1);
+    w.gamma(raw >> 8, raw & 0xFF);
+    emitLength(w, count - 1 - (off > FAR ? 1 : 0));
+  }
+  function emitReuse(w, off, count) {
+    w.ev(0, -1);
+    w.gamma(REUSE, -1);
+    emitLength(w, count - 1 - (off > FAR ? 1 : 0));
+  }
+  function finishSection(w) {
+    w.ev(0, -1);
+    w.gamma(TERM_GAMMA, TERM_BYTE);
+    const body = w.out.bytes();
+    let sum = 0;
+    for (let k = 0; k < body.length; k++) sum = (sum + body[k]) >>> 0;
+    const pad = (4 - ((8 + body.length) % 4)) % 4;
+    const sec = new Uint8Array(8 + body.length + pad);
+    put32(sec, 0, body.length); put32(sec, 4, sum); sec.set(body, 8);
+    return sec;
+  }
+
+  // ---- packer "lz2": elekloader's current aplib.py _parse(): back-references chosen by
+  // bit cost, with last-offset reuse and one-byte lookahead ------------------------------
+  const MAX_OFFSET2 = (1 << 20) - 1, CANDIDATES2 = 8, LITERAL_BITS = 9;
+  const gammaCost = (v) => 2 * (31 - Math.clz32(v));
+  function matchCost(off, count, reuse) {
+    const length = count - 1 - (off > FAR ? 1 : 0);
+    if (length < 1) return -1;
+    const lc = length <= 3 ? 2 : 2 + gammaCost(length - 2);
+    return 1 + (reuse ? gammaCost(REUSE) : gammaCost((off + BIAS) >> 8) + 8) + lc;
+  }
+
+  function packSection2(data) {
+    const n = data.length;
+    const w = new BitWriter(n + (n >> 2));
+    const head = new Map(), prev = new Int32Array(n).fill(-1);
+    let hashed = 0;
+    const hashTo = (p) => {
+      for (; hashed <= p; hashed++) {
+        const q = hashed;
+        if (q + MIN_MATCH <= n) {
+          const k = (data[q] << 16) | (data[q + 1] << 8) | data[q + 2];
+          const h = head.get(k);
+          prev[q] = h === undefined ? -1 : h;
+          head.set(k, q);
+        }
+      }
+    };
+    const run = (i, j, limit) => { let k = 0; while (k < limit && data[i + k] === data[j + k]) k++; return k; };
+    let bGain, bOff, bCount, bReuse;           // best(): the result in these
+    const best = (i, last) => {
+      hashTo(i);
+      const limit = Math.min(MAX_COUNT, n - i);
+      bGain = 0; bOff = 0; bCount = 0; bReuse = false;
+      if (last && last <= i) {
+        const k = run(i, i - last, limit);
+        const c = k >= 2 ? matchCost(last, k, true) : -1;
+        if (c >= 0 && LITERAL_BITS * k - c > bGain) { bGain = LITERAL_BITS * k - c; bOff = last; bCount = k; bReuse = true; }
+      }
+      let j = i + MIN_MATCH <= n ? prev[i] : -1, tried = 0;
+      while (j >= 0 && tried < CANDIDATES2) {
+        const off = i - j;
+        if (off > MAX_OFFSET2) break;
+        const k = run(i, j, limit);
+        const c = matchCost(off, k, off === last);
+        if (c >= 0 && LITERAL_BITS * k - c > bGain) { bGain = LITERAL_BITS * k - c; bOff = off; bCount = k; bReuse = off === last; }
+        j = prev[j]; tried++;
+      }
+    };
+    let i = 0, last = 0;
+    while (i < n) {
+      best(i, last);
+      let gain = bGain;
+      const off = bOff, count = bCount, reuse = bReuse;
+      if (gain > 0 && i + 1 < n) { best(i + 1, last); if (bGain > gain + LITERAL_BITS) gain = 0; }
+      if (gain > 0) {
+        if (reuse) emitReuse(w, off, count); else emitMatch(w, off, count);
+        last = off;
+        i += count;
+      } else {
+        w.ev(1, data[i]);
+        i += 1;
+      }
+    }
+    return finishSection(w);
+  }
+
+  // ---- packer "lz1": the greedy finder the first patches (sfx/rui 10xx) were made with
+  const PACKERS = ['lz1', 'lz2'];             // a patch without output.packer is lz1
+  function packSection(data, packer) {
+    packer = packer || 'lz1';
+    if (packer === 'lz2') return packSection2(data);
+    if (packer !== 'lz1') throw new PatchError('unknown packer ' + packer);
     const n = data.length;
     const w = new BitWriter(n + (n >> 2));
     // the match finder: a 3-byte key -> its last CANDIDATES positions (oldest first)
@@ -232,28 +331,14 @@
       }
       if (bestLen) {
         for (let k = 1; k < bestLen; k++) if (i + k < lim) index(i + k);
-        let length = bestLen - 1;
-        if (bestOff > FAR) length -= 1;
-        const raw = bestOff + BIAS;
-        w.ev(0, -1);
-        w.gamma(raw >> 8, raw & 0xFF);
-        if (length >= 1 && length <= 3) { w.ev((length >> 1) & 1, -1); w.ev(length & 1, -1); }
-        else { w.ev(0, -1); w.ev(0, -1); w.gamma(length - 2, -1); }
+        emitMatch(w, bestOff, bestLen);
         i += bestLen;
       } else {
         w.ev(1, data[i]);
         i += 1;
       }
     }
-    w.ev(0, -1);
-    w.gamma(TERM_GAMMA, TERM_BYTE);
-    const body = w.out.bytes();
-    let sum = 0;
-    for (let k = 0; k < body.length; k++) sum = (sum + body[k]) >>> 0;
-    const pad = (4 - ((8 + body.length) % 4)) % 4;
-    const sec = new Uint8Array(8 + body.length + pad);
-    put32(sec, 0, body.length); put32(sec, 4, sum); sec.set(body, 8);
-    return sec;
+    return finishSection(w);
   }
 
   // ---- the .syx container --------------------------------------------------------------
@@ -341,6 +426,10 @@
     log = log || (() => {});
     checkPatch(doc);
     const st = doc.stock, out = doc.output;
+    const packer = out.packer || 'lz1';
+    if (!PACKERS.includes(packer))
+      throw new PatchError('this patch needs packer ' + packer + '; this patcher knows ' + PACKERS.join(', ') +
+        ' (reload the page for the newer patcher)');
     const got = sha256hex(stockRaw);
     if (got !== st.syx_sha256)
       throw new PatchError('This is not the stock OS ' + st.os + ' file the patch needs (sha256 ' + got +
@@ -363,7 +452,7 @@
     }
     if (sha256hex(img) !== out.main_sha256) throw new PatchError('the patched image is not the expected one');
     log('Applied ' + doc.ops.length + ' records; packing.');
-    const res = writeSyx(s, st.main_section, packSection(img), out.version);
+    const res = writeSyx(s, st.main_section, packSection(img, packer), out.version);
     if (sha256hex(res) !== out.syx_sha256)
       throw new PatchError('the result is not bit-identical to the tested build; nothing was saved');
     log('Result OK: ' + out.name + ' (sha256 ' + out.syx_sha256.slice(0, 16) + '..)');

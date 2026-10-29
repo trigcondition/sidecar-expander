@@ -9,6 +9,10 @@
 there; never copied here). Each patch is made by rytm-mods' tools/release_patch.py, which
 refuses unless the records rebuild our .syx byte for byte and carry no stock bytes. TAGs
 default to every build in public/patcher/builds.json.
+
+Each patch's output.packer names the packer the front ends must use to get that .syx:
+--packer (default lz2, elekloader's bit-cost packer, which release_patch.py checks with).
+A patch without the field is lz1, the greedy packer of the first patches (sfx/rui 10xx).
 """
 import argparse
 import json
@@ -25,6 +29,8 @@ ap.add_argument("--mods", required=True, help="a rytm-mods checkout with tools/r
 ap.add_argument("--dir", required=True, help="the build folder (stock + built .syx)")
 ap.add_argument("--commit", required=True, help="the rytm-mods commit the builds came from")
 ap.add_argument("--elekloader", help="elekloader checkout (default: <mods>/vendor/elekloader)")
+ap.add_argument("--packer", default="lz2", choices=["lz1", "lz2"],
+                help="the packer the elekloader release_patch.py used (default lz2)")
 ap.add_argument("tags", nargs="*")
 a = ap.parse_args()
 
@@ -41,6 +47,10 @@ for b in builds:
     if a.elekloader:
         cmd += ["--elekloader", a.elekloader]
     subprocess.run(cmd, check=True)
+    f = OUT / f"sidecar-{b['tag']}.json"
+    d = json.loads(f.read_text())
+    d["output"]["packer"] = a.packer
+    f.write_text(json.dumps(d, separators=(",", ":")) + "\n")
 
 index = []
 for b in cfg["builds"]:                       # the index lists every built patch, in config order

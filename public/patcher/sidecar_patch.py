@@ -173,7 +173,8 @@ def depack_section(stream):
     return bytes(out)
 
 
-# ---- packer (elekloader/codec/aplib.py, from digikit; match finder by irpina) --------
+# ---- packer "lz1" (elekloader/codec/aplib.py as it was, from digikit; match finder by
+# irpina): the greedy finder the first patches were made with ---------------------------
 
 _TERM_GAMMA = (1 << 24) + 2
 _TERM_BYTE = 0xFF
@@ -257,20 +258,121 @@ def _find_matches(data, min_match=_MIN_MATCH, max_offset=_MAX_OFFSET,
     return out
 
 
-def pack_section(data):
-    """Image -> its stored MAIN OS section: [u32 len][u32 byte sum] + stream, zero-padded
-    to a multiple of 4."""
-    matches = {pos: (off, count) for pos, off, count in _find_matches(data)}
-    events = []
-    i, n = 0, len(data)
+# ---- packer "lz2": elekloader's current one (elekloader/codec/aplib.py _parse), which
+# chooses back-references by bit cost, with last-offset reuse and one-byte lookahead -----
+
+_MAX_OFFSET2 = (1 << 20) - 1
+_CANDIDATES2 = 8
+_LITERAL_BITS = 9
+
+
+def _reuse_events(offset, count):
+    length = count - 1 - (1 if offset > FAR else 0)
+    out = [(0, b"")] + [(bit, b"") for bit in _gamma_bits(REUSE)]
+    if length <= 3:
+        out += [((length >> 1) & 1, b""), (length & 1, b"")]
+    else:
+        out += [(0, b""), (0, b"")] + [(bit, b"") for bit in _gamma_bits(length - 2)]
+    return out
+
+
+def _gamma_cost(value):
+    return 2 * (value.bit_length() - 1)
+
+
+def _match_cost(offset, count, reuse):
+    length = count - 1 - (1 if offset > FAR else 0)
+    if length < 1:
+        return None
+    lc = 2 if length <= 3 else 2 + _gamma_cost(length - 2)
+    return 1 + (_gamma_cost(REUSE) if reuse else _gamma_cost((offset + BIAS) >> 8) + 8) + lc
+
+
+def _parse2(data):
+    n = len(data)
+    head, prev = {}, [-1] * n
+    hashed = [0]
+
+    def hash_to(p):
+        while hashed[0] <= p:
+            q = hashed[0]
+            if q + _MIN_MATCH <= n:
+                k = (data[q] << 16) | (data[q + 1] << 8) | data[q + 2]
+                prev[q] = head.get(k, -1)
+                head[k] = q
+            hashed[0] = q + 1
+
+    def run(i, j, limit):
+        k = 0
+        while k < limit and data[i + k] == data[j + k]:
+            k += 1
+        return k
+
+    def best(i, last):
+        hash_to(i)
+        limit = min(_MAX_COUNT, n - i)
+        out = (0, 0, 0, False)
+        if last and last <= i:
+            k = run(i, i - last, limit)
+            c = _match_cost(last, k, True) if k >= 2 else None
+            if c is not None and _LITERAL_BITS * k - c > out[0]:
+                out = (_LITERAL_BITS * k - c, last, k, True)
+        j, tried = (prev[i] if i + _MIN_MATCH <= n else -1), 0
+        while j >= 0 and tried < _CANDIDATES2:
+            off = i - j
+            if off > _MAX_OFFSET2:
+                break
+            k = run(i, j, limit)
+            c = _match_cost(off, k, off == last)
+            if c is not None and _LITERAL_BITS * k - c > out[0]:
+                out = (_LITERAL_BITS * k - c, off, k, off == last)
+            j, tried = prev[j], tried + 1
+        return out
+
+    out, i, last = [], 0, 0
     while i < n:
-        hit = matches.get(i)
-        if hit:
-            events.extend(_match_events(*hit))
-            i += hit[1]
+        gain, off, count, reuse = best(i, last)
+        if gain > 0 and i + 1 < n and best(i + 1, last)[0] > gain + _LITERAL_BITS:
+            gain = 0
+        if gain > 0:
+            out.append(("R" if reuse else "M", off, count))
+            last = off
+            i += count
         else:
-            events.append((1, bytes((data[i],))))
+            out.append(("L", data[i]))
             i += 1
+    return out
+
+
+PACKERS = ("lz1", "lz2")   # a patch without output.packer was made with lz1
+
+
+def pack_section(data, packer="lz1"):
+    """Image -> its stored MAIN OS section: [u32 len][u32 byte sum] + stream, zero-padded
+    to a multiple of 4. lz1 is the packer of the first patches (sfx/rui 10xx), lz2
+    elekloader's bit-cost packer (rel0-3-0 on)."""
+    events = []
+    if packer == "lz2":
+        for e in _parse2(data):
+            if e[0] == "L":
+                events.append((1, bytes((e[1],))))
+            elif e[0] == "M":
+                events.extend(_match_events(e[1], e[2]))
+            else:
+                events.extend(_reuse_events(e[1], e[2]))
+    elif packer == "lz1":
+        matches = {pos: (off, count) for pos, off, count in _find_matches(data)}
+        i, n = 0, len(data)
+        while i < n:
+            hit = matches.get(i)
+            if hit:
+                events.extend(_match_events(*hit))
+                i += hit[1]
+            else:
+                events.append((1, bytes((data[i],))))
+                i += 1
+    else:
+        raise PatchError("unknown packer %r: this patcher knows %s" % (packer, ", ".join(PACKERS)))
     events.append((0, b""))
     gbits = _gamma_bits(_TERM_GAMMA)
     for k, bit in enumerate(gbits):
@@ -387,6 +489,10 @@ def patch(stock_raw, doc, log=print):
     if len(stock) != st["main_len"] or sha(stock) != st["main_sha256"]:
         raise PatchError("the stock MAIN OS does not decode to the expected image")
     out = doc["output"]
+    packer = out.get("packer", "lz1")
+    if packer not in PACKERS:
+        raise PatchError("this patch needs packer %r; this patcher knows %s (get the newer "
+                         "sidecar_patch.py)" % (packer, ", ".join(PACKERS)))
     img = bytearray(stock) + bytearray(out["main_len"] - len(stock))
     for op in doc["ops"]:
         if len(op) == 2:
@@ -399,7 +505,7 @@ def patch(stock_raw, doc, log=print):
         raise PatchError("the patched image is not the expected one")
     log("applied %d records (%s); packing the image, this takes a little while.."
         % (len(doc["ops"]), doc["tag"]))
-    res = syx.write(main, pack_section(bytes(img)), out["version"])
+    res = syx.write(main, pack_section(bytes(img), packer), out["version"])
     if sha(res) != out["syx_sha256"]:
         raise PatchError("the result is not bit-identical to the tested build; nothing written")
     log("result OK: %s, sha256 %s" % (out["name"], out["syx_sha256"]))

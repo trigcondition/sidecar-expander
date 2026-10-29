@@ -3,8 +3,13 @@
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
+      "tag": "rel0-3-0",
+      "title": "rel0-3-0: Sidecar 0.3.0 mods (default, recommended)",
+      "description": "The mods for Sidecar 0.3.0: everything in rui1027d, plus projects keyed by the Rytm's slots (SAVE AS / copy / clear follow, the project trash), kits following SAVE / RELOAD KIT, NO + KIT / PATTERN reload on the Sidecar's pages, the poly sequencer's pages and keys (FUNC + YES undo, FUNC + DOWN menu), the SIDECAR MENU with WEB UI (the pairing code), and a freeze probe that reports a stuck Rytm screen to the Sidecar. The same file elekloader builds from core 0.1 + rytm-sidecar-0.3.0.elemod (sha256 893ed9a5...733ab). Needs Sidecar 0.3.0 on the Pi."
+    },
+    {
       "tag": "rui1027d",
-      "title": "rui1027d: Sidecar 0.1.0 mods + remote pages (default, recommended)",
+      "title": "rui1027d: Sidecar 0.1.0 / 0.2 mods + remote pages (older)",
       "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the LFO page (TRK + LFO), the REC page with playback and channel picking on the trig keys (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; the SRC view (the Sidecar machine's page on the Rytm's own SRC page); the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual."
     },
     {
