@@ -32,6 +32,7 @@ It needs the **Rytm firmware 0.3.0**, built with elekloader from your own stock 
 - **The poly SEQ page's keys:** UP / DOWN are the Rytm's (the CHRO pads' range: 4 semitones a press, C2..B5), **FUNC + DOWN** opens the track menu, **FUNC then YES** is UNDO, YES + PLAY / YES + SCENE quick saves reach the Rytm. The poly SEQ, UP + FX, UP + AMP and UP + LFO pages replace the Rytm's page. The Rytm-screen keyboards name each octave's C.
 - **Poly machines** MULTISAMPLE, WAVETABLE, GRANULAR ([Poly machines](/sidecar-expander/using/poly-machines/)); very short MULTISAMPLE trigs always sound.
 - **MD built in**, in DIGIDRUM's place: DIGIDRUM is gone, and its tracks play MD. From the Rytm, 11 drum types on knob 1 until the next Rytm firmware brings MD's own page with all 30; the MD user machine in a U slot already shows the full page ([MD](/sidecar-expander/using/machines/#md)).
+- **CHOP**, a new machine: one sample cut into up to 64 slices (GRID, TRANSIENT, LAZY tapping, by hand), played from the trigs, the CHRO pads and poly tracks, with a slice editor on the Rytm and the touchscreen ([CHOP](/sidecar-expander/using/chop/)).
 - **DSP SAMPLE** picks its sample with SMP (knob D of its SMPL page); FUNC + YES on its SRC page opens the browser.
 
 **Projects, kits and files**
@@ -42,6 +43,8 @@ It needs the **Rytm firmware 0.3.0**, built with elekloader from your own stock 
 - **Pools and the sample library**, **storage** (USB drives FAT32 / MBR in a blue port, NVMe on the Pi 5), the **RAM store** (no card access on kit and pattern changes, safe in a power cut).
 
 **Sound, recording, screens**
+- **SPACE**, a new send effect: a Space Echo-style tape echo with three heads, REPEAT into tape saturation (dub throws), wow and flutter, a spring reverb and tempo sync ([SPACE](/sidecar-expander/using/send-effects/#space-pi)).
+- **AMP**, a new insert effect: Neural Amp Modeler amp and pedal captures on a voice. Put your own A2-Lite `.nam` / `.namb` files (for example TONE3000's A2 downloads) in the card's `/NAM/` folder; up to 6 play at once ([AMP](/sidecar-expander/using/insert-fx/#amp-amp-captures-nam)).
 - **Insert FX, FX buses and the OUT route** (stereo to the Rytm's main mix); the **sampler** and **auto-sampler**; the **song recorder** with UNDO REPLAY.
 - **The recorder:** take names with the date, a big buffer, a speed warning before a take that may be too much for the drive, recording to a USB stick ([Recorder](/sidecar-expander/using/recorder/)). Samples stay on the SD card for now.
 - **The touchscreen** in two themes and two sizes (optional), **UP as the Sidecar key**, the SIDECAR MENU, the KEYS page, the combo map; the touchscreen's SEQ grid behind every page.

@@ -84,6 +84,23 @@ stor=cancel          # stop it, remove its files
 
 What to expect (estimates, to be measured on the Pi): SD card 15-22 MB/s read, 8-12 MB/s write; USB 2 stick 20-35 MB/s; USB 3 stick or SSD 80-250 MB/s; NVMe about 280 MB/s reads.
 
+## Folders on the SD card
+
+The web page's **Files** tab reaches the card's content folders (and nothing else, since 0.3.0). The ones you fill yourself:
+
+| Folder | What goes in |
+|---|---|
+| `/Samples` | WAV and AIFF samples for the pools and the machines |
+| `/MULTISAMPLE` | `.sfz` instruments for MULTISAMPLE |
+| `/WAVETABLES` | wavetables for WAVETABLE |
+| `/NAM` | amp captures (`.nam`, `.namb`, A2-Lite) for the insert effect [AMP](/sidecar-expander/using/insert-fx/#amp-amp-captures-nam). Make the folder if it is not there; `amp=rescan` on the console reads it again |
+| `/Plugins` | user machines (`.a64.rmp`) |
+| `/JUNO`, `/DX7` | JUNO and 6-OP FM patches |
+| `/Bundles` | project bundles |
+| `/Recordings` | the recorder's takes |
+
+The Sidecar's own folder `/.rytm` (settings, project files, the trash) is not reachable from the web page: use a card reader.
+
 ## Limitations
 
 - Sidecar (Pi) only. The drives are not yet measured on a Pi.

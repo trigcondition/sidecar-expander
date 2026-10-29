@@ -29,6 +29,7 @@ In 0.3.0 (Sidecar (Pi) only) the two send effects are FX buses 1 and 2 of the [i
 | CRUSH | <span class="sc-ok">hardware</span> |
 | RINGMOD | <span class="sc-ok">hardware</span> |
 | HALO | <span class="sc-ok">hardware</span> (heard) |
+| SPACE (0.3.0) | <span class="sc-test">in testing</span> |
 | RINGS | <span class="sc-ok">hardware</span> |
 | CLOUDSEED | <span class="sc-ok">hardware</span> |
 | STUTTER | <span class="sc-ok">hardware</span> |
@@ -95,6 +96,23 @@ A small, lush, modulated plate reverb written for the Sidecar: very long smooth 
 ![SEND FX 1 set to HALO: TYPE and ROUTE as text, P2..P5 named DCY, MOD, TONE, SHIM](../../../assets/rytm/sendfx1-halo.png)
 
 <small>Screenshot: the SEND FX 1 page in the emulator with HALO's labels from the Sidecar.</small>
+
+## SPACE (Pi)
+
+<span class="sc-test">in testing</span> New in 0.3.0. A tape echo in the style of the Roland RE-201 Space Echo, written for the Sidecar: one tape loop read by **three playback heads**, REPEAT into tape saturation, wow and flutter, and an optional **spring reverb**. Tempo sync to the Rytm's clock.
+
+| Knob | Label | Range |
+|---|---|---|
+| P2 | TIME | 0..63: free, the shortest head 40 to 400 ms. 64..127: **sync** to the Rytm's clock, the shortest head 1/16, 1/8T, 1/8 or 1/8D. The other heads are 2x and 3x the shortest |
+| P3 | RPT | REPEAT (feedback): 0 one echo per head, about 100 the edge, above it the echo runs away and the tape saturation holds it (a dub throw) |
+| P4 | MODE | which heads play: H1, H2, H3, H1+2, H2+3, H123, H23+S, H123S (+S: with the spring reverb) |
+| P5 | AGE | the tape's wear: 0 new and bright, up to worn: darker repeats, more wow and flutter |
+
+- **TIME is the tape speed:** all heads move together, and a change glides, so the echoes already on the tape bend in pitch as on a real machine. Sweep TIME with RPT high for the classic sounds; H1 keeps howling through a sweep.
+- The return is wide: H1 in the centre, H2 to the left, H3 to the right, the spring on both sides.
+- **Ideas:** H1 with a short TIME for a slapback; H123 synced to 1/8 with some REPEAT and AGE; RPT above 100 and a TIME sweep for a dub throw (turn RPT down to stop it).
+- Sync needs the Rytm's clock over USB (MIDI CONFIG: CLOCK SEND); without a clock it assumes 120 BPM.
+- About 545 KB of memory per slot; with the spring about 1.6 % of a Pi 4 core (estimated). Sidecar (Pi) only: the Sidecar Mini shows it as missing.
 
 ## RINGS (Pi)
 
