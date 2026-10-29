@@ -33,7 +33,7 @@ Portable C++17, built from one source for the Teensy, the Pi and the Mac (tests,
 | Part | What |
 |---|---|
 | `platform.h`, `engine.h`, `hooks.h` | what a board provides (clock, cycle counter, log, files, sample RAM) and the core's entry points: `engine_begin`, `engine_sysex`, `render_voices`, idle work |
-| `voices.*`, `machines.h` | the 8 voices and the machines; the voice byte's machine bits select PLAITS, JUNO, DAISYSP, DSP SAMPLE, DIGIDRUM, 6-OP FM or U1..U5 |
+| `voices.*`, `machines.h` | the 8 voices and the machines; the voice byte's machine bits select PLAITS, JUNO, DAISYSP, DSP SAMPLE, MD (DIGIDRUM before 0.3.0), 6-OP FM or U1..U5 |
 | `host_link.*`, `sysex.*`, `slots.*` | the host-link protocol in and out ([Host-link protocol](/sidecar-expander/developers/host-link-protocol/)) |
 | `notes.*` | the note adapter: a stock Rytm's MIDI notes as the mods' reports |
 | `main_out.h` | the voices summed on MAIN for a stock Rytm, with a fade-in and a -12 dBFS limit |

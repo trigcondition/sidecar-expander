@@ -28,6 +28,8 @@ Six machines of our own (MIT licence), ready to install:
 
 <span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
 
+MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.3.0 the built-in MD shows only DIGIDRUM's old page (11 types on knob 1); the MD user machine in a U slot shows MD's full page below, with all 30 types, until the next Rytm firmware gives the built-in MD the same page.
+
 | Knob | Page | |
 |---|---|---|
 | **P9 ENGINE** | SMPL | the family: FM, PI or TRX |
@@ -47,7 +49,7 @@ Six machines of our own (MIT licence), ready to install:
 - The knobs keep their values when TYPE changes: an SD after a BD plays with the BD's knob positions.
 - MD is a mono drum voice: the trig's note is not used (tune with the voice's own PTCH), and the velocity scales the hit. Loudness differs a lot between voices; use LEV.
 - Only the voice you are using costs CPU; the others in the machine cost nothing.
-- MD is installed by the Sidecar's plugin library (coming). MD needs the 0.3 Sidecar software. An older one refuses the package ("format not supported") rather than show the wrong TYPE names.
+- MD needs Sidecar 0.3.0 or later. An older one refuses the package ("format not supported") rather than show the wrong TYPE names.
 - Earlier test builds had three machines, MD-PI, MD-EFM and MD-TRX. MD replaces them.
 
 ## Install

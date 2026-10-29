@@ -74,7 +74,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   { src: fm, alt: 'The 6-OP FM page with its algorithm', pixel: true },
   { src: grain, alt: 'The GRAIN view of DSP SAMPLE', pixel: true },
 ]}>
-  <p>Pick PLAITS, JUNO, 6-OP FM, DAISYSP, DIGIDRUM or DSP SAMPLE in a track's machine list, like any Rytm machine. DSP SAMPLE plays from the Sidecar's card, with slices, loops and a granular mode. Five user slots load machine plugins: six starter machines come with the release.</p>
+  <p>Pick PLAITS, JUNO, 6-OP FM, DAISYSP, MD or DSP SAMPLE in a track's machine list, like any Rytm machine. DSP SAMPLE plays from the Sidecar's card, with slices, loops and a granular mode. Five user slots load machine plugins: six starter machines come with the release.</p>
 </Feature>
 
 <Feature flip kicker="Send effects" title="Two send effects next to the Rytm's own" href="/sidecar-expander/using/send-effects/" shots={[
@@ -125,10 +125,10 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
   { src: dispHome, alt: 'The 0.2.0 display home screen' },
 ]}>
-  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In the 0.3 test line it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
+  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In 0.3.0 it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature kicker="Poly mode · 0.3 test line" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[
+<Feature kicker="Poly mode · 0.3.0" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[
   { src: seqMake, alt: 'The make prompt: MAKE BT A POLY TRACK? PLAITS, 4 NOTES', pixel: true },
   { src: polyCfg, alt: 'POLY CONFIG on the Rytm: VOICES, ALLOCATION, UNISON, DETUNE, SPREAD', pixel: true },
   { src: seqHeld, alt: 'The SEQ page with a step held: its chord on a keyboard', pixel: true },
@@ -137,7 +137,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>UP + TRIG makes a track on any Sidecar machine a poly track, PLAITS and JUNO included: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. Each track has a POLY CONFIG in the Rytm's own track menu (FUNC + CHRO): VOICES, ALLOCATION, UNISON with DETUNE and SPREAD. Probability can follow a fixed seed. The Rytm stays the master. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature flip kicker="Poly machines · 0.3 test line" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
+<Feature flip kicker="Poly machines · 0.3.0" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/using/poly-machines/" shots={[
   { src: msChord, alt: 'MULTISAMPLE with a chord on the Rytm', pixel: true },
   { src: wtPage, alt: 'WAVETABLE on the Rytm', pixel: true },
   { src: grTouch, alt: 'GRANULAR on the touchscreen' },
@@ -146,7 +146,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>Three polyphonic machines with chords on four knobs: SFZ instruments streamed from the card, band-limited wavetables, and grains on samples or the Rytm's live audio. They pick their sources from the project's <a href="/sidecar-expander/using/pools/">POOL</a>, chosen from a list on the Rytm's SRC page. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature kicker="Inserts, sampling, songs · 0.3 test line" title="Inserts, a sampler and a song recorder" href="/sidecar-expander/using/insert-fx/" shots={[
+<Feature kicker="Inserts, sampling, songs · 0.3.0" title="Inserts, a sampler and a song recorder" href="/sidecar-expander/using/insert-fx/" shots={[
   { src: insTouch, alt: 'The INSERT FX page on the touchscreen' },
   { src: autoExt, alt: 'The AUTO page on the Rytm', pixel: true },
   { src: songTouch, alt: 'The song timeline on the touchscreen' },
@@ -155,7 +155,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>Two <a href="/sidecar-expander/using/insert-fx/">insert slots</a> on every Sidecar voice, three FX buses and an <a href="/sidecar-expander/using/stereo-out/">OUT route</a> that sends a voice in stereo straight to the Rytm's main mix, before or after its master effects; a <a href="/sidecar-expander/using/sampling/">sampler and auto-sampler</a> that turns a patch, a Rytm track or an external synth into a MULTISAMPLE instrument; a <a href="/sidecar-expander/using/song-recorder/">song recorder</a> that captures a whole performance and replays it; and a <a href="/sidecar-expander/using/touchscreen/">touchscreen</a> with two themes, at 800x480 or 1024x600. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature flip kicker="Pools and projects · 0.3 test line" title="One pool per project, one file to move it" href="/sidecar-expander/using/pools/" shots={[
+<Feature flip kicker="Pools and projects · 0.3.0" title="One pool per project, one file to move it" href="/sidecar-expander/using/pools/" shots={[
   { src: poolRytm, alt: 'The bank list on the Rytm: SAMPLES, bank A', pixel: true },
   { src: poolPage, alt: 'The POOL page on the touchscreen: SAMPLES, TABLES, INSTR' },
   { src: projTouch, alt: 'The PROJECT page on the touchscreen' },
@@ -164,7 +164,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>Samples, wavetables and instruments in three POOL lists of 8 banks; FUNC + YES loads a file into any row from the Rytm. Every sample is known by its fingerprint, so a moved file keeps playing and a missing one is flagged. A <a href="/sidecar-expander/using/projects-bundles/">bundle</a> carries a project with its samples to another Sidecar, through the touchscreen, the Rytm, the web page or a <a href="/sidecar-expander/using/storage/">USB stick</a>. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature kicker="Finding your way · 0.3 test line" title="Every combo one key away" href="/sidecar-expander/using/key-combinations/" shots={[
+<Feature kicker="Finding your way · 0.3.0" title="Every combo one key away" href="/sidecar-expander/using/key-combinations/" shots={[
   { src: upMap, alt: 'The combo map on the Rytm while UP is held', pixel: true },
   { src: menuTop, alt: 'The SIDECAR MENU on the Rytm', pixel: true },
   { src: comboMap, alt: 'The same map on the touchscreen' },
@@ -183,8 +183,8 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS 1.73 file, in the browser</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/releases"><b>Downloads</b><small>the Sidecar SD card</small></a></li>
   <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.2.0</small></a></li>
-  <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3 test line)</small></a></li>
-  <li><a href="/sidecar-expander/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3 test line)</small></a></li>
+  <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3.0)</small></a></li>
+  <li><a href="/sidecar-expander/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3.0)</small></a></li>
   <li><a href="/sidecar-expander/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
 </ul>

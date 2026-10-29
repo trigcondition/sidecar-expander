@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
 :::
 
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>
@@ -60,7 +60,7 @@ The INSERT page **replaces the Rytm's page** like SRC: no page dots and no LEFT 
 
 <small>Screenshot: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-Settings, the OUT route included, are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit. <span class="sc-plan">coming</span> With the next Rytm firmware they follow the Rytm's kit SAVE and RELOAD.
+Settings, the OUT route included, are saved per kit on the Sidecar's card (`/.rytm/ins/<project>/kNNN.txt`), a second after the last edit. They follow the Rytm's kit **SAVE** and **RELOAD** (YES + KIT / NO + KIT, or the KIT menu): a saved kit's insert settings come back when you reload it ([Saving and reloading](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys)).
 
 ## Limitations
 

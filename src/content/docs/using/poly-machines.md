@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
 :::
 
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
@@ -50,6 +50,7 @@ A multisampled instrument player. Instruments are **SFZ** files (a subset of the
 - The SRC page on the Rytm shows the instrument's name. The touchscreen's VOICE page shows its zones on a keyboard and the envelope.
 - Memory: 8 instruments are kept loaded, in the shared [pool RAM](/sidecar-expander/using/pools/#the-pool-ram); the least recently used is replaced. A trig before its instrument has loaded plays when it has (within 250 ms).
 - The card's speed limits how many notes can stream at once, more so while the recorder writes. A card test on the Sidecar measures it.
+- Very short Rytm trigs always sound (0.3.0): a note let go before it started still plays its attack, then releases.
 
 ![The touchscreen's VOICE page for MULTISAMPLE (CLASSIC theme): INST, VEL, LEV, RTRG, ATK, DEC, SUS, REL, UPRIGHT PIANO with 6 zones, the envelope and the p-locks of the Rytm's pattern](../../../assets/touch/classic-voice-multisample.png)
 
@@ -89,7 +90,7 @@ A granular machine on card samples or on the Rytm's live audio.
 
 GRANULAR's SRC, WAVETABLE's TBL and MULTISAMPLE's INST each pick a row of their own POOL list: **8 banks, A..H, of 128 rows**, row 000 OFF in every bank. The row is part of the knob's value, so it is saved in the kit and in p-locks.
 
-- **On the Rytm:** turn **knob A** on the SRC page, or press **UP + SRC**: the bank list opens (LEFT / RIGHT the bank, the knob or UP / DOWN the row, YES chooses, NO cancels, YES with trigs held locks it). **FUNC + YES** opens the card's browser aimed at the row: load a file into it.
+- **On the Rytm:** turn **knob A** on the SRC page, or press **UP + SRC**: the bank list opens (LEFT / RIGHT the bank, the knob or UP / DOWN the row, YES chooses, NO cancels, YES with trigs held locks it). **FUNC + YES** opens the card's browser aimed at the row: load a file into it. (DSP SAMPLE, not a poly machine, picks its sample on knob D of its SMPL page instead: [DSP SAMPLE](/sidecar-expander/using/machines/#dsp-sample).)
 - **On the touchscreen:** the machine view (UP + T4), **POOL**: tap a row to play it, tap an empty row to fill it from FILES. **ALL POOLS** shows the three lists.
 - **On the web page:** the Pool tab, and +SMP / +WT / +INST and Fill bank on the Files tab.
 
@@ -110,4 +111,4 @@ The SRC page then shows the source's name; an empty row reads like `B005`, a mis
 - Locks from the bank list need GRID REC. A source lock set on a poly step keeps bank A.
 - Tables and instruments load at their first use; the first trig may wait for them (up to 250 ms). Samples the project played before are loaded ahead when it opens.
 - MULTISAMPLE rows are not previewed.
-- Projects made with the earlier 0.3 test builds' source banks open with the new POOL template: load their sources again.
+- Projects made with the 0.3 test builds' source banks open with the new POOL template: load their sources again.

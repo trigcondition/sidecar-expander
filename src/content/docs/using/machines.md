@@ -1,6 +1,6 @@
 ---
 title: Voices and machines
-description: "PLAITS, JUNO, 6-OP FM, DAISYSP, DIGIDRUM, DSP SAMPLE and GRAIN, knob by knob; in 0.3 the poly machines, the POOL lists, the OUT route and the insert FX on every voice."
+description: "PLAITS, JUNO, 6-OP FM, DAISYSP, MD, DSP SAMPLE and GRAIN, knob by knob; in 0.3 the poly machines, the POOL lists, the OUT route and the insert FX on every voice."
 sidebar:
   order: 3
 ---
@@ -8,7 +8,7 @@ sidebar:
 The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
 :::caution[New in 0.3]
-The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build, Sidecar (Pi) only) adds to every machine on this page:
+Sidecar 0.3.0 (Sidecar (Pi) only) adds to every machine on this page:
 
 - three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on 6-OP FM: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
 - two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK, as before) or in stereo on the Rytm's main mix (PRE / POST);
@@ -30,7 +30,7 @@ The Mutable Instruments Plaits macro oscillator, curated to 17 models.
 | LEV | output level |
 | Page 2 | TMD MMD FM AUX / FIN VEL GLD VOL (as the Rytm shows them): timbre and morph modulation, frequency modulation, the aux output, fine tune, velocity, glide and volume |
 
-The drum models are left out (DIGIDRUM plays drums), and the six-op FM models are their own machine (6-OP FM).
+The drum models are left out (MD plays drums), and the six-op FM models are their own machine (6-OP FM).
 
 ## JUNO
 
@@ -79,16 +79,22 @@ Physical-model resonators from DaisySP, excited by the Rytm.
 
 With INP on an analog voice, an analog drum rings a Sidecar resonator.
 
-## DIGIDRUM
+## MD
 
-Machinedrum-style digital drum engines from the open digidrum project.
+<span class="sc-test">in testing</span> New in 0.3.0. **MD** is built in: Machinedrum-style drums from the open [mdkit](https://github.com/soejrd/mdkit) project, 30 drum types in three families (FM, PI, TRX). It replaces **DIGIDRUM**, which is gone: the machine slot that was DIGIDRUM in the Rytm's machine list now plays MD, and your old DIGIDRUM tracks play MD.
+
+**With the Rytm firmware 0.3.0** the Rytm still shows DIGIDRUM's page for this machine. Until the next Rytm firmware brings MD's own page:
 
 | Knob | |
 |---|---|
-| ENG | EFM-BD, EFM-SD, EFM-XT, EFM-CP, EFM-RS, EFM-CB, EFM-HH, EFM-CY, TRX-RS, TRX-CB, TRX-CL |
-| B..H | the engine's controls; their labels change with ENG (PTCH, DEC, ...) |
+| ENG (knob 1) | the drum type. Its 11 positions are the old DIGIDRUM engines, now played by MD: FM BD, SD, XT, CP, RS, CB, HH, CY (the old EFM-...) and TRX RS, CB, CL |
+| B..H | the drum's controls, as the old DIGIDRUM labels name them |
 
-The track's sample layer stays and plays under the drum. The engine's PTCH sets the pitch; the note is not used.
+- Old DIGIDRUM sounds keep their values and play through MD. Whether they sound exactly as before has not been compared by ear.
+- The 30 types and MD's ENGINE / TYPE knobs come with the next Rytm firmware, a dedicated update right after 0.3.0 (see the [roadmap](/sidecar-expander/roadmap/)). It then shows ENGINE, TYPE and the control names of each drum.
+- **All 30 types now:** the **MD user machine** in a user slot (U1..U5) shows MD's full page already: ENGINE, TYPE and named controls ([User machines](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums)).
+- MD is a mono drum voice: the trig's note is not used, and the velocity scales the hit. Per-step locks of the drum type are click-free.
+- On the Sidecar Mini (Teensy) a track on this machine stays silent: MD is built into Sidecar (Pi) only.
 
 ## DSP SAMPLE
 
@@ -103,17 +109,18 @@ A sample from the Sidecar's card, played through a resonator.
 | TUN, LEV | tuning, level |
 | Page 2 (SD SAMPLE) | TUN FIN SMP MOD STA END LOP LEV |
 
-- **SMP** picks the sample from the project's Sidecar pool (0 OFF). Fill the pool with LOAD TO PROJ in the SIDECAR folder. In the 0.3 test line SMP picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it (or **UP + SRC**) opens the bank list, and FUNC + YES loads a file into a row.
+- **SMP** (knob D of the SMPL page) picks the sample. In 0.3.0 it picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it (or **UP + SRC**) opens the bank list, and FUNC + YES there loads a file into a row. **FUNC + YES on DSP SAMPLE's SRC page** opens the card's sample browser. LOAD TO PROJ in the SIDECAR folder fills the pool too.
+- **Why SMP is on the SMPL page:** the SRC page keeps its room for the resonator. WAVETABLE and MULTISAMPLE pick their source with knob A of their SRC page; DSP SAMPLE with knob D of its SMPL page. A later version may line them up.
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default).
-- In the 0.3 test line a stereo sample plays in stereo when the voice is on PRE or POST (on TRK, as before, the sum of its two channels), and the OUT view's **DEC** sets DSP SAMPLE's decay there ([Stereo and the OUT route](/sidecar-expander/using/stereo-out/)).
+- In 0.3.0 a stereo sample plays in stereo when the voice is on PRE or POST (on TRK, as before, the sum of its two channels), and the OUT view's **DEC** sets DSP SAMPLE's decay there ([Stereo and the OUT route](/sidecar-expander/using/stereo-out/)).
 
 ## GRAIN
 
-DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Each Pi render core can sound up to 32 grains. In the 0.3 test line the polyphonic **GRANULAR** machine is a granular machine of its own, with its source from the SAMPLES pool (card samples, built-ins or the Rytm's live audio): see [Poly machines](/sidecar-expander/using/poly-machines/#granular).
+DSP SAMPLE's **GRAIN** mode: a granular voice over the pool sample, from memory, with position, size and density on STA END LOP. Each Pi render core can sound up to 32 grains. In 0.3.0 the polyphonic **GRANULAR** machine is a granular machine of its own, with its source from the SAMPLES pool (card samples, built-ins or the Rytm's live audio): see [Poly machines](/sidecar-expander/using/poly-machines/#granular).
 
 For a stand-alone granular machine with its own built-in sample, see the GRAIN user machine in the starter set ([User machines](/sidecar-expander/using/user-machines/)).
 
 ## CPU
 
-Measured on the Pi 4, each voice costs about 0.2 % (DIGIDRUM) to 1.2 % (6-OP FM) of one core, so eight voices leave most of the Pi free. A voice that runs over its budget, or crashes, is muted on its own; the others keep playing.
+Measured on the Pi 4, each voice costs about 0.2 % (the old DIGIDRUM) to 1.2 % (6-OP FM) of one core, so eight voices leave most of the Pi free. A voice that runs over its budget, or crashes, is muted on its own; the others keep playing.

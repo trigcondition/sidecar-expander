@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key, poly tracks on every Sidecar machine, POLY CONFIG, the seeded random) are tested in the emulator and on the Mac. Poly tracks per pattern and NOTE EDIT have had a first round on a real Rytm; their newest versions (YES and DOWN on the SEQ page, the new NOTE EDIT screen) are still being checked. They need no new Rytm firmware. Sidecar (Pi) only.
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key, poly tracks on every Sidecar machine, POLY CONFIG, the seeded random) are tested in the emulator and on the Mac. Poly tracks per pattern and NOTE EDIT have been used on a real Rytm; their newest versions (the SEQ page's keys, the new NOTE EDIT screen) are being checked with the 0.3.0 release. Sidecar (Pi) only.
 :::
 
 A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
@@ -22,7 +22,7 @@ A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the
 
 ### Which machines
 
-**Every Sidecar machine** can be a poly track: PLAITS, JUNO, DAISYSP, DIGIDRUM, DSP SAMPLE, 6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and user machines. Only the analog machines cannot: the Rytm's analog voice is mono. How many notes a track plays at once is its [POLY CONFIG](#poly-config); AUTO gives each machine its default:
+**Every Sidecar machine** can be a poly track: PLAITS, JUNO, DAISYSP, MD, DSP SAMPLE, 6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and user machines. Only the analog machines cannot: the Rytm's analog voice is mono. How many notes a track plays at once is its [POLY CONFIG](#poly-config); AUTO gives each machine its default:
 
 | Machine | VOICES on AUTO | Where the notes play |
 |---|---|---|
@@ -32,12 +32,12 @@ A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the
 | GRANULAR | 6 | the machine's own pool |
 | JUNO | 6 | the instance pool |
 | PLAITS, DAISYSP | 4 | the instance pool |
-| DIGIDRUM | 1 (mono: a new note cuts the old) | the voice, or the instance pool with VOICES above 1 |
+| MD | 1 (mono: a new note cuts the old) | the voice |
 | DSP SAMPLE | 1 (mono only: one card stream a voice) | the voice |
 | user machines | 1 for a drum, else up to 4 (the package declares its maximum) | the instance pool, when the package allows it |
 
 - **The instance pool** holds 32 instances shared by the poly tracks, each with its own engine state, so a PLAITS track with VOICES 4 plays four PLAITS at once. They are rendered into the track's own channel, before its inserts, so the voice's CPU budget covers them: every built-in machine fits 8. A heavy user machine is cut to what fits (`CUT` on the pages).
-- **The note's pitch:** on PLAITS, JUNO, DAISYSP, DSP SAMPLE and the note machines the note is the pitch (plus TUN / FIN); DIGIDRUM takes it as an offset on PTCH; a user machine for a fixed-pitch drum ignores it.
+- **The note's pitch:** on PLAITS, JUNO, DAISYSP, DSP SAMPLE and the note machines the note is the pitch (plus TUN / FIN); MD does not use it (tune with its own pitch knob); a user machine for a fixed-pitch drum ignores it.
 - A user machine package declares its voices (`max_voices`) and whether pitch matters; older packages stay mono.
 - A poly track's own Rytm trigs make no note; its pad in the normal pad mode still plays its voice.
 
@@ -58,9 +58,26 @@ To leave the SEQ page: UP + TRIG again, or NO. Selecting a track that is no poly
 
 The SEQ page **replaces the Rytm's page** like the SRC page does: LEFT and RIGHT do not jump to other Sidecar pages from it, and it has no page dots.
 
-**The poly track's menu:** on the SEQ page with no trig held, press **DOWN**: **BACK TO THE SEQ**, **TURN OFF (STEPS KEPT)**, **LENGTH (KNOB C)**, **QUANTISE (KNOB D)**. UP / DOWN pick, YES confirms. TURN OFF asks once more and then **closes the poly page at once**: the Rytm's own trigs and LEDs are back, no NO needed. The steps stay on the card. To make the track poly again, press UP + TRIG and YES; if it still holds notes, the Rytm asks **RESTORE n NOTES?**: **YES** brings them back, **NO** starts empty (FUNC + YES undoes the NO). A pattern switch while the question shows drops it.
+**The poly track's menu:** on the SEQ page with no trig held, hold **FUNC** and press **DOWN**: **BACK TO THE SEQ**, **TURN OFF (STEPS KEPT)**, **LENGTH (KNOB C)**, **QUANTISE (KNOB D)**, **PLAY MODE**, **PRINT RND**. UP / DOWN pick, YES confirms, NO goes back. TURN OFF asks once more and then **closes the poly page at once**: the Rytm's own trigs and LEDs are back, no NO needed. The steps stay on the card. To make the track poly again, press UP + TRIG and YES; if it still holds notes, the Rytm asks **RESTORE n NOTES?**: **YES** brings them back, **NO** starts empty (FUNC + YES undoes the NO). A pattern switch while the question shows drops it.
 
-**YES is the Rytm's** on the poly SEQ page, so its own YES combinations work under the page: hold **YES + PLAY** or **YES + SCENE** for the quick saves. **FUNC, then YES** is **UNDO** (press FUNC first). YES with a trig held is still the step preview (below). With the current Rytm firmware a very fast FUNC, YES can still reach the Rytm as a save instead of an undo; the next Rytm firmware closes that gap.
+**The Rytm's keys on the SEQ page.** The page leaves the Rytm the keys it does not need:
+
+- **YES is the Rytm's**, so its own YES combinations work under the page: hold **YES + PLAY** or **YES + SCENE** for the quick saves. **FUNC, then YES** is **UNDO** (press FUNC first). YES with a trig held is still the step preview (below).
+- **UP and DOWN are the Rytm's.** In CHRO pad mode they move the pads' range, so you can play and record higher or lower notes ([The pads' range](#the-pads-range)). FUNC + DOWN is the poly track's menu (above).
+- **NO + KIT, NO + PATTERN, NO + TRACK** reload as on a stock Rytm, and YES + KIT saves the kit ([Saving and reloading](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys)). NO alone still goes back; it acts when you let go of it.
+- A fast FUNC then YES, or FUNC then DOWN, always reaches the Sidecar: it never slips through to the Rytm.
+
+### The pads' range
+
+In CHRO mode the Rytm's 12 pads play 12 semitones. **UP / DOWN** move them **4 semitones a press** (not an octave): 3 presses up, 6 down from where they start. The Rytm keeps the setting when you leave CHRO and come back.
+
+| Pads | Notes |
+|---|---|
+| lowest (DOWN 6 times) | C2 .. B2 |
+| the default | C4 .. B4 |
+| highest (UP 3 times) | C5 .. B5 |
+
+So the pads reach **C2 .. B5**. For notes outside that range, use the NOTE knob under a held trig, NOTE EDIT, a MIDI keyboard or the touchscreen's piano roll. A per-track octave shift for the pads (PAD OCT) is planned for 0.3.1.
 
 ![The poly track's menu: LT: POLY TRACK, BACK TO THE SEQ, TURN OFF (STEPS KEPT), LENGTH (KNOB C), QUANTISE (KNOB D)](../../../assets/rytm/sc-seq-menu.png)
 ![The turn-off prompt: LT: POLY TRACK OFF? ITS STEPS STAY SAVED. B UP: BACK ON. YES: TURN OFF, NO: KEEP](../../../assets/rytm/sc-seq-off.png)
@@ -91,7 +108,7 @@ Each poly track has a **POLY CONFIG**, named and modelled after the Analog Four 
 ![POLY CONFIG on an analog track: RS PLAYS ANALOG: THE RYTM'S VOICE IS MONO](../../../assets/rytm/sc-poly-analog.png)
 ![The touchscreen's SEQ page with the POLY tool: VOICES AUTO..8, ALLOCATION REASGN / ROTATE / RESET, UNISON, and the line POLY T9: FM 4 INST 4 NOTES 4.88%](../../../assets/touch/oled-seq-poly.png)
 
-<span class="sc-test">in testing</span> (emulator, `rui1048`)
+<span class="sc-test">in testing</span> (emulator)
 
 ## Seeded randomness
 
@@ -281,7 +298,7 @@ T8..T13 open on the touchscreen when it has the page, else on the Rytm's screen.
 
 ## What the screens show
 
-**The Rytm** (the SEQ page): SIDECAR SEQ and the track, the pattern, the page (`PG1/4`), the length and the transport; a step strip with the page's steps; a piano roll of the page. With a trig held: a keyboard with the step's notes, a timing lane, and the eight values. The playhead on the page moves at most 4 times a second; the trig LEDs show every step.
+**The Rytm** (the SEQ page): SIDECAR SEQ and the track, the pattern, the page (`PG1/4`), the length and the transport; a step strip with the page's steps; a piano roll of the page. With a trig held: a keyboard with the step's notes, a timing lane, and the eight values. The keyboard names each octave's C (C3, C4, C5) and keeps its window steady while the step's notes fit in it. The playhead on the page moves at most 4 times a second; the trig LEDs show every step.
 
 ![The SEQ page playing: A01 PG1/4 64, the step strip and the page's notes, TAP:STEP HOLD+PADS:NOTES](../../../assets/rytm/sc-seq-roll.png)
 ![The SEQ page with lock ticks over the steps and a lock trig as a hollow box](../../../assets/rytm/sc-seq-locks.png)
@@ -305,7 +322,8 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 | UP + TRIG | any track | the SEQ page; on a track that is no poly track the make prompt (or why not) |
 | YES / NO | make prompt | make the poly track / back |
 | UP + TRIG or NO | SEQ page | leave (the page has no LEFT / RIGHT siblings) |
-| DOWN (no trig held) | SEQ page | the poly track's menu |
+| FUNC + DOWN (no trig held) | SEQ page | the poly track's menu |
+| UP / DOWN | SEQ page, CHRO pads | the Rytm's: the pads' range ([above](#the-pads-range)) |
 | YES + PLAY, YES + SCENE | SEQ page | the Rytm's quick saves (YES is the Rytm's) |
 | FUNC, then YES | SEQ page | UNDO |
 | DATA turned / pushed | SEQ page of a poly track | [NOTE EDIT](#note-edit): walk the notes / select |
@@ -326,7 +344,7 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 | UP + T1..T13 | anywhere | the pages (above) |
 
 :::note[Older forms]
-TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 test builds, still work.
+TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds, still work.
 :::
 
 ## Features
@@ -362,13 +380,13 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 - Poly tracks use the Sidecar's own swing, set per track.
 - The first steps after PLAY are late by the round trip (PLAY cannot be predicted); after that, and across pattern changes, notes are rendered ahead.
 - Steps live on the Sidecar's card. A stock OS, a SysEx or Transfer backup, or a project shared without the card's files does not carry them: use a [bundle](/sidecar-expander/using/projects-bundles/).
-- The files are keyed by the project's name. After a rename or SAVE PROJECT AS on the Rytm the Sidecar [asks whether to move them](/sidecar-expander/using/projects-bundles/#renamed-on-the-rytm). With the next Rytm firmware they follow the project's slot instead ([coming](/sidecar-expander/using/projects-bundles/#coming-projects-by-slot-and-the-project-trash)).
+- The files belong to the Rytm's project slot. A rename needs nothing; SAVE AS and copy / paste of a project take them along ([Projects by slot](/sidecar-expander/using/projects-bundles/#projects-belong-to-the-rytms-slot)).
 - The SEQ page's playhead moves at most 4 times a second, to keep the Rytm's UI responsive.
 - First hardware use on a Pi 4. Nothing is confirmed on a Pi 5 yet.
 
 ## More sequencer pages: direction, speed, scale, random, ratchets, slides, FX column
 
-<span class="sc-test">in testing</span> (emulator and Mac; needs the Rytm build `rui1050` or later, and the Sidecar's 0.3 test build). On a poly track's SEQ page, with no trig held, **TRIG** cycles four pages: NOTES, **DEFAULTS**, **SCALE**, **RANDOM**, then NOTES again. With trigs held, TRIG cycles NOTES, **TRIG**, **RTRG**, **FX**.
+<span class="sc-test">in testing</span> (emulator and Mac; needs the Rytm build `rui1050` or later, and Sidecar 0.3.0). On a poly track's SEQ page, with no trig held, **TRIG** cycles four pages: NOTES, **DEFAULTS**, **SCALE**, **RANDOM**, then NOTES again. With trigs held, TRIG cycles NOTES, **TRIG**, **RTRG**, **FX**.
 
 | Page | Knobs | What |
 |---|---|---|
@@ -391,12 +409,12 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the earlier 0.3 tes
 
 Not built: changing the speed in the middle of a pattern.
 
-## Coming in 0.3
+## Coming in 0.3.1
 
-<span class="sc-plan">in progress</span> Not in the test builds yet:
+<span class="sc-plan">planned</span> Not in 0.3.0:
 
 **FREEZE** turns an analog track into a poly track: the auto-sampler samples the track's current sound over a range of notes, **2 round robins per note**, writes a multisample, and the track becomes a MULTISAMPLE poly track with it. The kit's analog sound stays as it was, so the track can go back. A quick way to play an analog sound polyphonically, not a replacement: locks and LFOs on the analog sound's own parameters are baked in.
 
-**With the next Rytm firmware** (not flashed yet): **NO + KIT** and **NO + PATTERN**, the Rytm's reload of the kit or pattern, also work while the poly SEQ page (or another Sidecar page that replaces the Rytm's page) is open, and a very fast FUNC, YES is always an undo.
+**PAD OCT:** a per-track octave shift for the pads, so a poly track's pads can reach the notes above B5 and below C2.
 
 See the [roadmap](/sidecar-expander/roadmap/).

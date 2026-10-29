@@ -1,12 +1,12 @@
 ---
 title: The touchscreen (0.3)
-description: "The Pi's touchscreen in the 0.3 test line: the OLED and CLASSIC themes and the STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600."
+description: "The Pi's touchscreen in 0.3.0: the OLED and CLASSIC themes and the STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600."
 sidebar:
   order: 7.1
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
 :::
 
 The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T13). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. **It is optional:** without it the Sidecar's pages open on the Rytm's own screen, and the web page covers setup. <span class="sc-test">in testing</span>
@@ -74,7 +74,7 @@ The poly track's notes as bars, coloured by velocity, with note names when there
 | **POLY** | the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config): VOICES (AUTO, 1..8), ALLOCATION (REASSIGN / ROTATE / RESET), UNISON; the line above says what it resolves to (`POLY T9: FM 4 INST 4 NOTES 4.88%`) |
 | **UNDO / REDO** | 24 levels, kept per track and pattern; the Rytm's [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit) (FUNC + YES) walks the same history |
 
-Drag on the grid scrolls; pinch zooms (1..8 pages across, row height). **While the Rytm plays** the roll opens in **VIEW**, so a stray touch changes nothing: tap DRAW to edit (it locks again after 10 s without a touch), and a long press adds or deletes a note. Each edit shows a short message. While playing, the view follows the playhead's page, 3 s after your last touch.
+The step grid is drawn behind every page shown, playing or stopped. Drag on the grid scrolls; pinch zooms (1..8 pages across, row height). **While the Rytm plays** the roll opens in **VIEW**, so a stray touch changes nothing: tap DRAW to edit (it locks again after 10 s without a touch), and a long press adds or deletes a note. Each edit shows a short message. While playing, the view follows the playhead's page, 3 s after your last touch.
 
 When you edit with **NOTE EDIT** on the Rytm, the roll follows the same note: it selects it, shows the page it is on and scrolls its row into view, and the playhead does not move the window meanwhile. The step editor lists only the pattern's poly tracks (a track that is off answers "not a seq track").
 
@@ -109,8 +109,8 @@ Read only, twice a second:
 
 - **VOICES:** each voice by its track, its machine and its share of a render core; a poly track's machine with its instances (`PLAITS X8`), and on the panel's title the instance pool in use (`INST 12/32`), one instance's cost and its memory.
 - **SEND FX:** FX 1 / FX 2 with their TYPE and PRE / POST.
-- **CPU:** cores 1..3, the longest block and pass, underruns, the buffer and the temperature.
-- **LINKS:** the Rytm, the Overbridge audio, USB-C, the network, the web page, the SD card, a [USB drive](/sidecar-expander/using/storage/) and an NVMe SSD with their free space, the display.
+- **CPU:** cores 1..3, the longest block and pass, underruns, the buffer and the temperature. Its title shows the clock, and `CLOCK LOWERED` when the Pi has slowed down because it is hot ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)).
+- **LINKS:** its title line holds the web page's [pairing code](/sidecar-expander/using/web-ui/#pairing-a-browser) (PAIR). Then the Rytm, the Overbridge audio, USB-C, the network, the web page, the SD card, a [USB drive](/sidecar-expander/using/storage/) and an NVMe SSD with their free space, the display.
 - **VERSIONS + LIBRARY:** the Sidecar build, Circle, LVGL, the Rytm mods seen, and the [sample library](/sidecar-expander/using/pools/#the-sample-library).
 
 Limits and errors (a muted voice, underruns, a busy core, the network down, little free space) show in the alert look.
@@ -119,7 +119,7 @@ Limits and errors (a muted voice, underruns, a busy core, the network down, litt
 
 ### PROJECT and POOL
 
-The PROJECT page lists the card's projects and exports and imports bundles, to the card or a USB stick: see [Projects and bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project). The POOL views show and edit the project's sample, wavetable and instrument lists: see [Pools](/sidecar-expander/using/pools/#on-the-touchscreen).
+The PROJECT page lists the card's projects, exports bundles to the card, imports them from the card or a USB stick, and has the project trash (**TRASH (n)**, **RESTORE**): see [Projects and bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project). The POOL views show and edit the project's sample, wavetable and instrument lists: see [Pools](/sidecar-expander/using/pools/#on-the-touchscreen).
 
 ![The PROJECT page (OLED)](../../../assets/touch/oled-project.png)
 ![The POOL page (OLED) at 1024x600](../../../assets/touch/wide-oled-pool-page-samples.png)

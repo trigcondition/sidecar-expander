@@ -23,7 +23,7 @@ Audio never goes over SysEx: the Overbridge stream carries it.
 | `03` | PARAMS | `<voice byte> <P1..P16> [<tag>]`: knob, LFO or slide changes, at most ~90 a second per voice |
 | `11` | NOTE_OFF | `<voice>`: the gate closed (pad released, trig length elapsed, sequencer stopped) |
 
-- **Voice byte:** the physical voice (0..7) in the low 3 bits, the machine in `voice & 0x78`: `00` PLAITS, `08` JUNO, `10` DAISYSP, `20` DSP SAMPLE, `40` DIGIDRUM, `48` 6-OP FM, `50 58 60 68 70` U1..U5. Anything else plays as PLAITS.
+- **Voice byte:** the physical voice (0..7) in the low 3 bits, the machine in `voice & 0x78`: `00` PLAITS, `08` JUNO, `10` DAISYSP, `20` DSP SAMPLE, `40` MD (DIGIDRUM before 0.3.0: the host reads an old DIGIDRUM sound by its layout and plays it on MD), `48` 6-OP FM, `50 58 60 68 70` U1..U5. Anything else plays as PLAITS.
 - **P values** are 14-bit: the 0..127 value, then the fraction in 1/128 steps (slides and the LFO move it). LFO modulation is included.
 - **List knobs** (ENG and others) are equal zones: `zone = min((value * N) >> 7, N - 1)`.
 - **Tag:** the owner track's sound tag. For U1..U5 it is the fingerprint of the machine the sound was made for (0 untagged). A host plays a user-slot voice only when the tag is 0 or matches.

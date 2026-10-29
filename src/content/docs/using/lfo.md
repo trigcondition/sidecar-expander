@@ -7,7 +7,7 @@ sidebar:
 
 <span class="sc-test">in testing</span> (new in 0.1.0; saved per kit in `/.rytm/lfo/<project>/kNNN.txt` on the Sidecar's card)
 
-The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidecar voice or effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs. <span class="sc-plan">coming</span> With the next Rytm firmware the Sidecar's per-kit settings (LFOs, inserts) follow the Rytm's kit **SAVE** and **RELOAD**, the way poly patterns follow pattern SAVE and RELOAD.
+The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidecar voice or effect, on top of the value the Rytm sets (its knob or a p-lock). They are global, not tied to a track, and are **saved per kit**, like the Rytm's own LFOs. Since 0.3.0 they follow the Rytm's kit **SAVE** and **RELOAD** (YES + KIT / NO + KIT, or the KIT menu), the way poly patterns follow pattern SAVE and RELOAD: change an LFO, reload the kit, and the saved LFO comes back ([Saving and reloading](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys)).
 
 ## Targets
 
@@ -20,7 +20,7 @@ The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidec
 | **O1..O8** (0.3) | a voice's [OUT route](/sidecar-expander/using/stereo-out/): LEV, PAN, WID |
 
 :::caution[New in 0.3]
-The I, B and O targets need the Sidecar's 0.3 test build (Sidecar (Pi) only). On an insert or the OUT route an LFO is an offset on top of the knob or the step lock. <span class="sc-test">in testing</span>
+The I, B and O targets need Sidecar 0.3.0 (Sidecar (Pi) only). On an insert or the OUT route an LFO is an offset on top of the knob or the step lock. <span class="sc-test">in testing</span>
 :::
 
 Two LFOs on one parameter add up. Selectors that are read only at a trig (6-OP FM's PAT, DSP SAMPLE's SMP) do not follow an LFO. On a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), an LFO on a locked parameter moves around the lock. The LFOs never change the Rytm's own sound parameters, so a kit you save is never altered by a running LFO.
@@ -47,7 +47,7 @@ Hold **UP** and press **LFO** to open the remote pages straight on the LFO page,
 
 ## On the web page and the console
 
-The web page has an **LFO** tab with the same settings per LFO: target, parameter, wave, rate, sync, retrig, depth, and the design steps. In the 0.3 test line its target list has the I, B and O targets too.
+The web page has an **LFO** tab with the same settings per LFO: target, parameter, wave, rate, sync, retrig, depth, and the design steps. In 0.3.0 its target list has the I, B and O targets too.
 
 ![The Pi page's LFO tab: LFO 1 on V3, LFO 2 on FX1 with a DESIGN wave, the design grid with HOLD / RAMP / SMTH and the presets](../../../assets/ui/pi-lfo.png)
 

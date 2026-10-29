@@ -20,7 +20,7 @@ The SRC page shows the machine's eight knobs. They behave like any Rytm knob: tu
 | PLAITS | ENG HRM TIM MOR DEC LPG TUN LEV | TMD MMD FM AUX / FIN VEL GLD VOL |
 | DAISYSP | ENG STR BRI DMP INP EXC TUN LEV | EXCITER: OUT FB XLV XTN / XDC XP4 XP5 WID |
 | DSP SAMPLE | ENG STR BRI DMP MIX FB TUN LEV | SD SAMPLE: TUN FIN SMP MOD STA END LOP LEV |
-| DIGIDRUM | ENG and the engine's seven controls (named per engine) | the stock sample layer |
+| DIGIDRUM (plays MD in 0.3.0) | ENG (the drum type) and the drum's seven controls (named per type) | the stock sample layer |
 | JUNO | PAT CUT RES ENV ATK DEC REL LEN | the stock page, muted |
 | 6-OP FM | PAT TIM MOR DEC LPG TUN LEV LEN | the stock page, muted |
 | MULTISAMPLE, WAVETABLE, GRANULAR (0.3) | see [Poly machines](/sidecar-expander/using/poly-machines/) | eight more knobs, CHD INV SPR VOI last |
@@ -41,7 +41,7 @@ The Rytm's sample browser (GLOBAL > SAMPLES, or FUNC + SMPL, DOWN, FUNC + YES) s
 
 - **LOAD TO PROJ** on a Sidecar file adds it to the project's **Sidecar pool** (stored on the Sidecar, one pool per project). Nothing is copied into the Rytm.
 - DSP SAMPLE's **SMP** knob then picks from that pool: 0 is OFF, N is pool slot N.
-- In the 0.3 test line the pool is the project's SAMPLES [POOL list](/sidecar-expander/using/pools/): LOAD TO PROJ puts the file into the first free row of bank A, and SMP reaches all eight banks. The bank list's **FUNC + YES** opens this browser aimed at a row.
+- In 0.3.0 the pool is the project's SAMPLES [POOL list](/sidecar-expander/using/pools/): LOAD TO PROJ puts the file into the first free row of bank A, and SMP reaches all eight banks. The bank list's **FUNC + YES** opens this browser aimed at a row.
 - LOAD TO PROJ on a JUNO patch or a DX7 voice adds it to the project's JUNO or FM list, which the PAT knob then steps through.
 
 ## User slots U1..U5
@@ -126,7 +126,7 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on. Every letter is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places; no font data of the Rytm is in Sidecar. New pages, layouts and graphics come with a Sidecar update (the Pi's SD card) and **do not need a new Rytm flash**; only a new kind of building block on the Rytm side does.
 
 :::caution[New in 0.3]
-The 0.3 test line (Rytm build `rui1048` with the Sidecar's 0.3 test build) makes **UP the Sidecar key** and adds the SIDECAR MENU, the KEYS page and the combo map, the SAMPLE, AUTO, SEQ, POLY CONFIG, INSERT (with UP + AMP for its OUT view), SONG, POOL and PROJECT pages, and TRK's LED blinking while a page has the keys. Built and tested in the emulator; not yet confirmed on a real Rytm. With the 0.2.0 release's `rui1027d` the key is TRK (TRK + YES) and the page list is SIDECAR, SYSTEM, LFO, REC and SCOPE.
+Sidecar 0.3.0 makes **UP the Sidecar key** and adds the SIDECAR MENU, the KEYS page and the combo map, the SAMPLE, AUTO, SEQ, POLY CONFIG, INSERT (with UP + AMP for its OUT view), SONG, POOL and PROJECT pages, and TRK's LED blinking while a page has the keys. Built and tested in the emulator; not yet confirmed on a real Rytm. With the 0.2.0 release's `rui1027d` the key is TRK (TRK + YES) and the page list is SIDECAR, SYSTEM, LFO, REC and SCOPE.
 :::
 
 ### Opening, moving, leaving
@@ -187,7 +187,7 @@ Twelve tracks can choose a Sidecar machine; eight Sidecar voices sound at once. 
 
 <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build, 2026-10-19, also after a USB replug)
 
-On a track that plays a Sidecar machine with a page, the Rytm's **own SRC page** shows the Sidecar's machine page with its graphics: JUNO's envelope and filter, the FM algorithm, DSP SAMPLE's waveform, GRAIN's cloud, and in the 0.3 test line GRANULAR's grains, WAVETABLE's frames and MULTISAMPLE's zones. It is drawn from the Rytm's own values, so every key and knob stays the Rytm's: edits, p-locks, kits and saving work as on a stock SRC page. The bottom bar names the last knob you turned (for example `BD CUT:73`).
+On a track that plays a Sidecar machine with a page, the Rytm's **own SRC page** shows the Sidecar's machine page with its graphics: JUNO's envelope and filter, the FM algorithm, DSP SAMPLE's waveform, GRAIN's cloud, and in 0.3.0 GRANULAR's grains, WAVETABLE's frames and MULTISAMPLE's zones. It is drawn from the Rytm's own values, so every key and knob stays the Rytm's: edits, p-locks, kits and saving work as on a stock SRC page. The bottom bar names the last knob you turned (for example `BD CUT:73`).
 
 - Other machines, and analog tracks, show the stock SRC page.
 - The stock machine list, popups and holding TRK or BANK show the stock screen while they are up.
@@ -204,7 +204,7 @@ New in 0.3 (<span class="sc-test">in testing</span>, emulator):
 
 ### More pages
 
-**Connect screen** <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). Its footer names the key that opens the pages (`UP+YES: SIDECAR PAGES` in the 0.3 test line, `TRK + YES` with `rui1027d`, as in the pictures). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
+**Connect screen** <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds: the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). Its footer names the key that opens the pages (`UP+YES: SIDECAR PAGES` in 0.3.0, `TRK + YES` with `rui1027d`, as in the pictures). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
 
 ![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, TRK + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
 ![The connect screen on the Pi with its network address](../../../assets/rytm/remote-connect-ip.png)

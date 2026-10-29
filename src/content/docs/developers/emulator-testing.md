@@ -41,6 +41,8 @@ With the Rytm plugged into the Sidecar, its USB port belongs to the Pi, so a com
 
 <span class="sc-test">in testing</span>: tested against a fake Sidecar and on the Mac; not yet checked on hardware.
 
+**REMOTE KEYS** (the Rytm-side mod that lets a test tool press the Rytm's keys, analoghealth's protocol) is **not in the 0.3.0 release firmware**: it is a development build only (`RUI_DEV=1 tools/build_rui.sh TAG` in the mods repository). Two UI freezes on a release candidate after key and pad bursts pointed at it, so it stays out of production builds until it is reworked. The bridge itself works with the release firmware, for MIDI and SysEx.
+
 ## The engine's own tests
 
 - `make -C core test`: the core's unit tests (protocol bytes against `sim/protocol.py`, the voices, the send FX, the user slots, the remote UI).
