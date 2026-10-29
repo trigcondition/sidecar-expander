@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-The 0.3 test line (Sidecar (Pi)) redraws the whole display: two themes and the STAGE look, the 1024x600 size, a new boot screen and the connection animation. The pages themselves (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET) are on [The touchscreen](/sidecar-expander/using/touchscreen/). The 0.2.0 display is described in the [0.2 docs](/sidecar-expander/0.2/using/display/).
+Sidecar 0.3.0 (Pi) redraws the whole display: two themes and the STAGE look, the 1024x600 size, a new boot screen and the connection animation. The pages themselves (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET) are on [The touchscreen](/sidecar-expander/using/touchscreen/). The 0.2.0 display is described in the [0.2 docs](/sidecar-expander/0.2/using/display/).
 :::
 
 The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on: the screen is set up at boot. The display is optional; everything it shows is also on the Rytm or the web page.

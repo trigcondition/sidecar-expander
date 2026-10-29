@@ -13,7 +13,7 @@ A small computer sits on the Rytm's USB port: a **Raspberry Pi 4B or Pi 5** (one
 Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/sidecar-expander/0.2/introduction/pi-vs-teensy/).
 :::
 
-A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive the Sidecar. You play and edit everything from the Rytm: pick a Sidecar machine on a track, turn its knobs, p-lock them, and send tracks to the Sidecar's effects. The Sidecar's own pages open on the Rytm's screen with one key held: **UP** in the 0.3 test line (TRK in the 0.2.0 release).
+A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive the Sidecar. You play and edit everything from the Rytm: pick a Sidecar machine on a track, turn its knobs, p-lock them, and send tracks to the Sidecar's effects. The Sidecar's own pages open on the Rytm's screen with one key held: **UP** in 0.3.0 (TRK in the 0.2.0 release).
 
 ## A screen is optional
 
@@ -31,8 +31,8 @@ This is a tester release. It is not made, endorsed or supported by the instrumen
 
 | Part | Runs on | Does |
 |---|---|---|
-| **Rytm mods** | the Rytm (patched OS 1.73) | external (EXT) machines on every track, the SEND FX pages, the user slot menu, the SIDECAR folder in the sample browser, the remote pages the Sidecar draws on the Rytm's screen, and in the 0.3 test line the key combinations, the source lists and the poly tracks' link. Built on elekloader. |
-| **The engine** | Pi 4B or Pi 5 | renders the voices, the send effects and the user machines, records, and serves the display and the web page. The 0.3 test line adds the poly-track sequencer, the insert FX and the OUT route, the pools and the sample library, project bundles, the sampler and the song recorder. |
+| **Rytm mods** | the Rytm (patched OS 1.73) | external (EXT) machines on every track, the SEND FX pages, the user slot menu, the SIDECAR folder in the sample browser, the remote pages the Sidecar draws on the Rytm's screen, and in 0.3.0 the key combinations, the source lists and the poly tracks' link. Built on elekloader. |
+| **The engine** | Pi 4B or Pi 5 | renders the voices, the send effects and the user machines, records, and serves the display and the web page. Sidecar 0.3.0 adds the poly-track sequencer, the insert FX and the OUT route, the pools and the sample library, project bundles, the sampler and the song recorder. |
 | **The patcher** | your browser or Python | patches your own stock OS 1.73 file. We never distribute firmware. |
 | **The web tools** | your browser | the Pi's page at `sidecar.local`. |
 

@@ -2,7 +2,19 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.2.0 (Raspberry Pi 4B and Pi 5; Sidecar Mini stays at 0.1.0; Rytm builds `rui1027d`, the default, and `sfx1021`). The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Please report anything not listed here, using the Tester report form under Issues.
+Sidecar 0.3.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.0, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3.0 is an early-tester release. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.3.0
+
+- **The Rytm shows DIGIDRUM's page for MD**, with 11 drum types on knob 1. MD's own page (ENGINE, TYPE, all 30 types) comes with the next Rytm firmware, right after 0.3.0. Meanwhile the MD user machine in a U slot shows the full page.
+- **Export to a USB stick is off.** The end of a stick export hung the Pi in a test. Export to the card, then copy the bundle to the stick yourself. Import from a stick works.
+- **The Sidecar's audio to the Rytm stayed silent after a Pi restart**, once (the Rytm's audio still reached the Pi). Restart the Rytm. A fix that notices and restarts it is planned.
+- **The Rytm's screen froze twice** on an earlier release candidate, after bursts of key and pad presses (REMOTE KEYS, now left out, is the main suspect). The release firmware has a freeze probe: if the screen stops for over 2 seconds, the Sidecar's log says `FREEZE PROBE` and where. Please report it with the log.
+- **Pi 5 HDMI:** the picture is scaled to 1920x1080, so it is slightly soft.
+- **The pads reach C2..B5** in CHRO mode (UP / DOWN move them 4 semitones a press). For other notes use the NOTE knob, NOTE EDIT, a MIDI keyboard or the touchscreen. PAD OCT comes in 0.3.1.
+- **DSP SAMPLE picks its sample differently** from WAVETABLE and MULTISAMPLE: knob D of its SMPL page, not knob A of SRC. A later version may line them up.
+- **The pairing code's popup on the Rytm** may stay up after a key press on the Rytm's own screen; it ends by itself after 30 seconds.
+- The issues below, from 0.2.0 and 0.1.0, still apply unless fixed.
 
 ## Still in testing
 
@@ -62,8 +74,8 @@ In testing: nothing of the PSRAM path has run on PSRAM hardware yet. With one or
 - **The Rytm does not connect after many replugs** of the USB cable (the log says `Cannot set device address`): restart the Pi. A fix is planned.
 - **Wi-Fi is off** in the SD card package. Use a direct Ethernet cable for `sidecar.local`, or set up Wi-Fi yourself as in INSTALL-PI.md.
 - Ethernet has no DHCP client: the address is fixed (169.254.61.60), or set with `ip=` in `cmdline.txt`.
-- The web page has no password.
-- **Pi 5: no USB audio or MIDI to the computer.** Its USB-C port is power only in 0.2.0 (even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer). Use a Pi 4B for computer audio and MIDI.
+- The web page needs a paired browser since 0.3.0 (the code on the Rytm: SIDECAR MENU > WEB UI). The connection is plain HTTP: use a direct cable or a network you trust.
+- **Pi 5: no USB audio or MIDI to the computer.** Its USB-C port is power only (0.2.0 and 0.3.0; even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer). Use a Pi 4B for computer audio and MIDI.
 - **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 it names the Pi 4's own supply (`POWER TOO WEAK: use 15 W supply`).
 - **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
 - **Pi 5 DSI display:** in testing (built, not yet run on hardware). With no DSI panel answering, the Sidecar uses HDMI.

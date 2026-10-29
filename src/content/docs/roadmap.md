@@ -25,32 +25,43 @@ Finished and confirmed on real hardware.
 - **Computer audio on the Sidecar Mini:** stereo USB audio to the computer.
 - **Smaller NoisePlethora packages and slot reasons** (!ROOM, !CRSH, !TIME) on the Rytm.
 
-## Now: the road to 0.3.0
+## Released: 0.3.0
 
-Built and tested in the emulator and on the Mac; the hardware runs come next (see [What works now](/sidecar-expander/introduction/what-works-now/#next-the-03-test-line-sidecar-on-the-pi)). What is in the 0.3 test line:
+The early-tester release, with many new base features ([What works now](/sidecar-expander/introduction/what-works-now/#new-in-030), [Release notes](/sidecar-expander/release-notes/)):
 
-- **Poly tracks on every Sidecar machine:** the Sidecar's own sequencer on a Rytm track, with chords, 8 pages, trig conditions, p-locks and a piano roll on the touchscreen; a per-track **POLY CONFIG** (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD) in the Rytm's own track menu; seeded randomness.
-- **The sequencer's top 8:** direction, speed, scale and key, random notes with a modulatable seed, ratchets and arps, slides, the FX column.
-- **Poly per pattern and NOTE EDIT:** a track is poly in the patterns where you made it so; DATA walks and edits single notes, Push 3 style.
-- **Poly machines:** MULTISAMPLE, WAVETABLE and GRANULAR.
-- **MD:** one user machine with 30 Machinedrum-style drums.
-- **The recorder:** dated take names, a big buffer, a speed warning, recording to USB.
-- **UNDO REPLAY** for the song recorder, and the **RAM store** (instant saves, safe in a power cut).
-- **Pools and the sample library, project bundles, storage** (USB drives, NVMe on the Pi 5).
-- **Insert FX, FX buses and the OUT route** (stereo to the Rytm's main mix, before or after its master effects; UP + AMP).
-- **Sampler, auto-sampler and the song recorder.**
-- **The touchscreen** in two themes and two sizes (optional: everything also works from the Rytm's screen).
-- **UP as the Sidecar key**, the SIDECAR MENU, the KEYS page and the combo map.
+- **Poly tracks on every Sidecar machine:** the Sidecar's own sequencer on a Rytm track, per pattern, with chords, 8 pages, trig conditions, p-locks, NOTE EDIT, POLY CONFIG, seeded randomness and the sequencer's top 8 (direction, speed, scale and key, random notes, ratchets and arps, slides, the FX column).
+- **Poly machines:** MULTISAMPLE, WAVETABLE and GRANULAR. **MD** built in, in DIGIDRUM's place.
+- **Projects by the Rytm's slot** with a project trash; kits that follow SAVE and RELOAD; NO + KIT / PATTERN reload on the Sidecar pages.
+- **Pools and the sample library, project bundles, storage** (USB drives, NVMe on the Pi 5), the **RAM store** (instant saves, safe in a power cut).
+- **Insert FX, FX buses and the OUT route**; the sampler, the auto-sampler and the song recorder with UNDO REPLAY; the recorder with dated takes, a speed warning and recording to USB.
+- **The touchscreen** in two themes and two sizes (optional), **UP as the Sidecar key**, the SIDECAR MENU, the KEYS page and the combo map.
+- **The pairing code** for the web page, on by default; the crash note after an unexpected restart.
+- **Install with elekloader** on OS 1.73.
 
-The agreed order from here to 0.3.0:
+## Right after 0.3.0: the MD page
 
-1. **Hardware pass:** the current Rytm and Sidecar builds on a real Rytm, with a fixed test list (the UP combinations, pools, bundle export and import, poly tracks, the OUT view, storage speed, the trig LEDs) and the first stereo measurements.
-2. **Bug fixes before features:** whatever the hardware pass finds, plus the known ones (the Rytm freezing after a Pi brownout, red trig LEDs, files safe across a power cut).
-3. **Finish what is in flight:** **FREEZE** (an analog track auto-sampled into a multisample poly track, 2 round robins per note), last, once everything else works well. The rest of the sequencer's top 8 is built: [More sequencer pages](/sidecar-expander/using/sequencer/#more-sequencer-pages-direction-speed-scale-random-ratchets-slides-fx-column). <span class="sc-plan">in progress</span>
-4. **With the next Rytm firmware:** projects kept by slot with a project trash, kits that follow SAVE and RELOAD, NO + KIT / PATTERN reload on the Sidecar pages, remote keys for hardware testing, and the install with elekloader.
-5. **Release 0.3.0** to testers.
+A dedicated Rytm firmware update, before 0.3.1: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
 
-## After 0.3.0
+## Next: 0.3.1
+
+Planned, in no fixed order:
+
+- **The "Octa release":** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
+- **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
+- **PAD OCT:** a per-track octave for the CHRO pads, so a poly track's pads reach beyond C2..B5.
+- **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
+- **A MIDI machine:** a user machine that sends its track's notes and knobs out as MIDI (to a computer, a USB MIDI device or the Rytm's MIDI out), like Tonverk's.
+- **.elmulti instruments:** MULTISAMPLE loads Elektron's multisample format next to `.sfz`.
+- **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
+- **A NEON pass:** the Pi's vector unit on the heaviest engines and the mixer, for more voices and effects.
+- **Export to a USB stick** again, once the hang at its end is fixed.
+- **A touchscreen keyboard** for names (takes, samples, folders, pools, Rytm names).
+- **The pairing code, next steps:** a physical "allow pairing now" key, and a list of paired devices on the page.
+- **Clean-ups after the 0.3.0 fixes:** one way to pick a sample on every sample machine (DSP SAMPLE's SMP lined up with the others), no stalls while samples load into the pool, previewing a sample in the file browser (FUNC + PLAY) and a check that restarts the Sidecar's audio to the Rytm when it stays silent after a Pi restart.
+
+Research alongside: **DSP coprocessors** (a Daisy Seed first) as extra plugin targets.
+
+## After 0.3.1
 
 In order of value:
 
@@ -65,15 +76,14 @@ In order of value:
 Being finished and tested on hardware.
 
 - **Wi-Fi settings** (Pi, in testing): scan, connect and save from the web page, with a 90 s fallback; first setup without a cable with `sidecar-wifi.txt` at the card root; next, from the display.
-- **LFOs** (in testing): 8 per kit, with the DESIGN wave and the LFO page; in the 0.3 test line also on the inserts and the OUT route.
+- **LFOs** (in testing): 8 per kit, with the DESIGN wave and the LFO page; in 0.3.0 also on the inserts and the OUT route.
 - **Machine graphics and the sample waveform page** (in testing): the FM algorithm, the JUNO envelope, GRAIN's cloud, DSP SAMPLE's waveform with its markers.
-- **Pairing code and access control** for the web page, so a Sidecar on a shared network is not open to everyone.
 
-## Next
+## Designed
 
 Designed, with parts built.
 
-- **The machine catalogue.** Project bundles are in the 0.3 test line; next, a catalogue of machines and effects that finds what a shared project is missing.
+- **The machine catalogue.** Project bundles are in 0.3.0; next, a catalogue of machines and effects that finds what a shared project is missing.
 - **The Sidecar Manager / remote UI M2.** A Rytm menu item that turns on what management needs (Wi-Fi, the web server, file access) and turns it off again for performing; richer remote pages for the send FX, user machines and the sample browser.
 - **Borrow a voice for shared tracks.** The Rytm's paired tracks (RS/CP, MT/HT, CH/OH, CY/CB) share one analog voice and choke each other. A Sidecar voice could play one track of a pair, so both sound at once.
 - **User effects (UFX1..UFX4):** loadable send effects, per project, like user machines.
@@ -84,16 +94,10 @@ Designed, with parts built.
 
 Ideas we intend to build; not designed in detail yet.
 
-- **Signal flow:** configure the order of the Rytm's effects and the Sidecar's (inserts on the Sidecar's voices and the OUT route are in the 0.3 test line).
+- **Signal flow:** configure the order of the Rytm's effects and the Sidecar's (inserts on the Sidecar's voices and the OUT route are in 0.3.0).
 - **Touch slicing** on the Pi's display: waveform, slice markers, auditioning, auto-slice, for the Sidecar's sample machines; a SAMPLE and AUTO page on the touchscreen.
 - **A page designer** in the browser: lay out remote UI pages with widgets, bind parameters, preview at 128x64, export the page for a machine or plugin.
 - **One-click bundles over SysEx:** fetch and restore the Rytm project itself as part of a bundle.
 - **Remote pages in the browser:** the same pages the Rytm shows, on the web page.
 - **Performance features:** an arpeggiator, more LFO targets, beat repeat variations, more polyphony, master effects.
 - **More sampler tools:** resample in one click, sample chopping, larger sample banks.
-
-## Coming
-
-Ideas only, nothing built:
-
-- **Machinedrum-style user machines:** research, paused.

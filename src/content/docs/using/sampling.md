@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build), Sidecar (Pi) only. Built and tested on the Mac; first fixes after hardware reports are in; not yet confirmed on a real Rytm.
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Built and tested on the Mac; first fixes after hardware reports are in; not yet confirmed on a real Rytm.
 :::
 
 ## The sampler

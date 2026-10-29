@@ -8,7 +8,7 @@ sidebar:
 The Sidecar's two send effects take the Rytm's voices, each at its track's send level (AMPLITUDE 2, SFX1 and SFX2), and return the effect in stereo, wet only. How to reach the pages: [The SEND FX pages](/sidecar-expander/using/rytm-side/#the-send-fx-pages).
 
 :::caution[New in 0.3]
-In the 0.3 test line (Sidecar (Pi) only) the two send effects are FX buses 1 and 2 of the [insert FX](/sidecar-expander/using/insert-fx/): each has its own chain of two insert slots after the effect, and a third, dry bus joins them. Their TYPE, P1..P5 and the tracks' sends are unchanged, and a kit without insert settings sounds exactly as before. On a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), held trigs + **FX** lock P2..P5 of both effects per step. <span class="sc-test">in testing</span>
+In 0.3.0 (Sidecar (Pi) only) the two send effects are FX buses 1 and 2 of the [insert FX](/sidecar-expander/using/insert-fx/): each has its own chain of two insert slots after the effect, and a third, dry bus joins them. Their TYPE, P1..P5 and the tracks' sends are unchanged, and a kit without insert settings sounds exactly as before. On a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), held trigs + **FX** lock P2..P5 of both effects per step. <span class="sc-test">in testing</span>
 :::
 
 ## Common to every effect

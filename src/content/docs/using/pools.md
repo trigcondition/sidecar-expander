@@ -6,7 +6,7 @@ sidebar:
 ---
 
 :::caution[New in 0.3]
-New in 0.3 (until 0.3.0 is released: the test line, Rytm build `rui1048` with the Sidecar's 0.3 test build). Built and tested on the Mac and in the emulator; not yet run on a Pi or a real Rytm. Sidecar (Pi) only. The pools replace the per-machine source banks and the DSP SAMPLE pool of the earlier 0.3 test builds; projects made with those open with the template below.
+New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested on the Mac and in the emulator; not yet run on a Pi or a real Rytm. Sidecar (Pi) only. The pools replace the per-machine source banks and the DSP SAMPLE pool of the 0.3 test builds; projects made with those open with the template below.
 :::
 
 Every project has three **POOL** lists: the sounds its tracks pick from, in fixed rows. The Rytm's knob stores a row, never a file name, so a kit or a p-lock plays the same row whatever you load. <span class="sc-test">in testing</span>
@@ -157,7 +157,7 @@ After a boot the Sidecar reads its index (`/.rytm/library/`), walks the card's f
 
 ## Files
 
-The lists are per project: `/.rytm/projects/<project>/samples.pool.txt`, `wavetables.pool.txt`, `instruments.pool.txt`, and `pool-used.txt` (what was seen playing). They are written a moment after an edit. A list file from a newer Sidecar, or a damaged one, is **locked**: shown, never written over (`POOL LOCKED`). The pool files of the earlier 0.3 test builds stay on the card and are not read.
+The lists are per project: `/.rytm/projects/<project>/samples.pool.txt`, `wavetables.pool.txt`, `instruments.pool.txt`, and `pool-used.txt` (what was seen playing). They are written a moment after an edit. A list file from a newer Sidecar, or a damaged one, is **locked**: shown, never written over (`POOL LOCKED`). The pool files of the 0.3 test builds stay on the card and are not read.
 
 ## Limitations
 
