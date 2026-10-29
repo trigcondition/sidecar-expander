@@ -13,7 +13,7 @@
   {
    "file": "sidecar-rui1027d.json",
    "tag": "rui1027d",
-   "title": "rui1027d: Sidecar 0.1.0 mods + remote pages (default, recommended)",
+   "title": "rui1027d: Sidecar 0.1.0 / 0.2 mods + remote pages (older)",
    "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the LFO page (TRK + LFO), the REC page with playback and channel picking on the trig keys (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; the SRC view (the Sidecar machine's page on the Rytm's own SRC page); the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual.",
    "output": "Analog-Rytm_MKII_OS1.73_rui1027d.syx",
    "output_sha256": "4843848805c0e08b3cf7c69bf5b68ca7e1453bb643d351709bdad9f59468dce8",
