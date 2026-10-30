@@ -32,7 +32,7 @@ package (install like the starters):
 | Machine | What it is | Knobs (P1..P8 / P9..) | Voices | Based on |
 |---|---|---|---|---|
 | NUSAW | supersaw for pads and stabs: 7 detuned saws, sine sub, resonant filter with its own envelope | DETN MIX CUT RES ENV ATK REL SUB / TUN DEC SUS FDEC FSUS VEL LEV | 8 | [NuSaw](https://github.com/charlesvestal/schwung-nusaw) by Charles Vestal (MIT) |
-| VOX | a singing / speaking vocal tract: vowels, tongue and lips, consonant-like closures, breath, vibrato, glides | VOWL TONG CONS CDIA TENS BRTH VIBR NASL / ATK REL GLID WOBL VRAT VEL LEV | 4 (heavier) | [Pink Trombone](https://dood.al/pinktrombone/) by Neil Thapen (MIT) |
+| VOX | a singing / speaking vocal tract: vowels, tongue and lips, consonant-like closures, breath, vibrato, glides | VOWL TONG CONS CDIA TENS BRTH VIBR NASL / ATK REL GLID WOBL VRAT VEL LEV | 8 (about 2.3 % of a Pi 4 core each) | [Pink Trombone](https://dood.al/pinktrombone/) by Neil Thapen (MIT) |
 | HUSH1 | SH-101-style mono bass and lead: saw, pulse with PW, sub, noise, resonant filter, glide, VCA env / gate | SAW PULS PW SUB NOIS CUT RES ENV / ATK DEC SUS REL GLID TRK LEV VCA | 8 (glides on a mono track) | [schwung-hush1](https://github.com/charlesvestal/schwung-hush1) by Charles Vestal (MIT) |
 | RAFFO | four oscillators into a ladder filter: fat basses and leads, slides on overlapping trigs | WAV1 WAV2 DTN2 MIX SUB CUT RES ENV / ATK DEC SUS REL FDEC FSUS GLID LEV | 8 | [RaffoSynth](https://github.com/nicoroulet/RaffoSynth) by Nicolas Roulet and Julian Palladino, via [schwung-moog](https://github.com/charlesvestal/schwung-moog) (MIT) |
 
