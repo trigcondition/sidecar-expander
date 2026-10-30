@@ -104,10 +104,6 @@ SOFTWARE.
 
 RAFFO (plugins/raffo) is a port of charlesvestal/schwung-moog (4f1f658), based on nicoroulet/RaffoSynth (e2731c9), MIT:
 
-
-
-RAFFO (plugins/raffo) is a port of charlesvestal/schwung-moog (4f1f658), based on nicoroulet/RaffoSynth (e2731c9), MIT:
-
 MIT License
 
 Copyright (c) 2014 Nicolas Roulet
