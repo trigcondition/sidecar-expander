@@ -24,6 +24,21 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## New in 0.3.0: four more machines
+
+<span class="sc-test">in testing</span> (Mac renders; not yet played on a Pi). Ports of open-source instruments, each its own
+package (install like the starters):
+
+| Machine | What it is | Knobs (P1..P8 / P9..) | Voices | Based on |
+|---|---|---|---|---|
+| NUSAW | supersaw for pads and stabs: 7 detuned saws, sine sub, resonant filter with its own envelope | DETN MIX CUT RES ENV ATK REL SUB / TUN DEC SUS FDEC FSUS VEL LEV | 8 | [NuSaw](https://github.com/charlesvestal/schwung-nusaw) by Charles Vestal (MIT) |
+| VOX | a singing / speaking vocal tract: vowels, tongue and lips, consonant-like closures, breath, vibrato, glides | VOWL TONG CONS CDIA TENS BRTH VIBR NASL / ATK REL GLID WOBL VRAT VEL LEV | 4 (heavier) | [Pink Trombone](https://dood.al/pinktrombone/) by Neil Thapen (MIT) |
+| HUSH1 | SH-101-style mono bass and lead: saw, pulse with PW, sub, noise, resonant filter, glide, VCA env / gate | SAW PULS PW SUB NOIS CUT RES ENV / ATK DEC SUS REL GLID TRK LEV VCA | 8 (glides on a mono track) | [schwung-hush1](https://github.com/charlesvestal/schwung-hush1) by Charles Vestal (MIT) |
+| RAFFO | four oscillators into a ladder filter: fat basses and leads, slides on overlapping trigs | WAV1 WAV2 DTN2 MIX SUB CUT RES ENV / ATK DEC SUS REL FDEC FSUS GLID LEV | 8 | [RaffoSynth](https://github.com/nicoroulet/RaffoSynth) by Nicolas Roulet and Julian Palladino, via [schwung-moog](https://github.com/charlesvestal/schwung-moog) (MIT) |
+
+On a poly track they play chords (one instance a note); on a plain track HUSH1 and RAFFO glide like the originals.
+No LFOs of their own: use the Sidecar's LFOs on any knob.
+
 ## MD: Machinedrum-style drums
 
 <span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
