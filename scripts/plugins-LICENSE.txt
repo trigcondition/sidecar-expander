@@ -1,4 +1,5 @@
-Sidecar | Expander starter user machines (sc_acid, sc_wavepad, sc_metal, sc_snare, sc_pluck, sc_grain)
+Sidecar | Expander user machines (sc_acid, sc_wavepad, sc_metal, sc_snare, sc_pluck, sc_grain, nusaw, vox, hush1,
+raffo, mdk_md)
 
 MIT License
 
@@ -126,3 +127,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+MD (plugins/mdkit, mdk_md.a64.rmp): the drum voices are mdkit's (https://github.com/soejrd/mdkit, commit 96157fe),
+compiled unchanged (PI-CC, PI-HH, PI-RC with their delay memory windowed); used with the developer's agreement:
+
+  mdkit
+  Copyright (c) 2026 Soejrd
+  mdkit is made available under CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/).
+  CC0 covers the rights the contributors can dedicate; it does not grant rights to third-party names or materials.
+
+mdkit is an independent project, unaffiliated with or endorsed by Elektron. The glue (plugins/mdkit): MIT, as above.
