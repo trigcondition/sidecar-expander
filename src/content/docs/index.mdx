@@ -24,7 +24,6 @@ import piRecord from '../../assets/ui/pi-record.png';
 import piSound from '../../assets/ui/pi-sound.png';
 import piMachines from '../../assets/ui/pi-machines.png';
 import piLfo from '../../assets/ui/pi-lfo.png';
-import dispHome from '../../assets/ui/display-home-hidden.png';
 import seqMake from '../../assets/rytm/sc-seq-make.png';
 import seqHeld from '../../assets/rytm/sc-seq-held.png';
 import seqLock from '../../assets/rytm/sc-seq-lock-src.png';
@@ -50,6 +49,7 @@ import upMap from '../../assets/rytm/sc-up-map.png';
 import menuTop from '../../assets/rytm/sc-menu-top.png';
 import touchHome from '../../assets/touch/oled-home.png';
 import touchClassic from '../../assets/touch/classic-home.png';
+import touchStage from '../../assets/touch/oled-stage-home.png';
 import polyCfg from '../../assets/rytm/sc-poly-config.png';
 
 <div class="sc-hero">
@@ -126,7 +126,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
 <Feature flip kicker="Touchscreen (optional)" title="A screen of its own, if you want one" href="/sidecar-expander/using/display/" shots={[
   { src: touchHome, alt: 'The touchscreen home page in the OLED theme' },
   { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
-  { src: dispHome, alt: 'The 0.2.0 display home screen' },
+  { src: touchStage, alt: 'The touchscreen home page in the STAGE look' },
 ]}>
   <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In 0.3.0 it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
 </Feature>

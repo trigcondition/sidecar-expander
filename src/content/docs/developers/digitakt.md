@@ -1,19 +1,19 @@
 ---
 title: Experimenting with the Digitakt
-description: A starting point for developers (and their AI coding agents) who want to try Digitakt support on the 0.2.0 engine.
+description: A starting point for developers (and their AI coding agents) who want to try Digitakt support on the 0.3.0 engine.
 sidebar:
   order: 10
 ---
 
 :::caution[Experimental, not supported]
-Nothing on this page has been tried with a Digitakt yet. It is a map for developers who want to experiment, written against the **0.2.0** engine source. Anything marked **(to verify)** is not confirmed in that source: check it on your own device. None of the commands were run while this page was written.
+Nothing on this page has been tried with a Digitakt yet. It is a map for developers who want to experiment, written against the **0.3.0** engine source. Anything marked **(to verify)** is not confirmed in that source: check it on your own device. None of the commands were run while this page was written.
 :::
 
-**Getting the source.** The engine is public: [trigcondition/sidecar-firmware](https://github.com/trigcondition/sidecar-firmware). Work from the **`v0.2.0`** tag (`git clone https://github.com/trigcondition/sidecar-firmware && cd sidecar-firmware && git checkout -b digitakt v0.2.0`). File paths below are relative to that repository.
+**Getting the source.** The engine is public: [trigcondition/sidecar-firmware](https://github.com/trigcondition/sidecar-firmware). Work from the **`v0.3.0`** tag (`git clone https://github.com/trigcondition/sidecar-firmware && cd sidecar-firmware && git checkout -b digitakt v0.3.0`). File paths below are relative to that repository.
 
 ## 1. What the Sidecar is, and what "Digitakt support" can mean for now
 
-The Sidecar is a Raspberry Pi 4 (the 0.2.0 branch also builds for the Pi 5) running a
+The Sidecar is a Raspberry Pi 4 (the 0.3.0 branch also builds for the Pi 5) running a
 bare-metal program built on the Circle library (no Linux). It plugs into the drum machine's
 USB port and acts as its **USB host**. It speaks **Overbridge**, Elektron's multichannel audio
 over USB, and **USB MIDI**. It runs extra synth "machines" (Plaits, JUNO, 6-OP FM, DaisySP,
@@ -32,13 +32,13 @@ inputs.** No firmware changes and no Digitakt UI integration.
 
 ---
 
-## 2. Getting set up on v0.2.0
+## 2. Getting set up on v0.3.0
 
 ### Get the branch
 ```
 git clone https://github.com/trigcondition/sidecar-firmware
 cd sidecar-firmware
-git checkout -b digitakt v0.2.0      # your branch, starting at the 0.2.0 release
+git checkout -b digitakt v0.3.0      # your branch, starting at the 0.3.0 release
 ```
 
 ### Host tools (Mac)
@@ -82,7 +82,7 @@ Source: `docs/pi-engine.md`, "Build and run", and the scripts' own header commen
 - **SD card set (release style):** `pi/circle/make-sd-dual.sh` builds one FAT32 card set for the
   Pi 4 and the Pi 5 (`pi/circle/out/sidecar-sd/`, copied to the root of a FAT32 MBR card). It
   needs both kernels and `pi/circle/out/sdboot.img` (`pi/circle/build-sdboot.sh`) built from a
-  clean (not "dirty") tree. The ready-made 0.2.0 card set is on the
+  clean (not "dirty") tree. The ready-made 0.3.0 card set is on the
   [Raspberry Pi install page](/sidecar-expander/getting-started/install-pi/).
 - **Development loop (Pi 4):** `pi/engine/build.sh kernel && CIRCLE_TREE=circle-engine pi/circle/flash.sh ../engine 45`
   uploads the kernel into RAM over the serial cable and logs 45 s to `pi/circle/out/`. The SD
@@ -95,7 +95,7 @@ Source: `docs/pi-engine.md`, "Build and run", and the scripts' own header commen
 
 ### Hardware
 - Raspberry Pi 4B (the docs' measurements use a 4 GB board) with the **official 15 W (5.1 V 3 A)
-  supply**. The 0.2.0 engine warns on screen and on the web page when the supply is too weak.
+  supply**. The 0.3.0 engine warns on screen and on the web page when the supply is too weak.
   The Pi 5 build also runs, but it has no `sdboot`/`flash.sh` yet (`docs/pi5.md`).
 - A microSD card (FAT32, MBR).
 - A 3.3 V USB-to-serial adapter for the console and flashing: GND to pin 6, adapter RX to pin 8
@@ -171,7 +171,7 @@ What it gives you for this experiment:
 - the Digitakt's screen and keys on your Mac, to set up MIDI tracks and see what the OS does;
 - virtual USB MIDI ports (`rytm-emu usb in/out`), so a host on the Mac can receive the
   Digitakt's MIDI notes (Stage C) without hardware;
-- the Sidecar engine's emulator link: the 0.2.0 engine can use an emulator over the network
+- the Sidecar engine's emulator link: the 0.3.0 engine can use an emulator over the network
   instead of USB (`link=tcp`, `emuhost=` in `cmdline.txt`; see `pi/engine/kernel.cpp`), and the
   emulator serves the host->device Overbridge stream with `--ob-link`. Both are built around the
   Rytm's 12-channel stream: whether they work in Digitakt mode is **(to verify)**. Extending the
@@ -310,7 +310,7 @@ involves, but none of it applies to a Digitakt as it is.
 
 ```
 You are helping me experiment with Elektron Digitakt support in the "Sidecar", a bare-metal
-Raspberry Pi 4 (Circle) USB host for Elektron drum machines. The source is github.com/trigcondition/sidecar-firmware; work on a branch from the v0.2.0 tag. Read the page "Experimenting with the Digitakt" on the Sidecar docs site
+Raspberry Pi 4 (Circle) USB host for Elektron drum machines. The source is github.com/trigcondition/sidecar-firmware; work on a branch from the v0.3.0 tag. Read the page "Experimenting with the Digitakt" on the Sidecar docs site
 (developers section) first, then docs/research-rytm-usb.md,
 docs/pi-engine.md, docs/core.md, teensy/libraries/RytmHost/ob_block.h, pi/engine/ob_usb.cpp,
 pi/engine/output.h and core/notes.h. Treat anything marked "(to verify)" as unknown.
