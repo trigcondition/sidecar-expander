@@ -12,9 +12,12 @@ It needs the **Rytm firmware 0.3.0**, made in the browser patcher (or with elekl
 | Part | File |
 |---|---|
 | Rytm firmware | `core-0.1.elemod` + `rytm-sidecar-0.3.0.elemod` (elekloader, OS 1.73, GPL-2.0-or-later). Build the `.syx` from your stock OS 1.73 file on the elekloader page with the version set to 1.73; the result's SHA-256 is `893ed9a5fc27ab18687c1ea95d7a07f4ff4b23fde235173ce332e54055a733ab` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share the built `.syx`: it holds Elektron's firmware |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | two SD card zips: one for **800x480** displays (and DSI or no display), one for **1024x600** HDMI displays such as the GeeekPi 7" (EP-0194). Copy one zip's contents to a FAT32 card; it boots the Pi 4B and the Pi 5 ([Install](/sidecar-expander/getting-started/install-pi/)) |
-| Starter user machines and content | as in 0.2.0 |
-| Checksums | `SHA256SUMS` |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | two SD card zips: `sidecar-pi-sd-a5733aa-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-a5733aa-1024x600.zip` for **1024x600** HDMI displays such as the GeeekPi 7" (EP-0194), each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels. Copy one zip's contents to a FAT32 card; it boots the Pi 4B and the Pi 5 ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.3.0.zip`: the six starters (ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN) and, new, NUSAW, VOX, HUSH1, RAFFO and MD as `.a64.rmp` |
+| Starter content | `sidecar-content-0.3.0.zip`: the same patches as 0.2.0 (also on the card) |
+| Checksums | `SHA256SUMS` on each release page |
+
+Downloads: the Sidecar (Pi) files on the [sidecar-firmware 0.3.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.0), the Rytm firmware (the two `.elemod` files with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and elekloader's source) on the [sidecar-mods 0.3.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.0). 0.1.0 and 0.2.0 stay on the [sidecar-expander releases](https://github.com/trigcondition/sidecar-expander/releases).
 
 ### Upgrading from 0.2.0
 

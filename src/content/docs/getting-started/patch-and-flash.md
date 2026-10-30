@@ -23,7 +23,7 @@ The 0.3.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 | `core-0.1.elemod` | elekloader's core 0.1 for the Rytm: the base every elekloader mod builds on | `33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825` |
 | `rytm-sidecar-0.3.0.elemod` | the Sidecar mods, all in one module | `e93a0b2794a8316dad1d6cfe52151820e153d6f86427d12343a5f947cae0c28a` |
 
-The two `.elemod` files are on the release page with `SHA256SUMS`, `LICENSE`, `NOTICE` and the source of elekloader's parts. Check both hashes before you use them. The mods are licensed **GPL-2.0-or-later**.
+The two `.elemod` files are on the [Rytm firmware 0.3.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.0) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (`elekloader-8972d70-core-ar2-src.tar.gz`, `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. The mods are licensed **GPL-2.0-or-later**.
 
 ### Build the `.syx`
 

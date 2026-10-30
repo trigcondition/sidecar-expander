@@ -4,7 +4,7 @@
 
 Sidecar adds digital voices and send effects to the Analog Rytm MKII. A small computer sits on the Rytm's USB port: **Sidecar Mini** on a Teensy 4.1, or the full **Sidecar** on a Raspberry Pi 4B or Pi 5. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.2.0** (Rytm build `rui1027d`): one SD card for the Raspberry Pi 4B and the Pi 5 ([release notes](RELEASE-NOTES.md)); Sidecar Mini stays at 0.1.0. **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
+> **Sidecar 0.3.0** (Rytm firmware 0.3.0, an elekloader module): an early-tester release for the Raspberry Pi 4B and the Pi 5 ([release notes](RELEASE-NOTES.md)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.0) and the [Rytm firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.0). Sidecar Mini stays at 0.1.0. **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 >
