@@ -72,7 +72,7 @@ grep -qx 'sdport=0' "$here/dist/pi/sd/cmdline.txt" || { echo "cmdline.txt is not
 # Pi 4 and the Pi 5), next to the card set
 out="$here/dist/pi/plugins"
 mkdir -p "$out"
-for p in sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain; do
+for p in sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw; do
   rm -f "$wt/plugins/$p/$p.a64.rmp" "$wt/plugins/$p/$p.a64.elf"
   make -C "$wt/plugins/$p" a64 PY=python3 >/dev/null
   [ "$(head -c 4 "$wt/plugins/$p/$p.a64.rmp")" = RMPA ] || { echo "$p.a64.rmp is not an RMPA package"; exit 1; }
