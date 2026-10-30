@@ -56,6 +56,18 @@ A sample is held whole in memory, up to 87 seconds (a longer one: its first 87 s
 
 **UNDO** takes back the last edit (one level; UNDO again brings it back).
 
+## Lazy chopping, step by step
+
+Lazy chopping: you tap along while the sample plays, and every tap becomes a slice. All on the Rytm, no touchscreen needed:
+
+1. On the CHOP track, open the **SRC** page and **push any of the encoders B..H**: the slice editor opens (A's push opens the source list instead).
+2. **Push G (LAZY).** The sample starts playing from its beginning.
+3. **Tap in time** wherever you hear a slice begin: the **pads**, the **trig keys** or **T1..T16** all work. Each tap drops a marker.
+4. Tapped one wrong? **Push D** takes back the last marker.
+5. **YES** keeps the markers as the slices; **NO** throws them away. (Pushing G again also stops.)
+
+Then check the result: **YES** plays the selected slice, **LEFT / RIGHT** step through them. A marker that is slightly off: move it with **STRT / END** (with **FUNC** held, one sample frame at a time). On the touchscreen the same works with the **LAZY** key and a tap on the pads.
+
 ## The slice editor on the Rytm
 
 On CHOP's SRC page, **push encoder B..H** (A's push stays the source list). The editor shows the selected slice and its neighbours with the markers. **PAGE** steps through three views:
