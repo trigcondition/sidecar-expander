@@ -2,16 +2,20 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.3.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.0, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3.0 is an early-tester release. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.3.1 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.1, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.3.1
+
+- **Uploading plugins or a rescan while playing can still cause short dropouts.** The scan of `/Plugins` still runs on the control core. Do it while the sequencer is stopped.
 
 ## New in 0.3.0
 
-- **The Rytm shows DIGIDRUM's page for MD**, with 11 drum types on knob 1. MD's own page (ENGINE, TYPE, all 30 types) comes with the next Rytm firmware, right after 0.3.0. Meanwhile the MD user machine in a U slot shows the full page.
+- **The Rytm shows DIGIDRUM's page for MD**, with 11 drum types on knob 1. MD's own page (ENGINE, TYPE, all 30 types) comes with a later Rytm firmware. Meanwhile the MD user machine in a U slot shows the full page.
 - **Export to a USB stick is off.** The end of a stick export hung the Pi in a test. Export to the card, then copy the bundle to the stick yourself. Import from a stick works.
 - **The Sidecar's audio to the Rytm stayed silent after a Pi restart**, once (the Rytm's audio still reached the Pi). Restart the Rytm. A fix that notices and restarts it is planned.
 - **The Rytm's screen froze twice** on an earlier release candidate, after bursts of key and pad presses (REMOTE KEYS, now left out, is the main suspect). The release firmware has a freeze probe: if the screen stops for over 2 seconds, the Sidecar's log says `FREEZE PROBE` and where. Please report it with the log.
 - **Pi 5 HDMI:** the picture is scaled to 1920x1080, so it is slightly soft.
-- **The pads reach C2..B5** in CHRO mode (UP / DOWN move them 4 semitones a press). For other notes use the NOTE knob, NOTE EDIT, a MIDI keyboard or the touchscreen. PAD OCT comes in 0.3.1.
+- **The pads reach C2..B5** in CHRO mode (UP / DOWN move them 4 semitones a press). For other notes use the NOTE knob, NOTE EDIT, a MIDI keyboard or the touchscreen. PAD OCT is planned.
 - **DSP SAMPLE picks its sample differently** from WAVETABLE and MULTISAMPLE: knob D of its SMPL page, not knob A of SRC. A later version may line them up.
 - **The pairing code's popup on the Rytm** may stay up after a key press on the Rytm's own screen; it ends by itself after 30 seconds.
 - The issues below, from 0.2.0 and 0.1.0, still apply unless fixed.

@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.3.0**: the Sidecar 0.3.0 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.0 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
+This is **Sidecar 0.3.1**, a fix release of 0.3.0: the Sidecar 0.3.1 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -80,6 +80,14 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
 | **Pi 5:** USB audio and MIDI to the computer | not in 0.2.0 (USB-C is power only on the Pi 5) |
 
+## New in 0.3.1
+
+| Fix | Status |
+|---|---|
+| No dropouts when loading user machines, presets and multisamples (the card work moved off the control core) | <span class="sc-ok">hardware</span> |
+| [The black box](/sidecar-expander/using/troubleshooting/#the-black-box): the whole log on the card | <span class="sc-ok">hardware</span> |
+| Send FX follow a kit switch at once (Rytm firmware 0.3.1) | <span class="sc-test">in testing</span> (emulator) |
+
 ## New in 0.3.0
 
 Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on the Rytm's screen too. Most of it is built and tested in the emulator and on the Mac; the sequencer, NOTE EDIT, poly tracks per pattern, the RAM store and the touchscreen's OLED theme have been used on a real Rytm with a Pi 4. The newest parts are being checked with the 0.3.0 release.
@@ -106,7 +114,7 @@ Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on th
 | Poly mode: [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit), Push 3 style: DATA walks the notes, A..E edit, select, delete, undo, a scrolling pitch window | <span class="sc-ok">hardware</span> (first round; the new screen is being checked) |
 | Poly SEQ page: YES goes to the Rytm (YES + PLAY / YES + SCENE quick saves), UP / DOWN are the Rytm's (the CHRO pads' range, C2..B5), FUNC + DOWN opens the track menu, FUNC then YES is UNDO; the poly SEQ, UP + FX, UP + AMP and UP + LFO pages replace the Rytm's page like SRC (no LEFT / RIGHT siblings) | <span class="sc-test">in testing</span> (Mac, emulator; being checked on the Rytm with 0.3.0) |
 | [MD](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums) as a user machine: 30 drums, ENGINE (FM / PI / TRX) and TYPE on the SMPL page, names that follow, click-free per-step locks | <span class="sc-test">in testing</span> (its three earlier machines played on hardware) |
-| [MD built in](/sidecar-expander/using/machines/#md), in DIGIDRUM's place (DIGIDRUM is gone): old DIGIDRUM tracks play MD; the drum type on knob 1, 11 types from the Rytm until the next Rytm firmware brings MD's own page | <span class="sc-test">in testing</span> |
+| [MD built in](/sidecar-expander/using/machines/#md), in DIGIDRUM's place (DIGIDRUM is gone): old DIGIDRUM tracks play MD; the drum type on knob 1, 11 types from the Rytm until a later Rytm firmware brings MD's own page | <span class="sc-test">in testing</span> |
 | [The recorder](/sidecar-expander/using/recorder/): take names with the date (`<project>_<YYYY-MM-DD_HHMM>`, clock set by the web page), date columns and sorting, a scrollable touchscreen list, a big buffer, space reserved up front, a speed warning, recording to a USB drive | <span class="sc-test">in testing</span> (Mac; the all-channel take on a Pi is the next check) |
 | [Song recorder](/sidecar-expander/using/song-recorder/#undo-a-replay): UNDO REPLAY | <span class="sc-test">in testing</span> (Mac, emulator) |
 | [The RAM store](/sidecar-expander/using/storage/#saves-are-instant-and-safe-in-a-power-cut): no card access on kit and pattern changes, instant saves, a power cut keeps the last whole file | <span class="sc-ok">hardware</span> (2026-10-26) |
@@ -130,6 +138,6 @@ Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on th
 | [After an unexpected restart](/sidecar-expander/using/troubleshooting/#after-an-unexpected-restart) the Pi writes why to `/.rytm/prevboot.txt`; the Rytm firmware reports a stuck screen (freeze probe) | <span class="sc-test">in testing</span> |
 | One card for the Pi 4B and the Pi 5, two card zips (800x480, 1024x600) | <span class="sc-test">in testing</span> |
 
-Not in 0.3.0: REMOTE KEYS (a development build only) and FREEZE (moved to 0.3.1). The Rytm MIDI bridge is in, off by default, for developers.
+Not in 0.3.0: REMOTE KEYS (a development build only) and FREEZE (planned). The Rytm MIDI bridge is in, off by default, for developers.
 
 For what does not work yet, see [Troubleshooting and known issues](/sidecar-expander/using/troubleshooting/).

@@ -77,7 +77,7 @@ In CHRO mode the Rytm's 12 pads play 12 semitones. **UP / DOWN** move them **4 s
 | the default | C4 .. B4 |
 | highest (UP 3 times) | C5 .. B5 |
 
-So the pads reach **C2 .. B5**. For notes outside that range, use the NOTE knob under a held trig, NOTE EDIT, a MIDI keyboard or the touchscreen's piano roll. A per-track octave shift for the pads (PAD OCT) is planned for 0.3.1.
+So the pads reach **C2 .. B5**. For notes outside that range, use the NOTE knob under a held trig, NOTE EDIT, a MIDI keyboard or the touchscreen's piano roll. A per-track octave shift for the pads (PAD OCT) is planned.
 
 ![The poly track's menu: LT: POLY TRACK, BACK TO THE SEQ, TURN OFF (STEPS KEPT), LENGTH (KNOB C), QUANTISE (KNOB D)](../../../assets/rytm/sc-seq-menu.png)
 ![The turn-off prompt: LT: POLY TRACK OFF? ITS STEPS STAY SAVED. B UP: BACK ON. YES: TURN OFF, NO: KEEP](../../../assets/rytm/sc-seq-off.png)
@@ -409,9 +409,9 @@ TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds
 
 Not built: changing the speed in the middle of a pattern.
 
-## Coming in 0.3.1
+## Coming later
 
-<span class="sc-plan">planned</span> Not in 0.3.0:
+<span class="sc-plan">planned</span> Not in 0.3:
 
 **FREEZE** turns an analog track into a poly track: the auto-sampler samples the track's current sound over a range of notes, **2 round robins per note**, writes a multisample, and the track becomes a MULTISAMPLE poly track with it. The kit's analog sound stays as it was, so the track can go back. A quick way to play an analog sound polyphonically, not a replacement: locks and LFOs on the analog sound's own parameters are baked in.
 

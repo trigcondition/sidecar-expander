@@ -50,9 +50,18 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 - Attach the file to your report. It holds the log's lines (project and sample names can be in it), never a password or a pairing code.
 - After a power cut there is no note: the Pi's memory is lost with the power. A planned restart (an install, a setting) keeps the last crash's note.
 
+## The black box
+
+<span class="sc-test">in testing</span> New in 0.3.1. The Pi writes its whole log to the card as it runs, so the last seconds before a crash, a restart or a dropped Rytm link are still there afterwards, also after a power cut (only the last seconds can be missing).
+
+- The files are **`/.rytm/blackbox.log`** and, older, **`/.rytm/blackbox.1.log`**, up to 8 MB each, about 2 hours of log a file.
+- To send it: switch the Pi off soon after the problem, take the card out and copy both files on a computer (the `.rytm` folder is hidden: show hidden files). Attach them to your report, zipped if they are too large, and say at about what time it happened.
+- It holds the log's lines (project and sample names can be in it), never a password or a pairing code.
+- Tools paired with the Sidecar can read it over the network: [`GET /blackbox`](/sidecar-expander/using/web-ui/#the-black-box).
+
 ## Known issues
 
-The 0.3.0 release's own list is in the [release notes](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 
@@ -67,6 +76,7 @@ The 0.3.0 release's own list is in the [release notes](/sidecar-expander/release
 
 ### Raspberry Pi 4B and Pi 5
 
+- **Uploading plugins or a rescan while playing can still cause short dropouts.** The scan of `/Plugins` still runs on the control core. Do it while the sequencer is stopped.
 - **The Rytm does not connect after many replugs** (the log says `Cannot set device address`): restart the Pi. A fix is planned.
 
 - Wi-Fi is off in the SD card package (see the install page to turn it on); Ethernet has no DHCP client (fixed 169.254.61.60, or `ip=`).
@@ -91,10 +101,11 @@ Results from testers are welcome:
 
 ## Reporting
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm firmware (0.3.0, or `rui1027d` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. What helps most:
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the Rytm firmware (0.3.1, 0.3.0, or `rui1027d` / `sfx1021`), the Sidecar build (from `BUILD-INFO`), what you did and what happened. What helps most:
 
 - **The steps:** what you pressed, in order, and what you expected. Whether it happens again.
 - **`/status`:** open `http://sidecar.local/status` and save the page right after the problem (no pairing needed). It has the counters (underruns, temperature, the storage, the recorder).
 - **The log:** `http://sidecar.local/log`, also open without pairing. It holds about the last 25 seconds: save it soon after the problem.
+- **After a crash or a dropped Rytm link:** the black box from the card ([above](#the-black-box)).
 - **After a restart by itself:** `/.rytm/prevboot.txt` from the card ([above](#after-an-unexpected-restart)).
 - **If the Rytm's screen froze:** the Rytm firmware 0.3.0 reports where its screen got stuck. The Sidecar's log then has a line with `FREEZE PROBE`: save the log at once.

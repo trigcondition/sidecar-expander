@@ -43,7 +43,7 @@ No LFOs of their own: use the Sidecar's LFOs on any knob.
 
 <span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
 
-MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.3.0 the built-in MD shows only DIGIDRUM's old page (11 types on knob 1); the MD user machine in a U slot shows MD's full page below, with all 30 types, until the next Rytm firmware gives the built-in MD the same page.
+MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.3.1 the built-in MD shows only DIGIDRUM's old page (11 types on knob 1); the MD user machine in a U slot shows MD's full page below, with all 30 types, until the next Rytm firmware gives the built-in MD the same page.
 
 | Knob | Page | |
 |---|---|---|

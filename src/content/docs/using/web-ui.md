@@ -47,6 +47,10 @@ On the web page, the Status tab's **Access** has **Forget this device** and **Fo
 - Pairing is protection against people on the same network, not against someone holding the SD card. The connection is plain HTTP: on a network you do not trust, pair the devices you need beforehand, or use a direct cable.
 - **Development cards only:** `paircode=0` in `cmdline.txt` turns the pairing off. The Sidecar then warns at every start, once a minute in the log and on the STATUS page. Never use it on a card you share or take on stage.
 
+## The black box
+
+New in 0.3.1. `GET /blackbox` returns the [black box](/sidecar-expander/using/troubleshooting/#the-black-box), for paired clients only: a browser tab cannot open it, a tool sends its token in the `X-Sidecar-Auth` header. It gives up to 64 KB a request: the last 64 KB, or from byte N with `?off=N`; `?old=1` reads the older file. The first line is `SIZE FROM`: the file's size and where this piece starts. The simplest way for a report is the card: [send the black box](/sidecar-expander/using/troubleshooting/#the-black-box).
+
 ## The tabs
 
 | Tab | What |

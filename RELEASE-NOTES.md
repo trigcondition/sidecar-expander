@@ -2,6 +2,39 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.3.1
+
+**A fix release for 0.3.0.** It goes with the **Rytm firmware 0.3.1**. Sidecar (Pi) only: Sidecar Mini stays at 0.1.0.
+
+| Part | File |
+|---|---|
+| Rytm firmware | `core-0.1.elemod` + `rytm-sidecar-0.3.1.elemod` (elekloader, OS 1.73, GPL-2.0-or-later), or build `rel0-3-1` in the browser patcher. Both give one `.syx` with SHA-256 `a203db27201aabbdaa285ccb7c40a168075206c0ce91477671fcfae729c3df3c` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share the built `.syx`: it holds Elektron's firmware |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-82566ee-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-82566ee-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.3.1.zip`: the same machines as 0.3.0 |
+| Starter content | `sidecar-content-0.3.1.zip`: the same patches as 0.3.0 (also on the card) |
+| Checksums | `SHA256SUMS` on each release page |
+
+Downloads: the [sidecar-firmware 0.3.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.1) (the Pi) and the [sidecar-mods 0.3.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1) (the Rytm firmware).
+
+### Upgrading from 0.3.0
+
+1. Back up your Rytm projects with Transfer.
+2. Build and flash the Rytm firmware 0.3.1 ([Patch and flash](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)).
+3. Copy the new card files over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
+
+From 0.2.0, follow [Upgrading from 0.2.0](#upgrading-from-020) below with the 0.3.1 files.
+
+### Fixed in 0.3.1
+
+- **Dropouts when loading user machines, presets and multisamples.** This card work ran on the control core, which then missed its deadlines. It now runs on the core that owns the card. Switching kits, machines and multisamples no longer drops out.
+- **Send FX after a kit switch.** After a pattern on another kit, a track kept the old kit's send FX values until its next trig, and a track with no trigs kept them for good. Each track now follows the new kit at once. This fix is in the Rytm firmware.
+- **The black box.** The Pi now writes its whole log to the card, `/.rytm/blackbox.log`, so the last seconds before a crash or a dropped Rytm link are still there afterwards. Please send it when you report a crash ([The black box](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/#the-black-box)). Paired clients can read it with `GET /blackbox`.
+
+### Known issues in 0.3.1
+
+- **Uploading plugins or a rescan while playing can still cause short dropouts.** The scan of `/Plugins` still runs on the control core. Do it while the sequencer is stopped.
+- Everything in [Known issues in 0.3.0](#known-issues-in-030) still applies.
+
 ## Sidecar 0.3.0
 
 **Sidecar 0.3.0 is an early-tester release.** It brings many new base features at once: poly tracks with the Sidecar's own sequencer, new machines, projects kept by the Rytm's slot, pools, bundles, inserts, a sampler, a song recorder, a pairing code for the web page and more. Most of it is tested in the emulator and on the Mac; a part of it has run on a real Rytm with a Pi 4 (see [What works now](https://trigcondition.github.io/sidecar-expander/introduction/what-works-now/#new-in-030)). **Your feedback is what we need most**: what works, what does not, what feels clumsy ([how to report](#how-to-report)).
@@ -33,7 +66,7 @@ Downloads: the Sidecar (Pi) files on the [sidecar-firmware 0.3.0 release](https:
 - **NOTE EDIT:** turn DATA to walk the notes, A..E edit the one in focus, which always stays in view; select, delete, undo. TURN OFF closes the poly page at once; making the track poly again asks **RESTORE n NOTES?**
 - **The poly SEQ page's keys:** UP / DOWN are the Rytm's (the CHRO pads' range: 4 semitones a press, C2..B5), **FUNC + DOWN** opens the track menu, **FUNC then YES** is UNDO, YES + PLAY / YES + SCENE quick saves reach the Rytm. The poly SEQ, UP + FX, UP + AMP and UP + LFO pages replace the Rytm's page. The Rytm-screen keyboards name each octave's C.
 - **Poly machines** MULTISAMPLE, WAVETABLE, GRANULAR ([Poly machines](https://trigcondition.github.io/sidecar-expander/using/poly-machines/)); very short MULTISAMPLE trigs always sound.
-- **MD built in**, in DIGIDRUM's place: DIGIDRUM is gone, and its tracks play MD. From the Rytm, 11 drum types on knob 1 until the next Rytm firmware brings MD's own page with all 30; the MD user machine in a U slot already shows the full page ([MD](https://trigcondition.github.io/sidecar-expander/using/machines/#md)).
+- **MD built in**, in DIGIDRUM's place: DIGIDRUM is gone, and its tracks play MD. From the Rytm, 11 drum types on knob 1 until a later Rytm firmware brings MD's own page with all 30; the MD user machine in a U slot already shows the full page ([MD](https://trigcondition.github.io/sidecar-expander/using/machines/#md)).
 - **CHOP**, a new machine: one sample cut into up to 64 slices (GRID, TRANSIENT, LAZY tapping, by hand), played from the trigs, the CHRO pads and poly tracks, with a slice editor on the Rytm and the touchscreen ([CHOP](https://trigcondition.github.io/sidecar-expander/using/chop/)).
 - **Four new user machines:** NUSAW (supersaw), VOX (a singing vocal tract), HUSH1 (SH-101-style mono) and RAFFO (four oscillators into a ladder filter), in the plugins zip ([User machines](/sidecar-expander/using/user-machines/)).
 - **DSP SAMPLE** picks its sample with SMP (knob D of its SMPL page); FUNC + YES on its SRC page opens the browser.
@@ -59,28 +92,29 @@ Downloads: the Sidecar (Pi) files on the [sidecar-firmware 0.3.0 release](https:
 - **The crash note:** after an unexpected restart the Pi writes why to `/.rytm/prevboot.txt` on the card, for bug reports ([After an unexpected restart](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/#after-an-unexpected-restart)). The Rytm firmware reports a stuck screen (the freeze probe) in the Sidecar's log.
 - **Pi 5:** the same card boots the Pi 4B and the Pi 5; the Pi 5's HDMI picture is scaled.
 
-**Not in 0.3.0:** REMOTE KEYS (a development build only); FREEZE (0.3.1). The Rytm MIDI bridge is in, off by default, for development.
+**Not in 0.3.0:** REMOTE KEYS (a development build only); FREEZE (planned). The Rytm MIDI bridge is in, off by default, for development.
 
 ### Known issues in 0.3.0
 
-- **The Rytm shows DIGIDRUM's page for MD**, with 11 drum types on knob 1. MD's own page (ENGINE, TYPE, all 30 types) comes with the next Rytm firmware, right after 0.3.0. Meanwhile the MD user machine in a U slot shows the full page.
+- **The Rytm shows DIGIDRUM's page for MD**, with 11 drum types on knob 1. MD's own page (ENGINE, TYPE, all 30 types) comes with a later Rytm firmware. Meanwhile the MD user machine in a U slot shows the full page.
 - **Export to a USB stick is off.** The end of a stick export hung the Pi in a test. Export to the card, then copy the bundle to the stick yourself. Import from a stick works.
 - **The Sidecar's audio to the Rytm stayed silent after a Pi restart**, once (the Rytm's audio still reached the Pi). Restart the Rytm. A fix that notices and restarts it is planned.
 - **The Rytm's screen froze twice** on an earlier release candidate, after bursts of key and pad presses (REMOTE KEYS, now left out, is the main suspect). The release firmware has a freeze probe: if the screen stops for over 2 seconds, the Sidecar's log says `FREEZE PROBE` and where. Please report it with the log.
 - **Pi 5 HDMI:** the picture is scaled to 1920x1080, so it is slightly soft.
-- **The pads reach C2..B5** in CHRO mode (UP / DOWN move them 4 semitones a press). For other notes use the NOTE knob, NOTE EDIT, a MIDI keyboard or the touchscreen. PAD OCT comes in 0.3.1.
+- **The pads reach C2..B5** in CHRO mode (UP / DOWN move them 4 semitones a press). For other notes use the NOTE knob, NOTE EDIT, a MIDI keyboard or the touchscreen. PAD OCT is planned.
 - **DSP SAMPLE picks its sample differently** from WAVETABLE and MULTISAMPLE: knob D of its SMPL page, not knob A of SRC. A later version may line them up.
 - **The pairing code's popup on the Rytm** may stay up after a key press on the Rytm's own screen; it ends by itself after 30 seconds.
 - Everything from the 0.2.0 and 0.1.0 known issues that is not fixed still applies: see [Troubleshooting and known issues](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/).
 
 ### How to report
 
-Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). Name the Rytm firmware (0.3.0) and the Sidecar build (`BUILD-INFO-pi.txt`), and add:
+Use the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). Name the Rytm firmware (0.3.1) and the Sidecar build (`BUILD-INFO-pi.txt`), and add:
 
 - **the steps:** what you pressed, in order, what you expected and what happened; whether it happens again;
 - **`/status`:** save `http://sidecar.local/status` right after the problem (open without pairing);
 - **the log:** `http://sidecar.local/log`, saved soon after (it holds the last half minute or so);
 - **after a restart by itself:** `/.rytm/prevboot.txt` from the card.
+- **after a crash or a dropped Rytm link:** `/.rytm/blackbox.log` from the card ([The black box](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/#the-black-box)).
 
 See [Troubleshooting](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/#reporting).
 

@@ -12,12 +12,12 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
-- From the [Sidecar 0.3.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.0): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.3.0.zip` (the user machines) and `sidecar-content-0.3.0.zip` (the starter content, also on the card). The Rytm firmware is on the [Rytm firmware 0.3.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
+- From the [Sidecar 0.3.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.1): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.3.1.zip` (the user machines) and `sidecar-content-0.3.1.zip` (the starter content, also on the card). The Rytm firmware is on the [Rytm firmware 0.3.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
 | Card zip | For |
 |---|---|
-| `sidecar-pi-sd-a5733aa-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
-| `sidecar-pi-sd-a5733aa-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+| `sidecar-pi-sd-82566ee-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
+| `sidecar-pi-sd-82566ee-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
 
 Each zip also has its own `.sha256`; `BUILD-INFO-pi.txt` names the commit, both kernels and each card's `config.txt`.
 
@@ -128,13 +128,13 @@ The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1`
 
 ## Starter content
 
-The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.3.0.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.0): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
+The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.3.1.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.1): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
 
 On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-0.3.0.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT) and `mdk_md.a64.rmp` (MD: mdkit, CC0 1.0). Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
+The release's `sidecar-pi-plugins-0.3.1.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT) and `mdk_md.a64.rmp` (MD: mdkit, CC0 1.0). Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 
@@ -142,7 +142,7 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
-| 0.3.0 release | the Rytm firmware 0.3.0 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.3.0 SD card | **UP + YES** (TRK + YES still works) |
+| 0.3.1 release | the Rytm firmware 0.3.1 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.3.1 SD card | **UP + YES** (TRK + YES still works) |
 | 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
 
 With a kernel older than 1021 the pages open without any text. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.

@@ -1,6 +1,6 @@
 ---
 title: Patch and flash the Rytm
-description: "Sidecar 0.3.0: build the Rytm firmware from your own stock OS 1.73 file with elekloader (core 0.1 + rytm-sidecar-0.3.0.elemod), check it, and send it to the Rytm. The 0.2.0 builds: the patcher."
+description: "Sidecar 0.3.1: build the Rytm firmware from your own stock OS 1.73 file with elekloader (core 0.1 + rytm-sidecar-0.3.1.elemod) or the patcher, check it, and send it to the Rytm. The 0.2.0 builds: the patcher."
 sidebar:
   order: 3
 ---
@@ -11,9 +11,9 @@ The Rytm side of Sidecar is a set of mods to the Rytm's OS 1.73. We do not distr
 Back up first: use Transfer to back up your projects, kits, sounds and samples. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you flash.
 :::
 
-## Sidecar 0.3.0: build it with elekloader
+## Sidecar 0.3.1: build it with elekloader
 
-The 0.3.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.3.0 card. <span class="sc-test">in testing</span> (it ran in the emulator; on 2026-10-29 the first Rytm was flashed with it)
+The 0.3.1 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.3.1 card. <span class="sc-test">in testing</span> (it ran in the emulator; the first Rytm was flashed with 0.3.0 on 2026-10-29). The [patcher](/sidecar-expander/patcher/) makes the same file: pick build `rel0-3-1`.
 
 ### What you need
 
@@ -21,21 +21,21 @@ The 0.3.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 |---|---|---|
 | `Analog-Rytm_MKII_OS1.73.syx` | the stock OS 1.73, from Elektron's support site | `8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52` |
 | `core-0.1.elemod` | elekloader's core 0.1 for the Rytm: the base every elekloader mod builds on | `33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825` |
-| `rytm-sidecar-0.3.0.elemod` | the Sidecar mods, all in one module | `e93a0b2794a8316dad1d6cfe52151820e153d6f86427d12343a5f947cae0c28a` |
+| `rytm-sidecar-0.3.1.elemod` | the Sidecar mods, all in one module | `e451fd6001f28d7cb0e9a05d46c712b49d1688c8873714d43f4ec1b786aaae5c` |
 
-The two `.elemod` files are on the [Rytm firmware 0.3.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.0) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (`elekloader-8972d70-core-ar2-src.tar.gz`, `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. The mods are licensed **GPL-2.0-or-later**.
+The two `.elemod` files are on the [Rytm firmware 0.3.1 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (`elekloader-8972d70-core-ar2-src.tar.gz`, `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. The mods are licensed **GPL-2.0-or-later**.
 
 ### Build the `.syx`
 
 1. Open the elekloader page: <https://irpina.github.io/elekloader/>.
 2. Choose your stock firmware, `Analog-Rytm_MKII_OS1.73.syx`. The page knows it by its hash.
-3. Add `core-0.1.elemod` and `rytm-sidecar-0.3.0.elemod` as your own mods. (The page lists no Rytm core for OS 1.73, so you add the core file too.)
+3. Add `core-0.1.elemod` and `rytm-sidecar-0.3.1.elemod` as your own mods. (The page lists no Rytm core for OS 1.73, so you add the core file too.)
 4. Tick `rytm-sidecar`. That ticks the core it needs. The check should say there are no conflicts.
 5. **Set the version to `1.73`.** The page's default for the Rytm is `2.0a`. **Never flash a build whose version is not 1.73**: going back to stock from it is untested.
 6. Build and download the `.syx`. Its SHA-256 must be:
 
    ```
-   893ed9a5fc27ab18687c1ea95d7a07f4ff4b23fde235173ce332e54055a733ab
+   a203db27201aabbdaa285ccb7c40a168075206c0ce91477671fcfae729c3df3c
    ```
 
    If yours differs, do not flash it. The page may run a newer elekloader; build with the command line at the tested commit instead:
@@ -44,7 +44,7 @@ The two `.elemod` files are on the [Rytm firmware 0.3.0 release page](https://gi
    git clone https://github.com/irpina/elekloader && cd elekloader
    git checkout c150ac583a4b7e6d64680d5592f4a40f409193f7
    python3 -m elekloader.patch --stock Analog-Rytm_MKII_OS1.73.syx --mod core-0.1.elemod \
-       --mod rytm-sidecar-0.3.0.elemod --out sidecar.syx --version 1.73
+       --mod rytm-sidecar-0.3.1.elemod --out sidecar.syx --version 1.73
    ```
 
 Then send it to the Rytm ([below](#send-it-to-the-rytm)).
@@ -115,14 +115,14 @@ shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 
 ## Send it to the Rytm
 
-Send the built (0.3.0) or patched (0.2.0) file as an OS update, exactly as you would send an official one:
+Send the built (0.3.1) or patched (0.2.0) file as an OS update, exactly as you would send an official one:
 
 - **Transfer (USB)**: drop the `.syx` on Transfer while the Rytm is connected and confirm on the unit.
 - **STARTUP menu (DIN MIDI)**: hold FUNC while you power on, press TRIG 4 (OS UPGRADE), and send the file from Transfer's legacy OS upgrade mode, or any SysEx tool, through a DIN MIDI interface. This route works even if the OS does not boot. It is slow: about 16 minutes or more.
 
 After the update the Rytm may stay on "Success! Rebooting". That is stock behaviour: power cycle it. After an OS upgrade the Rytm may also update its bootstrap at the first restart: do not turn the power off then.
 
-**First start with 0.3.0:** the Sidecar moves your existing projects' files to their Rytm slots by itself ([Projects by slot](/sidecar-expander/using/projects-bundles/#projects-belong-to-the-rytms-slot)).
+**First start with 0.3 (from 0.2.0):** the Sidecar moves your existing projects' files to their Rytm slots by itself ([Projects by slot](/sidecar-expander/using/projects-bundles/#projects-belong-to-the-rytms-slot)).
 
 ## How the patcher works
 

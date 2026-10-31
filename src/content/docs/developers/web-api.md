@@ -5,7 +5,7 @@ sidebar:
   order: 7
 ---
 
-The Pi's web page is a client of a small HTTP API on port 80. The same API is open to your own tools. There is no authentication: use it on a direct cable or a trusted network. At most 4 connections are served at once; more get `503 busy` with `Retry-After: 1` and are counted.
+The Pi's web page is a client of a small HTTP API on port 80. The same API is open to your own tools. Since 0.3.0 most of it needs a paired client ([Pairing tools](/sidecar-expander/developers/building/#pairing-tools-with-the-sidecar)); the connection is plain HTTP: use it on a direct cable or a trusted network. At most 4 connections are served at once; more get `503 busy` with `Retry-After: 1` and are counted.
 
 ## `GET /status`
 
@@ -16,6 +16,10 @@ The page polls it once a second and keeps one request open at a time. Do the sam
 ## `GET /log?since=N`
 
 The console log from byte N of a 64 KB ring. The first line is `START END`, then the bytes; poll again with `since=END`.
+
+## `GET /blackbox`
+
+New in 0.3.1, paired clients only (the `X-Sidecar-Auth` header): the [black box](/sidecar-expander/using/troubleshooting/#the-black-box), `/.rytm/blackbox.log`, up to 64 KB a request: the last 64 KB, or from byte N with `?off=N`; `?old=1` reads `blackbox.1.log`. The first line is `SIZE FROM`, then the bytes. `/status` has its counts in `blackbox`.
 
 ## `POST /cmd`
 

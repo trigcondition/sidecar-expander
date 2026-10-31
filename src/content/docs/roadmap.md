@@ -38,11 +38,15 @@ The early-tester release, with many new base features ([What works now](/sidecar
 - **The pairing code** for the web page, on by default; the crash note after an unexpected restart.
 - **Install with elekloader** on OS 1.73.
 
-## Right after 0.3.0: the MD page
+## Released: 0.3.1
 
-A dedicated Rytm firmware update, before 0.3.1: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
+A fix release: no more dropouts when loading user machines, presets and multisamples, the black box, and send FX that follow a kit switch ([Release notes](/sidecar-expander/release-notes/)).
 
-## Next: 0.3.1
+## Next: the MD page
+
+A dedicated Rytm firmware update: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
+
+## Then: 0.4.0
 
 Planned, in no fixed order:
 
@@ -61,7 +65,7 @@ Planned, in no fixed order:
 
 Research alongside: **DSP coprocessors** (a Daisy Seed first) as extra plugin targets.
 
-## After 0.3.1
+## After 0.4.0
 
 In order of value:
 

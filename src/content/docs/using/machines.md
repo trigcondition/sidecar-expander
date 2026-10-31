@@ -84,7 +84,7 @@ With INP on an analog voice, an analog drum rings a Sidecar resonator.
 
 <span class="sc-test">in testing</span> New in 0.3.0. **MD** is built in: Machinedrum-style drums from the open [mdkit](https://github.com/soejrd/mdkit) project, 30 drum types in three families (FM, PI, TRX). It replaces **DIGIDRUM**, which is gone: the machine slot that was DIGIDRUM in the Rytm's machine list now plays MD, and your old DIGIDRUM tracks play MD.
 
-**With the Rytm firmware 0.3.0** the Rytm still shows DIGIDRUM's page for this machine. Until the next Rytm firmware brings MD's own page:
+**With the Rytm firmware 0.3.1** the Rytm still shows DIGIDRUM's page for this machine. Until a later Rytm firmware brings MD's own page:
 
 | Knob | |
 |---|---|
@@ -92,7 +92,7 @@ With INP on an analog voice, an analog drum rings a Sidecar resonator.
 | B..H | the drum's controls, as the old DIGIDRUM labels name them |
 
 - Old DIGIDRUM sounds keep their values and play through MD. Whether they sound exactly as before has not been compared by ear.
-- The 30 types and MD's ENGINE / TYPE knobs come with the next Rytm firmware, a dedicated update right after 0.3.0 (see the [roadmap](/sidecar-expander/roadmap/)). It then shows ENGINE, TYPE and the control names of each drum.
+- The 30 types and MD's ENGINE / TYPE knobs come with a later Rytm firmware, a dedicated update (see the [roadmap](/sidecar-expander/roadmap/)). It then shows ENGINE, TYPE and the control names of each drum.
 - **All 30 types now:** the **MD user machine** in a user slot (U1..U5) shows MD's full page already: ENGINE, TYPE and named controls ([User machines](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums)).
 - MD is a mono drum voice: the trig's note is not used, and the velocity scales the hit. Per-step locks of the drum type are click-free.
 - On the Sidecar Mini (Teensy) a track on this machine stays silent: MD is built into Sidecar (Pi) only.
