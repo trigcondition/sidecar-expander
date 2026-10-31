@@ -17,7 +17,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
 1. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch it.
-2. Pick the mod build. `rel0-3-1` is the default and the recommended one, for Sidecar 0.3.1 (the same file elekloader builds). `rel0-3-0` is for Sidecar 0.3.0. For Sidecar 0.2.0: `rui1027d`, the mods plus the remote pages, or `sfx1021`, the same mods without them. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+2. Pick the mod build. `rel0-3-1` is the default and the recommended one, for Sidecar 0.3.1 and 0.3.2 (the same file elekloader builds). `rel0-3-0` is for Sidecar 0.3.0. For Sidecar 0.2.0: `rui1027d`, the mods plus the remote pages, or `sfx1021`, the same mods without them. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 2. Drop your stock `.syx` on the page, or click to choose it.
 3. Press **Patch**, then **Save**.
 

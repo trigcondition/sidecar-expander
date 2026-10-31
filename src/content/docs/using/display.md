@@ -19,6 +19,8 @@ The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on t
 | 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 | expected, to be confirmed: needs the `config.txt` lines below | expected |
 | 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
 | Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
+| Raspberry Pi Touch Display 2, 7" | not supported | <span class="sc-ok">hardware</span> (0.3.2: rotated 270 by default, `dsi_rotate=90` the other way up, the 1024x600 UI centred) |
+| Raspberry Pi Touch Display 2, 5" | not supported | <span class="sc-test">in testing</span> (0.3.2: support added, untested here) |
 | Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
 
 **Connecting.** HDMI goes to the Pi's **micro-HDMI 0** (next to the power socket), USB touch to a USB-A port. With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards).

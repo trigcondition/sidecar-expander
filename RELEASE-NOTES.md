@@ -2,6 +2,46 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.3.2
+
+**It adds super basic native support for Digitakt and a starting point for other devices.** A Pi-only release: it goes with the **Rytm firmware 0.3.1**, so no Rytm flash is needed and nothing changes for Rytm users. Sidecar Mini stays at 0.1.0.
+
+| Part | File |
+|---|---|
+| Rytm firmware | no change: the [Rytm firmware 0.3.1](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1), build `rel0-3-1` in the browser patcher ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-77fd0ad-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-77fd0ad-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.3.2.zip`: the same machines as 0.3.1 |
+| Starter content | `sidecar-content-0.3.2.zip`: the same patches as 0.3.1 (also on the card) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.3.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.2) (the Pi).
+
+### Upgrading from 0.3.1
+
+Copy the new card files over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay). The Rytm keeps its firmware 0.3.1.
+
+From 0.3.0, flash the Rytm firmware 0.3.1 first ([Upgrading from 0.3.0](#upgrading-from-030)). From 0.2.0, follow [Upgrading from 0.2.0](#upgrading-from-020) below with the 0.3.2 card and the Rytm firmware 0.3.1.
+
+### New in 0.3.2
+
+- **Digitakt support, experimental.** A Digitakt mk1 with a mod plays Sidecar machines on its 8 tracks, one stereo mix comes back on its main output, and its FILTER and AMP pages control the Sidecar's. **This has run in an emulator only, never on a real Digitakt.** The steps are in [Digitakt (experimental)](https://trigcondition.github.io/sidecar-expander/developers/digitakt/). The mod is in the separate repository [trigcondition/sidecar-digitakt](https://github.com/trigcondition/sidecar-digitakt), with its own steps and risks, and the emulator is public: [analog-emu](https://github.com/trigcondition/analog-emu). Its state stays in `/.digitakt` on the card, apart from a Rytm's `/.rytm`.
+- **Pi 5: Touch Display 2.** The 7" is tested; 5" support is added but untested here. It is rotated 270 by default (`dsi_rotate=90` for the other way up), with the 1024x600 UI centred. Thanks to [bandersong](https://github.com/bandersong) for the Touch Display 2 work ([sidecar-firmware PR #4](https://github.com/trigcondition/sidecar-firmware/pull/4)).
+- **Device profiles.** A starting point for other devices: what the Sidecar assumes about the box it serves is now in one profile. For developers: [docs/device-profiles.md](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md). This is a place to plug a port into, not official support for other boxes.
+
+### Fixed in 0.3.2
+
+- **Pi 5 with a Rytm: the Pi could stop at the first USB MIDI message to the Rytm.** A stack overflow: the engine's main object took up nearly all of the 128 KB stack, and a USB send ran out of room. That object now lives on the heap. A Pi 5 with a Rytm on 0.3.0 or 0.3.1 was likely affected: the released 0.3.1 Pi 5 image has that object on the stack at the same size, but it was not run with a Rytm to see it stop.
+- **What was tested:** on 2026-11-01 this 0.3.2 Pi 5 kernel ran with a real Rytm and a Touch Display 2 7": voices, touch, 0 underruns. The Pi 4 ran the previous 0.3.2 commit for 45 minutes with the Rytm.
+- **Card reads off the control core for the sample overview.** These reads held up the control core; they now run on the core that owns the card.
+
+### Known issues in 0.3.2
+
+- **Picking or clearing a sample on DSP SAMPLE can still give a dropout.** The stream's refill took up to 10 ms on the Pi 4 at our check. It is fixed in 0.4.0.
+- **Touch after a warm restart** may not come back on some setups (a power cycle brings it back; the web page still works). Untested on the 7".
+- **Going back from a later 0.4.0 card:** FM lists read clean, but an edit on 0.3.2 drops 0.4.0's voice data.
+- **Digitakt:** the voices never pass through the Digitakt's filters, FX or track levels, a track's mute stops its trigs but not a tail, and the level may be low. See [What works now](https://trigcondition.github.io/sidecar-expander/introduction/what-works-now/#new-in-032).
+- Everything in [Known issues in 0.3.1](#known-issues-in-031) still applies.
+
 ## Sidecar 0.3.1
 
 **A fix release for 0.3.0.** It goes with the **Rytm firmware 0.3.1**. Sidecar (Pi) only: Sidecar Mini stays at 0.1.0.

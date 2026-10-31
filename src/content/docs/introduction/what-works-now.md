@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.3.1**, a fix release of 0.3.0: the Sidecar 0.3.1 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
+This is **Sidecar 0.3.2**, a Pi-only release: the Sidecar 0.3.2 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -79,6 +79,20 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
 | **Pi 5:** USB audio and MIDI to the computer | coming: not in this version; a Pi 5 ran 12 channels each way and MIDI in Ableton Live under Raspberry Pi OS |
+
+## New in 0.3.2
+
+Pi only: no Rytm flash needed, no change for Rytm users.
+
+| Feature or fix | Status |
+|---|---|
+| Pi 5 with a Rytm: no stop at the first USB MIDI message (the stack overflow) | <span class="sc-ok">hardware</span>: 2026-11-01, this kernel with a real Rytm, voices, 0 underruns |
+| Pi 5 Touch Display 2, 7": rotated 270 by default, the 1024x600 UI centred, touch (with [bandersong](https://github.com/bandersong)'s work) | <span class="sc-ok">hardware</span> |
+| Pi 5 Touch Display 2, 5" | <span class="sc-test">in testing</span>: support added, untested here |
+| The previous 0.3.2 commit on a Pi 4 with the Rytm, 45 minutes | <span class="sc-ok">hardware</span> |
+| The sample overview's card reads off the control core | <span class="sc-ok">hardware</span> (Pi 4) |
+| [Device profiles](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md), a starting point for other devices | <span class="sc-test">in testing</span>: host tests; the Rytm's own path ran on the hardware above |
+| Digitakt mk1 support, with the mod in [sidecar-digitakt](https://github.com/trigcondition/sidecar-digitakt): Sidecar machines on its 8 tracks, one stereo mix back on its main output, its FILTER and AMP pages on the Sidecar's | <span class="sc-test">in testing</span>: emulator ([analog-emu](https://github.com/trigcondition/analog-emu)) and host tests only, **never run on a real Digitakt**. The voices never pass through its filters, FX or track levels, a track's mute stops its trigs but not a tail, and the level may be low |
 
 ## New in 0.3.1
 

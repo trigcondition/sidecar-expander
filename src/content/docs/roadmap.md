@@ -42,6 +42,12 @@ The early-tester release, with many new base features ([What works now](/sidecar
 
 A fix release: no more dropouts when loading user machines, presets and multisamples, the black box, and send FX that follow a kit switch ([Release notes](/sidecar-expander/release-notes/)).
 
+## Released: 0.3.2
+
+**Device profiles are done:** the [guide for porters](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md) and the [Digitakt](/sidecar-expander/developers/digitakt/) as the worked example.
+
+A Pi-only release: super basic native support for Digitakt (experimental, emulator only) and a starting point for other devices, device profiles, the Touch Display 2 on the Pi 5, and a fix for the Pi 5 stopping at the first USB MIDI message to the Rytm ([Release notes](/sidecar-expander/release-notes/)).
+
 ## Next: the MD page
 
 A dedicated Rytm firmware update: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
@@ -78,7 +84,7 @@ In order of value:
 2. **A master FX chain.**
 3. **A slice editor** and a SAMPLE page.
 4. **The user-machine SDK** with declarative pages.
-5. **Analog Four MKII** with the Rytm on one Sidecar: the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned.
+5. **Analog Four MKII** with the Rytm on one Sidecar: the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned by us; [device profiles](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md) are the starting point for a community port.
 
 ## Also now
 

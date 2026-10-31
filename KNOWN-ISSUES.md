@@ -2,7 +2,15 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.3.1 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.1, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.3.2 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.1, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.3.2
+
+- **Picking or clearing a sample on DSP SAMPLE can still give a dropout.** The stream's refill took up to 10 ms on the Pi 4 at our check. It is fixed in 0.4.0.
+- **Pi 5 Touch Display 2:** touch after a warm restart may not come back on some setups (a power cycle brings it back; the web page still works). Untested on the 7". 5" support is added, untested here.
+- **Going back from a later 0.4.0 card:** FM lists read clean, but an edit on 0.3.2 drops 0.4.0's voice data.
+- **Pi 5 with a Rytm on 0.3.0 or 0.3.1:** likely affected by the stop at the first USB MIDI message, not verified. Use 0.3.2.
+- **Digitakt support is experimental:** emulator only, never run on a real Digitakt. The mod is in the separate repository [trigcondition/sidecar-digitakt](https://github.com/trigcondition/sidecar-digitakt). The voices never pass through the Digitakt's filters, FX or track levels, a track's mute stops its trigs but not a tail, and the level may be low.
 
 ## New in 0.3.1
 
@@ -82,7 +90,7 @@ In testing: nothing of the PSRAM path has run on PSRAM hardware yet. With one or
 - **Pi 5: no USB audio or MIDI to the computer yet.** The Sidecar doesn't use the Pi 5's USB-C port for this yet, so for now it only takes power. **Support is coming:** a Pi 5 under Raspberry Pi OS ran 12 audio channels in each direction and MIDI through that port, into Ableton Live. It needs power from a separate supply, not from the computer. Until then, use a Pi 4B for computer audio and MIDI.
 - **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 it names the Pi 4's own supply (`POWER TOO WEAK: use 15 W supply`).
 - **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
-- **Pi 5 DSI display:** in testing (built, not yet run on hardware). With no DSI panel answering, the Sidecar uses HDMI.
+- **Pi 5 DSI display:** v1 displays in testing (built, not yet run on hardware); the Touch Display 2 7" is tested. With no DSI panel answering, the Sidecar uses HDMI.
 - **Pi 5 updates:** by copying the new release over the card only (no network update on the Pi 5 yet). A Pi 5 that shows its boot diagnostics screen needs a bootloader update (Raspberry Pi Imager, "Misc utility images", "Bootloader").
 - **One card for both boards** is in testing on the Pi 4B and the Pi 5 (the Pi 4 reads exactly the 0.1.0 settings; the Pi 5 build is tested on hardware).
 - The Pi 3 and Pi 400 are untested.

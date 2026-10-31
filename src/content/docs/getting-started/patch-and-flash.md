@@ -13,6 +13,8 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 
 ## Sidecar 0.3.1: build it with elekloader
 
+Sidecar 0.3.2 uses this same Rytm firmware: a Rytm on 0.3.1 needs no flash.
+
 The 0.3.1 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.3.1 card. <span class="sc-test">in testing</span> (it ran in the emulator; the first Rytm was flashed with 0.3.0 on 2026-10-29). The [patcher](/sidecar-expander/patcher/) makes the same file: pick build `rel0-3-1`.
 
 ### What you need

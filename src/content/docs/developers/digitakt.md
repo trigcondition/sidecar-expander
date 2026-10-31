@@ -1,12 +1,32 @@
 ---
-title: Experimenting with the Digitakt
-description: A starting point for developers (and their AI coding agents) who want to try Digitakt support on the 0.3.0 engine.
+title: Digitakt (experimental)
+description: "Sidecar 0.3.2 on a Digitakt mk1: the mod, the emulator, what is experimental, and the device profiles guide for porters. Emulator only, never run on a real Digitakt."
 sidebar:
   order: 10
 ---
 
+## Digitakt on Sidecar 0.3.2
+
+Sidecar 0.3.2 adds super basic native support for the **Digitakt mk1**: each of its 8 audio tracks can pick a Sidecar machine (PLAITS, JUNO, DAISYSP, 6-OP FM, MD, TRX-B2) on its SRC page, its trigs and parameters go to the Sidecar on a Pi over USB, one stereo mix comes back on its main output, and its FILTER and AMP pages control the Sidecar's.
+
+- **The mod:** [trigcondition/sidecar-digitakt](https://github.com/trigcondition/sidecar-digitakt), a separate repository with its own steps and risks. You supply a Digitakt mk1 stock OS file, 1.53 or 1.54. It needs the Sidecar 0.3.2 or later.
+- **The emulator:** [trigcondition/analog-emu](https://github.com/trigcondition/analog-emu) runs the Digitakt's own OS on emulated hardware; its main branch has the Digitakt work. Try the mod there first.
+- **The Sidecar's side:** nothing to set up. The first connection restarts the Pi once, into its own state folder `/.digitakt`, apart from a Rytm's `/.rytm`. Samples, plugins and patch libraries stay shared.
+
+:::caution[What is experimental]
+All of it. **This has run in an emulator and in host tests only, never on a real Digitakt.** Flashing a modded OS is at your own risk. Known limits: the voices never pass through the Digitakt's filters, FX or track levels, a track's mute stops its trigs but not a tail, and the level may be low. The Digitakt mk1 only.
+:::
+
+## Porting to another device
+
+The [device profiles guide](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md) is the place to start: what a device must send, the audio row, the state folders. `core/device/digitakt.*` in the engine and the sidecar-digitakt mod are the worked example. It is a place to plug a port into, not official support for other boxes.
+
+## The earlier map, for 0.3.0
+
+The rest of this page was written before 0.3.2, for a first experiment without a mod. It stays for what it says about the engine's insides.
+
 :::caution[Experimental, not supported]
-Nothing on this page has been tried with a Digitakt yet. It is a map for developers who want to experiment, written against the **0.3.0** engine source. Anything marked **(to verify)** is not confirmed in that source: check it on your own device. None of the commands were run while this page was written.
+Nothing below has been tried with a Digitakt yet. It is a map for developers who want to experiment, written against the **0.3.0** engine source. Anything marked **(to verify)** is not confirmed in that source: check it on your own device. None of the commands were run while this page was written.
 :::
 
 **Getting the source.** The engine is public: [trigcondition/sidecar-firmware](https://github.com/trigcondition/sidecar-firmware). Work from the **`v0.3.0`** tag (`git clone https://github.com/trigcondition/sidecar-firmware && cd sidecar-firmware && git checkout -b digitakt v0.3.0`). File paths below are relative to that repository.
@@ -310,7 +330,7 @@ involves, but none of it applies to a Digitakt as it is.
 
 ```
 You are helping me experiment with Elektron Digitakt support in the "Sidecar", a bare-metal
-Raspberry Pi 4 (Circle) USB host for Elektron drum machines. The source is github.com/trigcondition/sidecar-firmware; work on a branch from the v0.3.0 tag. Read the page "Experimenting with the Digitakt" on the Sidecar docs site
+Raspberry Pi 4 (Circle) USB host for Elektron drum machines. The source is github.com/trigcondition/sidecar-firmware; work on a branch from the v0.3.0 tag. Read the page "Digitakt (experimental)" on the Sidecar docs site
 (developers section) first, then docs/research-rytm-usb.md,
 docs/pi-engine.md, docs/core.md, teensy/libraries/RytmHost/ob_block.h, pi/engine/ob_usb.cpp,
 pi/engine/output.h and core/notes.h. Treat anything marked "(to verify)" as unknown.
