@@ -86,7 +86,7 @@ On the Pi 4B unless the row says Pi 5.
 |---|---|
 | No dropouts when loading user machines, presets and multisamples (the card work moved off the control core) | <span class="sc-ok">hardware</span> |
 | [The black box](/sidecar-expander/using/troubleshooting/#the-black-box): the whole log on the card | <span class="sc-ok">hardware</span> |
-| Send FX follow a kit switch at once (Rytm firmware 0.3.1) | <span class="sc-test">in testing</span> (emulator) |
+| Send FX follow a kit switch at once (Rytm firmware 0.3.1) | <span class="sc-ok">hardware</span> |
 
 ## New in 0.3.0
 
