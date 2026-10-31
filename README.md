@@ -34,7 +34,7 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
   - If your Rytm runs an older OS, update it to 1.73 first.
   - **On OS 1.74:** the patched file is a whole OS (1.73 plus the Sidecar mods), so sending it replaces 1.74; no separate downgrade. Your projects carry over.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
-- **A Raspberry Pi 4B** (2 GB or more, with a computer: also USB-C audio and MIDI) **or a Raspberry Pi 5** (standalone: no USB audio or MIDI to the computer yet; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 or 1024x600 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
+- **A Raspberry Pi 4B** (2 GB or more, with a computer: also USB-C audio and MIDI) **or a Raspberry Pi 5** (standalone for now: USB audio and MIDI to the computer are coming; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 or 1024x600 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
 - The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
 

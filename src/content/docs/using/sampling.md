@@ -57,7 +57,7 @@ Plays notes, records them, trims, finds loops and writes a MULTISAMPLE instrumen
 ## Limitations
 
 - Sidecar (Pi) only.
-- EXT on **USB** needs the Sidecar's USB-C MIDI to the computer, which only the Pi 4 has; your DAW routes the notes to the synth. On a Pi 5 use DEV.
+- EXT on **USB** needs the Sidecar's USB-C MIDI to the computer, which only the Pi 4 has for now; your DAW routes the notes to the synth. On a Pi 5 use DEV.
 - EXT on **RYTM** reaches a synth only if the Rytm passes USB MIDI on to its MIDI OUT; not confirmed.
 - TRK: RS/CP, MT/HT, CH/OH and CY/CB share one stem each.
 - DSP SAMPLE sees a new take only after the next boot.

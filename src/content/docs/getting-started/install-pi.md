@@ -199,7 +199,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
-| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone**: no USB audio or MIDI to the computer yet |
+| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone** for now: USB audio and MIDI to the computer are coming |
 | Supply | official 5.1 V 3 A USB-C | official **27 W** USB-C, plugged in **directly** |
 | HDMI display | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
@@ -208,7 +208,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 
 What is different on the Pi 5 for now:
 
-- **No USB audio or MIDI to the computer.** The Pi 5's USB-C port is power only in this version (on the Pi 4 it is also the Sidecar's audio and MIDI interface): even Raspberry Pi OS's own USB gadget did not connect on our Pi 5 powered from a computer, so it is left out.
+- **No USB audio or MIDI to the computer yet.** The Sidecar doesn't use the Pi 5's USB-C port for this yet, so for now it only takes power (on the Pi 4 it is also the Sidecar's audio and MIDI interface). **Support is coming:** a Pi 5 under Raspberry Pi OS ran 12 audio channels in each direction and MIDI through that port, into Ableton Live, with power from a separate supply.
 - **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its UI to it, so the picture is slightly soft. The same holds for both card zips. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
 - **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).

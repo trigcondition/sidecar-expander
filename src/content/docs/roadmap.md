@@ -46,6 +46,10 @@ A fix release: no more dropouts when loading user machines, presets and multisam
 
 A dedicated Rytm firmware update: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
 
+## Then: USB audio and MIDI on the Pi 5
+
+A Pi 5 will work like a Pi 4: 12 audio channels each way and MIDI to your computer over its USB-C port, in any DAW, with nothing to install. Under Raspberry Pi OS this already ran on our Pi 5 in Ableton Live. It needs power from a separate supply, because a computer's USB port can't power a Pi 5 under load, so it comes with a simple wiring guide.
+
 ## Then: 0.4.0
 
 Planned, in no fixed order:
@@ -54,6 +58,7 @@ Planned, in no fixed order:
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **PAD OCT:** a per-track octave for the CHRO pads, so a poly track's pads reach beyond C2..B5.
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
+- **An arpeggiator** on the Sidecar's sequencer, for poly tracks and any machine.
 - **A MIDI machine:** a user machine that sends its track's notes and knobs out as MIDI (to a computer, a USB MIDI device or the Rytm's MIDI out), like Tonverk's.
 - **.elmulti instruments:** MULTISAMPLE loads Elektron's multisample format next to `.sfz`.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.

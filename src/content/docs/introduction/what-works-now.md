@@ -78,7 +78,7 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** Wi-Fi (saved from the web page, connected) | <span class="sc-ok">hardware</span> (2026-10-19) |
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
-| **Pi 5:** USB audio and MIDI to the computer | not in 0.2.0 (USB-C is power only on the Pi 5) |
+| **Pi 5:** USB audio and MIDI to the computer | coming: not in this version; a Pi 5 ran 12 channels each way and MIDI in Ableton Live under Raspberry Pi OS |
 
 ## New in 0.3.1
 

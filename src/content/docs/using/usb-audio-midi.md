@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of the 0.2.0 release and unchanged in 0.3.0, tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19). Not on the **Pi 5**: its USB-C port is power only (in 0.2.0 and in 0.3.0).
+<span class="sc-ok">hardware</span> on the **Sidecar (Pi 4B)**: part of the 0.2.0 release and unchanged in 0.3.0, tested with multi-channel audio and MIDI (no clicks at the stream's start; 5 minutes clean, 2026-10-19). Not on the **Pi 5** yet: **support is coming** (in Raspberry Pi OS, a Pi 5 ran 12 channels each way and MIDI into Ableton Live through its USB-C port, with power from a separate supply).
 
 With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the Pi 4's USB-C. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux.
 
