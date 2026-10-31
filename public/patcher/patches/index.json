@@ -2,9 +2,18 @@
  "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
  "patches": [
   {
+   "file": "sidecar-rel0-3-1.json",
+   "tag": "rel0-3-1",
+   "title": "rel0-3-1: Sidecar 0.3.1 mods (default, recommended)",
+   "description": "The mods for Sidecar 0.3.1: everything in rel0-3-0, plus the fix that makes send FX follow a kit switch at once. The same file elekloader builds from core 0.1 + rytm-sidecar-0.3.1.elemod (sha256 a203db27...3df3c). Goes with Sidecar 0.3.1 on the Pi.",
+   "output": "Analog-Rytm_MKII_OS1.73_rel0-3-1.syx",
+   "output_sha256": "a203db27201aabbdaa285ccb7c40a168075206c0ce91477671fcfae729c3df3c",
+   "source_commit": "d10f2e8"
+  },
+  {
    "file": "sidecar-rel0-3-0.json",
    "tag": "rel0-3-0",
-   "title": "rel0-3-0: Sidecar 0.3.0 mods (default, recommended)",
+   "title": "rel0-3-0: Sidecar 0.3.0 mods (older)",
    "description": "The mods for Sidecar 0.3.0: everything in rui1027d, plus projects keyed by the Rytm's slots (SAVE AS / copy / clear follow, the project trash), kits following SAVE / RELOAD KIT, NO + KIT / PATTERN reload on the Sidecar's pages, the poly sequencer's pages and keys (FUNC + YES undo, FUNC + DOWN menu), the SIDECAR MENU with WEB UI (the pairing code), and a freeze probe that reports a stuck Rytm screen to the Sidecar. The same file elekloader builds from core 0.1 + rytm-sidecar-0.3.0.elemod (sha256 893ed9a5...733ab). Needs Sidecar 0.3.0 on the Pi.",
    "output": "Analog-Rytm_MKII_OS1.73_rel0-3-0.syx",
    "output_sha256": "893ed9a5fc27ab18687c1ea95d7a07f4ff4b23fde235173ce332e54055a733ab",
