@@ -9,6 +9,10 @@ A user machine is a plain C or C++ sound generator with a fixed C ABI. It is bui
 
 The same source can also build a Sidecar Mini package (RMP1) and a native library for tests on a Mac. This page is about the Pi.
 
+:::note[What may come next]
+[Plugin API 3](/sidecar-expander/developers/plugin-api-3/) is a proposed design, not implemented: tempo, memory, guarded setup, stereo, effects, a signal bus, modulation, custom pages. Its section [Write it this way today](/sidecar-expander/developers/plugin-api-3/#write-it-this-way-today) says how to structure an API 2 port now, so a retrofit stays small.
+:::
+
 :::note[How far this was tested]
 The build steps, the example and the host tests below were run on an Apple silicon Mac, from a clean checkout of the 0.3.2 engine. The steps that need a Sidecar (copying to a real card, the web page, the Rytm's menu) were not part of that run. The console assign was run on the Mac core library, not on a Pi.
 :::
@@ -371,6 +375,8 @@ There is no way, in 0.3.2 or 0.4.0, for a machine to:
 - produce stereo: `render` is mono;
 - read card files, other than presets and pool samples;
 - allocate memory.
+
+For what may change this, see the proposed [Plugin API 3](/sidecar-expander/developers/plugin-api-3/).
 
 ## The package
 
