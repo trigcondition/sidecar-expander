@@ -17,7 +17,7 @@ A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the
 
 1. **A poly track** is a Rytm track on a Sidecar poly machine that you handed to the Sidecar sequencer. Poly is a property of the **pattern** ([below](#poly-tracks-belong-to-the-pattern)). Its steps live on the Sidecar's card, one file per project and pattern (`/.rytm/seq/<project>/pNNN.sqp`), saved a second after each edit and at STOP (a power cut can lose the very last edits, never damages the file). The Rytm's own track stays empty.
 2. **The clock.** While playing, the Rytm reports each step of each poly track to the Sidecar, stamped to its audio block. The Sidecar plans the notes ahead and starts them early by the measured round trip, so they land with the Rytm's own trigs. The round trip is measured automatically, once, after the Rytm connects (5 short clicks while stopped).
-3. **The analog chain is held open.** On a poly track the Rytm's analog amp stays open and the filter envelope is off, so the Sidecar's notes, each with its own envelope, pass through the track's filter, overdrive and amp. FRQ, RES, the filter type, OVR, level, pan and the sends stay yours. A poly track that has nothing sounding is closed again after 400 ms.
+3. **The analog chain must be open.** Set the track's **AMP** page open yourself: **ATK 0, HOLD max, DEC max**. With a shorter amp, notes are cut or do not sound properly. The filter envelope is off on a poly track, so the Sidecar's notes, each with its own envelope, pass through the track's filter, overdrive and amp. FRQ, RES, the filter type, OVR, level, pan and the sends stay yours. A poly track that has nothing sounding is closed again after 400 ms.
 4. **Pattern changes.** The Sidecar loads the next pattern's steps as soon as the change is queued and switches on the Rytm's switch, with the next pattern's first steps already planned. DIRECT JUMP and TEMP JUMP (FUNC + BANK C / D) play the new pattern from the old position at once.
 
 ### Which machines
@@ -49,10 +49,11 @@ The Rytm's make prompt names the machine and its notes, and where POLY CONFIG is
 ## Getting started
 
 1. Pick a **Sidecar machine** on a track's SRC page: PLAITS, JUNO, 6-OP FM, MULTISAMPLE and the rest (see [Machines](/sidecar-expander/using/machines/) and [Poly machines](/sidecar-expander/using/poly-machines/)).
-2. Select the track (TRK + pad), hold **UP** and press **TRIG**. The Rytm asks **MAKE BD A POLY TRACK?**
-3. Press **YES** (UP may still be held). The track is a poly track, saved per project. The Rytm shows the Sidecar's SEQ page for it, and the touchscreen switches to its piano roll.
-4. Press **RECORD** (GRID REC) to edit steps on the trig keys. This is **seq mode**: the trig keys, PAGE and the knobs under a held trig are the Sidecar's.
-5. Press **PLAY**.
+2. On the track's **AMP** page, set **ATK 0, HOLD max, DEC max**, so the track's amp stays open for the notes.
+3. Select the track (TRK + pad), hold **UP** and press **TRIG**. The Rytm asks **MAKE BD A POLY TRACK?**
+4. Press **YES** (UP may still be held). The track is a poly track, saved per project. The Rytm shows the Sidecar's SEQ page for it, and the touchscreen switches to its piano roll.
+5. Press **RECORD** (GRID REC) to edit steps on the trig keys. This is **seq mode**: the trig keys, PAGE and the knobs under a held trig are the Sidecar's.
+6. Press **PLAY**.
 
 To leave the SEQ page: UP + TRIG again, or NO. Selecting a track that is no poly track closes it too, and the trig keys are the Rytm's again.
 
