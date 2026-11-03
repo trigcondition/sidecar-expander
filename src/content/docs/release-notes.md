@@ -55,6 +55,7 @@ On the Pi:
 - **Tonverk `.elmulti` instruments in MULTISAMPLE,** beside `.sfz`. The format is not publicly documented, so the conventions we read it by are unverified ([MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample)).
 - **Samples load on first play.** Nothing is loaded whole when a project opens, so projects open faster; a sample comes in when a voice selects it or, for MULTISAMPLE, after its first note ([The pool RAM](/sidecar-expander/using/pools/#the-pool-ram)).
 - **A 1280x720 touchscreen layout,** the default on the Pi 5's Touch Display 2; `res=` in `/.rytm/display.txt` picks another ([Screen sizes](/sidecar-expander/using/display/#screen-sizes)).
+- **The NEON pass:** the render loops' heaviest parts (the voices, WAVETABLE, CLOUDSEED and the send effects) now use the Pi's vector unit: less CPU per voice, so more headroom for heavy kits. On a Pi 4 at boot, against 0.3.1: DAISYSP 35 % less, WAVETABLE 10 %, JUNO 8 %, PLAITS 6 %, 6-OP FM and GRANULAR 5 %; over a minute's play the render cores 3 to 6 % less, with no underruns.
 - **Idle sleep on all four cores:** a cooler Pi; `/status` shows it as "idle" ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)).
 - **Computer audio and MIDI over the Pi 5's USB-C,** in testing: on by default, `gadget=0` turns it off. A Pi 5 needs a USB-C power and data splitter or a header-pin supply for it ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)).
 

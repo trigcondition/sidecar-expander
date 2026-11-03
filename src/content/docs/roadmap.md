@@ -60,7 +60,7 @@ A Pi-only release: super basic native support for Digitakt (experimental, emulat
 - **The arpeggiator** on any Sidecar machine and the MIDI machine, with **arp locks** per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
 - **The USER SLOTS page** on the box's own screen, and **SOPHIE**, a new user machine.
 - **Analog Four MKII support:** the Sidecar's machines through the A4's analog voices ([Analog Four MKII](/sidecar-expander/using/analog-four/); what may come next for it: [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/)).
-- **MD's own page** on the Rytm (ENGINE, TYPE and all 30 drum types), the **JUNO / 6-OP FM preset browser**, DSP SAMPLE's SMP on knob A as on the other sample machines, **PAD OCT** for the CHRO pads, Tonverk **.elmulti** instruments in MULTISAMPLE, samples loaded on first play, the **1280x720** layout for the Touch Display 2, idle sleep for a cooler Pi.
+- **MD's own page** on the Rytm (ENGINE, TYPE and all 30 drum types), the **JUNO / 6-OP FM preset browser**, DSP SAMPLE's SMP on knob A as on the other sample machines, **PAD OCT** for the CHRO pads, Tonverk **.elmulti** instruments in MULTISAMPLE, samples loaded on first play, the **1280x720** layout for the Touch Display 2, idle sleep for a cooler Pi, and the **NEON pass**: the Pi's vector unit in the render loops, less CPU per voice.
 - **Computer audio and MIDI over the Pi 5's USB-C** (in testing, on by default): [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/).
 - Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and flicker, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
 
@@ -72,7 +72,6 @@ Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's mai
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
-- **A NEON pass:** the Pi's vector unit on the heaviest engines and the mixer, for more voices and effects.
 - **Export to a USB stick** again, once the hang at its end is fixed.
 - **A touchscreen keyboard** for names (takes, samples, folders, pools, Rytm names).
 - **The pairing code, next steps:** a physical "allow pairing now" key, and a list of paired devices on the page.

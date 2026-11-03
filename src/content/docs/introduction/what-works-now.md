@@ -100,6 +100,7 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 | Tonverk `.elmulti` instruments in [MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample) | <span class="sc-test">in testing</span>: host tests; the format's conventions unverified |
 | [Samples load on first play](/sidecar-expander/using/pools/#the-pool-ram), nothing whole at project load | <span class="sc-test">in testing</span> |
 | The [1280x720 layout](/sidecar-expander/using/display/#screen-sizes) on the Pi 5's Touch Display 2 | <span class="sc-test">in testing</span>: built and host-tested |
+| The NEON pass: the render loops on the Pi's vector unit, less CPU per voice | <span class="sc-test">in testing</span>: measured on a Pi 4 (DAISYSP 35 % less, render cores 3 to 6 % less, no underruns); a heavy kit still to try |
 | [Idle sleep](/sidecar-expander/using/troubleshooting/#keeping-it-cool) on all four cores | <span class="sc-ok">hardware</span>: Pi 5, 66 °C flat where it reached 79 °C |
 | [Computer audio and MIDI over the Pi 5's USB-C](/sidecar-expander/using/usb-audio-midi/), on by default | <span class="sc-test">in testing</span> |
 | DSP SAMPLE: no dropout when a sample is picked or cleared (card reads on the card's core) | <span class="sc-test">in testing</span>: host tests |
