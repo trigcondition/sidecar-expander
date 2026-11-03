@@ -5,7 +5,7 @@ description: "Sidecar 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOP
 
 ## Sidecar 0.4.0
 
-<!-- UNRELEASED: Sidecar 0.4.0 is not released yet. Fill in every UNRELEASED mark in this section at release: commits, file names, zip names, hashes and the release-page links. -->
+<!-- UNRELEASED: fill in every UNRELEASED mark in this section from the release build: commits, file names, zip names, hashes and the release-page links. -->
 
 **Master FX, a saturator, arp locks, a new user machine, and the Analog Four MKII as a box of its own.** It goes with the **Rytm firmware 0.4.0**: flash it for master FX and the Rytm fixes. Sidecar Mini stays at 0.1.0.
 

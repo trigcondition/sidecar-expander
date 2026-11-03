@@ -4,9 +4,7 @@
 
 Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.3.2** (with the Rytm firmware 0.3.1, an elekloader module): a Pi-only release for the Raspberry Pi 4B and the Pi 5. It adds super basic native support for Digitakt (experimental: emulator only, never run on a real Digitakt; the mod: [sidecar-digitakt](https://github.com/trigcondition/sidecar-digitakt), the emulator: [analog-emu](https://github.com/trigcondition/analog-emu)) and a starting point for other devices ([device profiles](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md)); no Rytm flash needed ([release notes](RELEASE-NOTES.md)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.2) and the [Rytm firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1). **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
->
-> **Sidecar 0.4.0 is coming** (with the Rytm firmware 0.4.0): master FX, the SAT saturator, arp locks, the USER SLOTS page, the SOPHIE user machine and Analog Four MKII support ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040)). <!-- UNRELEASED: at release, make 0.4.0 the current release above and link its downloads. -->
+> **Sidecar 0.4.0** (with the Rytm firmware 0.4.0, an elekloader module): master FX, the SAT saturator, the MIDI machine, the arpeggiator and arp locks, the USER SLOTS page, the SOPHIE user machine and Analog Four MKII support, for the Raspberry Pi 4B and the Pi 5 ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) and the [Rytm firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0). <!-- UNRELEASED: the release links --> **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > **Sidecar Mini (Teensy 4.1) is phased out.** It is frozen at 0.1.0: no new features. Its source stays in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (`teensy/`) for reference, and the 0.1.0 release stays on the [releases page](https://github.com/trigcondition/sidecar-expander/releases).
 >
@@ -52,7 +50,7 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
 
 ## Install
 
-1. **Build the Rytm firmware 0.3.1 from your stock OS 1.73 file:** with elekloader (`core-0.1.elemod` + `rytm-sidecar-0.3.1.elemod`, version set to 1.73) or the browser patcher (build `rel0-3-1`); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
+1. **Build the Rytm firmware 0.4.0 from your stock OS 1.73 file:** with elekloader (`core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod`, version set to 1.73) or the browser patcher (build `rel0-4-0`); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar** (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md).
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
@@ -84,7 +82,7 @@ The Sidecar's own USB device port (the Pi's USB-C, for computer audio and MIDI) 
 
 ## Feedback
 
-Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (the Rytm firmware 0.3.1, and the Sidecar build from `BUILD-INFO-pi.txt`), what you did, and what happened. `http://sidecar.local/status` and `/log`, saved right after the problem, help a lot.
+Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (the Rytm firmware 0.4.0, and the Sidecar build from `BUILD-INFO-pi.txt`), what you did, and what happened. `http://sidecar.local/status` and `/log`, saved right after the problem, help a lot.
 
 ## Versioning
 

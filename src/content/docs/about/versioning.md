@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-Sidecar uses **semantic versioning**, `MAJOR.MINOR.PATCH`, starting with the first public release, **0.1.0**. One number covers both Sidecar (Raspberry Pi 4B and Pi 5) and Sidecar Mini (Teensy 4.1), which share one engine core. A release may leave one of them out: **0.2.0** and **0.3.0** are Sidecar (Pi) releases; Sidecar Mini stays at **0.1.0** until a release names a newer Mini build. The current release is **0.3.2**; **0.4.0** is coming. <!-- UNRELEASED: 0.4.0 is not out yet; at release, say it is the current release. -->
+Sidecar uses **semantic versioning**, `MAJOR.MINOR.PATCH`, starting with the first public release, **0.1.0**. One number covers both Sidecar (Raspberry Pi 4B and Pi 5) and Sidecar Mini (Teensy 4.1), which share one engine core. A release may leave one of them out: **0.2.0** and **0.3.0** are Sidecar (Pi) releases; Sidecar Mini stays at **0.1.0** until a release names a newer Mini build. The current release is **0.4.0**.
 
 | Step | Example | What it means |
 |---|---|---|

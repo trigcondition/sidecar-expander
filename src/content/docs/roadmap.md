@@ -50,11 +50,9 @@ A fix release: no more dropouts when loading user machines, presets and multisam
 
 A Pi-only release: super basic native support for Digitakt (experimental, emulator only) and a starting point for other devices, device profiles, the Touch Display 2 on the Pi 5, and a fix for the Pi 5 stopping at the first USB MIDI message to the Rytm ([Release notes](/sidecar-expander/release-notes/)).
 
-## Coming: 0.4.0
+## Released: 0.4.0
 
-<!-- UNRELEASED: 0.4.0 is not released yet. At release, make this "Released: 0.4.0". -->
-
-Being prepared for release ([Release notes](/sidecar-expander/release-notes/#sidecar-040)):
+([Release notes](/sidecar-expander/release-notes/#sidecar-040))
 
 - **Master FX:** a stereo chain after the Rytm's own effects, with a through mode for the Rytm's tracks and a limiter.
 - **SAT**, a tape, console and soft saturator for any insert slot.
