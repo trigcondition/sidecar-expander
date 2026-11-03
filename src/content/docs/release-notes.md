@@ -35,15 +35,28 @@ From 0.3.1 do the same. From 0.3.0, the Rytm firmware 0.4.0 replaces 0.3.1, so f
 
 On the Rytm:
 
-- **Master FX.** A stereo chain after the Rytm's own effects: four slots (any insert type, SAT among them, and CHORUS, COMB, SPACE, RINGS, CLOUD and HALO, two of those at a time), a POST EQ (HPF, LPF, LOW, HIGH) and a level, with a stereo limiter last. Saved per kit. **SRC RET** (the default) takes the Sidecar's voices and returns. **SRC MIX**, the through mode, also takes every Rytm track you take off ROUTE TO MAIN, after its filter, amp and drive, panned as on the Rytm, with a STEM TRIM before the sum. The Rytm's delay and reverb stay outside the chain. Set it on the Rytm's **MASTER** page (on the ring and in the SIDECAR MENU), on the touchscreen (Settings > Send FX > Master) or on the web page's Send FX tab. No p-locks or LFOs on it yet.
+- **Master FX.** A stereo chain after the Rytm's own effects: four slots (any insert type, SAT among them, and CHORUS, COMB, SPACE, RINGS, CLOUD and HALO, two of those at a time), a POST EQ (HPF, LPF, LOW, HIGH) and a level, with a stereo-linked lookahead limiter last, so a loud mix comes out whole. Saved per kit. **SRC RET** (the default) takes the Sidecar's voices and returns. **SRC MIX**, the through mode, also takes every Rytm track you take off ROUTE TO MAIN, after its filter, amp and drive, panned as on the Rytm, with a STEM TRIM (0 to -24 dB, default -6) before the sum. The Rytm's delay and reverb stay outside the chain. Set it on the Rytm's **MASTER** page (on the ring and in the SIDECAR MENU), on the touchscreen (Settings > Send FX > Master) or on the web page's Send FX tab. No p-locks or LFOs on it yet.
 - **The MIDI machine.** Machine 50 on every track sends the track's notes and locks as MIDI, to the Rytm's DIN out, the computer (USB-C) or USB MIDI devices on the Pi (USB-A). SRC: DST CHAN BANK SBNK PROG PB AT MW; SMPL: VAL1..4 and SEL1..4, four CCs of your choice ([MIDI machine](/sidecar-expander/using/midi-machine/)).
 - **The arpeggiator.** UP + FLTR opens the ARP page: MODE, SPD, RNG, GATE and SWNG, per sound, in time with the Rytm, on any Sidecar machine and the MIDI machine ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
+- **MD's own page.** The built-in MD shows ENGINE, TYPE and all 30 drum types, with each drum's controls named, instead of DIGIDRUM's old page ([MD](/sidecar-expander/using/machines/#md)).
+- **A preset browser for JUNO and 6-OP FM.** PAT (knob A of SRC) opens the bank list of the project's presets; FUNC + YES on it browses the card's `/JUNO` and `/DX7`, with FACTORY and ROM as folders. The first add fills the list with the built-ins at their PAT numbers, so a saved PAT keeps its preset ([JUNO](/sidecar-expander/using/machines/#juno)).
+- **DSP SAMPLE's SMP on knob A of SRC,** as on GRANULAR, WAVETABLE and MULTISAMPLE: it opens the same bank list. ENG moves to the SMPL page; saved sounds and locks are unchanged. MIX starts at 0 on a new sound, and the page shows the playhead ([DSP SAMPLE](/sidecar-expander/using/machines/#dsp-sample)).
+- **PAD OCT** in POLY CONFIG (knob G, -3..3): the CHRO pads reach C2..B5 only; PAD OCT moves them by octaves on that track ([POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config)).
+- **Longer list knobs:** a list knob holds up to 36 names, 16 before.
 - **SAT,** a new insert type: a saturator with three characters, TAPE, CONS and SOFT, with DRV, TONE and MIX, for a voice, a bus or the master chain ([SAT](/sidecar-expander/using/insert-fx/#sat-tape-console-soft)).
 - **Arp locks.** On a Sidecar seq track, hold a step and press FLTR: **LOCK ARP** locks the arpeggiator's MODE, SPD, RNG, GATE and SWNG (knobs A..E) for that step only. The touchscreen's ARP tool sets them too. They copy, paste and clear with the step ([Arp locks](/sidecar-expander/using/arpeggiator/#arp-locks)).
 - **List knobs step one entry a detent.** The recorder's source, insert A / B, FX TYPE and the other list knobs were far too quick; now the first turn after a rest steps at once, then one entry a detent. Thanks to the testers who reported it.
 - **A JUNO preset picked in the bank list sounds at once.** It used to show at once but could sound only after a track switch.
 - **The USER SLOTS page.** U1..U5's machines picked on the box's own screen: UP + YES, then the ring or the SIDECAR MENU ([The USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page)). On the Rytm and the A4.
 - **SOPHIE,** a new user machine: metallic FM percussion with four operator models and a kick body, ring delay and a multimode filter. A port of [Sophie](https://github.com/mestela/schwung-sophie) v0.5.1 by Matt Estela (MIT) ([User machines](/sidecar-expander/using/user-machines/#new-in-040-sophie)).
+
+On the Pi:
+
+- **Tonverk `.elmulti` instruments in MULTISAMPLE,** beside `.sfz`. The format is not publicly documented, so the conventions we read it by are unverified ([MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample)).
+- **Samples load on first play.** Nothing is loaded whole when a project opens, so projects open faster; a sample comes in when a voice selects it or, for MULTISAMPLE, after its first note ([The pool RAM](/sidecar-expander/using/pools/#the-pool-ram)).
+- **A 1280x720 touchscreen layout,** the default on the Pi 5's Touch Display 2; `res=` in `/.rytm/display.txt` picks another ([Screen sizes](/sidecar-expander/using/display/#screen-sizes)).
+- **Idle sleep on all four cores:** a cooler Pi; `/status` shows it as "idle" ([Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool)).
+- **Computer audio and MIDI over the Pi 5's USB-C,** in testing: on by default, `gadget=0` turns it off. A Pi 5 needs a USB-C power and data splitter or a header-pin supply for it ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)).
 
 On a new box:
 
@@ -63,10 +76,13 @@ The Pi:
 - **A box that comes up at full speed is re-enumerated.** Overbridge audio needs USB high speed. A Rytm or A4 found at full speed used to fail ("cannot submit the first URBs") until a replug; now the Pi resets its port and tries again, up to three times. Behind an external hub there is no retry, and the log says to replug.
 - **Pi 5 in 3 A mode: a note, not a warning.** With some 27 W adapters the Pi 5 reports 3 A mode. That only limits bus-powered USB devices to 600 mA; the Rytm and the A4 have their own supply. The warning is now for under-voltage only; 3 A mode alone is a note on the Power tile, in `/status` and in the log.
 - **The box's name and voice names on the touchscreen,** not always the Rytm's (above).
+- **Picking or clearing a sample on DSP SAMPLE no longer gives a dropout** (0.3.2's known issue). DSP SAMPLE's card reads, like the user-machine scan and the JUNO / FM lists, now run on the core that owns the card, not on the control core.
+- **The host link is found by the USB product, not the vendor name,** so another Elektron box is never taken for the Rytm.
 
 ### Known issues in 0.4.0
 
 - **An A4's screen froze once on a unit** and has not come back in ten tries to repeat it: the A4's sequencer and audio kept running, its UI stopped. If it happens, power-cycle the A4 and [report it](/sidecar-expander/using/troubleshooting/#reporting) with the Sidecar's log.
+- **Pi 5 computer audio over USB-C is in testing.** Please report whether your computer sees Sidecar | Expander and how it sounds.
 - **The full-speed retry has not been needed on hardware yet:** every Rytm and A4 connection in our tests came up at high speed. If a box comes up at full speed and stays silent, replug it and send us the log.
 - **Touch after a warm restart** may still not come back on some setups (0.3.2's known issue; a power cycle brings it back).
 - **On the A4:** the limits on its page, among them the LFO destination lists keeping stock's names ([Limits](/sidecar-expander/using/analog-four/#limits)).

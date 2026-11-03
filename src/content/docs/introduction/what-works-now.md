@@ -78,7 +78,7 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** Wi-Fi (saved from the web page, connected) | <span class="sc-ok">hardware</span> (2026-10-19) |
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
-| **Pi 5:** USB audio and MIDI to the computer | coming: not in this version; a Pi 5 ran 12 channels each way and MIDI in Ableton Live under Raspberry Pi OS |
+| **Pi 5:** USB audio and MIDI to the computer | <span class="sc-test">in testing</span>: new in 0.4.0, on by default ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
 
 ## New in 0.4.0
 
@@ -91,6 +91,19 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 | [The MIDI machine](/sidecar-expander/using/midi-machine/): notes and locks out as MIDI to DIN, USB-C or USB-A | <span class="sc-test">in testing</span>: emulator, not yet tried with a device on the other end |
 | [The arpeggiator](/sidecar-expander/using/arpeggiator/): UP + FLTR, MODE SPD RNG GATE SWNG per sound | <span class="sc-ok">hardware</span>: on FM, Pi 5 |
 | [Arp locks](/sidecar-expander/using/arpeggiator/#arp-locks) per step | <span class="sc-test">in testing</span>: no report from a real Rytm yet |
+| [MD's own page](/sidecar-expander/using/machines/#md) on the Rytm: ENGINE, TYPE, all 30 types | <span class="sc-ok">hardware</span> |
+| [The JUNO / 6-OP FM preset browser](/sidecar-expander/using/machines/#juno) on PAT (knob A) | <span class="sc-ok">hardware</span> |
+| DSP SAMPLE: SMP on knob A of SRC, opening the bank list | <span class="sc-test">in testing</span>: emulator |
+| DSP SAMPLE: MIX 0 on a new sound, the playhead on the page | <span class="sc-ok">hardware</span> |
+| [PAD OCT](/sidecar-expander/using/sequencer/#poly-config) in POLY CONFIG | <span class="sc-test">in testing</span> |
+| List knobs with up to 36 names | <span class="sc-test">in testing</span>: emulator |
+| Tonverk `.elmulti` instruments in [MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample) | <span class="sc-test">in testing</span>: host tests; the format's conventions unverified |
+| [Samples load on first play](/sidecar-expander/using/pools/#the-pool-ram), nothing whole at project load | <span class="sc-test">in testing</span> |
+| The [1280x720 layout](/sidecar-expander/using/display/#screen-sizes) on the Pi 5's Touch Display 2 | <span class="sc-test">in testing</span>: built and host-tested |
+| [Idle sleep](/sidecar-expander/using/troubleshooting/#keeping-it-cool) on all four cores | <span class="sc-ok">hardware</span>: Pi 5, 66 °C flat where it reached 79 °C |
+| [Computer audio and MIDI over the Pi 5's USB-C](/sidecar-expander/using/usb-audio-midi/), on by default | <span class="sc-test">in testing</span> |
+| DSP SAMPLE: no dropout when a sample is picked or cleared (card reads on the card's core) | <span class="sc-test">in testing</span>: host tests |
+| The host link found by the USB product, not the vendor name | <span class="sc-ok">hardware</span>: an A4 is no longer taken for the Rytm |
 | List knobs one entry a detent | <span class="sc-ok">hardware</span> |
 | A JUNO preset picked in the bank list sounds at once | <span class="sc-ok">hardware</span> |
 | [The USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page) | <span class="sc-ok">hardware</span>: on the Rytm and the A4 |
