@@ -52,6 +52,18 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
        --mod sidecar-a4-0.10.elemod --lockfile a4156.lock.json --version SA10 --out sidecar.syx
    ```
 
+   :::danger[Not on elekloader's web page]
+   Don't build the A4 firmware on elekloader's web page. It has no lock file, so it picks other versions of the parts and gives a file nobody has tested on an A4. Use the patcher or the command line above.
+   :::
+
+   **Check it before you flash.** The patcher checks it for you. On the command line, run `shasum -a 256 sidecar.syx`; it must be:
+
+   ```
+   2c18032346c37bbd5faefc533b6d88ee8b401721d2ca7679150821784c836fe0
+   ```
+
+   If yours differs, do not flash it. <!-- UNRELEASED: SA10 stamp; a 1.56 stamp changes this hash (release checklist, version stamp). -->
+
    **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
 2. **Flash it.** GLOBAL > SYSTEM > USB CONFIG: USB MIDI, connected to a computer. Send the `.syx` with Transfer as an OS update and press YES at UPGRADE OS NOW?. The A4 restarts.
 3. **Connect the Sidecar.** Set USB CONFIG to OVERBRIDGE and connect the A4 to the Pi's USB-A port. The first hello restarts the Pi once, into its own state folder `/.a4`. Samples, plugins and patch libraries stay shared with a Rytm's `/.rytm`.
