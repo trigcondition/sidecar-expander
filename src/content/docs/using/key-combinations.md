@@ -56,6 +56,7 @@ For Sidecar 0.3.0: the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card, Sidecar 
 | **UP + TRIG** | any track | the SEQ page of a poly track; on another track, the make prompt (or why it cannot be one) |
 | **UP + SRC** | a track on GRANULAR, WAVETABLE, MULTISAMPLE or DSP SAMPLE | the source list in one press: the machine's POOL bank list (DSP SAMPLE: its SMP list, knob D of the SMPL page) |
 | **UP + LFO** | anywhere | the Sidecar's [LFO page](/sidecar-expander/using/lfo/); again: leave |
+| **UP + FLTR** | anywhere | the selected track's [ARP page](/sidecar-expander/using/arpeggiator/) (0.4.0); again: leave |
 | **UP + FX** | anywhere | the [INSERT page](/sidecar-expander/using/insert-fx/); again: leave |
 | **UP + AMP** | anywhere | the INSERT page on its **OUT view** for the selected track: the [OUT route](/sidecar-expander/using/stereo-out/) (OUT TRK / PRE / POST, LEV, PAN, WID, DEC); again while open: aims the OUT view at the track now selected |
 | **FUNC + CHRO**, then **POLY CONFIG** | a track | the Rytm's own track menu; its last item opens the track's [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) (VOICES, ALLOCATION, UNISON, DETUNE, SPREAD, GROUP) |

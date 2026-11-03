@@ -24,6 +24,8 @@ Finished and confirmed on real hardware.
 - **The FX return on IN L/R:** the Rytm's delay and reverb return recorded and scoped as its own channels.
 - **Computer audio on the Sidecar Mini:** stereo USB audio to the computer.
 - **Smaller NoisePlethora packages and slot reasons** (!ROOM, !CRSH, !TIME) on the Rytm.
+- **The arpeggiator** (0.4.0): MODE, SPD, RNG, GATE and SWNG per sound on any Sidecar machine, heard on a real Rytm; arp locks per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
+- **The MIDI machine** (0.4.0): a track's notes and locks out as MIDI to the Rytm's DIN, the computer or USB MIDI devices ([MIDI machine](/sidecar-expander/using/midi-machine/)). Built and run in the emulator; not yet tried with a device on the other end.
 
 ## Released: 0.3.0
 
@@ -56,7 +58,8 @@ Being prepared for release ([Release notes](/sidecar-expander/release-notes/#sid
 
 - **Master FX:** a stereo chain after the Rytm's own effects, with a through mode for the Rytm's tracks and a limiter.
 - **SAT**, a tape, console and soft saturator for any insert slot.
-- **Arp locks:** the arpeggiator's MODE, SPD, RNG, GATE and SWNG locked per step.
+- **The MIDI machine:** a track's notes and locks out as MIDI, to the Rytm's DIN, the computer or USB MIDI devices ([MIDI machine](/sidecar-expander/using/midi-machine/)).
+- **The arpeggiator** on any Sidecar machine and the MIDI machine, with **arp locks** per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
 - **The USER SLOTS page** on the box's own screen, and **SOPHIE**, a new user machine.
 - **Analog Four MKII support:** the Sidecar's machines through the A4's analog voices ([Analog Four MKII](/sidecar-expander/using/analog-four/); what may come next for it: [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/)).
 - Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and flicker, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
@@ -77,7 +80,6 @@ Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's mai
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **PAD OCT:** a per-track octave for the CHRO pads, so a poly track's pads reach beyond C2..B5.
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
-- **A MIDI machine:** a user machine that sends its track's notes and knobs out as MIDI (to a computer, a USB MIDI device or the Rytm's MIDI out), like Tonverk's.
 - **.elmulti instruments:** MULTISAMPLE loads Elektron's multisample format next to `.sfz`.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
 - **A NEON pass:** the Pi's vector unit on the heaviest engines and the mixer, for more voices and effects.
@@ -125,5 +127,5 @@ Ideas we intend to build; not designed in detail yet.
 - **A page designer** in the browser: lay out remote UI pages with widgets, bind parameters, preview at 128x64, export the page for a machine or plugin.
 - **One-click bundles over SysEx:** fetch and restore the Rytm project itself as part of a bundle.
 - **Remote pages in the browser:** the same pages the Rytm shows, on the web page.
-- **Performance features:** an arpeggiator, more LFO targets, beat repeat variations, more polyphony, master effects.
+- **Performance features:** more LFO targets, beat repeat variations, more polyphony, master effects.
 - **More sampler tools:** resample in one click, sample chopping, larger sample banks.
