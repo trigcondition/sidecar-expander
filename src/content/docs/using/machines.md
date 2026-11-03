@@ -110,6 +110,7 @@ With the Rytm firmware 0.4.0:
 | ENG | MODAL, STRING or RESON (on the SMPL page from 0.4.0) |
 | STR, BRI, DMP | structure, brightness, damping |
 | MIX | dry sample against the resonator; 0 (only the sample) on a new sound from 0.4.0 |
+| SEED | no effect yet |
 | TUN, LEV | tuning, level |
 
 - **SMP** (new in 0.4.0: knob A of the SRC page, as on GRANULAR, WAVETABLE and MULTISAMPLE) picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it opens the same bank list as GRANULAR's, and FUNC + YES there loads a file into a row. **FUNC + YES on DSP SAMPLE's SRC page** opens the card's sample browser. LOAD TO PROJ in the SIDECAR folder fills the pool too. <span class="sc-test">in testing</span> (emulator). With the Rytm firmware 0.3.1, SMP and ENG had each other's places: ENG on SRC knob A, SMP on the SMPL page. Saved sounds and locks are unchanged.

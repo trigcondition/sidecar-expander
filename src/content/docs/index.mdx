@@ -51,6 +51,9 @@ import touchHome from '../../assets/touch/oled-home.png';
 import touchClassic from '../../assets/touch/classic-home.png';
 import touchStage from '../../assets/touch/oled-stage-home.png';
 import polyCfg from '../../assets/rytm/sc-poly-config.png';
+import mfxPage from '../../assets/rytm/sc-master-chain.png';
+import mfxEq from '../../assets/rytm/sc-master-eq.png';
+import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 
 <div class="sc-hero">
   <p class="sc-big" translate="no">Sidecar</p>
@@ -184,7 +187,11 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + AMP the OUT route, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
 </Feature>
 
-<Feature kicker="Master FX · 0.4.0" title="A master chain after the Rytm's own effects" href="/sidecar-expander/release-notes/#new-in-040" shots={[]}>
+<Feature kicker="Master FX · 0.4.0" title="A master chain after the Rytm's own effects" href="/sidecar-expander/using/master-fx/" shots={[
+  { src: mfxPage, alt: 'The MASTER page on the Rytm: four slots, COMP in slot 1, SRC MIX', pixel: true },
+  { src: mfxEq, alt: 'The MASTER EQ view on the Rytm', pixel: true },
+  { src: mfxTouch, alt: 'The MASTER FX page on the touchscreen in SRC MIX' },
+]}>
   <p>Four slots in a row, any insert type among them the new <a href="/sidecar-expander/using/insert-fx/#sat-tape-console-soft">SAT</a> tape, console and soft saturator, plus CHORUS, COMB, SPACE, RINGS, CLOUD and HALO as inserts, then a POST EQ, a level and a stereo limiter. In through mode the Rytm's own tracks join the chain too, panned as on the Rytm. Saved per kit, set on the Rytm's MASTER page, the touchscreen or the web page.</p>
 </Feature>
 
@@ -215,7 +222,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
 </ul>
 
-<p class="sc-note">New in 0.4.0: master FX, the SAT saturator, the <a href="/sidecar-expander/using/midi-machine/">MIDI machine</a>, the <a href="/sidecar-expander/using/arpeggiator/">arpeggiator</a> and arp locks, the USER SLOTS page, the SOPHIE user machine, <a href="/sidecar-expander/using/analog-four/">Analog Four MKII</a> support, and fixes on the Rytm (the SRC page's view after a BANK tap, the animated SRC pages' flicker). See the <a href="/sidecar-expander/release-notes/#sidecar-040">release notes</a>.</p>
+<p class="sc-note">New in 0.4.0: <a href="/sidecar-expander/using/master-fx/">master FX</a>, the SAT saturator, the <a href="/sidecar-expander/using/midi-machine/">MIDI machine</a>, the <a href="/sidecar-expander/using/arpeggiator/">arpeggiator</a> and arp locks, the USER SLOTS page, the SOPHIE user machine, <a href="/sidecar-expander/using/analog-four/">Analog Four MKII</a> support, and fixes on the Rytm (the SRC page's view after a BANK tap, the animated SRC pages' flicker). See the <a href="/sidecar-expander/release-notes/#sidecar-040">release notes</a>.</p>
 
 <p class="sc-note">0.3.2 added experimental <a href="/sidecar-expander/developers/digitakt/">Digitakt</a> support (emulator only) and the Touch Display 2 on the Pi 5.</p>
 

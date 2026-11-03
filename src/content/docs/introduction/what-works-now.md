@@ -86,7 +86,7 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 
 | Feature or fix | Status |
 |---|---|
-| Master FX: four slots, POST EQ, limiter, SRC RET and the through mode SRC MIX | <span class="sc-ok">hardware</span>: Pi 5, 2026-11-01 |
+| [Master FX](/sidecar-expander/using/master-fx/): four slots, POST EQ, limiter, SRC RET and the through mode SRC MIX | <span class="sc-ok">hardware</span>: Pi 5, 2026-11-01 |
 | [SAT](/sidecar-expander/using/insert-fx/#sat-tape-console-soft), the saturator insert | <span class="sc-ok">hardware</span>: heard on a Rytm |
 | [The MIDI machine](/sidecar-expander/using/midi-machine/): notes and locks out as MIDI to DIN, USB-C or USB-A | <span class="sc-test">in testing</span>: emulator, not yet tried with a device on the other end |
 | [The arpeggiator](/sidecar-expander/using/arpeggiator/): UP + FLTR, MODE SPD RNG GATE SWNG per sound | <span class="sc-ok">hardware</span>: on FM, Pi 5 |

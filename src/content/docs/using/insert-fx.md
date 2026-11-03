@@ -47,7 +47,7 @@ Changing TYPE crossfades without a click and loads the effect's defaults. Parame
 
 ## SAT: tape, console, soft
 
-<span class="sc-ok">hardware</span> New in 0.4.0. **SAT** is a saturator for any slot: a voice, a bus, the master chain. CHAR picks its character:
+<span class="sc-ok">hardware</span> New in 0.4.0. **SAT** is a saturator for any slot: a voice, a bus, the [master chain](/sidecar-expander/using/master-fx/). CHAR picks its character:
 
 - **TAPE**: the highs saturate first, the lows get a small bump around 100 Hz as DRV goes up.
 - **CONS**: clean for longer, then a firmer edge, as a console channel pushed.

@@ -54,7 +54,7 @@ A Pi-only release: super basic native support for Digitakt (experimental, emulat
 
 ([Release notes](/sidecar-expander/release-notes/#sidecar-040))
 
-- **Master FX:** a stereo chain after the Rytm's own effects, with a through mode for the Rytm's tracks and a limiter.
+- **[Master FX](/sidecar-expander/using/master-fx/):** a stereo chain after the Rytm's own effects, with a through mode for the Rytm's tracks and a limiter.
 - **SAT**, a tape, console and soft saturator for any insert slot.
 - **The MIDI machine:** a track's notes and locks out as MIDI, to the Rytm's DIN, the computer or USB MIDI devices ([MIDI machine](/sidecar-expander/using/midi-machine/)).
 - **The arpeggiator** on any Sidecar machine and the MIDI machine, with **arp locks** per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
