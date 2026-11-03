@@ -1,7 +1,73 @@
 ---
 title: Release notes
-description: "Sidecar 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
+description: "Sidecar 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
 ---
+
+## Sidecar 0.4.0
+
+<!-- UNRELEASED: Sidecar 0.4.0 is not released yet. Fill in every UNRELEASED mark in this section at release: commits, file names, zip names, hashes and the release-page links. -->
+
+**Master FX, a saturator, arp locks, a new user machine, and the Analog Four MKII as a box of its own.** It goes with the **Rytm firmware 0.4.0**: flash it for master FX and the Rytm fixes. Sidecar Mini stays at 0.1.0.
+
+| Part | File |
+|---|---|
+| Rytm firmware | `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod` (elekloader, OS 1.73, GPL-2.0-or-later), or build `rel0-4-0` in the browser patcher. Both give one `.syx` with SHA-256 `HASH` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share the built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: HASH is the Rytm .syx SHA-256; check the core and mod .elemod names and versions and the patcher build name --> |
+| Analog Four MKII firmware | the A4 mod, build SA12 or later, from the patcher or elekloader's command line, OS 1.56 ([Analog Four MKII](/sidecar-expander/using/analog-four/)). Never share the built `.syx` <!-- UNRELEASED: the A4 build name, its .elemod names, the a4-v release tag and the .syx SHA-256 --> |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-COMMIT-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-COMMIT-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: COMMIT is the release commit; set both zip names --> |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.0.zip`: 0.3.2's machines and **SOPHIE** (`sophie.a64.rmp`) <!-- UNRELEASED: the zip name --> |
+| Starter content | `sidecar-content-0.4.0.zip`: the same patches as 0.3.2 (also on the card) <!-- UNRELEASED: the zip name --> |
+| Checksums | `SHA256SUMS` on each release page |
+
+Downloads: the sidecar-firmware 0.4.0 release (the Pi), the sidecar-mods 0.4.0 release (the Rytm firmware) and the A4 mod's release (the A4 firmware). <!-- UNRELEASED: link the three release pages: https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0 and https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0, and the A4 mod's a4-v tag on sidecar-mods -->
+
+### Upgrading from 0.3.2
+
+1. **Flash the Rytm firmware 0.4.0** ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Master FX needs it for the Rytm's pans and routing in through mode, and the Rytm fixes below are in it.
+2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
+3. **With an NVMe SSD on a Pi 5:** add `nvme=1` to the one line in `cmdline.txt`. From 0.4.0 the Pi only looks for an SSD when asked ([Fixed in 0.4.0](#fixed-in-040)).
+4. **For SOPHIE:** upload `sophie.a64.rmp` from the user machines zip on the web page's User machines tab.
+
+From 0.3.1 do the same. From 0.3.0, the Rytm firmware 0.4.0 replaces 0.3.1, so flash it and copy the card. From 0.2.0, follow [Upgrading from 0.2.0](#upgrading-from-020) with the 0.4.0 card and the Rytm firmware 0.4.0.
+
+**With an Analog Four MKII:** flash the A4 firmware and connect it as on [Analog Four MKII](/sidecar-expander/using/analog-four/#install). The same 0.4.0 card serves the Rytm and the A4.
+
+### New in 0.4.0
+
+On the Rytm:
+
+- **Master FX.** A stereo chain after the Rytm's own effects: four slots (any insert type, SAT among them, and CHORUS, COMB, SPACE, RINGS, CLOUD and HALO, two of those at a time), a POST EQ (HPF, LPF, LOW, HIGH) and a level, with a stereo limiter last. Saved per kit. **SRC RET** (the default) takes the Sidecar's voices and returns. **SRC MIX**, the through mode, also takes every Rytm track you take off ROUTE TO MAIN, after its filter, amp and drive, panned as on the Rytm, with a STEM TRIM before the sum. The Rytm's delay and reverb stay outside the chain. Set it on the Rytm's **MASTER** page (on the ring and in the SIDECAR MENU), on the touchscreen (Settings > Send FX > Master) or on the web page's Send FX tab. No p-locks or LFOs on it yet.
+- **SAT,** a new insert type: a saturator with three characters, TAPE, CONS and SOFT, with DRV, TONE and MIX, for a voice, a bus or the master chain ([SAT](/sidecar-expander/using/insert-fx/#sat-tape-console-soft)).
+- **Arp locks.** On a Sidecar seq track, hold a step and press FLTR: **LOCK ARP** locks the arpeggiator's MODE, SPD, RNG, GATE and SWNG (knobs A..E) for that step only. The touchscreen's ARP tool sets them too. They copy, paste and clear with the step.
+- **List knobs step one entry a detent.** The recorder's source, insert A / B, FX TYPE and the other list knobs were far too quick; now the first turn after a rest steps at once, then one entry a detent. Thanks to the testers who reported it.
+- **A JUNO preset picked in the bank list sounds at once.** It used to show at once but could sound only after a track switch.
+- **The USER SLOTS page.** U1..U5's machines picked on the box's own screen: UP + YES, then the ring or the SIDECAR MENU ([The USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page)). On the Rytm and the A4.
+- **SOPHIE,** a new user machine: metallic FM percussion with four operator models and a kick body, ring delay and a multimode filter. A port of [Sophie](https://github.com/mestela/schwung-sophie) v0.5.1 by Matt Estela (MIT) ([User machines](/sidecar-expander/using/user-machines/#new-in-040-sophie)).
+
+On a new box:
+
+- **Analog Four MKII support.** The Sidecar's machines on the A4's tracks, through each voice's own analog filters, overdrive, amp and FX, with chords on any track, locks and LFOs on the machine's knobs, and the Sidecar's pages on the A4's screen with UP + YES. A4 mod build SA12 or later on OS 1.56, on a Pi 5 or a Pi 4. Everything, including what has run where and the limits: [Analog Four MKII](/sidecar-expander/using/analog-four/). What may come next: [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/).
+- **The box's name on the touchscreen.** With an A4 it says A4 CONNECTED or NO A4 and names its voices T1..T4 (splash, HOME, STATUS, REC, SCOPE, INSERT FX, VOICE, Sound), and the web page's Record tab lists T1..T4.
+
+### Fixed in 0.4.0
+
+The Rytm firmware:
+
+- **The Sidecar's view on the SRC page no longer gets stuck after a BANK tap.** Tapping a BANK key while the Sidecar's view was on the SRC page left the view away until a Rytm restart. It now comes back after the bank menu, and after CLEAR / UNDO CLEAR.
+- **The animated SRC pages no longer flicker.** With a DSP SAMPLE or WAVETABLE track playing, stock's screen could show through between frames of the Sidecar's page.
+
+The Pi:
+
+- **NVMe probe opt-in: `nvme=1`.** On a Pi 5 the search for an NVMe SSD at boot could drop a Rytm that was already attached ([issue 11](https://github.com/trigcondition/sidecar-firmware/issues/11)). The Pi now looks for an SSD only with `nvme=1` in `cmdline.txt`.
+- **A box that comes up at full speed is re-enumerated.** Overbridge audio needs USB high speed. A Rytm or A4 found at full speed used to fail ("cannot submit the first URBs") until a replug; now the Pi resets its port and tries again, up to three times. Behind an external hub there is no retry, and the log says to replug.
+- **Pi 5 in 3 A mode: a note, not a warning.** With some 27 W adapters the Pi 5 reports 3 A mode. That only limits bus-powered USB devices to 600 mA; the Rytm and the A4 have their own supply. The warning is now for under-voltage only; 3 A mode alone is a note on the Power tile, in `/status` and in the log.
+- **The box's name and voice names on the touchscreen,** not always the Rytm's (above).
+
+### Known issues in 0.4.0
+
+- **An A4's screen froze once on a unit** and has not come back in ten tries to repeat it: the A4's sequencer and audio kept running, its UI stopped. If it happens, power-cycle the A4 and [report it](/sidecar-expander/using/troubleshooting/#reporting) with the Sidecar's log.
+- **The full-speed retry has not been needed on hardware yet:** every Rytm and A4 connection in our tests came up at high speed. If a box comes up at full speed and stays silent, replug it and send us the log.
+- **Touch after a warm restart** may still not come back on some setups (0.3.2's known issue; a power cycle brings it back).
+- **On the A4:** the limits on its page, among them the LFO destination lists keeping stock's names ([Limits](/sidecar-expander/using/analog-four/#limits)).
 
 ## Sidecar 0.3.2
 
