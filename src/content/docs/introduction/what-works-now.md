@@ -11,9 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.3.2**, a Pi-only release: the Sidecar 0.3.2 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
-
-**0.4.0 is coming:** master FX, SAT, arp locks, the USER SLOTS page, SOPHIE and Analog Four MKII support ([Release notes](/sidecar-expander/release-notes/#sidecar-040), [Analog Four MKII](/sidecar-expander/using/analog-four/)). <!-- UNRELEASED: 0.4.0 is not out yet; at release, say it is the current release. -->
+This is **Sidecar 0.4.0**: the Sidecar 0.4.0 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0. <!-- UNRELEASED: 0.4.0 is not out yet; check this paragraph against the release (card, Rytm firmware, A4 build) and the version in BUILD-INFO. -->
 
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -81,6 +79,29 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
 | **Pi 5:** USB audio and MIDI to the computer | coming: not in this version; a Pi 5 ran 12 channels each way and MIDI in Ableton Live under Raspberry Pi OS |
+
+## New in 0.4.0
+
+The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Details: [Release notes](/sidecar-expander/release-notes/#sidecar-040).
+
+| Feature or fix | Status |
+|---|---|
+| Master FX: four slots, POST EQ, limiter, SRC RET and the through mode SRC MIX | <span class="sc-ok">hardware</span>: Pi 5, 2026-11-01 |
+| [SAT](/sidecar-expander/using/insert-fx/#sat-tape-console-soft), the saturator insert | <span class="sc-ok">hardware</span>: heard on a Rytm |
+| [The MIDI machine](/sidecar-expander/using/midi-machine/): notes and locks out as MIDI to DIN, USB-C or USB-A | <span class="sc-test">in testing</span>: emulator, not yet tried with a device on the other end |
+| [The arpeggiator](/sidecar-expander/using/arpeggiator/): UP + FLTR, MODE SPD RNG GATE SWNG per sound | <span class="sc-ok">hardware</span>: on FM, Pi 5 |
+| [Arp locks](/sidecar-expander/using/arpeggiator/#arp-locks) per step | <span class="sc-test">in testing</span>: no report from a real Rytm yet |
+| List knobs one entry a detent | <span class="sc-ok">hardware</span> |
+| A JUNO preset picked in the bank list sounds at once | <span class="sc-ok">hardware</span> |
+| [The USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page) | <span class="sc-ok">hardware</span>: on the Rytm and the A4 |
+| [SOPHIE](/sidecar-expander/using/user-machines/#new-in-040-sophie), a new user machine | <span class="sc-ok">hardware</span>: on the Rytm |
+| [Analog Four MKII support](/sidecar-expander/using/analog-four/) | <span class="sc-ok">hardware</span>: Pi 5 and Pi 4 ([What has run where](/sidecar-expander/using/analog-four/#what-has-run-where)) |
+| Rytm firmware: the SRC page's view comes back after a BANK tap | <span class="sc-ok">hardware</span>: a Rytm firmware build with both fixes, on a real Rytm |
+| Rytm firmware: the animated SRC pages without flicker | <span class="sc-ok">hardware</span>: the same build, on a real Rytm |
+| NVMe probe only with `nvme=1` | <span class="sc-ok">hardware</span>: the Pi 5 logs NVMe off |
+| Pi 5 in 3 A mode: a note, not a warning | <span class="sc-ok">hardware</span> |
+| The box's name and voice names on the touchscreen | <span class="sc-test">in testing</span>: not on hardware yet |
+| A box that comes up at full speed is re-enumerated | <span class="sc-test">in testing</span>: not needed on hardware yet, every connection came up at high speed |
 
 ## New in 0.3.2
 
