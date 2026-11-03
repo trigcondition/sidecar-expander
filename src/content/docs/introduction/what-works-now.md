@@ -13,6 +13,8 @@ Sidecar is in public testing. Each feature below is marked:
 
 This is **Sidecar 0.3.2**, a Pi-only release: the Sidecar 0.3.2 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
+**0.4.0 is coming:** master FX, SAT, arp locks, the USER SLOTS page, SOPHIE and Analog Four MKII support ([Release notes](/sidecar-expander/release-notes/#sidecar-040), [Analog Four MKII](/sidecar-expander/using/analog-four/)). <!-- UNRELEASED: 0.4.0 is not out yet; at release, say it is the current release. -->
+
 :::note
 The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 :::

@@ -61,7 +61,7 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 ## Known issues
 
-The releases' own lists are in the release notes: [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.4.0, coming](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 

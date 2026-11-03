@@ -12,6 +12,7 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
+- (0.4.0 is coming: its card and plugins zip come with its [release notes](/sidecar-expander/release-notes/#sidecar-040). <!-- UNRELEASED: 0.4.0 is not out yet; at release, say it is the current release. -->)
 - From the [Sidecar 0.3.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.2): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.3.2.zip` (the user machines) and `sidecar-content-0.3.2.zip` (the starter content, also on the card). The Rytm firmware is on the [Rytm firmware 0.3.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.3.1) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
 | Card zip | For |
@@ -104,6 +105,7 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `recbuf=MB` | auto | the recorder's memory. Auto gives a Pi 4 256 MB (about 55 s of all channels) and a 1 GB board 64 MB; 0 turns recording off |
 | `cpumhz=1500\|1200\|1000` | 1500 | the CPU clock in MHz (also the touchscreen's Settings > System > CPU clock, or `cpumhz=` on the console). Lower is cooler: [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool) |
 | `socmaxtemp=C` | 78 on new cards | the temperature in °C (40..78) above which the Pi slows itself down to 600 MHz; add it by hand to an older card |
+| `nvme=0\|1` | 0 | 0.4: Pi 5: look for an NVMe SSD on the PCIe connector at boot ([Storage](/sidecar-expander/using/storage/#nvme-ssd-pi-5)). Before 0.4.0 the search was on by default |
 | `paircode=` | (none: a new code at every start) | development cards only: `paircode=0` turns the [pairing code](/sidecar-expander/using/web-ui/#pairing-a-browser) off. Never on a card you share |
 
 Example: `sdport=0 display=0` for a Pi without a display.
@@ -143,13 +145,14 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
+| 0.4.0 release | the Rytm firmware 0.4.0 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.0 SD card | **UP + YES** |
 | 0.3.1 release | the Rytm firmware 0.3.1 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.3.1 SD card | **UP + YES** (TRK + YES still works) |
 | 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
 
 With a kernel older than 1021 the pages open without any text. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
 :::caution[New in 0.3]
-With 0.3.0, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too ([Storage](/sidecar-expander/using/storage/)).
+With 0.3.0, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too; from 0.4.0 only with `nvme=1` in `cmdline.txt` ([Storage](/sidecar-expander/using/storage/)).
 :::
 
 ## Wi-Fi without a cable: sidecar-wifi.txt

@@ -59,7 +59,7 @@ The log and the web page say which it is: "GPT partition table: use the MBR sche
 - An M.2 HAT on the Pi 5's PCIe connector (the official M.2 HAT+ or a bottom-mount NVMe base).
 - Format it **FAT32 with the MBR scheme**, as above (on Windows a 256 GB+ SSD needs a FAT32 tool). 512-byte sectors only.
 - **The NVMe driver is experimental.** Use an SSD with nothing on it you cannot lose; the SD card stays the boot drive and the place of record.
-- It is looked for once at boot (no hot-plug). `nvme=0` in `cmdline.txt` skips the search.
+- It is looked for once at boot (no hot-plug), and from 0.4.0 only with `nvme=1` in `cmdline.txt`: the search could drop a Rytm that was already attached. Before 0.4.0 it was on by default and `nvme=0` skipped it.
 - `stor=eject:NVME` unmounts it; it stays listed as ejected until the next boot (`stor=mount:NVME` mounts it again).
 
 ## Measuring a drive: `stor=bench`
