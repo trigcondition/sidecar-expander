@@ -6,10 +6,10 @@ sidebar:
   order: 30
 ---
 
-<!-- UNRELEASED: this page is `draft: true`, so a production build leaves it out. Lift the draft and every mark below only with Sidecar 0.4.0, after SA09 or its successor has run on a real A4. -->
+<!-- UNRELEASED: this page is `draft: true`, so a production build leaves it out. Lift the draft and every mark below only with Sidecar 0.4.0, after SA10 or its successor has run on a real A4. -->
 
 :::danger[Draft, not released]
-A4 support reaches people with Sidecar 0.4.0. This page describes mod 0.9 (build SA09), which **has not run on a real A4 yet**: it has passed the emulator suites and flash rehearsals only. The earlier builds it grew from ran on one A4, with a Pi 5.
+A4 support reaches people with Sidecar 0.4.0. This page describes mod 0.10 (build SA10), which **has not run on a real A4 yet**: it has passed the emulator suites and flash rehearsals only. The earlier builds it grew from ran on one A4, with a Pi 5.
 :::
 
 The Sidecar can drive an **Analog Four MKII** on OS 1.56. A track's sound picks a Sidecar machine; that track's trigs and knobs go to the Sidecar over USB, and the machine comes back over Overbridge, through stock's own track inputs, into that voice's analog path. So PLAITS or JUNO go through the A4's filters, overdrive, amp and FX. No audio code is patched.
@@ -18,7 +18,7 @@ With no Sidecar, or with every sound OFF, the A4 sounds and plays as stock. What
 
 ## What has run where
 
-| | <span class="sc-ok">on a real A4</span>, earlier builds | <span class="sc-test">emulator only</span>, SA09 |
+| | <span class="sc-ok">on a real A4</span>, earlier builds | <span class="sc-test">emulator only</span>, SA10 |
 |---|---|---|
 | Overbridge stream, machine through filter, drive and FX | Yes, 0 underruns | Yes |
 | The Sidecar's first start into `/.a4` | Yes | Yes |
@@ -45,11 +45,11 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
 
 1. **Build your firmware.** On the [patcher](/sidecar-expander/patcher/), pick the A4 build, drop your stock file on it, press **Patch**, then **Save**. It is done in your browser; nothing is uploaded, and the result is checked against the tested build. <!-- UNRELEASED: the entry is hidden and the deploy refuses it until release. -->
 
-   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.9`: **this release does not exist yet**) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
+   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.10`: **this release does not exist yet**) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
 
    ```sh
    python3 -m elekloader.patch --stock Analog-Four_MKII_OS1.56.syx --mod core-0.3.elemod \
-       --mod sidecar-a4-0.9.elemod --lockfile a4156.lock.json --version SA09 --out sidecar.syx
+       --mod sidecar-a4-0.10.elemod --lockfile a4156.lock.json --version SA10 --out sidecar.syx
    ```
 
    **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
@@ -132,7 +132,7 @@ Hold **UP** for a moment and press **YES**: the A4's screen shows the Sidecar's 
 
 While a page is open only the arrows, YES, NO and the knobs that page uses are the Sidecar's. The keyboard, track keys and transport stay stock's. If the Sidecar goes away, the stock screen returns by itself within about a second.
 
-UP still does its stock job as it goes down. On a parameter page that is the keyboard's octave up, so **each UP + YES there leaves the octave one higher**; DOWN brings it back. YES is the page's while it is open, so a held trig's note preview needs the page closed.
+UP still does its stock job as it goes down. On a parameter page that is the keyboard's octave up, so **each UP + YES there leaves the octave a step higher**, more than one if UP is held long; DOWN brings it back. YES is the page's while it is open, so a held trig's note preview needs the page closed.
 
 ## Limits
 

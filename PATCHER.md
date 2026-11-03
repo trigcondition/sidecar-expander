@@ -75,13 +75,13 @@ The packer, the SysEx transport and the depacker are elekloader's codec (GPL-2.0
 
 ## The Analog Four (UNRELEASED)
 
-> **UNRELEASED: build `a4-sa09` is hidden on the page, and the site will not deploy while `public/patcher/builds.json` marks it `unreleased`** (`scripts/check_unreleased.py`). It has not run on a real A4. To see it on a local copy, open the page with `?unreleased=1`.
+> **UNRELEASED: build `a4-sa10` is hidden on the page, and the site will not deploy while `public/patcher/builds.json` marks it `unreleased`** (`scripts/check_unreleased.py`). It has not run on a real A4. To see it on a local copy, open the page with `?unreleased=1`.
 
-The same patcher takes the A4 builds: stock `Analog-Four_MKII_OS1.56.syx`, SHA-256 `5aea489db3e747547f71d5e08a2d20253149fe6258defad60306402d2fc23cb5`. The web patcher does not read `.elemod` files: `core-0.3.elemod` + `sidecar-a4-0.9.elemod` are built into a `.syx` with the lock file, and its record file comes from that build.
+The same patcher takes the A4 builds: stock `Analog-Four_MKII_OS1.56.syx`, SHA-256 `5aea489db3e747547f71d5e08a2d20253149fe6258defad60306402d2fc23cb5`. The web patcher does not read `.elemod` files: `core-0.3.elemod` + `sidecar-a4-0.10.elemod` are built into a `.syx` with the lock file, and its record file comes from that build.
 
 | Build | Output file | SHA-256 |
 |---|---|---|
-| a4-sa09 | `Analog-Four_MKII_OS1.56_a4-sa09.syx` | `605ff0681de0d87a20a4d99359ac7f479c37c23d3237131ce68006870ddb9e5c` |
+| a4-sa10 | `Analog-Four_MKII_OS1.56_a4-sa10.syx` | `2c18032346c37bbd5faefc533b6d88ee8b401721d2ca7679150821784c836fe0` |
 
 ## For maintainers
 

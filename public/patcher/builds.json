@@ -23,18 +23,18 @@
       "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1027d without the remote pages."
     },
     {
-      "tag": "a4-sa09",
-      "title": "a4-sa09: Analog Four MKII, OS 1.56 (UNRELEASED)",
-      "description": "UNRELEASED: the A4 mod 0.9, never run on a real A4. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters and amp. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.9.elemod with the lock file and version SA09 (sha256 605ff068...db9e5c). Needs a Sidecar with the A4 pages.",
+      "tag": "a4-sa10",
+      "title": "a4-sa10: Analog Four MKII, OS 1.56 (UNRELEASED)",
+      "description": "UNRELEASED: the A4 mod 0.10, never run on a real A4. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters and amp. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.10.elemod with the lock file and version SA10 (sha256 2c180323...836fe0). Needs a Sidecar with the A4 pages.",
       "device": "Analog Four MKII",
       "stock_name": "Analog-Four_MKII_OS1.56.syx",
       "tool": "a4/tools/a4_patch.py",
       "unreleased": {
-        "why": "A4 support reaches people with Sidecar 0.4.0. SA09 has not been on a real A4.",
-        "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.9",
+        "why": "A4 support reaches people with Sidecar 0.4.0. SA10 has not been on a real A4.",
+        "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.10",
         "elemods": {
           "core-0.3.elemod": "88ba2587c7aaf4d598f6d8c96d2e6cd976accf21cef6d8e48087144428b9e98f",
-          "sidecar-a4-0.9.elemod": "430d97648d32cebb3ff7cdd82bd9c44179b52c3d9cfd02ea141a777afbf995e4"
+          "sidecar-a4-0.10.elemod": "430d97648d32cebb3ff7cdd82bd9c44179b52c3d9cfd02ea141a777afbf995e4"
         }
       }
     }
