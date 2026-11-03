@@ -1,15 +1,14 @@
 ---
 title: Analog Four MKII
-description: "DRAFT, unreleased. The Sidecar on an Analog Four MKII: a machine on a track's OSC1 page, through the A4's own filters and amp."
-draft: true
+description: "New in 0.4.0. The Sidecar on an Analog Four MKII: a machine on a track's OSC1 page, through the A4's own filters and amp."
 sidebar:
   order: 30
 ---
 
-<!-- UNRELEASED: this page is `draft: true`, so a production build leaves it out. Lift the draft and every mark below only with Sidecar 0.4.0, SA11 has run on a real A4 (2026-11-03). -->
+<!-- UNRELEASED: the release build is SA12 or later. At release, set its mod version, build name, release tag, .elemod name and SHA-256 below (each has its own mark), and lift the patcher entry's "unreleased". -->
 
-:::danger[Draft, not released]
-A4 support reaches people with Sidecar 0.4.0. This page describes mod 0.11 (build SA11). It has run on one A4, with a Pi 5 and a Pi 4, besides the emulator suites and flash rehearsals.
+:::note[New in 0.4.0]
+A4 support comes with Sidecar 0.4.0. It has run on an A4 with a Pi 5 and with a Pi 4, besides the emulator suites and flash rehearsals. What is next for the A4: the [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/).
 :::
 
 The Sidecar can drive an **Analog Four MKII** on OS 1.56. A track's sound picks a Sidecar machine; that track's trigs and knobs go to the Sidecar over USB, and the machine comes back over Overbridge, through stock's own track inputs, into that voice's analog path. So PLAITS or JUNO go through the A4's filters, overdrive, amp and FX. No audio code is patched.
@@ -46,12 +45,14 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
 
 1. **Build your firmware.** On the [patcher](/sidecar-expander/patcher/), pick the A4 build, drop your stock file on it, press **Patch**, then **Save**. It is done in your browser; nothing is uploaded, and the result is checked against the tested build. <!-- UNRELEASED: the entry is hidden and the deploy refuses it until release. -->
 
-   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.11`: **this release does not exist yet**) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
+   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.11` <!-- UNRELEASED: the release build's tag -->) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
 
    ```sh
    python3 -m elekloader.patch --stock Analog-Four_MKII_OS1.56.syx --mod core-0.3.elemod \
        --mod sidecar-a4-0.11.elemod --lockfile a4156.lock.json --version SA11 --out sidecar.syx
    ```
+
+   <!-- UNRELEASED: the .elemod name and --version above are SA11's; set the release build's. -->
 
    :::danger[Not on elekloader's web page]
    Don't build the A4 firmware on elekloader's web page. It has no lock file, so it picks other versions of the parts and gives a file nobody has tested on an A4. Use the patcher or the command line above.
@@ -63,7 +64,7 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
    358c8ed35ad49bb6fb50caa7c718ec499e2c48937efb363caa455a13ca648a52
    ```
 
-   If yours differs, do not flash it. <!-- UNRELEASED: SA11 stamp; a 1.56 stamp changes this hash (release checklist, version stamp). -->
+   If yours differs, do not flash it. <!-- UNRELEASED: this is SA11's hash; set the release build's (SA12 or later). A 1.56 stamp changes it too. -->
 
    **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
 2. **Flash it.** GLOBAL > SYSTEM > USB CONFIG: USB MIDI, connected to a computer. Send the `.syx` with Transfer as an OS update and press YES at UPGRADE OS NOW?. The A4 restarts.
@@ -85,7 +86,7 @@ The OSC1 key steps two pages, **OSC1** and **NOISE**. A sound with a machine tur
 | F, **OS2** | ANALOG or MACHINE, below |
 | G, H, I, J | Four more of the machine's parameters, under its names. Empty where a machine has none |
 
-U1..U5 are what the Sidecar's User machines tab put in those slots.
+U1..U5 are what you put in those slots: on the A4 itself with the [USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page), or on the web page's User machines tab.
 
 **A pick from OFF** writes the machine's defaults on its knobs and sets OSC1 LEV to 0, so the analog oscillator is out of the way. Turning on through the list keeps writing defaults as long as no knob has moved. From one machine to another with a knob moved, nothing is written. Back to OFF, the hidden values return to stock's ranges; OSC1 LEV stays where it is.
 
@@ -138,7 +139,7 @@ Hold **UP** for a moment and press **YES**: the A4's screen shows the Sidecar's 
 
 | Key | |
 |---|---|
-| LEFT, RIGHT | SIDECAR, SYSTEM, a page for each track with a machine, SCOPE, REC |
+| LEFT, RIGHT | SIDECAR, SYSTEM, a page for each track with a machine, SCOPE, REC, USER SLOTS (LEFT once on SIDECAR) |
 | YES | On SIDECAR: the MENU |
 | NO | Back; on SIDECAR, leaves |
 | Any stock page key | Leaves, and does its stock job |
