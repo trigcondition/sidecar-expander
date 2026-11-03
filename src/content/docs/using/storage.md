@@ -5,10 +5,6 @@ sidebar:
   order: 6.6
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0. Built and tested on the Mac; USB sticks have had first runs on a Pi 4, the drives' speeds are not measured on a Pi yet. Sidecar (Pi) only.
-:::
-
 The Sidecar boots from its **SD card**, which stays the place of record: projects, pools and samples live there. Besides it, it mounts **USB drives** as they are plugged in and, on the Pi 5, an **NVMe SSD**. In 0.3.0 a USB stick is used for:
 
 - **recordings:** record straight to the stick ([Recording to a USB drive](/sidecar-expander/using/recorder/#recording-to-a-usb-drive));

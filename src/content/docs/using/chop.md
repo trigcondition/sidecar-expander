@@ -5,9 +5,7 @@ sidebar:
   order: 3.15
 ---
 
-:::caution[New in 0.3.0]
-Sidecar (Pi) only, with the Rytm firmware 0.3.0. Built and tested on the Mac and in the emulator. <span class="sc-test">in testing</span>
-:::
+<span class="sc-test">in testing</span> (Mac and emulator)
 
 **CHOP** is a Sidecar machine that cuts one sample into up to **64 slices** and plays them from the Rytm's trigs, its pads in CHRO mode and the Sidecar sequencer. Every slice has its own settings (pitch, gain, reverse, envelope, loop, choke group and more). The settings never change the sample itself.
 

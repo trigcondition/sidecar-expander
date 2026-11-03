@@ -5,10 +5,6 @@ sidebar:
   order: 1.1
 ---
 
-:::caution[New in 0.3]
-For Sidecar 0.3.0: the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card, Sidecar (Pi). Rows marked 0.2 also work with the 0.2.0 release's `rui1027d`, where the Sidecar key is still TRK (TRK + YES, TRK + LFO).
-:::
-
 **UP is the Sidecar key.** Hold UP and press a second key. The stock Rytm leaves all of these combinations free, so nothing of the Rytm's own is lost. UP alone still moves the cursor in the Rytm's menus.
 
 - **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen, in two columns, and lights T1..T13 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.

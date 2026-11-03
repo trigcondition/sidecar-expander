@@ -33,22 +33,22 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Voices released and FX tails cleared on every reconnect | <span class="sc-test">in testing</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1027d`)
+## The remote pages
 
 | Feature | Status |
 |---|---|
-| Remote pages on the Rytm's screen (TRK + YES) in the Rytm's own font | <span class="sc-ok">hardware</span> |
+| Remote pages on the Rytm's screen (UP + YES) in the Rytm's own font | <span class="sc-ok">hardware</span> |
 | Status pages SIDECAR + SYSTEM (they catch every knob) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Key pass-through: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo reach the Rytm on a page | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Connect screen when the Sidecar comes up | <span class="sc-ok">hardware</span> (2026-10-18) |
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
 | REC page: arm, record, stop | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Machine pages only for tracks on a Sidecar machine, shown on the SRC page (not in the TRK + YES list) with `rui1027d`; they follow a machine change at once | <span class="sc-ok">hardware</span> (2026-10-19) |
+| Machine pages only for tracks on a Sidecar machine, shown on the SRC page (not in the UP + YES list); they follow a machine change at once | <span class="sc-ok">hardware</span> (2026-10-19) |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
-| SRC view (`rui1027d`): the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's, also after a USB replug | <span class="sc-ok">hardware</span> (2026-10-19) |
+| SRC view: the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's, also after a USB replug | <span class="sc-ok">hardware</span> (2026-10-19) |
 | Voice pages named by track (BD, SD, ...), meters and SCOPE in track order, JUNO pages per track, PAT presets | <span class="sc-ok">hardware</span> (Pi) |
-| LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
+| LFO page (UP + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
 | NO on SIDECAR leaves; unused user-machine knobs as hatched boxes on the Rytm's SRC / SMPL pages; preset names at once | <span class="sc-test">in testing</span> |
 | FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18) |

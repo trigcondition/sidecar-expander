@@ -145,14 +145,10 @@ Use a Rytm build and a Sidecar build of the same line:
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
 | 0.4.0 release | the Rytm firmware 0.4.0 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.0 SD card | **UP + YES** |
-| 0.3.1 release | the Rytm firmware 0.3.1 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.3.1 SD card | **UP + YES** (TRK + YES still works) |
-| 0.2.0 release | `rui1027d` | the 0.2.0 SD card package (kernel 1021 or later) | TRK + YES |
 
-With a kernel older than 1021 the pages open without any text. An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
 
-:::caution[New in 0.3]
-With 0.3.0, a USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too; from 0.4.0 only with `nvme=1` in `cmdline.txt` ([Storage](/sidecar-expander/using/storage/)).
-:::
+A USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too, with `nvme=1` in `cmdline.txt` ([Storage](/sidecar-expander/using/storage/)).
 
 ## Wi-Fi without a cable: sidecar-wifi.txt
 

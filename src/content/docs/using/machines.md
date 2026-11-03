@@ -7,14 +7,13 @@ sidebar:
 
 The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
-:::caution[New in 0.3]
-Sidecar 0.3.0 (Sidecar (Pi) only) adds to every machine on this page:
+Beside the machines on this page:
 
-- three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on 6-OP FM: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
-- two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK, as before) or in stereo on the Rytm's main mix (PRE / POST);
+- three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on every machine: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
+- two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK) or in stereo on the Rytm's main mix (PRE / POST);
 - the project's [POOL lists](/sidecar-expander/using/pools/) as the source of samples, wavetables and instruments;
-- **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/).
-:::
+- **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/);
+- the [MIDI machine](/sidecar-expander/using/midi-machine/), which sends a track's notes as MIDI.
 
 All knobs are 0..127 with the Rytm's fine resolution. List knobs (ENG, PAT, MOD) split their range into equal zones, one per item.
 

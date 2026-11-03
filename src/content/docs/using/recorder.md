@@ -21,9 +21,7 @@ The Pi records the Rytm's Overbridge channels, its own voices and the effect ret
 | `21_FX1`, `22_FX2` | each send effect's own return, stereo |
 | `23_PRE`, `24_POST` (0.3) | the voices routed PRE and POST, as the Sidecar sends them to the Rytm's main mix, stereo |
 
-:::caution[New in 0.3]
-With the [OUT route](/sidecar-expander/using/stereo-out/) (Sidecar 0.3.0), a voice on PRE or POST when a take starts records its own `VOICEn` file in stereo, L and R as rendered, and two more sources hold the PRE and POST pairs. The route is read when the take is armed or started; a route change during a take does not change its files. <span class="sc-test">in testing</span> (Mac)
-:::
+With the [OUT route](/sidecar-expander/using/stereo-out/), a voice on PRE or POST when a take starts records its own `VOICEn` file in stereo, L and R as rendered, and two more sources hold the PRE and POST pairs. The route is read when the take is armed or started; a route change during a take does not change its files. <span class="sc-test">in testing</span> (Mac)
 
 ## Recording from the web page
 

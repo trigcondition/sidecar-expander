@@ -5,10 +5,6 @@ sidebar:
   order: 3.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
-:::
-
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
 
 ## Chords on page 2

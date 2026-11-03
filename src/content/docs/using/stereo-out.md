@@ -5,10 +5,6 @@ sidebar:
   order: 2.2
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested on the Mac; **not yet measured on a real Rytm** (see [Measurements](#measurements-pending)). Sidecar (Pi) only.
-:::
-
 Every Sidecar voice normally comes back on its own Rytm track, in mono, through the track's analog filter and amp. The **OUT** route can send it past the track instead: straight onto the Rytm's main mix, in stereo. <span class="sc-test">in testing</span>
 
 ## TRK, PRE and POST

@@ -5,10 +5,6 @@ sidebar:
   order: 2.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
-:::
-
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>
 
 ## Signal flow

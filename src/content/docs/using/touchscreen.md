@@ -5,9 +5,7 @@ sidebar:
   order: 7.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/). The pages are rendered and their touch controls checked off-device; the OLED theme and the SEQ page have been used on a Pi 4 with a 7" DSI panel (OSOYOO).
-:::
+Which displays work, the screen sizes and the display settings: [The display](/sidecar-expander/using/display/).
 
 The touchscreen follows the Rytm: it shows the track you select there, and the Rytm can switch its pages (UP + T1..T13). The Rytm's keys and knobs come first; the touchscreen shows more and edits what is easier by touch. **It is optional:** without it the Sidecar's pages open on the Rytm's own screen, and the web page covers setup. <span class="sc-test">in testing</span>
 

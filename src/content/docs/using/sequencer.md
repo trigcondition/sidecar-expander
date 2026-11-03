@@ -5,10 +5,6 @@ sidebar:
   order: 3.2
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). First used on a real Rytm with a Pi 4 (build `rui1039`); the fixes and additions since (the TRIG view, trig conditions, step copy, pattern reload and save, jumps, UP as the Sidecar key, poly tracks on every Sidecar machine, POLY CONFIG, the seeded random) are tested in the emulator and on the Mac. Poly tracks per pattern and NOTE EDIT have been used on a real Rytm; their newest versions (the SEQ page's keys, the new NOTE EDIT screen) are being checked with the 0.3.0 release. Sidecar (Pi) only.
-:::
-
 A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
 
 <span class="sc-test">in testing</span>

@@ -5,10 +5,6 @@ sidebar:
   order: 3.3
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested on the Mac and in the emulator; not yet run on a Pi or a real Rytm. Sidecar (Pi) only. The pools replace the per-machine source banks and the DSP SAMPLE pool of the 0.3 test builds; projects made with those open with the template below.
-:::
-
 Every project has three **POOL** lists: the sounds its tracks pick from, in fixed rows. The Rytm's knob stores a row, never a file name, so a kit or a p-lock plays the same row whatever you load. <span class="sc-test">in testing</span>
 
 ## The three lists

@@ -7,9 +7,7 @@ sidebar:
 
 <!-- UNRELEASED: the release build is SA12 or later. At release, set its mod version, build name, release tag, .elemod name and SHA-256 below (each has its own mark), and lift the patcher entry's "unreleased". -->
 
-:::note[New in 0.4.0]
-A4 support comes with Sidecar 0.4.0. It has run on an A4 with a Pi 5 and with a Pi 4, besides the emulator suites and flash rehearsals. What is next for the A4: the [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/).
-:::
+It has run on an A4 with a Pi 5 and with a Pi 4, besides the emulator suites and flash rehearsals. What may come next for the A4: the [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/).
 
 The Sidecar can drive an **Analog Four MKII** on OS 1.56. A track's sound picks a Sidecar machine; that track's trigs and knobs go to the Sidecar over USB, and the machine comes back over Overbridge, through stock's own track inputs, into that voice's analog path. So PLAITS or JUNO go through the A4's filters, overdrive, amp and FX. No audio code is patched.
 
