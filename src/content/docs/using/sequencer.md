@@ -77,7 +77,7 @@ In CHRO mode the Rytm's 12 pads play 12 semitones. **UP / DOWN** move them **4 s
 | the default | C4 .. B4 |
 | highest (UP 3 times) | C5 .. B5 |
 
-So the pads reach **C2 .. B5**. For notes outside that range, use the NOTE knob under a held trig, NOTE EDIT, a MIDI keyboard or the touchscreen's piano roll. A per-track octave shift for the pads (PAD OCT) is planned.
+So the pads reach **C2 .. B5**. For notes outside that range, use the NOTE knob under a held trig, NOTE EDIT, a MIDI keyboard or the touchscreen's piano roll. Or set the track's **PAD OCT** in POLY CONFIG (0.4.0, below).
 
 ![The poly track's menu: LT: POLY TRACK, BACK TO THE SEQ, TURN OFF (STEPS KEPT), LENGTH (KNOB C), QUANTISE (KNOB D)](../../../assets/rytm/sc-seq-menu.png)
 ![The turn-off prompt: LT: POLY TRACK OFF? ITS STEPS STAY SAVED. B UP: BACK ON. YES: TURN OFF, NO: KEEP](../../../assets/rytm/sc-seq-off.png)
@@ -94,10 +94,12 @@ Each poly track has a **POLY CONFIG**, named and modelled after the Analog Four 
 | **D** DTUN | **DETUNE** of the stack | 0..127 (127: ±50 cents at the stack's edges; FUNC: by 8) |
 | **E** SPRD | **SPREAD**: the stack across the stereo field | 0..127 (needs the voice on OUT [PRE / POST](/sidecar-expander/using/stereo-out/); FUNC: by 8) |
 | **F** GRP | **GROUP** | OFF, 1..4: stored, not played yet |
+| **G** OCT | **PAD OCT** (0.4.0): the CHRO pads' octave on this track | -3..3: each step moves what the pads play by 12 semitones, so they reach 0..119 |
 
 - The line under the title says what the config resolves to now: `4 NOTES 4 INST 2.92%` (notes, instances, their share of a core), with `CUT` when the budget or the machine's maximum cut it.
 - 6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR allocate from their own pools: they take **VOICES** only, B..E read `-`.
 - On a Sidecar track that is no poly track yet, the page says so and **YES** makes it one. On an analog track it explains that the Rytm's voice is mono.
+- **PAD OCT** shifts the pads and the Rytm's pad notes on this track only. Recorded steps hold the shifted pitch, the one you hear. A keyboard on the Pi and the sequencer's own playback are not shifted, and steps already recorded stay where they are when OCT changes. <span class="sc-test">in testing</span>
 - **NO** goes back to the Rytm's own screen.
 - **Where it is stored:** in the pattern, and as the track's default in the project. A track plays its pattern's config, else its default (the last one set on it), so a track keeps its voicing across patterns, and a pattern may still differ.
 - The same config is on the touchscreen's SEQ page (the **POLY** tool), the web page (**Sound > Poly tracks**) and the console (`seq=poly:T:voices=4,alloc=rotate,unison=2,detune=30,spread=64`).

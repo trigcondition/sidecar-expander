@@ -73,6 +73,8 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
 
 **With a Rytm too:** a box already streaming keeps the Sidecar, and the other waits. At a start with both attached, the Rytm takes it and the A4 waits.
 
+**Experimental: a stock A4 beside the Rytm.** `a4=1` in `cmdline.txt` takes an Analog Four MKII without the mod, in OVERBRIDGE mode on a USB-A port, and mixes its MAIN into the Rytm's PRE pair, resampled to the Rytm's clock (`a4ch=N` picks another A4 output pair, `a4att=N` lowers it by N dB, 6 by default). Audio only: no machines, no pages. Not for an A4 with the mod, which needs no option. It has not been run with both boxes streaming on hardware.
+
 ## Pages
 
 The OSC1 key steps two pages, **OSC1** and **NOISE**. A sound with a machine turns both into the machine's; a sound on OFF shows stock.

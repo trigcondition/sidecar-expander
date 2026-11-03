@@ -139,7 +139,7 @@ One shared memory for the samples of GRANULAR, DSP SAMPLE and MULTISAMPLE: a fil
 - Every POOL view shows it as MB and percent (`RAM 412 MB 40%`). WAVETABLE's table memory is counted in the figure.
 - When it is full, the least recently used samples that no voice is playing make room.
 - A sample longer than 87 s at 48 kHz is cut (`TOO LONG: FIRST 87 S`); a wavetable file is at most 8 MB (`TOO BIG: 8 MB MAX`).
-- When a project opens, the SAMPLES rows it played most are loaded ahead, as far as there is free room. Tables and instruments load when a voice uses them.
+- **Samples load on first play (0.4.0):** nothing is loaded whole when a project opens, so projects open faster. A sample comes in when a voice selects it (GRANULAR, CHOP, DSP SAMPLE); a MULTISAMPLE instrument brings its heads, and the rest of a sample comes into memory in the background after its first note. Then it stays until the room is needed. Tables load when a voice uses them. <span class="sc-test">in testing</span>
 - MULTISAMPLE keeps the first half second of each sample in memory and streams the rest; a row can be held whole ("always in RAM", see [Stereo and the OUT route](/sidecar-expander/using/stereo-out/#the-streaming-budget)).
 
 ## The sample library
