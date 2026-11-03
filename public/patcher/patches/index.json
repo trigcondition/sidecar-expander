@@ -8,7 +8,10 @@
    "description": "The mods for Sidecar 0.3.1: everything in rel0-3-0, plus the fix that makes send FX follow a kit switch at once. The same file elekloader builds from core 0.1 + rytm-sidecar-0.3.1.elemod (sha256 a203db27...3df3c). Goes with Sidecar 0.3.1 on the Pi.",
    "output": "Analog-Rytm_MKII_OS1.73_rel0-3-1.syx",
    "output_sha256": "a203db27201aabbdaa285ccb7c40a168075206c0ce91477671fcfae729c3df3c",
-   "source_commit": "d10f2e8"
+   "source_commit": "d10f2e8",
+   "device": "Analog Rytm MKII",
+   "os": "1.73",
+   "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
   },
   {
    "file": "sidecar-rel0-3-0.json",
@@ -17,7 +20,10 @@
    "description": "The mods for Sidecar 0.3.0: everything in rui1027d, plus projects keyed by the Rytm's slots (SAVE AS / copy / clear follow, the project trash), kits following SAVE / RELOAD KIT, NO + KIT / PATTERN reload on the Sidecar's pages, the poly sequencer's pages and keys (FUNC + YES undo, FUNC + DOWN menu), the SIDECAR MENU with WEB UI (the pairing code), and a freeze probe that reports a stuck Rytm screen to the Sidecar. The same file elekloader builds from core 0.1 + rytm-sidecar-0.3.0.elemod (sha256 893ed9a5...733ab). Needs Sidecar 0.3.0 on the Pi.",
    "output": "Analog-Rytm_MKII_OS1.73_rel0-3-0.syx",
    "output_sha256": "893ed9a5fc27ab18687c1ea95d7a07f4ff4b23fde235173ce332e54055a733ab",
-   "source_commit": "5c3087e"
+   "source_commit": "5c3087e",
+   "device": "Analog Rytm MKII",
+   "os": "1.73",
+   "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
   },
   {
    "file": "sidecar-rui1027d.json",
@@ -26,7 +32,10 @@
    "description": "Everything in sfx1021, plus the remote pages: a connect screen when the Sidecar comes up, and with TRK + YES the SIDECAR and SYSTEM status pages, SCOPE and meters, the LFO page (TRK + LFO), the REC page with playback and channel picking on the trig keys (Sidecar on the Pi) and the voice pages, in the Rytm's own font, on Sidecar Mini and Sidecar; the SRC view (the Sidecar machine's page on the Rytm's own SRC page); the Rytm's FX return on IN L/R for recording and SCOPE. The page catches only the keys and knobs it uses: PLAY / STOP / RECORD always reach the Rytm, pads, mutes, FILL and tap tempo work as usual.",
    "output": "Analog-Rytm_MKII_OS1.73_rui1027d.syx",
    "output_sha256": "4843848805c0e08b3cf7c69bf5b68ca7e1453bb643d351709bdad9f59468dce8",
-   "source_commit": "4933c8514bd09ce0ec4e1ea6137a02dd7c3e323a"
+   "source_commit": "4933c8514bd09ce0ec4e1ea6137a02dd7c3e323a",
+   "device": "Analog Rytm MKII",
+   "os": "1.73",
+   "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
   },
   {
    "file": "sidecar-sfx1021.json",
@@ -35,7 +44,23 @@
    "description": "External voice machines (PLAITS, DAISYSP, JUNO, FM, DIGIDRUM, DSP SAMPLE and user machines) on every track, the SEND FX 1/2 pages (AMPLITUDE 2; TYPE and P1..P5 with the Sidecar's FX labels, stepped lists), and the SIDECAR folder in the sample browser. The same mods as rui1027d without the remote pages.",
    "output": "Analog-Rytm_MKII_OS1.73_sfx1021.syx",
    "output_sha256": "e86805ff1e2c5a2e2784bf455fe5fdd6c2336463da04892442e451445fa82f4e",
-   "source_commit": "45083480b0995175d528ab826302787d8e91ecd8"
+   "source_commit": "45083480b0995175d528ab826302787d8e91ecd8",
+   "device": "Analog Rytm MKII",
+   "os": "1.73",
+   "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
+  },
+  {
+   "file": "sidecar-a4-sa10.json",
+   "tag": "a4-sa10",
+   "title": "a4-sa10: Analog Four MKII, OS 1.56 (UNRELEASED)",
+   "description": "UNRELEASED: the A4 mod 0.10, never run on a real A4. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters and amp. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.10.elemod with the lock file and version SA10 (sha256 2c180323...836fe0). Needs a Sidecar with the A4 pages.",
+   "output": "Analog-Four_MKII_OS1.56_a4-sa10.syx",
+   "output_sha256": "2c18032346c37bbd5faefc533b6d88ee8b401721d2ca7679150821784c836fe0",
+   "source_commit": "13c37af",
+   "device": "Analog Four MKII",
+   "os": "1.56",
+   "stock_name": "Analog-Four_MKII_OS1.56.syx",
+   "unreleased": true
   }
  ]
 }

@@ -73,6 +73,16 @@ The patch files contain no checksums, headers or framing from the stock file. Ev
 
 The packer, the SysEx transport and the depacker are elekloader's codec (GPL-2.0-or-later), which comes from digikit. Both patchers carry a copy of it. The browser patcher is a line-for-line port, tested to give the same bytes as the Python on every build.
 
+## The Analog Four (UNRELEASED)
+
+> **UNRELEASED: build `a4-sa10` is hidden on the page, and the site will not deploy while `public/patcher/builds.json` marks it `unreleased`** (`scripts/check_unreleased.py`). It has not run on a real A4. To see it on a local copy, open the page with `?unreleased=1`.
+
+The same patcher takes the A4 builds: stock `Analog-Four_MKII_OS1.56.syx`, SHA-256 `5aea489db3e747547f71d5e08a2d20253149fe6258defad60306402d2fc23cb5`. The web patcher does not read `.elemod` files: `core-0.3.elemod` + `sidecar-a4-0.10.elemod` are built into a `.syx` with the lock file, and its record file comes from that build.
+
+| Build | Output file | SHA-256 |
+|---|---|---|
+| a4-sa10 | `Analog-Four_MKII_OS1.56_a4-sa10.syx` | `2c18032346c37bbd5faefc533b6d88ee8b401721d2ca7679150821784c836fe0` |
+
 ## For maintainers
 
 Make the patch files from a rytm-mods build:
@@ -81,3 +91,5 @@ Make the patch files from a rytm-mods build:
     scripts/test_patcher.sh <build folder>
 
 `--dir` holds the stock `.syx` and the built `Analog-Rytm_MKII_OS1.73_<tag>.syx` files. The tags and their titles are listed in `public/patcher/builds.json`. rytm-mods' `tools/release_patch.py` refuses to write a patch unless the records rebuild the built `.syx` byte for byte and no literal holds 4 consecutive bytes found in any stock section. `test_patcher.sh` runs both patchers (the JavaScript one in Node) and compares their output with the builds.
+
+A box other than the Rytm: its entry in `builds.json` names its `stock_name` and its `tool` under `--mods` (`a4/tools/a4_patch.py` in sidecar-mods), and `--dir` holds its stock file and build. A build marked `unreleased` stays hidden and stops the deploy: on release day delete the key, rerun `make_patches.py`, lift the `draft` of `src/content/docs/using/analog-four.md`.
