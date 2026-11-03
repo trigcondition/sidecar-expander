@@ -33,7 +33,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
-| Use | **with a computer**: the Sidecar is also a USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone** for now: USB audio and MIDI to the computer are coming |
+| Use | **with a computer**: the Sidecar is also a USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **with a computer** too, from 0.4.0 (<span class="sc-test">in testing</span>): needs a USB-C power and data splitter or a header-pin supply ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
 | Supply | official 5.1 V 3 A USB-C | official 27 W USB-C, directly: from a hub's port the Pi 5 ran in reduced-power mode and the web page became slow ("503 busy"). The Sidecar warns about a weak supply |
 | HDMI display (micro-HDMI 0) | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to the firmware's 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | <span class="sc-ok">hardware</span> (OSOYOO 7" DSI, 0.3.0) | driven by the engine: <span class="sc-test">in testing</span> |

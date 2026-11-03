@@ -204,7 +204,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
-| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone** for now: USB audio and MIDI to the computer are coming |
+| Use | **with a computer**: also the Sidecar's USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **with a computer** too, from 0.4.0 (<span class="sc-test">in testing</span>): needs a USB-C power and data splitter or a header-pin supply |
 | Supply | official 5.1 V 3 A USB-C | official **27 W** USB-C, plugged in **directly** |
 | HDMI display | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
@@ -213,7 +213,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 
 What is different on the Pi 5 for now:
 
-- **No USB audio or MIDI to the computer yet.** The Sidecar doesn't use the Pi 5's USB-C port for this yet, so for now it only takes power (on the Pi 4 it is also the Sidecar's audio and MIDI interface). **Support is coming:** a Pi 5 under Raspberry Pi OS ran 12 audio channels in each direction and MIDI through that port, into Ableton Live, with power from a separate supply.
+- **USB audio and MIDI to the computer** (<span class="sc-test">in testing</span>, new in 0.4.0): on by default over the Pi 5's USB-C port, `gadget=0` turns it off. That port is also the Pi 5's power input, and a computer cannot power a Pi 5, so it needs a USB-C power and data splitter or a header-pin supply: [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached).
 - **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its UI to it, so the picture is slightly soft. The same holds for both card zips. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
 - **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up), the 1024x600 UI centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
