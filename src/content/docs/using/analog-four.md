@@ -6,10 +6,10 @@ sidebar:
   order: 30
 ---
 
-<!-- UNRELEASED: this page is `draft: true`, so a production build leaves it out. Lift the draft and every mark below only with Sidecar 0.4.0, after SA10 or its successor has run on a real A4. -->
+<!-- UNRELEASED: this page is `draft: true`, so a production build leaves it out. Lift the draft and every mark below only with Sidecar 0.4.0, SA11 has run on a real A4 (2026-11-03). -->
 
 :::danger[Draft, not released]
-A4 support reaches people with Sidecar 0.4.0. This page describes mod 0.10 (build SA10), which **has not run on a real A4 yet**: it has passed the emulator suites and flash rehearsals only. The earlier builds it grew from ran on one A4, with a Pi 5.
+A4 support reaches people with Sidecar 0.4.0. This page describes mod 0.11 (build SA11). It has run on one A4, with a Pi 5 and a Pi 4, besides the emulator suites and flash rehearsals.
 :::
 
 The Sidecar can drive an **Analog Four MKII** on OS 1.56. A track's sound picks a Sidecar machine; that track's trigs and knobs go to the Sidecar over USB, and the machine comes back over Overbridge, through stock's own track inputs, into that voice's analog path. So PLAITS or JUNO go through the A4's filters, overdrive, amp and FX. No audio code is patched.
@@ -18,17 +18,18 @@ With no Sidecar, or with every sound OFF, the A4 sounds and plays as stock. What
 
 ## What has run where
 
-| | <span class="sc-ok">on a real A4</span>, earlier builds | <span class="sc-test">emulator only</span>, SA10 |
+| | <span class="sc-ok">on a real A4</span> | <span class="sc-test">emulator</span> |
 |---|---|---|
-| Overbridge stream, machine through filter, drive and FX | Yes, 0 underruns | Yes |
-| The Sidecar's first start into `/.a4` | Yes | Yes |
-| Clock and transport with CLOCK SEND and TRANSPORT SEND on | Yes | Not checked |
-| Chords from the sequencer, on mono and poly tracks | Yes | Yes |
-| Machine on OSC1 with its own names and plain dials | No: earlier builds had a separate SIDECAR page | Yes |
-| MCH and OS2 on the NOISE page, the four extra parameters | No | Yes |
-| Empty hatched knobs | Yes, on the earlier layout | Yes |
-| The Sidecar's pages on the A4's screen | Yes, by another key | Yes, by UP + YES |
-| UP + YES | No | Yes |
+| Overbridge stream, machine through filter, drive and FX | Yes, 0 underruns, Pi 5 and Pi 4 | Yes |
+| The Sidecar's first start into `/.a4`, and a swap with a Rytm | Yes | Yes |
+| USB unplug and replug, an A4 restart with the Pi running | Yes | Yes |
+| Clock and transport with CLOCK SEND and TRANSPORT SEND on | Yes, on an earlier build | Not checked |
+| Chords from the sequencer and a step's preview | Yes | Yes |
+| MCH from OFF and back, machine on OSC1 | Yes | Yes |
+| OS2 on MACHINE | Yes | Yes |
+| Locks and LFOs on the machine's knobs | Yes | Yes |
+| UP + YES, the Sidecar's pages and MENU | Yes | Yes |
+| UP and DOWN leave the octave alone | Yes | Yes |
 | Going back to stock | Not on record | Rehearsed, no machine set |
 | Recovery over MIDI DIN from a torn image | No | No |
 
@@ -38,18 +39,18 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
 
 - An Analog Four **MKII** on **OS 1.56**. Above 1.56 this is a downgrade: stop.
 - The stock `Analog-Four_MKII_OS1.56.syx`. We never distribute firmware, stock or modified.
-- A Sidecar on 0.4.0. The Pi 5 is the one that has run this; a Pi 4 has not been tried.
+- A Sidecar on 0.4.0, on a Pi 5 or a Pi 4: both have run it.
 - Your projects backed up with Transfer, and a MIDI DIN interface in hand.
 
 ## Install
 
 1. **Build your firmware.** On the [patcher](/sidecar-expander/patcher/), pick the A4 build, drop your stock file on it, press **Patch**, then **Save**. It is done in your browser; nothing is uploaded, and the result is checked against the tested build. <!-- UNRELEASED: the entry is hidden and the deploy refuses it until release. -->
 
-   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.10`: **this release does not exist yet**) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
+   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.11`: **this release does not exist yet**) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
 
    ```sh
    python3 -m elekloader.patch --stock Analog-Four_MKII_OS1.56.syx --mod core-0.3.elemod \
-       --mod sidecar-a4-0.10.elemod --lockfile a4156.lock.json --version SA10 --out sidecar.syx
+       --mod sidecar-a4-0.11.elemod --lockfile a4156.lock.json --version SA11 --out sidecar.syx
    ```
 
    :::danger[Not on elekloader's web page]
@@ -59,10 +60,10 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
    **Check it before you flash.** The patcher checks it for you. On the command line, run `shasum -a 256 sidecar.syx`; it must be:
 
    ```
-   2c18032346c37bbd5faefc533b6d88ee8b401721d2ca7679150821784c836fe0
+   358c8ed35ad49bb6fb50caa7c718ec499e2c48937efb363caa455a13ca648a52
    ```
 
-   If yours differs, do not flash it. <!-- UNRELEASED: SA10 stamp; a 1.56 stamp changes this hash (release checklist, version stamp). -->
+   If yours differs, do not flash it. <!-- UNRELEASED: SA11 stamp; a 1.56 stamp changes this hash (release checklist, version stamp). -->
 
    **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
 2. **Flash it.** GLOBAL > SYSTEM > USB CONFIG: USB MIDI, connected to a computer. Send the `.syx` with Transfer as an OS update and press YES at UPGRADE OS NOW?. The A4 restarts.
@@ -144,7 +145,7 @@ Hold **UP** for a moment and press **YES**: the A4's screen shows the Sidecar's 
 
 While a page is open only the arrows, YES, NO and the knobs that page uses are the Sidecar's. The keyboard, track keys and transport stay stock's. If the Sidecar goes away, the stock screen returns by itself within about a second.
 
-UP still does its stock job as it goes down. On a parameter page that is the keyboard's octave up, so **each UP + YES there leaves the octave a step higher**, more than one if UP is held long; DOWN brings it back. YES is the page's while it is open, so a held trig's note preview needs the page closed.
+While a Sidecar is connected, UP and DOWN do not change the keyboard's octave on a parameter page, so UP + YES leaves it alone: use OCT+ and OCT-. In menus and lists UP and DOWN work as ever, and with no Sidecar they are stock's. YES is the page's while it is open, so a held trig's note preview needs the page closed.
 
 ## Limits
 
@@ -157,7 +158,7 @@ UP still does its stock job as it goes down. On a parameter page that is the key
 - **Copy, paste and clear of a machine's page** take the shown knobs only.
 - **OSC1 LEV 0 is what keeps the analog oscillator out.** With it at 0, SUB is silent, and AM2 and SYNC do not change OSC2's sound: heard on a unit on an earlier build.
 
-Not yet heard on a real A4, on any build: ACC on an accent trig, which may lift the amp on the Sidecar's path; AM1 up with OSC1 LEV 0; the dial feel of the wide knobs.
+Heard on a unit: an accent trig plays the machine louder, and AM1 or AM2 with OSC1 LEV 0 changes nothing. Not yet judged: the dial feel of the wide knobs.
 
 ## Back to stock
 
