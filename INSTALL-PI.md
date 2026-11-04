@@ -13,7 +13,7 @@ Sidecar, the full Raspberry Pi version of Sidecar | Expander, **works on the Pi 
 - Optional:
   - an **800x480 HDMI display** (a USB touch panel works too);
   - an **Ethernet cable** to your computer, for the status page.
-- From the [Sidecar 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): one SD card zip (each is one card for the Pi 4B and the Pi 5), `sidecar-pi-sd-{{COMMIT}}-800x480.zip` (an 800x480 HDMI display, a DSI display or none) or `sidecar-pi-sd-{{COMMIT}}-1024x600.zip` (a 1024x600 HDMI display such as the GeeekPi 7" EP-0194), and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.0.zip` (the user machines) and `sidecar-content-0.4.0.zip` (the starter content, also on the card). The Rytm firmware: the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0), for OS 1.74 or OS 1.73. <!-- UNRELEASED: {{COMMIT}} is the release commit: set both zip names -->
+- From the [Sidecar 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): one SD card zip (each is one card for the Pi 4B and the Pi 5), `sidecar-pi-sd-e2de6c5-800x480.zip` (an 800x480 HDMI display, a DSI display or none) or `sidecar-pi-sd-e2de6c5-1024x600.zip` (a 1024x600 HDMI display such as the GeeekPi 7" EP-0194), and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.0.zip` (the user machines) and `sidecar-content-0.4.0.zip` (the starter content, also on the card). The Rytm firmware: the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0), for OS 1.74 or OS 1.73.
 
 ## Make the SD card
 
