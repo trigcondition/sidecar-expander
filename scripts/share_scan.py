@@ -23,6 +23,7 @@ import zipfile
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATCHER = os.path.join(HERE, "public", "patcher")   # served at /patcher/
 sys.path.insert(0, PATCHER)
+sys.dont_write_bytecode = True   # no __pycache__ in public/: a .pyc holds its source's absolute path
 import sidecar_patch as sp  # noqa: E402
 
 NOTICE_FILES = {"THIRD_PARTY_LICENSES", "LICENSE"}
