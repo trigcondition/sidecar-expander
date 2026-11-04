@@ -11,10 +11,10 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.3.2**, a Pi-only release: the Sidecar 0.3.2 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.3.1 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). It is an early-tester release: many new base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0 (still in 0.3.0), then [what is new in 0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
+This is **Sidecar 0.4.0**: the Sidecar 0.4.0 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
-The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
+The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73; most hardware marks come from 1.73, and the 1.74 build has since run on a real Rytm (2026-11-04). Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 :::
 
 ## Voices, effects, modulation
@@ -33,22 +33,22 @@ The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supporte
 | Voices released and FX tails cleared on every reconnect | <span class="sc-test">in testing</span> |
 | Double stop fades the Sidecar's effect tails | <span class="sc-ok">hardware</span> |
 
-## The remote pages (`rui1027d`)
+## The remote pages
 
 | Feature | Status |
 |---|---|
-| Remote pages on the Rytm's screen (TRK + YES) in the Rytm's own font | <span class="sc-ok">hardware</span> |
+| Remote pages on the Rytm's screen (UP + YES) in the Rytm's own font | <span class="sc-ok">hardware</span> |
 | Status pages SIDECAR + SYSTEM (they catch every knob) | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Key pass-through: PLAY / STOP / RECORD, pads, mutes, FILL and tap tempo reach the Rytm on a page | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Connect screen when the Sidecar comes up | <span class="sc-ok">hardware</span> (2026-10-18) |
 | SCOPE and meters | <span class="sc-ok">hardware</span> (2026-10-18) |
 | REC page: arm, record, stop | <span class="sc-ok">hardware</span> (2026-10-18) |
 | Playback on the REC page (Pi) | <span class="sc-ok">hardware</span> (2026-10-18; one glitch when picking takes with C, being fixed) |
-| Machine pages only for tracks on a Sidecar machine, shown on the SRC page (not in the TRK + YES list) with `rui1027d`; they follow a machine change at once | <span class="sc-ok">hardware</span> (2026-10-19) |
+| Machine pages only for tracks on a Sidecar machine, shown on the SRC page (not in the UP + YES list); they follow a machine change at once | <span class="sc-ok">hardware</span> (2026-10-19) |
 | DSP SAMPLE waveform page, machine graphics (FM algorithm, JUNO envelope, GRAIN's cloud) | <span class="sc-test">in testing</span> |
-| SRC view (`rui1027d`): the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's, also after a USB replug | <span class="sc-ok">hardware</span> (2026-10-19) |
+| SRC view: the Sidecar's machine page on the Rytm's own SRC page, every key and knob the Rytm's, also after a USB replug | <span class="sc-ok">hardware</span> (2026-10-19) |
 | Voice pages named by track (BD, SD, ...), meters and SCOPE in track order, JUNO pages per track, PAT presets | <span class="sc-ok">hardware</span> (Pi) |
-| LFO page (TRK + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
+| LFO page (UP + LFO) with the DESIGN view | <span class="sc-test">in testing</span> |
 | REC page: the trig keys pick the recorded channels (Pi) | <span class="sc-test">in testing</span> |
 | NO on SIDECAR leaves; unused user-machine knobs as hatched boxes on the Rytm's SRC / SMPL pages; preset names at once | <span class="sc-test">in testing</span> |
 | FX return on IN L/R: recorder files FX_L / FX_R, SCOPE source FX | <span class="sc-ok">hardware</span> (2026-10-18) |
@@ -78,7 +78,45 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** Wi-Fi (saved from the web page, connected) | <span class="sc-ok">hardware</span> (2026-10-19) |
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
-| **Pi 5:** USB audio and MIDI to the computer | coming: not in this version; a Pi 5 ran 12 channels each way and MIDI in Ableton Live under Raspberry Pi OS |
+| **Pi 5:** USB audio and MIDI to the computer | <span class="sc-test">in testing</span>: new in 0.4.0, on by default ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
+
+## New in 0.4.0
+
+The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Details: [Release notes](/sidecar-expander/release-notes/#sidecar-040).
+
+| Feature or fix | Status |
+|---|---|
+| [Master FX](/sidecar-expander/using/master-fx/): four slots, POST EQ, limiter, SRC RET and the through mode SRC MIX | <span class="sc-ok">hardware</span>: Pi 5, 2026-11-01 |
+| [SAT](/sidecar-expander/using/insert-fx/#sat-tape-console-soft), the saturator insert | <span class="sc-ok">hardware</span>: heard on a Rytm |
+| [The MIDI machine](/sidecar-expander/using/midi-machine/): notes and locks out as MIDI to DIN, USB-C or USB-A | <span class="sc-test">in testing</span>: emulator, not yet tried with a device on the other end |
+| [The arpeggiator](/sidecar-expander/using/arpeggiator/): UP + FLTR, MODE SPD RNG GATE SWNG per sound | <span class="sc-ok">hardware</span>: on FM, Pi 5 |
+| [Arp locks](/sidecar-expander/using/arpeggiator/#arp-locks) per step | <span class="sc-test">in testing</span>: no report from a real Rytm yet |
+| The Rytm firmware for **OS 1.74** ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) | <span class="sc-ok">hardware</span>: Sidecar machines, the pages, send FX with ROUTE PRE, the MASTER page, kit save and reload |
+| [MD's own page](/sidecar-expander/using/machines/#md) on the Rytm: ENGINE, TYPE, all 30 types | <span class="sc-ok">hardware</span> |
+| [The JUNO / 6-OP FM preset browser](/sidecar-expander/using/machines/#juno) on PAT (knob A) | <span class="sc-ok">hardware</span> |
+| DSP SAMPLE: SMP on knob A of SRC, opening the bank list | <span class="sc-test">in testing</span>: emulator |
+| DSP SAMPLE: MIX 0 on a new sound, the playhead on the page | <span class="sc-ok">hardware</span> |
+| [PAD OCT](/sidecar-expander/using/sequencer/#poly-config) in POLY CONFIG | <span class="sc-test">in testing</span> |
+| List knobs with up to 36 names | <span class="sc-test">in testing</span>: emulator |
+| Tonverk `.elmulti` instruments in [MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample) | <span class="sc-test">in testing</span>: host tests; the format's conventions unverified |
+| [Samples load on first play](/sidecar-expander/using/pools/#the-pool-ram), nothing whole at project load | <span class="sc-test">in testing</span> |
+| The [1280x720 layout](/sidecar-expander/using/display/#screen-sizes) on the Pi 5's Touch Display 2 | <span class="sc-test">in testing</span>: built and host-tested |
+| The NEON pass: the render loops on the Pi's vector unit, less CPU per voice | <span class="sc-test">in testing</span>: measured on a Pi 4 (DAISYSP 35 % less, render cores 3 to 6 % less, no underruns); a heavy kit still to try |
+| [Idle sleep](/sidecar-expander/using/troubleshooting/#keeping-it-cool) on all four cores | <span class="sc-ok">hardware</span>: Pi 5, 66 °C flat where it reached 79 °C |
+| [Computer audio and MIDI over the Pi 5's USB-C](/sidecar-expander/using/usb-audio-midi/), on by default | <span class="sc-test">in testing</span> |
+| DSP SAMPLE: no dropout when a sample is picked or cleared (card reads on the card's core) | <span class="sc-test">in testing</span>: host tests |
+| The host link found by the USB product, not the vendor name | <span class="sc-ok">hardware</span>: an A4 is no longer taken for the Rytm |
+| List knobs one entry a detent | <span class="sc-ok">hardware</span> |
+| A JUNO preset picked in the bank list sounds at once | <span class="sc-ok">hardware</span> |
+| [The USER SLOTS page](/sidecar-expander/using/user-machines/#the-user-slots-page) | <span class="sc-ok">hardware</span>: on the Rytm and the A4 |
+| [SOPHIE](/sidecar-expander/using/user-machines/#new-in-040-sophie), a new user machine | <span class="sc-ok">hardware</span>: on the Rytm |
+| [Analog Four MKII support](/sidecar-expander/using/analog-four/) | <span class="sc-ok">hardware</span>: Pi 5 and Pi 4 ([What has run where](/sidecar-expander/using/analog-four/#what-has-run-where)) |
+| Rytm firmware: the SRC page's view comes back after a BANK tap | <span class="sc-ok">hardware</span>: a Rytm firmware build with both fixes, on a real Rytm |
+| Rytm firmware: a drawing race that could make the animated SRC pages flicker, fixed | <span class="sc-test">in testing</span>: the same build runs on a real Rytm, no flicker seen so far |
+| NVMe probe only with `nvme=1` | <span class="sc-ok">hardware</span>: the Pi 5 logs NVMe off |
+| Pi 5 in 3 A mode: a note, not a warning | <span class="sc-ok">hardware</span> |
+| The box's name and voice names on the touchscreen | <span class="sc-test">in testing</span>: not on hardware yet |
+| A box that comes up at full speed is re-enumerated | <span class="sc-test">in testing</span>: not needed on hardware yet, every connection came up at high speed |
 
 ## New in 0.3.2
 

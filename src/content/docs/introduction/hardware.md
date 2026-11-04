@@ -7,10 +7,11 @@ sidebar:
 
 ## On the Rytm side
 
-- An **Analog Rytm MKII running OS 1.73**, and only OS 1.73. The mods are built against that exact OS, and the patcher refuses any other file.
-  - An older OS: update to 1.73 first.
-  - OS 1.74 or newer: not supported yet. The first version is based on Analog Rytm MKII OS 1.73; OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
-- The stock file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
+- An **Analog Rytm MKII on OS 1.74 or OS 1.73**. There is one build of the mods for each, built against that exact OS; elekloader refuses a module made for another OS. The 1.74 build has run on a real Rytm.
+  - An older OS: update to 1.74 first (Elektron offers only 1.74 now).
+  - You can move between 1.73 and 1.74 in both directions with Elektron's stock files (Elektron offers only 1.74 now, so keep your own copy of 1.73 if you want it): see [Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173).
+  - A newer OS than 1.74: not supported yet.
+- The stock file of your OS: `Analog-Rytm_MKII_OS1.74.syx` from Elektron's `Analog-Rytm_MKII_OS1.74_dist.zip` on the Rytm MKII support page, or the `Analog-Rytm_MKII_OS1.73.syx` you have. We do not distribute it.
 - The official **Transfer** app on a computer, to send the patched OS.
 - Recommended: a **DIN MIDI interface**, for the recovery route that works even when the OS does not boot.
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the **Overbridge** mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync, synced LFOs and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND). The 0.3.0's [song recorder](/sidecar-expander/using/song-recorder/) needs a few more MIDI CONFIG settings, which it checks for you.
@@ -33,7 +34,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
-| Use | **with a computer**: the Sidecar is also a USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **standalone** for now: USB audio and MIDI to the computer are coming |
+| Use | **with a computer**: the Sidecar is also a USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **with a computer** too, from 0.4.0 (<span class="sc-test">in testing</span>): needs a USB-C power and data splitter or a header-pin supply ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
 | Supply | official 5.1 V 3 A USB-C | official 27 W USB-C, directly: from a hub's port the Pi 5 ran in reduced-power mode and the web page became slow ("503 busy"). The Sidecar warns about a weak supply |
 | HDMI display (micro-HDMI 0) | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to the firmware's 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | <span class="sc-ok">hardware</span> (OSOYOO 7" DSI, 0.3.0) | driven by the engine: <span class="sc-test">in testing</span> |

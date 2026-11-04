@@ -24,6 +24,8 @@ Finished and confirmed on real hardware.
 - **The FX return on IN L/R:** the Rytm's delay and reverb return recorded and scoped as its own channels.
 - **Computer audio on the Sidecar Mini:** stereo USB audio to the computer.
 - **Smaller NoisePlethora packages and slot reasons** (!ROOM, !CRSH, !TIME) on the Rytm.
+- **The arpeggiator** (0.4.0): MODE, SPD, RNG, GATE and SWNG per sound on any Sidecar machine, heard on a real Rytm; arp locks per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
+- **The MIDI machine** (0.4.0): a track's notes and locks out as MIDI to the Rytm's DIN, the computer or USB MIDI devices ([MIDI machine](/sidecar-expander/using/midi-machine/)). Built and run in the emulator; not yet tried with a device on the other end.
 
 ## Released: 0.3.0
 
@@ -48,43 +50,43 @@ A fix release: no more dropouts when loading user machines, presets and multisam
 
 A Pi-only release: super basic native support for Digitakt (experimental, emulator only) and a starting point for other devices, device profiles, the Touch Display 2 on the Pi 5, and a fix for the Pi 5 stopping at the first USB MIDI message to the Rytm ([Release notes](/sidecar-expander/release-notes/)).
 
-## Next: the MD page
+## Released: 0.4.0
 
-A dedicated Rytm firmware update: the built-in MD gets its own page on the Rytm (ENGINE, TYPE and all 30 drum types, with the controls named per drum). Until then the Rytm shows DIGIDRUM's old page for it, with 11 types ([MD](/sidecar-expander/using/machines/#md)).
+([Release notes](/sidecar-expander/release-notes/#sidecar-040))
 
-## Then: USB audio and MIDI on the Pi 5
+- **[Master FX](/sidecar-expander/using/master-fx/):** a stereo chain after the Rytm's own effects, with a through mode for the Rytm's tracks and a limiter.
+- **SAT**, a tape, console and soft saturator for any insert slot.
+- **The MIDI machine:** a track's notes and locks out as MIDI, to the Rytm's DIN, the computer or USB MIDI devices ([MIDI machine](/sidecar-expander/using/midi-machine/)).
+- **The arpeggiator** on any Sidecar machine and the MIDI machine, with **arp locks** per step ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
+- **The USER SLOTS page** on the box's own screen, and **SOPHIE**, a new user machine.
+- **Analog Four MKII support:** the Sidecar's machines through the A4's analog voices ([Analog Four MKII](/sidecar-expander/using/analog-four/); what may come next for it: [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/)).
+- **MD's own page** on the Rytm (ENGINE, TYPE and all 30 drum types), the **JUNO / 6-OP FM preset browser**, DSP SAMPLE's SMP on knob A as on the other sample machines, **PAD OCT** for the CHRO pads, Tonverk **.elmulti** instruments in MULTISAMPLE, samples loaded on first play, the **1280x720** layout for the Touch Display 2, idle sleep for a cooler Pi, and the **NEON pass**: the Pi's vector unit in the render loops, less CPU per voice.
+- **Computer audio and MIDI over the Pi 5's USB-C** (in testing, on by default): [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/).
+- Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and a drawing race on the animated SRC pages, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
 
-A Pi 5 will work like a Pi 4: 12 audio channels each way and MIDI to your computer over its USB-C port, in any DAW, with nothing to install. Under Raspberry Pi OS this already ran on our Pi 5 in Ableton Live. It needs power from a separate supply, because a computer's USB port can't power a Pi 5 under load, so it comes with a simple wiring guide.
+## Then: 0.5.0 and later
 
-## Then: 0.4.0
-
-Planned, in no fixed order:
+Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's main features:
 
 - **The "Octa release":** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
-- **PAD OCT:** a per-track octave for the CHRO pads, so a poly track's pads reach beyond C2..B5.
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
-- **An arpeggiator** on the Sidecar's sequencer, for poly tracks and any machine.
-- **A MIDI machine:** a user machine that sends its track's notes and knobs out as MIDI (to a computer, a USB MIDI device or the Rytm's MIDI out), like Tonverk's.
-- **.elmulti instruments:** MULTISAMPLE loads Elektron's multisample format next to `.sfz`.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
-- **A NEON pass:** the Pi's vector unit on the heaviest engines and the mixer, for more voices and effects.
 - **Export to a USB stick** again, once the hang at its end is fixed.
 - **A touchscreen keyboard** for names (takes, samples, folders, pools, Rytm names).
 - **The pairing code, next steps:** a physical "allow pairing now" key, and a list of paired devices on the page.
-- **Clean-ups after the 0.3.0 fixes:** one way to pick a sample on every sample machine (DSP SAMPLE's SMP lined up with the others), no stalls while samples load into the pool, previewing a sample in the file browser (FUNC + PLAY) and a check that restarts the Sidecar's audio to the Rytm when it stays silent after a Pi restart.
+- **Clean-ups after the 0.3.0 fixes:** no stalls while samples load into the pool, previewing a sample in the file browser (FUNC + PLAY) and a check that restarts the Sidecar's audio to the Rytm when it stays silent after a Pi restart.
 
 Research alongside: **DSP coprocessors** (a Daisy Seed first) as extra plugin targets.
 
-## After 0.4.0
+## After that
 
 In order of value:
 
 1. **Stereo and the OUT route, the next phases** (after the measurements on a real Rytm).
-2. **A master FX chain.**
-3. **A slice editor** and a SAMPLE page.
-4. **The user-machine SDK** with declarative pages.
-5. **Analog Four MKII** with the Rytm on one Sidecar: the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned by us; [device profiles](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md) are the starting point for a community port.
+2. **A slice editor** and a SAMPLE page.
+3. **The user-machine SDK** with declarative pages.
+4. **Analog Four MKII and the Rytm at once** on one Sidecar (the A4 as a box of its own comes with 0.4.0): the A4's channels through the Sidecar's effects into the Rytm's analog compressor and distortion. Other Elektron boxes are not planned by us; [device profiles](https://github.com/trigcondition/sidecar-firmware/blob/v0.3.2/docs/device-profiles.md) are the starting point for a community port.
 
 ## Also now
 
@@ -114,5 +116,5 @@ Ideas we intend to build; not designed in detail yet.
 - **A page designer** in the browser: lay out remote UI pages with widgets, bind parameters, preview at 128x64, export the page for a machine or plugin.
 - **One-click bundles over SysEx:** fetch and restore the Rytm project itself as part of a bundle.
 - **Remote pages in the browser:** the same pages the Rytm shows, on the web page.
-- **Performance features:** an arpeggiator, more LFO targets, beat repeat variations, more polyphony, master effects.
+- **Performance features:** more LFO targets, beat repeat variations, more polyphony, master effects.
 - **More sampler tools:** resample in one click, sample chopping, larger sample banks.

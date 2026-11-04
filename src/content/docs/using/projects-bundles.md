@@ -5,9 +5,7 @@ sidebar:
   order: 6.5
 ---
 
-:::caution[New in 0.3.0]
-Sidecar (Pi) only. Projects by slot and the trash need the Rytm firmware 0.3.0. First run on a real Rytm and a Pi 4 on 2026-10-29 (the move of existing projects to their slots, with no failures); the rest is tested on the Mac and in the emulator. <span class="sc-test">in testing</span>
-:::
+<span class="sc-test">in testing</span> (projects moved to their slots on a real Rytm and a Pi 4; the rest on the Mac and in the emulator)
 
 The Sidecar keeps each project's own files on its card: the poly tracks, the POOL lists, the LFO and INSERT settings, the songs, the user slot maps, the JUNO / FM lists. They belong to the Rytm's **project slot**. A **bundle** puts one project in one file, `<NAME> <YYYYMMDD-HHMM>.sidecar.zip`: move it to another Sidecar (Pi 4B or Pi 5) or keep it as a backup.
 

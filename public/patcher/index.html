@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sidecar Rytm Patcher</title>
+<title>Sidecar Mod Patcher</title>
 <style>
   :root { --bg: #f4f3ef; --fg: #1b1b1b; --dim: #6b6b66; --line: #d6d4cc; --card: #ffffff; --accent: #d9480f; --ok: #2b8a3e; --bad: #c92a2a; }
   @media (prefers-color-scheme: dark) {
@@ -32,7 +32,7 @@
 <body>
 <main>
   <h1>SIDECAR <span>|</span> EXPANDER</h1>
-  <p class="sub">Rytm mod patcher. Your file never leaves this page: it is read and patched in your browser, nothing is uploaded.</p>
+  <p class="sub">Mod patcher. Your file never leaves this page: it is read and patched in your browser, nothing is uploaded.</p>
 
   <div class="card">
     <div class="step">1. Mod build</div>
@@ -41,10 +41,10 @@
   </div>
 
   <div class="card">
-    <div class="step">2. Your stock OS 1.73 file</div>
-    <div id="drop" tabindex="0">Drop <b>Analog-Rytm_MKII_OS1.73.syx</b> here, or click to choose it.</div>
+    <div class="step" id="stock-step">2. Your stock OS 1.74 file</div>
+    <div id="drop" tabindex="0">Drop <b>Analog-Rytm_MKII_OS1.74.syx</b> here, or click to choose it.</div>
     <input id="file" type="file" accept=".syx" hidden>
-    <p class="note">Only the unmodified OS 1.73 file is accepted (it is checked by SHA-256). No firmware is included in this page.</p>
+    <p class="note">Only the unmodified <span class="os-name">OS 1.74</span> file is accepted (it is checked by SHA-256). No firmware is included in this page.</p>
   </div>
 
   <div class="card">
@@ -55,8 +55,8 @@
   </div>
 
   <div class="card note">
-    Then send the saved file to the Rytm as an OS update (the Transfer app, or the STARTUP menu's OS UPGRADE over MIDI).
-    To go back, send the stock OS 1.73 file the same way. Unofficial: read the warnings in the
+    Then send the saved file to the <span id="box-name">Rytm</span> as an OS update (the Transfer app, or the STARTUP menu's OS UPGRADE over MIDI).
+    To go back, send the stock <span class="os-name">OS 1.74</span> file the same way. Unofficial: read the warnings in the
     <a href="https://github.com/trigcondition/sidecar-expander#readme">README</a> first.
   </div>
 </main>
@@ -65,26 +65,42 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const log = (t, cls) => { const s = document.createElement('div'); s.textContent = t; if (cls) s.className = cls; $('log').appendChild(s); };
-  let patches = [], stock = null, url = null;
+  let patches = [], stock = null, url = null, want = '';
 
   function ready() { $('go').disabled = !(stock && patches.length); }
 
+  // A build follows its own box and stock file. "unreleased" builds stay hidden unless the address ends in ?unreleased=1.
+  function showBox(p) {
+    const os = 'OS ' + (p.os || '1.73');
+    want = p.stock_name || 'Analog-Rytm_MKII_OS1.73.syx';
+    $('stock-step').textContent = '2. Your stock ' + os + ' file';
+    for (const e of document.querySelectorAll('.os-name')) e.textContent = os;
+    $('box-name').textContent = p.device === 'Analog Four MKII' ? 'A4' : 'Rytm';
+    if (stock && stock.want !== want) stock = null;
+    if (!stock) {
+      $('drop').innerHTML = 'Drop <b></b> here, or click to choose it.';
+      $('drop').querySelector('b').textContent = want;
+      ready();
+    }
+  }
+
   fetch('patches/index.json').then((r) => r.json()).then((list) => {
-    patches = list.patches;
+    const hold = new URLSearchParams(location.search).has('unreleased');
+    patches = list.patches.filter((p) => hold || !p.unreleased);
     $('patch').innerHTML = '';
     for (const p of patches) {
       const o = document.createElement('option');
       o.value = p.file; o.textContent = p.title;
       $('patch').appendChild(o);
     }
-    const show = () => { const p = patches.find((x) => x.file === $('patch').value); $('desc').textContent = p ? p.description || '' : ''; };
+    const show = () => { const p = patches.find((x) => x.file === $('patch').value); $('desc').textContent = p ? p.description || '' : ''; if (p) showBox(p); };
     $('patch').onchange = show; show(); ready();
   }).catch(() => { $('patch').innerHTML = '<option>no patch list (open this page from the site, not as a file)</option>'; });
 
   function take(f) {
     if (!f) return;
     f.arrayBuffer().then((b) => {
-      stock = { name: f.name, bytes: new Uint8Array(b) };
+      stock = { name: f.name, bytes: new Uint8Array(b), want };
       $('drop').textContent = f.name + ' (' + b.byteLength.toLocaleString() + ' bytes)';
       ready();
     });

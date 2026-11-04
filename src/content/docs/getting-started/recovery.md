@@ -7,15 +7,17 @@ sidebar:
 
 You can always go back to the stock OS. Nothing in the mods changes the Rytm's bootloader, and the stock OS file restores everything.
 
+**Which stock file:** the stock file of the OS you want to be on, **1.74** (`Analog-Rytm_MKII_OS1.74.syx`) or **1.73** (`Analog-Rytm_MKII_OS1.73.syx`). Both directions work with Elektron's own files (checked on a unit), whichever OS the Rytm runs now. Elektron's site offers only 1.74, so to go back to 1.73 you need your own copy of that file. Back up your projects before any OS change, as always.
+
 ## Before you flash anything
 
 - **Back up** every project, kit, sound and sample with Transfer.
 - Make a scratch project for testing.
-- If you can, try the DIN route below once with the stock file, so you know it works on your setup.
+- If you can, try the DIN route below once with the stock file, so you know it works on your setup. Before moving to 1.74, do this with Elektron's stock 1.74 file before the Sidecar's 1.74 build ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 
 ## Back to stock, the normal way
 
-Send the stock `Analog-Rytm_MKII_OS1.73.syx` with **Transfer**, the same way you sent the patched one.
+Send the stock `.syx` (1.74 or 1.73, as above) with **Transfer**, the same way you sent the patched one.
 
 ## If the Rytm does not boot: the STARTUP menu
 
@@ -23,7 +25,7 @@ The STARTUP menu is served by the Rytm's bootloader, so it works without a booti
 
 1. Hold **FUNC** while you power the Rytm on. The STARTUP menu appears.
 2. Press **TRIG 4 (OS UPGRADE)**.
-3. Send the stock 1.73 file over **DIN MIDI**: Transfer's legacy OS upgrade mode through a MIDI interface, or any SysEx tool.
+3. Send the stock file (1.74 or 1.73, as above) over **DIN MIDI**: Transfer's legacy OS upgrade mode through a MIDI interface, or any SysEx tool.
 4. Wait. It takes about **16 minutes or more**. Do not switch off while it writes.
 
 ## "Success! Rebooting" and nothing happens

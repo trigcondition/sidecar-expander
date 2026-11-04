@@ -5,10 +5,6 @@ sidebar:
   order: 3.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card). Built and tested in the emulator and on the Mac; not yet confirmed on a real Rytm unless marked. Sidecar (Pi) only.
-:::
-
 Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
 
 ## Chords on page 2
@@ -50,6 +46,7 @@ A multisampled instrument player. Instruments are **SFZ** files (a subset of the
 - The SRC page on the Rytm shows the instrument's name. The touchscreen's VOICE page shows its zones on a keyboard and the envelope.
 - Memory: 8 instruments are kept loaded, in the shared [pool RAM](/sidecar-expander/using/pools/#the-pool-ram); the least recently used is replaced. A trig before its instrument has loaded plays when it has (within 250 ms).
 - The card's speed limits how many notes can stream at once, more so while the recorder writes. A card test on the Sidecar measures it.
+- **Tonverk instruments (0.4.0):** MULTISAMPLE also reads Elektron Tonverk's `.elmulti` files, in the pools, the browser and bundles, beside `.sfz`. The format is not publicly documented; it is read from a public description and real files, so its conventions are unverified: key ranges go to the nearer root, velocity layers from each layer's value, loop crossfades are ignored (a hard loop jump). <span class="sc-test">in testing</span>
 - Very short Rytm trigs always sound (0.3.0): a note let go before it started still plays its attack, then releases.
 
 ![The touchscreen's VOICE page for MULTISAMPLE (CLASSIC theme): INST, VEL, LEV, RTRG, ATK, DEC, SUS, REL, UPRIGHT PIANO with 6 zones, the envelope and the p-locks of the Rytm's pattern](../../../assets/touch/classic-voice-multisample.png)

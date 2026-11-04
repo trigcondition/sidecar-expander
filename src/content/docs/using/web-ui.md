@@ -79,10 +79,6 @@ The choice buttons are **segmented toggles that show the device's own state**: a
 
 <small>Screenshots: the 0.2 page with mock data (`mock_web.py`: made-up addresses, takes and machines).</small>
 
-:::caution[New in 0.3]
-Sidecar 0.3.0 (Sidecar (Pi) only) adds the **Pool** and **Project** tabs, **Sound > Poly tracks**, the **Storage** section and the sample library's line on the Status tab, and the Files tab's pool buttons. The 0.2.0 tab **Pool & presets** is now **Presets**. <span class="sc-test">in testing</span> (Mac, with the mock page)
-:::
-
 ### Poly tracks
 
 **Sound > Poly tracks** has a row per poly track: **VOICES**, **ALLOCATION**, **UNISON**, **DETUNE**, **SPREAD** and **Set**, and a line with the instances the config resolves to. It sets the same [POLY CONFIG](/sidecar-expander/using/sequencer/#poly-config) as the Rytm's track menu (FUNC + CHRO) and the touchscreen's POLY tool. <span class="sc-test">in testing</span>

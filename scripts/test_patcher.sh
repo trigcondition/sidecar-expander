@@ -1,18 +1,22 @@
 #!/bin/sh
 # Patch the stock .syx with both front ends (Python, and the browser patcher's JS core in
 # Node) for every patch in public/patcher/patches, and compare each result with our build.
-#   scripts/test_patcher.sh BUILD_DIR      (holds the stock .syx and *_<tag>.syx)
+#   scripts/test_patcher.sh BUILD_DIR      (holds the stock .syx files and <stock name>_<tag>.syx)
 set -eu
+# no __pycache__ in public/patcher: a .pyc holds its source's absolute path, and public/ is the site
+export PYTHONDONTWRITEBYTECODE=1
 here=$(cd "$(dirname "$0")/.." && pwd)
 patcher="$here/public/patcher"
 dir=${1:?usage: test_patcher.sh BUILD_DIR}
-stock="$dir/Analog-Rytm_MKII_OS1.73.syx"
+first="$dir/Analog-Rytm_MKII_OS1.73.syx"
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 fail=0
 for p in "$patcher"/patches/sidecar-*.json; do
   tag=$(basename "$p" .json); tag=${tag#sidecar-}
-  want="$dir/Analog-Rytm_MKII_OS1.73_$tag.syx"
+  name=$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d["stock"].get("name", "Analog-Rytm_MKII_OS1.73.syx"), d["output"]["name"])' "$p")
+  stock="$dir/${name%% *}"; want="$dir/${name##* }"
+  [ -e "$stock" ] || { echo "SKIP $tag: no $(basename "$stock") in $dir"; continue; }
   if [ ! -e "$want" ]; then
     # no build to compare with: still check the records rebuild the patch's image
     if python3 -c 'import sys; sys.path.insert(0, sys.argv[1]); import sidecar_patch as s
@@ -35,8 +39,9 @@ assert s.sha(bytes(img)) == out["main_sha256"] and out.get("packer", "lz1") in s
     else echo "FAIL $tag $fe differs from $(basename "$want")"; fail=1; fi
   done
 done
-# a file that is not stock 1.73 must be refused, and nothing written
-head -c 100000 "$stock" > "$tmp/bad.syx"
+# a file that is not the stock file must be refused, and nothing written
+p="$patcher/patches/sidecar-rel0-3-1.json"
+head -c 100000 "$first" > "$tmp/bad.syx"
 if python3 "$patcher/sidecar_patch.py" "$tmp/bad.syx" "$p" -o "$tmp/no.syx" 2>/dev/null || [ -e "$tmp/no.syx" ]; then
   echo "FAIL a wrong stock file was accepted"; fail=1
 else echo "OK   a wrong stock file is refused"; fi

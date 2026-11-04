@@ -125,9 +125,7 @@ Press **STOP** twice and the Rytm cuts its delay and reverb tails. With the mods
 
 The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm side only shows what it is sent and passes the keys and knobs on. Every letter is drawn by the Rytm itself, in its own font, at the stock screens' sizes and places; no font data of the Rytm is in Sidecar. New pages, layouts and graphics come with a Sidecar update (the Pi's SD card) and **do not need a new Rytm flash**; only a new kind of building block on the Rytm side does.
 
-:::caution[New in 0.3]
-Sidecar 0.3.0 makes **UP the Sidecar key** and adds the SIDECAR MENU, the KEYS page and the combo map, the SAMPLE, AUTO, SEQ, POLY CONFIG, INSERT (with UP + AMP for its OUT view), SONG, POOL and PROJECT pages, and TRK's LED blinking while a page has the keys. Built and tested in the emulator; not yet confirmed on a real Rytm. With the 0.2.0 release's `rui1027d` the key is TRK (TRK + YES) and the page list is SIDECAR, SYSTEM, LFO, REC and SCOPE.
-:::
+**UP is the Sidecar key.** Besides the pages below there are the SIDECAR MENU, the KEYS page and the combo map, and the SAMPLE, AUTO, SEQ, POLY CONFIG, INSERT (with UP + AMP for its OUT view), SONG, POOL, PROJECT, MASTER, ARP and USER SLOTS pages. TRK's LED blinks while a page has the keys.
 
 ### Opening, moving, leaving
 

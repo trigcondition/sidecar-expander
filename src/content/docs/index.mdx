@@ -51,12 +51,15 @@ import touchHome from '../../assets/touch/oled-home.png';
 import touchClassic from '../../assets/touch/classic-home.png';
 import touchStage from '../../assets/touch/oled-stage-home.png';
 import polyCfg from '../../assets/rytm/sc-poly-config.png';
+import mfxPage from '../../assets/rytm/sc-master-chain.png';
+import mfxEq from '../../assets/rytm/sc-master-eq.png';
+import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 
 <div class="sc-hero">
   <p class="sc-big" translate="no">Sidecar</p>
   <div class="sc-rule">EXPANDER</div>
-  <p class="sc-tag">More voices, effects, LFOs, recording and pages for the Analog Rytm MKII, played and edited from the Rytm itself.</p>
-  <p class="sc-version">Version 0.3.2 · public tester release · Pi 4B and Pi 5</p>
+  <p class="sc-tag">More voices, effects, LFOs, recording and pages for the Analog Rytm MKII and the Analog Four MKII, played and edited from the box itself.</p>
+  <p class="sc-version">Version 0.4.0 · public tester release · Pi 4B and Pi 5</p>
   <div class="sc-cta">
     <a class="sc-btn primary" href="/sidecar-expander/getting-started/patch-and-flash/">Get started</a>
     <a class="sc-btn" href="#features">What it does</a>
@@ -65,7 +68,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
 
 <Diagram piOnly />
 
-<p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
+<p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.74 or 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
 
 <p class="sc-lede"><b>No screen needed.</b> The Rytm's own screen and keys drive everything: the Sidecar draws its pages on the Rytm's display, and holding UP shows the map of every shortcut. The web page on a phone or laptop covers setup. A touchscreen is an optional extra for the piano roll, the scope and the status at a glance.</p>
 
@@ -94,7 +97,7 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   { src: lfoDesign, alt: 'The LFO design view with 16 steps', pixel: true },
   { src: connect, alt: 'The connect screen', pixel: true },
 ]}>
-  <p>Hold UP and press YES (TRK + YES on the 0.2.0 release's Rytm build): status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
+  <p>Hold UP and press YES: status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
 </Feature>
 
 <Feature flip kicker="Modulation" title="LFOs, with your own wave" href="/sidecar-expander/using/lfo/" shots={[
@@ -184,6 +187,22 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
   <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + AMP the OUT route, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
 </Feature>
 
+<Feature kicker="Master FX · 0.4.0" title="A master chain after the Rytm's own effects" href="/sidecar-expander/using/master-fx/" shots={[
+  { src: mfxPage, alt: 'The MASTER page on the Rytm: four slots, COMP in slot 1, SRC MIX', pixel: true },
+  { src: mfxEq, alt: 'The MASTER EQ view on the Rytm', pixel: true },
+  { src: mfxTouch, alt: 'The MASTER FX page on the touchscreen in SRC MIX' },
+]}>
+  <p>Four slots in a row, any insert type among them the new <a href="/sidecar-expander/using/insert-fx/#sat-tape-console-soft">SAT</a> tape, console and soft saturator, plus CHORUS, COMB, SPACE, RINGS, CLOUD and HALO as inserts, then a POST EQ, a level and a stereo limiter. In through mode the Rytm's own tracks join the chain too, panned as on the Rytm. Saved per kit, set on the Rytm's MASTER page, the touchscreen or the web page.</p>
+</Feature>
+
+<Feature flip kicker="MIDI and arps · 0.4.0" title="Send MIDI, arpeggiate anything" href="/sidecar-expander/using/arpeggiator/" more="The arpeggiator" shots={[]}>
+  <p>The <a href="/sidecar-expander/using/midi-machine/">MIDI machine</a> turns any track into a MIDI track: its notes, program changes, pitch bend and four CCs of your choice go out to the Rytm's DIN port, your computer or a USB MIDI device on the Pi, with p-locks and LFOs. The <a href="/sidecar-expander/using/arpeggiator/">arpeggiator</a> plays a held or sequenced chord as a pattern in time with the Rytm, on any Sidecar machine and the MIDI machine (UP + FLTR), and a poly track can lock it per step.</p>
+</Feature>
+
+<Feature kicker="A new box · 0.4.0" title="The Analog Four MKII, through its analog voices" href="/sidecar-expander/using/analog-four/" shots={[]}>
+  <p>On an Analog Four MKII a track's sound picks a Sidecar machine. Its trigs and knobs go to the Sidecar, and the machine comes back into that voice's own analog filters, overdrive, amp and FX: PLAITS or JUNO through the A4's analog path. Chords on any track, locks and LFOs on the machine's knobs, and the Sidecar's pages on the A4's screen with UP + YES.</p>
+</Feature>
+
 </div>
 
 <p class="sc-note">Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the <a href="/sidecar-expander/0.2/introduction/pi-vs-teensy/">0.2 docs</a>.</p>
@@ -191,18 +210,22 @@ import polyCfg from '../../assets/rytm/sc-poly-config.png';
 <ul class="sc-links">
   <li><a href="/sidecar-expander/introduction/what-is-sidecar/"><b>Read me first</b><small>what it is, what works, risks</small></a></li>
   <li><a href="/sidecar-expander/introduction/what-works-now/"><b>What works now</b><small>tested on hardware or in testing</small></a></li>
-  <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS 1.73 file, in the browser</small></a></li>
-  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.2"><b>Downloads</b><small>the Sidecar 0.3.2 SD cards</small></a></li>
-  <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.3.2</small></a></li>
+  <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS file, in the browser</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0"><b>Downloads</b><small>the Sidecar 0.4.0 SD cards</small></a></li>
+  <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.4.0</small></a></li>
   <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3.0)</small></a></li>
   <li><a href="/sidecar-expander/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3.0)</small></a></li>
   <li><a href="/sidecar-expander/developers/digitakt/"><b>Digitakt</b><small>experimental, emulator only (0.3.2)</small></a></li>
+  <li><a href="/sidecar-expander/using/analog-four/"><b>Analog Four MKII</b><small>a box of its own, 0.4.0</small></a></li>
   <li><a href="/sidecar-expander/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
+  <li><a href="/sidecar-expander/about/community/"><b>Discord</b><small>the community server: help, ideas, sharing</small></a></li>
 </ul>
 
-<p class="sc-note">New in 0.3.2: super basic native support for <a href="/sidecar-expander/developers/digitakt/">Digitakt</a> (experimental, emulator only, never run on a real Digitakt) and a starting point for other devices, plus the Touch Display 2 on the Pi 5. Nothing changes for Rytm users, no Rytm flash needed. See the <a href="/sidecar-expander/release-notes/">release notes</a>.</p>
+<p class="sc-note">New in 0.4.0: <a href="/sidecar-expander/using/master-fx/">master FX</a>, the SAT saturator, the <a href="/sidecar-expander/using/midi-machine/">MIDI machine</a>, the <a href="/sidecar-expander/using/arpeggiator/">arpeggiator</a> and arp locks, the USER SLOTS page, the SOPHIE user machine, <a href="/sidecar-expander/using/analog-four/">Analog Four MKII</a> support, and fixes on the Rytm (the SRC page's view after a BANK tap, a drawing race that could make the animated SRC pages flicker). See the <a href="/sidecar-expander/release-notes/#sidecar-040">release notes</a>.</p>
 
-<p class="sc-note">The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.</p>
+<p class="sc-note">0.3.2 added experimental <a href="/sidecar-expander/developers/digitakt/">Digitakt</a> support (emulator only) and the Touch Display 2 on the Pi 5.</p>
 
-<p class="sc-note">Unofficial tester release, not affiliated with or endorsed by the maker of the Analog Rytm; "Analog Rytm", "Digitakt" and "Overbridge" are their trademarks, used only to say what this works with. Nothing you open here uploads your files. Code under the GNU GPL; see the <a href="/sidecar-expander/about/licence/">licence page</a> and the <a href="https://github.com/trigcondition/sidecar-expander/blob/main/THIRD_PARTY_LICENSES">third-party licences</a>.</p>
+<p class="sc-note">The Rytm firmware 0.4.0 runs on Analog Rytm MKII OS 1.74 and OS 1.73. The Analog Four MKII runs on OS 1.56.</p>
+
+<p class="sc-note">Unofficial tester release, not affiliated with or endorsed by the maker of the Analog Rytm; "Analog Rytm", "Analog Four", "Digitakt" and "Overbridge" are their trademarks, used only to say what this works with. Nothing you open here uploads your files. Code under the GNU GPL; see the <a href="/sidecar-expander/about/licence/">licence page</a> and the <a href="https://github.com/trigcondition/sidecar-expander/blob/main/THIRD_PARTY_LICENSES">third-party licences</a>.</p>

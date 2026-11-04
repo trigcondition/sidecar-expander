@@ -18,7 +18,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  unreleased:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: No unreleased build in the patcher
+        run: python3 scripts/check_unreleased.py
+
   build:
+    needs: unreleased
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4

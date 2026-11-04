@@ -30,6 +30,8 @@ sidebar:
 
 The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protects itself: at **78 °C** it drops its clock to **600 MHz**, and the Sidecar has far less room to render: expect dropouts. The clock goes back to 1500 MHz when the chip is at 75 °C again. The limit is set by `socmaxtemp=78` in `cmdline.txt` (78 is the highest the Pi software allows; the Pi's own firmware still protects itself at 80 and 85 °C). New SD cards already have `socmaxtemp=78`. On a card you made earlier, open `cmdline.txt` on the card (it is one line) and add ` socmaxtemp=78` at the end, with a space before it, then put the card back and restart. Without it the Pi slows down at 60 °C.
 
+**Idle sleep (0.4.0):** all four cores now sleep while they wait instead of spinning, so the Pi runs cooler: on a Pi 5 with a light load, 66 °C flat where it reached 79 °C in 16 minutes before. `/status` shows it as "idle". `idlewfe=0` in `cmdline.txt` turns it off.
+
 | Temperature | What you see |
 |---|---|
 | below 78 °C | nothing: the full clock |
@@ -61,12 +63,12 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 ## Known issues
 
-The releases' own lists are in the release notes: [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
-- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
+- **OS 1.74 and 1.73 only.** There is one build for each. The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 
@@ -81,7 +83,7 @@ The releases' own lists are in the release notes: [0.3.2](/sidecar-expander/rele
 
 - Wi-Fi is off in the SD card package (see the install page to turn it on); Ethernet has no DHCP client (fixed 169.254.61.60, or `ip=`).
 - The web page needs a [paired browser](/sidecar-expander/using/web-ui/#pairing-a-browser) since 0.3.0. The connection is plain HTTP: use a direct cable or a network you trust.
-- **Pi 5: no USB audio or MIDI to the computer yet.** The Sidecar doesn't use the Pi 5's USB-C port for this yet, so for now it only takes power. **Support is coming:** a Pi 5 under Raspberry Pi OS ran 12 audio channels in each direction and MIDI through that port, into Ableton Live. It needs power from a separate supply, not from the computer. Until then, use a Pi 4B for computer audio and MIDI.
+- **Pi 5: USB audio and MIDI to the computer are in testing** (new in 0.4.0, on by default). The USB-C port is also the Pi 5's power input and a computer cannot power it: use a USB-C power and data splitter or a header-pin supply ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)). If the computer does not see Sidecar | Expander, or the audio clicks, please report it. `gadget=0` turns it off.
 - **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 it names the Pi 4's own supply (`POWER TOO WEAK: use 15 W supply`).
 - **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
 - **Pi 5 DSI display:** in testing (built, not yet run on hardware). With no DSI panel answering, the Sidecar uses HDMI.

@@ -5,10 +5,6 @@ sidebar:
   order: 5.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Built and tested on the Mac; first fixes after hardware reports are in; not yet confirmed on a real Rytm.
-:::
-
 ## The sampler
 
 One take to the card, from: <span class="sc-test">in testing</span>

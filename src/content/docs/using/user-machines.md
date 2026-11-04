@@ -24,6 +24,16 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## New in 0.4.0: SOPHIE
+
+A port of an open-source instrument, a package of its own (install like the starters):
+
+| Machine | What it is | Knobs (P1..P8 / P9..) | Voices | Based on |
+|---|---|---|---|---|
+| SOPHIE | metallic FM percussion: four operator models and a kick body, color, metal, feedback, sweep, crush, drive, ring delay, multimode filter | TUN MODL COLR METL FDBK SWP DEC CRSH / DRV CUT RES FLT RTIM RFB RMIX RTON | 8 (two hits a track) | [Sophie](https://github.com/mestela/schwung-sophie) v0.5.1 by Matt Estela (MIT) |
+
+A new track starts on Sophie's kick. Each hit takes the knobs as they are when it starts, so a p-lock or an LFO shapes the next hit, not the one that rings. A hit plays out by itself; the Rytm's AMP can cut it short. Level is the track's own: SOPHIE has no LEV knob.
+
 ## New in 0.3.0: four more machines
 
 <span class="sc-test">in testing</span> (Mac renders; not yet played on a Pi). Ports of open-source instruments, each its own
@@ -43,7 +53,7 @@ No LFOs of their own: use the Sidecar's LFOs on any knob.
 
 <span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
 
-MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.3.1 the built-in MD shows only DIGIDRUM's old page (11 types on knob 1); the MD user machine in a U slot shows MD's full page below, with all 30 types, until the next Rytm firmware gives the built-in MD the same page.
+MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.4.0 the built-in MD has the same full page as below, with all 30 types (with 0.3.1 it showed DIGIDRUM's old page).
 
 | Knob | Page | |
 |---|---|---|
@@ -75,13 +85,28 @@ The installed list shows each machine's name, version, size, fingerprint, memory
 
 ## Assign a slot
 
-Three ways, all ending in the same slot map:
+Four ways, all ending in the same slot map:
 
 - **On the Rytm:** the track menu (FUNC + CHRO), `U1..U5`, YES steps through the installed machines. See [User slots](/sidecar-expander/using/rytm-side/#user-slots-u1u5).
+- **On the box's screen: the USER SLOTS page** (new in 0.4.0), on the Rytm and the [Analog Four](/sidecar-expander/using/analog-four/). See [below](#the-user-slots-page).
 - **On the web page / console:** the project's U1..U5, each with an assign / clear select.
 - **Import a slot list:** a JSON file exported from another Sidecar (`sidecar-slots` format). Machines that are not installed are named, so you know what to get.
 
 Then pick U1..U5 as the track's machine. Choosing a slot sets the track's knobs to the machine's defaults.
+
+### The USER SLOTS page
+
+New in 0.4.0. One of the Sidecar's own pages, drawn on the box's screen, so it works the same on the Rytm and on the Analog Four, which has no slot menu of its own.
+
+1. **UP + YES** opens the Sidecar's pages.
+2. **Reach USER SLOTS** along the ring with LEFT / RIGHT (on the Rytm after AUTO; on the A4 press LEFT once on SIDECAR), or press **YES** on SIDECAR for the SIDECAR MENU and pick its USER SLOTS row.
+3. **Knob A or UP / DOWN** picks the slot, U1..U5. Each row shows what the slot plays now: `---` for empty, the machine's name, `NAME...` while it loads, or a `!` reason as [below](#name-on-the-rytm).
+4. **Knob B** steps through the installed machines, one a detent, starting from what the slot plays. `---`, first in the list, clears the slot. The row shows the pick with a `?`.
+5. **YES** assigns the pick (or clears the slot). **NO** drops the pick and keeps what the slot had; with no pick, NO goes back to SIDECAR.
+
+The bottom bar says what YES will do (`YES: SET U3  NO: KEEP`) and then what happened (`U3 = NUSAW`, `U3 CLEARED`, `KEPT`). With nothing in `/Plugins/` it says `NO MACHINES IN /PLUGINS`. A pick is dropped when you change rows or leave the page. Knobs C..H do nothing on this page, so a stray turn does not edit the sound under it.
+
+An assignment here is the same as one on the web page: it goes into the project's slot list, with the same fingerprint rules ([Which machine a slot plays](#which-machine-a-slot-plays)).
 
 ## Which machine a slot plays
 

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 """Share-readiness scan of everything that would ship: the repo's files, the built site (_site/) and the dist/ artifacts.
 
-    scripts/share_scan.py [--stock STOCK.syx] [--names NAME ...]
+    scripts/share_scan.py [--stock STOCK.syx ...] [--names NAME ...]
 
 Flags:
 - personal data: the names given with --names (plus a few defaults), e-mail addresses (third-party licence notices
@@ -23,6 +23,7 @@ import zipfile
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATCHER = os.path.join(HERE, "public", "patcher")   # served at /patcher/
 sys.path.insert(0, PATCHER)
+sys.dont_write_bytecode = True   # no __pycache__ in public/: a .pyc holds its source's absolute path
 import sidecar_patch as sp  # noqa: E402
 
 NOTICE_FILES = {"THIRD_PARTY_LICENSES", "LICENSE"}
@@ -65,7 +66,8 @@ def payload(rel, path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stock", help="the stock .syx, to check the patch files' literals against it")
+    ap.add_argument("--stock", action="append", default=[],
+                    help="a stock .syx, to check the patch files for that stock against it; repeat for each box")
     ap.add_argument("--names", nargs="*", default=[], help="personal names to look for (case-insensitive)")
     a = ap.parse_args()
     names = [n.encode() for n in a.names]
@@ -108,16 +110,24 @@ def main():
             if ext in (".html", ".js") and re.search(rb"overbridge", data, re.I):
                 notes.append(f"{rel}: mentions 'Overbridge' (a trademark; consider neutral wording in the GUI)")
     if a.stock:
-        st = sp.Syx(open(a.stock, "rb").read())
-        grams = set()
-        for sid in st.stored:
-            b = st.section(sid)
-            grams |= {b[i:i + 4] for i in range(len(b) - 3)}
+        by_sha = {}
+        for path in a.stock:
+            raw = open(path, "rb").read()
+            st = sp.Syx(raw)
+            grams = set()
+            for sid in st.stored:
+                b = st.section(sid)
+                grams |= {b[i:i + 4] for i in range(len(b) - 3)}
+            by_sha[sp.sha(raw)] = grams
         pdir = os.path.join(PATCHER, "patches")
         for f in sorted(os.listdir(pdir)):
             if not f.startswith("sidecar-"):
                 continue
             doc = json.load(open(os.path.join(pdir, f)))
+            grams = by_sha.get(doc["stock"]["syx_sha256"])
+            if grams is None:
+                bad.append(f"public/patcher/patches/{f}: its stock file was not given with --stock")
+                continue
             hits = 0
             for op in doc["ops"]:
                 if len(op) == 2:

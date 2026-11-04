@@ -7,14 +7,13 @@ sidebar:
 
 The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
-:::caution[New in 0.3]
-Sidecar 0.3.0 (Sidecar (Pi) only) adds to every machine on this page:
+Beside the machines on this page:
 
-- three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on 6-OP FM: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
-- two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK, as before) or in stereo on the Rytm's main mix (PRE / POST);
+- three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on every machine: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
+- two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK) or in stereo on the Rytm's main mix (PRE / POST);
 - the project's [POOL lists](/sidecar-expander/using/pools/) as the source of samples, wavetables and instruments;
-- **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/).
-:::
+- **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/);
+- the [MIDI machine](/sidecar-expander/using/midi-machine/), which sends a track's notes as MIDI.
 
 All knobs are 0..127 with the Rytm's fine resolution. List knobs (ENG, PAT, MOD) split their range into equal zones, one per item.
 
@@ -47,6 +46,8 @@ A Juno-106 style poly-synth voice, our own implementation following the open AMY
 Choosing a patch writes its own slider values onto CUT..REL, so the knobs show the patch.
 
 **Presets (JUNO and 6-OP FM).** The release's **starter content** (`sidecar-content-<version>.zip`, already on the Pi's SD card package) puts the Juno-106's 128 factory patches in `/JUNO/Factory/` and three DX7 banks in `/DX7/` on the card, ready for LOAD TO PROJ. PAT steps through the project's list, up to 127 patches, and can be p-locked. Add patches with **LOAD TO PROJ** from the SIDECAR folder in the Rytm's sample browser (the `/JUNO` and `/DX7` folders of `.syx` files on the Sidecar's card), or with **Save current** on the web page's Presets tab (Pool & presets in 0.2.0). Without a project list, PAT shows the factory list (JUNO A11..B88, the FM ROM voices). The lists and the patch libraries live on the Sidecar's card. <span class="sc-ok">hardware</span> (PAT presets on the Pi)
+
+**The preset browser (0.4.0).** PAT (knob A of the SRC page) on JUNO and 6-OP FM opens the same bank list as the pools: the rows are the project's list, YES takes a row, NO leaves, LEFT / RIGHT move eight rows. **FUNC + YES** on the list browses the card's presets, `/JUNO` and `/DX7`, from an index in RAM, with **FACTORY** and **ROM** as folders; YES on a preset adds it to the list's first empty row, and YES again takes it. The first add fills the list with the built-ins at their PAT numbers first, so a saved PAT keeps its preset. On JUNO every PAT is a factory patch, so an add asks `REPLACE nnn? YES` for the row under the cursor: pick a row no sound uses. <span class="sc-ok">hardware</span>
 
 Put Juno-106 patch dumps (`.syx`, single patches or banks) in `/JUNO` on the Sidecar's card, browse them in the SIDECAR folder and LOAD TO PROJ to build the project's JUNO list.
 
@@ -84,16 +85,10 @@ With INP on an analog voice, an analog drum rings a Sidecar resonator.
 
 <span class="sc-test">in testing</span> New in 0.3.0. **MD** is built in: Machinedrum-style drums from the open [mdkit](https://github.com/soejrd/mdkit) project, 30 drum types in three families (FM, PI, TRX). It replaces **DIGIDRUM**, which is gone: the machine slot that was DIGIDRUM in the Rytm's machine list now plays MD, and your old DIGIDRUM tracks play MD.
 
-**With the Rytm firmware 0.3.1** the Rytm still shows DIGIDRUM's page for this machine. Until a later Rytm firmware brings MD's own page:
-
-| Knob | |
-|---|---|
-| ENG (knob 1) | the drum type. Its 11 positions are the old DIGIDRUM engines, now played by MD: FM BD, SD, XT, CP, RS, CB, HH, CY (the old EFM-...) and TRX RS, CB, CL |
-| B..H | the drum's controls, as the old DIGIDRUM labels name them |
+<span class="sc-ok">hardware</span> New in 0.4.0: **MD's own page** with the Rytm firmware 0.4.0: ENGINE, TYPE and all 30 drum types, with each drum's controls named, the same page as the [MD user machine](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums). The Sidecar sends the names, so the Rytm holds none of them.
 
 - Old DIGIDRUM sounds keep their values and play through MD. Whether they sound exactly as before has not been compared by ear.
-- The 30 types and MD's ENGINE / TYPE knobs come with a later Rytm firmware, a dedicated update (see the [roadmap](/sidecar-expander/roadmap/)). It then shows ENGINE, TYPE and the control names of each drum.
-- **All 30 types now:** the **MD user machine** in a user slot (U1..U5) shows MD's full page already: ENGINE, TYPE and named controls ([User machines](/sidecar-expander/using/user-machines/#md-machinedrum-style-drums)).
+- With the Rytm firmware 0.3.1 the Rytm showed DIGIDRUM's old page for this machine, with 11 types on knob 1.
 - MD is a mono drum voice: the trig's note is not used, and the velocity scales the hit. Per-step locks of the drum type are click-free.
 - On the Sidecar Mini (Teensy) a track on this machine stays silent: MD is built into Sidecar (Pi) only.
 
@@ -101,17 +96,24 @@ With INP on an analog voice, an analog drum rings a Sidecar resonator.
 
 A sample from the Sidecar's card, played through a resonator.
 
+With the Rytm firmware 0.4.0:
+
+| Page | Knobs A..H |
+|---|---|
+| SRC | SMP STR BRI DMP MIX SEED TUN LEV |
+| SMPL | TUN FIN MOD ENG STA END LOP LEV |
+
 | Knob | |
 |---|---|
-| ENG | MODAL, STRING or RESON |
+| SMP | the sample: a row of the project's SAMPLES pool |
+| ENG | MODAL, STRING or RESON (on the SMPL page from 0.4.0) |
 | STR, BRI, DMP | structure, brightness, damping |
-| MIX | dry sample against the resonator |
-| FB | feedback |
+| MIX | dry sample against the resonator; 0 (only the sample) on a new sound from 0.4.0 |
+| SEED | no effect yet |
 | TUN, LEV | tuning, level |
-| Page 2 (SD SAMPLE) | TUN FIN SMP MOD STA END LOP LEV |
 
-- **SMP** (knob D of the SMPL page) picks the sample. In 0.3.0 it picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it (or **UP + SRC**) opens the bank list, and FUNC + YES there loads a file into a row. **FUNC + YES on DSP SAMPLE's SRC page** opens the card's sample browser. LOAD TO PROJ in the SIDECAR folder fills the pool too.
-- **Why SMP is on the SMPL page:** the SRC page keeps its room for the resonator. WAVETABLE and MULTISAMPLE pick their source with knob A of their SRC page; DSP SAMPLE with knob D of its SMPL page. A later version may line them up.
+- **SMP** (new in 0.4.0: knob A of the SRC page, as on GRANULAR, WAVETABLE and MULTISAMPLE) picks a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/) in any of its eight banks: turning it opens the same bank list as GRANULAR's, and FUNC + YES there loads a file into a row. **FUNC + YES on DSP SAMPLE's SRC page** opens the card's sample browser. LOAD TO PROJ in the SIDECAR folder fills the pool too. <span class="sc-test">in testing</span> (emulator). With the Rytm firmware 0.3.1, SMP and ENG had each other's places: ENG on SRC knob A, SMP on the SMPL page. Saved sounds and locks are unchanged.
+- The page the Sidecar draws shows the playhead. <span class="sc-ok">hardware</span>
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default).
 - In 0.3.0 a stereo sample plays in stereo when the voice is on PRE or POST (on TRK, as before, the sum of its two channels), and the OUT view's **DEC** sets DSP SAMPLE's decay there ([Stereo and the OUT route](/sidecar-expander/using/stereo-out/)).

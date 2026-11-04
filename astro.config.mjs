@@ -22,7 +22,7 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/trigcondition/sidecar-expander/edit/main/' },
       lastUpdated: false,
       plugins: [
-        starlightVersions({ current: { label: '0.3 (latest)' }, versions: [{ slug: '0.2', label: '0.2' }] }),
+        starlightVersions({ current: { label: '0.4 (latest)' }, versions: [{ slug: '0.3', label: '0.3' }, { slug: '0.2', label: '0.2' }] }),
         starlightLinksValidator({ exclude: ['/sidecar-expander/patcher/', '/sidecar-expander/console/', '/sidecar-expander/patcher/**', '/sidecar-expander/console/**'] })],
       sidebar: [
         { label: 'Introduction', items: [{ autogenerate: { directory: 'introduction' } }] },

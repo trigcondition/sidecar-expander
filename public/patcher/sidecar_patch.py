@@ -14,11 +14,12 @@
 # terms of the GNU General Public License as published by the Free Software Foundation;
 # either version 2 of the License, or (at your option) any later version. It is
 # distributed WITHOUT ANY WARRANTY; see LICENSE.
-"""Patch your own stock Analog Rytm MKII OS 1.73 .syx with a Sidecar mod patch.
+"""Patch your own stock .syx with a Sidecar mod patch: the Analog Rytm MKII's OS 1.74 or OS 1.73, or the Analog
+Four MKII's OS 1.56, as the patch file names it.
 
-    python3 sidecar_patch.py Analog-Rytm_MKII_OS1.73.syx patches/sidecar-sfx1017.json
+    python3 sidecar_patch.py Analog-Rytm_MKII_OS1.74.syx patches/sidecar-rel0-4-0-os1.74.json
 
-writes Analog-Rytm_MKII_OS1.73_sfx1017.syx next to the stock file (or -o PATH).
+writes Analog-Rytm_MKII_OS1.74_rel0-4-0.syx next to the stock file (or -o PATH).
 
 The patch file holds only the Sidecar mods' bytes and elekloader's core, as records
 against the decoded MAIN OS image; it contains no firmware. This script checks the
@@ -513,9 +514,9 @@ def patch(stock_raw, doc, log=print):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description="Patch a stock Analog Rytm MKII OS 1.73 .syx "
-                                             "with a Sidecar mod patch (nothing leaves this computer).")
-    ap.add_argument("stock", help="your stock Analog-Rytm_MKII_OS1.73.syx")
+    ap = argparse.ArgumentParser(description="Patch a stock OS .syx with a Sidecar mod patch "
+                                             "(nothing leaves this computer).")
+    ap.add_argument("stock", help="your stock .syx, e.g. Analog-Rytm_MKII_OS1.73.syx")
     ap.add_argument("patch", help="a patch file, e.g. patches/sidecar-sfx1017.json")
     ap.add_argument("-o", "--out", help="where to write the patched .syx")
     a = ap.parse_args(argv)
@@ -530,8 +531,8 @@ def main(argv=None):
     out = a.out or os.path.join(os.path.dirname(os.path.abspath(a.stock)), doc["output"]["name"])
     with open(out, "wb") as fh:
         fh.write(res)
-    print("wrote %s; send it to the Rytm with the Transfer app (or the STARTUP menu's "
-          "OS UPGRADE over MIDI)" % out)
+    print("wrote %s; send it to the %s with the Transfer app (or the STARTUP menu's "
+          "OS UPGRADE over MIDI)" % (out, doc.get("device", "Rytm")))
     return 0
 
 

@@ -1,0 +1,209 @@
+---
+slug: 0.3
+title: Home
+description: Sidecar | Expander adds digital voices, send effects, LFOs, recording, computer audio and its own pages on the Rytm's screen to the Analog Rytm MKII. A Raspberry Pi 4B or Pi 5 on the Rytm's USB port.
+template: splash
+tableOfContents: false
+editUrl: false
+---
+import Diagram from '../../../components/Diagram.astro';
+import Feature from '../../../components/Feature.astro';
+import plaits from '../../../assets/rytm/remote-plaits.png';
+import juno from '../../../assets/rytm/remote-juno.png';
+import fm from '../../../assets/rytm/remote-fm.png';
+import grain from '../../../assets/rytm/remote-wave-grain.png';
+import halo from '../../../assets/rytm/sendfx1-halo.png';
+import rings from '../../../assets/rytm/sendfx1-rings.png';
+import stutter from '../../../assets/rytm/sendfx2-stutter.png';
+import statusP from '../../../assets/rytm/remote-status-sidecar.png';
+import scope from '../../../assets/rytm/remote-scope.png';
+import lfoDesign from '../../../assets/rytm/remote-lfo-design.png';
+import connect from '../../../assets/rytm/remote-connect.png';
+import rec from '../../../assets/rytm/remote-rec.png';
+import play from '../../../assets/rytm/remote-play.png';
+import piRecord from '../../../assets/ui/pi-record.png';
+import piSound from '../../../assets/ui/pi-sound.png';
+import piMachines from '../../../assets/ui/pi-machines.png';
+import piLfo from '../../../assets/ui/pi-lfo.png';
+import seqMake from '../../../assets/rytm/sc-seq-make.png';
+import seqHeld from '../../../assets/rytm/sc-seq-held.png';
+import seqLock from '../../../assets/rytm/sc-seq-lock-src.png';
+import chopSrc from '../../../assets/rytm/sc-chop-src.png';
+import chopEdit from '../../../assets/rytm/sc-chop-edit.png';
+import chopSlice from '../../../assets/rytm/sc-chop-slice1.png';
+import touchSeq from '../../../assets/touch/oled-seq-roll.png';
+import msChord from '../../../assets/rytm/sc-multisample-chord.png';
+import wtPage from '../../../assets/rytm/sc-wavetable.png';
+import grTouch from '../../../assets/touch/oled-mach-granular.png';
+import poolTouch from '../../../assets/touch/oled-pool-samples.png';
+import poolPage from '../../../assets/touch/oled-pool-page-samples.png';
+import poolRytm from '../../../assets/rytm/sc-pool-samples.png';
+import projTouch from '../../../assets/touch/oled-project.png';
+import projRytm from '../../../assets/rytm/sc-project-list.png';
+import statusTouch from '../../../assets/touch/oled-status.png';
+import comboMap from '../../../assets/touch/oled-combo-map.png';
+import songTouch from '../../../assets/touch/classic-song-timeline.png';
+import insTouch from '../../../assets/touch/oled-insfx-voice.png';
+import recTouch from '../../../assets/touch/oled-rec-recording.png';
+import autoExt from '../../../assets/rytm/sc-auto-ext.png';
+import upMap from '../../../assets/rytm/sc-up-map.png';
+import menuTop from '../../../assets/rytm/sc-menu-top.png';
+import touchHome from '../../../assets/touch/oled-home.png';
+import touchClassic from '../../../assets/touch/classic-home.png';
+import touchStage from '../../../assets/touch/oled-stage-home.png';
+import polyCfg from '../../../assets/rytm/sc-poly-config.png';
+
+<div class="sc-hero">
+  <p class="sc-big" translate="no">Sidecar</p>
+  <div class="sc-rule">EXPANDER</div>
+  <p class="sc-tag">More voices, effects, LFOs, recording and pages for the Analog Rytm MKII, played and edited from the Rytm itself.</p>
+  <p class="sc-version">Version 0.3.2 · public tester release · Pi 4B and Pi 5</p>
+  <div class="sc-cta">
+    <a class="sc-btn primary" href="/sidecar-expander/0.3/getting-started/patch-and-flash/">Get started</a>
+    <a class="sc-btn" href="#features">What it does</a>
+  </div>
+</div>
+
+<Diagram piOnly />
+
+<p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
+
+<p class="sc-lede"><b>No screen needed.</b> The Rytm's own screen and keys drive everything: the Sidecar draws its pages on the Rytm's display, and holding UP shows the map of every shortcut. The web page on a phone or laptop covers setup. A touchscreen is an optional extra for the piano roll, the scope and the status at a glance.</p>
+
+<div id="features" class="sc-features">
+
+<Feature kicker="Voices" title="Digital machines on every track" href="/sidecar-expander/0.3/using/machines/" shots={[
+  { src: plaits, alt: 'A PLAITS voice page on the Rytm', pixel: true },
+  { src: juno, alt: 'The JUNO page with its envelope', pixel: true },
+  { src: fm, alt: 'The 6-OP FM page with its algorithm', pixel: true },
+  { src: grain, alt: 'The GRAIN view of DSP SAMPLE', pixel: true },
+]}>
+  <p>Pick PLAITS, JUNO, 6-OP FM, DAISYSP, MD or DSP SAMPLE in a track's machine list, like any Rytm machine. DSP SAMPLE plays from the Sidecar's card, with slices, loops and a granular mode. Five user slots load machine plugins: six starter machines come with the release.</p>
+</Feature>
+
+<Feature flip kicker="Send effects" title="Two send effects next to the Rytm's own" href="/sidecar-expander/0.3/using/send-effects/" shots={[
+  { src: halo, alt: 'SEND FX 1 set to HALO with DCY, MOD, TONE, SHIM', pixel: true },
+  { src: rings, alt: 'SEND FX 1 set to RINGS', pixel: true },
+  { src: stutter, alt: 'SEND FX 2 set to STUTTER', pixel: true },
+]}>
+  <p>Every track gets two more sends. <b>HALO</b>, a lush plate with FREEZE and SHIMMER, runs on both Sidecars with CHORUS, COMB, CRUSH and RINGMOD; the Pi adds RINGS, CLOUD SEED, STUTTER and, new in 0.3.0, <a href="/sidecar-expander/0.3/using/send-effects/#space-pi"><b>SPACE</b></a>: a three-head tape echo with spring reverb, wow and flutter, synced to the Rytm, that runs away into dub throws. Each effect's knobs carry their own names on the Rytm's pages, and PRE / POST decides whether the return goes through the Rytm's analog distortion and compressor.</p>
+</Feature>
+
+<Feature kicker="On the Rytm's screen" title="Pages the Sidecar draws for you" href="/sidecar-expander/0.3/using/rytm-side/#the-remote-ui" shots={[
+  { src: statusP, alt: 'The SIDECAR status page', pixel: true },
+  { src: scope, alt: 'SCOPE with twelve meters', pixel: true },
+  { src: lfoDesign, alt: 'The LFO design view with 16 steps', pixel: true },
+  { src: connect, alt: 'The connect screen', pixel: true },
+]}>
+  <p>Hold UP and press YES (TRK + YES on the 0.2.0 release's Rytm build): status pages, a scope with meters, the recorder and an LFO designer, in the Rytm's own font. On a track with a Sidecar machine, the Rytm's own SRC page shows the machine's page with its graphics while every knob stays the Rytm's. The Rytm keeps playing underneath: PLAY, STOP, the pads and mutes still work. New pages arrive with a Sidecar update, without reflashing the Rytm. </p>
+</Feature>
+
+<Feature flip kicker="Modulation" title="LFOs, with your own wave" href="/sidecar-expander/0.3/using/lfo/" shots={[
+  { src: piLfo, alt: 'The web page LFO tab' },
+]}>
+  <p>Eight LFOs on any parameter of a Sidecar voice or effect, saved per kit. Free or synced to the Rytm, retriggered by a trig or PLAY, and a DESIGN wave of 16 steps you draw on the Rytm (UP + LFO) or in the browser. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Recording" title="Record every track, play it back" href="/sidecar-expander/0.3/using/recorder/" shots={[
+  { src: rec, alt: 'The REC page, armed', pixel: true },
+  { src: play, alt: 'The REC page playing a channel of a take', pixel: true },
+  { src: piRecord, alt: 'The web page Record tab with takes' },
+]}>
+  <p>Record the Rytm's tracks, the Sidecar's voices and the effect returns to the SD card, one aligned WAV per source, from the Rytm's REC page or armed to PLAY. On the Pi, play a take's channel back into the Rytm's mix. The Rytm's own delay and reverb can be recorded as their own channels.</p>
+</Feature>
+
+<Feature flip kicker="Computer audio" title="An audio interface for your DAW" href="/sidecar-expander/0.3/using/usb-audio-midi/" shots={[
+  { src: piSound, alt: 'The web page Sound tab' },
+]}>
+  <p>With the Sidecar on the Rytm's USB port, its own USB port becomes a class-compliant audio and MIDI device for your computer: multi-channel on the Pi 4. No driver needed.</p>
+</Feature>
+
+<Feature kicker="Web UI and plugins" title="Manage it from a browser" href="/sidecar-expander/0.3/using/web-ui/" shots={[
+  { src: piMachines, alt: 'The web page User machines tab' },
+]}>
+  <p>The Pi serves its own page at <code>sidecar.local</code>. Install user machines, see the CPU and memory, fill the sample pool, browse and upload whole sample folders, set up Wi-Fi. Nothing leaves your network.</p>
+</Feature>
+
+<Feature flip kicker="Touchscreen (optional)" title="A screen of its own, if you want one" href="/sidecar-expander/0.3/using/display/" shots={[
+  { src: touchHome, alt: 'The touchscreen home page in the OLED theme' },
+  { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
+  { src: touchStage, alt: 'The touchscreen home page in the STAGE look' },
+]}>
+  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In 0.3.0 it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Poly mode · 0.3.0" title="A sequencer for poly tracks" href="/sidecar-expander/0.3/using/sequencer/" shots={[
+  { src: seqMake, alt: 'The make prompt: MAKE BT A POLY TRACK? PLAITS, 4 NOTES', pixel: true },
+  { src: polyCfg, alt: 'POLY CONFIG on the Rytm: VOICES, ALLOCATION, UNISON, DETUNE, SPREAD', pixel: true },
+  { src: seqHeld, alt: 'The SEQ page with a step held: its chord on a keyboard', pixel: true },
+  { src: touchSeq, alt: 'The touchscreen piano roll' },
+]}>
+  <p>UP + TRIG makes a track on any Sidecar machine a poly track, PLAITS and JUNO included: chords and several notes per step, each with its own velocity, length and micro timing, up to 8 pages, trig conditions, p-locks on the Sidecar's parameters, step preview and step copy, edited on the Rytm's own trig keys and on the touchscreen's piano roll. Each track has a POLY CONFIG in the Rytm's own track menu (FUNC + CHRO): VOICES, ALLOCATION, UNISON with DETUNE and SPREAD. Probability can follow a fixed seed. The Rytm stays the master. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature flip kicker="Poly machines · 0.3.0" title="MULTISAMPLE, WAVETABLE, GRANULAR" href="/sidecar-expander/0.3/using/poly-machines/" shots={[
+  { src: msChord, alt: 'MULTISAMPLE with a chord on the Rytm', pixel: true },
+  { src: wtPage, alt: 'WAVETABLE on the Rytm', pixel: true },
+  { src: grTouch, alt: 'GRANULAR on the touchscreen' },
+  { src: poolTouch, alt: 'The SAMPLES pool on the touchscreen' },
+]}>
+  <p>Three polyphonic machines with chords on four knobs: SFZ instruments streamed from the card, band-limited wavetables, and grains on samples or the Rytm's live audio. They pick their sources from the project's <a href="/sidecar-expander/0.3/using/pools/">POOL</a>, chosen from a list on the Rytm's SRC page. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Slicing · 0.3.0" title="CHOP: slice a sample, play it from the pads" href="/sidecar-expander/0.3/using/chop/" shots={[
+  { src: chopSrc, alt: 'CHOP on the Rytm: a break cut into slices', pixel: true },
+  { src: chopEdit, alt: 'The CHOP slice editor on the Rytm', pixel: true },
+  { src: chopSlice, alt: 'Per-slice settings on the Rytm', pixel: true },
+]}>
+  <p>CHOP cuts one sample into up to 64 slices, by a grid, by its hits, by hand, or by tapping along while it plays. Play the slices from the Rytm's trigs (a p-lock picks the slice per step), the CHRO pads or a poly track, each slice with its own pitch, envelope, loop, reverse and choke. Edit it all in a slice editor on the Rytm's screen or the touchscreen, then shuffle, stutter or tape-stop the slices. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature flip kicker="Inserts, sampling, songs · 0.3.0" title="Inserts, a sampler and a song recorder" href="/sidecar-expander/0.3/using/insert-fx/" shots={[
+  { src: insTouch, alt: 'The INSERT FX page on the touchscreen' },
+  { src: autoExt, alt: 'The AUTO page on the Rytm', pixel: true },
+  { src: songTouch, alt: 'The song timeline on the touchscreen' },
+  { src: recTouch, alt: 'The REC page on the touchscreen' },
+]}>
+  <p>Two <a href="/sidecar-expander/0.3/using/insert-fx/">insert slots</a> on every Sidecar voice, among them <a href="/sidecar-expander/0.3/using/insert-fx/#amp-amp-captures-nam">AMP</a>: real amp and pedal captures (Neural Amp Modeler), with your own <code>.nam</code> files from TONE3000 on the card; three FX buses and an <a href="/sidecar-expander/0.3/using/stereo-out/">OUT route</a> that sends a voice in stereo straight to the Rytm's main mix, before or after its master effects; a <a href="/sidecar-expander/0.3/using/sampling/">sampler and auto-sampler</a> that turns a patch, a Rytm track or an external synth into a MULTISAMPLE instrument; a <a href="/sidecar-expander/0.3/using/song-recorder/">song recorder</a> that captures a whole performance and replays it; and a <a href="/sidecar-expander/0.3/using/touchscreen/">touchscreen</a> with two themes, at 800x480 or 1024x600. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature kicker="Pools and projects · 0.3.0" title="One pool per project, one file to move it" href="/sidecar-expander/0.3/using/pools/" shots={[
+  { src: poolRytm, alt: 'The bank list on the Rytm: SAMPLES, bank A', pixel: true },
+  { src: poolPage, alt: 'The POOL page on the touchscreen: SAMPLES, TABLES, INSTR' },
+  { src: projTouch, alt: 'The PROJECT page on the touchscreen' },
+  { src: projRytm, alt: 'The PROJECT page on the Rytm', pixel: true },
+]}>
+  <p>Samples, wavetables and instruments in three POOL lists of 8 banks; FUNC + YES loads a file into any row from the Rytm. Every sample is known by its fingerprint, so a moved file keeps playing and a missing one is flagged. A <a href="/sidecar-expander/0.3/using/projects-bundles/">bundle</a> carries a project with its samples to another Sidecar, through the touchscreen, the Rytm, the web page or a <a href="/sidecar-expander/0.3/using/storage/">USB stick</a>. <span class="sc-test">in testing</span></p>
+</Feature>
+
+<Feature flip kicker="Finding your way · 0.3.0" title="Every combo one key away" href="/sidecar-expander/0.3/using/key-combinations/" shots={[
+  { src: upMap, alt: 'The combo map on the Rytm while UP is held', pixel: true },
+  { src: menuTop, alt: 'The SIDECAR MENU on the Rytm', pixel: true },
+  { src: comboMap, alt: 'The same map on the touchscreen' },
+  { src: statusTouch, alt: 'SIDECAR STATUS on the touchscreen' },
+]}>
+  <p>UP is the Sidecar key. Hold it alone for the map of every combination; UP + T1..T13 opens a page, UP + TRIG the sequencer, UP + SRC the source list, UP + AMP the OUT route, UP + YES the Sidecar's pages with a menu of all of them. The touchscreen's keys carry their UP + T shortcut. <span class="sc-test">in testing</span></p>
+</Feature>
+
+</div>
+
+<p class="sc-note">Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the <a href="/sidecar-expander/0.2/introduction/pi-vs-teensy/">0.2 docs</a>.</p>
+
+<ul class="sc-links">
+  <li><a href="/sidecar-expander/0.3/introduction/what-is-sidecar/"><b>Read me first</b><small>what it is, what works, risks</small></a></li>
+  <li><a href="/sidecar-expander/0.3/introduction/what-works-now/"><b>What works now</b><small>tested on hardware or in testing</small></a></li>
+  <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS 1.73 file, in the browser</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.3.2"><b>Downloads</b><small>the Sidecar 0.3.2 SD cards</small></a></li>
+  <li><a href="/sidecar-expander/0.3/release-notes/"><b>Release notes</b><small>0.3.2</small></a></li>
+  <li><a href="/sidecar-expander/0.3/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3.0)</small></a></li>
+  <li><a href="/sidecar-expander/0.3/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3.0)</small></a></li>
+  <li><a href="/sidecar-expander/0.3/developers/digitakt/"><b>Digitakt</b><small>experimental, emulator only (0.3.2)</small></a></li>
+  <li><a href="/sidecar-expander/0.3/roadmap/"><b>Roadmap</b><small>done, now, next, later</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
+</ul>
+
+<p class="sc-note">New in 0.3.2: super basic native support for <a href="/sidecar-expander/0.3/developers/digitakt/">Digitakt</a> (experimental, emulator only, never run on a real Digitakt) and a starting point for other devices, plus the Touch Display 2 on the Pi 5. Nothing changes for Rytm users, no Rytm flash needed. See the <a href="/sidecar-expander/0.3/release-notes/">release notes</a>.</p>
+
+<p class="sc-note">The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.</p>
+
+<p class="sc-note">Unofficial tester release, not affiliated with or endorsed by the maker of the Analog Rytm; "Analog Rytm", "Digitakt" and "Overbridge" are their trademarks, used only to say what this works with. Nothing you open here uploads your files. Code under the GNU GPL; see the <a href="/sidecar-expander/0.3/about/licence/">licence page</a> and the <a href="https://github.com/trigcondition/sidecar-expander/blob/main/THIRD_PARTY_LICENSES">third-party licences</a>.</p>

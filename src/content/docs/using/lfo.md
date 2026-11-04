@@ -19,9 +19,7 @@ The Sidecar has its own LFOs: **8**. Each one modulates one parameter of a Sidec
 | **B1..B3** (0.3) | an FX bus's insert chain, the same eight parameters |
 | **O1..O8** (0.3) | a voice's [OUT route](/sidecar-expander/using/stereo-out/): LEV, PAN, WID |
 
-:::caution[New in 0.3]
-The I, B and O targets need Sidecar 0.3.0 (Sidecar (Pi) only). On an insert or the OUT route an LFO is an offset on top of the knob or the step lock. <span class="sc-test">in testing</span>
-:::
+On an insert or the OUT route an LFO is an offset on top of the knob or the step lock. <span class="sc-test">in testing</span>
 
 Two LFOs on one parameter add up. Selectors that are read only at a trig (6-OP FM's PAT, DSP SAMPLE's SMP) do not follow an LFO. On a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), an LFO on a locked parameter moves around the lock. The LFOs never change the Rytm's own sound parameters, so a kit you save is never altered by a running LFO.
 
@@ -34,7 +32,7 @@ Two LFOs on one parameter add up. Selectors that are read only at a trig (6-OP F
 
 ## The LFO page on the Rytm
 
-Hold **UP** and press **LFO** to open the remote pages straight on the LFO page, or pick LFO in the SIDECAR MENU (UP + YES, then YES). TRK + LFO, the older form, still works; with the 0.2.0 release's `rui1027d` it is the only one.
+Hold **UP** and press **LFO** to open the remote pages straight on the LFO page, or pick LFO in the SIDECAR MENU (UP + YES, then YES). TRK + LFO, the older form, still works.
 
 - **The page replaces the Rytm's page** like SRC: no page dots and no siblings. **LEFT / RIGHT** step to the previous / next LFO (the same as knob A; in the design view they step the design step). Leave with **NO** (from the design view, NO goes to the main view first) or **UP + LFO** again; leaving drops the design view.
 - **Main view:** the wave over one cycle with a dot at the phase. A **LFO** (which one), B **TGT** (OFF, V1..V8, FX1, FX2, and in 0.3 I1..I8, B1..B3, O1..O8), C **PAR** (by name), D **DEP**, E **WAVE**, F **RATE** (FUNC: steps of 8), G **SYNC** (FREE / CLK), H **TRIG** (FREE / TRIG / PLAY).

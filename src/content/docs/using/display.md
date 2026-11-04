@@ -5,9 +5,7 @@ sidebar:
   order: 7
 ---
 
-:::caution[New in 0.3]
-Sidecar 0.3.0 (Pi) redraws the whole display: two themes and the STAGE look, the 1024x600 size, a new boot screen and the connection animation. The pages themselves (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET) are on [The touchscreen](/sidecar-expander/using/touchscreen/). The 0.2.0 display is described in the [0.2 docs](/sidecar-expander/0.2/using/display/).
-:::
+The pages themselves (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET) are on [The touchscreen](/sidecar-expander/using/touchscreen/).
 
 The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on the Pi's display connector. Connect it before power-on: the screen is set up at boot. The display is optional; everything it shows is also on the Rytm or the web page.
 
@@ -32,12 +30,13 @@ The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on t
 
 ## Screen sizes
 
-The UI has two sizes, each with its own layout in both themes: **800x480** and **1024x600** (OLED: 512x300 dots). On the larger size the roll, the lists, the timeline and the meters get more room; text and touch targets keep their size. The size follows the frame buffer the Pi's firmware sets from `config.txt`:
+The UI has three sizes, each with its own layout in both themes: **800x480**, **1024x600** (OLED: 512x300 dots) and, new in 0.4.0, **1280x720** (OLED: 640x360 dots). On the larger size the roll, the lists, the timeline and the meters get more room; text and touch targets keep their size. The size follows the frame buffer the Pi's firmware sets from `config.txt`:
 
 - 800x480 or 1024x600: that layout, 1:1.
 - Any other size (Pi 4): the 800x480 layout in the middle, unscaled, with black borders.
 - Pi 5 on HDMI: the firmware picks the mode (1920x1080 measured), and the UI is scaled to it: the 1024x600 layout when the display prefers 1024x600, else 800x480.
-- To force a size: `res=800x480`, `res=1024x600` or `res=auto` in `cmdline.txt` or on its own line in `/.rytm/display.txt`; read at boot.
+- Pi 5 with the Touch Display 2: the 1280x720 layout on the whole panel, by default (0.4.0). HDMI at any size never picks 1280x720 by itself. <span class="sc-test">in testing</span> (built and host-tested)
+- To force a size: `res=800x480`, `res=1024x600`, `res=1280x720` or `res=auto` in `cmdline.txt` or on its own line in `/.rytm/display.txt`; read at boot.
 
 **The GeeekPi EP-0194 (1024x600)** on a Pi 4: the HDMI block of `config.txt` becomes
 

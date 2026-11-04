@@ -5,10 +5,6 @@ sidebar:
   order: 2.1
 ---
 
-:::caution[New in 0.3]
-New in 0.3.0 (the Rytm firmware 0.3.0 with the Sidecar 0.3.0 card), Sidecar (Pi) only. Built and tested on the Mac and in the emulator; not yet confirmed on a real Rytm.
-:::
-
 Every Sidecar voice gets an **INSERT** chain of two slots, A and B, before it goes back into the Rytm's track. Three **FX buses** take sends from the voices. <span class="sc-test">in testing</span>
 
 ## Signal flow
@@ -41,8 +37,21 @@ bus 3 = dry       -> its chain (A, B) -> PRE or POST (ROUTE)
 | TREMOLO | RATE 0.1..20 Hz | DPTH | SHPE sine > square | PAN |
 | RINGMOD | FREQ 10 Hz..5 kHz | SHPE sine > square | MOD | MIX |
 | AMP (0.3.0) | MODL: an amp capture from `/NAM/` | GAIN -18..+18 dB into it | TONE tilt ±6 dB | LEV -36..+6 dB |
+| SAT (0.4.0) | CHAR: TAPE, CONS, SOFT | DRV 0..+24 dB | TONE tilt ±6 dB | MIX |
 
 Changing TYPE crossfades without a click and loads the effect's defaults. Parameters are smoothed, so p-lock jumps do not zipper.
+
+## SAT: tape, console, soft
+
+<span class="sc-ok">hardware</span> New in 0.4.0. **SAT** is a saturator for any slot: a voice, a bus, the [master chain](/sidecar-expander/using/master-fx/). CHAR picks its character:
+
+- **TAPE**: the highs saturate first, the lows get a small bump around 100 Hz as DRV goes up.
+- **CONS**: clean for longer, then a firmer edge, as a console channel pushed.
+- **SOFT**: a plain round curve.
+
+DRV is how hard it is driven, and the level stays about the same for a signal around -12 dBFS; louder input comes out quieter. TONE tilts the result around 1 kHz. MIX blends it with the dry signal in time, so MIX in between does not comb.
+
+DRV 0 or MIX 0 is exactly the dry signal. Anything above adds 15 samples of delay (0.3 ms). The curve runs at four times the sample rate, which keeps aliasing down; a loud high note at full DRV still has some. Changing CHAR crossfades without a click, and it takes p-locks and LFOs.
 
 ## AMP: amp captures (NAM)
 
