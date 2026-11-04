@@ -5,7 +5,7 @@ sidebar:
   order: 30
 ---
 
-<!-- UNRELEASED: the release build is SA12 or later. At release, set its mod version, build name, release tag, .elemod name and SHA-256 below (each has its own mark), and lift the patcher entry's "unreleased". -->
+<!-- UNRELEASED: the release build is SA12 (mod 0.12). At release, check its SHA-256 below against the build and lift the patcher entry's "unreleased". -->
 
 It has run on an A4 with a Pi 5 and with a Pi 4, besides the emulator suites and flash rehearsals. What may come next for the A4: the [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/).
 
@@ -43,14 +43,12 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
 
 1. **Build your firmware.** On the [patcher](/sidecar-expander/patcher/), pick the A4 build, drop your stock file on it, press **Patch**, then **Save**. It is done in your browser; nothing is uploaded, and the result is checked against the tested build. <!-- UNRELEASED: the entry is hidden and the deploy refuses it until release. -->
 
-   The same bytes come from the two `.elemod` files on the A4 mod's release page (`a4-v0.12` <!-- UNRELEASED: the tag exists only at release -->) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
+   The same bytes come from the two `.elemod` files on the A4 mod's release page ([`a4-v0.12`](https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.12)) with elekloader's command line. Use the lock file and version from the release, or the hash will differ:
 
    ```sh
    python3 -m elekloader.patch --stock Analog-Four_MKII_OS1.56.syx --mod core-0.3.elemod \
        --mod sidecar-a4-0.12.elemod --lockfile a4156.lock.json --version SA12 --out sidecar.syx
    ```
-
-   <!-- UNRELEASED: SA12's .elemod name and version; change them if a later build is released. -->
 
    :::danger[Not on elekloader's web page]
    Don't build the A4 firmware on elekloader's web page. It has no lock file, so it picks other versions of the parts and gives a file nobody has tested on an A4. Use the patcher or the command line above.
@@ -62,7 +60,7 @@ Not tried anywhere: a computer in Overbridge with a machine set, so keep every s
    e9eab646102844518ff48e44864f42b2a555aadc2b8fd86b5eaabe2d772a1d71
    ```
 
-   If yours differs, do not flash it. <!-- UNRELEASED: SA12's hash (releases/a4-mod-sa12); a later build or a 1.56 stamp changes it. -->
+   If yours differs, do not flash it. <!-- UNRELEASED: SA12's .syx hash; check it against the release build. -->
 
    **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
 2. **Flash it.** GLOBAL > SYSTEM > USB CONFIG: USB MIDI, connected to a computer. Send the `.syx` with Transfer as an OS update and press YES at UPGRADE OS NOW?. The A4 restarts.

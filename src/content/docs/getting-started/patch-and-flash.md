@@ -50,7 +50,7 @@ The 0.4.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 
 <!-- UNRELEASED: the .elemod names and the four .elemod hashes above are the release candidate's; check them against the release's SHA256SUMS -->
 
-Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) <!-- UNRELEASED: the release link --> with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (1.74: `elekloader-13fa795-core-ar2-src.tar.gz`; 1.73: `elekloader-8972d70-core-ar2-src.tar.gz`; both: `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. Both builds come from the same source and do the same; the 1.74 one differs only by the firmware addresses that moved between the two OSes. The mods are licensed **GPL-2.0-or-later**.
+Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (1.74: `elekloader-13fa795-core-ar2-src.tar.gz`; 1.73: `elekloader-8972d70-core-ar2-src.tar.gz`; both: `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. Both builds come from the same source and do the same; the 1.74 one differs only by the firmware addresses that moved between the two OSes. The mods are licensed **GPL-2.0-or-later**.
 
 ### Build the `.syx`
 
@@ -79,7 +79,7 @@ Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](http
 
    For 1.73: `--stock Analog-Rytm_MKII_OS1.73.syx --mod core-0.1.elemod --mod rytm-sidecar-0.4.0.elemod --version 1.73`.
 
-**The patcher:** the [patcher](/sidecar-expander/patcher/) makes the same file in your browser: build `rel0-4-0` for 1.73, and its 1.74 build. <!-- UNRELEASED: the patcher's 0.4.0 build names; the 1.74 entry comes with the release -->
+**The patcher:** the [patcher](/sidecar-expander/patcher/) makes the same file in your browser: build `rel0-4-0-os1.74` for 1.74, `rel0-4-0` for 1.73.
 
 Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 

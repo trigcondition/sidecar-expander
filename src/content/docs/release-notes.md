@@ -5,21 +5,21 @@ description: "Sidecar 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOP
 
 ## Sidecar 0.4.0
 
-<!-- UNRELEASED: fill in every UNRELEASED mark in this section from the release build: commits, file names, zip names, hashes and the release-page links. -->
+<!-- UNRELEASED: fill in the marks left in this section from the release build: the card zips' commit and the .syx hashes. -->
 
 **Master FX, a saturator, arp locks, a new user machine, and the Analog Four MKII as a box of its own.** It goes with the **Rytm firmware 0.4.0**: flash it for master FX and the Rytm fixes. Sidecar Mini stays at 0.1.0.
 
 | Part | File |
 |---|---|
-| Rytm firmware, OS 1.74 | `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod` (elekloader, GPL-2.0-or-later), from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx`. One `.syx` with SHA-256 `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337`. <span class="sc-test">in testing</span>: emulator only, not yet on a real Rytm. Moving from 1.73 to 1.74 is one way ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) <!-- UNRELEASED: the .elemod names, the .syx hash and the patcher's 1.74 build, from the release --> |
-| Rytm firmware, OS 1.73 | `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0` in the browser patcher, from your stock `Analog-Rytm_MKII_OS1.73.syx`. One `.syx` with SHA-256 `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: the .elemod names, the .syx hash and the patcher build name, from the release --> |
-| Analog Four MKII firmware | the A4 mod, build SA12 or later, from the patcher or elekloader's command line, OS 1.56 ([Analog Four MKII](/sidecar-expander/using/analog-four/)). Never share the built `.syx` <!-- UNRELEASED: the A4 build name, its .elemod names, the a4-v release tag and the .syx SHA-256 --> |
+| Rytm firmware, OS 1.74 | `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0-os1.74` in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx`. One `.syx` with SHA-256 `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337`. <span class="sc-test">in testing</span>: emulator only, not yet on a real Rytm. Moving from 1.73 to 1.74 is one way ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) <!-- UNRELEASED: check the .syx hash against the release build; change "in testing" if a unit has run the release build --> |
+| Rytm firmware, OS 1.73 | `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0` in the browser patcher, from your stock `Analog-Rytm_MKII_OS1.73.syx`. One `.syx` with SHA-256 `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: check the .syx hash against the release build --> |
+| Analog Four MKII firmware | the A4 mod 0.12, build SA12: `core-0.3.elemod` + `sidecar-a4-0.12.elemod` with the lock file `a4156.lock.json` (elekloader's command line), or build `a4-sa12` in the browser patcher, from your stock `Analog-Four_MKII_OS1.56.syx` ([Analog Four MKII](/sidecar-expander/using/analog-four/)). One `.syx` with SHA-256 `e9eab646102844518ff48e44864f42b2a555aadc2b8fd86b5eaabe2d772a1d71`. Never share the built `.syx` <!-- UNRELEASED: check the .syx hash against the release build --> |
 | Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-COMMIT-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-COMMIT-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: COMMIT is the release commit; set both zip names --> |
-| User machines (Pi) | `sidecar-pi-plugins-0.4.0.zip`: 0.3.2's machines and **SOPHIE** (`sophie.a64.rmp`) <!-- UNRELEASED: the zip name --> |
-| Starter content | `sidecar-content-0.4.0.zip`: the same patches as 0.3.2 (also on the card) <!-- UNRELEASED: the zip name --> |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.0.zip`: 0.3.2's machines and **SOPHIE** (`sophie.a64.rmp`) |
+| Starter content | `sidecar-content-0.4.0.zip`: the same patches as 0.3.2 (also on the card) |
 | Checksums | `SHA256SUMS` on each release page |
 
-Downloads: the sidecar-firmware 0.4.0 release (the Pi), the sidecar-mods 0.4.0 release (the Rytm firmware) and the A4 mod's release (the A4 firmware). <!-- UNRELEASED: link the three release pages: https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0 and https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0, and the A4 mod's a4-v tag on sidecar-mods -->
+Downloads: the [sidecar-firmware 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) (the Pi), the [sidecar-mods 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) (the Rytm firmware) and the [A4 mod's release a4-v0.12](https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.12) (the A4 firmware).
 
 ### Upgrading from 0.3.2
 
