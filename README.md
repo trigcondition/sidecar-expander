@@ -14,11 +14,13 @@ Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-
 
 ## What works now
 
-Sidecar 0.3.0 adds, on top of 0.2.0:
+Sidecar 0.4.0 adds, on top of 0.3.2: master FX (a stereo chain after the Rytm's effects, with a lookahead limiter and a through mode), the SAT saturator, the MIDI machine, the arpeggiator and arp locks, MD's own page, the JUNO and 6-OP FM preset browser, the USER SLOTS page, the SOPHIE user machine, the Rytm firmware for OS 1.74 (in testing) besides OS 1.73, Pi 5 computer audio and MIDI over USB-C (in testing), and Analog Four MKII support. The [release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040) have all of it, and each item's status is on [What works now](https://trigcondition.github.io/sidecar-expander/introduction/what-works-now/).
+
+Sidecar 0.3.0 added, on top of 0.2.0:
 
 - **Poly tracks** on every Sidecar machine, played by the Sidecar's own sequencer: chords, up to 8 pages, trig conditions, p-locks, NOTE EDIT, POLY CONFIG in the Rytm's track menu, poly tracks per pattern.
 - **New machines:** MULTISAMPLE, WAVETABLE and GRANULAR (poly), CHOP (a sample in up to 64 slices), LIVE IN (the Rytm's audio input) and MD built in, in DIGIDRUM's place.
-- **New user machines:** NUSAW, VOX, HUSH1 and RAFFO, with the six starters (ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN) and MD in `sidecar-pi-plugins-0.3.2.zip`.
+- **New user machines:** NUSAW, VOX, HUSH1 and RAFFO, with the six starters (ACID, WAVEPAD, METAL, SNARE, PLUCK, GRAIN) and MD in the user machines zip.
 - **Effects:** insert FX and FX buses, among them **AMP** (Neural Amp Modeler A2-Lite captures from the card's `/NAM/` folder); **SPACE**, a tape echo send effect; the OUT route to the Rytm's main mix.
 - **Recording:** the recorder with dated take names and recording to a USB drive; the sampler and auto-sampler; the song recorder.
 - **Projects by the Rytm's slot:** SAVE AS, copy and paste take the Sidecar's files along; CLEAR and DELETE go to the project trash; bundles; pools and the sample library.
