@@ -5,7 +5,7 @@
     {
       "tag": "rel0-4-0",
       "title": "rel0-4-0: Sidecar 0.4.0 mods, OS 1.73 (default, recommended)",
-      "description": "The mods for Sidecar 0.4.0 on OS 1.73: everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and the animated SRC pages no longer flicker. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.73_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
+      "description": "The mods for Sidecar 0.4.0 on OS 1.73: everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and a drawing race that could make the animated SRC pages flicker is fixed. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.73_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
       "unreleased": {
         "why": "Sidecar 0.4.0 is not released yet: the patch file comes from the release build.",
         "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0",

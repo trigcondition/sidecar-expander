@@ -112,7 +112,7 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 | [SOPHIE](/sidecar-expander/using/user-machines/#new-in-040-sophie), a new user machine | <span class="sc-ok">hardware</span>: on the Rytm |
 | [Analog Four MKII support](/sidecar-expander/using/analog-four/) | <span class="sc-ok">hardware</span>: Pi 5 and Pi 4 ([What has run where](/sidecar-expander/using/analog-four/#what-has-run-where)) |
 | Rytm firmware: the SRC page's view comes back after a BANK tap | <span class="sc-ok">hardware</span>: a Rytm firmware build with both fixes, on a real Rytm |
-| Rytm firmware: the animated SRC pages without flicker | <span class="sc-ok">hardware</span>: the same build, on a real Rytm |
+| Rytm firmware: a drawing race that could make the animated SRC pages flicker, fixed | <span class="sc-test">in testing</span>: the same build runs on a real Rytm, no flicker seen so far |
 | NVMe probe only with `nvme=1` | <span class="sc-ok">hardware</span>: the Pi 5 logs NVMe off |
 | Pi 5 in 3 A mode: a note, not a warning | <span class="sc-ok">hardware</span> |
 | The box's name and voice names on the touchscreen | <span class="sc-test">in testing</span>: not on hardware yet |

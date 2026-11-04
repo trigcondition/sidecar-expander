@@ -70,7 +70,7 @@ On a new box:
 The Rytm firmware:
 
 - **The Sidecar's view on the SRC page no longer gets stuck after a BANK tap.** Tapping a BANK key while the Sidecar's view was on the SRC page left the view away until a Rytm restart. It now comes back after the bank menu, and after CLEAR / UNDO CLEAR.
-- **The animated SRC pages no longer flicker.** With a DSP SAMPLE or WAVETABLE track playing, stock's screen could show through between frames of the Sidecar's page.
+- **A drawing race that could make the animated SRC pages flicker is fixed.** With a DSP SAMPLE or WAVETABLE track playing, the Rytm could draw stock's screen and the Sidecar's page at the same time, so stock's screen could show through between frames of the Sidecar's page. That race is closed. The flicker was rare and has not been reproduced on demand, so this fix is still being watched on a real Rytm.
 
 The Pi:
 
