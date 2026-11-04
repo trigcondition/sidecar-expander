@@ -5,25 +5,25 @@ description: "Sidecar 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOP
 
 ## Sidecar 0.4.0
 
-<!-- UNRELEASED: fill in every UNRELEASED mark in this section from the release build: commits, file names, zip names, hashes and the release-page links. -->
+<!-- UNRELEASED: fill in the marks left in this section from the release build: the card zips' commit and the .syx hashes. -->
 
 **Master FX, a saturator, arp locks, a new user machine, and the Analog Four MKII as a box of its own.** It goes with the **Rytm firmware 0.4.0**: flash it for master FX and the Rytm fixes. Sidecar Mini stays at 0.1.0.
 
 | Part | File |
 |---|---|
-| Rytm firmware, OS 1.74 | `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod` (elekloader, GPL-2.0-or-later), from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx`. One `.syx` with SHA-256 `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337`. <span class="sc-test">in testing</span>: emulator only, not yet on a real Rytm. Moving from 1.73 to 1.74 is one way ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) <!-- UNRELEASED: the .elemod names, the .syx hash and the patcher's 1.74 build, from the release --> |
-| Rytm firmware, OS 1.73 | `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0` in the browser patcher, from your stock `Analog-Rytm_MKII_OS1.73.syx`. One `.syx` with SHA-256 `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: the .elemod names, the .syx hash and the patcher build name, from the release --> |
-| Analog Four MKII firmware | the A4 mod, build SA12 or later, from the patcher or elekloader's command line, OS 1.56 ([Analog Four MKII](/sidecar-expander/using/analog-four/)). Never share the built `.syx` <!-- UNRELEASED: the A4 build name, its .elemod names, the a4-v release tag and the .syx SHA-256 --> |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-COMMIT-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-COMMIT-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: COMMIT is the release commit; set both zip names --> |
-| User machines (Pi) | `sidecar-pi-plugins-0.4.0.zip`: 0.3.2's machines and **SOPHIE** (`sophie.a64.rmp`) <!-- UNRELEASED: the zip name --> |
-| Starter content | `sidecar-content-0.4.0.zip`: the same patches as 0.3.2 (also on the card) <!-- UNRELEASED: the zip name --> |
+| Rytm firmware, OS 1.74 | `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0-os1.74` in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx`. One `.syx` with SHA-256 `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337`. Has run on a real Rytm (Sidecar machines, pages, send FX with ROUTE PRE, the MASTER page, kit save and reload). You can move between 1.73 and 1.74 in both directions with Elektron's stock files ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) <!-- UNRELEASED: check the .syx hash against the release build (the unit run used 538ae6fa..., the same hash) --> |
+| Rytm firmware, OS 1.73 | `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-0` in the browser patcher, from your stock `Analog-Rytm_MKII_OS1.73.syx`. One `.syx` with SHA-256 `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: check the .syx hash against the release build --> |
+| Analog Four MKII firmware | the A4 mod 0.12, build SA12: `core-0.3.elemod` + `sidecar-a4-0.12.elemod` with the lock file `a4156.lock.json` (elekloader's command line), or build `a4-sa12` in the browser patcher, from your stock `Analog-Four_MKII_OS1.56.syx` ([Analog Four MKII](/sidecar-expander/using/analog-four/)). One `.syx` with SHA-256 `e9eab646102844518ff48e44864f42b2a555aadc2b8fd86b5eaabe2d772a1d71`. Never share the built `.syx` <!-- UNRELEASED: check the .syx hash against the release build --> |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-{{COMMIT}}-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-{{COMMIT}}-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: {{COMMIT}} is the release commit; set both zip names --> |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.0.zip`: 0.3.2's machines and **SOPHIE** (`sophie.a64.rmp`) |
+| Starter content | `sidecar-content-0.4.0.zip`: the same patches as 0.3.2 (also on the card) |
 | Checksums | `SHA256SUMS` on each release page |
 
-Downloads: the sidecar-firmware 0.4.0 release (the Pi), the sidecar-mods 0.4.0 release (the Rytm firmware) and the A4 mod's release (the A4 firmware). <!-- UNRELEASED: link the three release pages: https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0 and https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0, and the A4 mod's a4-v tag on sidecar-mods -->
+Downloads: the [sidecar-firmware 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) (the Pi), the [sidecar-mods 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) (the Rytm firmware) and the [A4 mod's release a4-v0.12](https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.12) (the A4 firmware).
 
 ### Upgrading from 0.3.2
 
-1. **Flash the Rytm firmware 0.4.0**, the build for your Rytm's OS ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). On 1.73 you can stay on 1.73. To move to 1.74: flash Elektron's stock 1.74 first, which proves recovery, then the Sidecar's 1.74 build; a 1.73 Rytm can also take the 1.74 build directly. Either way it is one way: back up every project first. Master FX needs it for the Rytm's pans and routing in through mode, and the Rytm fixes below are in it.
+1. **Flash the Rytm firmware 0.4.0**, the build for your Rytm's OS ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). On 1.73 you can stay on 1.73. To move to 1.74: flash Elektron's stock 1.74 first, which proves recovery, then the Sidecar's 1.74 build; a 1.73 Rytm can also take the 1.74 build directly. You can go back with the stock file of the OS you want (both directions work with Elektron's files; Elektron offers only 1.74 now, so keep your own copy of 1.73). Back up every project before any OS change. Master FX needs it for the Rytm's pans and routing in through mode, and the Rytm fixes below are in it.
 2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
 3. **With an NVMe SSD on a Pi 5:** add `nvme=1` to the one line in `cmdline.txt`. From 0.4.0 the Pi only looks for an SSD when asked ([Fixed in 0.4.0](#fixed-in-040)).
 4. **For SOPHIE:** upload `sophie.a64.rmp` from the user machines zip on the web page's User machines tab.
@@ -36,7 +36,7 @@ From 0.3.1 do the same. From 0.3.0, the Rytm firmware 0.4.0 replaces 0.3.1, so f
 
 On the Rytm:
 
-- **OS 1.74 support.** The Rytm firmware comes in two builds, for OS 1.74 (what Elektron offers now) and for OS 1.73. Projects should carry over to 1.74 (checked in the code and the emulator, not yet on a unit). The 1.74 build is <span class="sc-test">in testing</span>: emulator only ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
+- **OS 1.74 support.** The Rytm firmware comes in two builds, for OS 1.74 (what Elektron offers now) and for OS 1.73. Projects should carry over to 1.74 (checked in the code and the emulator, and a kit saved and reloaded on a real Rytm). The 1.74 build has run on a real Rytm ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - **Master FX.** A stereo chain after the Rytm's own effects: four slots (any insert type, SAT among them, and CHORUS, COMB, SPACE, RINGS, CLOUD and HALO, two of those at a time), a POST EQ (HPF, LPF, LOW, HIGH) and a level, with a stereo-linked lookahead limiter last, so a loud mix comes out whole. Saved per kit. **SRC RET** (the default) takes the Sidecar's voices and returns. **SRC MIX**, the through mode, also takes every Rytm track you take off ROUTE TO MAIN, after its filter, amp and drive, panned as on the Rytm, with a STEM TRIM (0 to -24 dB, default -6) before the sum. The Rytm's delay and reverb stay outside the chain. Set it on the Rytm's **MASTER** page (on the ring and in the SIDECAR MENU), on the touchscreen (Settings > Send FX > Master) or on the web page's Send FX tab. No p-locks or LFOs on it yet ([Master FX](/sidecar-expander/using/master-fx/)).
 - **The MIDI machine.** Machine 50 on every track sends the track's notes and locks as MIDI, to the Rytm's DIN out, the computer (USB-C) or USB MIDI devices on the Pi (USB-A). SRC: DST CHAN BANK SBNK PROG PB AT MW; SMPL: VAL1..4 and SEL1..4, four CCs of your choice ([MIDI machine](/sidecar-expander/using/midi-machine/)).
 - **The arpeggiator.** UP + FLTR opens the ARP page: MODE, SPD, RNG, GATE and SWNG, per sound, in time with the Rytm, on any Sidecar machine and the MIDI machine ([Arpeggiator](/sidecar-expander/using/arpeggiator/)).
@@ -54,6 +54,7 @@ On the Rytm:
 
 On the Pi:
 
+- **OS updates for the Rytm through the Pi's USB-C MIDI port,** <span class="sc-test">in testing</span>. A setting, off by default (`usbmidi=os:on` in `cmdline.txt` or on the serial console; the web page's `/cmd` refuses it on purpose), lets Elektron Transfer or elkflash on a computer at the Pi's USB-C port send the Rytm an OS update through the Sidecar, so the Rytm does not need to be unplugged from the Pi. With it off, OS update messages are blocked as before. An interrupted upgrade is aborted rather than finished with a hole ([OS updates through the Sidecar](/sidecar-expander/using/usb-audio-midi/#os-updates-through-the-sidecar)). From work by [Iced-Cream](https://github.com/Iced-Cream).
 - **Tonverk `.elmulti` instruments in MULTISAMPLE,** beside `.sfz`. The format is not publicly documented, so the conventions we read it by are unverified ([MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample)).
 - **Samples load on first play.** Nothing is loaded whole when a project opens, so projects open faster; a sample comes in when a voice selects it or, for MULTISAMPLE, after its first note ([The pool RAM](/sidecar-expander/using/pools/#the-pool-ram)).
 - **A 1280x720 touchscreen layout,** the default on the Pi 5's Touch Display 2; `res=` in `/.rytm/display.txt` picks another ([Screen sizes](/sidecar-expander/using/display/#screen-sizes)).
@@ -71,7 +72,7 @@ On a new box:
 The Rytm firmware:
 
 - **The Sidecar's view on the SRC page no longer gets stuck after a BANK tap.** Tapping a BANK key while the Sidecar's view was on the SRC page left the view away until a Rytm restart. It now comes back after the bank menu, and after CLEAR / UNDO CLEAR.
-- **The animated SRC pages no longer flicker.** With a DSP SAMPLE or WAVETABLE track playing, stock's screen could show through between frames of the Sidecar's page.
+- **A drawing race that could make the animated SRC pages flicker is fixed.** With a DSP SAMPLE or WAVETABLE track playing, the Rytm could draw stock's screen and the Sidecar's page at the same time, so stock's screen could show through between frames of the Sidecar's page. That race is closed. The flicker was rare and has not been reproduced on demand, so this fix is still being watched on a real Rytm.
 
 The Pi:
 

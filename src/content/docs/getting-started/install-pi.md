@@ -12,12 +12,14 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
-- From the [Sidecar 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.0.zip` (the user machines) and `sidecar-content-0.4.0.zip` (the starter content, also on the card). The Rytm firmware is on the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). <!-- UNRELEASED: the release links and zip names -->
+- From the [Sidecar 0.4.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.0.zip` (the user machines) and `sidecar-content-0.4.0.zip` (the starter content, also on the card). The Rytm firmware is on the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
 | Card zip | For |
 |---|---|
-| `sidecar-pi-sd-77fd0ad-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
-| `sidecar-pi-sd-77fd0ad-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+| `sidecar-pi-sd-{{COMMIT}}-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
+| `sidecar-pi-sd-{{COMMIT}}-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+
+<!-- UNRELEASED: {{COMMIT}} is the release commit: set both zip names -->
 
 Each zip also has its own `.sha256`; `BUILD-INFO-pi.txt` names the commit, both kernels and each card's `config.txt`.
 
@@ -130,13 +132,13 @@ The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1`
 
 ## Starter content
 
-The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.4.0.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) <!-- UNRELEASED: the zip name and release link -->: extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
+The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.4.0.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
 
 On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-0.4.0.zip` <!-- UNRELEASED: the zip name --> holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT) `mdk_md.a64.rmp` (MD: mdkit, CC0 1.0) and, new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT). Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
+The release's `sidecar-pi-plugins-0.4.0.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT) `mdk_md.a64.rmp` (MD: mdkit, CC0 1.0) and, new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT). Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 
@@ -211,7 +213,7 @@ What is different on the Pi 5 for now:
 
 - **USB audio and MIDI to the computer** (<span class="sc-test">in testing</span>, new in 0.4.0): on by default over the Pi 5's USB-C port, `gadget=0` turns it off. That port is also the Pi 5's power input, and a computer cannot power a Pi 5, so it needs a USB-C power and data splitter or a header-pin supply: [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached).
 - **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its UI to it, so the picture is slightly soft. The same holds for both card zips. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
-- **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up), the 1024x600 UI centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
+- **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up). From 0.4.0 the UI uses the panel's 1280x720 by default (<span class="sc-test">in testing</span>: not yet run on the panel); `res=1024x600` in `/.rytm/display.txt` gives the older 1024x600 UI, centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
 - **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).
 - **Updating**: copy the new release's files over the old ones (as on the Pi 4). There is no update over the network on a Pi 5 yet.

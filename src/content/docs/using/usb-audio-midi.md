@@ -46,7 +46,19 @@ With a header-pin supply the Pi has no USB-PD to read and may report 3 A mode, w
 The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Rytm: notes, CCs, clock and transport, program changes, and SysEx dumps. Two filters stay in place:
 
 - the Sidecar's own messages to and from the Rytm are not passed on;
-- OS update messages are never passed to the Rytm. Update the Rytm with the Sidecar unplugged.
+- OS update messages are not passed to the Rytm unless you turn that on ([OS updates through the Sidecar](#os-updates-through-the-sidecar)). By default, update the Rytm with the Sidecar unplugged.
+
+## OS updates through the Sidecar
+
+<span class="sc-test">in testing</span>. New in 0.4.0, from work by [Iced-Cream](https://github.com/Iced-Cream).
+
+A setting, off by default, lets Elektron Transfer or elkflash on a computer at the Pi's USB-C port send the Rytm an OS update through the Sidecar, so the Rytm does not need to be unplugged from the Pi. Turn it on with `usbmidi=os:on` in `cmdline.txt`, or as a command on the serial console. The web page's `/cmd` refuses it on purpose. With it off, OS update messages are blocked, as before.
+
+- While it is on, the USB-C port waits for the Rytm instead of dropping messages, so the whole OS file arrives.
+- If data is lost during an upgrade, the upgrade is aborted rather than finished with a hole in the image. The log says `OS upgrade ABORTED`. Start the upgrade again.
+- `/status` shows `usbmidi.os` (`off`, `emu` or `on`), `usbmidi.osUpgrade` (whether OS messages pass right now) and `usbmidi.aborted` (upgrades cut since boot).
+- After the upgrade the Rytm reboots and the Pi sees it again.
+- It is meant for the Rytm. Keep it off when you are not updating, and back up your projects first, as before any OS change.
 
 ## A stock Rytm
 

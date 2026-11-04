@@ -2,7 +2,16 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.3.2 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.3.1, built with elekloader on OS 1.73; Sidecar Mini stays at 0.1.0). 0.3 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.4.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.0, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.4.0
+
+- **An A4's screen froze once on a unit** and has not come back in ten tries to repeat it: the A4's sequencer and audio kept running, its UI stopped. If it happens, power-cycle the A4 and report it with the Sidecar's log.
+- **Pi 5 computer audio over USB-C is in testing.** Please report whether your computer sees Sidecar | Expander and how it sounds.
+- **The full-speed retry has not been needed on hardware yet:** every Rytm and A4 connection in our tests came up at high speed. If a box comes up at full speed and stays silent, replug it and send us the log.
+- **Elektron offers only OS 1.74 now.** You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. To be able to go back to 1.73, keep your own copy of that file. Back up every project before any OS change.
+- **Touch after a warm restart** may still not come back on some setups (0.3.2's issue below; a power cycle brings it back).
+- **On the A4:** the limits on its page, among them the LFO destination lists keeping stock's names ([Limits](https://trigcondition.github.io/sidecar-expander/using/analog-four/#limits)).
 
 ## New in 0.3.2
 
@@ -48,7 +57,7 @@ If something looks wrong, flash the stock `Analog-Rytm_MKII_OS1.73.syx` to go ba
 - **The status pages catch every knob** (nothing happens underneath while you turn one). SCOPE and REC use their own encoders; voice pages catch their knobs. Keys that open stock screens (TRIG, SRC, SMPL, FLTR, AMP, LFO, FX, GLOBAL, YES, TRK and so on) do nothing on the Rytm while a page is open; PLAY, STOP, RECORD, the pads, mutes, FILL and tap tempo work.
 - **An older Sidecar firmware** (before the key masks) makes the page catch every key and knob except PLAY, STOP and RECORD; an older Pi kernel opens the pages without text and shows no connect screen.
 - **FX return on IN L/R:** never send those two channels back into the Rytm through your computer's audio: the effect would feed itself. The page warns while the switch is on.
-- **OS 1.73 only.** There are no patch files for other OS versions. OS 1.74 will be supported after testing. On OS 1.74 (or any other version), first flash the stock OS 1.73 `.syx` with Transfer, as any OS update, then patch and flash it.
+- **OS 1.74 and 1.73 only.** There is one build for each OS. On any other OS version, first flash Elektron's stock OS 1.74 file with Transfer, as any OS update, then patch and flash. You can flash between 1.73 and 1.74 both ways with Elektron's stock files; Elektron offers only 1.74 for download, so keep your own 1.73 file if you want to go back.
 - The slot menu (FUNC + CHRO, YES on a U slot) can hold the screen for up to 2 seconds while it waits for the Sidecar; with no Sidecar it then shows **NO SIDECAR**.
 - **User FX slots are not available yet.** The SEND FX TYPE list offers only the built-in effects.
 - **P2..P5 show numbers instead of names** when the Sidecar's firmware is older than the Rytm build. Update the Sidecar.
@@ -87,7 +96,7 @@ In testing: nothing of the PSRAM path has run on PSRAM hardware yet. With one or
 - **Wi-Fi is off** in the SD card package. Use a direct Ethernet cable for `sidecar.local`, or set up Wi-Fi yourself as in INSTALL-PI.md.
 - Ethernet has no DHCP client: the address is fixed (169.254.61.60), or set with `ip=` in `cmdline.txt`.
 - The web page needs a paired browser since 0.3.0 (the code on the Rytm: SIDECAR MENU > WEB UI). The connection is plain HTTP: use a direct cable or a network you trust.
-- **Pi 5: no USB audio or MIDI to the computer yet.** The Sidecar doesn't use the Pi 5's USB-C port for this yet, so for now it only takes power. **Support is coming:** a Pi 5 under Raspberry Pi OS ran 12 audio channels in each direction and MIDI through that port, into Ableton Live. It needs power from a separate supply, not from the computer. Until then, use a Pi 4B for computer audio and MIDI.
+- **Pi 5: USB audio and MIDI to the computer are in testing** (new in 0.4.0, on by default, `gadget=0` turns it off). The Pi 5's USB-C port is also its power input, and a computer cannot power a Pi 5: it needs a USB-C power and data splitter or a header-pin supply.
 - **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 it names the Pi 4's own supply (`POWER TOO WEAK: use 15 W supply`).
 - **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
 - **Pi 5 DSI display:** v1 displays in testing (built, not yet run on hardware); the Touch Display 2 7" is tested. With no DSI panel answering, the Sidecar uses HDMI.

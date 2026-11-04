@@ -3,6 +3,8 @@
 # Node) for every patch in public/patcher/patches, and compare each result with our build.
 #   scripts/test_patcher.sh BUILD_DIR      (holds the stock .syx files and <stock name>_<tag>.syx)
 set -eu
+# no __pycache__ in public/patcher: a .pyc holds its source's absolute path, and public/ is the site
+export PYTHONDONTWRITEBYTECODE=1
 here=$(cd "$(dirname "$0")/.." && pwd)
 patcher="$here/public/patcher"
 dir=${1:?usage: test_patcher.sh BUILD_DIR}

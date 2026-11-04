@@ -45,6 +45,7 @@ This is a tester release. It is not made, endorsed or supported by the instrumen
 
 ## Where to go next
 
+- [How Sidecar works](/sidecar-expander/introduction/how-sidecar-works/), with the signal flow
 - [What works now](/sidecar-expander/introduction/what-works-now/)
 - [Hardware you need](/sidecar-expander/introduction/hardware/)
 - [Key combinations](/sidecar-expander/using/key-combinations/)

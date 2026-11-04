@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1960" viewBox="0 0 1400 1960" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<defs><marker id="hry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#b4bcc7"/></marker><marker id="hsc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4fd98a"/></marker></defs>
+<rect width="1400" height="1960" fill="#15171b"/>
+<text x="40" y="46" font-size="20" fill="#e8eaed" font-weight="bold" text-anchor="start" >1 · Analog Rytm MKII on its own</text>
+<text x="40" y="68" font-size="13" fill="#9aa3ad" font-weight="normal" text-anchor="start" >Every track is analog end to end: machine, filter, amp, then the mix and the master effects.</text>
+<rect x="40" y="100" width="180" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="130.0" y="123.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >12 TRACKS</text>
+<text x="130.0" y="140.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >analog or sample machine</text>
+<circle cx="216" cy="102" r="11" fill="#ffb020"/>
+<text x="216" y="106.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >1</text>
+<rect x="260" y="100" width="120" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="320.0" y="133.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >FILTER</text>
+<rect x="420" y="100" width="170" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="505.0" y="133.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >AMP + OVERDRIVE</text>
+<rect x="630" y="100" width="130" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="695.0" y="133.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >VOL / PAN</text>
+<rect x="800" y="100" width="160" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="880.0" y="123.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >ROUTE TO MAIN</text>
+<text x="880.0" y="140.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >per track</text>
+<circle cx="956" cy="102" r="11" fill="#ffb020"/>
+<text x="956" y="106.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >2</text>
+<rect x="1000" y="100" width="200" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1100.0" y="133.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >MAIN MIX</text>
+<path d="M 220 129 L 260 129" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 380 129 L 420 129" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 590 129 L 630 129" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 760 129 L 800 129" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 960 129 L 1000 129" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="800" y="210" width="160" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="880.0" y="233.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >INDIVIDUAL OUTS</text>
+<text x="880.0" y="250.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >8 analog outs</text>
+<path d="M 695 158 L 695 239 L 800 239" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="420" y="210" width="170" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="505.0" y="233.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >DELAY / REVERB SENDS</text>
+<text x="505.0" y="250.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >the track's AMP page</text>
+<circle cx="586" cy="212" r="11" fill="#ffb020"/>
+<text x="586" y="216.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >3</text>
+<path d="M 505 158 L 505 210" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="420" y="310" width="170" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="505.0" y="343.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >DELAY</text>
+<rect x="630" y="310" width="130" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="695.0" y="343.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >REVERB</text>
+<path d="M 505 268 L 505 310" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 590 252 L 612 252 L 612 325 L 630 325" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 590 350 L 630 350" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="592" y="382" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >delay → reverb</text>
+<rect x="40" y="310" width="180" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="130.0" y="333.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >AUDIO IN L/R</text>
+<text x="130.0" y="350.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >via the FX track</text>
+<path d="M 220 330 L 400 330 L 400 245 L 420 245" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 130 368 L 130 410 L 980 410 L 980 144 L 1000 144" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="780" y="402" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >returns and audio in → main mix</text>
+<path d="M 505 368 L 505 410" fill="none" stroke="#b4bcc7" stroke-width="2"/>
+<path d="M 695 368 L 695 410" fill="none" stroke="#b4bcc7" stroke-width="2"/>
+<rect x="1000" y="210" width="200" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1100.0" y="233.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >DISTORTION</text>
+<text x="1100.0" y="250.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >delay / reverb before or after</text>
+<circle cx="1196" cy="212" r="11" fill="#ffb020"/>
+<text x="1196" y="216.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >4</text>
+<rect x="1000" y="310" width="200" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1100.0" y="343.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >COMPRESSOR</text>
+<circle cx="1196" cy="312" r="11" fill="#ffb020"/>
+<text x="1196" y="316.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >4</text>
+<rect x="1000" y="410" width="200" height="50" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1100.0" y="439.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >MAIN OUT · PHONES</text>
+<path d="M 1100 158 L 1100 210" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1100 268 L 1100 310" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1100 368 L 1100 410" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="1230" y="210" width="140" height="158" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1300.0" y="276.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >USB</text>
+<text x="1300.0" y="293.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >to a computer</text>
+<text x="1300.0" y="308.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >(Overbridge)</text>
+<circle cx="1366" cy="212" r="11" fill="#ffb020"/>
+<text x="1366" y="216.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >5</text>
+<path d="M 1200 339 L 1230 339" fill="none" stroke="#b4bcc7" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#hry)"/>
+<text x="1300" y="395" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >main, 12 tracks,</text>
+<text x="1300" y="410" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >audio in</text>
+<line x1="20" y1="490" x2="1380" y2="490" stroke="#2c3138" stroke-width="1"/>
+<text x="40" y="530" font-size="20" fill="#e8eaed" font-weight="bold" text-anchor="start" >2 · Analog Rytm MKII + Sidecar (0.4.0)</text>
+<text x="40" y="552" font-size="13" fill="#9aa3ad" font-weight="normal" text-anchor="start" >The Pi is the Rytm's USB host. Green is the Sidecar's digital path; grey is the Rytm's analog one.</text>
+<rect x="20" y="570" width="690" height="830" rx="12" fill="none" stroke="#39c06b" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="34" y="592" font-size="12.5" fill="#39c06b" font-weight="bold" text-anchor="start" letter-spacing="1.5">SIDECAR  ·  RASPBERRY PI</text>
+<rect x="760" y="570" width="620" height="830" rx="12" fill="none" stroke="#5d6673" stroke-width="1.5" stroke-dasharray="8 5"/>
+<text x="774" y="592" font-size="12.5" fill="#5d6673" font-weight="bold" text-anchor="start" letter-spacing="1.5">ANALOG RYTM MKII</text>
+<text x="735" y="1395" font-size="12" fill="#9aa3ad" font-weight="bold" text-anchor="middle" >USB</text>
+<rect x="780" y="610" width="220" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="890.0" y="633.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >TRACK</text>
+<text x="890.0" y="650.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >Sidecar machine or analog</text>
+<circle cx="996" cy="612" r="11" fill="#ffb020"/>
+<text x="996" y="616.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >1</text>
+<rect x="780" y="710" width="110" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="835.0" y="743.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >FILTER</text>
+<rect x="910" y="710" width="150" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="985.0" y="743.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >AMP + OVERDRIVE</text>
+<rect x="1080" y="710" width="110" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1135.0" y="743.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >VOL / PAN</text>
+<rect x="1210" y="710" width="150" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1285.0" y="743.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >ROUTE TO MAIN</text>
+<circle cx="1356" cy="712" r="11" fill="#ffb020"/>
+<text x="1356" y="716.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >2</text>
+<path d="M 835 668 L 835 710" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="843" y="694" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >analog machine</text>
+<path d="M 890 739 L 910 739" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1060 739 L 1080 739" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1190 739 L 1210 739" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="860" y="810" width="240" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="980.0" y="833.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SENDS</text>
+<text x="980.0" y="850.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >AMP: DEL / REV · AMP 2: SFX1 / SFX2</text>
+<circle cx="1096" cy="812" r="11" fill="#ffb020"/>
+<text x="1096" y="816.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >10</text>
+<circle cx="1072" cy="812" r="11" fill="#ffb020"/>
+<text x="1072" y="816.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >3</text>
+<path d="M 985 768 L 985 810" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="860" y="910" width="240" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="980.0" y="933.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >DELAY → REVERB</text>
+<text x="980.0" y="950.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >the Rytm's own</text>
+<path d="M 980 868 L 980 910" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="1210" y="810" width="150" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1285.0" y="843.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >MAIN MIX</text>
+<rect x="1210" y="910" width="150" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1285.0" y="943.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >DISTORTION</text>
+<circle cx="1356" cy="912" r="11" fill="#ffb020"/>
+<text x="1356" y="916.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >4</text>
+<rect x="1210" y="1010" width="150" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1285.0" y="1043.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >COMPRESSOR</text>
+<circle cx="1356" cy="1012" r="11" fill="#ffb020"/>
+<text x="1356" y="1016.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >4</text>
+<rect x="1210" y="1130" width="150" height="50" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="1285.0" y="1159.5" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >MAIN OUT · PHONES</text>
+<path d="M 1285 768 L 1285 810" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1285 868 L 1285 910" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1285 968 L 1285 1010" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1100 939 L 1210 939" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<circle cx="1285" cy="1100" r="11" fill="#23272e" stroke="#b4bcc7" stroke-width="2"/>
+<text x="1285" y="1105" font-size="15" fill="#e8eaed" font-weight="bold" text-anchor="middle" >+</text>
+<path d="M 1285 1068 L 1285 1089" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<path d="M 1285 1111 L 1285 1130" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<rect x="780" y="1230" width="400" height="58" rx="8" fill="#23272e" stroke="#5d6673" stroke-width="1.5"/>
+<text x="980.0" y="1253.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >USB OUT TO THE PI</text>
+<text x="980.0" y="1270.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >main · 8 track channels · audio in</text>
+<rect x="40" y="610" width="180" height="58" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="130.0" y="633.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SIDECAR VOICES ×8</text>
+<text x="130.0" y="650.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >the machines' sound</text>
+<rect x="40" y="710" width="210" height="58" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="145.0" y="733.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >INSERT A → B</text>
+<text x="145.0" y="750.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >two effect slots per voice</text>
+<circle cx="246" cy="712" r="11" fill="#ffb020"/>
+<text x="246" y="716.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >6</text>
+<rect x="290" y="710" width="190" height="58" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="385.0" y="726.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >OUT</text>
+<text x="385.0" y="743.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >TRK · PRE · POST</text>
+<text x="385.0" y="758.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >LEV · PAN · WID</text>
+<circle cx="476" cy="712" r="11" fill="#ffb020"/>
+<text x="476" y="716.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >7</text>
+<rect x="40" y="810" width="210" height="58" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="145.0" y="833.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >BUS SENDS 1 · 2 · 3</text>
+<text x="145.0" y="850.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >after the inserts</text>
+<circle cx="246" cy="812" r="11" fill="#ffb020"/>
+<text x="246" y="816.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >8</text>
+<path d="M 130 668 L 130 710" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<path d="M 250 739 L 290 739" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<path d="M 145 768 L 145 810" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="290" y="800" width="270" height="150" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="425" y="823" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >FX BUSES</text>
+<circle cx="556" cy="802" r="11" fill="#ffb020"/>
+<text x="556" y="806.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >9</text>
+<text x="305" y="849" font-size="12.5" fill="#e8eaed" font-weight="normal" text-anchor="start" >1 · SEND FX 1 → A → B</text>
+<text x="305" y="871" font-size="12.5" fill="#e8eaed" font-weight="normal" text-anchor="start" >2 · SEND FX 2 → A → B</text>
+<text x="305" y="893" font-size="12.5" fill="#e8eaed" font-weight="normal" text-anchor="start" >3 · dry → A → B</text>
+<text x="305" y="935" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="start" >each returns PRE or POST</text>
+<path d="M 250 839 L 290 839" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="40" y="1010" width="640" height="130" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="60" y="1036" font-size="14" fill="#e8eaed" font-weight="bold" text-anchor="start" >MASTER FX</text>
+<circle cx="676" cy="1012" r="11" fill="#ffb020"/>
+<text x="676" y="1016.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >11</text>
+<rect x="60" y="1050" width="62" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="91.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SLOT 1</text>
+<path d="M 122 1065 L 136 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="140" y="1050" width="62" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="171.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SLOT 2</text>
+<path d="M 202 1065 L 216 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="220" y="1050" width="62" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="251.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SLOT 3</text>
+<path d="M 282 1065 L 296 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="300" y="1050" width="62" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="331.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >SLOT 4</text>
+<path d="M 362 1065 L 376 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="380" y="1050" width="74" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="417.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >POST EQ</text>
+<path d="M 454 1065 L 468 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="472" y="1050" width="46" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="495.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >LEV</text>
+<path d="M 518 1065 L 532 1065" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<rect x="536" y="1050" width="80" height="30" rx="5" fill="#173d27" stroke="#39c06b" stroke-width="1"/>
+<text x="576.0" y="1070" font-size="11.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >LIMITER</text>
+<text x="60" y="1104" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="start" >SRC RET: the Sidecar's own sound · SRC MIX: also the Rytm tracks taken off main</text>
+<text x="60" y="1122" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="start" >While a slot is set, the PRE pair is moved onto POST through the chain. BYPASS keeps tails.</text>
+<path d="M 780 639 L 220 639" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="560" y="631" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >trigs · knobs · p-locks</text>
+<path d="M 480 724 L 780 724" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="494" y="716" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >TRK: back on its own track</text>
+<path d="M 480 755 L 600 755 L 600 1010" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="608" y="790" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >PRE / POST</text>
+<path d="M 860 839 L 560 839" fill="none" stroke="#15171b" stroke-width="9"/>
+<path d="M 860 839 L 560 839" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="700" y="831" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >SFX1 / SFX2 sends</text>
+<path d="M 425 950 L 425 1010" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="433" y="985" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >returns</text>
+<path d="M 680 1040 L 735 1040 L 735 890 L 1240 890 L 1240 868" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="1050" y="882" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >PRE return: before DISTORTION</text>
+<path d="M 680 1100 L 1274 1100" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="760" y="1092" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >POST return: after COMPRESSOR</text>
+<path d="M 780 1259 L 520 1259 L 520 1140" fill="none" stroke="#15171b" stroke-width="9"/>
+<path d="M 780 1259 L 520 1259 L 520 1140" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="528" y="1166" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >SRC MIX stems</text>
+<rect x="40" y="1300" width="640" height="70" rx="8" fill="#0f2a1b" stroke="#39c06b" stroke-width="1.5"/>
+<text x="360.0" y="1329.0" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="middle" >COMPUTER</text>
+<text x="360.0" y="1346.0" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="middle" >USB-C on the Pi · 12 in / 12 out audio + MIDI</text>
+<circle cx="676" cy="1302" r="11" fill="#ffb020"/>
+<text x="676" y="1306.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >12</text>
+<path d="M 520 1259 L 520 1300" fill="none" stroke="#b4bcc7" stroke-width="2" marker-end="url(#hry)"/>
+<text x="528" y="1288" font-size="11.5" fill="#b4bcc7" font-weight="normal" text-anchor="start" >to the computer</text>
+<path d="M 130 1300 L 130 1140" fill="none" stroke="#4fd98a" stroke-width="2" marker-end="url(#hsc)"/>
+<text x="138" y="1170" font-size="11.5" fill="#4fd98a" font-weight="normal" text-anchor="start" >computer audio</text>
+<line x1="20" y1="1430" x2="1380" y2="1430" stroke="#2c3138" stroke-width="1"/>
+<text x="40" y="1462" font-size="18" fill="#e8eaed" font-weight="bold" text-anchor="start" >Where you choose</text>
+<circle cx="51" cy="1498" r="11" fill="#ffb020"/>
+<text x="51" y="1502.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >1</text>
+<text x="72" y="1502" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Machine</text>
+<text x="72" y="1522" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >Track's SRC page, SRC again for the machine list. Sidecar machines are in the same list.</text>
+<circle cx="51" cy="1568" r="11" fill="#ffb020"/>
+<text x="51" y="1572.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >2</text>
+<text x="72" y="1572" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Route to main</text>
+<text x="72" y="1592" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >GLOBAL &gt; AUDIO ROUTING, or the kit's TRACK ROUTING.</text>
+<circle cx="51" cy="1638" r="11" fill="#ffb020"/>
+<text x="51" y="1642.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >3</text>
+<text x="72" y="1642" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Delay / reverb sends</text>
+<text x="72" y="1662" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >The track's AMP page.</text>
+<circle cx="51" cy="1708" r="11" fill="#ffb020"/>
+<text x="51" y="1712.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >4</text>
+<text x="72" y="1712" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Distortion, compressor</text>
+<text x="72" y="1732" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >The FX track's pages.</text>
+<circle cx="51" cy="1778" r="11" fill="#ffb020"/>
+<text x="51" y="1782.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >5</text>
+<text x="72" y="1782" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >USB mode</text>
+<text x="72" y="1802" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >USB CONFIG. With a Sidecar: the Overbridge mode.</text>
+<circle cx="51" cy="1848" r="11" fill="#ffb020"/>
+<text x="51" y="1852.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >6</text>
+<text x="72" y="1852" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Insert A → B</text>
+<text x="72" y="1872" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >UP + FX: the INSERT page. Touchscreen: INSERT FX (UP + T6).</text>
+<circle cx="731" cy="1498" r="11" fill="#ffb020"/>
+<text x="731" y="1502.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >7</text>
+<text x="752" y="1502" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >OUT route, LEV, PAN, WID</text>
+<text x="752" y="1522" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >UP + AMP: the OUT view. Touchscreen: the OUT row.</text>
+<circle cx="731" cy="1568" r="11" fill="#ffb020"/>
+<text x="731" y="1572.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >8</text>
+<text x="752" y="1572" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Bus sends</text>
+<text x="752" y="1592" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >INSERT page: G BUS, H SEND.</text>
+<circle cx="731" cy="1638" r="11" fill="#ffb020"/>
+<text x="731" y="1642.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >9</text>
+<text x="752" y="1642" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Send FX type, ROUTE, bus slots</text>
+<text x="752" y="1662" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >FX track: SRC again (FX 1), SMPL again (FX 2). INSERT page: YES for the BUS view.</text>
+<circle cx="731" cy="1708" r="11" fill="#ffb020"/>
+<text x="731" y="1712.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >10</text>
+<text x="752" y="1712" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >SFX1 / SFX2</text>
+<text x="752" y="1732" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >Every track: AMP twice (AMPLITUDE 2), knobs A and B.</text>
+<circle cx="731" cy="1778" r="11" fill="#ffb020"/>
+<text x="731" y="1782.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >11</text>
+<text x="752" y="1782" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Master FX, SRC, BYPASS</text>
+<text x="752" y="1802" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >UP + YES, then LEFT / RIGHT to MASTER. Stem trim: web page.</text>
+<circle cx="731" cy="1848" r="11" fill="#ffb020"/>
+<text x="731" y="1852.5" font-size="12.5" fill="#15171b" font-weight="bold" text-anchor="middle" >12</text>
+<text x="752" y="1852" font-size="13.5" fill="#e8eaed" font-weight="bold" text-anchor="start" >Computer audio</text>
+<text x="752" y="1872" font-size="12" fill="#9aa3ad" font-weight="normal" text-anchor="start" >Web page: Sound tab. Touchscreen: Settings &gt; Sound.</text>
+<text x="40" y="1938" font-size="11.5" fill="#9aa3ad" font-weight="normal" text-anchor="start" >Rytm points 1–5 work the same with or without a Sidecar. Sidecar 0.4.0 · trigcondition.github.io/sidecar-expander</text>
+</svg>

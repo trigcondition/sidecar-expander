@@ -17,6 +17,10 @@ Use the **Tester report** form under [Issues](https://github.com/trigcondition/s
 
 The items under "Not yet confirmed on hardware" in [Known issues](/sidecar-expander/using/troubleshooting/#still-in-testing) are especially welcome.
 
+## Talk
+
+Questions, ideas and help from other users: the community [Discord](/sidecar-expander/about/community/).
+
 ## Source code
 
 The source is public: the engine in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (its `CONTRIBUTING.md`: fork, a branch, tests, a pull request against `main`), the Rytm mods in [sidecar-mods](https://github.com/trigcondition/sidecar-mods) (bring your own stock OS), the emulator in [analog-emu](https://github.com/trigcondition/analog-emu). This repository holds the patcher, the web console, the documentation and the release scripts.

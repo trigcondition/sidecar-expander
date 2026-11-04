@@ -17,6 +17,10 @@ A patch without the field is lz1, the greedy packer of the first patches (sfx/ru
 A build's "tool" in builds.json names the tool under --mods that makes its patch, for a box other than the Rytm
 (a sidecar-mods checkout with a4/tools/a4_patch.py); --dir then holds that box's stock .syx and build, and --elekloader
 is required. A build's "unreleased" goes into the index, where the page hides it.
+
+A build's "stock_name" and "built" name its stock file and our .syx inside --dir when they are not the tool's defaults
+(the Rytm's OS 1.74 build: Analog-Rytm_MKII_OS1.74.syx and Analog-Rytm_MKII_OS1.74_rel0-4-0.syx). The tool picks the
+OS from the stock file's sha256.
 """
 import argparse
 import json
@@ -48,6 +52,10 @@ for b in builds:
     cmd = [sys.executable, str(tool), "--tag", b["tag"], "--dir", a.dir, "--commit", a.commit,
            "--title", b["title"], "--description", b["description"],
            "-o", str(OUT / f"sidecar-{b['tag']}.json")]
+    if "stock_name" in b:
+        cmd += ["--stock", str(Path(a.dir) / b["stock_name"])]
+    if "built" in b:
+        cmd += ["--built", str(Path(a.dir) / b["built"])]
     if a.elekloader:
         cmd += ["--elekloader", a.elekloader]
     subprocess.run(cmd, check=True)

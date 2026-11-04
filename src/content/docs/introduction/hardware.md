@@ -7,9 +7,9 @@ sidebar:
 
 ## On the Rytm side
 
-- An **Analog Rytm MKII on OS 1.74 or OS 1.73**. There is one build of the mods for each, built against that exact OS; elekloader refuses a module made for another OS. The 1.74 build is <span class="sc-test">in testing</span> (emulator only).
+- An **Analog Rytm MKII on OS 1.74 or OS 1.73**. There is one build of the mods for each, built against that exact OS; elekloader refuses a module made for another OS. The 1.74 build has run on a real Rytm.
   - An older OS: update to 1.74 first (Elektron offers only 1.74 now).
-  - Moving from 1.73 to 1.74 is one way: see [Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173).
+  - You can move between 1.73 and 1.74 in both directions with Elektron's stock files (Elektron offers only 1.74 now, so keep your own copy of 1.73 if you want it): see [Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173).
   - A newer OS than 1.74: not supported yet.
 - The stock file of your OS: `Analog-Rytm_MKII_OS1.74.syx` from Elektron's `Analog-Rytm_MKII_OS1.74_dist.zip` on the Rytm MKII support page, or the `Analog-Rytm_MKII_OS1.73.syx` you have. We do not distribute it.
 - The official **Transfer** app on a computer, to send the patched OS.

@@ -14,7 +14,7 @@ Sidecar is in public testing. Each feature below is marked:
 This is **Sidecar 0.4.0**: the Sidecar 0.4.0 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
-The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73; the hardware marks come from 1.73. Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
+The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73; most hardware marks come from 1.73, and the 1.74 build has since run on a real Rytm (2026-11-04). Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 :::
 
 ## Voices, effects, modulation
@@ -91,7 +91,7 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 | [The MIDI machine](/sidecar-expander/using/midi-machine/): notes and locks out as MIDI to DIN, USB-C or USB-A | <span class="sc-test">in testing</span>: emulator, not yet tried with a device on the other end |
 | [The arpeggiator](/sidecar-expander/using/arpeggiator/): UP + FLTR, MODE SPD RNG GATE SWNG per sound | <span class="sc-ok">hardware</span>: on FM, Pi 5 |
 | [Arp locks](/sidecar-expander/using/arpeggiator/#arp-locks) per step | <span class="sc-test">in testing</span>: no report from a real Rytm yet |
-| The Rytm firmware for **OS 1.74** ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) | <span class="sc-test">in testing</span>: emulator only, not yet on a real Rytm |
+| The Rytm firmware for **OS 1.74** ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)) | <span class="sc-ok">hardware</span>: Sidecar machines, the pages, send FX with ROUTE PRE, the MASTER page, kit save and reload |
 | [MD's own page](/sidecar-expander/using/machines/#md) on the Rytm: ENGINE, TYPE, all 30 types | <span class="sc-ok">hardware</span> |
 | [The JUNO / 6-OP FM preset browser](/sidecar-expander/using/machines/#juno) on PAT (knob A) | <span class="sc-ok">hardware</span> |
 | DSP SAMPLE: SMP on knob A of SRC, opening the bank list | <span class="sc-test">in testing</span>: emulator |
@@ -112,7 +112,7 @@ The Rytm firmware 0.4.0 and the 0.4.0 card; the A4 mod for an Analog Four. Detai
 | [SOPHIE](/sidecar-expander/using/user-machines/#new-in-040-sophie), a new user machine | <span class="sc-ok">hardware</span>: on the Rytm |
 | [Analog Four MKII support](/sidecar-expander/using/analog-four/) | <span class="sc-ok">hardware</span>: Pi 5 and Pi 4 ([What has run where](/sidecar-expander/using/analog-four/#what-has-run-where)) |
 | Rytm firmware: the SRC page's view comes back after a BANK tap | <span class="sc-ok">hardware</span>: a Rytm firmware build with both fixes, on a real Rytm |
-| Rytm firmware: the animated SRC pages without flicker | <span class="sc-ok">hardware</span>: the same build, on a real Rytm |
+| Rytm firmware: a drawing race that could make the animated SRC pages flicker, fixed | <span class="sc-test">in testing</span>: the same build runs on a real Rytm, no flicker seen so far |
 | NVMe probe only with `nvme=1` | <span class="sc-ok">hardware</span>: the Pi 5 logs NVMe off |
 | Pi 5 in 3 A mode: a note, not a warning | <span class="sc-ok">hardware</span> |
 | The box's name and voice names on the touchscreen | <span class="sc-test">in testing</span>: not on hardware yet |

@@ -62,7 +62,7 @@ A Pi-only release: super basic native support for Digitakt (experimental, emulat
 - **Analog Four MKII support:** the Sidecar's machines through the A4's analog voices ([Analog Four MKII](/sidecar-expander/using/analog-four/); what may come next for it: [Analog Four roadmap](/sidecar-expander/using/analog-four-roadmap/)).
 - **MD's own page** on the Rytm (ENGINE, TYPE and all 30 drum types), the **JUNO / 6-OP FM preset browser**, DSP SAMPLE's SMP on knob A as on the other sample machines, **PAD OCT** for the CHRO pads, Tonverk **.elmulti** instruments in MULTISAMPLE, samples loaded on first play, the **1280x720** layout for the Touch Display 2, idle sleep for a cooler Pi, and the **NEON pass**: the Pi's vector unit in the render loops, less CPU per voice.
 - **Computer audio and MIDI over the Pi 5's USB-C** (in testing, on by default): [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/).
-- Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and flicker, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
+- Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and a drawing race on the animated SRC pages, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
 
 ## Then: 0.5.0 and later
 

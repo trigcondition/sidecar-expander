@@ -68,7 +68,7 @@ The releases' own lists are in the release notes: [0.4.0](/sidecar-expander/rele
 ### Rytm mods
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
-- **OS 1.74 and 1.73 only.** There is one build for each. The 1.74 build is <span class="sc-test">in testing</span>: emulator only so far. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. Moving from 1.73 to 1.74 is one way ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
+- **OS 1.74 and 1.73 only.** There is one build for each. The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 
