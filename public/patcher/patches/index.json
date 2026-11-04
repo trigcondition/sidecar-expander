@@ -1,6 +1,30 @@
 {
- "stock_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
+ "stock_sha256": "cb0f99d620edde994fb860c0e79cc2464e427d06882828cfdfb00fc53700e123",
  "patches": [
+  {
+   "file": "sidecar-rel0-4-0-os1.74.json",
+   "tag": "rel0-4-0-os1.74",
+   "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74 (default, recommended)",
+   "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 538ae6fa...ab337). Goes with Sidecar 0.4.0 on the Pi.",
+   "output": "Analog-Rytm_MKII_OS1.74_rel0-4-0.syx",
+   "output_sha256": "538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337",
+   "source_commit": "725ca76",
+   "device": "Analog Rytm MKII",
+   "os": "1.74",
+   "stock_name": "Analog-Rytm_MKII_OS1.74.syx"
+  },
+  {
+   "file": "sidecar-rel0-4-0.json",
+   "tag": "rel0-4-0",
+   "title": "rel0-4-0: Sidecar 0.4.0 mods, OS 1.73",
+   "description": "The mods for Sidecar 0.4.0 on OS 1.73, for a Rytm you keep on 1.73 (Elektron offers only 1.74 now): everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and a drawing race that could make the animated SRC pages flicker is fixed. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 07780e9e...bff18). Goes with Sidecar 0.4.0 on the Pi.",
+   "output": "Analog-Rytm_MKII_OS1.73_rel0-4-0.syx",
+   "output_sha256": "07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18",
+   "source_commit": "725ca76",
+   "device": "Analog Rytm MKII",
+   "os": "1.73",
+   "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
+  },
   {
    "file": "sidecar-rel0-3-1.json",
    "tag": "rel0-3-1",
@@ -48,6 +72,18 @@
    "device": "Analog Rytm MKII",
    "os": "1.73",
    "stock_name": "Analog-Rytm_MKII_OS1.73.syx"
+  },
+  {
+   "file": "sidecar-a4-sa12.json",
+   "tag": "a4-sa12",
+   "title": "a4-sa12: Analog Four MKII, OS 1.56",
+   "description": "The A4 mod 0.12 for Sidecar 0.4.0. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters, overdrive and amp; chords on any track, locks and LFOs on the machine's knobs, the Sidecar's pages on the A4's screen with UP + YES; with a Sidecar, UP and DOWN leave the keyboard's octave alone. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.12.elemod with the lock file a4156.lock.json and version SA12 (sha256 e9eab646...2a1d71). Needs Sidecar 0.4.0.",
+   "output": "Analog-Four_MKII_OS1.56_a4-sa12.syx",
+   "output_sha256": "e9eab646102844518ff48e44864f42b2a555aadc2b8fd86b5eaabe2d772a1d71",
+   "source_commit": "725ca76",
+   "device": "Analog Four MKII",
+   "os": "1.56",
+   "stock_name": "Analog-Four_MKII_OS1.56.syx"
   }
  ]
 }

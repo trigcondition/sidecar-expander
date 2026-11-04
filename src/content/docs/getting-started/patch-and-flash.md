@@ -48,8 +48,6 @@ The 0.4.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 | `core-0.1.elemod` | elekloader's core 0.1 for the Rytm | `33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825` |
 | `rytm-sidecar-0.4.0.elemod` | the Sidecar mods, all in one module | `d003a738374ae3cb643c5d6c4cd4622dd1f7931398dcdfaf016b82576c956c44` |
 
-<!-- UNRELEASED: the .elemod names and the four .elemod hashes above are the release candidate's; check them against the release's SHA256SUMS -->
-
 Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (1.74: `elekloader-13fa795-core-ar2-src.tar.gz`; 1.73: `elekloader-8972d70-core-ar2-src.tar.gz`; both: `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. Both builds come from the same source and do the same; the 1.74 one differs only by the firmware addresses that moved between the two OSes. The mods are licensed **GPL-2.0-or-later**.
 
 ### Build the `.syx`
@@ -65,8 +63,6 @@ Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](http
    |---|---|
    | version 1.74 | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
    | version 1.73 | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
-
-   <!-- UNRELEASED: the two .syx hashes are the release candidate's; check them at the release commit -->
 
    If yours differs, do not flash it. The page may run a newer elekloader; build with the command line at the tested commit instead:
 

@@ -5,29 +5,21 @@
     {
       "tag": "rel0-4-0-os1.74",
       "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74 (default, recommended)",
-      "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.74_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
+      "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 538ae6fa...ab337). Goes with Sidecar 0.4.0 on the Pi.",
       "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
       "built": "Analog-Rytm_MKII_OS1.74_rel0-4-0.syx",
-      "unreleased": {
-        "why": "Sidecar 0.4.0 is not released yet: the patch file comes from the release build.",
-        "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0",
-        "elemods": {
-          "core-0.1-os1.74.elemod": "{{SHA256 core-0.1-os1.74.elemod}}",
-          "rytm-sidecar-0.4.0-os1.74.elemod": "{{SHA256 rytm-sidecar-0.4.0-os1.74.elemod}}"
-        }
+      "elemods": {
+        "core-0.1-os1.74.elemod": "89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a",
+        "rytm-sidecar-0.4.0-os1.74.elemod": "794448662bb11fd2b9ece677640a431e2a6d9e169952aa3378cd0e3d9834e545"
       }
     },
     {
       "tag": "rel0-4-0",
       "title": "rel0-4-0: Sidecar 0.4.0 mods, OS 1.73",
-      "description": "The mods for Sidecar 0.4.0 on OS 1.73, for a Rytm you keep on 1.73 (Elektron offers only 1.74 now): everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and a drawing race that could make the animated SRC pages flicker is fixed. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.73_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
-      "unreleased": {
-        "why": "Sidecar 0.4.0 is not released yet: the patch file comes from the release build.",
-        "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0",
-        "elemods": {
-          "core-0.1.elemod": "{{SHA256 core-0.1.elemod}}",
-          "rytm-sidecar-0.4.0.elemod": "{{SHA256 rytm-sidecar-0.4.0.elemod}}"
-        }
+      "description": "The mods for Sidecar 0.4.0 on OS 1.73, for a Rytm you keep on 1.73 (Elektron offers only 1.74 now): everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and a drawing race that could make the animated SRC pages flicker is fixed. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 07780e9e...bff18). Goes with Sidecar 0.4.0 on the Pi.",
+      "elemods": {
+        "core-0.1.elemod": "33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825",
+        "rytm-sidecar-0.4.0.elemod": "d003a738374ae3cb643c5d6c4cd4622dd1f7931398dcdfaf016b82576c956c44"
       }
     },
     {
@@ -53,17 +45,13 @@
     {
       "tag": "a4-sa12",
       "title": "a4-sa12: Analog Four MKII, OS 1.56",
-      "description": "The A4 mod 0.12 for Sidecar 0.4.0. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters, overdrive and amp; chords on any track, locks and LFOs on the machine's knobs, the Sidecar's pages on the A4's screen with UP + YES; with a Sidecar, UP and DOWN leave the keyboard's octave alone. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.12.elemod with the lock file a4156.lock.json and version SA12 (sha256 {{SHA256 Analog-Four_MKII_OS1.56_a4-sa12.syx, first 8 ... last 6}}). Needs Sidecar 0.4.0.",
+      "description": "The A4 mod 0.12 for Sidecar 0.4.0. A track's sound can pick a Sidecar machine, whose audio comes back through that voice's analog filters, overdrive and amp; chords on any track, locks and LFOs on the machine's knobs, the Sidecar's pages on the A4's screen with UP + YES; with a Sidecar, UP and DOWN leave the keyboard's octave alone. The same file elekloader builds from core-0.3.elemod + sidecar-a4-0.12.elemod with the lock file a4156.lock.json and version SA12 (sha256 e9eab646...2a1d71). Needs Sidecar 0.4.0.",
       "device": "Analog Four MKII",
       "stock_name": "Analog-Four_MKII_OS1.56.syx",
       "tool": "a4/tools/a4_patch.py",
-      "unreleased": {
-        "why": "A4 support reaches people with Sidecar 0.4.0: the patch file comes from the release build, after SA12 has run on a real A4.",
-        "release_url_not_live_yet": "https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.12",
-        "elemods": {
-          "core-0.3.elemod": "{{SHA256 core-0.3.elemod}}",
-          "sidecar-a4-0.12.elemod": "{{SHA256 sidecar-a4-0.12.elemod}}"
-        }
+      "elemods": {
+        "core-0.3.elemod": "88ba2587c7aaf4d598f6d8c96d2e6cd976accf21cef6d8e48087144428b9e98f",
+        "sidecar-a4-0.12.elemod": "b76015df977429573eb3d075050e9faf8afa01c832dfa7a9ac1e4b79fd5efe6f"
       }
     }
   ]

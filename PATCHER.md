@@ -39,8 +39,6 @@ Both patchers check the result themselves and save nothing if it is wrong. To ch
 
     shasum -a 256 Analog-Rytm_MKII_OS1.74_rel0-4-0.syx
 
-<!-- UNRELEASED: the two 0.4.0 rows' SHA-256 are the release candidate's; check them against the release build -->
-
 | Build | Output file | SHA-256 |
 |---|---|---|
 | rel0-4-0 | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
@@ -80,8 +78,6 @@ The patch files contain no checksums, headers or framing from the stock file. Ev
 The packer, the SysEx transport and the depacker are elekloader's codec (GPL-2.0-or-later), which comes from digikit. Both patchers carry a copy of it. The browser patcher is a line-for-line port, tested to give the same bytes as the Python on every build.
 
 ## The Analog Four
-
-<!-- UNRELEASED: build a4-sa12 is hidden on the page, and the site will not deploy, while public/patcher/builds.json marks it "unreleased" (scripts/check_unreleased.py); check its SHA-256 below against the release build -->
 
 The same patcher takes the A4 build: stock `Analog-Four_MKII_OS1.56.syx`, SHA-256 `5aea489db3e747547f71d5e08a2d20253149fe6258defad60306402d2fc23cb5`. The web patcher does not read `.elemod` files: `core-0.3.elemod` + `sidecar-a4-0.12.elemod` are built into a `.syx` with the lock file `a4156.lock.json` and version `SA12`, and its record file comes from that build. Read the [Analog Four MKII](https://trigcondition.github.io/sidecar-expander/using/analog-four/) page first.
 
