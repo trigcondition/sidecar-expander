@@ -9,7 +9,7 @@ Sidecar 0.4.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.0, built with ele
 - **An A4's screen froze once on a unit** and has not come back in ten tries to repeat it: the A4's sequencer and audio kept running, its UI stopped. If it happens, power-cycle the A4 and report it with the Sidecar's log.
 - **Pi 5 computer audio over USB-C is in testing.** Please report whether your computer sees Sidecar | Expander and how it sounds.
 - **The full-speed retry has not been needed on hardware yet:** every Rytm and A4 connection in our tests came up at high speed. If a box comes up at full speed and stays silent, replug it and send us the log.
-- **The Rytm firmware for OS 1.74 has run in the emulator only.** Moving a Rytm from 1.73 to 1.74 is one way: back up every project first; recovery is the stock 1.74 file.
+- **Elektron offers only OS 1.74 now.** You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. To be able to go back to 1.73, keep your own copy of that file. Back up every project before any OS change.
 - **Touch after a warm restart** may still not come back on some setups (0.3.2's issue below; a power cycle brings it back).
 - **On the A4:** the limits on its page, among them the LFO destination lists keeping stock's names ([Limits](https://trigcondition.github.io/sidecar-expander/using/analog-four/#limits)).
 

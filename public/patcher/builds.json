@@ -17,8 +17,8 @@
     },
     {
       "tag": "rel0-4-0-os1.74",
-      "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74 (in testing)",
-      "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. In testing: run in the emulator only, not yet on a unit. Moving a Rytm from 1.73 to 1.74 is one way: back up every project first; recovery is the stock 1.74 file. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.74_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
+      "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74",
+      "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 {{SHA256 Analog-Rytm_MKII_OS1.74_rel0-4-0.syx, first 8 ... last 5}}). Goes with Sidecar 0.4.0 on the Pi.",
       "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
       "built": "Analog-Rytm_MKII_OS1.74_rel0-4-0.syx",
       "unreleased": {

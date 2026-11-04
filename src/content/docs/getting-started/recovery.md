@@ -7,13 +7,13 @@ sidebar:
 
 You can always go back to the stock OS. Nothing in the mods changes the Rytm's bootloader, and the stock OS file restores everything.
 
-**Which stock file:** the one for the OS your Sidecar build is for. On the 1.74 build that is stock **1.74** (`Analog-Rytm_MKII_OS1.74.syx`), also if the Rytm ran 1.73 before: OS 1.74 reports "Downgrade not possible", and going back to 1.73 has not been tried on a unit, so treat the move to 1.74 as one way. On the 1.73 build it is stock 1.73.
+**Which stock file:** the stock file of the OS you want to be on, **1.74** (`Analog-Rytm_MKII_OS1.74.syx`) or **1.73** (`Analog-Rytm_MKII_OS1.73.syx`). Both directions work with Elektron's own files (checked on a unit), whichever OS the Rytm runs now. Elektron's site offers only 1.74, so to go back to 1.73 you need your own copy of that file. Back up your projects before any OS change, as always.
 
 ## Before you flash anything
 
 - **Back up** every project, kit, sound and sample with Transfer.
 - Make a scratch project for testing.
-- If you can, try the DIN route below once with the stock file, so you know it works on your setup. Moving to 1.74: do this with Elektron's stock 1.74 file before the Sidecar's 1.74 build ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
+- If you can, try the DIN route below once with the stock file, so you know it works on your setup. Before moving to 1.74, do this with Elektron's stock 1.74 file before the Sidecar's 1.74 build ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 
 ## Back to stock, the normal way
 

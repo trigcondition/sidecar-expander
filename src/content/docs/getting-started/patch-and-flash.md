@@ -1,6 +1,6 @@
 ---
 title: Patch and flash the Rytm
-description: "Sidecar 0.4.0: build the Rytm firmware from your own stock OS 1.74 (or 1.73) file with elekloader (core 0.1 + rytm-sidecar-0.4.0), check it, and send it to the Rytm. Moving from 1.73 to 1.74 is one way. The 0.2.0 builds: the patcher."
+description: "Sidecar 0.4.0: build the Rytm firmware from your own stock OS 1.74 (or 1.73) file with elekloader (core 0.1 + rytm-sidecar-0.4.0), check it, and send it to the Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's own files. The 0.2.0 builds: the patcher."
 sidebar:
   order: 3
 ---
@@ -19,16 +19,16 @@ The 0.4.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 
 ### Which OS: 1.74 or 1.73
 
-- **OS 1.74** is what Elektron offers now: their Rytm MKII support page has only `Analog-Rytm_MKII_OS1.74_dist.zip`, with the stock `Analog-Rytm_MKII_OS1.74.syx` inside. If you don't have a 1.73 file, use 1.74. <span class="sc-test">in testing</span>: the 1.74 build has run in the emulator, not yet on a real Rytm.
-- **OS 1.73** stays supported in 0.4.0 for people who have its stock file. Its build is the one that has run on real Rytms.
+- **OS 1.74** is what Elektron offers now: their Rytm MKII support page has only `Analog-Rytm_MKII_OS1.74_dist.zip`, with the stock `Analog-Rytm_MKII_OS1.74.syx` inside. If you don't have a 1.73 file, use 1.74. The 1.74 build has run on a real Rytm: stock 1.74 first, then the Sidecar's 1.74 build, with the Sidecar machines, the pages, the send FX (including ROUTE PRE), the MASTER page and kit save and reload all working.
+- **OS 1.73** stays supported in 0.4.0 for people who have its stock file. Elektron no longer offers 1.73 for download, so if you want it, keep your own copy of `Analog-Rytm_MKII_OS1.73.syx`.
 - **Use the build for the OS of your stock file.** elekloader refuses a module made for another OS.
-- **Moving from 1.73 to 1.74 is one way.** OS 1.74 reports "Downgrade not possible". Going back to 1.73 has not been tried on a unit, so once a Rytm runs 1.74, stock or with the Sidecar, its recovery file is stock 1.74.
+- **Moving between 1.73 and 1.74 works in both directions.** Flashing Elektron's stock 1.73 or stock 1.74 file always works (checked on a unit), whether the Rytm runs stock or the Sidecar's build. Recovery is the stock file of the OS you want to be on. Back up your projects before any OS change, as always. Elektron's site now offers only 1.74, so to be able to go back to 1.73 you need your own copy of that file.
 
-**The recommended way to 1.74:** first flash Elektron's stock 1.74 file, over DIN through the STARTUP menu if you can ([Recovery to stock](/sidecar-expander/getting-started/recovery/#if-the-rytm-does-not-boot-the-startup-menu)). That is the one-way step, and it proves that recovery works on your unit. Then build and flash the Sidecar's 1.74 build from the same stock file.
+**The recommended way to 1.74:** first flash Elektron's stock 1.74 file, over DIN through the STARTUP menu if you can ([Recovery to stock](/sidecar-expander/getting-started/recovery/#if-the-rytm-does-not-boot-the-startup-menu)). That proves that recovery works on your unit. Then build and flash the Sidecar's 1.74 build from the same stock file.
 
-**Directly:** a Rytm on 1.73, stock or with the Sidecar's 1.73 build, can also take the Sidecar's 1.74 build straight away, since the file is a whole OS. It is the same one-way move, without the recovery check first.
+**Directly:** a Rytm on 1.73, stock or with the Sidecar's 1.73 build, can also take the Sidecar's 1.74 build straight away, since the file is a whole OS. It is the same move, without the recovery check first.
 
-**Projects should carry over** to 1.74: its project, kit, sound and pattern code is 1.73's with its addresses moved, and it only adds the Outbox's main-output routing. That was checked in the code and in the emulator, not yet on a unit, so back up every project first.
+**Projects should carry over** to 1.74: its project, kit, sound and pattern code is 1.73's with its addresses moved, and it only adds the Outbox's main-output routing. That was checked in the code and in the emulator, and a kit saved and reloaded on a real Rytm on 1.74. Back up every project first, as before any OS change.
 
 ### What you need
 
@@ -58,7 +58,7 @@ Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](http
 2. Choose your stock firmware, `Analog-Rytm_MKII_OS1.74.syx` (or `Analog-Rytm_MKII_OS1.73.syx`). The page knows it by its hash.
 3. Add that OS's core and module as your own mods: `core-0.1-os1.74.elemod` and `rytm-sidecar-0.4.0-os1.74.elemod` (1.73: `core-0.1.elemod` and `rytm-sidecar-0.4.0.elemod`). Use our core file, not one the page lists: the page's own Rytm cores for 1.74 are newer ones, which are refused (below).
 4. Tick `rytm-sidecar`. That ticks the core it needs. The check should say there are no conflicts.
-5. **Set the version to your OS: `1.74` (or `1.73`).** The page's default for the Rytm is `2.0a`. **Never flash a build whose version is not your stock file's**: going back to stock from it is untested.
+5. **Set the version to your OS: `1.74` (or `1.73`).** The page's default for the Rytm is `2.0a`. **Never flash a build whose version is not your stock file's.**
 6. Build and download the `.syx`. Its SHA-256 must be:
 
    | Build | SHA-256 |
@@ -87,7 +87,7 @@ Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 - **Use core 0.1 only.** A newer core keeps its settings in the same spare bytes the Sidecar mods use; elekloader refuses that combination with a message that the sites "overlap". Untick the newer core.
 - **No mixing with other mods** for now: other people's Rytm mods for 1.74 need a newer core, and patch some of the same places, so elekloader refuses the set. The Sidecar module is all or nothing.
 - What is in the module: the external machines, the SysEx router, the SIDECAR folder, the send FX pages, the remote UI and FX in. Not in it: the **REMOTE KEYS** mod (development and testing only). It does hold a **freeze probe**: if the Rytm's screen ever stops for over 2 seconds, the Sidecar's log shows `FREEZE PROBE` with where it stopped (please report it).
-- To go back, flash the stock file of the OS your build is for (the 1.74 build: stock 1.74): see [Recovery to stock](/sidecar-expander/getting-started/recovery/). Use a scratch project for your first session under the mods.
+- To go back, flash the stock file of the OS you want to be on (1.73 or 1.74): see [Recovery to stock](/sidecar-expander/getting-started/recovery/). Use a scratch project for your first session under the mods.
 
 ## The 0.2.0 builds: the patcher
 

@@ -19,7 +19,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
-1. Pick the mod build for your OS. For Sidecar 0.4.0: `rel0-4-0` (OS 1.73, the default) or `rel0-4-0-os1.74` (OS 1.74, in testing). Moving a Rytm from 1.73 to 1.74 is one way: back up every project first, and recover with the stock 1.74 file ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)). Older builds, all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
+1. Pick the mod build for your OS. For Sidecar 0.4.0: `rel0-4-0` (OS 1.73, the default) or `rel0-4-0-os1.74` (OS 1.74, has run on a real Rytm). You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)). Older builds, all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
 2. Drop your stock `.syx` on the page, or click to choose it. The page names the file the build needs.
 3. Press **Patch**, then **Save**.
 
