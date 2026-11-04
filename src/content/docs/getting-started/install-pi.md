@@ -144,9 +144,9 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
-| 0.4.0 release | the Rytm firmware 0.4.0 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.0 SD card | **UP + YES** |
+| 0.4.0 release | the Rytm firmware 0.4.0, for OS 1.74 or 1.73 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.0 SD card | **UP + YES** |
 
-An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73 ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 
 A USB stick in a blue USB 3 port of the Pi 4 (any port on the Pi 5) is mounted for [project bundles](/sidecar-expander/using/projects-bundles/#usb-sticks); keep the Rytm on a black USB 2 port. On the Pi 5 an NVMe SSD on the PCIe connector is mounted too, with `nvme=1` in `cmdline.txt` ([Storage](/sidecar-expander/using/storage/)).
 

@@ -2,13 +2,13 @@
 
 **A voice and feature expander for the Analog Rytm MKII.**
 
-Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
+Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 or 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
 > **Sidecar 0.4.0** (with the Rytm firmware 0.4.0, an elekloader module): master FX, the SAT saturator, the MIDI machine, the arpeggiator and arp locks, the USER SLOTS page, the SOPHIE user machine and Analog Four MKII support, for the Raspberry Pi 4B and the Pi 5 ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) and the [Rytm firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0). <!-- UNRELEASED: the release links --> **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
 >
 > **Sidecar Mini (Teensy 4.1) is phased out.** It is frozen at 0.1.0: no new features. Its source stays in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (`teensy/`) for reference, and the 0.1.0 release stays on the [releases page](https://github.com/trigcondition/sidecar-expander/releases).
 >
-> The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing.
+> The Rytm firmware 0.4.0 has a build for OS 1.74 (in testing: the emulator so far) and one for OS 1.73.
 
 Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-expander/>
 
@@ -30,27 +30,27 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
 
 ## Requirements
 
-- **An Analog Rytm MKII running OS 1.73, and only OS 1.73.** The first version is based on Analog Rytm MKII OS 1.73. OS 1.74 will be supported after testing. The mods are built against that exact OS. The patcher refuses any other file.
-  - If your Rytm runs an older OS, update it to 1.73 first.
-  - **On OS 1.74:** the patched file is a whole OS (1.73 plus the Sidecar mods), so sending it replaces 1.74; no separate downgrade. Your projects carry over.
+- **An Analog Rytm MKII on OS 1.74 or OS 1.73.** There is one build of the mods for each OS, built against that exact OS. The 1.74 build has run in the emulator, not yet on a real Rytm.
+  - If your Rytm runs an older OS, update it to 1.74 first (Elektron offers only 1.74 now).
+  - **Moving from 1.73 to 1.74 is one way:** 1.74 reports "Downgrade not possible". Flash Elektron's stock 1.74 first, which proves recovery, then the Sidecar's 1.74 build; a 1.73 Rytm can also take the 1.74 build directly. Projects should carry over (checked in the code and the emulator, not yet on a unit): back up first ([Which OS](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - **A Raspberry Pi 4B** (2 GB or more, with a computer: also USB-C audio and MIDI) **or a Raspberry Pi 5** (standalone for now: USB audio and MIDI to the computer are coming; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 or 1024x600 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
-- The stock OS 1.73 file `Analog-Rytm_MKII_OS1.73.syx` from the official download page. We do not distribute it.
+- The stock file of your OS: `Analog-Rytm_MKII_OS1.74.syx` from Elektron's `Analog-Rytm_MKII_OS1.74_dist.zip` (Rytm MKII support page), or the `Analog-Rytm_MKII_OS1.73.syx` you have. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
 
 ## Risks and recovery
 
 - This is **unofficial**. It is not made, endorsed or supported by Elektron. Running modified firmware may affect the support or warranty you get for your unit. You use it at your own risk.
 - **Back up first.** Use Transfer to back up your projects, kits, sounds and samples before you flash anything.
-- **Going back to stock:** send the stock `Analog-Rytm_MKII_OS1.73.syx` the same way you sent the patched one. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
-- **If the Rytm does not boot:** hold **FUNC** while you power it on to get the STARTUP menu, press **TRIG 4 (OS UPGRADE)**, and send the stock 1.73 file over **DIN MIDI**: Transfer's legacy OS upgrade mode through a MIDI interface. This route is served by the Rytm's bootloader, so it works without a booting OS. It is slow: about 16 minutes or more.
+- **Going back to stock:** send the stock file of the OS your build is for (the 1.74 build: stock 1.74) the same way you sent the patched one. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
+- **If the Rytm does not boot:** hold **FUNC** while you power it on to get the STARTUP menu, press **TRIG 4 (OS UPGRADE)**, and send that stock file over **DIN MIDI**: Transfer's legacy OS upgrade mode through a MIDI interface. This route is served by the Rytm's bootloader, so it works without a booting OS. It is slow: about 16 minutes or more.
 - **Known stock behaviour:** after an OS upgrade, the Rytm can stay on "Success! Rebooting" and never restart by itself. A power cycle is fine: switch it off and on.
 - Do not switch the Rytm off while it writes an update, except in the "Success! Rebooting" case above.
 - The kit's SEND FX settings are stored in the kit. A stock OS ignores them.
 
 ## Install
 
-1. **Build the Rytm firmware 0.4.0 from your stock OS 1.73 file:** with elekloader (`core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod`, version set to 1.73) or the browser patcher (build `rel0-4-0`); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
+1. **Build the Rytm firmware 0.4.0 from your stock OS file:** with elekloader, OS 1.74: `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod`, version set to 1.74; OS 1.73: `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod`, version 1.73, or the browser patcher (build `rel0-4-0`); both give the same `.syx` <!-- UNRELEASED: the .elemod names and the patcher's build names, from the release --> ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar** (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md).
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
