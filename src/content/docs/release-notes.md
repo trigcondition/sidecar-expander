@@ -54,6 +54,7 @@ On the Rytm:
 
 On the Pi:
 
+- **OS updates for the Rytm through the Pi's USB-C MIDI port,** <span class="sc-test">in testing</span>. A setting, off by default (`usbmidi=os:on` in `cmdline.txt` or on the serial console; the web page's `/cmd` refuses it on purpose), lets Elektron Transfer or elkflash on a computer at the Pi's USB-C port send the Rytm an OS update through the Sidecar, so the Rytm does not need to be unplugged from the Pi. With it off, OS update messages are blocked as before. An interrupted upgrade is aborted rather than finished with a hole ([OS updates through the Sidecar](/sidecar-expander/using/usb-audio-midi/#os-updates-through-the-sidecar)). From work by [Iced-Cream](https://github.com/Iced-Cream).
 - **Tonverk `.elmulti` instruments in MULTISAMPLE,** beside `.sfz`. The format is not publicly documented, so the conventions we read it by are unverified ([MULTISAMPLE](/sidecar-expander/using/poly-machines/#multisample)).
 - **Samples load on first play.** Nothing is loaded whole when a project opens, so projects open faster; a sample comes in when a voice selects it or, for MULTISAMPLE, after its first note ([The pool RAM](/sidecar-expander/using/pools/#the-pool-ram)).
 - **A 1280x720 touchscreen layout,** the default on the Pi 5's Touch Display 2; `res=` in `/.rytm/display.txt` picks another ([Screen sizes](/sidecar-expander/using/display/#screen-sizes)).
