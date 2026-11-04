@@ -6,7 +6,8 @@
 
 The deploy workflow runs this first. A build marked "unreleased" in public/patcher/builds.json or patches/index.json is
 hidden on the page, but its patch file would still be on the site, so nothing deploys with one. Exit status 1 if one is
-listed. On release day: delete the "unreleased" key, rerun make_patches.py, and this passes.
+listed. On release day: delete the "unreleased" key, rerun make_patches.py, and this passes. It also stops on a
+"{{" slot left in builds.json or the index (a hash still to fill in from the release build).
 """
 import json
 import os
@@ -20,6 +21,10 @@ with open(os.path.join(PATCHER, "builds.json")) as fh:
 with open(os.path.join(PATCHER, "patches", "index.json")) as fh:
     index = json.load(fh)["patches"]
 held = sorted({b["tag"] for b in builds + index if b.get("unreleased")})
+slots = sorted({b["tag"] for b in builds + index if "{{" in json.dumps(b)})
+if slots:
+    print("NOT DEPLOYING: a {{...}} slot not filled in: " + ", ".join(slots), file=sys.stderr)
+    sys.exit(1)
 if held:
     print("NOT DEPLOYING: unreleased in the patcher: " + ", ".join(held), file=sys.stderr)
     sys.exit(1)
