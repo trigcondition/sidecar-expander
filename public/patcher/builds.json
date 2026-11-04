@@ -1,5 +1,5 @@
 {
-  "comment": "The mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. The first build is the default. A build with \"unreleased\" is hidden on the page, and scripts/check_unreleased.py stops the site's deploy while one is listed: delete the key only on release day. A build's \"stock_name\" and \"built\" name its stock file and our .syx in the build folder, when not the OS 1.73 defaults. \"{{SHA256 ...}}\" slots are filled from the release build; the deploy stops while one is left.",
+  "comment": "The mod builds this release offers. scripts/make_patches.py turns each into patcher/patches/sidecar-<tag>.json. The first build is the default. A build with \"unreleased\" is hidden on the page, and scripts/check_unreleased.py stops the site's deploy while one is listed: delete the key only on release day. A build's \"stock_name\" and \"built\" name its stock file and our .syx in the build folder, when not the OS 1.73 defaults. The SHA256 slots (in double braces) are filled from the release build; the deploy stops while one is left.",
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
