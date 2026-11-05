@@ -6,6 +6,10 @@ tableOfContents: true
 
 This roadmap has no dates on purpose. Items move up when they are ready and tested on real hardware, and the order within a group can change with tester feedback. For what works today, see [What works now](/sidecar-expander/introduction/what-works-now/).
 
+:::tip[Follow the work as it happens]
+The [Sidecar roadmap board](https://github.com/users/trigcondition/projects/1) on GitHub shows what is planned, in progress and in testing right now. Comment or 👍 on an item to tell us what matters to you.
+:::
+
 ## Done
 
 Finished and confirmed on real hardware.
