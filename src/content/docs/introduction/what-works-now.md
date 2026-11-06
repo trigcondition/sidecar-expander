@@ -96,7 +96,7 @@ The 0.4.1 card, with the Rytm firmware 0.4.0 (no new Rytm flash). Details: [Rele
 | DSP SAMPLE and other machines no longer silent after choosing them in the Rytm's machine list | <span class="sc-ok">hardware</span>: Pi 4, LIVE IN to DSP SAMPLE |
 | The web page's buttons in Chrome with a paired browser; a lost pairing brings the dialog back; refusals say why | <span class="sc-ok">hardware</span> |
 | The plugin list keeps updating after long uptime (24.8 days) | <span class="sc-test">in testing</span> (host tests) |
-| After a restart, the same project and settings | <span class="sc-test">in testing</span> |
+| After a restart, the same project and settings | <span class="sc-ok">hardware</span> |
 | MODEL E in the user machines zip; the MD user machine out (MD is built in) | <span class="sc-test">in testing</span> (emulator and Mac renders) |
 
 ## New in 0.4.0

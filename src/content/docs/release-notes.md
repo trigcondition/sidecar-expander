@@ -43,7 +43,7 @@ From 0.3.2 or older: follow [Upgrading from 0.3.2](#upgrading-from-032) (flash t
 - **DSP SAMPLE (and other machines) silent after choosing it in the Rytm's machine list,** <span class="sc-ok">hardware</span> (Pi 4). The Rytm resets only the machine's first page, so the second page kept the old machine's values (after LIVE IN, END 0 and LEV 0). The Sidecar now writes the second page's defaults when the list closes (OS 1.74 and 1.73); NO keeps the old sound.
 - **The web page's buttons work again in Chrome with a paired browser,** <span class="sc-ok">hardware</span>. Chrome sent a header in lower case and every paired change was refused without a word. A lost pairing now brings the pairing dialog back, and a refused change says why.
 - **The plugin list keeps updating after long uptime,** <span class="sc-test">in testing</span> (host tests). After about 24.8 days of uptime the list stopped updating after an upload until a restart.
-- **After a restart** the Sidecar comes back to the same project and settings, <span class="sc-test">in testing</span>.
+- **After a restart** the Sidecar comes back to the same project and settings (seen on hardware through many restarts).
 
 ### Known issues in 0.4.1
 
