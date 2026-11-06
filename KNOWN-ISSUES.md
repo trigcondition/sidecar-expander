@@ -2,7 +2,13 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.4.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.0, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.4.1 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.0, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.4.1
+
+- **Overbridge passthrough is Pi 4 only;** the Pi 5 gets it in 0.4.2.
+- **A Pi 5 on a computer's USB-C without a splitter** gets only about 1.5 A from the port and can be short of power (under-voltage, resets): use a USB-C power and data splitter with the 27 W supply.
+- **Switching the USB-C mode is a replug** for the computer: stop the DAW first, and never switch during a transfer or an OS update.
 
 ## New in 0.4.0
 

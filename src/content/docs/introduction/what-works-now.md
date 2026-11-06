@@ -11,7 +11,7 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.4.0**: the Sidecar 0.4.0 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
+This is **Sidecar 0.4.1**: the Sidecar 0.4.1 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 (unchanged since 0.4.0) for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.1](#new-in-041), [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
 The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73; most hardware marks come from 1.73, and the 1.74 build has since run on a real Rytm (2026-11-04). Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
@@ -78,7 +78,26 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** Wi-Fi (saved from the web page, connected) | <span class="sc-ok">hardware</span> (2026-10-19) |
 | **Pi 5:** HDMI display with USB touch, the 800x480 UI scaled to 1920x1080 (slightly soft) | <span class="sc-ok">hardware</span> (2026-10-19; needs `hdmi_force_hotplug=1`, on the card) |
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
-| **Pi 5:** USB audio and MIDI to the computer | <span class="sc-test">in testing</span>: new in 0.4.0, on by default ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
+| **Pi 5:** USB audio and MIDI to the computer | <span class="sc-test">in testing</span>: new in 0.4.0, on by default; needs a USB-C power and data splitter, a computer or hub port gives a Pi 5 only about 1.5 A ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
+| Overbridge through the Sidecar (USB-C mode OVERBRIDGE) | Pi 4: <span class="sc-ok">hardware</span> (0.4.1, opt-in); Pi 5: <span class="sc-plan">planned</span> for 0.4.2 ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4)) |
+
+## New in 0.4.1
+
+The 0.4.1 card, with the Rytm firmware 0.4.0 (no new Rytm flash). Details: [Release notes](/sidecar-expander/release-notes/#sidecar-041).
+
+| Feature or fix | Status |
+|---|---|
+| [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4) on the Pi 4 (opt-in): Overbridge Engine and the Analog Rytm plugin see the Rytm through the Sidecar; from pull requests 19 and 20 by Iced-Cream | <span class="sc-ok">hardware</span>: Pi 4, macOS, 2026-11-06 (idle suspend and resume, the app started after a switch) |
+| The USB-C mode switch, CLASS COMPLIANT / OVERBRIDGE, on the web page, the Rytm's SIDECAR MENU and the touchscreen; live, kept on the card | <span class="sc-ok">hardware</span>: Pi 4, live switches while streaming |
+| Overbridge through the Sidecar on the Pi 5 | <span class="sc-plan">planned</span> for 0.4.2 (needs a USB-C power and data splitter) |
+| A USB transaction error on the Rytm's cable no longer stops the voices (Overbridge IN and OUT, the A4 follower, MIDI OUT) | <span class="sc-ok">hardware</span>: Pi 4 |
+| The Rytm comes back after its cable is pulled | <span class="sc-ok">hardware</span>: Pi 4, cable pulls while playing |
+| The USB hub re-arm (pull request 15 by Iced-Cream) | <span class="sc-test">in testing</span> |
+| DSP SAMPLE and other machines no longer silent after choosing them in the Rytm's machine list | <span class="sc-ok">hardware</span>: Pi 4, LIVE IN to DSP SAMPLE |
+| The web page's buttons in Chrome with a paired browser; a lost pairing brings the dialog back; refusals say why | <span class="sc-ok">hardware</span> |
+| The plugin list keeps updating after long uptime (24.8 days) | <span class="sc-test">in testing</span> (host tests) |
+| After a restart, the same project and settings | <span class="sc-test">in testing</span> |
+| MODEL E in the user machines zip; the MD user machine out (MD is built in) | <span class="sc-test">in testing</span> (emulator and Mac renders) |
 
 ## New in 0.4.0
 

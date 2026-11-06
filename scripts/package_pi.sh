@@ -91,21 +91,26 @@ echo "starter content: $(basename "$csrc") added to both card sets" >> "$info"
 # Pi 4 and the Pi 5), next to the card set
 out="$here/dist/pi/plugins"
 mkdir -p "$out"
-for p in sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw vox hush1 raffo sophie; do   # sophie: 0.4.0
+for p in sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw vox hush1 raffo sophie modele; do   # sophie: 0.4.0; modele: 0.4.1
   rm -f "$wt/plugins/$p/$p.a64.rmp" "$wt/plugins/$p/$p.a64.elf"
   make -C "$wt/plugins/$p" a64 PY=python3 >/dev/null
   [ "$(head -c 4 "$wt/plugins/$p/$p.a64.rmp")" = RMPA ] || { echo "$p.a64.rmp is not an RMPA package"; exit 1; }
   cp "$wt/plugins/$p/$p.a64.rmp" "$out/"
 done
-# MD (mdkit's 30 drum voices in one machine, CC0 1.0; Pi only): plugins/mdkit, FAM=md -> mdk_md.a64.rmp
-rm -f "$wt/plugins/mdkit/mdk_md.a64.rmp" "$wt/plugins/mdkit/mdk_md.a64.elf"
-make -C "$wt/plugins/mdkit" FAM=md a64 PY=python3 >/dev/null
-[ "$(head -c 4 "$wt/plugins/mdkit/mdk_md.a64.rmp")" = RMPA ] || { echo "mdk_md.a64.rmp is not an RMPA package"; exit 1; }
-cp "$wt/plugins/mdkit/mdk_md.a64.rmp" "$out/"
+# MD is a built-in machine since 0.4.0 (core/md): the mdkit user machines (mdk_md, mdk_pi, mdk_efm, mdk_trx) are not
+# shipped since 0.4.1; plugins/mdkit stays in the source for the built-in's tables
+# MODEL E is GPL-2.0-or-later (ModelDigi's oscillators): its licence, notices and complete source beside the package,
+# outside the zip's MIT LICENSE.txt (plugins/modele/README.md, make package)
+make -C "$wt/plugins/modele" package PY=python3 >/dev/null
+cmp -s "$wt/plugins/modele/out/modele.a64.rmp" "$out/modele.a64.rmp" || { echo "modele: make package built another package"; exit 1; }
+cp "$wt/plugins/modele/out/LICENSE.txt" "$out/modele-LICENSE.txt"
+cp "$wt/plugins/modele/out/NOTICE.txt" "$out/modele-NOTICE.txt"
+cp "$wt/plugins/modele/out/modele-source.tar.gz" "$out/"
+! ls "$out"/mdk*.rmp >/dev/null 2>&1 || { echo "an mdkit user machine is in the package (MD is built in)"; exit 1; }
 # the internal test plugins (rytm.sine_test, rytm.fault_test: crashes on purpose) must never ship
 ! grep -l -a -E 'rytm\.(sine|fault|state|v2)_test|fault_test|sine_test' "$out"/*.rmp || { echo "a test plugin is in the package"; exit 1; }
 cp "$here/scripts/plugins-LICENSE.txt" "$out/LICENSE.txt"
-( cd "$out" && shasum -a 256 *.rmp > SHA256SUMS )
+( cd "$out" && shasum -a 256 *.rmp *.tar.gz > SHA256SUMS )
 echo "source commit: $full" > "$out/BUILD-INFO-plugins.txt"
 # the release zip: sidecar-pi-plugins-<VERSION>.zip (the packages, LICENSE.txt, SHA256SUMS, BUILD-INFO; fixed dates)
 ver=$(cat "$wt/VERSION")
