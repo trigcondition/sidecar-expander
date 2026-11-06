@@ -68,6 +68,18 @@ A Pi-only release: super basic native support for Digitakt (experimental, emulat
 - **Computer audio and MIDI over the Pi 5's USB-C** (in testing, on by default): [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/).
 - Fixes from tester feedback: list knobs one entry a detent, a JUNO preset that sounds at once, the SRC page's view and a drawing race on the animated SRC pages, the NVMe probe opt-in, and a retry for a box that comes up at full speed.
 
+## Released: 0.4.1
+
+A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes](/sidecar-expander/release-notes/#sidecar-041)):
+
+- **[Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4) on the Pi 4** (opt-in), from pull requests 19 and 20 by Iced-Cream, with the **USB-C mode switch** (CLASS COMPLIANT / OVERBRIDGE) on the web page, the Rytm and the touchscreen.
+- **USB robustness:** a USB transaction error no longer stops the voices, the Rytm comes back after its cable is pulled, and the hub re-arm (pull request 15 by Iced-Cream).
+- DSP SAMPLE no longer silent after a machine change, the web page's buttons in Chrome, the plugin list after long uptime, **MODEL E** in the user machines zip.
+
+## Next: 0.4.2
+
+- **Overbridge through the Sidecar on the Pi 5,** once it has run with a USB-C power and data splitter (a Pi 5 on a computer or hub port gets only about 1.5 A).
+
 ## Then: 0.5.0 and later
 
 Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's main features:

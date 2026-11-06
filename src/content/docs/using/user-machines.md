@@ -24,6 +24,16 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## New in 0.4.1: MODEL E
+
+<span class="sc-test">in testing</span> (emulator and Mac renders). A three-oscillator voice with a ladder filter, for basses and leads, in the 0.4.1 user machines zip (`modele.a64.rmp`; install like the starters):
+
+| Machine | What it is | Knobs (P1..P8 / P9..P16) | Voices | Based on |
+|---|---|---|---|---|
+| MODEL E | three oscillators (all 36 range and wave pairs each, oscillator 3 as a modulator), noise, a 4-pole ladder filter that self-oscillates, filter and loudness contours, glide, analog drift | OSC1 OSC2 OSC3 TUN2 TUN3 MIX O3NZ MOD / CUT EMPH CONT G<>A DEC SUS MODE LEV | mono (glides from the last note), or 4 on a poly track | the oscillators of [ModelDigi](https://github.com/simonjohansson/ModelDigi) (GPL-2.0-or-later) |
+
+**MODEL E is GPL-2.0-or-later**, unlike the other user machines (MIT): its licence (`modele-LICENSE.txt`), notices (`modele-NOTICE.txt`) and complete source (`modele-source.tar.gz`) are in the zip beside it; if you pass the package on, pass those on too. Its oscillator lists hold 36 names and need the Rytm firmware 0.4.0: an older Rytm shows 16 of them. The knobs in detail: [MODEL E's README](https://github.com/trigcondition/sidecar-firmware/blob/v0.4.1/plugins/modele/README.md).
+
 ## New in 0.4.0: SOPHIE
 
 A port of an open-source instrument, a package of its own (install like the starters):
@@ -51,7 +61,7 @@ No LFOs of their own: use the Sidecar's LFOs on any knob.
 
 ## MD: Machinedrum-style drums
 
-<span class="sc-test">in testing</span> (Pi). **MD** is one user machine with 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. Install it like any user machine and put it in a slot (U1..U5).
+<span class="sc-test">in testing</span> (Pi). **MD** is 30 drum voices in three families, built from the open [mdkit](https://github.com/soejrd/mdkit) project. It is **built in** since 0.4.0, so from 0.4.1 its user machine (`mdk_md.a64.rmp`) is no longer in the user machines zip; an installed copy still works, but you can delete it from `/Plugins/` and free its slot.
 
 MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and machines](/sidecar-expander/using/machines/#md)). With the Rytm firmware 0.4.0 the built-in MD has the same full page as below, with all 30 types (with 0.3.1 it showed DIGIDRUM's old page).
 

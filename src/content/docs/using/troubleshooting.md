@@ -63,7 +63,7 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 ## Known issues
 
-The releases' own lists are in the release notes: [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 
@@ -83,7 +83,7 @@ The releases' own lists are in the release notes: [0.4.0](/sidecar-expander/rele
 
 - Wi-Fi is off in the SD card package (see the install page to turn it on); Ethernet has no DHCP client (fixed 169.254.61.60, or `ip=`).
 - The web page needs a [paired browser](/sidecar-expander/using/web-ui/#pairing-a-browser) since 0.3.0. The connection is plain HTTP: use a direct cable or a network you trust.
-- **Pi 5: USB audio and MIDI to the computer are in testing** (new in 0.4.0, on by default). The USB-C port is also the Pi 5's power input and a computer cannot power it: use a USB-C power and data splitter or a header-pin supply ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)). If the computer does not see Sidecar | Expander, or the audio clicks, please report it. `gadget=0` turns it off.
+- **Pi 5: USB audio and MIDI to the computer are in testing** (new in 0.4.0, on by default). The USB-C port is also the Pi 5's power input and a computer or hub port gives it only about 1.5 A: use a USB-C power and data splitter or a header-pin supply ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)). If the computer does not see Sidecar | Expander, or the audio clicks, please report it. `gadget=0` turns it off.
 - **Pi 5: use the official 27 W supply, plugged in directly.** From a hub's port the Pi 5 ran in reduced-power mode, and Wi-Fi and the web page became slow (pages of 5 s, "503 busy"). The Sidecar warns: in the log, on the web page's Power tile and in red on the display (`POWER TOO WEAK: use 27 W adapter`). On a Pi 4 it names the Pi 4's own supply (`POWER TOO WEAK: use 15 W supply`).
 - **Pi 5 HDMI picture is slightly soft:** the Pi 5's firmware always sends 1920x1080 and the 800x480 UI is scaled to it. Only `hdmi_force_hotplug=1` under `[pi5]` matters; the other `[pi5]` display lines do nothing on the Pi 5 and are harmless.
 - **Pi 5 DSI display:** in testing (built, not yet run on hardware). With no DSI panel answering, the Sidecar uses HDMI.

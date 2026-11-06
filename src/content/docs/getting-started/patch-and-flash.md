@@ -1,21 +1,34 @@
 ---
 title: Patch and flash the Rytm
-description: "Sidecar 0.4.0: build the Rytm firmware from your own stock OS 1.74 (or 1.73) file with elekloader (core 0.1 + rytm-sidecar-0.4.0), check it, and send it to the Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's own files. The 0.2.0 builds: the patcher."
+description: "The Rytm firmware 0.4.0 (for Sidecar 0.4.0 and 0.4.1): patch your own stock OS 1.74 (or 1.73) file in the browser patcher, check it, and send it to the Rytm with Transfer. You can move between 1.73 and 1.74 in both directions with Elektron's own files. Advanced: build the same file with elekloader. The 0.2.0 builds."
 sidebar:
-  order: 3
+  order: 2
 ---
 
-The Rytm side of Sidecar is a set of mods to the Rytm's OS. Sidecar 0.4.0 has two builds of the same mods, one for **OS 1.74** and one for **OS 1.73**. We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
+The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.4.0, which Sidecar 0.4.0 and 0.4.1 both use, has two builds of the same mods, one for **OS 1.74** and one for **OS 1.73**. We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
 
 :::caution
 Back up first: use Transfer to back up your projects, kits, sounds and samples. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you flash.
 :::
 
-## Sidecar 0.4.0: build it with elekloader
+## The Rytm firmware 0.4.0: patch it in your browser
 
-Sidecar 0.4.0 needs the Rytm firmware 0.4.0: a Rytm on 0.3.1 must be flashed. (The 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
+Sidecar 0.4.0 and 0.4.1 need the Rytm firmware 0.4.0: a Rytm on 0.3.1 must be flashed. Sidecar 0.4.1 changes only the Pi: a Rytm that already runs the Rytm firmware 0.4.0 needs no new flash. (The 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
 
-The 0.4.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.4.0 card.
+The [patcher](/sidecar-expander/patcher/) turns your stock OS file into the Rytm firmware 0.4.0 in your browser. Nothing is uploaded: the page reads your file and fetches only its own patch files.
+
+1. Download the stock OS from Elektron's Analog Rytm MKII support page: `Analog-Rytm_MKII_OS1.74_dist.zip`. Unzip it: you need `Analog-Rytm_MKII_OS1.74.syx`.
+2. Open the [patcher](/sidecar-expander/patcher/). Leave the build on **`rel0-4-0-os1.74`** (the default; for a stock 1.73 file pick `rel0-4-0`).
+3. Drop the stock `.syx` on the page, or click to choose it. Only the unmodified file is accepted.
+4. Press **Patch**, then **Save .syx**. The page checks the result itself and saves nothing if it is wrong.
+5. Send the saved file to the Rytm with Transfer ([below](#send-it-to-the-rytm)).
+
+The result is bit-identical to the elekloader build we tested ([below](#advanced-build-it-with-elekloader)). To check it yourself:
+
+| Build | Saved file | SHA-256 |
+|---|---|---|
+| `rel0-4-0-os1.74` | `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx` | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
+| `rel0-4-0` | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
 
 ### Which OS: 1.74 or 1.73
 
@@ -24,11 +37,15 @@ The 0.4.0 Rytm firmware comes as an [elekloader](https://github.com/irpina/elekl
 - **Use the build for the OS of your stock file.** elekloader refuses a module made for another OS.
 - **Moving between 1.73 and 1.74 works in both directions.** Flashing Elektron's stock 1.73 or stock 1.74 file always works (checked on a unit), whether the Rytm runs stock or the Sidecar's build. Recovery is the stock file of the OS you want to be on. Back up your projects before any OS change, as always. Elektron's site now offers only 1.74, so to be able to go back to 1.73 you need your own copy of that file.
 
-**The recommended way to 1.74:** first flash Elektron's stock 1.74 file, over DIN through the STARTUP menu if you can ([Recovery to stock](/sidecar-expander/getting-started/recovery/#if-the-rytm-does-not-boot-the-startup-menu)). That proves that recovery works on your unit. Then build and flash the Sidecar's 1.74 build from the same stock file.
+**The recommended way to 1.74:** first flash Elektron's stock 1.74 file, over DIN through the STARTUP menu if you can ([Recovery to stock](/sidecar-expander/getting-started/recovery/#if-the-rytm-does-not-boot-the-startup-menu)). That proves that recovery works on your unit. Then patch and flash the Sidecar's 1.74 build from the same stock file.
 
 **Directly:** a Rytm on 1.73, stock or with the Sidecar's 1.73 build, can also take the Sidecar's 1.74 build straight away, since the file is a whole OS. It is the same move, without the recovery check first.
 
 **Projects should carry over** to 1.74: its project, kit, sound and pattern code is 1.73's with its addresses moved, and it only adds the Outbox's main-output routing. That was checked in the code and in the emulator, and a kit saved and reloaded on a real Rytm on 1.74. Back up every project first, as before any OS change.
+
+## Advanced: build it with elekloader
+
+You do not need this: the patcher above makes the same file. If you would rather build it yourself, the 0.4.0 Rytm firmware also comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.4.0 card.
 
 ### What you need
 
@@ -75,8 +92,6 @@ Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](http
 
    For 1.73: `--stock Analog-Rytm_MKII_OS1.73.syx --mod core-0.1.elemod --mod rytm-sidecar-0.4.0.elemod --version 1.73`.
 
-**The patcher:** the [patcher](/sidecar-expander/patcher/) makes the same file in your browser: build `rel0-4-0-os1.74` for 1.74, `rel0-4-0` for 1.73.
-
 Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 
 - **Never share the `.syx` you built:** it contains Elektron's firmware. Share the `.elemod` files instead.
@@ -85,7 +100,7 @@ Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 - What is in the module: the external machines, the SysEx router, the SIDECAR folder, the send FX pages, the remote UI and FX in. Not in it: the **REMOTE KEYS** mod (development and testing only). It does hold a **freeze probe**: if the Rytm's screen ever stops for over 2 seconds, the Sidecar's log shows `FREEZE PROBE` with where it stopped (please report it).
 - To go back, flash the stock file of the OS you want to be on (1.73 or 1.74): see [Recovery to stock](/sidecar-expander/getting-started/recovery/). Use a scratch project for your first session under the mods.
 
-## The 0.2.0 builds: the patcher
+## The 0.2.0 builds (older)
 
 The 0.2.0 release used two patch builds of OS 1.73, `rui1027d` and `sfx1021`, made with our patcher. Use them only with a 0.2.0 Sidecar card.
 
@@ -143,7 +158,7 @@ shasum -a 256 Analog-Rytm_MKII_OS1.73_sfx1021.syx
 
 ## Send it to the Rytm
 
-Send the built (0.4.0) or patched (0.2.0) file as an OS update, exactly as you would send an official one:
+Send the patched (or built) file as an OS update, exactly as you would send an official one:
 
 - **Transfer (USB)**: drop the `.syx` on Transfer while the Rytm is connected and confirm on the unit.
 - **STARTUP menu (DIN MIDI)**: hold FUNC while you power on, press TRIG 4 (OS UPGRADE), and send the file from Transfer's legacy OS upgrade mode, or any SysEx tool, through a DIN MIDI interface. This route works even if the OS does not boot. It is slow: about 16 minutes or more.
