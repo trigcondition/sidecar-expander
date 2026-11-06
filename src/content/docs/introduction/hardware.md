@@ -35,7 +35,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
 | Use | **with a computer**: the Sidecar is also a USB-C audio and MIDI interface (<span class="sc-ok">hardware</span>) | **with a computer** too, from 0.4.0 (<span class="sc-test">in testing</span>): needs a USB-C power and data splitter or a header-pin supply: a computer or hub port gives a Pi 5 only about 1.5 A ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
-| Overbridge passthrough (0.4.1, opt-in) | the computer sees the Rytm through the Sidecar (<span class="sc-ok">hardware</span>, [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4)) | not yet: comes in 0.4.2 |
+| Overbridge passthrough (opt-in) | the computer sees the Rytm through the Sidecar since 0.4.1 (<span class="sc-ok">hardware</span>, [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)) | the same, since 0.4.2 (<span class="sc-ok">hardware</span>, on a powered hub port; a USB-C power and data splitter is recommended) |
 | Supply | official 5.1 V 3 A USB-C | official 27 W USB-C, directly: from a hub's port the Pi 5 ran in reduced-power mode and the web page became slow ("503 busy"). The Sidecar warns about a weak supply |
 | HDMI display (micro-HDMI 0) | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to the firmware's 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | <span class="sc-ok">hardware</span> (OSOYOO 7" DSI, 0.3.0) | driven by the engine: <span class="sc-test">in testing</span> |

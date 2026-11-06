@@ -4,6 +4,8 @@
 
 Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 or 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
+> **Sidecar 0.4.2** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): Overbridge passthrough on the Pi 5 too ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-042)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.2) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.2/Sidecar-0.4.2-User-Manual.pdf).
+>
 > **Sidecar 0.4.1** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): a fix release for the Pi, with Overbridge passthrough on the Pi 4 (opt-in), the USB-C mode switch, USB dropout and replug fixes and MODEL E ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-041)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.1) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.1/Sidecar-0.4.1-User-Manual.pdf).
 >
 > **Sidecar 0.4.0** (with the Rytm firmware 0.4.0, an elekloader module): master FX, the SAT saturator, the MIDI machine, the arpeggiator and arp locks, the USER SLOTS page, the SOPHIE user machine and Analog Four MKII support, for the Raspberry Pi 4B and the Pi 5 ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0) the [Rytm firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) and the [A4 firmware](https://github.com/trigcondition/sidecar-mods/releases/tag/a4-v0.12). **Unofficial, experimental software.** Read [Risks and recovery](#risks-and-recovery) before you install anything.
@@ -15,6 +17,8 @@ Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A 
 Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-expander/>
 
 ## What works now
+
+Sidecar 0.4.2 adds Overbridge passthrough on the Pi 5, with the same USB-C mode switch as the Pi 4 (a USB-C power and data splitter is recommended for the Pi 5's power) ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-042)).
 
 Sidecar 0.4.1 adds, on top of 0.4.0 (the Pi only; the Rytm keeps the Rytm firmware 0.4.0): Overbridge passthrough on the Pi 4 (opt-in; the Pi 5 in 0.4.2) with the USB-C mode switch on the web page, the Rytm and the touchscreen; a fix for USB dropouts that stopped the voices and for the Rytm coming back after its cable is pulled; the hub re-arm from Iced-Cream; DSP SAMPLE no longer silent after a machine change; the web page's buttons in Chrome; MODEL E in the user machines zip ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-041)).
 
