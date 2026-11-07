@@ -32,7 +32,8 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
    - Linux: `mkfs.vfat -F 32`.
    - Raspberry Pi Imager's "Erase" does it too.
 3. Unzip the file and copy **the files themselves** (not the folder) to the card's top level.
-4. Eject the card and put it in the Pi.
+4. **Check the card.** Open it on your computer. Without opening any folder you should see `config.txt`, `cmdline.txt`, `sdboot.img`, `start4.elf`, `kernel_2712.img` and the folders `overlays`, `firmware`, `JUNO` and `DX7`. If you see one folder named like `sidecar-pi-sd-…` instead, open it, move everything inside it to the card's top level and delete the empty folder. With the files in a folder the Pi does not find them and does not start: the Rytm still shows the Sidecar machines, but nothing plays.
+5. Eject the card and put it in the Pi.
 
 | File | What |
 |---|---|

@@ -9,6 +9,7 @@ sidebar:
 
 | Symptom | Check |
 |---|---|
+| The Rytm shows the Sidecar machines but nothing plays, and nothing comes from the Pi | the Pi has not started the Sidecar. The card's files must be at its top level, not in a folder ([Check the card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)); the Rytm in a USB-A port of the Pi, not USB-C; the official supply. Pi 5: a red LED means it is off, press its power button once |
 | No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (`sidecar.local` Log & console tab) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
