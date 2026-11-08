@@ -55,7 +55,7 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
 ```
 
 - Use a USB-A port for the Rytm, with no hub.
-- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
+- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). **Playing notes from the pads (CHRO mode, poly tracks):** set SETTINGS > MIDI CONFIG > PORT CONFIG > **PAD DEST** to **INT+EXT**, with OUTPUT TO including USB. On INT the pads send no MIDI, so the Sidecar gets no pitch from them and every pad plays the same note. Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - Connect the display before power-on: the screen is set up at boot.
 - Power on. A boot screen with a progress bar appears within a second of the engine starting; the engine runs about 11 seconds after power-on.
 
