@@ -80,6 +80,10 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 
 - **[Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar) on the Pi 5** too, with the same USB-C mode switch as the Pi 4 ([Release notes](/sidecar-expander/release-notes/#sidecar-042)). A Pi 5 on a computer or hub port gets about 1.5 A: a USB-C power and data splitter is recommended.
 
+## Released: 0.4.3
+
+A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes](/sidecar-expander/release-notes/#sidecar-043)): the **CHRO pads play from the first hit** on a selected poly track.
+
 ## Then: 0.5.0 and later
 
 Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's main features:

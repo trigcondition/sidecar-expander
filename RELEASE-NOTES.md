@@ -2,6 +2,38 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.4.3
+
+**The CHRO pads play from the first hit on a selected poly track.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+| Part | File |
+|---|---|
+| Rytm firmware | unchanged: the Rytm firmware 0.4.0 for OS 1.74 or OS 1.73 ([Sidecar 0.4.0](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040), [Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-@@COMMIT@@-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-@@COMMIT@@-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.3.zip`: the same machines as 0.4.2 |
+| Starter content | `sidecar-content-0.4.3.zip`: the same patches as 0.4.2 (also on the card) |
+| User manual | `Sidecar-0.4.3-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf)) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.4.3 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.3) (the Pi). The Rytm firmware stays on the [sidecar-mods 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0).
+
+### Upgrading from 0.4.2
+
+1. **The Rytm:** nothing to do if it runs the Rytm firmware 0.4.0 (OS 1.74 or 1.73).
+2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
+
+From 0.4.0 or 0.4.1, also see [Upgrading from 0.4.1](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-041) and [Upgrading from 0.4.0](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-040). From 0.3.2 or older: follow [Upgrading from 0.3.2](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-032) (flash the Rytm firmware 0.4.0) with the 0.4.3 card.
+
+### New in 0.4.3
+
+- **The CHRO pads play from the first hit on a selected poly track.** In 0.4.2, right after you selected a poly track, the first pad hit or two could be silent: the pads played nothing until a first note had been triggered on the track (by a p-locked step, or by holding a step and pressing a pad), while the Sidecar learned which voice the pads play. Now the Sidecar binds the pads' channel to the selected poly track at once. **PAD DEST** on **INT+EXT** is still needed for poly tracks and chords, and **CHROMATIC** on **SYNTH** or **SYN+SMP** for the pads to play pitches ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/), [Sequencer](https://trigcondition.github.io/sidecar-expander/using/sequencer/)).
+
+### Known issues in 0.4.3
+
+- **A Pi 5 on a weak computer or hub port** can be short of power (under-voltage, resets): use a USB-C power and data splitter with the 27 W supply.
+- **Switching the USB-C mode is a replug** for the computer: stop the DAW first, and never switch during a transfer or an OS update.
+- Everything else in [Known issues in 0.4.0](https://trigcondition.github.io/sidecar-expander/release-notes/#known-issues-in-040) still applies.
+
 ## Sidecar 0.4.2
 
 **Overbridge through the Sidecar on the Pi 5 too.** Apart from that it is Sidecar 0.4.1. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
