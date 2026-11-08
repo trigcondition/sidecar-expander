@@ -56,7 +56,7 @@ New in 0.3.1. `GET /blackbox` returns the [black box](/sidecar-expander/using/tr
 | Tab | What |
 |---|---|
 | **Status** | CPU of the render cores, buffer levels, underruns, the Overbridge stream, whether the Rytm is attached, USB-C, temperature, the **Power** tile ("too weak" with a warning when the supply is, e.g. a Pi 5 not on its 27 W adapter), the SD card speed test, the **Wi-Fi** section and the **Storage** section (below) |
-| **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, the **USB-C mode** (Class compliant or Overbridge, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4)), a machine per voice and a test drone; **Display**: screensaver and brightness (the UI style through the console, `uistyle=oled` or `uistyle=classic`); in 0.3 **Poly tracks** (below) |
+| **Sound** | MIDI notes, output to tracks or MAIN, the **IN L/R source** (Inputs or the Rytm's FX return), computer audio, the **USB-C mode** (Class compliant or Overbridge, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)), a machine per voice and a test drone; **Display**: screensaver and brightness (the UI style through the console, `uistyle=oled` or `uistyle=classic`); in 0.3 **Poly tracks** (below) |
 | **Send FX** | the two effects' TYPE and the tracks' send levels as the Rytm's kit sets them (read only); Kill tails |
 | **LFO** | the eight [LFOs](/sidecar-expander/using/lfo/): target, wave (with the DESIGN grid), rate, retrig, depth |
 | **Record** | the [recorder](/sidecar-expander/using/recorder/): record, arm, channels, and the takes with a play button per channel |

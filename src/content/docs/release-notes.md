@@ -1,7 +1,41 @@
 ---
 title: Release notes
-description: "Sidecar 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
+description: "Sidecar 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
 ---
+
+## Sidecar 0.4.2
+
+**Overbridge through the Sidecar on the Pi 5 too.** Apart from that it is Sidecar 0.4.1. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+| Part | File |
+|---|---|
+| Rytm firmware | unchanged: the Rytm firmware 0.4.0 for OS 1.74 or OS 1.73 ([Sidecar 0.4.0](#sidecar-040), [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-b74af29-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-b74af29-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.2.zip`: the same machines as 0.4.1 |
+| Starter content | `sidecar-content-0.4.2.zip`: the same patches as 0.4.1 (also on the card) |
+| User manual | `Sidecar-0.4.2-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.2/Sidecar-0.4.2-User-Manual.pdf)) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.4.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.2) (the Pi). The Rytm firmware stays on the [sidecar-mods 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0).
+
+### Upgrading from 0.4.1
+
+1. **The Rytm:** nothing to do if it runs the Rytm firmware 0.4.0 (OS 1.74 or 1.73).
+2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
+3. **For Overbridge:** set the USB-C mode to OVERBRIDGE ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
+
+From 0.4.0, also see [Upgrading from 0.4.0](#upgrading-from-040) (MODEL E). From 0.3.2 or older: follow [Upgrading from 0.3.2](#upgrading-from-032) (flash the Rytm firmware 0.4.0) with the 0.4.2 card.
+
+### New in 0.4.2
+
+- **Overbridge through the Sidecar on the Pi 5** (opt-in), <span class="sc-ok">hardware</span> (Pi 5, macOS): as on the Pi 4 since 0.4.1, the computer on the Pi's USB-C sees the Rytm itself, so Overbridge Engine and the Analog Rytm plugin work while the Sidecar plays alongside. The USB-C mode switch (web page, the Rytm's SIDECAR MENU > USB-C, the touchscreen's Settings > Sound) now offers OVERBRIDGE on the Pi 5 too. On a real Pi 5: live switches between CLASS COMPLIANT and OVERBRIDGE with the Overbridge Analog Rytm app open, 12 channels and the plugin streaming, no reset, no underruns. Based on pull requests 19 and 20 by [Iced-Cream](https://github.com/Iced-Cream).
+- **Power on the Pi 5:** a Pi 5 that uses its USB-C for data gets only about 1.5 A from a computer or hub port. In our test it worked on a powered hub port with no under-voltage; a **USB-C power and data splitter** with the 27 W supply gives it full power and is the recommended setup ([The Pi 5 and Overbridge](/sidecar-expander/using/usb-audio-midi/#the-pi-5-and-overbridge)).
+
+### Known issues in 0.4.2
+
+- **A Pi 5 on a weak computer or hub port** can be short of power (under-voltage, resets): use a USB-C power and data splitter with the 27 W supply.
+- **Switching the USB-C mode is a replug** for the computer: stop the DAW first, and never switch during a transfer or an OS update.
+- Everything else in [Known issues in 0.4.0](#known-issues-in-040) still applies.
 
 ## Sidecar 0.4.1
 
@@ -23,13 +57,13 @@ Downloads: the [sidecar-firmware 0.4.1 release](https://github.com/trigcondition
 1. **The Rytm:** nothing to do if it runs the Rytm firmware 0.4.0 (OS 1.74 or 1.73).
 2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
 3. **For MODEL E:** upload `modele.a64.rmp` from the user machines zip on the web page's User machines tab. You can delete the MD user machine (`mdk_md.a64.rmp`) from `/Plugins/`: MD is built in.
-4. **For Overbridge on a Pi 4:** set the USB-C mode to OVERBRIDGE ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4)).
+4. **For Overbridge on a Pi 4:** set the USB-C mode to OVERBRIDGE ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
 
 From 0.3.2 or older: follow [Upgrading from 0.3.2](#upgrading-from-032) (flash the Rytm firmware 0.4.0) with the 0.4.1 card.
 
 ### New in 0.4.1
 
-- **Overbridge passthrough on the Pi 4** (opt-in), <span class="sc-ok">hardware</span> (Pi 4, macOS, 2026-11-06). The computer on the Pi's USB-C sees the Rytm itself, so Overbridge Engine and the Analog Rytm plugin work through the Sidecar while the Sidecar plays alongside. From pull requests 19 and 20 by [Iced-Cream](https://github.com/Iced-Cream), with our fixes ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4)).
+- **Overbridge passthrough on the Pi 4** (opt-in), <span class="sc-ok">hardware</span> (Pi 4, macOS, 2026-11-06). The computer on the Pi's USB-C sees the Rytm itself, so Overbridge Engine and the Analog Rytm plugin work through the Sidecar while the Sidecar plays alongside. From pull requests 19 and 20 by [Iced-Cream](https://github.com/Iced-Cream), with our fixes ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
 - **The USB-C mode switch:** CLASS COMPLIANT (the default, the Sidecar's own audio and MIDI interface) or OVERBRIDGE, on the web page (Sound tab), the Rytm (SIDECAR MENU > USB-C) and the touchscreen (Settings > Sound). It switches live, with no restart, and is kept on the card. The USB-C side copes with the computer's idle suspend and resume, and with the Overbridge app starting while a request is still pending (in the test builds that reset the Pi).
 - **Pi 5: Overbridge comes in 0.4.2.** OVERBRIDGE is greyed out on a Pi 5. A Pi 5 that uses its USB-C for data gets only about 1.5 A from a computer or hub port, so it needs a USB-C power and data splitter; Overbridge on the Pi 5 will be released once it has run that way ([The Pi 5 and Overbridge](/sidecar-expander/using/usb-audio-midi/#the-pi-5-and-overbridge)).
 - **MODEL E** in the user machines zip: a three-oscillator voice with a ladder filter, for basses and leads ([MODEL E](/sidecar-expander/using/user-machines/#new-in-041-model-e)). The MD user machine is no longer in the zip: MD is built in since 0.4.0.

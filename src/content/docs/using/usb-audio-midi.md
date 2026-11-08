@@ -9,7 +9,7 @@ sidebar:
 
 <span class="sc-test">in testing</span> on the **Pi 5**, new in 0.4.0: on by default, `gadget=0` in `cmdline.txt` turns it off. Read [Powering a Pi 5 with a computer attached](#powering-a-pi-5-with-a-computer-attached) first.
 
-With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the USB-C port of the Pi 4 or the Pi 5. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux. On a Pi 4, from 0.4.1, the USB-C port can instead show the computer the Rytm itself, for Overbridge: [Overbridge through the Sidecar](#overbridge-through-the-sidecar-pi-4).
+With the Sidecar as the Rytm's USB host, the Rytm's own USB port is taken. The Sidecar can hand the Rytm's audio and MIDI on to a computer through its own device port: the USB-C port of the Pi 4 or the Pi 5. It shows up as a class-compliant audio and MIDI device, so no driver is needed on macOS, Windows or Linux. On a Pi 4, from 0.4.1, the USB-C port can instead show the computer the Rytm itself, for Overbridge: [Overbridge through the Sidecar](#overbridge-through-the-sidecar).
 
 ## What the computer sees
 
@@ -30,9 +30,9 @@ The Rytm is the clock. The multichannel mode is the default. The USB-C device an
 
 A voice on TRK is in its track's channel, as before. A voice on PRE / POST ([the OUT route](/sidecar-expander/using/stereo-out/), 0.3) leaves its track's channel; whether it shows in the MAIN L/R the Rytm sends back is still to be measured on a real Rytm ([Measurements](/sidecar-expander/using/stereo-out/#measurements-pending)).
 
-## Overbridge through the Sidecar (Pi 4)
+## Overbridge through the Sidecar
 
-<span class="sc-ok">hardware</span> on the **Pi 4B**, new in 0.4.1, opt-in. The Pi 5 gets it in 0.4.2 (see [below](#the-pi-5-and-overbridge)).
+<span class="sc-ok">hardware</span> on the **Pi 4B** (new in 0.4.1) and the **Pi 5** (new in 0.4.2), opt-in. On a Pi 5 read [The Pi 5 and Overbridge](#the-pi-5-and-overbridge) for the power.
 
 The Sidecar's USB-C port is one thing at a time, like the Rytm's own USB CONFIG. The **USB-C mode** picks which:
 
@@ -57,11 +57,11 @@ Each place shows what USB-C is now (the Sidecar device, the Rytm, or replugging)
 
 ### The Pi 5 and Overbridge
 
-Not in 0.4.1: OVERBRIDGE is greyed out on a Pi 5 (the Rytm's USB-C page says PI5: IN 0.4.2). The Pi 5's USB-C port is also its power input, and a Pi 5 that uses it for data gets only about 1.5 A from a computer or hub port: on a hub port it ran short of power and reset when Overbridge started. It comes in **0.4.2**, once it has been tested with a USB-C power and data splitter.
+New in 0.4.2 (0.4.1 had it on the Pi 4 only). The Pi 5's USB-C port is also its power input. A Pi 5 that uses its USB-C for data gets only about 1.5 A from a computer or hub port. In our test it worked on a powered hub port with no under-voltage; a USB-C power and data splitter with the 27 W supply gives it full power and is the recommended setup ([Powering a Pi 5 with a computer attached](#powering-a-pi-5-with-a-computer-attached)). On a real Pi 5 with macOS, on a powered hub port: live switches between CLASS COMPLIANT and OVERBRIDGE with the Overbridge Analog Rytm app open, 12 channels and the plugin streaming, no reset, no underruns.
 
 ## Powering a Pi 5 with a computer attached
 
-The Pi 5's USB-C port is both its **power input** and its **data port** to the computer, and a computer's USB port cannot power a Pi 5. A computer or hub port gives a Pi 5 that uses its USB-C for data only about **1.5 A**, far less than the 5 A its 27 W supply gives (under-voltage, resets). So a Pi 5 with a computer needs one of these:
+The Pi 5's USB-C port is both its **power input** and its **data port** to the computer, and a computer's USB port cannot power a Pi 5. A computer or hub port gives a Pi 5 that uses its USB-C for data only about **1.5 A**, far less than the 5 A its 27 W supply gives. A powered hub port was enough in our Overbridge test (no under-voltage), but a weak port gives under-voltage and resets. So a Pi 5 with a computer needs one of these:
 
 - **A USB-C power and data splitter:** an adapter that takes power from the 27 W supply and passes the data on to the computer. A powered hub or dock with USB-PD pass-through that also passes the data works too.
 - **A header-pin power adapter:** power into the Pi's 5 V GPIO pins, so the USB-C port carries data only.
@@ -76,6 +76,13 @@ The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Ry
 
 - the Sidecar's own messages to and from the Rytm are not passed on;
 - OS update messages are not passed to the Rytm unless you turn that on ([OS updates through the Sidecar](#os-updates-through-the-sidecar)). By default, update the Rytm with the Sidecar unplugged.
+
+## MIDI keyboards on the Pi
+
+A USB MIDI keyboard in one of the Pi's USB-A ports, or the computer on USB-C, plays the Rytm's selected track:
+
+- **6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and poly tracks:** the Sidecar plays the notes itself, polyphonic.
+- **JUNO, PLAITS, DAISYSP and the Rytm's own tracks:** the Sidecar sends the notes to the Rytm on its auto channel, and the Rytm plays them. For this, turn on **RECEIVE NOTES** in SETTINGS > MIDI CONFIG > PORT CONFIG, with INPUT FROM including USB. With RECEIVE NOTES off these notes are silent.
 
 ## OS updates through the Sidecar
 

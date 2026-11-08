@@ -12,12 +12,12 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 - A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
-- From the [Sidecar 0.4.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.1): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.1.zip` (the user machines), `sidecar-content-0.4.1.zip` (the starter content, also on the card) and the user manual as a PDF, [`Sidecar-0.4.1-User-Manual.pdf`](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.1/Sidecar-0.4.1-User-Manual.pdf). The Rytm firmware stays at 0.4.0 for Sidecar 0.4.1: it is on the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
+- From the [Sidecar 0.4.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.2): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.2.zip` (the user machines), `sidecar-content-0.4.2.zip` (the starter content, also on the card) and the user manual as a PDF, [`Sidecar-0.4.2-User-Manual.pdf`](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.2/Sidecar-0.4.2-User-Manual.pdf). The Rytm firmware stays at 0.4.0 for Sidecar 0.4.1 and 0.4.2: it is on the [Rytm firmware 0.4.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
 | Card zip | For |
 |---|---|
-| `sidecar-pi-sd-8bfc7e1-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
-| `sidecar-pi-sd-8bfc7e1-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+| `sidecar-pi-sd-b74af29-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
+| `sidecar-pi-sd-b74af29-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
 
 Each zip also has its own `.sha256`; `BUILD-INFO-pi.txt` names the commit, both kernels and each card's `config.txt`.
 
@@ -32,7 +32,8 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
    - Linux: `mkfs.vfat -F 32`.
    - Raspberry Pi Imager's "Erase" does it too.
 3. Unzip the file and copy **the files themselves** (not the folder) to the card's top level.
-4. Eject the card and put it in the Pi.
+4. **Check the card.** Open it on your computer. Without opening any folder you should see `config.txt`, `cmdline.txt`, `sdboot.img`, `start4.elf`, `kernel_2712.img` and the folders `overlays`, `firmware`, `JUNO` and `DX7`. If you see one folder named like `sidecar-pi-sd-…` instead, open it, move everything inside it to the card's top level and delete the empty folder. With the files in a folder the Pi does not find them and does not start: the Rytm still shows the Sidecar machines, but nothing plays.
+5. Eject the card and put it in the Pi.
 
 | File | What |
 |---|---|
@@ -54,7 +55,7 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
 ```
 
 - Use a USB-A port for the Rytm, with no hub.
-- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
+- On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). **Playing notes from the pads (CHRO mode):** the track's sound needs **CHROMATIC** on **SYNTH** or **SYN+SMP** (FUNC + FLTR, the sound's settings). On OFF or SAMPLE the Rytm sends the Sidecar no pitch and every pad plays the same note. The setting belongs to the sound and stays when you change its machine. Poly tracks, and chords held on the pads (6-OP FM and the poly machines), also need **PAD DEST** on **INT+EXT** (SETTINGS > MIDI CONFIG > PORT CONFIG), with OUTPUT TO including USB: the Sidecar reads the pads' MIDI notes. After you select a track, its first pad hit or two may stay silent while the Sidecar learns which voice the pads play. Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
 - Connect the display before power-on: the screen is set up at boot.
 - Power on. A boot screen with a progress bar appears within a second of the engine starting; the engine runs about 11 seconds after power-on.
 
@@ -130,13 +131,13 @@ The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1`
 
 ## Starter content
 
-The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.4.1.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
+The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.4.2.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.0): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
 
 On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-0.4.1.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT), new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT) and, new in 0.4.1, `modele.a64.rmp` (MODEL E: GPL-2.0-or-later, with its `modele-LICENSE.txt`, `modele-NOTICE.txt` and complete source `modele-source.tar.gz` beside it). MD is built in since 0.4.0, so its user machine (`mdk_md.a64.rmp`) is no longer in the zip; you can delete it from `/Plugins/`. Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
+The release's `sidecar-pi-plugins-0.4.2.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT), new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT) and, new in 0.4.1, `modele.a64.rmp` (MODEL E: GPL-2.0-or-later, with its `modele-LICENSE.txt`, `modele-NOTICE.txt` and complete source `modele-source.tar.gz` beside it). MD is built in since 0.4.0, so its user machine (`mdk_md.a64.rmp`) is no longer in the zip; you can delete it from `/Plugins/`. Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 
@@ -144,7 +145,7 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
-| 0.4.1 release | the Rytm firmware 0.4.0, for OS 1.74 or 1.73 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.1 SD card (or 0.4.0) | **UP + YES** |
+| 0.4.2 release | the Rytm firmware 0.4.0, for OS 1.74 or 1.73 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.2 SD card (or 0.4.1, 0.4.0) | **UP + YES** |
 
 An older Sidecar build ignores the Rytm's newer requests (the combo map when UP is held, pages it does not have); update both together. Each package's `BUILD-INFO-pi.txt` names the kernel it carries. The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73 ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 
@@ -196,7 +197,7 @@ psk=YOUR-PASSPHRASE
 
 The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for each board, and each board only reads its own files. On the Pi 5 the voices, send effects, the Rytm over USB (replug included), the remote pages, `sidecar.local` over Ethernet and Wi-Fi work (<span class="sc-ok">hardware</span>, 2026-10-19); the user machines use the same `.a64.rmp` files as on the Pi 4. The shared card itself is <span class="sc-test">in testing</span> on both boards.
 
-**Use 0.3.2 or later (0.4.1 now) on a Pi 5 with a Rytm.** On 0.3.0 and 0.3.1 the Pi 5 could stop at the first USB MIDI message to the Rytm ([Fixed in 0.3.2](/sidecar-expander/release-notes/#fixed-in-032)). On 2026-11-01 the 0.3.2 Pi 5 kernel ran with a real Rytm, 0 underruns.
+**Use 0.3.2 or later (0.4.2 now) on a Pi 5 with a Rytm.** On 0.3.0 and 0.3.1 the Pi 5 could stop at the first USB MIDI message to the Rytm ([Fixed in 0.3.2](/sidecar-expander/release-notes/#fixed-in-032)). On 2026-11-01 the 0.3.2 Pi 5 kernel ran with a real Rytm, 0 underruns.
 
 | | Raspberry Pi 4B | Raspberry Pi 5 |
 |---|---|---|
@@ -205,14 +206,14 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 | HDMI display | 800x480, sharp (<span class="sc-ok">hardware</span>) | the 800x480 UI scaled to 1920x1080: works, slightly soft (<span class="sc-ok">hardware</span>) |
 | DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
 | Wi-Fi | <span class="sc-ok">hardware</span> | <span class="sc-ok">hardware</span> |
-| Overbridge passthrough (USB-C mode OVERBRIDGE) | opt-in, new in 0.4.1 (<span class="sc-ok">hardware</span>): [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar-pi-4) | not yet: comes in 0.4.2 |
+| Overbridge passthrough (USB-C mode OVERBRIDGE) | opt-in, new in 0.4.1 (<span class="sc-ok">hardware</span>): [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar) | opt-in, new in 0.4.2 (<span class="sc-ok">hardware</span>, on a powered hub port; a USB-C power and data splitter is recommended) |
 | Updating | copy the new files over the old ones | the same (no network update on the Pi 5) |
 
 What is different on the Pi 5 for now:
 
 - **USB audio and MIDI to the computer** (<span class="sc-test">in testing</span>, new in 0.4.0): on by default over the Pi 5's USB-C port, `gadget=0` turns it off. That port is also the Pi 5's power input, and a computer cannot power a Pi 5, so it needs a USB-C power and data splitter or a header-pin supply: [USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached).
-- **USB-C for data needs a splitter:** a Pi 5 whose USB-C goes to a computer or a hub port gets only about **1.5 A** from it, too little for the Pi 5 (under-voltage, resets). Use a USB-C power and data splitter with the 27 W supply.
-- **Overbridge passthrough** is not in the Pi 5's 0.4.1 kernel (OVERBRIDGE is greyed out): it comes in 0.4.2, once it has run on a splitter.
+- **USB-C for data: power.** A Pi 5 whose USB-C goes to a computer or a hub port gets only about **1.5 A** from it. A powered hub port was enough in our Overbridge test (no under-voltage); a weak port gives under-voltage and resets. A USB-C power and data splitter with the 27 W supply gives full power and is recommended.
+- **Overbridge passthrough** works on the Pi 5 from 0.4.2, as on the Pi 4 ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
 - **HDMI display** (<span class="sc-ok">hardware</span>): connect the display to **micro-HDMI 0** (next to the USB-C) before power-on. The Pi 5's firmware always sends 1920x1080; the Sidecar scales its UI to it, so the picture is slightly soft. The same holds for both card zips. Only `hdmi_force_hotplug=1` under `[pi5]` matters (it is on the card); the other `[pi5]` display lines are ignored by the Pi 5 and do no harm. `width=`/`height=` in `cmdline.txt` set the UI's size on the Pi 5 (`width=1920 height=1080`: unscaled, small).
 - **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up). From 0.4.0 the UI uses the panel's 1280x720 by default (<span class="sc-test">in testing</span>: not yet run on the panel); `res=1024x600` in `/.rytm/display.txt` gives the older 1024x600 UI, centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
@@ -224,7 +225,7 @@ What is different on the Pi 5 for now:
 ## Updating and going back
 
 - To update, copy the new release's files over the old ones on the card. Your samples, recordings, `/Plugins/` and `/.rytm/` stay. Each package's `BUILD-INFO-pi.txt` names the kernel it carries.
-- **From 0.4.0 to 0.4.1** only the card changes: a Rytm on the Rytm firmware 0.4.0 needs no new flash ([Release notes](/sidecar-expander/release-notes/#sidecar-041)).
+- **From 0.4.0 or 0.4.1 to 0.4.2** only the card changes: a Rytm on the Rytm firmware 0.4.0 needs no new flash ([Release notes](/sidecar-expander/release-notes/#sidecar-042)).
 - To stop using Sidecar, reformat the card. Nothing on the Pi itself is changed.
 
 ## Check that it works

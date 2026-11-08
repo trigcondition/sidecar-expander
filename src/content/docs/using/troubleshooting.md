@@ -9,8 +9,13 @@ sidebar:
 
 | Symptom | Check |
 |---|---|
+| The Rytm shows the Sidecar machines but nothing plays, and nothing comes from the Pi | the Pi has not started the Sidecar. The card's files must be at its top level, not in a folder ([Check the card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)); the Rytm in a USB-A port of the Pi, not USB-C; the official supply. Pi 5: a red LED means it is off, press its power button once |
+| The card shows as `bootfs`, or holds `initramfs8`, `initramfs_2712` or `fixup_cd.dat` | it is still a Raspberry Pi OS card, and the Pi starts that instead of the Sidecar (its `config.txt` is Raspberry Pi OS's). Erase the card to FAT32 (Raspberry Pi Imager: CHOOSE OS > Erase), then copy the card zip's contents again ([Make the SD card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)). Use the `sidecar-pi-sd-…` zip, not GitHub's "Source code" zip |
 | No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (`sidecar.local` Log & console tab) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
+| In CHRO mode every pad plays the same note on a Sidecar machine or a poly track | the track's sound: **CHROMATIC** on SYNTH or SYN+SMP (FUNC + FLTR); on OFF or SAMPLE the Rytm sends no pitch. A sound keeps the setting when its machine changes, so one track can be off while others work. Also check the track's arpeggiator is off. The MD drums take no pitch from the pads: tune them with PTCH |
+| Chords held on the CHRO pads play one note, or the CHRO pads play nothing on a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB. Right after selecting the track, the first pad hit or two can be silent while the Sidecar learns the pads' channel |
+| A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
 | `sidecar.local` does not open | a direct Ethernet cable; your computer's port on automatic (link-local) or 169.254.61.59/16; try <http://169.254.61.60> |
@@ -63,7 +68,7 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 ## Known issues
 
-The releases' own lists are in the release notes: [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.4.2](/sidecar-expander/release-notes/#known-issues-in-042), [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 
