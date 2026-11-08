@@ -4,12 +4,12 @@
 
 ## Sidecar 0.4.3
 
-**The CHRO pads on poly tracks: they play from the first hit, and on JUNO, PLAITS, DAISYSP, MD and user machines they play at all.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+**The CHRO pads on poly tracks: they play from the first hit, and on JUNO, PLAITS, DAISYSP, MD and user machines they play at all; and fewer redraws of the Rytm's screen.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
 
 | Part | File |
 |---|---|
 | Rytm firmware | unchanged: the Rytm firmware 0.4.0 for OS 1.74 or OS 1.73 ([Sidecar 0.4.0](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-040), [Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)) |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-19b427e-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-19b427e-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-1debc00-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-1debc00-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
 | User machines (Pi) | `sidecar-pi-plugins-0.4.3.zip`: the same machines as 0.4.2 |
 | Starter content | `sidecar-content-0.4.3.zip`: the same patches as 0.4.2 (also on the card) |
 | User manual | `Sidecar-0.4.3-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf)) |
@@ -29,6 +29,7 @@ From 0.4.0 or 0.4.1, also see [Upgrading from 0.4.1](https://trigcondition.githu
 - **The CHRO pads play from the first hit on a selected poly track.** In 0.4.2, right after you selected a poly track, the first pad hit or two could be silent: the pads played nothing until a first note had been triggered on the track (by a p-locked step, or by holding a step and pressing a pad), while the Sidecar learned which voice the pads play. Now the Sidecar binds the pads' channel to the selected poly track at once. **PAD DEST** on **INT+EXT** is still needed for poly tracks and chords, and **CHROMATIC** on **SYNTH** or **SYN+SMP** for the pads to play pitches ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/), [Sequencer](https://trigcondition.github.io/sidecar-expander/using/sequencer/)).
 - **The CHRO pads play a poly track with JUNO, PLAITS, DAISYSP, MD or a user machine.** In 0.4.2 the pads played nothing on such a track (its sequenced trigs did play); only 6-OP FM and the sample machines played from the pads. Now they play the track's machine, one note at a time, and a pad's note ends when you let go, also when you change track or machine while holding it.
 - **PAD OCT shifts a pad's note the same every time.** On a poly track with JUNO, PLAITS, DAISYSP, MD or a user machine, a pad could sound an octave off now and then, depending on which of the Rytm's two messages for the pad came first.
+- **Lighter work for the Rytm's screen.** Users reported a sluggish Rytm (its screen and keys responding late) with some machines, such as WAVETABLE. Every redraw Sidecar sends makes the Rytm redraw its whole screen, and a live page could send up to 20 to 40 a second. Now Sidecar's live pages redraw the Rytm's screen at most 5 times a second while a pattern plays, and the moving pictures (WAVETABLE's position, DSP SAMPLE's and CHOP's playheads) at most 10 times a second. Your own key presses and knob turns on Sidecar's pages still show at once.
 
 ### Known issues in 0.4.3
 
