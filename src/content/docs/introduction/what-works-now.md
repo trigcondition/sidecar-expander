@@ -88,6 +88,8 @@ The 0.4.3 card, with the Rytm firmware 0.4.0 (no new Rytm flash). Details: [Rele
 | Feature or fix | Status |
 |---|---|
 | The CHRO pads play from the first hit on a selected poly track (PAD DEST INT+EXT is still needed); in 0.4.2 the first hit or two could be silent | fixed in 0.4.3 |
+| The CHRO pads play a poly track with JUNO, PLAITS, DAISYSP, MD or a user machine (one note at a time); in 0.4.2 they were silent there | fixed in 0.4.3 |
+| PAD OCT shifts a pad's note the same every time on those machines (it could be an octave off) | fixed in 0.4.3 |
 
 ## New in 0.4.2
 

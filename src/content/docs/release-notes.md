@@ -1,16 +1,16 @@
 ---
 title: Release notes
-description: "Sidecar 0.4.3 (CHRO pads on a selected poly track play from the first hit), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
+description: "Sidecar 0.4.3 (CHRO pad fixes on poly tracks: the first hit, JUNO and the other machines, PAD OCT), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
 ---
 
 ## Sidecar 0.4.3
 
-**The CHRO pads play from the first hit on a selected poly track.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+**The CHRO pads on poly tracks: they play from the first hit, and on JUNO, PLAITS, DAISYSP, MD and user machines they play at all.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
 
 | Part | File |
 |---|---|
 | Rytm firmware | unchanged: the Rytm firmware 0.4.0 for OS 1.74 or OS 1.73 ([Sidecar 0.4.0](#sidecar-040), [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)) |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-a7df4be-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-a7df4be-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-19b427e-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-19b427e-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) |
 | User machines (Pi) | `sidecar-pi-plugins-0.4.3.zip`: the same machines as 0.4.2 |
 | Starter content | `sidecar-content-0.4.3.zip`: the same patches as 0.4.2 (also on the card) |
 | User manual | `Sidecar-0.4.3-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf)) |
@@ -28,6 +28,8 @@ From 0.4.0 or 0.4.1, also see [Upgrading from 0.4.1](#upgrading-from-041) and [U
 ### New in 0.4.3
 
 - **The CHRO pads play from the first hit on a selected poly track.** In 0.4.2, right after you selected a poly track, the first pad hit or two could be silent: the pads played nothing until a first note had been triggered on the track (by a p-locked step, or by holding a step and pressing a pad), while the Sidecar learned which voice the pads play. Now the Sidecar binds the pads' channel to the selected poly track at once. **PAD DEST** on **INT+EXT** is still needed for poly tracks and chords, and **CHROMATIC** on **SYNTH** or **SYN+SMP** for the pads to play pitches ([Install](/sidecar-expander/getting-started/install-pi/), [Sequencer](/sidecar-expander/using/sequencer/)).
+- **The CHRO pads play a poly track with JUNO, PLAITS, DAISYSP, MD or a user machine.** In 0.4.2 the pads played nothing on such a track (its sequenced trigs did play); only 6-OP FM and the sample machines played from the pads. Now they play the track's machine, one note at a time, and a pad's note ends when you let go, also when you change track or machine while holding it.
+- **PAD OCT shifts a pad's note the same every time.** On a poly track with JUNO, PLAITS, DAISYSP, MD or a user machine, a pad could sound an octave off now and then, depending on which of the Rytm's two messages for the pad came first.
 
 ### Known issues in 0.4.3
 

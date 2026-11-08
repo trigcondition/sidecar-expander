@@ -4,7 +4,7 @@
 
 Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 or 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.4.3** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): the CHRO pads play from the first hit on a selected poly track ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.3) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf).
+> **Sidecar 0.4.3** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): the CHRO pads play from the first hit on a selected poly track, and on JUNO and the other poly machines ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.3) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf).
 >
 > **Sidecar 0.4.2** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): Overbridge passthrough on the Pi 5 too ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-042)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.2) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.2/Sidecar-0.4.2-User-Manual.pdf).
 >
@@ -20,7 +20,7 @@ Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-
 
 ## What works now
 
-Sidecar 0.4.3 fixes the CHRO pads on a selected poly track: they play from the first hit (in 0.4.2 the first hit or two could be silent) ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)).
+Sidecar 0.4.3 fixes the CHRO pads on poly tracks: they play from the first hit on a selected poly track (in 0.4.2 the first hit or two could be silent), they play JUNO, PLAITS, DAISYSP, MD and user machines (silent in 0.4.2), and PAD OCT shifts their notes the same every time ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)).
 
 Sidecar 0.4.2 adds Overbridge passthrough on the Pi 5, with the same USB-C mode switch as the Pi 4 (a USB-C power and data splitter is recommended for the Pi 5's power) ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-042)).
 
