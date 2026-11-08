@@ -89,6 +89,7 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's main features:
 
 - **The "Octa release":** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
+- **PERF mode, like the Analog Four MKII's:** a mode for playing live. The DATA ENTRY knobs play the PERF macros, the pads pick scenes, FUNC + QPERF morphs between scenes and QPERF alone stays the QPERF macro. Trig keys 1 to 12 mute the twelve tracks and RTRG + a trig key solos one. Trig keys 13 to 16 are your own macros, toggle or momentary: hold one and turn the LEVEL/DATA knob to set its parameters.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
