@@ -65,7 +65,7 @@ The SEQ page **replaces the Rytm's page** like the SRC page does: LEFT and RIGHT
 
 ### The pads' range
 
-The pads send their notes to the Sidecar only with **PAD DEST** on **INT+EXT** (SETTINGS > MIDI CONFIG > PORT CONFIG). On INT every pad plays the same note.
+The pads play notes only when the track's sound has **CHROMATIC** on **SYNTH** or **SYN+SMP** (FUNC + FLTR). On OFF or SAMPLE every pad plays the same note.
 
 In CHRO mode the Rytm's 12 pads play 12 semitones. **UP / DOWN** move them **4 semitones a press** (not an octave): 3 presses up, 6 down from where they start. The Rytm keeps the setting when you leave CHRO and come back.
 
