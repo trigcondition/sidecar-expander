@@ -90,6 +90,7 @@ Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's mai
 
 - **The "Octa release":** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
 - **PERF mode, like the Analog Four MKII's:** a mode for playing live. The DATA ENTRY knobs play the PERF macros, the pads pick scenes, FUNC + QPERF morphs between scenes and QPERF alone stays the QPERF macro. Trig keys 1 to 12 mute the twelve tracks and RTRG + a trig key solos one. Trig keys 13 to 16 are your own macros, toggle or momentary: hold one and turn the LEVEL/DATA knob to set its parameters.
+- **Temp save:** FUNC + YES saves the active pattern and its kit, the Sidecar's tracks, steps and scenes with them; FUNC + NO brings both back, so you can try something and return to where you were.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
@@ -138,4 +139,5 @@ Ideas we intend to build; not designed in detail yet.
 - **One-click bundles over SysEx:** fetch and restore the Rytm project itself as part of a bundle.
 - **Remote pages in the browser:** the same pages the Rytm shows, on the web page.
 - **Performance features:** more LFO targets, beat repeat variations, more polyphony, master effects.
+- **A time-stretch machine with warp markers:** a sample that follows the tempo, with markers you place on the waveform to line its beats up with the grid.
 - **More sampler tools:** resample in one click, sample chopping, larger sample banks.
