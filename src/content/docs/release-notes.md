@@ -10,7 +10,7 @@ description: "Sidecar 0.4.3 (CHRO pads on a selected poly track play from the fi
 | Part | File |
 |---|---|
 | Rytm firmware | unchanged: the Rytm firmware 0.4.0 for OS 1.74 or OS 1.73 ([Sidecar 0.4.0](#sidecar-040), [Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)) |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-@@COMMIT@@-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-@@COMMIT@@-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-a7df4be-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-a7df4be-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](/sidecar-expander/getting-started/install-pi/)) |
 | User machines (Pi) | `sidecar-pi-plugins-0.4.3.zip`: the same machines as 0.4.2 |
 | Starter content | `sidecar-content-0.4.3.zip`: the same patches as 0.4.2 (also on the card) |
 | User manual | `Sidecar-0.4.3-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf)) |
