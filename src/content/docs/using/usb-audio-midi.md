@@ -77,6 +77,13 @@ The Rytm's USB MIDI goes to the computer, and the computer's MIDI goes to the Ry
 - the Sidecar's own messages to and from the Rytm are not passed on;
 - OS update messages are not passed to the Rytm unless you turn that on ([OS updates through the Sidecar](#os-updates-through-the-sidecar)). By default, update the Rytm with the Sidecar unplugged.
 
+## MIDI keyboards on the Pi
+
+A USB MIDI keyboard in one of the Pi's USB-A ports, or the computer on USB-C, plays the Rytm's selected track:
+
+- **6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and poly tracks:** the Sidecar plays the notes itself, polyphonic.
+- **JUNO, PLAITS, DAISYSP and the Rytm's own tracks:** the Sidecar sends the notes to the Rytm on its auto channel, and the Rytm plays them. For this, turn on **RECEIVE NOTES** in SETTINGS > MIDI CONFIG > PORT CONFIG, with INPUT FROM including USB. With RECEIVE NOTES off these notes are silent.
+
 ## OS updates through the Sidecar
 
 <span class="sc-test">in testing</span>. New in 0.4.0, from work by [Iced-Cream](https://github.com/Iced-Cream).

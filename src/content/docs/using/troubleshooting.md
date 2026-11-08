@@ -13,6 +13,7 @@ sidebar:
 | No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (`sidecar.local` Log & console tab) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | In CHRO mode every pad plays the same note on a Sidecar machine or a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB (on INT the pads send no notes to the Sidecar). The MD drums take no pitch from the pads: tune them with PTCH |
+| A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
 | `sidecar.local` does not open | a direct Ethernet cable; your computer's port on automatic (link-local) or 169.254.61.59/16; try <http://169.254.61.60> |
