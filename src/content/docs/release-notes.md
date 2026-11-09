@@ -36,6 +36,8 @@ From 0.4.0 or 0.4.1, also see [Upgrading from 0.4.1](#upgrading-from-041) and [U
 
 - **A Pi 5 on a weak computer or hub port** can be short of power (under-voltage, resets): use a USB-C power and data splitter with the 27 W supply.
 - **Switching the USB-C mode is a replug** for the computer: stop the DAW first, and never switch during a transfer or an OS update.
+- **A scene or PERF lock on SEND FX 1 also locks SEND FX 2**, and the other way round. Both sends share one Rytm parameter, and so do the knob pairs on the send FX pages (P2 and P3, P4 and P5): a lock on one takes the other at its current value, so set both the way you want them in the scene.
+- **The Rytm's scenes and PERF cannot lock INSERT FX**: the inserts are Sidecar settings, with no Rytm parameter behind them.
 - Everything else in [Known issues in 0.4.0](#known-issues-in-040) still applies.
 
 ## Sidecar 0.4.2
