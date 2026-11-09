@@ -93,6 +93,7 @@ Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's mai
 - **Temp save:** FUNC + YES saves the active pattern and its kit, the Sidecar's tracks, steps and scenes with them; FUNC + NO brings both back, so you can try something and return to where you were.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
 - **A channel strip for the Rytm's analog tracks:** a track's own audio through the Sidecar's EQ and inserts, back before or after the Rytm's compressor and distortion.
+- **A track mixer on the Rytm (MIX):** a view of the MASTER page where the eight DATA ENTRY knobs set eight tracks' levels at once, laid out like a mixer: BD · SD · RS/CP · BT · LT · MT/HT · CH/OH · CY/CB, each strip with its level and a peak meter. Push a paired knob to switch between its two tracks (RS or CP, and so on). First the Rytm's own track level, so it works with or without the master FX and is saved with the kit; with the channel strips, a long push opens that track's strip (EQ, inserts, sends). Suggested by a tester.
 - **LV2 plugins built from source:** open-source LV2 effects and instruments compiled into Sidecar packages, with a page generated from their controls.
 - **Export to a USB stick** again, once the hang at its end is fixed.
 - **A touchscreen keyboard** for names (takes, samples, folders, pools, Rytm names).
