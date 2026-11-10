@@ -19,7 +19,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
-1. Pick the mod build for your OS. For Sidecar 0.4.0: `rel0-4-0-os1.74` (OS 1.74, the default: the OS Elektron offers now) or `rel0-4-0` (OS 1.73). You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)). Older builds, all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
+1. Pick the mod build for your OS. For Sidecar 0.4.4: `rel0-4-4-os1.74` (OS 1.74, the default: the OS Elektron offers now) or `rel0-4-4` (OS 1.73). You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)). Older builds: `rel0-4-0-os1.74` (OS 1.74) and `rel0-4-0` (OS 1.73) for Sidecar 0.4.0 to 0.4.3; all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
 2. Drop your stock `.syx` on the page, or click to choose it. The page names the file the build needs.
 3. Press **Patch**, then **Save**.
 
@@ -29,18 +29,20 @@ The file is read and patched by JavaScript in the page itself. Nothing is upload
 
 Python 3.8 or newer, with no extra packages. From a copy of this repository:
 
-    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.74.syx public/patcher/patches/sidecar-rel0-4-0-os1.74.json
+    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.74.syx public/patcher/patches/sidecar-rel0-4-4-os1.74.json
 
-This writes `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
+This writes `Analog-Rytm_MKII_OS1.74_rel0-4-4.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
 
 ## Check the result
 
 Both patchers check the result themselves and save nothing if it is wrong. To check it yourself:
 
-    shasum -a 256 Analog-Rytm_MKII_OS1.74_rel0-4-0.syx
+    shasum -a 256 Analog-Rytm_MKII_OS1.74_rel0-4-4.syx
 
 | Build | Output file | SHA-256 |
 |---|---|---|
+| rel0-4-4 | `Analog-Rytm_MKII_OS1.73_rel0-4-4.syx` | `421cccc9dd16709f3981a1e4f0155bfdcabb337f2130ceb6fee26431967acf26` |
+| rel0-4-4-os1.74 | `Analog-Rytm_MKII_OS1.74_rel0-4-4.syx` | `3bb035a2035857c0a3035dfb95fab0703191a4f8fdd1b8de3a31302d2770d77c` |
 | rel0-4-0 | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
 | rel0-4-0-os1.74 | `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx` | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
 | rel0-3-1 | `Analog-Rytm_MKII_OS1.73_rel0-3-1.syx` | `a203db27201aabbdaa285ccb7c40a168075206c0ce91477671fcfae729c3df3c` |
