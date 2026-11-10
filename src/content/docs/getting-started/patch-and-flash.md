@@ -1,24 +1,24 @@
 ---
 title: Patch and flash the Rytm
-description: "The Rytm firmware 0.4.0 (for Sidecar 0.4.0, 0.4.1, 0.4.2 and 0.4.3): patch your own stock OS 1.74 (or 1.73) file in the browser patcher, check it, and send it to the Rytm with Transfer. You can move between 1.73 and 1.74 in both directions with Elektron's own files. Advanced: build the same file with elekloader. The 0.2.0 builds."
+description: "The Rytm firmware 0.4.4 (for Sidecar 0.4.4; 0.4.0 for Sidecar 0.4.0 to 0.4.3): patch your own stock OS 1.74 (or 1.73) file in the browser patcher, check it, and send it to the Rytm with Transfer. You can move between 1.73 and 1.74 in both directions with Elektron's own files. Advanced: build the same file with elekloader. The 0.2.0 builds."
 sidebar:
   order: 2
 ---
 
-The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.4.0, which Sidecar 0.4.0, 0.4.1, 0.4.2 and 0.4.3 all use, has two builds of the same mods, one for **OS 1.74** and one for **OS 1.73**. We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
+The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.4.4, for Sidecar 0.4.4, has two builds of the same mods, one for **OS 1.74** and one for **OS 1.73**. We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
 
 :::caution
 Back up first: use Transfer to back up your projects, kits, sounds and samples. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you flash.
 :::
 
-## The Rytm firmware 0.4.0: patch it in your browser
+## The Rytm firmware 0.4.4: patch it in your browser
 
-Sidecar 0.4.0, 0.4.1, 0.4.2 and 0.4.3 need the Rytm firmware 0.4.0: a Rytm on 0.3.1 must be flashed. Sidecar 0.4.1, 0.4.2 and 0.4.3 change only the Pi: a Rytm that already runs the Rytm firmware 0.4.0 needs no new flash. (The 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
+Sidecar 0.4.4 comes with the Rytm firmware 0.4.4: it adds a held step's values on the SRC view, and the CONNECTED screen when the Rytm boots with the Sidecar already attached ([Release notes](/sidecar-expander/release-notes/#sidecar-044)). A Rytm on the Rytm firmware 0.4.0 also works with the Sidecar 0.4.4 card, without those two. A Rytm on 0.3.1 or older must be flashed. (The Rytm firmware 0.4.0, for Sidecar 0.4.0 to 0.4.3: [below](#the-rytm-firmware-040-older); the 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
 
-The [patcher](/sidecar-expander/patcher/) turns your stock OS file into the Rytm firmware 0.4.0 in your browser. Nothing is uploaded: the page reads your file and fetches only its own patch files.
+The [patcher](/sidecar-expander/patcher/) turns your stock OS file into the Rytm firmware 0.4.4 in your browser. Nothing is uploaded: the page reads your file and fetches only its own patch files.
 
 1. Download the stock OS from Elektron's Analog Rytm MKII support page: `Analog-Rytm_MKII_OS1.74_dist.zip`. Unzip it: you need `Analog-Rytm_MKII_OS1.74.syx`.
-2. Open the [patcher](/sidecar-expander/patcher/). Leave the build on **`rel0-4-0-os1.74`** (the default; for a stock 1.73 file pick `rel0-4-0`).
+2. Open the [patcher](/sidecar-expander/patcher/). Leave the build on **`rel0-4-4-os1.74`** (the default; for a stock 1.73 file pick `rel0-4-4`).
 3. Drop the stock `.syx` on the page, or click to choose it. Only the unmodified file is accepted.
 4. Press **Patch**, then **Save .syx**. The page checks the result itself and saves nothing if it is wrong.
 5. Send the saved file to the Rytm with Transfer ([below](#send-it-to-the-rytm)).
@@ -27,13 +27,13 @@ The result is bit-identical to the elekloader build we tested ([below](#advanced
 
 | Build | Saved file | SHA-256 |
 |---|---|---|
-| `rel0-4-0-os1.74` | `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx` | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
-| `rel0-4-0` | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
+| `rel0-4-4-os1.74` | `Analog-Rytm_MKII_OS1.74_rel0-4-4.syx` | `3bb035a2035857c0a3035dfb95fab0703191a4f8fdd1b8de3a31302d2770d77c` |
+| `rel0-4-4` | `Analog-Rytm_MKII_OS1.73_rel0-4-4.syx` | `421cccc9dd16709f3981a1e4f0155bfdcabb337f2130ceb6fee26431967acf26` |
 
 ### Which OS: 1.74 or 1.73
 
 - **OS 1.74** is what Elektron offers now: their Rytm MKII support page has only `Analog-Rytm_MKII_OS1.74_dist.zip`, with the stock `Analog-Rytm_MKII_OS1.74.syx` inside. If you don't have a 1.73 file, use 1.74. The 1.74 build has run on a real Rytm: stock 1.74 first, then the Sidecar's 1.74 build, with the Sidecar machines, the pages, the send FX (including ROUTE PRE), the MASTER page and kit save and reload all working.
-- **OS 1.73** stays supported in 0.4.0 for people who have its stock file. Elektron no longer offers 1.73 for download, so if you want it, keep your own copy of `Analog-Rytm_MKII_OS1.73.syx`.
+- **OS 1.73** stays supported in 0.4.4 for people who have its stock file. Elektron no longer offers 1.73 for download, so if you want it, keep your own copy of `Analog-Rytm_MKII_OS1.73.syx`.
 - **Use the build for the OS of your stock file.** elekloader refuses a module made for another OS.
 - **Moving between 1.73 and 1.74 works in both directions.** Flashing Elektron's stock 1.73 or stock 1.74 file always works (checked on a unit), whether the Rytm runs stock or the Sidecar's build. Recovery is the stock file of the OS you want to be on. Back up your projects before any OS change, as always. Elektron's site now offers only 1.74, so to be able to go back to 1.73 you need your own copy of that file.
 
@@ -45,7 +45,7 @@ The result is bit-identical to the elekloader build we tested ([below](#advanced
 
 ## Advanced: build it with elekloader
 
-You do not need this: the patcher above makes the same file. If you would rather build it yourself, the 0.4.0 Rytm firmware also comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.4.0 card.
+You do not need this: the patcher above makes the same file. If you would rather build it yourself, the 0.4.4 Rytm firmware also comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS file. The result is one `.syx` that you flash like any OS update. It works with the Sidecar 0.4.4 card.
 
 ### What you need
 
@@ -55,7 +55,7 @@ You do not need this: the patcher above makes the same file. If you would rather
 |---|---|---|
 | `Analog-Rytm_MKII_OS1.74.syx` | the stock OS 1.74, in Elektron's `Analog-Rytm_MKII_OS1.74_dist.zip` | `cb0f99d620edde994fb860c0e79cc2464e427d06882828cfdfb00fc53700e123` |
 | `core-0.1-os1.74.elemod` | elekloader's core 0.1 for OS 1.74: the base every elekloader mod builds on | `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a` |
-| `rytm-sidecar-0.4.0-os1.74.elemod` | the Sidecar mods, all in one module, for OS 1.74 | `794448662bb11fd2b9ece677640a431e2a6d9e169952aa3378cd0e3d9834e545` |
+| `rytm-sidecar-0.4.4-os1.74.elemod` | the Sidecar mods, all in one module, for OS 1.74 | `41bd2bdd80720d384e3d355e54726d942cb9339cb64ccf2e962decb4778f48c1` |
 
 **OS 1.73:**
 
@@ -63,23 +63,23 @@ You do not need this: the patcher above makes the same file. If you would rather
 |---|---|---|
 | `Analog-Rytm_MKII_OS1.73.syx` | the stock OS 1.73 (Elektron no longer offers it: use the file you have) | `8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52` |
 | `core-0.1.elemod` | elekloader's core 0.1 for the Rytm | `33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825` |
-| `rytm-sidecar-0.4.0.elemod` | the Sidecar mods, all in one module | `d003a738374ae3cb643c5d6c4cd4622dd1f7931398dcdfaf016b82576c956c44` |
+| `rytm-sidecar-0.4.4.elemod` | the Sidecar mods, all in one module | `fc974cc02d21f2754c390424bf178541d06d9dbd124e55b2b23c43d8fcc7b4d5` |
 
-Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (1.74: `elekloader-13fa795-core-ar2-src.tar.gz`; 1.73: `elekloader-8972d70-core-ar2-src.tar.gz`; both: `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. Both builds come from the same source and do the same; the 1.74 one differs only by the firmware addresses that moved between the two OSes. The mods are licensed **GPL-2.0-or-later**.
+Each OS's two `.elemod` files are on the [Rytm firmware 0.4.4 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) with `SHA256SUMS`, `LICENSE`, `NOTICE`, `TOOLCHAIN.txt` and the source of elekloader's parts (1.74: `elekloader-13fa795-core-ar2-src.tar.gz`; 1.73: `elekloader-8972d70-core-ar2-src.tar.gz`; both: `elekloader-c150ac5-src.tar.gz`). Check both hashes before you use them. Both builds come from the same source and do the same; the 1.74 one differs only by the firmware addresses that moved between the two OSes. The mods are licensed **GPL-2.0-or-later**.
 
 ### Build the `.syx`
 
 1. Open the elekloader page: <https://irpina.github.io/elekloader/>.
 2. Choose your stock firmware, `Analog-Rytm_MKII_OS1.74.syx` (or `Analog-Rytm_MKII_OS1.73.syx`). The page knows it by its hash.
-3. Add that OS's core and module as your own mods: `core-0.1-os1.74.elemod` and `rytm-sidecar-0.4.0-os1.74.elemod` (1.73: `core-0.1.elemod` and `rytm-sidecar-0.4.0.elemod`). Use our core file, not one the page lists: the page's own Rytm cores for 1.74 are newer ones, which are refused (below).
+3. Add that OS's core and module as your own mods: `core-0.1-os1.74.elemod` and `rytm-sidecar-0.4.4-os1.74.elemod` (1.73: `core-0.1.elemod` and `rytm-sidecar-0.4.4.elemod`). Use our core file, not one the page lists: the page's own Rytm cores for 1.74 are newer ones, which are refused (below).
 4. Tick `rytm-sidecar`. That ticks the core it needs. The check should say there are no conflicts.
 5. **Set the version to your OS: `1.74` (or `1.73`).** The page's default for the Rytm is `2.0a`. **Never flash a build whose version is not your stock file's.**
 6. Build and download the `.syx`. Its SHA-256 must be:
 
    | Build | SHA-256 |
    |---|---|
-   | version 1.74 | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
-   | version 1.73 | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
+   | version 1.74 | `3bb035a2035857c0a3035dfb95fab0703191a4f8fdd1b8de3a31302d2770d77c` |
+   | version 1.73 | `421cccc9dd16709f3981a1e4f0155bfdcabb337f2130ceb6fee26431967acf26` |
 
    If yours differs, do not flash it. The page may run a newer elekloader; build with the command line at the tested commit instead:
 
@@ -87,10 +87,10 @@ Each OS's two `.elemod` files are on the [Rytm firmware 0.4.0 release page](http
    git clone https://github.com/irpina/elekloader && cd elekloader
    git checkout c150ac583a4b7e6d64680d5592f4a40f409193f7
    python3 -m elekloader.patch --stock Analog-Rytm_MKII_OS1.74.syx --mod core-0.1-os1.74.elemod \
-       --mod rytm-sidecar-0.4.0-os1.74.elemod --out sidecar.syx --version 1.74
+       --mod rytm-sidecar-0.4.4-os1.74.elemod --out sidecar.syx --version 1.74
    ```
 
-   For 1.73: `--stock Analog-Rytm_MKII_OS1.73.syx --mod core-0.1.elemod --mod rytm-sidecar-0.4.0.elemod --version 1.73`.
+   For 1.73: `--stock Analog-Rytm_MKII_OS1.73.syx --mod core-0.1.elemod --mod rytm-sidecar-0.4.4.elemod --version 1.73`.
 
 Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 
@@ -99,6 +99,15 @@ Then send it to the Rytm ([below](#send-it-to-the-rytm)).
 - **No mixing with other mods** for now: other people's Rytm mods for 1.74 need a newer core, and patch some of the same places, so elekloader refuses the set. The Sidecar module is all or nothing.
 - What is in the module: the external machines, the SysEx router, the SIDECAR folder, the send FX pages, the remote UI and FX in. Not in it: the **REMOTE KEYS** mod (development and testing only). It does hold a **freeze probe**: if the Rytm's screen ever stops for over 2 seconds, the Sidecar's log shows `FREEZE PROBE` with where it stopped (please report it).
 - To go back, flash the stock file of the OS you want to be on (1.73 or 1.74): see [Recovery to stock](/sidecar-expander/getting-started/recovery/). Use a scratch project for your first session under the mods.
+
+## The Rytm firmware 0.4.0 (older)
+
+The Rytm firmware 0.4.0 went with Sidecar 0.4.0, 0.4.1, 0.4.2 and 0.4.3, and you can go back to it from 0.4.4: flash it like any OS update. In the [patcher](/sidecar-expander/patcher/) its builds are `rel0-4-0-os1.74` (OS 1.74) and `rel0-4-0` (OS 1.73); its `.elemod` files (`rytm-sidecar-0.4.0-os1.74.elemod`, `rytm-sidecar-0.4.0.elemod`, with the same core files as above) are on the [Rytm firmware 0.4.0 release page](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.0).
+
+| Build | Saved file | SHA-256 |
+|---|---|---|
+| `rel0-4-0-os1.74` | `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx` | `538ae6fa1a66dfb72141743036c40b4f3845ed73a4ea59f7e3b6aa9e51fab337` |
+| `rel0-4-0` | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
 
 ## The 0.2.0 builds (older)
 
