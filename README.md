@@ -20,6 +20,8 @@ Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A 
 
 Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-expander/>
 
+Introduction video (the workflow and the features of 0.4.4, about 20 minutes): <https://www.youtube.com/watch?v=b10zwIORtgU>
+
 ## What works now
 
 Sidecar 0.4.4, with the Rytm firmware 0.4.4, shows a held step's values (its locks) on the SRC view, lets the pads' octave keys (UP / DOWN in CHRO mode) work on the SEQ and ARP pages, leaves a page opened by its shortcut with one NO, and shows the CONNECTED screen when the Rytm boots after the Sidecar ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-044)).

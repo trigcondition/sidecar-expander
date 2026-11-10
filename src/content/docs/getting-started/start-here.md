@@ -7,6 +7,8 @@ sidebar:
 
 The one route for a new setup: an Analog Rytm MKII, a Raspberry Pi 4B or Pi 5, Sidecar 0.4.4 (on the Pi) with the Rytm firmware 0.4.4 (on the Rytm). Each step links to the full page if you need more. Prefer paper? The whole manual is a PDF: [Sidecar-0.4.4-User-Manual.pdf](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf).
 
+New to Sidecar? The [introduction video](https://www.youtube.com/watch?v=b10zwIORtgU) shows the workflow and the features of 0.4.4 in about 20 minutes.
+
 :::caution
 Back up first: use Transfer to back up your projects, kits, sounds and samples before you flash. You can always go back to the stock OS ([Recovery to stock](/sidecar-expander/getting-started/recovery/)).
 :::
