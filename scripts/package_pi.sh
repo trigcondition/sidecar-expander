@@ -20,7 +20,8 @@
 # The release kernels' built-in network: 169.254.61.60/16 (link-local, a direct cable), emuhost 169.254.61.59:7301.
 # cmdline.txt is "sdport=0 socmaxtemp=78" (no boot-file writes over the network; the clock drops at 78 C, not 60 C;
 # make-sd-dual.sh's default). No wifi.txt is shipped: Wi-Fi stays off until the
-# tester adds one (the chip firmware for both boards is in firmware/). Never uploads or flashes anything.
+# tester adds one (the chip firmware for both boards is in firmware/). Also the web update file
+# dist/pi/sidecar-<VERSION>.scu (+ .sha256) when the commit has tools/make_update.py. Never uploads or flashes anything.
 set -euo pipefail
 repo=${1:?usage: package_pi.sh RYTM_TEENSY_REPO COMMIT}
 commit=${2:?usage: package_pi.sh RYTM_TEENSY_REPO COMMIT}
@@ -122,4 +123,20 @@ with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
         zi = zipfile.ZipInfo(fn, date_time=(2026, 1, 1, 0, 0, 0)); zi.compress_type = zipfile.ZIP_DEFLATED
         zf.writestr(zi, open(os.path.join(src, fn), "rb").read())
 PY
+
+# the web update file (0.5.0, rytm-teensy docs/web-update.md): both kernels and the web app (web-next's build) in one
+# sidecar-<VERSION>.scu for Settings > Update on the web page; tools/make_update.py --release refuses -dirty kernels,
+# kernels without the release address or the update stamp, and kernels of two commits. Older commits have no
+# make_update.py: no file then.
+if [ -f "$wt/tools/make_update.py" ]; then
+  ( cd "$wt/web-next" && npm ci --no-audit --no-fund >/dev/null && npm run build >/dev/null )
+  scu="sidecar-$ver.scu"
+  python3 "$wt/tools/make_update.py" --pi4 "$KERNEL" --pi5 "$KERNEL5" --web "$wt/web-next/dist" --release --version "$ver" \
+    --out "$here/dist/pi/$scu"
+  python3 "$wt/tools/make_update.py" --check "$here/dist/pi/$scu"
+  ( cd "$here/dist/pi" && shasum -a 256 "$scu" > "$scu.sha256" )
+  echo "web update file: $scu sha256 $(cut -d' ' -f1 "$here/dist/pi/$scu.sha256")" >> "$info"
+else
+  echo "$full has no tools/make_update.py: no web update file"
+fi
 echo "dist/pi from rytm-teensy $full (worktree $wt)"
