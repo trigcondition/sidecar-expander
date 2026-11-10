@@ -81,10 +81,10 @@ The TRK and FUNC forms of the 0.3 test builds still work: **TRK + YES**, **TRK +
 | **YES** | the SIDECAR page | the **SIDECAR MENU**: every page with its shortcut |
 | **UP / DOWN**, **YES** | the SIDECAR MENU | pick a page / open it |
 | **YES** on WEB UI | the SIDECAR MENU | the web page's pairing code and settings: WEB UI ON / OFF, CODE, PAIRED DEVICES, NEW CODE, FORGET DEVICES ([Pairing a browser](/sidecar-expander/using/web-ui/#pairing-a-browser)) |
-| **NO** | a remote page | back a level: page > SIDECAR > leave. NO acts when you let go of it, so NO held + KIT / PATTERN / TRACK stays the Rytm's reload (below) |
+| **NO** | a remote page | a page opened by its shortcut (UP + key, TRK + key, UP + a trig key): leave at once (0.4.4). A page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and the SIDECAR MENU itself: back to SIDECAR. On SIDECAR: leave. NO acts when you let go of it, so NO held + KIT / PATTERN / TRACK stays the Rytm's reload (below) |
 | **LEFT / RIGHT** | a page in the ring (SIDECAR, SYSTEM, REC, SCOPE ...) | the previous / next page |
 | **LEFT / RIGHT** | the LFO page | the previous / next LFO (in the design view: the step) |
-| **RIGHT**, LEFT or NO | the INSERT page | the EQ view, and back |
+| **RIGHT**, LEFT or NO | the INSERT page | the EQ view, and back (opened by UP + AMP, the OUT view: NO leaves the page) |
 | **UP / DOWN** | the KEYS page | scroll |
 | **YES**, YES again | the INSERT page | the BUS view, then the OUT view ([OUT route](/sidecar-expander/using/stereo-out/#where-to-set-it)) |
 | **FUNC + G** | the INSERT page | another track |
@@ -94,7 +94,7 @@ The TRK and FUNC forms of the 0.3 test builds still work: **TRK + YES**, **TRK +
 
 PLAY, STOP and RECORD always reach the Rytm, also while a Sidecar page is open.
 
-**Pages that replace the Rytm's page.** The poly SEQ page, UP + FX, UP + AMP and UP + LFO (and POOL, POLY CONFIG, the SIDECAR MENU and KEYS) take the Rytm's screen like the SRC view does: no page dots, and LEFT / RIGHT do not jump to other Sidecar pages (on the LFO page they step the LFO, on the INSERT page RIGHT opens the EQ view). Leave with **NO**, or press the same UP + key again.
+**Pages that replace the Rytm's page.** The poly SEQ page, UP + FX, UP + AMP and UP + LFO (and POOL, POLY CONFIG, the SIDECAR MENU and KEYS) take the Rytm's screen like the SRC view does: no page dots, and LEFT / RIGHT do not jump to other Sidecar pages (on the LFO page they step the LFO, on the INSERT page RIGHT opens the EQ view). Leave with **NO** (one press, from 0.4.4), or press the same UP + key again. UP and DOWN on these pages are the Rytm's (in CHRO mode the pads' range), except on POOL, CHOP, the SIDECAR MENU, KEYS, WEB UI and USB-C, which use them, and on the SEQ page's track menu.
 
 ## Saving and reloading (the Rytm's own keys)
 

@@ -83,6 +83,10 @@ main:has(.sc-hero) .content-panel { border-top: 0; }
 .sc-btn.primary { background: var(--sl-color-accent); border-color: var(--sl-color-accent); color: var(--sl-color-black); }
 .sc-btn.primary:hover { background: var(--sl-color-accent-high); border-color: var(--sl-color-accent-high); }
 .sc-lede { max-width: 44rem; margin: 1rem auto 0 !important; text-align: center; color: var(--sl-color-gray-2); font-size: 1.05rem; }
+/* the introduction video on the home page: 16:9, the width of the lede */
+.sc-video { max-width: 44rem; margin: 2.5rem auto 0; text-align: center; }
+.sc-video .sc-video-title { font-family: var(--sc-wordmark); font-size: 1.4rem; color: var(--sl-color-white); margin: 0; }
+.sc-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; margin: 1rem 0 .6rem; background: var(--sl-color-black); }
 .sc-features { max-width: 68rem; margin: 2.5rem auto 0; }
 .sc-feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 2.5rem; align-items: center;
   padding: 2.5rem 0; border-top: 1px solid var(--sl-color-gray-5); margin: 0 !important; }

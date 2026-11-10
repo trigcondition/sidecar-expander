@@ -2,7 +2,11 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.4.3 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.0, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.4.4 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.4, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.4.4
+
+- **The Rytm's page keys (SRC, SMPL, FLTR, AMP, LFO) stay with the Sidecar while one of its pages is open:** press NO first, then the key. The 0.4.3 and 0.4.2 items below still apply.
 
 ## New in 0.4.3
 

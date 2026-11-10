@@ -3,8 +3,28 @@
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
+      "tag": "rel0-4-4-os1.74",
+      "title": "rel0-4-4-os1.74: Sidecar 0.4.4 mods, OS 1.74 (default, recommended)",
+      "description": "The same mods as rel0-4-4, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.4-os1.74.elemod with version 1.74 (sha256 3bb035a2...0d77c). Goes with Sidecar 0.4.4 on the Pi.",
+      "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
+      "built": "Analog-Rytm_MKII_OS1.74_rel0-4-4.syx",
+      "elemods": {
+        "core-0.1-os1.74.elemod": "89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a",
+        "rytm-sidecar-0.4.4-os1.74.elemod": "41bd2bdd80720d384e3d355e54726d942cb9339cb64ccf2e962decb4778f48c1"
+      }
+    },
+    {
+      "tag": "rel0-4-4",
+      "title": "rel0-4-4: Sidecar 0.4.4 mods, OS 1.73",
+      "description": "The mods for Sidecar 0.4.4 on OS 1.73, for a Rytm you keep on 1.73 (Elektron offers only 1.74 now): everything in rel0-4-0, plus a held step's values on the Sidecar's SRC view (while you hold a step in GRID RECORDING, the view shows its locks and follows your knob turns on them), and the CONNECTED screen also when the Rytm boots with the Sidecar already attached. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.4.elemod with version 1.73 (sha256 421cccc9...acf26). Goes with Sidecar 0.4.4 on the Pi.",
+      "elemods": {
+        "core-0.1.elemod": "33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825",
+        "rytm-sidecar-0.4.4.elemod": "fc974cc02d21f2754c390424bf178541d06d9dbd124e55b2b23c43d8fcc7b4d5"
+      }
+    },
+    {
       "tag": "rel0-4-0-os1.74",
-      "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74 (default, recommended)",
+      "title": "rel0-4-0-os1.74: Sidecar 0.4.0 mods, OS 1.74 (older)",
       "description": "The same mods as rel0-4-0, built for OS 1.74, the OS Elektron offers now: drop the stock Analog-Rytm_MKII_OS1.74.syx. Has run on a real Rytm. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.4.0-os1.74.elemod with version 1.74 (sha256 538ae6fa...ab337). Goes with Sidecar 0.4.0 on the Pi.",
       "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
       "built": "Analog-Rytm_MKII_OS1.74_rel0-4-0.syx",
@@ -15,7 +35,7 @@
     },
     {
       "tag": "rel0-4-0",
-      "title": "rel0-4-0: Sidecar 0.4.0 mods, OS 1.73",
+      "title": "rel0-4-0: Sidecar 0.4.0 mods, OS 1.73 (older)",
       "description": "The mods for Sidecar 0.4.0 on OS 1.73, for a Rytm you keep on 1.73 (Elektron offers only 1.74 now): everything in rel0-3-1, plus the pan and route report master FX's through mode needs, MD's own page, the JUNO / 6-OP FM preset browser and DSP SAMPLE's sample picker on knob A of SRC, list knobs of up to 36 names, the MIDI machine (machine 50) and the arpeggiator's page (UP + FLTR); the Sidecar's SRC view comes back after a BANK tap, and a drawing race that could make the animated SRC pages flicker is fixed. The same file elekloader builds from core 0.1 + rytm-sidecar-0.4.0.elemod with version 1.73 (sha256 07780e9e...bff18). Goes with Sidecar 0.4.0 on the Pi.",
       "elemods": {
         "core-0.1.elemod": "33de51c098ab0ecd9cc57e9dfc3efa3d95f8133b1f4a4e6abd80d5fdba2dd825",

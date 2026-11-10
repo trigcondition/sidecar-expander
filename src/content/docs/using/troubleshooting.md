@@ -15,6 +15,8 @@ sidebar:
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | In CHRO mode every pad plays the same note on a Sidecar machine or a poly track | the track's sound: **CHROMATIC** on SYNTH or SYN+SMP (FUNC + FLTR); on OFF or SAMPLE the Rytm sends no pitch. A sound keeps the setting when its machine changes, so one track can be off while others work. Also check the track's arpeggiator is off. The MD drums take no pitch from the pads: tune them with PTCH |
 | Chords held on the CHRO pads play one note, or the CHRO pads play nothing on a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB. (Before 0.4.3 the first hit after selecting a poly track could be silent: update the card.) |
+| In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4: before, those pages took UP / DOWN |
+| No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
 | A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
@@ -68,7 +70,7 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 ## Known issues
 
-The releases' own lists are in the release notes: [0.4.3](/sidecar-expander/release-notes/#known-issues-in-043), [0.4.2](/sidecar-expander/release-notes/#known-issues-in-042), [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
+The releases' own lists are in the release notes: [0.4.4](/sidecar-expander/release-notes/#known-issues-in-044), [0.4.3](/sidecar-expander/release-notes/#known-issues-in-043), [0.4.2](/sidecar-expander/release-notes/#known-issues-in-042), [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
 
 ### Rytm mods
 

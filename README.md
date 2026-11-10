@@ -4,6 +4,8 @@
 
 Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 or 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
+> **Sidecar 0.4.4** (with the Rytm firmware 0.4.4: a new Rytm flash): a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page opened by its shortcut, and the CONNECTED screen when the Rytm boots after the Sidecar ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-044)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4), the [Rytm firmware 0.4.4](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) (or the [browser patcher](https://trigcondition.github.io/sidecar-expander/patcher/)) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf).
+>
 > **Sidecar 0.4.3** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): the CHRO pads play from the first hit on a selected poly track, and on JUNO and the other poly machines ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.3) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf).
 >
 > **Sidecar 0.4.2** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): Overbridge passthrough on the Pi 5 too ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-042)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.2) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.2/Sidecar-0.4.2-User-Manual.pdf).
@@ -14,11 +16,15 @@ Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A 
 >
 > **Sidecar Mini (Teensy 4.1) is phased out.** It is frozen at 0.1.0: no new features. Its source stays in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (`teensy/`) for reference, and the 0.1.0 release stays on the [releases page](https://github.com/trigcondition/sidecar-expander/releases).
 >
-> The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73.
+> The Rytm firmware 0.4.4 has a build for OS 1.74 and one for OS 1.73.
 
 Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-expander/>
 
+Introduction video (the workflow and the features of 0.4.4, about 20 minutes): <https://www.youtube.com/watch?v=b10zwIORtgU>
+
 ## What works now
+
+Sidecar 0.4.4, with the Rytm firmware 0.4.4, shows a held step's values (its locks) on the SRC view, lets the pads' octave keys (UP / DOWN in CHRO mode) work on the SEQ and ARP pages, leaves a page opened by its shortcut with one NO, and shows the CONNECTED screen when the Rytm boots after the Sidecar ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-044)).
 
 Sidecar 0.4.3 fixes the CHRO pads on poly tracks: they play from the first hit on a selected poly track (in 0.4.2 the first hit or two could be silent), they play JUNO, PLAITS, DAISYSP, MD and user machines (silent in 0.4.2), and PAD OCT shifts their notes the same every time ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)).
 
@@ -64,7 +70,7 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
 
 ## Install
 
-1. **Build the Rytm firmware 0.4.0 from your stock OS file:** with elekloader, OS 1.74: `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.0-os1.74.elemod`, version set to 1.74; OS 1.73: `core-0.1.elemod` + `rytm-sidecar-0.4.0.elemod`, version 1.73, or the browser patcher (build `rel0-4-0-os1.74` for 1.74, `rel0-4-0` for 1.73); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
+1. **Build the Rytm firmware 0.4.4 from your stock OS file:** with elekloader, OS 1.74: `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.4-os1.74.elemod`, version set to 1.74; OS 1.73: `core-0.1.elemod` + `rytm-sidecar-0.4.4.elemod`, version 1.73, or the browser patcher (build `rel0-4-4-os1.74` for 1.74, `rel0-4-4` for 1.73); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
 3. **Set up the Sidecar** (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md).
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
@@ -96,7 +102,7 @@ The Sidecar's own USB device port (the Pi's USB-C, for computer audio and MIDI) 
 
 ## Feedback
 
-Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (the Rytm firmware 0.4.0, and the Sidecar build from `BUILD-INFO-pi.txt`), what you did, and what happened. `http://sidecar.local/status` and `/log`, saved right after the problem, help a lot.
+Please report what you find with the **Tester report** form under [Issues](https://github.com/trigcondition/sidecar-expander/issues/new/choose). It asks for the build (the Rytm firmware, 0.4.4 or 0.4.0, and the Sidecar build from `BUILD-INFO-pi.txt`), what you did, and what happened. `http://sidecar.local/status` and `/log`, saved right after the problem, help a lot.
 
 ## Versioning
 

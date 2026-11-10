@@ -2,6 +2,44 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.4.4
+
+**A held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, and the CONNECTED screen when the Rytm boots after the Sidecar.** It comes with the **Rytm firmware 0.4.4** (OS 1.74 or OS 1.73): flash it for the held step's values and the boot screen. Apart from that it is Sidecar 0.4.3. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+| Part | File |
+|---|---|
+| Rytm firmware, OS 1.74 | `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.4-os1.74.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-4-os1.74` in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx`. One `.syx` with SHA-256 `3bb035a2035857c0a3035dfb95fab0703191a4f8fdd1b8de3a31302d2770d77c`. Has run on a real Rytm ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)) |
+| Rytm firmware, OS 1.73 | `core-0.1.elemod` + `rytm-sidecar-0.4.4.elemod` (elekloader, GPL-2.0-or-later), or build `rel0-4-4` in the browser patcher, from your stock `Analog-Rytm_MKII_OS1.73.syx`. One `.syx` with SHA-256 `421cccc9dd16709f3981a1e4f0155bfdcabb337f2130ceb6fee26431967acf26`. Never share a built `.syx`: it holds Elektron's firmware |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | `sidecar-pi-sd-05c4818-800x480.zip` for **800x480** displays (and DSI or no display), `sidecar-pi-sd-05c4818-1024x600.zip` for **1024x600** HDMI displays, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| User machines (Pi) | `sidecar-pi-plugins-0.4.4.zip`: the same machines as 0.4.3 |
+| Starter content | `sidecar-content-0.4.4.zip`: the same patches as 0.4.3 (also on the card) |
+| User manual | `Sidecar-0.4.4-User-Manual.pdf` ([download](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf)) |
+| Checksums | `SHA256SUMS` on each release page |
+
+Downloads: the [sidecar-firmware 0.4.4 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4) (the Pi) and the [sidecar-mods 0.4.4 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) (the Rytm firmware).
+
+### Upgrading from 0.4.3
+
+1. **Flash the Rytm firmware 0.4.4**, the build for your Rytm's OS: in the [patcher](https://trigcondition.github.io/sidecar-expander/patcher/), `rel0-4-4-os1.74` (the default) or `rel0-4-4` for OS 1.73 ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Back up every project first. A Rytm that stays on the Rytm firmware 0.4.0 works with the 0.4.4 card too, without the held step's values on the SRC view and without the CONNECTED screen at the Rytm's boot.
+2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay).
+
+To go back, flash the Rytm firmware 0.4.0 (`rel0-4-0-os1.74` or `rel0-4-0` in the patcher) or Elektron's stock file of your OS ([Recovery to stock](https://trigcondition.github.io/sidecar-expander/getting-started/recovery/)).
+
+From 0.4.0, 0.4.1 or 0.4.2, also see [Upgrading from 0.4.2](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-042), [Upgrading from 0.4.1](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-041) and [Upgrading from 0.4.0](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-040). From 0.3.2 or older: follow [Upgrading from 0.3.2](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-032) with the Rytm firmware 0.4.4 and the 0.4.4 card.
+
+### New in 0.4.4
+
+- **A held step's values on the SRC view** (with the Rytm firmware 0.4.4). On a track with a Sidecar machine, while you hold a step in GRID RECORDING mode, the SRC view shows that step's values: its locks, and the sound's values where it has none. Turn a knob and the view follows the lock. Let go of the step and the view shows the sound's values again. Before, the view always showed the sound's own values ([The SRC view](https://trigcondition.github.io/sidecar-expander/using/rytm-side/#the-src-view)).
+- **Knob turns on the SRC view show sooner while a pattern plays:** at most every 100 ms, not every 200 ms as in 0.4.3. Other live pages keep 0.4.3's limits.
+- **The pads' octave keys work on the SEQ and ARP pages.** In CHRO mode UP and DOWN move the pads' range. On the SEQ page (UP + TRIG) under its questions, such as the make prompt, and on the ARP page (UP + FLTR), the Sidecar took UP and DOWN and did nothing with them. Now a page that stands alone takes UP and DOWN only when it uses them: the SIDECAR MENU, KEYS, POOL, CHOP, WEB UI and USB-C, and the SEQ page only in its track menu or with FUNC held (FUNC + DOWN). On the other pages, such as SEQ, ARP, INSERT and LFO, they are the Rytm's. The pages of the LEFT / RIGHT ring (SIDECAR, SYSTEM, REC ...) keep them.
+- **One NO leaves a page you opened with its shortcut.** UP + TRIG, UP + LFO, UP + FX, UP + AMP, UP + a trig key and the TRK + key forms: one NO closes the page, whatever you opened on the way. Before, NO walked back through the pages you came from, and on UP + AMP's OUT view the first NO went to the INSERT page first. A page reached with LEFT / RIGHT or picked in the SIDECAR MENU still goes back to SIDECAR on NO; NO on the SIDECAR MENU goes back to SIDECAR, and NO on SIDECAR leaves ([Key combinations](https://trigcondition.github.io/sidecar-expander/using/key-combinations/)).
+- **The CONNECTED screen when the Rytm boots after the Sidecar** (with the Rytm firmware 0.4.4). With the Sidecar on first and the Rytm powered on after it, the connect screen did not show. Now it shows once the Rytm has started. This works with older Sidecar cards too.
+
+### Known issues in 0.4.4
+
+- **The Rytm's page keys (SRC, SMPL, FLTR, AMP, LFO) stay with the Sidecar while one of its pages is open:** press NO first, then the key.
+- Everything in [Known issues in 0.4.3](https://trigcondition.github.io/sidecar-expander/release-notes/#known-issues-in-043) still applies.
+
 ## Sidecar 0.4.3
 
 **The CHRO pads on poly tracks: they play from the first hit, and on JUNO, PLAITS, DAISYSP, MD and user machines they play at all; and fewer redraws of the Rytm's screen.** Apart from that it is Sidecar 0.4.2. It goes with the **Rytm firmware 0.4.0** you already have: **no new Rytm flash**, only new card files. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
