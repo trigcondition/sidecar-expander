@@ -50,7 +50,7 @@ The Rytm's make prompt names the machine and its notes, and where POLY CONFIG is
 4. Press **RECORD** (GRID REC) to edit steps on the trig keys. This is **seq mode**: the trig keys, PAGE and the knobs under a held trig are the Sidecar's.
 5. Press **PLAY**.
 
-To leave the SEQ page: UP + TRIG again, or NO. Selecting a track that is no poly track closes it too, and the trig keys are the Rytm's again.
+To leave the SEQ page: UP + TRIG again, or NO (one NO is enough from 0.4.4). Selecting a track that is no poly track closes it too, and the trig keys are the Rytm's again.
 
 The SEQ page **replaces the Rytm's page** like the SRC page does: LEFT and RIGHT do not jump to other Sidecar pages from it, and it has no page dots.
 
@@ -59,7 +59,7 @@ The SEQ page **replaces the Rytm's page** like the SRC page does: LEFT and RIGHT
 **The Rytm's keys on the SEQ page.** The page leaves the Rytm the keys it does not need:
 
 - **YES is the Rytm's**, so its own YES combinations work under the page: hold **YES + PLAY** or **YES + SCENE** for the quick saves. **FUNC, then YES** is **UNDO** (press FUNC first). YES with a trig held is still the step preview (below).
-- **UP and DOWN are the Rytm's.** In CHRO pad mode they move the pads' range, so you can play and record higher or lower notes ([The pads' range](#the-pads-range)). FUNC + DOWN is the poly track's menu (above).
+- **UP and DOWN are the Rytm's.** In CHRO pad mode they move the pads' range, so you can play and record higher or lower notes ([The pads' range](#the-pads-range)). From 0.4.4 this holds under the page's questions too, such as the make prompt; only the poly track's menu takes UP / DOWN, for its rows. FUNC + DOWN is the poly track's menu (above).
 - **NO + KIT, NO + PATTERN, NO + TRACK** reload as on a stock Rytm, and YES + KIT saves the kit ([Saving and reloading](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys)). NO alone still goes back; it acts when you let go of it.
 - A fast FUNC then YES, or FUNC then DOWN, always reaches the Sidecar: it never slips through to the Rytm.
 

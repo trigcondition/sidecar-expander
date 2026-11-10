@@ -9,7 +9,7 @@ New in 0.4.0. The arpeggiator plays a track's held or sequenced chord as a patte
 
 ## The ARP page
 
-**UP + FLTR** opens the ARP page of the selected track. It is also in the SIDECAR MENU.
+**UP + FLTR** opens the ARP page of the selected track. It is also in the SIDECAR MENU. One **NO** leaves it. **UP and DOWN stay the Rytm's** on the page: in CHRO pad mode they move the pads' range, so you can play the arp higher or lower (0.4.4; before, the page took them).
 
 | Knob | Name | Values |
 |---|---|---|
