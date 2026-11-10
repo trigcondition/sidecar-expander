@@ -11,10 +11,10 @@ Sidecar is in public testing. Each feature below is marked:
 - <span class="sc-test">in testing</span>: built and tested in the emulator or the simulator, or on the Sidecar alone, not yet confirmed with a real Rytm;
 - <span class="sc-plan">planned</span>: on the [roadmap](/sidecar-expander/roadmap/).
 
-This is **Sidecar 0.4.3**: the Sidecar 0.4.3 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.0 (unchanged since 0.4.0) for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.3](#new-in-043), [0.4.2](#new-in-042), [0.4.1](#new-in-041), [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
+This is **Sidecar 0.4.4**: the Sidecar 0.4.4 SD card (Raspberry Pi 4B and Pi 5) with the Rytm firmware 0.4.4 for OS 1.74 or 1.73 (built with elekloader: [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)), and for an Analog Four MKII the A4 mod ([Analog Four MKII](/sidecar-expander/using/analog-four/)). It is an early-tester release: many base features, most of them run in the emulator and on the Mac, a part of them on a real Rytm. The tables below first list what came before 0.3.0, then what is new in each version since: [0.4.4](#new-in-044), [0.4.3](#new-in-043), [0.4.2](#new-in-042), [0.4.1](#new-in-041), [0.4.0](#new-in-040), [0.3.2](#new-in-032), [0.3.1](#new-in-031), [0.3.0](#new-in-030). Sidecar Mini (Teensy) stays at 0.1.0.
 
 :::note
-The Rytm firmware 0.4.0 has a build for OS 1.74 and one for OS 1.73; most hardware marks come from 1.73, and the 1.74 build has since run on a real Rytm (2026-11-04). Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
+The Rytm firmware 0.4.4 (like 0.4.0) has a build for OS 1.74 and one for OS 1.73; most hardware marks come from 1.73, and the 1.74 build has since run on a real Rytm (0.4.0 on 2026-11-04, 0.4.4 on 2026-11-10). Marks dated 2026-10-18 come from the test line on a real Rytm; other "hardware" marks from the 1017 to 1022 builds of the same line. Keep the stock OS file at hand: flashing it takes you back. Where things are stored: the send FX settings and the Sidecar machine choices are in the Rytm's kit; the Sidecar's per-project and per-kit files (slot lists, sample pool, JUNO / FM lists, LFOs) are on the Sidecar's card. Back on the stock OS your projects still load: the send FX values are ignored and tracks on Sidecar machines show them as missing.
 :::
 
 ## Voices, effects, modulation
@@ -80,6 +80,18 @@ On the Pi 4B unless the row says Pi 5.
 | **Pi 5:** DSI display (official 7" v1 and compatibles, CAM/DISP 0 or 1), HDMI when none answers | <span class="sc-test">in testing</span> (built, not yet run) |
 | **Pi 5:** USB audio and MIDI to the computer | <span class="sc-test">in testing</span>: new in 0.4.0, on by default; needs a USB-C power and data splitter, a computer or hub port gives a Pi 5 only about 1.5 A ([USB audio and MIDI](/sidecar-expander/using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached)) |
 | Overbridge through the Sidecar (USB-C mode OVERBRIDGE) | Pi 4: <span class="sc-ok">hardware</span> (0.4.1, opt-in); Pi 5: <span class="sc-ok">hardware</span> (0.4.2, opt-in; a USB-C power and data splitter recommended) ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)) |
+
+## New in 0.4.4
+
+The 0.4.4 card, with the Rytm firmware 0.4.4 (a new Rytm flash; a Rytm on the Rytm firmware 0.4.0 works with the 0.4.4 card too, without the first and last rows). Details: [Release notes](/sidecar-expander/release-notes/#sidecar-044).
+
+| Feature or fix | Status |
+|---|---|
+| A held step's values on the SRC view: while you hold a step in GRID RECORDING, the view shows its locks and follows your knob turns on them (Rytm firmware 0.4.4) | <span class="sc-test">in testing</span> (emulator) |
+| Knob turns on the SRC view show at most every 100 ms while a pattern plays (200 ms in 0.4.3) | new in 0.4.4 |
+| UP / DOWN (the CHRO pads' octave keys) stay the Rytm's on the SEQ page's questions and the ARP page; a page alone takes them only when it uses them | fixed in 0.4.4 |
+| One NO leaves a page opened by its shortcut (UP + key, TRK + key, UP + a trig key), also UP + AMP's OUT view; NO on the SIDECAR MENU goes back to SIDECAR | fixed in 0.4.4 |
+| The CONNECTED screen when the Rytm boots with the Sidecar already attached (Rytm firmware 0.4.4) | <span class="sc-test">in testing</span> (emulator) |
 
 ## New in 0.4.3
 
