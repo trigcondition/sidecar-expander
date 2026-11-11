@@ -42,6 +42,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       <button type="button" class="ce-btn" id="ce-paste-read">Read</button>
     </details>
     <div id="ce-loaded" class="ce-loaded" aria-live="polite" hidden></div>
+    <label class="ce-check" id="ce-sdboot-row" hidden><input type="checkbox" id="ce-sdboot-back" autocomplete="off" /><span>Put the <code>sdboot</code> block back into config.txt (the card had it removed; the web update needs it)</span></label>
   </div>
 
   <div class="ce-grid">
@@ -406,6 +407,8 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       const key = (form.querySelector(`input[name="${name}"]`) as HTMLInputElement).dataset.key!;
       setRadio(name, o.cmd[key] ?? '');
     }
+    $('ce-sdboot-row').hidden = !o.sdbootRemoved;
+    $<HTMLInputElement>('ce-sdboot-back').checked = o.sdboot !== false;
     $<HTMLInputElement>('ce-wifi-on').checked = o.wifiFile.enabled;
     $<HTMLInputElement>('ce-ssid').value = o.wifiFile.ssid;
     $<HTMLInputElement>('ce-psk').value = o.wifiFile.psk;
@@ -513,6 +516,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
     renderMsgs();
   }
 
+  $('ce-sdboot-back').addEventListener('change', (e) => { o.sdboot = (e.target as HTMLInputElement).checked; update(); });
   form.addEventListener('input', update);
   form.addEventListener('change', update);
 
@@ -568,7 +572,14 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
     if (names.length) load(cfg.trim() ? cfg : null, cmd.trim() ? cmd : null, names);
   });
 
+  // the paste boxes can hold a paircode= or other secrets: empty them whenever the options go back to the card's
+  function clearPaste() {
+    $<HTMLTextAreaElement>('ce-paste-config').value = '';
+    $<HTMLTextAreaElement>('ce-paste-cmdline').value = '';
+  }
+
   $('ce-reset').addEventListener('click', () => {
+    clearPaste();
     loaded = { config: null, cmdline: null };
     o = C.defaults(o.version);
     $('ce-loaded').hidden = true;
@@ -636,7 +647,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   // a fresh page always starts from the card: nothing a browser restored (a password, a code) survives a reload
   writeForm();
   update();
-  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { o = C.defaults(C.VERSIONS[0].id); writeForm(); update(); } });
+  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { clearPaste(); loaded = { config: null, cmdline: null }; $('ce-loaded').hidden = true; o = C.defaults(C.VERSIONS[0].id); writeForm(); update(); } });
 </script>
 
 <style is:global>

@@ -187,7 +187,8 @@ export function defaults(version = '0.4.4') {
     pair: { mode: 'random', code: '' }, // 'random' (the card), 'fixed' (paircode=<8 digits>), 'off' (paircode=0)
     cmd,
     keptCmdline: [], // tokens from a loaded cmdline.txt the editor does not manage, written back as they were
-    keptConfig: [], // { section, line } from a loaded config.txt, written back at the end under their section
+    sdboot: true, // false: the card's sdboot block is left out (a card it was removed from, sdboot.py disable)
+    keptConfig: [], // { section, filters, line } from a loaded config.txt, written back at the end under their section
     wifiFile: { enabled: false, ssid: '', psk: '', band: '2g', open: false },
   };
 }
@@ -198,7 +199,7 @@ export function clone(o) {
     pair: { ...o.pair },
     cmd: { ...o.cmd },
     keptCmdline: [...o.keptCmdline],
-    keptConfig: o.keptConfig.map((x) => ({ ...x })),
+    keptConfig: o.keptConfig.map((x) => ({ ...x, filters: x.filters ? [...x.filters] : x.filters })),
     wifiFile: { ...o.wifiFile },
   };
 }
@@ -207,6 +208,7 @@ export function clone(o) {
 export function hdmiSize(o) {
   if (o.display === 'hdmi1024') return [1024, 600];
   if (o.display === 'hdmiOther') return [Number(o.hdmiW), Number(o.hdmiH)];
+  if (o.keepHdmi) return o.keepHdmi; // a loaded card's own mode, kept while a DSI display or none is chosen
   return [800, 480];
 }
 
@@ -331,7 +333,7 @@ function configLines(o) {
   const L = [...HEAD[o.board], ...ALL];
   if (o.board !== 'pi5') L.push(...pi4Block(o), ...pi4Hdmi(o));
   if (o.board !== 'pi4') L.push(...PI5, ...pi5Hdmi(o));
-  if (o.board !== 'pi5') L.push(...SDBOOT);
+  if (o.board !== 'pi5' && o.sdboot !== false) L.push(...SDBOOT);
   else while (L[L.length - 1] === '') L.pop();
   return L;
 }
@@ -341,8 +343,12 @@ export function generateConfig(o) {
   if (o.keptConfig.length) {
     L.push('', '# Kept as is from the loaded config.txt (lines the Sidecar card does not have):');
     let sec = null;
-    for (const { section, line } of o.keptConfig) {
-      if (section !== sec) L.push(`[${section}]`);
+    for (const { section, filters, line } of o.keptConfig) {
+      if (section !== sec) {
+        // [all] first: filters of different kinds combine, and the generated file's last [pi4] must not leak into the group
+        L.push('[all]');
+        for (const f of filters ?? (section === 'all' ? [] : [section])) L.push(`[${f}]`);
+      }
       sec = section;
       L.push(line);
     }
@@ -530,35 +536,50 @@ export function parseConfig(text) {
   let pi4 = false;
   let pi5 = false;
   let cvt = null;
-  let commented = false;
+  let commentedCvt = false;
+  let commentedPi4 = false;
+  let sawSdboot = false;
+  let filters = []; // the conditional filters in force (a model filter, [HDMI:1], [EDID=...] ...: kinds combine)
+  const notes = [];
   let lcdRotate = false;
   for (const raw of lines) {
     const line = raw.trim();
-    if (line.startsWith(SDBOOT_BEGIN)) { inSdboot = true; pi4 = true; continue; }
+    if (line.startsWith(SDBOOT_BEGIN)) { inSdboot = true; sawSdboot = true; pi4 = true; continue; }
     if (line.startsWith(SDBOOT_END)) { inSdboot = false; continue; }
-    if (/^#\s*hdmi_cvt=/.test(line)) commented = true;
+    // only the shape the editor writes for "no display" (a card's own comment line has more text after the mode)
+    if (/^#\s*hdmi_cvt=\d+ \d+ 60 [1-6] 0 0 0$/.test(line)) commentedCvt = true;
+    if (/^#\s*\[pi4\]$/.test(line)) commentedPi4 = true;
     if (!line || line.startsWith('#')) continue;
     const m = /^\[([^\]]+)\]$/.exec(line);
-    if (m) { sec = m[1]; continue; }
+    if (m) {
+      const h = m[1];
+      const kind = (x) => (/^(pi\d+\w*|cm\d+\w*|pi\d+b)$/i.test(x) ? 'model' : /^(HDMI|EDID|gpio|serial)\b/i.test(x) ? x.replace(/[^A-Za-z].*$/, '').toLowerCase() : x);
+      if (h === 'all') filters = [];
+      else if (h === 'none') filters = [h];
+      else filters = [...filters.filter((f) => kind(f) !== kind(h)), h];
+      sec = filters.length ? filters.join('][') : 'all';
+      continue;
+    }
     if (inSdboot) continue;
     if (sec === 'pi4' && /^(armstub=armstub8-rpi4\.bin|kernel=sdboot\.img)$/.test(line)) pi4 = true;
     if (sec === 'pi5' && line === 'kernel=kernel_2712.img') pi5 = true;
     const c = /^hdmi_cvt=(\d+) (\d+) 60 [1-6] 0 0 0$/.exec(line);
     if (c && (sec === 'pi4' || sec === 'pi5')) {
       // the editor writes the mode itself (with the aspect for the size): a card's own hdmi_cvt is not kept twice
-      if (!cvt) cvt = [Number(c[1]), Number(c[2])];
-      continue;
+      if (!cvt) { cvt = [Number(c[1]), Number(c[2])]; continue; }
+      if (cvt[0] === Number(c[1]) && cvt[1] === Number(c[2])) continue;
+      notes.push(`config.txt [${sec}] ${line}: a second, different HDMI mode; kept as is (it is written after the editor's own).`);
     }
     if (sec === 'pi5' && /^framebuffer_(width|height)=\d+$/.test(line)) continue; // written from the size too
     if (sec === 'pi4' && line === 'lcd_rotate=2') lcdRotate = true;
-    body.push({ section: sec, line });
+    body.push({ section: sec, filters: [...filters], line });
   }
-  const r = { board: pi4 && !pi5 ? 'pi4' : pi5 && !pi4 ? 'pi5' : 'dual', display: null, hdmiW: null, hdmiH: null, rotate: null, kept: [], notes: [] };
+  const r = { board: pi4 && !pi5 ? 'pi4' : pi5 && !pi4 ? 'pi5' : 'dual', display: null, hdmiW: null, hdmiH: null, rotate: null, kept: [], notes, cvt, sdboot: true };
   if (cvt) {
     const [w, h] = cvt;
     r.display = w === 800 && h === 480 ? 'hdmi800' : w === 1024 && h === 600 ? 'hdmi1024' : 'hdmiOther';
     if (r.display === 'hdmiOther') (r.hdmiW = w), (r.hdmiH = h);
-  } else if (commented) r.display = 'none';
+  } else if (commentedCvt && commentedPi4) r.display = 'none';
   if (lcdRotate) (r.display = 'dsi1'), (r.rotate = 'flip');
   // what the editor would write for this: every line of the file not in it is kept
   const o = defaults();
@@ -573,6 +594,10 @@ export function parseConfig(text) {
     const mm = /^\[([^\]]+)\]$/.exec(line);
     if (mm) sec = mm[1];
     else if (line && !line.startsWith('#')) have.add(`${sec}\n${line}`);
+  }
+  if (!sawSdboot && r.board !== 'pi5') {
+    r.sdboot = false;
+    notes.push('This config.txt has no sdboot block (sdboot.py disable removed it): it stays out. The web update needs it; tick the box to put it back.');
   }
   const keptSet = new Set();
   for (const b of body) {
@@ -596,6 +621,9 @@ export function fromFiles(configText, cmdlineText, version = '0.4.4') {
     if (p.display) o.display = p.display;
     if (p.hdmiW) (o.hdmiW = p.hdmiW), (o.hdmiH = p.hdmiH);
     if (p.rotate) o.rotate = p.rotate;
+    if (p.cvt) o.keepHdmi = [...p.cvt];
+    o.sdboot = p.sdboot;
+    o.sdbootRemoved = !p.sdboot;
     o.keptConfig = p.kept.map((x) => ({ ...x }));
     notes.push(...p.notes);
   }

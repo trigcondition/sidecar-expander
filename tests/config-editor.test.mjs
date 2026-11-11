@@ -209,16 +209,17 @@ test('config.txt: unknown lines are kept under their section; comments are not',
     .replace('[all]\narm_64bit=1\n', '[all]\narm_64bit=1\ngpu_mem=64\n')
     + '[EDID=GeeekPi]\nhdmi_cvt=1024 600 60 6 0 0 0\n';
   const p = C.parseConfig(text);
-  assert.deepEqual(p.kept, [
+  // the file's last filter before [EDID=...] is the sdboot block's [pi4]: the two combine, so the chain is kept whole
+  assert.deepEqual(p.kept.map(({ section, line }) => ({ section, line })), [
     { section: 'all', line: 'gpu_mem=64' },
     { section: 'pi4', line: 'dtparam=audio=on' },
-    { section: 'EDID=GeeekPi', line: 'hdmi_cvt=1024 600 60 6 0 0 0' },
+    { section: 'pi4][EDID=GeeekPi', line: 'hdmi_cvt=1024 600 60 6 0 0 0' },
   ]);
   assert.equal(p.display, 'hdmi800');
   const o = C.fromFiles(text, null).options;
   const out = C.generateConfig(o);
   assert.ok(out.startsWith(CARD800));
-  assert.ok(out.endsWith('[all]\ngpu_mem=64\n[pi4]\ndtparam=audio=on\n[EDID=GeeekPi]\nhdmi_cvt=1024 600 60 6 0 0 0\n'));
+  assert.ok(out.endsWith('[all]\ngpu_mem=64\n[all]\n[pi4]\ndtparam=audio=on\n[all]\n[pi4]\n[EDID=GeeekPi]\nhdmi_cvt=1024 600 60 6 0 0 0\n'));
   assert.equal(settings(out, 'pi4').dtparam, 'audio=on');
   // a kept line the docs forbid is warned about
   const bad = C.fromFiles(CARD800 + '[all]\ndtoverlay=vc4-kms-v3d\n', null).options;
@@ -336,4 +337,57 @@ test('hdmi_cvt aspect code per size', () => {
   const oldCard = CARD800.replaceAll('800 480 60 6 0 0 0', '1280 800 60 6 0 0 0');
   const b = C.fromFiles(oldCard, null).options;
   assert.deepEqual([b.display, b.hdmiW, b.hdmiH, b.keptConfig.length], ['hdmiOther', 1280, 800, 0]);
+});
+
+// ---- review fixes
+test('a DSI-only card (no HDMI lines, the card comments kept) does not load as "no display"', () => {
+  const dsi = CARD800.split('\n').filter((l) => !/^(hdmi_|disable_overscan|framebuffer_)/.test(l) && l !== '[pi4]' || l === '[pi4]').join('\n');
+  const o = C.fromFiles(dsi, CARDCMD).options;
+  assert.notEqual(o.display, 'none');
+  assert.ok(!C.generateCmdline(o).includes('display=0'));
+  // the editor's own "no display" output still loads as none
+  const none = C.defaults(); none.display = 'none';
+  assert.equal(C.fromFiles(C.generateConfig(none), null).options.display, 'none');
+});
+
+test('a dsi_rotate in cmdline keeps a loaded HDMI size', () => {
+  for (const [cfg, size] of [[CARD1024, '1024 600'], [C.generateConfig(opts((o) => { o.display = 'hdmiOther'; o.hdmiW = 1280; o.hdmiH = 800; })), '1280 800']]) {
+    const out = C.generateConfig(C.fromFiles(cfg, 'sdport=0 dsi_rotate=270').options);
+    const cvt = out.split('\n').filter((l) => l.startsWith('hdmi_cvt='));
+    assert.deepEqual(cvt.map((l) => l.slice(9, 9 + size.length)), [size, size]);
+  }
+});
+
+test('kept config lines keep their combined section filters', () => {
+  const cfg = CARD800 + '\n[all]\n[pi5]\n[HDMI:1]\nhdmi_mode=4\n[pi4]\nfoo=1\n';
+  const out = C.generateConfig(C.fromFiles(cfg, null).options);
+  const kept = out.slice(out.indexOf('# Kept as is'));
+  const lines = kept.split('\n');
+  const i = lines.indexOf('hdmi_mode=4');
+  assert.deepEqual(lines.slice(i - 3, i), ['[all]', '[pi5]', '[HDMI:1]']);
+  // foo=1: [pi4] with HDMI:1 still in force, so its own full chain
+  const j = lines.indexOf('foo=1');
+  assert.deepEqual(lines.slice(j - 3, j), ['[all]', '[HDMI:1]', '[pi4]']);
+  assert.equal(settings(out, 'pi4').hdmi_mode, '87');
+  assert.equal(settings(out, 'pi5').hdmi_mode, '87');
+});
+
+test('a second, different [pi5] hdmi_cvt is kept and noted', () => {
+  const two = CARD800 + '\n[pi5]\nhdmi_cvt=1920 1080 60 3 0 0 0\n';
+  const r = C.fromFiles(two, null);
+  assert.ok(r.options.keptConfig.some((k) => k.line === 'hdmi_cvt=1920 1080 60 3 0 0 0'));
+  assert.ok(r.notes.some((n) => n.includes('1920 1080')));
+  assert.ok(C.generateConfig(r.options).includes('hdmi_cvt=1920 1080 60 3 0 0 0'));
+});
+
+test('a card without the sdboot block keeps it out, with a note, and it can be put back', () => {
+  const nob = CARD800.replace(/# sidecar sdboot begin[\s\S]*# sidecar sdboot end\n/, '');
+  assert.ok(!nob.includes('kernel=sdboot.img'));
+  const r = C.fromFiles(nob, null);
+  assert.ok(r.notes.some((n) => /sdboot/.test(n)));
+  assert.ok(!C.generateConfig(r.options).includes('kernel=sdboot.img'));
+  r.options.sdboot = true;
+  assert.ok(C.generateConfig(r.options).includes('kernel=sdboot.img'));
+  // the release card itself: no note
+  assert.deepEqual(C.fromFiles(CARD800, null).notes, []);
 });
