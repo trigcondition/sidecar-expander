@@ -36,6 +36,7 @@ export default defineConfig({
           label: 'Tools',
           items: [
             { label: 'Rytm patcher', link: '/patcher/' },
+            { label: 'Card config editor', link: '/getting-started/config-editor/' },
           ],
         },
       ],

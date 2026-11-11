@@ -1,0 +1,747 @@
+---
+// The config editor: a form for the Pi's config.txt and cmdline.txt (and sidecar-wifi.txt), the files shown live with
+// Copy and Download. Everything runs in the page: no network, no storage, no URL state. The generator is
+// src/lib/sidecar-config.mjs (tests/config-editor.test.mjs).
+import { KEYS, KEY, CARD } from '../lib/sidecar-config.mjs';
+
+type K = (typeof KEYS)[number];
+// keys placed in the main sections; the rest go under Advanced, by group
+const MAIN = new Set(['res', 'uistyle', 'ip', 'netmask', 'web', 'sdport', 'wifi', 'usb', 'gadget', 'usbmidi', 'socmaxtemp', 'cpumhz']);
+const ADV: [string, string][] = [
+  ['display', 'Display and touch'],
+  ['usb', 'USB-C'],
+  ['engine', 'Sound and engine'],
+  ['dev', 'Developer'],
+];
+const adv = (g: string) => KEYS.filter((k: K) => k.group === g && !MAIN.has(k.key));
+const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (off)' : v);
+---
+
+<div class="ce not-content" id="ce">
+  <noscript><p class="ce-msg ce-err">The config editor needs JavaScript (it runs only in this page: nothing is sent anywhere).</p></noscript>
+
+  <div class="ce-start">
+    <div class="ce-start-text">
+      <p class="ce-kicker">Start from</p>
+      <p class="ce-start-sub">The Sidecar {CARD.version} card's own files (<code>{CARD.commit}</code>), or the files on your card.</p>
+    </div>
+    <div class="ce-start-actions">
+      <button type="button" class="ce-btn" id="ce-reset">The {CARD.version} card</button>
+      <label class="ce-btn ce-file">
+        Open my files…
+        <input type="file" id="ce-open" accept=".txt,text/plain" multiple />
+      </label>
+      <a class="ce-btn ce-jump" href="#ce-files">Files ↓</a>
+    </div>
+    <details class="ce-paste">
+      <summary>Paste them instead</summary>
+      <div class="ce-paste-grid">
+        <label>config.txt<textarea id="ce-paste-config" rows="5" spellcheck="false" autocomplete="off"></textarea></label>
+        <label>cmdline.txt<textarea id="ce-paste-cmdline" rows="2" spellcheck="false" autocomplete="off"></textarea></label>
+      </div>
+      <button type="button" class="ce-btn" id="ce-paste-read">Read</button>
+    </details>
+    <div id="ce-loaded" class="ce-loaded" aria-live="polite" hidden></div>
+  </div>
+
+  <div class="ce-grid">
+    <form class="ce-form" id="ce-form" autocomplete="off" onsubmit="return false">
+
+      <section class="ce-sec" aria-labelledby="ce-h-board">
+        <p class="ce-num">01</p>
+        <h2 id="ce-h-board">Board</h2>
+        <fieldset class="ce-seg">
+          <legend class="sr-only">Which Raspberry Pi</legend>
+          <label><input type="radio" name="board" value="dual" checked /><span>One card for both<small>Pi 4B and Pi 5</small></span></label>
+          <label><input type="radio" name="board" value="pi4" /><span>Pi 4B<small>4B, 400, CM4</small></span></label>
+          <label><input type="radio" name="board" value="pi5" /><span>Pi 5<small>5, 500, CM5</small></span></label>
+        </fieldset>
+        <p class="ce-hint">The release card is one card for both boards: each board reads only its own <code>[pi4]</code> or <code>[pi5]</code> lines. The card's other files are the same for every choice: copy the zip as it comes, then replace <code>config.txt</code> and <code>cmdline.txt</code>.</p>
+      </section>
+
+      <section class="ce-sec" aria-labelledby="ce-h-display">
+        <p class="ce-num">02</p>
+        <h2 id="ce-h-display">Display</h2>
+        <fieldset class="ce-cards">
+          <legend class="sr-only">Which display</legend>
+          <label><input type="radio" name="display" value="hdmi800" checked /><span><b>HDMI 800x480</b><small>Waveshare 5" / 7" with USB touch</small></span></label>
+          <label><input type="radio" name="display" value="hdmi1024" /><span><b>HDMI 1024x600</b><small>GeeekPi EP-0194 7" and similar</small></span></label>
+          <label><input type="radio" name="display" value="hdmiOther" /><span><b>Other HDMI size</b><small>1280x800, 1920x1080…</small></span></label>
+          <label><input type="radio" name="display" value="td2" /><span><b>Touch Display 2</b><small>Raspberry Pi, DSI · Pi 5 only</small></span></label>
+          <label><input type="radio" name="display" value="dsi1" /><span><b>Touch Display 7" v1</b><small>Raspberry Pi DSI, or compatible</small></span></label>
+          <label><input type="radio" name="display" value="none" /><span><b>No display</b><small>headless: the Rytm and the web page</small></span></label>
+        </fieldset>
+
+        <div class="ce-row" id="ce-hdmi-size" hidden>
+          <label class="ce-field"><span>Width</span><input type="number" id="ce-hdmiW" min="320" max="3840" step="1" inputmode="numeric" /></label>
+          <span class="ce-x" aria-hidden="true">×</span>
+          <label class="ce-field"><span>Height</span><input type="number" id="ce-hdmiH" min="240" max="2160" step="1" inputmode="numeric" /></label>
+        </div>
+
+        <fieldset class="ce-seg ce-seg-sm" id="ce-rotate" hidden>
+          <legend>Orientation</legend>
+          <label><input type="radio" name="rotate" value="normal" checked /><span>Normal</span></label>
+          <label><input type="radio" name="rotate" value="flip" /><span>Upside down</span></label>
+        </fieldset>
+
+        <p class="ce-hint" id="ce-display-hint"></p>
+
+        <div class="ce-pair">
+          <label class="ce-field">
+            <span>{KEY.res.label}</span>
+            <select data-key="res">
+              <option value="">Automatic</option>
+              {KEY.res.values.filter((v: string) => v !== 'auto').map((v: string) => <option value={v}>{v}</option>)}
+            </select>
+          </label>
+          <label class="ce-field">
+            <span>{KEY.uistyle.label}</span>
+            <select data-key="uistyle">
+              <option value="">Not set (OLED, or as saved)</option>
+              <option value="oled">OLED</option>
+              <option value="classic">CLASSIC</option>
+            </select>
+          </label>
+        </div>
+        <p class="ce-hint">{KEY.res.help}</p>
+      </section>
+
+      <section class="ce-sec" aria-labelledby="ce-h-net">
+        <p class="ce-num">03</p>
+        <h2 id="ce-h-net">Network</h2>
+
+        <h3>Ethernet</h3>
+        <div class="ce-pair">
+          <label class="ce-field"><span>Address <code>ip=</code></span><input type="text" data-key="ip" inputmode="decimal" placeholder={KEY.ip.def} spellcheck="false" /></label>
+          <label class="ce-field"><span>Netmask <code>netmask=</code></span><input type="text" data-key="netmask" inputmode="decimal" placeholder={KEY.netmask.def} spellcheck="false" /></label>
+        </div>
+        <p class="ce-hint">Empty: {KEY.ip.def} / {KEY.netmask.def}, a link-local address: a computer on the cable with no manual address reaches <code>http://sidecar.local</code> by itself. Set them to fit a network with fixed addresses.</p>
+
+        <h3>Web page and pairing code</h3>
+        <fieldset class="ce-seg ce-seg-sm">
+          <legend>Web page at <code>sidecar.local</code> <code>web=</code></legend>
+          <label><input type="radio" name="k-web" data-key="web" value="" checked /><span>On</span></label>
+          <label><input type="radio" name="k-web" data-key="web" value="0" /><span>Off</span></label>
+        </fieldset>
+        <fieldset class="ce-seg ce-seg-sm">
+          <legend>Pairing code <code>paircode=</code></legend>
+          <label><input type="radio" name="pairmode" value="random" checked /><span>New code at every boot</span></label>
+          <label><input type="radio" name="pairmode" value="fixed" /><span>Fixed code</span></label>
+          <label><input type="radio" name="pairmode" value="off" /><span>Off</span></label>
+        </fieldset>
+        <div id="ce-pair-fixed" hidden>
+          <label class="ce-field ce-narrow"><span>8 digits</span><input type="text" id="ce-paircode" inputmode="numeric" maxlength="8" autocomplete="off" spellcheck="false" data-lpignore="true" data-1p-ignore /></label>
+          <p class="ce-hint">For a unit with no screen at all. The code is in <code>cmdline.txt</code> in plain text: anyone who holds the card can read it.</p>
+        </div>
+        <p class="ce-msg ce-danger" id="ce-pair-off" hidden><b>Private network only.</b> With the pairing code off, anyone on the network can open the web page, read the card and <b>install firmware</b>, and the Sidecar says so at every boot. Use it on a cable or network you control, never on a card you share or lend.</p>
+        <p class="ce-hint" id="ce-pair-random">The release card's way: the code shows on the touchscreen (STATUS page) and on the Rytm (SIDECAR MENU › WEB UI). A browser pairs once and is remembered.</p>
+
+        <fieldset class="ce-seg ce-seg-sm">
+          <legend>{KEY.sdport.label} <code>sdport=</code></legend>
+          <label><input type="radio" name="k-sdport" data-key="sdport" value="0" checked /><span>Off (the card)</span></label>
+          <label><input type="radio" name="k-sdport" data-key="sdport" value="" /><span>On</span></label>
+        </fieldset>
+        <p class="ce-hint">{KEY.sdport.help}</p>
+
+        <h3>Wi-Fi</h3>
+        <label class="ce-field">
+          <span>{KEY.wifi.label} <code>wifi=</code></span>
+          <select data-key="wifi">
+            <option value="">Not set: as saved (off on a new card)</option>
+            <option value="on">on: join the saved network</option>
+            <option value="scan">scan: Ethernet, the chip up for scans</option>
+            <option value="off">off: Ethernet</option>
+          </select>
+        </label>
+        <label class="ce-check"><input type="checkbox" id="ce-wifi-on" /><span>Make <code>sidecar-wifi.txt</code>: join a network at the next boot, no cable needed</span></label>
+        <div id="ce-wifi" class="ce-wifi" hidden>
+          <p class="ce-msg ce-warn"><b>This file holds your Wi-Fi password in plain text</b> until the Pi has read it at the next boot (it then saves only a derived key and deletes the file). Don't share the card, or a photo of it, before that. The password stays in this page: it is not stored or sent anywhere, and is gone when you close the tab.</p>
+          <label class="ce-field"><span>Network name (SSID)</span><input type="text" id="ce-ssid" maxlength="64" autocomplete="off" spellcheck="false" data-lpignore="true" data-1p-ignore /></label>
+          <label class="ce-check"><input type="checkbox" id="ce-open-net" /><span>Open network (no password)</span></label>
+          <label class="ce-field" id="ce-psk-row">
+            <span>Password</span>
+            <span class="ce-pw">
+              <input type="password" id="ce-psk" maxlength="64" autocomplete="off" spellcheck="false" data-lpignore="true" data-1p-ignore />
+              <button type="button" class="ce-btn ce-btn-sm" id="ce-psk-show" aria-pressed="false" aria-controls="ce-psk">Show</button>
+            </span>
+          </label>
+          <fieldset class="ce-seg ce-seg-sm">
+            <legend>Band</legend>
+            <label><input type="radio" name="band" value="2g" checked /><span>2.4 GHz</span></label>
+            <label><input type="radio" name="band" value="5g" /><span>5 GHz</span></label>
+            <label><input type="radio" name="band" value="any" /><span>Any</span></label>
+          </fieldset>
+          <p class="ce-hint">Put the file at the card's top level. If the network does not come up in 90 s the Pi goes back to its previous setting; a problem is written to <code>sidecar-wifi-error.txt</code> (never the name or password).</p>
+        </div>
+      </section>
+
+      <section class="ce-sec" aria-labelledby="ce-h-usb">
+        <p class="ce-num">04</p>
+        <h2 id="ce-h-usb">USB-C to a computer</h2>
+        <fieldset class="ce-seg ce-seg-sm">
+          <legend>{KEY.usb.label} <code>usb=</code></legend>
+          <label><input type="radio" name="k-usb" data-key="usb" value="" checked /><span>Class compliant<small>the Sidecar's audio + MIDI</small></span></label>
+          <label><input type="radio" name="k-usb" data-key="usb" value="mirror" /><span>Overbridge<small>the Rytm passed through</small></span></label>
+        </fieldset>
+        <p class="ce-hint">{KEY.usb.help} <span class="ce-only-pi5">On a Pi 5 USB-C is also the power input: a computer or hub port gives about 1.5 A, so use a USB-C power and data splitter with the 27 W supply.</span></p>
+        <fieldset class="ce-seg ce-seg-sm">
+          <legend>{KEY.gadget.label} <code>gadget=</code></legend>
+          <label><input type="radio" name="k-gadget" data-key="gadget" value="" checked /><span>On</span></label>
+          <label><input type="radio" name="k-gadget" data-key="gadget" value="0" /><span>Off</span></label>
+        </fieldset>
+        <label class="ce-field">
+          <span>{KEY.usbmidi.label} <code>usbmidi=</code></span>
+          <select data-key="usbmidi">
+            <option value="">Not set: off</option>
+            <option value="os:on">os:on, to the Rytm</option>
+            <option value="os:emu">os:emu, to rytm-emu only</option>
+            <option value="os:off">os:off</option>
+          </select>
+        </label>
+        <p class="ce-hint">{KEY.usbmidi.help}</p>
+      </section>
+
+      <section class="ce-sec" aria-labelledby="ce-h-temp">
+        <p class="ce-num">05</p>
+        <h2 id="ce-h-temp">Heat and clock</h2>
+        <div class="ce-pair">
+          <label class="ce-field">
+            <span>{KEY.socmaxtemp.label} <code>socmaxtemp=</code></span>
+            <input type="number" data-key="socmaxtemp" min="40" max="78" step="1" inputmode="numeric" placeholder="60 (not set)" />
+          </label>
+          <label class="ce-field">
+            <span>{KEY.cpumhz.label} <code>cpumhz=</code></span>
+            <select data-key="cpumhz">
+              <option value="">Not set: 1500, or as saved</option>
+              <option value="1500">1500 (full)</option>
+              <option value="1200">1200</option>
+              <option value="1000">1000</option>
+            </select>
+          </label>
+        </div>
+        <p class="ce-hint">{KEY.socmaxtemp.help} The card sets 78; without the key the Pi slows down at 60 °C. {KEY.cpumhz.help}</p>
+      </section>
+
+      <section class="ce-sec" aria-labelledby="ce-h-adv">
+        <p class="ce-num">06</p>
+        <h2 id="ce-h-adv">Advanced</h2>
+        <p class="ce-hint">Every other option the Sidecar {CARD.version} reads from <code>cmdline.txt</code>. Empty means not in the file: the default shown.</p>
+        {ADV.map(([g, title]) => (
+          <details class="ce-adv">
+            <summary>{title} <small>{adv(g).length}</small></summary>
+            <div class="ce-adv-list">
+              {adv(g).map((k: K) => (
+                <div class="ce-opt">
+                  <label class="ce-field">
+                    <span><code>{k.key}=</code> {k.label}</span>
+                    {k.values ? (
+                      <select data-key={k.key}>
+                        <option value="">Not set ({k.def})</option>
+                        {k.values.map((v: string) => <option value={v}>{valueLabel(k, v)}</option>)}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        data-key={k.key}
+                        spellcheck="false"
+                        inputmode={k.int ? 'numeric' : 'text'}
+                        placeholder={k.placeholder ?? k.def}
+                      />
+                    )}
+                  </label>
+                  <p class="ce-hint">{k.help}{k.boards ? ' (Pi 5 only.)' : ''}</p>
+                </div>
+              ))}
+            </div>
+          </details>
+        ))}
+      </section>
+    </form>
+
+    <aside class="ce-out" id="ce-files" aria-label="The files">
+      <div id="ce-msgs" class="ce-msgs" aria-live="polite"></div>
+      <div class="ce-filecard" data-file="cmdline.txt">
+        <header>
+          <div><b>cmdline.txt</b><small id="ce-meta-cmdline"></small></div>
+          <div class="ce-actions">
+            <button type="button" class="ce-btn ce-btn-sm" data-copy="cmdline">Copy</button>
+            <button type="button" class="ce-btn ce-btn-sm ce-primary" data-download="cmdline">Download</button>
+          </div>
+        </header>
+        <pre class="ce-code ce-wrap" tabindex="0" aria-label="cmdline.txt"><code id="ce-cmdline"></code></pre>
+      </div>
+      <div class="ce-filecard" data-file="sidecar-wifi.txt" id="ce-wifi-card" hidden>
+        <header>
+          <div><b>sidecar-wifi.txt</b><small>read once, then deleted by the Pi</small></div>
+          <div class="ce-actions">
+            <button type="button" class="ce-btn ce-btn-sm" data-copy="wifi">Copy</button>
+            <button type="button" class="ce-btn ce-btn-sm ce-primary" data-download="wifi">Download</button>
+          </div>
+        </header>
+        <pre class="ce-code" tabindex="0" aria-label="sidecar-wifi.txt"><code id="ce-wifi-text"></code></pre>
+      </div>
+      <div class="ce-filecard" data-file="config.txt">
+        <header>
+          <div><b>config.txt</b><small id="ce-meta-config"></small></div>
+          <div class="ce-actions">
+            <button type="button" class="ce-btn ce-btn-sm" data-copy="config">Copy</button>
+            <button type="button" class="ce-btn ce-btn-sm ce-primary" data-download="config">Download</button>
+          </div>
+        </header>
+        <pre class="ce-code" tabindex="0" aria-label="config.txt"><code id="ce-config"></code></pre>
+      </div>
+      <p class="ce-legend"><span class="ce-mark-new"></span> changed from the {CARD.version} card <span class="ce-mark-kept"></span> kept from your file</p>
+      <p class="ce-legend">Put the files at the top level of the card (FAT32), replacing the card's own. <code>cmdline.txt</code> is one line.</p>
+      <p class="sr-only" id="ce-status" aria-live="polite"></p>
+    </aside>
+  </div>
+</div>
+
+<script>
+  import * as C from '../lib/sidecar-config.mjs';
+
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const form = $<HTMLFormElement>('ce-form');
+  const keyEls = () => Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-key]'));
+  const radio = (name: string) => (form.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement | null)?.value ?? '';
+  const setRadio = (name: string, v: string) => {
+    const els = Array.from(form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`));
+    // a value with no button of its own is the default spelled out (web=1, usb=sidecar): the "not set" button
+    const hit = els.find((e) => e.value === v) ?? els.find((e) => e.value === '') ?? els[0];
+    hit.checked = true;
+  };
+
+  let o = C.defaults(); // the options: in memory only
+  let refConfig = C.generateConfig(o);
+  let texts = { config: '', cmdline: '', wifi: '' };
+
+  function readForm() {
+    o.board = radio('board') as typeof o.board;
+    o.display = radio('display') as typeof o.display;
+    o.hdmiW = Number($<HTMLInputElement>('ce-hdmiW').value);
+    o.hdmiH = Number($<HTMLInputElement>('ce-hdmiH').value);
+    o.rotate = radio('rotate') as typeof o.rotate;
+    o.pair = { mode: radio('pairmode') as typeof o.pair.mode, code: $<HTMLInputElement>('ce-paircode').value.trim() };
+    for (const el of keyEls()) {
+      if (el instanceof HTMLInputElement && el.type === 'radio') {
+        if (el.checked) o.cmd[el.dataset.key!] = el.value;
+      } else o.cmd[el.dataset.key!] = el.value.trim();
+    }
+    const open = $<HTMLInputElement>('ce-open-net').checked;
+    o.wifiFile = {
+      enabled: $<HTMLInputElement>('ce-wifi-on').checked,
+      ssid: $<HTMLInputElement>('ce-ssid').value,
+      psk: open ? '' : $<HTMLInputElement>('ce-psk').value,
+      band: radio('band') as typeof o.wifiFile.band,
+      open,
+    };
+  }
+
+  function writeForm() {
+    setRadio('board', o.board);
+    setRadio('display', o.display);
+    $<HTMLInputElement>('ce-hdmiW').value = String(o.hdmiW);
+    $<HTMLInputElement>('ce-hdmiH').value = String(o.hdmiH);
+    setRadio('rotate', o.rotate);
+    setRadio('pairmode', o.pair.mode);
+    $<HTMLInputElement>('ce-paircode').value = o.pair.code;
+    for (const el of keyEls()) {
+      const v = o.cmd[el.dataset.key!] ?? '';
+      if (el instanceof HTMLInputElement && el.type === 'radio') continue;
+      if (el instanceof HTMLSelectElement && v && !Array.from(el.options).some((x) => x.value === v)) el.value = '';
+      else el.value = v;
+    }
+    for (const name of new Set(keyEls().filter((e) => (e as HTMLInputElement).type === 'radio').map((e) => (e as HTMLInputElement).name))) {
+      const key = (form.querySelector(`input[name="${name}"]`) as HTMLInputElement).dataset.key!;
+      setRadio(name, o.cmd[key] ?? '');
+    }
+    $<HTMLInputElement>('ce-wifi-on').checked = o.wifiFile.enabled;
+    $<HTMLInputElement>('ce-ssid').value = o.wifiFile.ssid;
+    $<HTMLInputElement>('ce-psk').value = o.wifiFile.psk;
+    $<HTMLInputElement>('ce-open-net').checked = o.wifiFile.open;
+    setRadio('band', o.wifiFile.band);
+  }
+
+  const HINT: Record<string, string> = {
+    hdmi800: 'The card\'s default. Pi 4: the panel runs at 800x480, the UI 1:1. Pi 5: connect it to micro-HDMI 0 (next to USB-C) before power-on; the Pi 5\'s firmware picks the mode itself (1920x1080) and the UI is scaled to it, slightly soft.',
+    hdmi1024: 'The 1024x600 card. Pi 4: the panel runs at 1024x600 with its own layout. Pi 5: the firmware picks the mode; the 1024x600 layout comes up when the display\'s EDID prefers it, else set UI layout size to 1024x600.',
+    hdmiOther: 'Pi 4: the HDMI mode is set to this size; the engine draws its 800x480 UI 1:1 in the middle (800x480 and 1024x600 get their own layouts). Pi 5: the firmware chooses the mode itself and ignores these lines; the UI is scaled to it.',
+    td2: 'Pi 5 only (no driver on a Pi 4). Found by itself on CAM/DISP 0 or 1, no config.txt line; the UI fills its 1280x720. Normal is the owner\'s mounting (rotation 270); upside down writes dsi_rotate=90. Touch may not come back after a warm restart on some panels: power cycle.',
+    dsi1: 'Found by itself, no config.txt line; preferred to HDMI. Pi 4: the firmware drives it (upside down: lcd_rotate=2 under [pi4]). Pi 5: the engine drives it (upside down: dsi_rotate=180) and needs a 22-to-15-pin display cable. In testing.',
+    none: 'The Sidecar pages show on the Rytm\'s screen (UP + YES) and on the web page. The pairing code is on the Rytm (SIDECAR MENU › WEB UI); a unit with no screen at all writes it to sidecar-paircode.txt on the card. The HDMI lines are commented out and display=0 is set.',
+  };
+
+  function visibility() {
+    $('ce-hdmi-size').hidden = o.display !== 'hdmiOther';
+    $('ce-rotate').hidden = !(o.display === 'td2' || o.display === 'dsi1');
+    $('ce-display-hint').textContent = HINT[o.display];
+    $('ce-pair-fixed').hidden = o.pair.mode !== 'fixed';
+    $('ce-pair-off').hidden = o.pair.mode !== 'off';
+    $('ce-pair-random').hidden = o.pair.mode !== 'random';
+    $('ce-wifi').hidden = !o.wifiFile.enabled;
+    $('ce-psk-row').hidden = o.wifiFile.open;
+    $('ce-wifi-card').hidden = !o.wifiFile.enabled;
+    for (const el of document.querySelectorAll<HTMLElement>('.ce-only-pi5')) el.hidden = o.board === 'pi4';
+    const td2 = form.querySelector<HTMLInputElement>('input[name="display"][value="td2"]')!;
+    td2.disabled = o.board === 'pi4';
+  }
+
+  const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]!);
+
+  function renderConfig() {
+    // the reference: the card's file for the same board and HDMI size, so only real changes are marked
+    refConfig = C.generateConfig({ ...C.defaults(), board: o.board, display: o.display === 'hdmi1024' ? 'hdmi1024' : 'hdmi800' });
+    const lines = texts.config.replace(/\n$/, '').split('\n');
+    const keptStart = lines.indexOf('# Kept as is from the loaded config.txt (lines the Sidecar card does not have):');
+    const ref1 = new Set(refConfig.split('\n'));
+    const settingsOf = (ls: string[]) => ls.filter((l) => l && !l.startsWith('#'));
+    const out1 = new Set(lines);
+    const keyOf = (l: string) => l.split(/[= ]/, 1)[0];
+    const added = settingsOf(keptStart >= 0 ? lines.slice(0, keptStart) : lines).filter((l) => !ref1.has(l) && !/^\[.*\]$/.test(l));
+    const addedKeys = new Set(added.map(keyOf));
+    const removed = settingsOf(refConfig.split('\n')).filter((l) => !out1.has(l) && !addedKeys.has(keyOf(l)));
+    const html = lines.map((l, i) => {
+      const kept = keptStart >= 0 && i >= keptStart;
+      const isNew = !kept && !ref1.has(l) && l !== '';
+      const comment = l.startsWith('#');
+      const cls = [kept ? 'k' : isNew ? 'n' : '', comment ? 'c' : /^\[.*\]$/.test(l) ? 's' : ''].filter(Boolean).join(' ');
+      return `<span class="ln${cls ? ' ' + cls : ''}">${esc(l) || ' '}</span>`;
+    });
+    $('ce-config').innerHTML = html.join('');
+    const kept = o.keptConfig.length;
+    const changed = added.length + removed.length;
+    $('ce-meta-config').textContent = `${lines.length} lines · ${changed ? `${changed} setting${changed > 1 ? 's' : ''} changed` : 'as on the card'}${kept ? ` · ${kept} kept` : ''}`;
+  }
+
+  function renderCmdline() {
+    const toks = C.cmdlineTokens(o);
+    const card = new Set(C.CARD.cmdline.split(' '));
+    const kept = new Set(o.keptCmdline);
+    const html = toks.map((t) => `<span class="tk${kept.has(t) ? ' k' : card.has(t) ? '' : ' n'}">${esc(t)}</span>`).join(' ');
+    $('ce-cmdline').innerHTML = html || '<span class="tk c">(empty: every option at its default)</span>';
+    const removed = [...card].filter((t) => !toks.includes(t)).length;
+    const added = toks.filter((t) => !card.has(t) && !kept.has(t)).length;
+    $('ce-meta-cmdline').textContent = `one line · ${toks.length} option${toks.length === 1 ? '' : 's'}${added || removed ? ` · ${added + removed} changed` : ' · as on the card'}${kept.size ? ` · ${kept.size} kept` : ''}`;
+  }
+
+  let showPsk = false;
+  function renderWifi() {
+    if (!o.wifiFile.enabled) { $('ce-wifi-text').textContent = ''; return; }
+    const shown = showPsk || !o.wifiFile.psk ? texts.wifi : texts.wifi.replace(/^psk=.*$/m, 'psk=' + '•'.repeat(Math.min(12, o.wifiFile.psk.length)) + '  (hidden here; Show reveals it)');
+    $('ce-wifi-text').textContent = shown;
+  }
+
+  function renderMsgs() {
+    const { errors, warnings } = C.check(o);
+    const box = $('ce-msgs');
+    box.innerHTML = '';
+    for (const [list, cls] of [[errors, 'ce-err'], [warnings, 'ce-warn']] as const) {
+      for (const m of list) {
+        const p = document.createElement('p');
+        p.className = `ce-msg ${cls}`;
+        p.textContent = m;
+        box.append(p);
+      }
+    }
+    for (const b of document.querySelectorAll<HTMLButtonElement>('[data-download],[data-copy]')) b.dataset.blocked = errors.length ? '1' : '';
+  }
+
+  function update() {
+    readForm();
+    texts = { config: C.generateConfig(o), cmdline: C.generateCmdline(o), wifi: o.wifiFile.enabled ? C.generateWifi(o.wifiFile) : '' };
+    visibility();
+    renderConfig();
+    renderCmdline();
+    renderWifi();
+    renderMsgs();
+  }
+
+  form.addEventListener('input', update);
+  form.addEventListener('change', update);
+
+  // ------------------------------------------------------------------ loading files
+  let loaded: { config: string | null; cmdline: string | null } = { config: null, cmdline: null };
+
+  function load(cfg: string | null, cmd: string | null, names: string[]) {
+    if (cfg != null) loaded.config = cfg;
+    if (cmd != null) loaded.cmdline = cmd;
+    const r = C.fromFiles(loaded.config, loaded.cmdline);
+    o = r.options;
+    writeForm();
+    update();
+    const box = $('ce-loaded');
+    box.hidden = false;
+    const kept = [
+      ...o.keptConfig.map((k) => `config.txt [${k.section}] ${k.line}`),
+      ...o.keptCmdline.map((t) => `cmdline.txt ${t}`),
+    ];
+    box.innerHTML = '';
+    const head = document.createElement('p');
+    head.innerHTML = `<b>Read ${names.map(esc).join(' and ')}.</b> Comments are replaced by the card's. ${kept.length ? `${kept.length} line${kept.length > 1 ? 's' : ''} the editor does not know, <b>kept as is</b>:` : 'Every setting is one the editor knows.'}`;
+    box.append(head);
+    if (kept.length) {
+      const ul = document.createElement('ul');
+      for (const k of kept) { const li = document.createElement('li'); const c = document.createElement('code'); c.textContent = k; li.append(c); ul.append(li); }
+      box.append(ul);
+    }
+    for (const n of r.notes) { const p = document.createElement('p'); p.textContent = n; box.append(p); }
+  }
+
+  const isConfig = (name: string, text: string) =>
+    /config/i.test(name) || (!/cmdline/i.test(name) && (/^\s*\[(pi4|pi5|all)\]/m.test(text) || /^\s*arm_64bit=/m.test(text)));
+
+  $<HTMLInputElement>('ce-open').addEventListener('change', async (e) => {
+    const files = Array.from((e.target as HTMLInputElement).files ?? []).slice(0, 2);
+    let cfg: string | null = null, cmd: string | null = null;
+    const names: string[] = [];
+    for (const f of files) {
+      if (f.size > 64 * 1024) continue;
+      const t = await f.text();
+      if (isConfig(f.name, t)) cfg = t; else cmd = t;
+      names.push(f.name);
+    }
+    (e.target as HTMLInputElement).value = '';
+    if (names.length) load(cfg, cmd, names);
+  });
+
+  $('ce-paste-read').addEventListener('click', () => {
+    const cfg = $<HTMLTextAreaElement>('ce-paste-config').value;
+    const cmd = $<HTMLTextAreaElement>('ce-paste-cmdline').value;
+    const names = [cfg.trim() && 'config.txt', cmd.trim() && 'cmdline.txt'].filter(Boolean) as string[];
+    if (names.length) load(cfg.trim() ? cfg : null, cmd.trim() ? cmd : null, names);
+  });
+
+  $('ce-reset').addEventListener('click', () => {
+    loaded = { config: null, cmdline: null };
+    o = C.defaults();
+    $('ce-loaded').hidden = true;
+    writeForm();
+    update();
+    status(`Back to the ${C.CARD.version} card's files.`);
+  });
+
+  // ------------------------------------------------------------------ copy, download
+  const NAMES: Record<string, string> = { config: 'config.txt', cmdline: 'cmdline.txt', wifi: 'sidecar-wifi.txt' };
+  function status(m: string) { const s = $('ce-status'); s.textContent = ''; requestAnimationFrame(() => (s.textContent = m)); }
+  function flash(b: HTMLButtonElement, label: string) {
+    const was = b.dataset.label ?? b.textContent!;
+    b.dataset.label = was;
+    b.textContent = label;
+    b.classList.add('done');
+    setTimeout(() => { b.textContent = was; b.classList.remove('done'); }, 1400);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) =>
+    b.addEventListener('click', async () => {
+      const which = b.dataset.copy!;
+      const t = texts[which as keyof typeof texts];
+      try {
+        await navigator.clipboard.writeText(t);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = t;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.append(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      flash(b, 'Copied');
+      status(`${NAMES[which]} copied${b.dataset.blocked ? ', but it has a problem: see the messages above' : ''}.`);
+    }));
+
+  document.querySelectorAll<HTMLButtonElement>('[data-download]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const which = b.dataset.download!;
+      const blob = new Blob([texts[which as keyof typeof texts]], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = NAMES[which];
+      document.body.append(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      flash(b, 'Saved');
+      status(`${NAMES[which]} downloaded.`);
+    }));
+
+  $('ce-psk-show').addEventListener('click', (e) => {
+    showPsk = !showPsk;
+    const b = e.currentTarget as HTMLButtonElement;
+    b.setAttribute('aria-pressed', String(showPsk));
+    b.textContent = showPsk ? 'Hide' : 'Show';
+    $<HTMLInputElement>('ce-psk').type = showPsk ? 'text' : 'password';
+    renderWifi();
+  });
+
+  // a fresh page always starts from the card: nothing a browser restored (a password, a code) survives a reload
+  writeForm();
+  update();
+  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { o = C.defaults(); writeForm(); update(); } });
+</script>
+
+<style is:global>
+  .ce {
+    --ce-red: #ff6369;
+    --ce-red-bg: #3b1214;
+    --ce-amber: #f1b44c;
+    --ce-amber-bg: #33270f;
+    --ce-line: var(--sl-color-gray-5);
+    --ce-panel: var(--sl-color-gray-6);
+    --ce-code-bg: #0a0a0a;
+    margin-top: 0;
+  }
+  :root[data-theme='light'] .ce {
+    --ce-red: #b4232a;
+    --ce-red-bg: #fdecec;
+    --ce-amber: #8a5a00;
+    --ce-amber-bg: #fdf3dc;
+    --ce-code-bg: #fbfbfb;
+  }
+  .ce .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .ce code { font-family: var(--sl-font-mono); font-size: .86em; }
+  .ce [hidden] { display: none !important; }
+
+  /* start bar */
+  .ce-start { display: grid; grid-template-columns: 1fr auto; gap: .6rem 1.5rem; align-items: center; padding: 1rem 0 1.25rem; border-bottom: 1px solid var(--ce-line); margin-bottom: 1.5rem; }
+  .ce-kicker { color: var(--sl-color-accent); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; margin: 0; }
+  .ce-start-sub { margin: .2rem 0 0; color: var(--sl-color-gray-2); font-size: .92rem; }
+  .ce-start-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+  .ce-paste, .ce-loaded { grid-column: 1 / -1; }
+  .ce-paste summary { cursor: pointer; color: var(--sl-color-gray-2); font-size: .9rem; width: max-content; }
+  .ce-paste-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin: .6rem 0; }
+  .ce-paste-grid label { display: grid; gap: .3rem; font-size: .8rem; font-family: var(--sl-font-mono); color: var(--sl-color-gray-2); }
+  .ce textarea { width: 100%; font-family: var(--sl-font-mono); font-size: .8rem; resize: vertical; }
+  .ce-loaded { border-left: 3px solid var(--sl-color-gray-3); padding: .4rem .9rem; font-size: .88rem; color: var(--sl-color-gray-2); }
+  .ce-loaded p { margin: .2rem 0; }
+  .ce-loaded ul { margin: .3rem 0; padding-left: 1.1rem; }
+  .ce-jump { display: none; }
+
+  /* buttons */
+  .ce-btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.5rem; padding: .45rem 1rem; border-radius: 999px;
+    border: 1px solid var(--sl-color-gray-4); background: transparent; color: var(--sl-color-white); font: inherit; font-weight: 700; font-size: .88rem;
+    cursor: pointer; text-decoration: none; white-space: nowrap; transition: border-color .15s, background .15s, color .15s; }
+  .ce-btn:hover { border-color: var(--sl-color-white); }
+  .ce-btn:focus-visible, .ce input:focus-visible, .ce select:focus-visible, .ce textarea:focus-visible, .ce summary:focus-visible, .ce-code:focus-visible {
+    outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+  .ce-btn-sm { min-height: 2.1rem; padding: .25rem .8rem; font-size: .8rem; }
+  .ce-primary { background: var(--sl-color-accent); border-color: var(--sl-color-accent); color: var(--sl-color-black); }
+  .ce-primary:hover { background: var(--sl-color-accent-high); border-color: var(--sl-color-accent-high); }
+  .ce-btn.done { background: var(--sl-color-accent-low); border-color: var(--sl-color-accent); color: var(--sl-color-accent-high); }
+  .ce-file { position: relative; overflow: hidden; }
+  .ce-file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .ce-file:focus-within { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+
+  /* layout */
+  .ce-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 2.5rem; align-items: start; }
+  .ce-out { position: sticky; top: calc(var(--sl-nav-height, 4rem) + 1rem); max-height: calc(100vh - var(--sl-nav-height, 4rem) - 2rem); overflow: auto;
+    display: grid; gap: 1rem; padding-bottom: .5rem; }
+
+  /* sections */
+  .ce-sec { position: relative; padding: 0 0 1.75rem; margin: 0 0 1.75rem; border-bottom: 1px solid var(--ce-line); }
+  .ce-sec:last-child { border-bottom: 0; }
+  .ce-num { font-family: var(--sl-font-mono); color: var(--sl-color-accent); font-size: .75rem; letter-spacing: .2em; margin: 0; }
+  .ce-sec h2 { font-family: var(--sc-wordmark); font-weight: 400; font-size: 1.55rem; line-height: 1.1; letter-spacing: -.01em; margin: .15rem 0 .9rem; color: var(--sl-color-white); }
+  .ce-sec h3 { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--sl-color-gray-3); margin: 1.4rem 0 .6rem; font-weight: 700; }
+  .ce-hint { color: var(--sl-color-gray-3); font-size: .85rem; line-height: 1.5; margin: .5rem 0 0; }
+  .ce fieldset { border: 0; padding: 0; margin: .9rem 0 0; min-width: 0; }
+  .ce legend { font-size: .85rem; color: var(--sl-color-gray-2); margin-bottom: .45rem; padding: 0; }
+
+  /* segmented radios */
+  .ce-seg { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .ce-seg legend { width: 100%; }
+  .ce-seg label, .ce-cards label { position: relative; cursor: pointer; }
+  .ce-seg input, .ce-cards input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .ce-seg span { display: flex; flex-direction: column; justify-content: center; min-height: 2.75rem; padding: .4rem .95rem; border: 1px solid var(--sl-color-gray-4);
+    border-radius: .45rem; font-weight: 700; font-size: .92rem; color: var(--sl-color-gray-1); line-height: 1.2; transition: border-color .15s, background .15s; }
+  .ce-seg small, .ce-cards small { display: block; font-weight: 400; font-size: .75rem; color: var(--sl-color-gray-3); margin-top: .15rem; }
+  .ce-seg-sm span { min-height: 2.5rem; padding: .3rem .85rem; font-size: .86rem; }
+  .ce-seg label:hover span, .ce-cards label:hover span { border-color: var(--sl-color-gray-2); }
+  .ce-seg input:checked + span, .ce-cards input:checked + span { border-color: var(--sl-color-accent); background: var(--sl-color-accent-low); color: var(--sl-color-white); box-shadow: inset 0 0 0 1px var(--sl-color-accent); }
+  .ce-seg input:focus-visible + span, .ce-cards input:focus-visible + span { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+  .ce-cards input:disabled + span { opacity: .4; cursor: not-allowed; }
+
+  .ce-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .5rem; margin-top: 0; }
+  .ce-cards span { display: block; height: 100%; padding: .75rem .9rem .8rem; border: 1px solid var(--sl-color-gray-4); border-radius: .5rem; transition: border-color .15s, background .15s; }
+  .ce-cards b { display: block; font-size: .95rem; color: var(--sl-color-white); }
+
+  /* fields */
+  .ce-field { display: grid; gap: .35rem; margin-top: .9rem; font-size: .85rem; color: var(--sl-color-gray-2); }
+  .ce-field > span:first-child code { color: var(--sl-color-gray-3); }
+  .ce input[type='text'], .ce input[type='number'], .ce input[type='password'], .ce select, .ce textarea {
+    min-height: 2.6rem; padding: .45rem .7rem; border: 1px solid var(--sl-color-gray-4); border-radius: .4rem;
+    background: var(--sl-color-black); color: var(--sl-color-white); font: inherit; font-size: .95rem; width: 100%; }
+  .ce input[type='text'][inputmode='decimal'], .ce input[data-key], .ce #ce-paircode { font-family: var(--sl-font-mono); }
+  .ce input::placeholder { color: var(--sl-color-gray-4); }
+  .ce input:invalid { border-color: var(--ce-red); }
+  .ce-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 .9rem; }
+  .ce-row { display: flex; align-items: end; gap: .6rem; }
+  .ce-row .ce-field { width: 8rem; }
+  .ce-x { padding-bottom: .6rem; color: var(--sl-color-gray-3); }
+  .ce-narrow { max-width: 12rem; }
+  .ce-check { display: flex; gap: .6rem; align-items: flex-start; margin-top: 1rem; font-size: .92rem; color: var(--sl-color-gray-1); cursor: pointer; }
+  .ce-check input { width: 1.15rem; height: 1.15rem; margin-top: .1rem; accent-color: var(--sl-color-accent); flex: none; }
+  .ce-pw { display: flex; gap: .5rem; }
+  .ce-wifi { margin-top: .6rem; padding: .1rem 0 0 1rem; border-left: 2px solid var(--sl-color-gray-5); }
+
+  /* messages */
+  .ce-msg { font-size: .86rem; line-height: 1.5; padding: .6rem .85rem; border-radius: .4rem; margin: .8rem 0 0; border-left: 3px solid; }
+  .ce-err { color: var(--ce-red); background: var(--ce-red-bg); border-color: var(--ce-red); }
+  .ce-warn { color: var(--sl-color-gray-1); background: var(--ce-amber-bg); border-color: var(--ce-amber); }
+  .ce-danger { color: var(--sl-color-white); background: var(--ce-red-bg); border-color: var(--ce-red); }
+  .ce-danger b, .ce-err b { color: var(--ce-red); }
+  .ce-msgs:empty { display: none; }
+  .ce-msgs .ce-msg:first-child { margin-top: 0; }
+
+  /* advanced */
+  .ce-adv { border: 1px solid var(--ce-line); border-radius: .5rem; margin-top: .6rem; }
+  .ce-adv summary { cursor: pointer; padding: .75rem 1rem; font-weight: 700; color: var(--sl-color-white); display: flex; justify-content: space-between; align-items: center; }
+  .ce-adv summary small { font-family: var(--sl-font-mono); color: var(--sl-color-gray-3); font-weight: 400; }
+  .ce-adv[open] summary { border-bottom: 1px solid var(--ce-line); }
+  .ce-adv-list { padding: 0 1rem 1rem; }
+  .ce-opt .ce-field { margin-top: 1rem; }
+  .ce-opt .ce-field > span:first-child code { color: var(--sl-color-accent); }
+  .ce-opt .ce-hint { margin-top: .3rem; font-size: .8rem; }
+
+  /* the files */
+  .ce-filecard { border: 1px solid var(--ce-line); border-radius: .6rem; overflow: hidden; background: var(--ce-code-bg); }
+  .ce-filecard header { display: flex; justify-content: space-between; align-items: center; gap: .75rem; padding: .55rem .6rem .55rem 1rem;
+    border-bottom: 1px solid var(--ce-line); background: var(--sl-color-black); flex-wrap: wrap; }
+  .ce-filecard header b { font-family: var(--sl-font-mono); font-size: .95rem; color: var(--sl-color-white); }
+  .ce-filecard header small { display: block; color: var(--sl-color-gray-3); font-size: .75rem; margin-top: .1rem; }
+  .ce-actions { display: flex; gap: .4rem; }
+  .ce-code { margin: 0; padding: .7rem 0; font-family: var(--sl-font-mono); font-size: .76rem; line-height: 1.55; overflow-x: auto; color: var(--sl-color-gray-1); background: transparent; border: 0; }
+  .ce-code code { display: block; min-width: max-content; font-size: inherit; background: none; padding: 0; }
+  .ce-code .ln { display: block; padding: 0 1rem 0 .85rem; border-left: 3px solid transparent; white-space: pre; }
+  .ce-code .ln.c { color: var(--sl-color-gray-3); }
+  .ce-code .ln.s { color: var(--sl-color-accent); font-weight: 700; }
+  .ce-code .ln.n { border-left-color: var(--sl-color-accent); background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent); color: var(--sl-color-white); }
+  .ce-code .ln.n.c { color: var(--sl-color-gray-2); }
+  .ce-code .ln.k { border-left-color: var(--sl-color-gray-3); background: color-mix(in srgb, var(--sl-color-gray-3) 12%, transparent); }
+  #ce-wifi-text { padding: 0 1rem; white-space: pre; }
+  .ce-wrap code { min-width: 0; padding: 0 1rem; white-space: normal; word-break: break-all; line-height: 2; }
+  .ce-code .tk { display: inline-block; padding: 0 .3rem; border-radius: .25rem; white-space: nowrap; }
+  .ce-code .tk.n { background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent); color: var(--sl-color-white); box-shadow: inset 0 -2px 0 var(--sl-color-accent); }
+  .ce-code .tk.k { box-shadow: inset 0 -2px 0 var(--sl-color-gray-3); }
+  .ce-code .tk.c { color: var(--sl-color-gray-3); white-space: normal; }
+  .ce-legend { font-size: .78rem; color: var(--sl-color-gray-3); margin: 0; display: flex; flex-wrap: wrap; gap: .3rem .5rem; align-items: center; }
+  .ce-mark-new, .ce-mark-kept { display: inline-block; width: .8rem; height: .8rem; border-left: 3px solid var(--sl-color-accent); background: color-mix(in srgb, var(--sl-color-accent) 18%, transparent); }
+  .ce-mark-kept { border-color: var(--sl-color-gray-3); background: color-mix(in srgb, var(--sl-color-gray-3) 18%, transparent); margin-left: .6rem; }
+
+  @media (max-width: 64rem) {
+    .ce-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .ce-out { position: static; max-height: none; overflow: visible; border-top: 1px solid var(--ce-line); padding-top: 1.5rem; }
+    .ce-jump { display: inline-flex; }
+  }
+  @media (max-width: 40rem) {
+    .ce-start { grid-template-columns: 1fr; }
+    .ce-start-actions { justify-content: flex-start; }
+    .ce-pair, .ce-paste-grid { grid-template-columns: 1fr; }
+    .ce-cards { grid-template-columns: 1fr 1fr; }
+    .ce-cards span { padding: .6rem .7rem; }
+    .ce-sec h2 { font-size: 1.35rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ce * { transition: none !important; } }
+</style>

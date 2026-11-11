@@ -88,6 +88,8 @@ Wi-Fi is off in the package; see [Wi-Fi (off by default)](#wi-fi-off-by-default)
 
 One line of `name=value` options, separated by spaces. The release sets `sdport=0`, which turns off writing boot files over the network. Leave it in.
 
+**Easier:** the [card config editor](/sidecar-expander/getting-started/config-editor/) writes `config.txt` and `cmdline.txt` for you: pick the Pi, the display, the network and the options, then copy or download the two files (and a `sidecar-wifi.txt` if you want Wi-Fi). It runs in your browser; nothing is sent or stored.
+
 | Option | Default | |
 |---|---|---|
 | `out=tracks\|main` | tracks | voices on their tracks' channels (what the mods expect), or summed on MAIN (a stock Rytm) |
@@ -128,6 +130,8 @@ disable_overscan=1
 For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. For a 1024x600 display, use the 1024x600 card zip (or see [The display](/sidecar-expander/using/display/#screen-sizes) for the lines). Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
 The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1` matters there (see [Raspberry Pi 5](#raspberry-pi-5)). A DSI display needs no line on either board.
+
+The [card config editor](/sidecar-expander/getting-started/config-editor/) writes these lines for each display, the rotation of a DSI display included.
 
 ## Starter content
 
