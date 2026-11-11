@@ -43,6 +43,9 @@ export CIRCLE_BUILD=${CIRCLE_BUILD:-$main/pi/circle/build}
 
 if [ -d "$wt" ]; then
   git -C "$wt" diff --quiet HEAD -- || { echo "$wt has modified tracked files: not touching it"; exit 1; }
+  # untracked files in the dirs whose content ships (copied as they are) would end up in the public zips
+  [ -z "$(git -C "$wt" status --porcelain --untracked-files=all -- content third_party/nam web-next/src web-next/public)" ] \
+    || { echo "$wt has untracked or modified files in content, third_party/nam or web-next: not touching it"; exit 1; }
   git -C "$wt" checkout -q --detach "$full"
 else
   git -C "$repo" worktree add -q --detach "$wt" "$full"
@@ -62,9 +65,9 @@ if [ -z "${KERNEL5:-}" ]; then
   env "${NET[@]}" RASPPI=5 "$wt/pi/engine/build.sh" kernel   # the Pi 4 objects go (hosted/.board); its .img stays
   KERNEL5=$wt/pi/engine/kernel_2712.img
 fi
-netcheck=1
+netcheck=1; tsuf=""   # tsuf: "-TEST" in the zip names of a test build
 if [ "${TEST_SKIP_NET_CHECK:-0}" = 1 ]; then
-  netcheck=0; echo "TEST_SKIP_NET_CHECK=1: the release address check is SKIPPED (a test build, never a release)"
+  netcheck=0; tsuf=-TEST; echo "TEST_SKIP_NET_CHECK=1: the release address check is SKIPPED (a test build, never a release)"
 fi
 for k in "$KERNEL" "$KERNEL5"; do
   [ $netcheck = 0 ] && break
@@ -89,9 +92,15 @@ PY
 # nothing private in a tree that ships: no Finder / AppleDouble files, no pairing or Wi-Fi settings
 shipcheck() {
   ! find "$1" \( -name '.DS_Store' -o -name '._*' -o -name 'pair.txt' -o -name 'pair.json' -o -name 'wifi.txt' \
-    -o -name 'sidecar-wifi*' -o -name 'wpa*.conf' -o -name '*.client' -o -name '*.secret' \) | grep . \
+    -o -name 'sidecar-wifi*' -o -name 'sidecar-paircode*' -o -name 'pair*.txt' -o -name 'wpa*.conf' -o -name '*.client' -o -name '*.secret' \) | grep . \
     || { echo "$1: a private or Finder file is in it (above)"; exit 1; }
-  ! grep -rIl 'paircode=' "$1" | grep . || { echo "$1: a pairing code setting is in it (above)"; exit 1; }
+  ! grep -rIlE 'paircode=|^Sidecar pairing code:|^c=[0-9a-f]+ [0-9a-f]{64}' "$1" | grep . \
+    || { echo "$1: a pairing code or pair file is in it (above)"; exit 1; }
+  # the same inside .gz files (the web app's .gz copies, the plugin source tarball)
+  find "$1" -type f -name '*.gz' | while IFS= read -r g; do
+    if gzip -dc "$g" 2>/dev/null | grep -aqE 'paircode=|^Sidecar pairing code:|^c=[0-9a-f]+ [0-9a-f]{64}'; then echo "$g"; fi
+  done | grep . && { echo "$1: a pairing code or pair file is inside a .gz (above)"; exit 1; }
+  return 0
 }
 
 # the starter content (scripts/package_content.sh, from the same commit) on the card: /JUNO/Factory, /DX7 and its
@@ -123,7 +132,7 @@ for res in 800x480 1024x600; do
   grep -qx "hdmi_cvt=${res%x*} ${res#*x} 60 6 0 0 0" "$sd/config.txt" || { echo "$res: config.txt has not the $res HDMI mode"; exit 1; }
   ! find "$sd" \( -name 'wifi.txt' -o -name 'sidecar-wifi*' -o -name 'wpa*.conf' -o -name '.rytm' \) | grep -q . \
     || { echo "a Wi-Fi settings file is in the card set"; exit 1; }
-  z=$(ls "$tmp"/sidecar-pi-sd-*.zip); zn=$(basename "${z%.zip}")-$res.zip
+  z=$(ls "$tmp"/sidecar-pi-sd-*.zip); zn=$(basename "${z%.zip}")-$res$tsuf.zip
   if [ -n "$web" ]; then
     # /.rytm holds the web app only (no settings, no pairing): the zip is made again with it
     python3 - "$wt/pi/circle" "$web" "$sd/.rytm/www-next" <<'PY'
@@ -192,7 +201,7 @@ cp "$here/scripts/plugins-LICENSE.txt" "$out/LICENSE.txt"
 echo "source commit: $full" > "$out/BUILD-INFO-plugins.txt"
 # the release zip: sidecar-pi-plugins-<VERSION>.zip (the packages, LICENSE.txt, SHA256SUMS, BUILD-INFO; fixed dates)
 ver=$(cat "$wt/VERSION")
-python3 - "$out" "$here/dist/pi/sidecar-pi-plugins-$ver.zip" <<'PY'
+python3 - "$out" "$here/dist/pi/sidecar-pi-plugins-$ver$tsuf.zip" <<'PY'
 import os, sys, zipfile
 src, z = sys.argv[1], sys.argv[2]
 with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -207,7 +216,7 @@ PY
 # make_update.py: no file then.
 if [ -f "$wt/tools/make_update.py" ]; then
   [ -n "$web" ] || { echo "$full: make_update.py but no web-next"; exit 1; }
-  scu="sidecar-$ver.scu"
+  scu="sidecar-$ver$tsuf.scu"
   python3 "$wt/tools/make_update.py" --pi4 "$KERNEL" --pi5 "$KERNEL5" --web "$web" --release --version "$ver" \
     --out "$here/dist/pi/$scu"
   python3 "$wt/tools/make_update.py" --check "$here/dist/pi/$scu"
@@ -241,10 +250,11 @@ if [ -f "$namb" ]; then
   mkdir -p "$st/NAM" "$st/Licenses/NAM"
   cp "$namb" "$st/NAM/NAMCore-A2Lite-test.namb"
   cp "$wt/third_party/nam/embedded/NOTICE" "$st/Licenses/NAM/NOTICE.txt"
+  cp "$wt/third_party/nam/embedded/LICENSE" "$st/Licenses/NAM/LICENSE.txt"
   notice+=("/NAM/NAMCore-A2Lite-test.namb: an A2-Lite capture for INSERT AMP: NeuralAmpModelerCore's A2-Lite test
   model as TONE3000's embedded repository ships it (weights/a2lite.namb). It shows that AMP loads a capture; it is
   a test model, not a recording of a particular amplifier. MIT, Copyright (c) 2023 Steven Atkinson
-  (/Licenses/NAM/NOTICE.txt).")
+  (/Licenses/NAM/NOTICE.txt); the capture's repository: MIT, Copyright (c) 2026 TONE3000 (/Licenses/NAM/LICENSE.txt).")
 fi
 if [ -f "$wt/plugins/sc_render.py" ]; then
   # the Mac builds of the six starters, rendered at their test note (1.5 s, 48 kHz mono, note off at 0.5 s)
@@ -280,20 +290,23 @@ GPL-2.0-or-later (modele-LICENSE.txt, modele-NOTICE.txt, its complete source mod
 has mist-LICENSE.txt and mist-NOTICE.txt (Beads by Emilie Gillet, MIT).
 
 EOF
-for n in "${notice[@]}"; do echo "$n"; echo; done
+for n in ${notice[@]+"${notice[@]}"}; do echo "$n"; echo; done
 echo "source commit: $full"
 } > "$st/NOTICE-STARTER.txt"
+rytmtxt="."
+[ -z "$web" ] || rytmtxt=", including the folder .rytm (the web app):
+   it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic
+   web page instead."
 cat > "$st/README-STARTER.txt" <<EOF
 Sidecar $ver starter: everything for a new SD card in one zip
 
 1. Format a microSD card as FAT32 with one partition (MBR).
-2. Unzip this zip and copy everything in it to the card's top level, including the folder .rytm (the web app):
-   it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic
-   web page instead.
+2. Unzip this zip and copy everything in it to the card's top level$rytmtxt
 3. Put the card in the Raspberry Pi 4B or Pi 5 and switch it on.
 
-The card set is the 800x480 one (an 800x480 HDMI display, a DSI display or none). A 1024x600 HDMI display: change
-both hdmi_cvt lines in config.txt to "hdmi_cvt=1024 600 60 6 0 0 0", or use sidecar-pi-sd-*-1024x600.zip.
+The card set is the 800x480 one (an 800x480 HDMI display, a DSI display or none). A 1024x600 HDMI display: in
+config.txt change both hdmi_cvt lines to "hdmi_cvt=1024 600 60 6 0 0 0" and, under [pi5], set framebuffer_width=1024
+and framebuffer_height=600 (the 1024x600 card has them), or use sidecar-pi-sd-*-1024x600.zip.
 What is where: /Plugins (user machines and effects: load them in a U1..U5 slot or a send FX slot), /JUNO, /DX7,
 /MULTISAMPLE (an instrument), /NAM (a capture for INSERT AMP), /Samples/Starter (demo one-shots), /Licenses.
 NOTICE-STARTER.txt lists where every file comes from. The install guide: INSTALL-PI.md in the sidecar-expander
@@ -301,9 +314,11 @@ repository.
 EOF
 shipcheck "$st"
 [ "$(ls -A "$st/.rytm" 2>/dev/null)" = www-next ] || [ -z "$web" ] || { echo "starter: /.rytm holds more than www-next"; exit 1; }
-sz="sidecar-$ver-starter.zip"
+sz="sidecar-$ver-starter$tsuf.zip"
 mkzip "$st" "$here/dist/pi/$sz"
 ( cd "$here/dist/pi" && shasum -a 256 "$sz" > "$sz.sha256" )
 echo "starter zip: $sz sha256 $(cut -d' ' -f1 "$here/dist/pi/$sz.sha256") ($(find "$st" -type f | wc -l | tr -d ' ') files)" >> "$info"
 rm -rf "$st"
+# SHA256SUMS of every zip and the update file (what INSTALL-PI.md checks against)
+( cd "$here/dist/pi" && shasum -a 256 *.zip $(ls *.scu 2>/dev/null) > SHA256SUMS )
 echo "dist/pi from rytm-teensy $full (worktree $wt)"
