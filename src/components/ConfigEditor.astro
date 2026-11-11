@@ -407,7 +407,6 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       const key = (form.querySelector(`input[name="${name}"]`) as HTMLInputElement).dataset.key!;
       setRadio(name, o.cmd[key] ?? '');
     }
-    $('ce-sdboot-row').hidden = !o.sdbootRemoved;
     $<HTMLInputElement>('ce-sdboot-back').checked = o.sdboot !== false;
     $<HTMLInputElement>('ce-wifi-on').checked = o.wifiFile.enabled;
     $<HTMLInputElement>('ce-ssid').value = o.wifiFile.ssid;
@@ -429,6 +428,8 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
     const vi = C.VERSIONS.findIndex((v) => v.id === o.version);
     for (const el of document.querySelectorAll<HTMLElement>('#ce [data-since]'))
       el.hidden = vi < C.VERSIONS.findIndex((v) => v.id === el.dataset.since);
+    // the sdboot block is a Pi 4 block: nothing to put back on a Pi 5-only card
+    $('ce-sdboot-row').hidden = !o.sdbootRemoved || o.board === 'pi5';
     for (const el of document.querySelectorAll<HTMLElement>('.ce-vname')) el.textContent = o.version;
     const commit = vinfo().commit;
     $('ce-vcommit').innerHTML = commit ? ` (<code>${commit}</code>)` : ' (as its card scripts write them; not released yet)';

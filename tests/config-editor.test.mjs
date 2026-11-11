@@ -391,3 +391,21 @@ test('a card without the sdboot block keeps it out, with a note, and it can be p
   // the release card itself: no note
   assert.deepEqual(C.fromFiles(CARD800, null).notes, []);
 });
+
+// ---- re-review fixes
+test('an HDMI size picked after loading a 1024x600 card is written, not the loaded one', () => {
+  const o = C.fromFiles(CARD1024, null).options;
+  o.display = 'hdmi800';
+  const cvt = C.generateConfig(o).split('\n').filter((l) => l.startsWith('hdmi_cvt='));
+  assert.deepEqual(cvt, ['hdmi_cvt=800 480 60 6 0 0 0', 'hdmi_cvt=800 480 60 6 0 0 0']);
+});
+
+test('a Pi 5-only "no display" config loads as none', () => {
+  const o = C.defaults(); o.board = 'pi5'; o.display = 'none';
+  assert.equal(C.fromFiles(C.generateConfig(o), null).options.display, 'none');
+});
+
+test('[gpio] filters combine', () => {
+  const o = C.fromFiles(CARD800 + '[gpio4=1]\n[gpio5=0]\nfoo=1\n', null).options;
+  assert.equal(o.keptConfig[0].section, 'pi4][gpio4=1][gpio5=0');
+});

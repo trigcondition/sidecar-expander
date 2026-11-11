@@ -208,7 +208,7 @@ export function clone(o) {
 export function hdmiSize(o) {
   if (o.display === 'hdmi1024') return [1024, 600];
   if (o.display === 'hdmiOther') return [Number(o.hdmiW), Number(o.hdmiH)];
-  if (o.keepHdmi) return o.keepHdmi; // a loaded card's own mode, kept while a DSI display or none is chosen
+  if (o.keepHdmi && (o.display === 'td2' || o.display === 'dsi1' || o.display === 'none')) return o.keepHdmi; // a loaded card's own mode, kept while a DSI display or none is chosen
   return [800, 480];
 }
 
@@ -548,14 +548,15 @@ export function parseConfig(text) {
     if (line.startsWith(SDBOOT_END)) { inSdboot = false; continue; }
     // only the shape the editor writes for "no display" (a card's own comment line has more text after the mode)
     if (/^#\s*hdmi_cvt=\d+ \d+ 60 [1-6] 0 0 0$/.test(line)) commentedCvt = true;
-    if (/^#\s*\[pi4\]$/.test(line)) commentedPi4 = true;
+    if (/^#\s*\[pi[45]\]$/.test(line)) commentedPi4 = true;
     if (!line || line.startsWith('#')) continue;
     const m = /^\[([^\]]+)\]$/.exec(line);
     if (m) {
       const h = m[1];
-      const kind = (x) => (/^(pi\d+\w*|cm\d+\w*|pi\d+b)$/i.test(x) ? 'model' : /^(HDMI|EDID|gpio|serial)\b/i.test(x) ? x.replace(/[^A-Za-z].*$/, '').toLowerCase() : x);
+      const kind = (x) => (/^gpio\d/i.test(x) ? 'gpio' : /^(pi\d+\w*|cm\d+\w*|pi\d+b)$/i.test(x) ? 'model' : /^(HDMI|EDID|serial)\b/i.test(x) ? x.replace(/[^A-Za-z].*$/, '').toLowerCase() : x);
       if (h === 'all') filters = [];
       else if (h === 'none') filters = [h];
+      else if (kind(h) === 'gpio') filters = [...filters, h]; // gpio filters combine with each other
       else filters = [...filters.filter((f) => kind(f) !== kind(h)), h];
       sec = filters.length ? filters.join('][') : 'all';
       continue;
