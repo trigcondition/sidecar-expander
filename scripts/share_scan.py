@@ -13,6 +13,7 @@ Flags:
 Exit status 1 when anything outside the expected notices is found.
 """
 import argparse
+import gzip
 import json
 import os
 import re
@@ -45,8 +46,21 @@ def files():
             yield os.path.relpath(p, HERE), p
 
 
-def payload(rel, path):
-    """-> bytes to scan: a .hex as its binary, a zip's members joined, else the raw file."""
+def notice(name):
+    """a third-party licence or notice file of a release artifact (dist/, a zip member): its e-mails are notices"""
+    base = os.path.basename(name).upper()
+    return (any(w in base for w in ("LICENSE", "LICENCE", "NOTICE", "COPYING")) or "/LICENSES/" in "/" + name.upper()
+            or base.endswith("-SOURCE.TAR.GZ"))   # a GPL package's source (modele-source.tar.gz): its authors' headers
+
+
+def unzip(name, b):
+    """a .gz (the web app's text files on the card) as its text, so the scan sees what it holds, not deflate noise"""
+    return gzip.decompress(b) if name.endswith(".gz") and b[:2] == b"\x1f\x8b" else b
+
+
+def payload(rel, path, notices=True):
+    """-> bytes to scan: a .hex as its binary, a zip's members joined (each .gz member unpacked; notices=False: not
+    its licence / notice members), a .gz unpacked, else the raw file."""
     raw = open(path, "rb").read()
     if rel.endswith(".hex"):
         out = bytearray()
@@ -56,7 +70,9 @@ def payload(rel, path):
         return bytes(out)
     if rel.endswith(".zip"):
         with zipfile.ZipFile(path) as z:
-            return b"\n".join(z.read(n) for n in z.namelist())
+            return b"\n".join(unzip(n, z.read(n)) for n in z.namelist() if notices or not notice(n))
+    if rel.endswith(".gz"):
+        return unzip(rel, raw)
     if rel.endswith(".json") and "patches" in rel:
         doc = json.loads(raw)
         if "ops" in doc:                    # the mods' own bytes, as the Rytm will hold them
@@ -91,13 +107,19 @@ def main():
         for m in set(PATHS.findall(data)):
             bad.append(f"{rel}: local path {m[:60].decode(errors='replace')}")
         mails = sorted(set(EMAIL.findall(data)))
+        if rel.endswith(".zip"):   # a zip's licence / notice members: their e-mails are notes, the rest as below
+            own = set(EMAIL.findall(payload(rel, path, notices=False)))
+            if set(mails) - own:
+                notes.append(f"{rel}: e-mail in its licence / notice files {', '.join(m.decode() for m in sorted(set(mails) - own)[:4])}")
+            mails = sorted(own)
         if rel.endswith((".img", ".hex", ".zip")) and mails and set(mails) <= BINARY_NOTICES:
             notes.append(f"{rel}: third-party notice e-mail {', '.join(m.decode() for m in mails)}")
             mails = []
         if mails:
             # the site's bundled third-party scripts (Pagefind's translation credits) count as notices too
             vendored = rel.startswith((os.path.join("_site", "pagefind") + os.sep, os.path.join("_site", "_astro") + os.sep))
-            (notes if top in NOTICE_FILES or top == "licenses" or vendored or rel.endswith(("COPYING.linux", "LICENCE.broadcom"))
+            dist_notice = top == "dist" and notice(rel)
+            (notes if top in NOTICE_FILES or top == "licenses" or vendored or dist_notice or rel.endswith(("COPYING.linux", "LICENCE.broadcom"))
              else bad).append(f"{rel}: e-mail {', '.join(m.decode() for m in mails[:4])}")
         if rel.endswith((".syx", ".bin", ".img", ".hex", ".zip")) and SYSEX.search(data):
             bad.append(f"{rel}: holds an Elektron SysEx header")
