@@ -11,6 +11,14 @@
 
 export const CARD = { version: '0.4.4', commit: '05c4818', cmdline: 'sdport=0 socmaxtemp=78' };
 
+// The Sidecar versions the editor writes for. A key is written only for a version that reads it (KEYS' since). 0.5.0:
+// the 0.5.0 line (sidecar-firmware merge/050-features ea80c4f); its card scripts write the same default files as 0.4.4.
+export const VERSIONS = [
+  { id: '0.4.4', label: '0.4.4', note: 'the current release', commit: '05c4818', cmdline: 'sdport=0 socmaxtemp=78' },
+  { id: '0.5.0', label: '0.5.0', note: 'coming', commit: null, cmdline: 'sdport=0 socmaxtemp=78' },
+];
+const vIndex = (v) => VERSIONS.findIndex((x) => x.id === v);
+
 export const BOARDS = ['dual', 'pi4', 'pi5'];
 export const DISPLAYS = ['hdmi800', 'hdmi1024', 'hdmiOther', 'td2', 'dsi1', 'none'];
 
@@ -67,6 +75,21 @@ export const KEYS = [
     help: 'OVERBRIDGE mode: the seconds the box may be gone before the Sidecar device comes back on USB-C.' },
   { key: 'usbmidi', group: 'usb', def: 'os:off', values: ['os:off', 'os:on', 'os:emu'], label: 'Rytm OS updates over USB-C',
     help: 'os:on lets Elektron Transfer upgrade the Rytm\'s OS through the Sidecar\'s USB-C MIDI port; os:emu only towards rytm-emu. Off by default.' },
+  // 0.5.0: the web update and the USB-C network (docs/web-update.md, docs/usb-network.md)
+  { key: 'webupdate', since: '0.5.0', group: 'network', def: '1', values: ['0', '1'], label: 'Update from the web page',
+    help: 'Settings › Update on the web page installs a .scu update file, on trial, going back by itself if it does not start. 0 turns it off: the card is then updated in a computer.' },
+  { key: 'net', since: '0.5.0', group: 'network', def: 'auto', values: ['auto', 'usb', 'wifi', 'lan'], label: 'Network at boot',
+    help: 'auto: the USB-C network when a computer on USB-C starts its network driver at boot, else Wi-Fi or Ethernet. usb: always USB-C; wifi: never USB-C (Wi-Fi if stored, else Ethernet); lan: Ethernet even with Wi-Fi stored.' },
+  { key: 'usbnet', since: '0.5.0', group: 'usb', def: 'on', values: ['on', 'off'], label: 'USB-C network',
+    help: 'The network function in the USB-C device (the web page over the cable). off: the USB-C device as in 0.4.2, byte for byte.' },
+  { key: 'usbip', since: '0.5.0', group: 'usb', def: '172.31.77.1', usbip: true, label: 'USB-C network address',
+    help: 'The Pi\'s address on the cable (/24); the computer gets .2 by DHCP (.1 when the Pi is .2). Not 0.x, 127.x, multicast, or a .0 / .255 host.' },
+  { key: 'usbwait', since: '0.5.0', group: 'usb', def: '5', int: [1, 30], label: 'USB-C network wait (s)',
+    help: 'net=auto: how long a computer on USB-C may take to start its network driver at boot.' },
+  { key: 'usbquiet', since: '0.5.0', group: 'usb', def: '700', int: [100, 5000], label: 'USB-C quiet time (ms)',
+    help: 'net=auto: no USB traffic this long after the device starts means no computer.' },
+  { key: 'usbtrust', since: '0.5.0', group: 'usb', def: '1', values: ['1', '0'], label: 'Trust the USB-C cable',
+    help: '1: no pairing code over the USB-C cable. 0: the code there too, as on Wi-Fi and Ethernet.' },
   // performance
   { key: 'cpumhz', group: 'temp', def: '1500', values: ['1500', '1200', '1000'], label: 'CPU clock (MHz)',
     help: '1500 is the board\'s full clock (a Pi 5 keeps its 2400); 1200 and 1000 run cooler (a Pi 5: 1500). Wins over Settings > System.' },
@@ -93,6 +116,8 @@ export const KEYS = [
     help: 'The output FIFO target; latency added N / 48 ms.' },
   { key: 'split', group: 'engine', def: '4', int: [1, 7], label: 'Core split',
     help: 'Voices 1..N render on core 1, the rest on core 2.' },
+  { key: 'plugram', since: '0.5.0', group: 'engine', def: 'by RAM: 64 (2 GB), 128 (4 GB), 256 (8 GB)', int: [0, 1024], label: 'Plugin RAM (MB)',
+    help: 'The user machines\' memory pool (plugin API 3), taken at boot before the pool RAM.' },
   { key: 'idlewfe', group: 'engine', def: '1', values: ['0', '1'], label: 'Idle sleep',
     help: '0 turns off the idle sleep added for the heat (for an A/B).' },
   // developer
@@ -110,7 +135,13 @@ export const KEYS = [
     help: 'A developer\'s option: a SysEx from the computer reboots the Pi. Never on a unit used to play live.' },
 ];
 
+for (const k of KEYS) k.since ??= '0.4.4';
 export const KEY = Object.fromEntries(KEYS.map((k) => [k.key, k]));
+// does this Sidecar version read the key? (the keys the display and network sections own: every version)
+export function reads(version, key) {
+  if (key === 'display' || key === 'dsi_rotate' || key === 'paircode') return true;
+  return !!KEY[key] && vIndex(version) >= vIndex(KEY[key].since);
+}
 // the order keys are written in: the card's two first, then the table's, the owned keys in their place
 export const KEY_ORDER = ['sdport', 'socmaxtemp', 'display', 'dsi_rotate', ...KEYS.slice(2).map((k) => k.key)];
 KEY_ORDER.splice(KEY_ORDER.indexOf('web') + 1, 0, 'paircode');
@@ -130,6 +161,11 @@ export function validValue(key, v) {
   if (k.values) return k.values.includes(v);
   if (k.int) return /^\d+$/.test(v) && String(Number(v)) === v && Number(v) >= k.int[0] && Number(v) <= k.int[1];
   if (k.ip) return isIPv4(v);
+  if (k.usbip) {
+    if (!isIPv4(v)) return false;
+    const q = v.split('.').map(Number);
+    return q[0] !== 0 && q[0] !== 127 && q[0] < 224 && q[3] !== 0 && q[3] !== 255;
+  }
   if (k.pattern) return k.pattern.test(v) && (key !== 'emuhost' || isIPv4(v.split(':')[0]));
   return false;
 }
@@ -137,11 +173,12 @@ export function validValue(key, v) {
 // ---------------------------------------------------------------------------------------------------------------------
 // the options
 
-export function defaults() {
+export function defaults(version = '0.4.4') {
   const cmd = Object.fromEntries(KEYS.map((k) => [k.key, '']));
   cmd.sdport = '0';
   cmd.socmaxtemp = '78';
   return {
+    version,
     board: 'dual',
     display: 'hdmi800',
     hdmiW: 1280,
@@ -171,6 +208,17 @@ export function hdmiSize(o) {
   if (o.display === 'hdmi1024') return [1024, 600];
   if (o.display === 'hdmiOther') return [Number(o.hdmiW), Number(o.hdmiH)];
   return [800, 480];
+}
+
+// hdmi_cvt's aspect field: 1 4:3, 2 14:9, 3 16:9, 4 5:4, 5 16:10, 6 15:9 (Raspberry Pi config.txt). 800x480 and
+// 1024x600 keep 6, as the card and the docs have them; any other size the nearest ratio.
+export const ASPECTS = [[1, 4 / 3], [2, 14 / 9], [3, 16 / 9], [4, 5 / 4], [5, 16 / 10], [6, 15 / 9]];
+export function hdmiAspect(w, h) {
+  if ((w === 800 && h === 480) || (w === 1024 && h === 600)) return 6;
+  const r = w / h;
+  let best = ASPECTS[0];
+  for (const a of ASPECTS) if (Math.abs(Math.log(r / a[1])) < Math.abs(Math.log(r / best[1]))) best = a;
+  return best[0];
 }
 
 function validHdmi(o) {
@@ -225,7 +273,7 @@ function pi4Hdmi(o) {
     `${d}hdmi_force_hotplug=1`,
     `${d}hdmi_group=2`,
     `${d}hdmi_mode=87`,
-    `${d}hdmi_cvt=${w} ${h} 60 6 0 0 0`,
+    `${d}hdmi_cvt=${w} ${h} 60 ${hdmiAspect(w, h)} 0 0 0`,
     `${d}disable_overscan=1`,
     '',
   ];
@@ -259,7 +307,7 @@ function pi5Hdmi(o) {
     `${d}framebuffer_height=${h}`,
     `${d}hdmi_group=2`,
     `${d}hdmi_mode=87`,
-    `${d}hdmi_cvt=${w} ${h} 60 6 0 0 0`,
+    `${d}hdmi_cvt=${w} ${h} 60 ${hdmiAspect(w, h)} 0 0 0`,
     '',
   ];
 }
@@ -323,6 +371,7 @@ export function cmdlineTokens(o) {
   const set = new Set();
   const out = [];
   for (const key of KEY_ORDER) {
+    if (!reads(o.version, key)) continue;
     const v = OWNED.has(key) ? ownedValue(o, key) : o.cmd[key] ?? '';
     if (v === '' || (!OWNED.has(key) && !validValue(key, v))) continue;
     out.push(`${key}=${v}`);
@@ -392,7 +441,7 @@ export function check(o) {
   if (o.pair.mode === 'fixed' && !/^\d{8}$/.test(o.pair.code)) errors.push('A fixed pairing code is exactly 8 digits.');
   for (const k of KEYS) {
     const v = o.cmd[k.key] ?? '';
-    if (!validValue(k.key, v)) errors.push(`${k.key}=${v}: ${describeValues(k)}.`);
+    if (reads(o.version, k.key) && !validValue(k.key, v)) errors.push(`${k.key}=${v}: ${describeValues(k)}.`);
   }
   if (o.display === 'td2' && o.board === 'pi4')
     errors.push('Touch Display 2 does not work on a Pi 4 (Circle has no driver for it there): choose a Pi 5.');
@@ -408,6 +457,15 @@ export function check(o) {
   if (o.wifiFile.enabled && o.cmd.wifi === 'off')
     warnings.push('wifi=off in cmdline.txt keeps the Pi on Ethernet: the network in sidecar-wifi.txt is saved but not joined.');
   if (o.wifiFile.enabled) errors.push(...checkWifi(o.wifiFile).map((e) => `sidecar-wifi.txt: ${e}`));
+  for (const t of o.keptCmdline) {
+    const key = t.split('=', 1)[0];
+    if (KEY[key] && !reads(o.version, key))
+      warnings.push(`cmdline.txt keeps "${t}" as it was, but Sidecar ${o.version} does not read ${key}= (from ${KEY[key].since} on).`);
+  }
+  if (o.cmd.webupdate === '0' && reads(o.version, 'webupdate'))
+    warnings.push('webupdate=0: no updates from the web page; update this card in a computer.');
+  if (o.cmd.usbtrust === '0' && reads(o.version, 'usbtrust'))
+    warnings.push('usbtrust=0: the USB-C cable asks for the pairing code too.');
   for (const { line } of o.keptConfig) {
     if (/^(ignore_lcd=1|disable_touchscreen=1|display_auto_detect=1)$|^dtoverlay=vc4-kms/.test(line))
       warnings.push(`config.txt keeps "${line}": the Sidecar docs say never (Circle has no KMS; the screen may stay dark).`);
@@ -418,7 +476,7 @@ export function check(o) {
 export function describeValues(k) {
   if (k.values) return `one of ${k.values.join(', ')}`;
   if (k.int) return `a whole number ${k.int[0]} to ${k.int[1]}`;
-  if (k.ip) return 'an IPv4 address such as 192.168.1.50';
+  if (k.ip || k.usbip) return 'an IPv4 address such as 192.168.1.50';
   if (k.placeholder) return `like ${k.placeholder}`;
   return 'a value without spaces';
 }
@@ -428,7 +486,7 @@ export function describeValues(k) {
 
 // cmdline.txt: the managed keys set the options; anything else is kept as it is. Returns the changes to apply on top
 // of the defaults with the card's sdport/socmaxtemp removed (what is not in the file is the firmware's default).
-export function parseCmdline(text) {
+export function parseCmdline(text, version = '0.4.4') {
   const cmd = Object.fromEntries(KEYS.map((k) => [k.key, '']));
   const r = { cmd, display: null, rotate: null, pair: { mode: 'random', code: '' }, kept: [], notes: [] };
   const seen = new Set();
@@ -448,6 +506,10 @@ export function parseCmdline(text) {
       else if (v === '270') (r.display = 'td2'), (r.rotate = 'normal');
     } else if (key === 'paircode' && (v === '0' || /^\d{8}$/.test(v))) {
       r.pair = v === '0' ? { mode: 'off', code: '' } : { mode: 'fixed', code: v };
+    } else if (KEY[key] && !reads(version, key)) {
+      r.kept.push(t);
+      r.notes.push(`${t}: Sidecar ${version} does not read ${key}= (from ${KEY[key].since} on); kept as is.`);
+      continue;
     } else if (KEY[key] && v !== '' && validValue(key, v)) {
       cmd[key] = v;
     } else {
@@ -481,8 +543,13 @@ export function parseConfig(text) {
     if (inSdboot) continue;
     if (sec === 'pi4' && /^(armstub=armstub8-rpi4\.bin|kernel=sdboot\.img)$/.test(line)) pi4 = true;
     if (sec === 'pi5' && line === 'kernel=kernel_2712.img') pi5 = true;
-    const c = /^hdmi_cvt=(\d+) (\d+) 60 6 0 0 0$/.exec(line);
-    if (c && !cvt && (sec === 'pi4' || sec === 'pi5' || sec === 'all')) cvt = [Number(c[1]), Number(c[2])];
+    const c = /^hdmi_cvt=(\d+) (\d+) 60 [1-6] 0 0 0$/.exec(line);
+    if (c && (sec === 'pi4' || sec === 'pi5')) {
+      // the editor writes the mode itself (with the aspect for the size): a card's own hdmi_cvt is not kept twice
+      if (!cvt) cvt = [Number(c[1]), Number(c[2])];
+      continue;
+    }
+    if (sec === 'pi5' && /^framebuffer_(width|height)=\d+$/.test(line)) continue; // written from the size too
     if (sec === 'pi4' && line === 'lcd_rotate=2') lcdRotate = true;
     body.push({ section: sec, line });
   }
@@ -520,8 +587,8 @@ export function parseConfig(text) {
 
 // options from loaded files: the card's defaults, then config.txt (board, display, kept lines), then cmdline.txt (its
 // keys, kept tokens, and the display when it says display=0 or a DSI rotation). A file not given: the card's.
-export function fromFiles(configText, cmdlineText) {
-  const o = defaults();
+export function fromFiles(configText, cmdlineText, version = '0.4.4') {
+  const o = defaults(version);
   const notes = [];
   if (configText != null) {
     const p = parseConfig(configText);
@@ -533,7 +600,7 @@ export function fromFiles(configText, cmdlineText) {
     notes.push(...p.notes);
   }
   if (cmdlineText != null) {
-    const p = parseCmdline(cmdlineText);
+    const p = parseCmdline(cmdlineText, version);
     o.cmd = { ...p.cmd };
     o.keptCmdline = [...p.kept];
     o.pair = { ...p.pair };
@@ -542,6 +609,22 @@ export function fromFiles(configText, cmdlineText) {
     notes.push(...p.notes);
   }
   return { options: o, notes };
+}
+
+// the options for another Sidecar version: kept tokens the new version reads (and takes) become form values; values
+// for keys it does not read stay in the options but are not written (switching back brings them back)
+export function retarget(o, version) {
+  const n = clone(o);
+  n.version = version;
+  n.keptCmdline = [];
+  for (const t of o.keptCmdline) {
+    const eq = t.indexOf('=');
+    const key = eq > 0 ? t.slice(0, eq) : '';
+    const v = eq > 0 ? t.slice(eq + 1) : '';
+    if (KEY[key] && reads(version, key) && v !== '' && validValue(key, v) && !n.cmd[key]) n.cmd[key] = v;
+    else n.keptCmdline.push(t);
+  }
+  return n;
 }
 
 // the lines of a generated file that differ from the release card's for the same board and HDMI size (for the page's

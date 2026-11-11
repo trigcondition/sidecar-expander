@@ -60,10 +60,10 @@ If you cannot use the bundled boot firmware for some reason, get `start4.elf`, `
 One line of `name=value` options, separated by spaces. The release sets:
 
 ```
-sdport=0
+sdport=0 socmaxtemp=78
 ```
 
-`sdport=0` turns off writing boot files over the network. Leave it in. Every other option keeps its default:
+`sdport=0` turns off writing boot files over the network. Leave it in. `socmaxtemp=78` lets the Pi run at its full clock up to 78 °C before it slows itself down (without it: 60 °C). Every other option keeps its default:
 
 | Option | Default | |
 |---|---|---|

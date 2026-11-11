@@ -137,7 +137,8 @@ test('Pi 4 only: no [pi5] lines, the sdboot block kept exactly', () => {
 test('other HDMI size: the mode in both sections, the comment says the size', () => {
   const o = opts((o) => { o.display = 'hdmiOther'; o.hdmiW = 1280; o.hdmiH = 800; });
   const cfg = C.generateConfig(o);
-  assert.equal(settings(cfg, 'pi4').hdmi_cvt, '1280 800 60 6 0 0 0');
+  assert.equal(settings(cfg, 'pi4').hdmi_cvt, '1280 800 60 5 0 0 0', '16:10: aspect 5');
+  assert.equal(settings(cfg, 'pi5').hdmi_cvt, '1280 800 60 5 0 0 0');
   assert.equal(settings(cfg, 'pi5').framebuffer_width, '1280');
   assert.ok(cfg.includes("# The Pi 4's 1280x800 HDMI display"));
   const back = C.fromFiles(cfg, null).options;
@@ -256,9 +257,83 @@ test('sidecar-wifi.txt: the firmware\'s checks, and values it would trim are quo
   assert.ok(!C.generateCmdline(o).includes('correct') && !C.generateConfig(o).includes('correct'));
 });
 
-test('every cmdline key the editor writes is one the 0.4.4 firmware reads', () => {
-  // GetAppOption* keys in sidecar-firmware v0.4.4 pi/engine + pi/ui, and Circle's documented options
-  const engine = 'a4 a4att a4ch bench capch cardq cpumhz display dsi dsi_port dsi_rotate dsitouch_inv emuhost fifo gadget idlewfe link midifake mirrorhold mirrormargin mirrorname msampram notes nvme obblocks obctr obout oboutdelay oburbs osupdate out paircode poolmono poolram recbuf res sampleram sdport selftest split testcard testsecs tohost trimpost trimpre uac2test uistyle um usb usbmidi usbreboot voicebudget web wifi ip netmask screensaver brightness touchtest'.split(' ');
+test('every cmdline key the editor writes for a version is one that version reads', () => {
+  // GetAppOption* keys in pi/engine + pi/ui: sidecar-firmware v0.4.4, and the 0.5.0 line (merge/050-features ea80c4f);
+  // ip/netmask (NetOption), screensaver/brightness/touchtest (the display settings' Value), and Circle's own options
+  const k044 = 'a4 a4att a4ch bench capch cardq cpumhz display dsi dsi_port dsi_rotate dsitouch_inv emuhost fifo gadget idlewfe link midifake mirrorhold mirrormargin mirrorname msampram notes nvme obblocks obctr obout oboutdelay oburbs osupdate out paircode poolmono poolram recbuf res sampleram sdport selftest split testcard testsecs tohost trimpost trimpre uac2test uistyle um usb usbmidi usbreboot voicebudget web wifi ip netmask screensaver brightness touchtest'.split(' ');
+  const k050 = [...k044, ...'net plugram updtrial usbip usbnet usbquiet usbtrust usbwait webupdate'.split(' ')];
   const circle = ['width', 'height', 'socmaxtemp', 'touchscreen'];
-  for (const k of C.KEY_ORDER) assert.ok(engine.includes(k) || circle.includes(k), k);
+  for (const [v, list] of [['0.4.4', k044], ['0.5.0', k050]]) {
+    // everything set: only keys of that version come out
+    const o = C.defaults(v);
+    for (const k of C.KEYS) o.cmd[k.key] = k.values ? k.values[k.values.length - 1] : k.int ? String(k.int[0]) : k.usbip ? '10.0.0.1' : k.ip ? '10.0.0.2' : '';
+    o.cmd.touchscreen = '0,1,0,1';
+    o.cmd.emuhost = '10.0.0.3:7301';
+    o.display = 'none';
+    o.pair = { mode: 'off', code: '' };
+    for (const t of C.cmdlineTokens(o)) {
+      const k = t.split('=')[0];
+      assert.ok(list.includes(k) || circle.includes(k), `${v}: ${k}`);
+    }
+  }
+});
+
+test('0.5.0: the default files are what the 0.5.0 card scripts write, byte for byte', () => {
+  const f = (n) => readFileSync(new URL(`./fixtures/card-0.5.0/${n}`, import.meta.url), 'utf8');
+  const o = C.defaults('0.5.0');
+  assert.equal(C.generateConfig(o), f('config-800x480.txt'));
+  assert.equal(C.generateCmdline(o), f('cmdline.txt'));
+  o.display = 'hdmi1024';
+  assert.equal(C.generateConfig(o), f('config-1024x600.txt'));
+});
+
+test('0.5.0-only keys: written for 0.5.0, never for 0.4.4; a loaded one is kept and said', () => {
+  const o = C.defaults('0.5.0');
+  o.cmd.webupdate = '0';
+  o.cmd.net = 'usb';
+  o.cmd.usbip = '172.31.77.2';
+  assert.equal(C.generateCmdline(o), 'sdport=0 socmaxtemp=78 webupdate=0 net=usb usbip=172.31.77.2\n');
+  assert.ok(C.check(o).warnings.some((w) => /webupdate=0/.test(w)));
+  // the same options for 0.4.4: none of them written
+  const old = C.retarget(o, '0.4.4');
+  assert.equal(C.generateCmdline(old), 'sdport=0 socmaxtemp=78\n');
+  assert.deepEqual(C.check(old).errors, []);
+  // and back: they return
+  assert.equal(C.generateCmdline(C.retarget(old, '0.5.0')), C.generateCmdline(o));
+  // a 0.4.4 card file with webupdate=0: kept as is, with a note and a warning
+  const r = C.fromFiles(null, 'sdport=0 socmaxtemp=78 webupdate=0 usbnet=off', '0.4.4');
+  assert.deepEqual(r.options.keptCmdline, ['webupdate=0', 'usbnet=off']);
+  assert.equal(r.notes.length, 2);
+  assert.ok(/does not read webupdate=/.test(r.notes[0]));
+  assert.equal(C.generateCmdline(r.options), 'sdport=0 socmaxtemp=78 webupdate=0 usbnet=off\n');
+  assert.equal(C.check(r.options).warnings.filter((w) => /does not read/.test(w)).length, 2);
+  // switching that to 0.5.0 makes them form values
+  const n = C.retarget(r.options, '0.5.0');
+  assert.deepEqual(n.keptCmdline, []);
+  assert.equal(n.cmd.webupdate, '0');
+  assert.equal(n.cmd.usbnet, 'off');
+  // loaded as 0.5.0 directly: no notes
+  assert.deepEqual(C.fromFiles(null, 'webupdate=0', '0.5.0').notes, []);
+  // usbip: the firmware's rules
+  for (const [ip, ok] of [['172.31.77.1', true], ['10.1.2.3', true], ['127.0.0.1', false], ['0.1.2.3', false], ['224.0.0.1', false], ['10.0.0.0', false], ['10.0.0.255', false]])
+    assert.equal(C.validValue('usbip', ip), ok, ip);
+});
+
+test('hdmi_cvt aspect code per size', () => {
+  const cases = [[800, 480, 6], [1024, 600, 6], [1280, 800, 5], [1920, 1200, 5], [1440, 900, 5], [1280, 720, 3], [1920, 1080, 3],
+    [1024, 768, 1], [640, 480, 1], [1280, 1024, 4], [1400, 900, 2]];
+  for (const [w, h, a] of cases) {
+    assert.equal(C.hdmiAspect(w, h), a, `${w}x${h}`);
+    const o = opts((o) => { o.display = 'hdmiOther'; o.hdmiW = w; o.hdmiH = h; });
+    const cfg = C.generateConfig(o);
+    assert.equal(settings(cfg, 'pi4').hdmi_cvt, `${w} ${h} 60 ${a} 0 0 0`);
+    // read back as the same display, the card's own hdmi_cvt line not kept twice
+    const back = C.fromFiles(cfg, null).options;
+    assert.deepEqual(back.keptConfig, []);
+    assert.equal(C.generateConfig(back), cfg);
+  }
+  // a card with the old aspect 6 on 1280x800 reads as that size and comes out with 5, nothing kept
+  const oldCard = CARD800.replaceAll('800 480 60 6 0 0 0', '1280 800 60 6 0 0 0');
+  const b = C.fromFiles(oldCard, null).options;
+  assert.deepEqual([b.display, b.hdmiW, b.hdmiH, b.keptConfig.length], ['hdmiOther', 1280, 800, 0]);
 });

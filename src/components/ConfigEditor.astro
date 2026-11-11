@@ -2,11 +2,11 @@
 // The config editor: a form for the Pi's config.txt and cmdline.txt (and sidecar-wifi.txt), the files shown live with
 // Copy and Download. Everything runs in the page: no network, no storage, no URL state. The generator is
 // src/lib/sidecar-config.mjs (tests/config-editor.test.mjs).
-import { KEYS, KEY, CARD } from '../lib/sidecar-config.mjs';
+import { KEYS, KEY, CARD, VERSIONS } from '../lib/sidecar-config.mjs';
 
 type K = (typeof KEYS)[number];
 // keys placed in the main sections; the rest go under Advanced, by group
-const MAIN = new Set(['res', 'uistyle', 'ip', 'netmask', 'web', 'sdport', 'wifi', 'usb', 'gadget', 'usbmidi', 'socmaxtemp', 'cpumhz']);
+const MAIN = new Set(['res', 'uistyle', 'ip', 'netmask', 'web', 'sdport', 'wifi', 'usb', 'gadget', 'usbmidi', 'socmaxtemp', 'cpumhz', 'webupdate', 'net', 'usbnet', 'usbip']);
 const ADV: [string, string][] = [
   ['display', 'Display and touch'],
   ['usb', 'USB-C'],
@@ -23,10 +23,10 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   <div class="ce-start">
     <div class="ce-start-text">
       <p class="ce-kicker">Start from</p>
-      <p class="ce-start-sub">The Sidecar {CARD.version} card's own files (<code>{CARD.commit}</code>), or the files on your card.</p>
+      <p class="ce-start-sub">The Sidecar <span class="ce-vname">{CARD.version}</span> card's own files<span id="ce-vcommit"> (<code>{CARD.commit}</code>)</span>, or the files on your card.</p>
     </div>
     <div class="ce-start-actions">
-      <button type="button" class="ce-btn" id="ce-reset">The {CARD.version} card</button>
+      <button type="button" class="ce-btn" id="ce-reset">The card's files</button>
       <label class="ce-btn ce-file">
         Open my files…
         <input type="file" id="ce-open" accept=".txt,text/plain" multiple />
@@ -47,6 +47,18 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   <div class="ce-grid">
     <form class="ce-form" id="ce-form" autocomplete="off" onsubmit="return false">
 
+      <section class="ce-sec" aria-labelledby="ce-h-version">
+        <p class="ce-num">01</p>
+        <h2 id="ce-h-version">Sidecar version</h2>
+        <fieldset class="ce-seg">
+          <legend class="sr-only">The Sidecar version on the card</legend>
+          {VERSIONS.map((v, i) => (
+            <label><input type="radio" name="version" value={v.id} checked={i === 0} /><span>{v.label}<small>{v.note}</small></span></label>
+          ))}
+        </fieldset>
+        <p class="ce-hint">The files are written for this version: an option it does not read is never written. 0.5.0 adds the web update and the USB-C network.</p>
+      </section>
+
       <section class="ce-sec" aria-labelledby="ce-h-board">
         <p class="ce-num">01</p>
         <h2 id="ce-h-board">Board</h2>
@@ -60,7 +72,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-display">
-        <p class="ce-num">02</p>
+        <p class="ce-num">03</p>
         <h2 id="ce-h-display">Display</h2>
         <fieldset class="ce-cards">
           <legend class="sr-only">Which display</legend>
@@ -107,8 +119,22 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-net">
-        <p class="ce-num">03</p>
+        <p class="ce-num">04</p>
         <h2 id="ce-h-net">Network</h2>
+
+        <div data-since="0.5.0">
+          <label class="ce-field">
+            <span>{KEY.net.label} <code>net=</code></span>
+            <select data-key="net">
+              <option value="">Not set: auto</option>
+              <option value="auto">auto: USB-C when a computer starts its network driver, else Wi-Fi or Ethernet</option>
+              <option value="usb">usb: always the USB-C network</option>
+              <option value="wifi">wifi: never USB-C (Wi-Fi if stored, else Ethernet)</option>
+              <option value="lan">lan: Ethernet, even with Wi-Fi stored</option>
+            </select>
+          </label>
+          <p class="ce-hint">{KEY.net.help}</p>
+        </div>
 
         <h3>Ethernet</h3>
         <div class="ce-pair">
@@ -123,6 +149,14 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
           <label><input type="radio" name="k-web" data-key="web" value="" checked /><span>On</span></label>
           <label><input type="radio" name="k-web" data-key="web" value="0" /><span>Off</span></label>
         </fieldset>
+        <div data-since="0.5.0">
+          <fieldset class="ce-seg ce-seg-sm">
+            <legend>{KEY.webupdate.label} <code>webupdate=</code></legend>
+            <label><input type="radio" name="k-webupdate" data-key="webupdate" value="" checked /><span>On</span></label>
+            <label><input type="radio" name="k-webupdate" data-key="webupdate" value="0" /><span>Off</span></label>
+          </fieldset>
+          <p class="ce-hint">{KEY.webupdate.help}</p>
+        </div>
         <fieldset class="ce-seg ce-seg-sm">
           <legend>Pairing code <code>paircode=</code></legend>
           <label><input type="radio" name="pairmode" value="random" checked /><span>New code at every boot</span></label>
@@ -176,7 +210,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-usb">
-        <p class="ce-num">04</p>
+        <p class="ce-num">05</p>
         <h2 id="ce-h-usb">USB-C to a computer</h2>
         <fieldset class="ce-seg ce-seg-sm">
           <legend>{KEY.usb.label} <code>usb=</code></legend>
@@ -184,6 +218,15 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
           <label><input type="radio" name="k-usb" data-key="usb" value="mirror" /><span>Overbridge<small>the Rytm passed through</small></span></label>
         </fieldset>
         <p class="ce-hint">{KEY.usb.help} <span class="ce-only-pi5">On a Pi 5 USB-C is also the power input: a computer or hub port gives about 1.5 A, so use a USB-C power and data splitter with the 27 W supply.</span></p>
+        <div data-since="0.5.0">
+          <fieldset class="ce-seg ce-seg-sm">
+            <legend>{KEY.usbnet.label} <code>usbnet=</code></legend>
+            <label><input type="radio" name="k-usbnet" data-key="usbnet" value="" checked /><span>On</span></label>
+            <label><input type="radio" name="k-usbnet" data-key="usbnet" value="off" /><span>Off</span></label>
+          </fieldset>
+          <label class="ce-field ce-narrow-wide"><span>{KEY.usbip.label} <code>usbip=</code></span><input type="text" data-key="usbip" inputmode="decimal" placeholder={KEY.usbip.def} spellcheck="false" /></label>
+          <p class="ce-hint">{KEY.usbnet.help} {KEY.usbip.help} The cable needs no pairing code unless <code>usbtrust=0</code> (Advanced).</p>
+        </div>
         <fieldset class="ce-seg ce-seg-sm">
           <legend>{KEY.gadget.label} <code>gadget=</code></legend>
           <label><input type="radio" name="k-gadget" data-key="gadget" value="" checked /><span>On</span></label>
@@ -202,7 +245,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-temp">
-        <p class="ce-num">05</p>
+        <p class="ce-num">06</p>
         <h2 id="ce-h-temp">Heat and clock</h2>
         <div class="ce-pair">
           <label class="ce-field">
@@ -223,15 +266,15 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-adv">
-        <p class="ce-num">06</p>
+        <p class="ce-num">07</p>
         <h2 id="ce-h-adv">Advanced</h2>
-        <p class="ce-hint">Every other option the Sidecar {CARD.version} reads from <code>cmdline.txt</code>. Empty means not in the file: the default shown.</p>
+        <p class="ce-hint">Every other option the Sidecar <span class="ce-vname">{CARD.version}</span> reads from <code>cmdline.txt</code>. Empty means not in the file: the default shown.</p>
         {ADV.map(([g, title]) => (
           <details class="ce-adv">
-            <summary>{title} <small>{adv(g).length}</small></summary>
+            <summary>{title}</summary>
             <div class="ce-adv-list">
               {adv(g).map((k: K) => (
-                <div class="ce-opt">
+                <div class="ce-opt" data-since={k.since === '0.4.4' ? undefined : k.since}>
                   <label class="ce-field">
                     <span><code>{k.key}=</code> {k.label}</span>
                     {k.values ? (
@@ -249,7 +292,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
                       />
                     )}
                   </label>
-                  <p class="ce-hint">{k.help}{k.boards ? ' (Pi 5 only.)' : ''}</p>
+                  <p class="ce-hint">{k.help}{k.boards ? ' (Pi 5 only.)' : ''}{k.since !== '0.4.4' ? ` (From ${k.since}.)` : ''}</p>
                 </div>
               ))}
             </div>
@@ -290,7 +333,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
         </header>
         <pre class="ce-code" tabindex="0" aria-label="config.txt"><code id="ce-config"></code></pre>
       </div>
-      <p class="ce-legend"><span class="ce-mark-new"></span> changed from the {CARD.version} card <span class="ce-mark-kept"></span> kept from your file</p>
+      <p class="ce-legend"><span class="ce-mark-new"></span> changed from the <span class="ce-vname">{CARD.version}</span> card <span class="ce-mark-kept"></span> kept from your file</p>
       <p class="ce-legend">Put the files at the top level of the card (FAT32), replacing the card's own. <code>cmdline.txt</code> is one line.</p>
       <p class="sr-only" id="ce-status" aria-live="polite"></p>
     </aside>
@@ -311,11 +354,18 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
     hit.checked = true;
   };
 
-  let o = C.defaults(); // the options: in memory only
+  let o = C.defaults(C.VERSIONS[0].id); // the options: in memory only
+  const vinfo = () => C.VERSIONS.find((v) => v.id === o.version)!;
   let refConfig = C.generateConfig(o);
   let texts = { config: '', cmdline: '', wifi: '' };
 
   function readForm() {
+    const v = radio('version');
+    if (v && v !== o.version) {
+      // another version: kept tokens it reads become form values (C.retarget), then the form shows them
+      o = C.retarget(o, v);
+      writeForm();
+    }
     o.board = radio('board') as typeof o.board;
     o.display = radio('display') as typeof o.display;
     o.hdmiW = Number($<HTMLInputElement>('ce-hdmiW').value);
@@ -338,6 +388,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   }
 
   function writeForm() {
+    setRadio('version', o.version);
     setRadio('board', o.board);
     setRadio('display', o.display);
     $<HTMLInputElement>('ce-hdmiW').value = String(o.hdmiW);
@@ -363,15 +414,21 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   }
 
   const HINT: Record<string, string> = {
-    hdmi800: 'The card\'s default. Pi 4: the panel runs at 800x480, the UI 1:1. Pi 5: connect it to micro-HDMI 0 (next to USB-C) before power-on; the Pi 5\'s firmware picks the mode itself (1920x1080) and the UI is scaled to it, slightly soft.',
+    hdmi800: 'The card\'s default. Pi 4: the panel runs at 800x480, the UI 1:1. Pi 5: connect it to micro-HDMI 0 (next to USB-C) and switch the screen on before the Pi; the Pi 5\'s firmware picks the mode itself (1920x1080) and the UI is scaled to it, slightly soft.',
     hdmi1024: 'The 1024x600 card. Pi 4: the panel runs at 1024x600 with its own layout. Pi 5: the firmware picks the mode; the 1024x600 layout comes up when the display\'s EDID prefers it, else set UI layout size to 1024x600.',
-    hdmiOther: 'Pi 4: the HDMI mode is set to this size; the engine draws its 800x480 UI 1:1 in the middle (800x480 and 1024x600 get their own layouts). Pi 5: the firmware chooses the mode itself and ignores these lines; the UI is scaled to it.',
+    hdmiOther: 'Pi 4: the HDMI mode is set to this size; the engine draws its 800x480 UI 1:1 in the middle (800x480 and 1024x600 get their own layouts). Pi 5: the firmware chooses the mode itself and ignores these lines; the UI is scaled to it. A Pi 5 that shows only the backlight or 640x480 read no screen info at power-on: power the screen first, then the Pi.',
     td2: 'Pi 5 only (no driver on a Pi 4). Found by itself on CAM/DISP 0 or 1, no config.txt line; the UI fills its 1280x720. Normal is the owner\'s mounting (rotation 270); upside down writes dsi_rotate=90. Touch may not come back after a warm restart on some panels: power cycle.',
     dsi1: 'Found by itself, no config.txt line; preferred to HDMI. Pi 4: the firmware drives it (upside down: lcd_rotate=2 under [pi4]). Pi 5: the engine drives it (upside down: dsi_rotate=180) and needs a 22-to-15-pin display cable. In testing.',
     none: 'The Sidecar pages show on the Rytm\'s screen (UP + YES) and on the web page. The pairing code is on the Rytm (SIDECAR MENU › WEB UI); a unit with no screen at all writes it to sidecar-paircode.txt on the card. The HDMI lines are commented out and display=0 is set.',
   };
 
   function visibility() {
+    const vi = C.VERSIONS.findIndex((v) => v.id === o.version);
+    for (const el of document.querySelectorAll<HTMLElement>('#ce [data-since]'))
+      el.hidden = vi < C.VERSIONS.findIndex((v) => v.id === el.dataset.since);
+    for (const el of document.querySelectorAll<HTMLElement>('.ce-vname')) el.textContent = o.version;
+    const commit = vinfo().commit;
+    $('ce-vcommit').innerHTML = commit ? ` (<code>${commit}</code>)` : ' (as its card scripts write them; not released yet)';
     $('ce-hdmi-size').hidden = o.display !== 'hdmiOther';
     $('ce-rotate').hidden = !(o.display === 'td2' || o.display === 'dsi1');
     $('ce-display-hint').textContent = HINT[o.display];
@@ -390,7 +447,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
 
   function renderConfig() {
     // the reference: the card's file for the same board and HDMI size, so only real changes are marked
-    refConfig = C.generateConfig({ ...C.defaults(), board: o.board, display: o.display === 'hdmi1024' ? 'hdmi1024' : 'hdmi800' });
+    refConfig = C.generateConfig({ ...C.defaults(o.version), board: o.board, display: o.display === 'hdmi1024' ? 'hdmi1024' : 'hdmi800' });
     const lines = texts.config.replace(/\n$/, '').split('\n');
     const keptStart = lines.indexOf('# Kept as is from the loaded config.txt (lines the Sidecar card does not have):');
     const ref1 = new Set(refConfig.split('\n'));
@@ -415,7 +472,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
 
   function renderCmdline() {
     const toks = C.cmdlineTokens(o);
-    const card = new Set(C.CARD.cmdline.split(' '));
+    const card = new Set(vinfo().cmdline.split(' '));
     const kept = new Set(o.keptCmdline);
     const html = toks.map((t) => `<span class="tk${kept.has(t) ? ' k' : card.has(t) ? '' : ' n'}">${esc(t)}</span>`).join(' ');
     $('ce-cmdline').innerHTML = html || '<span class="tk c">(empty: every option at its default)</span>';
@@ -465,7 +522,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   function load(cfg: string | null, cmd: string | null, names: string[]) {
     if (cfg != null) loaded.config = cfg;
     if (cmd != null) loaded.cmdline = cmd;
-    const r = C.fromFiles(loaded.config, loaded.cmdline);
+    const r = C.fromFiles(loaded.config, loaded.cmdline, o.version);
     o = r.options;
     writeForm();
     update();
@@ -513,11 +570,11 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
 
   $('ce-reset').addEventListener('click', () => {
     loaded = { config: null, cmdline: null };
-    o = C.defaults();
+    o = C.defaults(o.version);
     $('ce-loaded').hidden = true;
     writeForm();
     update();
-    status(`Back to the ${C.CARD.version} card's files.`);
+    status(`Back to the ${o.version} card's files.`);
   });
 
   // ------------------------------------------------------------------ copy, download
@@ -579,7 +636,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   // a fresh page always starts from the card: nothing a browser restored (a password, a code) survives a reload
   writeForm();
   update();
-  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { o = C.defaults(); writeForm(); update(); } });
+  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { o = C.defaults(C.VERSIONS[0].id); writeForm(); update(); } });
 </script>
 
 <style is:global>
@@ -681,6 +738,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   .ce-row .ce-field { width: 8rem; }
   .ce-x { padding-bottom: .6rem; color: var(--sl-color-gray-3); }
   .ce-narrow { max-width: 12rem; }
+  .ce-narrow-wide { max-width: 18rem; }
   .ce-check { display: flex; gap: .6rem; align-items: flex-start; margin-top: 1rem; font-size: .92rem; color: var(--sl-color-gray-1); cursor: pointer; }
   .ce-check input { width: 1.15rem; height: 1.15rem; margin-top: .1rem; accent-color: var(--sl-color-accent); flex: none; }
   .ce-pw { display: flex; gap: .5rem; }
