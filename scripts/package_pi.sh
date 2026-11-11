@@ -217,7 +217,9 @@ PY
 if [ -f "$wt/tools/make_update.py" ]; then
   [ -n "$web" ] || { echo "$full: make_update.py but no web-next"; exit 1; }
   scu="sidecar-$ver$tsuf.scu"
-  python3 "$wt/tools/make_update.py" --pi4 "$KERNEL" --pi5 "$KERNEL5" --web "$web" --release --version "$ver" \
+  # a test build (TEST_SKIP_NET_CHECK=1) leaves out --release, whose address check would refuse its kernels
+  rel=(--release); [ $netcheck = 1 ] || rel=()
+  python3 "$wt/tools/make_update.py" --pi4 "$KERNEL" --pi5 "$KERNEL5" --web "$web" ${rel[@]+"${rel[@]}"} --version "$ver" \
     --out "$here/dist/pi/$scu"
   python3 "$wt/tools/make_update.py" --check "$here/dist/pi/$scu"
   ( cd "$here/dist/pi" && shasum -a 256 "$scu" > "$scu.sha256" )
