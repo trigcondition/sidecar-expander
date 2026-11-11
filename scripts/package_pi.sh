@@ -44,7 +44,7 @@ export CIRCLE_BUILD=${CIRCLE_BUILD:-$main/pi/circle/build}
 if [ -d "$wt" ]; then
   git -C "$wt" diff --quiet HEAD -- || { echo "$wt has modified tracked files: not touching it"; exit 1; }
   # untracked files in the dirs whose content ships (copied as they are) would end up in the public zips
-  [ -z "$(git -C "$wt" status --porcelain --untracked-files=all -- content third_party/nam web-next/src web-next/public)" ] \
+  [ -z "$(git -C "$wt" status --porcelain --ignored --untracked-files=all -- content third_party/nam web-next/src web-next/public)" ] \
     || { echo "$wt has untracked or modified files in content, third_party/nam or web-next: not touching it"; exit 1; }
   git -C "$wt" checkout -q --detach "$full"
 else
