@@ -36,8 +36,10 @@
 # The release zip (0.5.0): dist/pi/sidecar-<VERSION>.zip: README-FIRST.txt, "SD card image/" (both images),
 # "Card files/<size>/" (the starter trees), "Rytm/" (the .elemod files, never a .syx, and the patcher link),
 # "Manual/" (when MANUAL is given), "Licenses/" and SHA256SUMS. Needs RYTM_MODS; without it no release zip is made.
-#   RYTM_MODS     a folder with the release's Rytm mod files: *.elemod (required), LICENSE, NOTICE, TOOLCHAIN*.txt and
-#                 elekloader-*-src.tar.gz (copied when present). Refused if it holds a .syx or no .elemod
+#   RYTM_MODS     a folder with the release's Rytm mod files: *.elemod (required), LICENSE, NOTICE, TOOLCHAIN*.txt
+#                 (copied when present). Refused if it holds a .syx or no .elemod. The elekloader source tarballs stay
+#                 on the Rytm release page (release_guard refuses them nested in a zip: its third-party exemption
+#                 goes by the outer file name); Rytm/PATCHER-LINK.txt points there
 #   MANUAL        the user manual PDF (copied as Manual/Sidecar-<VERSION>-User-Manual.pdf); left out when not set
 set -euo pipefail
 repo=${1:?usage: package_pi.sh RYTM_TEENSY_REPO COMMIT}
@@ -382,13 +384,14 @@ else
   cp -R "$st/." "$rel/Card files/800x480/"
   cp -R "$st2/." "$rel/Card files/1024x600/"
   cp "$RYTM_MODS"/*.elemod "$rel/Rytm/"
-  for f in LICENSE NOTICE 'TOOLCHAIN*.txt' 'elekloader-*-src.tar.gz'; do
+  for f in LICENSE NOTICE 'TOOLCHAIN*.txt'; do
     for g in "$RYTM_MODS"/$f; do [ -f "$g" ] && cp "$g" "$rel/Rytm/"; done
   done
   ( cd "$rel/Rytm" && shasum -a 256 *.elemod > SHA256SUMS )
   cat > "$rel/Rytm/PATCHER-LINK.txt" <<EOF
 The web patcher for the Rytm: https://trigcondition.github.io/sidecar-expander/patcher/
 Step by step: https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/
+The source of elekloader's parts (GPL) is on the Rytm firmware release page: https://github.com/trigcondition/sidecar-mods/releases
 EOF
   if [ -n "${MANUAL:-}" ]; then
     [ -f "$MANUAL" ] || { echo "MANUAL: $MANUAL is not a file"; exit 1; }
