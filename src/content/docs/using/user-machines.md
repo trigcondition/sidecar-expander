@@ -24,6 +24,10 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## New in 0.5.0: MIST
+
+**MIST** is a granular texture machine, shipped as a package of its own: see [MIST](/sidecar-expander/using/mist/).
+
 ## New in 0.4.1: MODEL E
 
 <span class="sc-test">in testing</span> (emulator and Mac renders). A three-oscillator voice with a ladder filter, for basses and leads, in the 0.4.1 user machines zip (`modele.a64.rmp`; install like the starters):

@@ -37,7 +37,10 @@ A new GRANULAR track points at A010 (empty, silent until you load something), WA
 
 | Key | In the list |
 |---|---|
-| LEFT / RIGHT | the bank |
+| **FUNC + LEFT / RIGHT** | the bank (0.5.0: with an older Rytm firmware it is LEFT / RIGHT alone) |
+| **RIGHT** | open the files at the last file you loaded, on the file after it (0.5.0, below) |
+| **FUNC + UP** | the cursor to the bank's row 000 (OFF) (0.5.0) |
+| **FUNC + NO** | the cursor to row 000 (OFF): YES then unloads the row (0.5.0) |
 | the knob, UP / DOWN | the row |
 | YES | choose the row |
 | NO | cancel, nothing changes |
@@ -45,6 +48,37 @@ A new GRANULAR track points at A010 (empty, silent until you load something), WA
 | **FUNC + YES** | open the card's browser, aimed at the row under the cursor |
 
 **FUNC + YES** works in every bank. The browser's root shows the list's virtual folders (`@INPUTS/`, `@BUILT-IN/`) and the card's folders; a folder shows its subfolders and the files the list takes (`.wav .aif .aiff`, or `.sfz` for INSTRUMENTS). YES on a folder opens it, YES on a file puts it in the row (`SET C005`), NO goes up. Resting the cursor on a file already in the list previews it.
+
+**Preview in the browser (0.5.0).** With the Rytm firmware 0.5.0, press **FUNC + YES** on a file in the card's browser to hear it. It plays **while YES is held** and stops when you let go of YES. Letting go of FUNC first keeps it playing until YES is up. **Knob H** sets the **preview level**, from -40 to -6 dB in 1 dB steps (the default is -9 dB). The header says `PREVIEW LEVEL -8 DB` for a moment. The level is a Sidecar setting, the same for every kit. In the JUNO and 6-OP FM preset browsers, knob H works as before.
+
+### Quick load and the file menu (0.5.0)
+
+With the Rytm firmware 0.5.0 the card's browser has the keys of a sampler's browser. **LEFT** in the list does nothing now: the banks are on FUNC + LEFT / RIGHT. On a SAMPLER track all of this works as on DSP SAMPLE.
+
+| Key | In the browser |
+|---|---|
+| UP / DOWN, knob A | the cursor. **FUNC + UP / DOWN**: a page of 8 |
+| YES | a folder: open it. A file: put it in the row and go back to the list (as before) |
+| **RIGHT** | a folder: open it. A file: **quick load** (below) |
+| **FUNC + YES** | hear the file while YES is held (above) |
+| **FUNC + RIGHT** | a file: the file menu. A folder: open it |
+| LEFT, NO | up one folder; at the top, back to the list |
+
+**Quick load.** In the list, **RIGHT** opens the files in the folder of the last file you loaded, with the cursor on the file after it. In the files, **RIGHT** loads the file into the row and goes back to the list on the **next empty row**: it looks on, then into the next banks (`POOL FULL` when there is none). Press RIGHT, RIGHT again for the next file and so on through a folder. A row in use asks first (`C003 USED 1: RIGHT=SET`) and the same key again replaces it. A file that is already in the pool is not loaded twice: the note says `IN POOL B003`, the cursor stays on the empty row and goes on after that file. The rows you load in one opening of the list are the batch that [FILL](/sidecar-expander/using/fill/)'s SAMPLE target starts with.
+
+#### The file menu
+
+**FUNC + RIGHT** on a file opens a small menu over the file rows. UP / DOWN or knob A pick an item, YES or RIGHT do it, NO or LEFT close it.
+
+| Item | Does |
+|---|---|
+| LOAD | as YES |
+| LOAD TO NEXT EMPTY | loads into the first empty row from the list's row on, and shows that row (`POOL FULL` when there is none) |
+| PREVIEW | plays the file; the row shows `PLAY` while it sounds. Choose it again to stop |
+| SAMPLE EDIT | for SAMPLES lists only: loads the file into the row (a used row asks first) and opens it in [SAMPLE EDIT](/sidecar-expander/using/sample-edit/) |
+| INFO | shows the file's rate, bits, mono or stereo and length in the header, such as `48K 16B MO 0.2S`. Nothing is loaded |
+
+An older Rytm firmware has none of these keys: RIGHT on a file does nothing and the banks stay on LEFT / RIGHT.
 
 Refused, with the reason: row 000 (`000 IS OFF`), an input or built-in row (`BUILT-IN: UNLOAD FIRST`), a locked list (`POOL LOCKED`). A row in use asks first (below).
 
@@ -61,7 +95,7 @@ A remote page for the whole pool: **UP + T13** (with a touchscreen connected, it
 | knob A | the list: SAMPLES / TABLES / INSTR |
 | knob B | the bank A..H |
 | knob C, UP / DOWN | the row (FUNC: 8 at a time) |
-| knob D | the action: SELECT, UNUSED, ALL, NONE, UNLOAD, REPLACE, UNDO |
+| knob D | the action: SELECT, UNUSED, ALL, NONE, UNLOAD, REPLACE, UNDO, EDIT |
 | YES | does the action |
 
 - **SELECT** toggles the row, **ALL** selects the bank's filled rows, **NONE** clears the selection.
@@ -69,6 +103,7 @@ A remote page for the whole pool: **UP + T13** (with a touchscreen connected, it
 - **UNLOAD** empties the selection (or the row). The file stays on the card.
 - **REPLACE** opens the list's browser aimed at the row: YES on a file puts it in the row.
 - **UNDO** brings back the last replace or unload of that list.
+- **EDIT** (0.5.0, SAMPLES only) opens the row's sample in [SAMPLE EDIT](/sidecar-expander/using/sample-edit/). `EDIT: SAMPLES ONLY` on another list, `NO SAMPLE IN THE ROW` on an empty row.
 
 Rows show `RAM`, `LOADING`, `MISSING`, `CHANGED`, `LIVE`, `BUILT-IN` or the size, and `USED` for a row in use.
 

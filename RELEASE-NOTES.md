@@ -2,6 +2,73 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.5.0
+
+<!-- UNRELEASED: this whole entry is a draft. Before the release, fill in every UNRELEASED mark in it from the release build (file names, zip names, hashes, commit, release-page links), take this mark out and run scripts/check_unreleased.py. -->
+
+**The Rytm's own parameters on the XY pad, MIDI learn and MORPH, 26 LFOs on Sidecar targets, CHOP that plays one slice at a time, FILL, the SAMPLER machine, send FX BASE and WIDTH, a browser that previews, quick-loads and edits, and updating from the web page.** It comes with the **Rytm firmware 0.5.0**, built for **OS 1.74 only**: from 0.5.0 on the Rytm needs OS 1.74, and there is no 0.5.0 build for OS 1.73. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. <!-- UNRELEASED: check the A4 mod and Mini lines against the release. -->
+
+| Part | File |
+|---|---|
+| Rytm firmware, OS 1.74 only | the 0.5.0 `.elemod` files (elekloader, GPL-2.0-or-later), or the 0.5.0 build in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: the .elemod names, the patcher build name and the .syx SHA-256 --> |
+| Sidecar (Raspberry Pi 4B and Pi 5, one card) | the 800x480 and 1024x600 card zips, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: the zip names with the release commit --> |
+| Update file (Pi 4 and Pi 5) | `sidecar-<version>.scu`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) <!-- UNRELEASED: the file name and its .sha256 --> |
+| User machines (Pi) | <!-- UNRELEASED: the plugins zip name and what it holds --> |
+| Starter content | <!-- UNRELEASED: the zip name --> |
+| User manual | <!-- UNRELEASED: the manual's name and link --> |
+| Checksums | `SHA256SUMS` on each release page |
+
+Downloads: <!-- UNRELEASED: the release-page links for sidecar-firmware and sidecar-mods --> the sidecar-firmware and sidecar-mods 0.5.0 releases.
+
+### Upgrading from 0.4.4
+
+1. **Flash the Rytm firmware 0.5.0** ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Back up every project first. The Rytm must run OS 1.74. A Rytm on OS 1.73 needs Elektron's OS 1.74 first.
+2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay), or update a Pi that already runs 0.5.0 from its web page.
+
+A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.0 card, without what needs the new Rytm firmware: the Rytm's own parameters on the XY pad, MIDI learn and MORPH, UP + T14 and UP + RIGHT, the SAMPLER machine (it plays as DSP SAMPLE), send FX BASE and WIDTH, and the browser's preview, quick load and file menu. FILL and MORPH open from the SIDECAR MENU.
+
+To go back, flash the Rytm firmware 0.4.4 and copy the 0.4.4 card files back ([Recovery to stock](https://trigcondition.github.io/sidecar-expander/getting-started/recovery/)). A 0.4.4 Sidecar does not read the new LFO files: see the known issues below.
+
+From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.github.io/sidecar-expander/release-notes/#upgrading-from-043) and the sections below it.
+
+### New in 0.5.0
+
+- **CHOP plays one slice at a time.** A hit on a CHOP track now cuts the slices still playing, with a 2 ms fade, so long slices no longer pile up (**mono**, the default). Each slice has a **POLY** switch (it may ring over itself and the other slices) and a **GATE** switch (it plays at full level while the pad or trig is held and fades out over DEC on release). In the slice editor, a tap of **UP** switches between editing one slice and **ALL** slices, and a change then goes to every slice. The waveform shows as soon as you pick a sample, before the track has played ([CHOP](https://trigcondition.github.io/sidecar-expander/using/chop/)).
+- **The Rytm's own parameters** (with the Rytm firmware 0.5.0). The XY pad, MIDI learn, the MORPH fader and the p-locks of poly tracks can move a track's filter, amp, LFO, synth and sample parameters, its velocity and the FX track's delay, reverb, distortion and compressor. The Sidecar sends an offset on top of the Rytm's own value: a kit you save keeps the knob's value ([The Rytm's own parameters](https://trigcondition.github.io/sidecar-expander/using/rytm-params/)).
+- **LFOs move Sidecar destinations only.** Both the A and the B list have no Rytm (RT / RFX) targets. An LFO on a Rytm parameter made the Rytm slow to respond. An LFO A saved on a Rytm parameter by an earlier 0.5.0-dev build loads as OFF. The XY pad, scenes and MIDI learn still reach the Rytm's parameters. A voice's target list shows only the parameters its machine names: on SAMPLER it starts at TUNE, with no empty P1..P8 ([LFOs](https://trigcondition.github.io/sidecar-expander/using/lfo/)).
+- **26 LFOs on the Pi:** an **A** and a **B** LFO on each of the 12 tracks and the FX track. Both aim at the Sidecar's own targets. The Sidecar Mini keeps its 4 LFOs.
+- **FILL** (UP + RIGHT). p-locks one target of the selected track (the sample, the engine, a preset or the velocity) onto its trigs with a range of values, in order, backwards or at random, with undo ([FILL](https://trigcondition.github.io/sidecar-expander/using/fill/)). Each label starts with its encoder letter (A TGT, B FR, C TO, D ORD, E TRG, F EVRY, G OFS, H SEED; A VELOCITY for velocity), and the header reads LOCK TRK n/72, the lock tracks in use. A fill is kept in the pattern the Rytm stores, so it survives a power-off. If the active pattern is not known yet, FILL shows PATTERN UNKNOWN and writes nothing. UP + LEFT is kept for a later release.
+- **The SAMPLER machine** (with the Rytm firmware 0.5.0): a Digitakt-style sample player next to DSP SAMPLE, which is unchanged. One page, SMP STRT END PLAY / TUNE FINE LOOP LEV. PLAY is FWD, REV, FLP (forwards, then loops), RLP, then SLICE, GRAIN, STRCH, PLUCK and WAVE. SMP 000 is OFF ([SAMPLER](https://trigcondition.github.io/sidecar-expander/using/machines/#sampler)).
+- **SAMPLER STRT, END and LOOP snap to zero crossings** during playback (within about 2 ms), so starts and loop seams don't click. The stored values don't change.
+- **Send FX BASE and WIDTH** (knobs G and H of the SEND FX page, with the Rytm firmware 0.5.0): a high-pass and a low-pass on the effect's return, as on the stock DELAY and REVERB pages ([Send effects](https://trigcondition.github.io/sidecar-expander/using/send-effects/)).
+- **The sample browser previews, quick-loads and edits** (with the Rytm firmware 0.5.0). **FUNC + YES** on a file plays it while YES is held, and **knob H** sets the preview **level** (-40 to -6 dB, default -9 dB). **RIGHT** loads a file and moves on to the next empty row. **FUNC + LEFT / RIGHT** change the bank. **FUNC + RIGHT** on a file opens a file menu: LOAD, LOAD TO NEXT EMPTY, PREVIEW, SAMPLE EDIT and INFO ([Pools](https://trigcondition.github.io/sidecar-expander/using/pools/#quick-load-and-the-file-menu-050)).
+- **SAMPLE EDIT.** Crop, normalise, trim, fade, reverse and gain a sample from the pool, hear the edit on the track while you work and save the region as a new file. The original is never written ([SAMPLE EDIT](https://trigcondition.github.io/sidecar-expander/using/sample-edit/)).
+- **The MORPH page: UP + T14.** Twelve scenes of locked parameters, two of them on the ends of a fader ([MORPH](https://trigcondition.github.io/sidecar-expander/using/morph/)).
+- **Updating from the web page** (Pi 4 and Pi 5): Settings > Update takes one file, tries the new version first and makes it permanent after 30 seconds. The Update card follows the trial across the restart, so nobody installs twice, and the next update can go in at once. The touchscreen and the Rytm's screen show a notice while it installs ([Updating from the web page](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
+- **MIST, a texture user machine** (Plugin API 3, with the 0.5.0 Sidecar). A granular texture over a built-in oscillator or wavetable, played at the trig's note: SRC, TIME, SIZE, DENS, PTCH, SHAP, FDBK, SPRD, MIX, then RVB, FRZ, QUAL, BANK, WAVE and more. It is a plugin shipped on its own, not in the starter set ([MIST](https://trigcondition.github.io/sidecar-expander/using/mist/)).
+- **PHASER and BBD, two send FX types** (Plugin API 3). PHASER is a stereo phaser with RATE, DPTH, FDBK and SPRD. BBD is a bucket-brigade delay with TIME, FDBK, W/F and TONE. RATE and TIME run free or lock to the song position. The Rytm shows their own knob names ([PHASER and BBD](https://trigcondition.github.io/sidecar-expander/using/user-effects/)).
+- **Send FX as inserts.** CHORUS, COMB, SPACE, RINGS, CLOUD and HALO are now INSERT TYPEs on the bus chains B1..B3 as well as on the master, each with a MIX knob (H). Four fit at a time, the master and the buses together: the INSERT page says `SEND FX INSERTS: 4 IN USE` and skips the fifth. A voice's chain never takes one ([Insert FX](https://trigcondition.github.io/sidecar-expander/using/insert-fx/)).
+- **MIDI settings.** The SIDECAR MENU has a MIDI page, and the touchscreen has Settings > MIDI. Both set the keyboard route (**SELECTED**: notes play the selected track; **CHANNEL**: MIDI channel 1..12 plays tracks 1..12), the auto channel and computer notes, and show the USB-A keyboards and the MIDI learn routes. A change is saved at once ([MIDI settings](https://trigcondition.github.io/sidecar-expander/using/midi-settings/)).
+- **The Pi 5's fan.** The Sidecar now drives the Pi 5's fan header (the Active Cooler or a case fan). **AUTO**, the default, follows Linux's curve: it spins up from about 50 °C and steps up at 60, 67.5 and 75 °C. **ON** and **OFF** are the other modes. Set it with `fan=auto`, `fan=on` or `fan=off` in `display.txt` on the card, or with the console's `fan`. `/status` shows the mode, level and speed. OFF still runs the fan when the SoC reaches 80 °C. Before this the fan was left as the boot found it ([The Pi 5's fan](https://trigcondition.github.io/sidecar-expander/using/pi5-fan/)).
+- **A hint when the Pi 5 got no screen info.** If the Pi 5 comes up at 640x480 because the screen sent no EDID at power-on, the log, the boot screen and `/status` now say so: power the screen first, then the Pi. Many panels show nothing at 640x480.
+- **The card config editor.** A page on this site writes `config.txt` and `cmdline.txt` from a form: the Pi, the display, the network ([Card config editor](https://trigcondition.github.io/sidecar-expander/getting-started/config-editor/)).
+
+### Fixed in 0.5.0
+
+- **CHRO pads enter notes into a held step on JUNO, DAISYSP and PLAITS poly tracks,** and live recording takes them. The pads enter notes only in CHRO pad mode (the CHRO key lit), not by the sound's CHROMATIC setting.
+- **After a cold boot, a poly track plays the right machine.** The Rytm now tells the Sidecar the machine, so a JUNO track no longer starts on the wrong one.
+- **A Rytm restart no longer sends a burst of late notes** or shifts the poly track's steps.
+- **A copied pattern survives a Pi restart** before you paste, and a COPY PAT made while a project loads is kept.
+- **The SEQ page opens and closes 150 ms after you select or leave a poly track,** so it no longer flashes. The keys and LEDs follow after the same 150 ms.
+- **Late timing on JUNO:** a slow JUNO attack (ATK) makes a chord swell in late: try ATK 0. The poly track's LENGTH and SPEED must match the Rytm track's ([Troubleshooting](https://trigcondition.github.io/sidecar-expander/using/troubleshooting/)).
+- **Rytm firmware: the fx-in mix report no longer lands inside a pattern dump,** so FILL and SONG fetches no longer fail or ask again.
+
+### Known issues in 0.5.0
+
+- **After a rollback to an older Sidecar build the LFOs show OFF.** The older build does not read the new LFO files. It leaves them alone, so going back to 0.5.0 brings them back.
+- **The CHOP editor's audition ignores GATE:** YES in the editor plays the selected slice to its end. Trigs and pads obey GATE.
+- **SONG Restore still uses the old write** until a later release. A fill that a SONG Restore removed comes back after a power-off. FILL does not write while the pattern is changing.
+
 ## Sidecar 0.4.4
 
 **A held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, and the CONNECTED screen when the Rytm boots after the Sidecar.** It comes with the **Rytm firmware 0.4.4** (OS 1.74 or OS 1.73): flash it for the held step's values and the boot screen. Apart from that it is Sidecar 0.4.3. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.

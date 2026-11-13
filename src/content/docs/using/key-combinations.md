@@ -1,14 +1,14 @@
 ---
 title: Key combinations
-description: "Every key combination the Sidecar adds to the Analog Rytm MKII, in one place: UP as the Sidecar key, UP + T1..T13 for the pages, UP + TRIG / SRC / LFO / FX / AMP / YES, POLY CONFIG in the track menu, one-handed step copy on poly tracks, the pools and the remote pages."
+description: "Every key combination the Sidecar adds to the Analog Rytm MKII, in one place: UP as the Sidecar key, UP + T1..T14 for the pages, UP + TRIG / SRC / LFO / FX / AMP / YES, POLY CONFIG in the track menu, one-handed step copy on poly tracks, the pools and the remote pages."
 sidebar:
   order: 1.1
 ---
 
 **UP is the Sidecar key.** Hold UP and press a second key. The stock Rytm leaves all of these combinations free, so nothing of the Rytm's own is lost. UP alone still moves the cursor in the Rytm's menus.
 
-- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen, in two columns, and lights T1..T13 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
-- **No touchscreen needed:** every page opened from T7..T13 and every UP + key combination works on the Rytm's own screen.
+- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen, in two columns, and lights T1..T14 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
+- **No touchscreen needed:** every page opened from T7..T14 and every UP + key combination works on the Rytm's own screen.
 - **The SIDECAR MENU** (UP + YES, then YES) lists every Sidecar page with its shortcut.
 - **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older forms.
 - While a Sidecar page has the Rytm's keys, **TRK's LED blinks** slowly.
@@ -36,8 +36,9 @@ sidebar:
 | **UP + T11** | SONG |
 | **UP + T12** | PROJECT |
 | **UP + T13** | POOL |
+| **UP + T14** | [MORPH](/sidecar-expander/using/morph/) on the Rytm's screen (0.5.0) |
 
-- T1..T6 are the touchscreen's pages alone. T8..T13 open on the touchscreen when one is connected and has the page, else on the Rytm's screen.
+- T1..T6 are the touchscreen's pages alone. T8..T14 open on the touchscreen when one is connected and has the page, else on the Rytm's screen.
 - No trig is placed: while UP is held the trig keys only pick pages.
 - A page that has nothing to show yet (PROJECT before the project list is read, POOL without pools) pops `PROJECT: NOT HERE NOW` on the Rytm instead of opening another page.
 - When the touchscreen takes a page, the Rytm pops a short note saying so.
@@ -52,6 +53,7 @@ sidebar:
 | **UP + TRIG** | any track | the SEQ page of a poly track; on another track, the make prompt (or why it cannot be one) |
 | **UP + SRC** | a track on GRANULAR, WAVETABLE, MULTISAMPLE or DSP SAMPLE | the source list in one press: the machine's POOL bank list (DSP SAMPLE: its SMP list, knob D of the SMPL page) |
 | **UP + LFO** | anywhere | the Sidecar's [LFO page](/sidecar-expander/using/lfo/); again: leave |
+| **UP + RIGHT** | anywhere (0.5.0) | [FILL](/sidecar-expander/using/fill/) on the selected track; again or NO: leave. **UP + LEFT** is taken for a later release |
 | **UP + FLTR** | anywhere | the selected track's [ARP page](/sidecar-expander/using/arpeggiator/) (0.4.0); again: leave |
 | **UP + FX** | anywhere | the [INSERT page](/sidecar-expander/using/insert-fx/); again: leave |
 | **UP + AMP** | anywhere | the INSERT page on its **OUT view** for the selected track: the [OUT route](/sidecar-expander/using/stereo-out/) (OUT TRK / PRE / POST, LEV, PAN, WID, DEC); again while open: aims the OUT view at the track now selected |
@@ -150,8 +152,10 @@ See [Poly mode](/sidecar-expander/using/sequencer/).
 | **knob A** turned (or UP + SRC) | SRC page of GRANULAR, WAVETABLE, MULTISAMPLE | the [bank list](/sidecar-expander/using/pools/#choosing-and-loading-on-the-rytm) of the machine's POOL |
 | **SMP** (knob D) turned (or UP + SRC) | SMPL page of DSP SAMPLE | the bank list of SAMPLES |
 | **FUNC + YES** | SRC page of DSP SAMPLE | the card's sample browser |
-| **LEFT / RIGHT**, **YES**, **NO** | the bank list | the bank / choose / cancel |
+| **LEFT / RIGHT**, **YES**, **NO** | the bank list | the bank / choose / cancel. With the Rytm firmware 0.5.0 the bank is **FUNC + LEFT / RIGHT**, and **RIGHT** opens the files ([quick load](/sidecar-expander/using/pools/#quick-load-and-the-file-menu-050)) |
 | **FUNC + YES** | the bank list | the card's browser, aimed at the row: load a file into it |
+| **FUNC + YES** held | a file in the card's browser (0.5.0) | hear the file while YES is held |
+| **FUNC + RIGHT** | a file in the card's browser (0.5.0) | the file menu: LOAD, LOAD TO NEXT EMPTY, PREVIEW, SAMPLE EDIT, INFO |
 | **trigs held + YES** | the bank list (GRID REC) | lock the row on those steps |
 
 ## The touchscreen's map

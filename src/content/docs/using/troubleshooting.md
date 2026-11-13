@@ -17,6 +17,8 @@ sidebar:
 | Chords held on the CHRO pads play one note, or the CHRO pads play nothing on a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB. (Before 0.4.3 the first hit after selecting a poly track could be silent: update the card.) |
 | In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4: before, those pages took UP / DOWN |
 | No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
+| The CHRO pads enter no notes into a held step on a poly track (JUNO, DAISYSP, PLAITS) | the pads enter notes only in **CHRO pad mode**: the CHRO key must be lit. The sound's CHROMATIC setting does not decide it. Update the card to 0.5.0: before, JUNO, DAISYSP and PLAITS poly tracks took no pad notes, and live recording missed them |
+| A poly track on JUNO sounds late, or a chord swells in late | a slow JUNO attack (**ATK**) does it: try ATK 0. Also check that the poly track's **LENGTH** and **SPEED** match the Rytm track's |
 | A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
@@ -38,6 +40,8 @@ sidebar:
 The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protects itself: at **78 °C** it drops its clock to **600 MHz**, and the Sidecar has far less room to render: expect dropouts. The clock goes back to 1500 MHz when the chip is at 75 °C again. The limit is set by `socmaxtemp=78` in `cmdline.txt` (78 is the highest the Pi software allows; the Pi's own firmware still protects itself at 80 and 85 °C). New SD cards already have `socmaxtemp=78`. On a card you made earlier, open `cmdline.txt` on the card (it is one line) and add ` socmaxtemp=78` at the end, with a space before it, then put the card back and restart. Without it the Pi slows down at 60 °C.
 
 **Idle sleep (0.4.0):** all four cores now sleep while they wait instead of spinning, so the Pi runs cooler: on a Pi 5 with a light load, 66 °C flat where it reached 79 °C in 16 minutes before. `/status` shows it as "idle". `idlewfe=0` in `cmdline.txt` turns it off.
+
+On a Pi 5 the Sidecar drives the fan header itself (AUTO, ON or OFF): see [The Pi 5's fan](/sidecar-expander/using/pi5-fan/).
 
 | Temperature | What you see |
 |---|---|

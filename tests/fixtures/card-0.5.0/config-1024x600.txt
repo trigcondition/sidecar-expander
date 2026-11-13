@@ -1,0 +1,56 @@
+# Sidecar | Expander, one card for the Raspberry Pi 4B and the Raspberry Pi 5.
+# Each board's firmware reads these lines in order: after [pi4] only a Pi 4 (4B, 400, CM4) uses the lines, after [pi5]
+# only a Pi 5 (5, 500, CM5), after [all] both. A later setting wins over an earlier one.
+[all]
+arm_64bit=1
+kernel_address=0x80000
+initial_turbo=0
+
+[pi4]
+armstub=armstub8-rpi4.bin
+max_framebuffers=2
+# A DSI display (the official 7" v1 or a compatible) needs no line: the firmware drives it and the engine prefers it
+# (docs/pi-display.md). Upside down: lcd_rotate=2 here. Never ignore_lcd=1, disable_touchscreen=1, a vc4-kms-*
+# overlay or display_auto_detect=1 (Circle has no KMS: the screen would stay dark).
+
+# The Pi 4's 1024x600 HDMI display (optional; without a display these lines do no harm). The engine draws the
+# frame buffer's size if it is 800x480 or 1024x600, else 800x480 centred. A 1024x600 panel (GeeekPi EP-0194):
+# hdmi_cvt=1024 600 60 6 0 0 0 (HDMI_RES=1024x600 when the card is made); a 800x480 one: hdmi_cvt=800 480 60 6 0 0 0.
+[pi4]
+hdmi_force_hotplug=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1024 600 60 6 0 0 0
+disable_overscan=1
+
+# The Pi 5: its boot firmware is in its EEPROM; it starts kernel_2712.img directly (no sdboot on the Pi 5 yet).
+[pi5]
+kernel=kernel_2712.img
+enable_uart=1
+disable_splash=1
+boot_delay=0
+os_check=0
+# A DSI display on CAM/DISP 0 or 1 needs no line either: the engine drives it itself (Circle's addon/rp1dsi) and
+# prefers it to HDMI. Upside down: dsi_rotate=180 in cmdline.txt, 90 on a Touch Display 2 (lcd_rotate does nothing on the Pi 5); dsi=0 there:
+# HDMI only. No vc4-kms-* overlay or display_auto_detect=1 (they are for Linux).
+
+# The Pi 5's HDMI display (micro-HDMI 0, next to USB-C, on before power-on; docs/pi5.md "HDMI display"): only
+# hdmi_force_hotplug=1 matters (measured). The Pi 5's firmware picks the mode itself (1920x1080 on an 800x480 LCD) and
+# the engine scales its 800x480 UI to it (1024x600 when the display's EDID prefers 1024x600, or res=1024x600 in
+# cmdline.txt); the other five lines are ignored by the Pi 5 (measured), kept as harmless.
+[pi5]
+hdmi_force_hotplug=1
+framebuffer_width=1024
+framebuffer_height=600
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1024 600 60 6 0 0 0
+
+# The Pi 4: sdboot.img checks and starts engine.img (the block below; sdboot.py disable/enable edits it).
+# sidecar sdboot begin (pi/circle/sdboot.py disable removes this block; config.txt.bak is the original)
+[pi4]
+kernel=sdboot.img
+initramfs engine.img 0x02000000
+disable_splash=1
+boot_delay=0
+# sidecar sdboot end

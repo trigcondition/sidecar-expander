@@ -1,0 +1,1 @@
+sdport=0 socmaxtemp=78

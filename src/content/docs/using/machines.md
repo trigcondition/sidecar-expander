@@ -10,6 +10,7 @@ The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can ch
 Beside the machines on this page:
 
 - three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on every machine: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);
+- **LIVE IN**, which plays the Rytm's AUDIO IN through a voice's insert FX and send FX: see [LIVE IN machine](/sidecar-expander/using/live-in/);
 - two [insert FX](/sidecar-expander/using/insert-fx/) slots per voice, and the [OUT route](/sidecar-expander/using/stereo-out/): a voice on its track (TRK) or in stereo on the Rytm's main mix (PRE / POST);
 - the project's [POOL lists](/sidecar-expander/using/pools/) as the source of samples, wavetables and instruments;
 - **CHOP**, a machine that slices one sample into up to 64 slices and plays them from the trigs and pads: see [CHOP](/sidecar-expander/using/chop/);
@@ -92,6 +93,36 @@ With INP on an analog voice, an analog drum rings a Sidecar resonator.
 - MD is a mono drum voice: the trig's note is not used, and the velocity scales the hit. Per-step locks of the drum type are click-free.
 - On the Sidecar Mini (Teensy) a track on this machine stays silent: MD is built into Sidecar (Pi) only.
 
+## SAMPLER
+
+A sample from the project's SAMPLES pool, played like a Digitakt sample track: no resonator, one page of knobs and a PLAY mode that sets the direction and the loop. New in 0.5.0, with the Rytm firmware 0.5.0, next to DSP SAMPLE. DSP SAMPLE is unchanged. <span class="sc-test">in testing</span>
+
+| Page | Knobs A..H |
+|---|---|
+| SRC | **SMP STRT END PLAY** / **TUNE FINE LOOP LEV** |
+
+| Knob | |
+|---|---|
+| A **SMP** | the sample: a row of the project's SAMPLES [pool](/sidecar-expander/using/pools/). **000 is OFF**: the track is silent |
+| B **STRT**, C **END** | where the sample starts and ends. 0 to 120 covers the whole file. The waveform shows both |
+| D **PLAY** | the play mode (below) |
+| E **TUNE** | -60 to +60 semitones |
+| F **FINE** | fine tuning |
+| G **LOOP** | where the loop starts, for FLP and RLP. 0 is OFF |
+| H **LEV** | level |
+
+**PLAY** has nine zones, one a detent: **FWD** (STRT to END, once), **REV** (END to STRT, backwards, once), **FLP** (forwards, then loops), **RLP** (backwards, then loops), then **SLICE**, **GRAIN**, **STRCH**, **PLUCK** and **WAVE**, which work as DSP SAMPLE's modes of the same names. In those five, STRT, END and LOOP do what DSP SAMPLE's STA, END and LOP do.
+
+- If END is before STRT, the direction turns round.
+- FLP plays STRT to END and then loops from LOOP to END. RLP plays END to STRT and then loops from LOOP down to STRT. With LOOP at 0, or not between STRT and END, the whole region loops.
+- A loop from a loop point needs the sample in the Sidecar's memory (up to about 87 seconds). A longer sample loops its whole region, streamed from the card.
+- In the sample list, **FUNC + NO** moves the cursor to OFF and **YES** unloads the sample.
+- [FILL](/sidecar-expander/using/fill/) can p-lock SMP across a track's trigs.
+- This page's layout changed during the 0.5.0 test (it was SMP TUNE FINE PLAY / STRT END LOOP LEV). Saved sounds and p-locks are not affected.
+- A 0.4.x Sidecar with a 0.5.0 Rytm plays a SAMPLER track as DSP SAMPLE.
+
+**Zero-crossing snap.** When a trig plays, STRT, END and the LOOP point move to the nearest zero crossing within about 2 ms, so a start or loop seam in the middle of a waveform doesn't click. The values you set stay as they are: the snap only happens during playback, so kits and p-locks keep their exact numbers. A sample that sits off zero (a DC offset or a very low tone) may have no crossing that close; then the point plays where you set it. A loop that would get much shorter from the snap keeps its points as set.
+
 ## DSP SAMPLE
 
 A sample from the Sidecar's card, played through a resonator.
@@ -116,6 +147,7 @@ With the Rytm firmware 0.4.0:
 - The page the Sidecar draws shows the playhead. <span class="sc-ok">hardware</span>
 - **MOD** is the playback mode, a stepped list (one item a detent): ONE, LOOP, SLICE, GRAIN, STRCH, PLUCK, WAVE. The STA, END and LOP labels change with it (STA END SLC for SLICE, POS SIZ DNS for GRAIN, and so on).
 - On the Pi, samples play from memory (256 MB by default).
+- **0.5.0:** DSP SAMPLE sounds and pages are unchanged. What is new around it: the sample list's [quick load, file menu and FUNC + LEFT / RIGHT banks](/sidecar-expander/using/pools/#quick-load-and-the-file-menu-050), and **push knob B** on the SRC view to open the track's sample in [SAMPLE EDIT](/sidecar-expander/using/sample-edit/) (also on a SAMPLER track).
 - In 0.3.0 a stereo sample plays in stereo when the voice is on PRE or POST (on TRK, as before, the sum of its two channels), and the OUT view's **DEC** sets DSP SAMPLE's decay there ([Stereo and the OUT route](/sidecar-expander/using/stereo-out/)).
 
 ## GRAIN

@@ -110,6 +110,32 @@ On the Status tab, **Storage**:
 
 <span class="sc-test">in testing</span>. The Status tab's **Wi-Fi** section: on / off, a network list from a scan (signal, a lock for secured networks, the band), "Other network…", a password field (never pre-filled), **Connect and save**, **Forget network**, and the current connection. Sidecar uses one network at a time, so **Connect and save restarts the Pi** and tries the new network at that boot. If it is not up within 90 seconds (a wrong password, no address, not found), the previous setting comes back and the Pi restarts on it, so a typo cannot lock you out. The password is stored only as the network's key, never shown again. Wi-Fi stays off in the SD card package; turning it on here works over Ethernet. Only a [paired browser](#pairing-a-browser) can change these settings. With no cable at all, use the card-root file instead: see [Wi-Fi without a cable: sidecar-wifi.txt](/sidecar-expander/using/wifi/#wi-fi-without-a-cable-sidecar-wifitxt).
 
+## Updating from the web page (0.5.0)
+
+<span class="sc-test">in testing</span> From 0.5.0 a Sidecar can update itself from its page, on the Pi 4 and the Pi 5: **Settings > Update**. You do not need the SD card in a computer. You download one file from the release page and pick it on the page. The Sidecar does not download anything itself.
+
+1. Download `sidecar-<version>.scu` from the release page. It is one file for the Pi 4 and the Pi 5, with a `.sha256` beside it.
+2. Open the page and [pair the browser](#pairing-a-browser) if it is not paired yet. Then open **Settings > Update**.
+3. Pick the file. The page checks it at once. A damaged or incomplete download, a file that is not a Sidecar update, or one without this board's firmware is refused before anything is sent. It then says what it will do, for example "Update from 0.5.0 (abc1234) to 0.5.0 (def5678)". The same version again, or an older one, needs the box **Install it anyway**.
+4. Press **Install**. The file goes up with a progress bar, the Sidecar checks it again and restarts into the new version **on trial**. Audio stops for about a minute. Keep the Sidecar switched on until the page says it is done.
+5. After the restart the page reconnects by itself and follows the trial: "Trying 0.5.0 (def5678): permanent in 20 s", then "Updated to 0.5.0 (def5678)". Reload the page: the update brings its own web app.
+
+**The Update card follows the trial.** The card on the page keeps showing where the update is, also while the Sidecar restarts: Trying, then Updated, or Failed. The new version is tried first. If it starts and runs for 30 seconds, it becomes permanent on its own, and the old version stays as the previous one. You do not install it twice.
+
+**You can install again right after.** Once a trial has become permanent, the next update can go in at once. You do not need to restart the Sidecar first.
+
+**On the screens.** While the update is written, the touchscreen shows a full-screen notice (`INSTALLING UPDATE - DO NOT POWER OFF`). During the trial it shows `TRIAL: PERMANENT IN N S`, for a few seconds after `UPDATED TO 0.5.0`, and after a failed trial `UPDATE FAILED - BACK ON 0.5.0`. The Rytm's screen shows the same lines as a status popup. It waits while one of the Sidecar's pages is open on the Rytm. No Rytm firmware change is needed.
+
+**When it goes wrong.** If the new version does not start, hangs, or the power goes during the trial, the Sidecar starts its old version again at the next start, by itself. The page then says the new firmware did not start and the Sidecar went back to the old version. Nothing is lost: try again, or update from a card.
+
+**Back to the previous version.** The card keeps the version before the last update. **Back to 0.5.0** restarts into it, on trial the same way. A previous version from before 0.5.0 cannot make itself permanent: the page warns you, and if you go on, it is put in at once without a trial. To go up again you then use the SD card in a computer.
+
+**The last crash report.** **Settings > Update > Read the last crash report** shows what the last start that did not end by a planned restart left behind (the report and the end of the log). **Save as a file** keeps it for a bug report. It is for paired browsers only, and it holds no pairing code or Wi-Fi key.
+
+**Who can update.** A paired browser, or the USB-C cable, and only from the page itself.
+
+**Turning it off.** Put `webupdate=0` in `cmdline.txt`. The web update is off by itself without a card, and on a Pi 4 card that does not start through sdboot. Update such a card in a computer.
+
 ### The file browser
 
 - Browse, download, upload (several files, drag and drop), delete, new folder, rename, free space.

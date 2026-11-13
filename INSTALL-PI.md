@@ -17,6 +17,10 @@ Sidecar, the full Raspberry Pi version of Sidecar | Expander, **works on the Pi 
 
 ## Make the SD card
 
+**The easy way (from Sidecar 0.5.0): unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card in one zip: the 800x480 card set below (both boards' engines, `sdboot.img`, `config.txt`, `cmdline.txt`), the web app (`/.rytm/www-next/`), the starter content (`/JUNO/Factory/`, `/DX7/`), every user machine and user effect of the release in `/Plugins/`, and some free demo material: a MULTISAMPLE instrument (`/MULTISAMPLE/SidecarTest/`), a capture for INSERT AMP (`/NAM/`) and one-shots of the starter machines (`/Samples/Starter/`). Check it against `SHA256SUMS`, format the card as below (step 2), then copy **everything** in the zip to the card's top level, including the folder `.rytm`: it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic web page. `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where and where every file comes from. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600` (the 1024x600 card has them), or use the 1024x600 card zip.
+
+The card zips alone, step by step:
+
 1. Check the download: in the download folder, `shasum -a 256 -c SHA256SUMS --ignore-missing` must say `OK` for the zip (Windows: `certutil -hashfile <file> SHA256` and compare with `SHA256SUMS`).
 2. Format the card as **FAT32** with one partition (MBR):
    - macOS: Disk Utility > Erase, Format "MS-DOS (FAT)", Scheme "Master Boot Record".
@@ -38,6 +42,7 @@ The card then holds:
 | `cmdline.txt` | Sidecar options, one line (see below) |
 | `sdboot.img` | the small loader that starts the engine |
 | `engine.img` | the Sidecar engine |
+| `.rytm/www-next/` | the web app (from Sidecar 0.5.0; a hidden folder on a Mac and on Linux): `sidecar.local` opens it, `/classic` the classic page |
 
 If you cannot use the bundled boot firmware for some reason, get `start4.elf`, `fixup4.dat`, `bcm2711-rpi-4-b.dtb` and `LICENCE.broadcom` from the official repository instead: <https://github.com/raspberrypi/firmware/tree/master/boot>. The release was tested with commit `0641c5bf25d185d5bf25d8dcafd1da6dc8fdbf68`.
 
@@ -55,13 +60,15 @@ If you cannot use the bundled boot firmware for some reason, get `start4.elf`, `
 
 ## Options (`cmdline.txt`)
 
+**Easier:** the [card config editor](https://trigcondition.github.io/sidecar-expander/getting-started/config-editor/) on the documentation site writes `config.txt` and `cmdline.txt` for you: pick the Pi, the display, the network and the options, then copy or download the two files (and a `sidecar-wifi.txt` if you want Wi-Fi). It runs in your browser; nothing is sent or stored.
+
 One line of `name=value` options, separated by spaces. The release sets:
 
 ```
-sdport=0
+sdport=0 socmaxtemp=78
 ```
 
-`sdport=0` turns off writing boot files over the network. Leave it in. Every other option keeps its default:
+`sdport=0` turns off writing boot files over the network. Leave it in. `socmaxtemp=78` lets the Pi run at its full clock up to 78 °C before it slows itself down (without it: 60 °C). Every other option keeps its default:
 
 | Option | Default | |
 |---|---|---|

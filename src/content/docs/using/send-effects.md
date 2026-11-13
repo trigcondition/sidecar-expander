@@ -13,10 +13,13 @@ The two send effects are FX buses 1 and 2 of the [insert FX](/sidecar-expander/u
 
 - **P1 is ROUTE** on every effect. **PRE** (0..63, the default) returns into the Rytm's MAIN FX input, which enters **before** the analog distortion and compressor: the return gets the Rytm's master character. **POST** (64..127) returns on MAIN, added **after** them: clean. A change crossfades in 8 ms. (Measured on a real Rytm: the POST return stayed clean with DIST at maximum; the PRE return got gritty and louder.)
 - **P2..P5** are the effect's own knobs. All can be p-locked on the FX track.
+- **BASE and WIDTH** (0.5.0, knobs **G** and **H** of the SEND FX page on the Rytm, with the Rytm firmware 0.5.0) shape the effect's return like the stock DELAY and REVERB pages do. **BASE** is the high-pass edge. **WIDTH** puts the low-pass above it: the larger the WIDTH, the wider the band. At the defaults (BASE 0, WIDTH 127) both filters are off and the return passes unchanged. They are two views of the return's HPF and LPF in the [insert FX](/sidecar-expander/using/insert-fx/) EQ view, so turning one moves the other. They are not p-lockable and have no LFO target of their own (the HPF is already one). The Sidecar Mini has no inserts: the knobs show 0 and 127 and a turn does nothing lasting.
 - **Every knob's 0 is a usable default**, so a fresh kit sounds sensible. There is no level or mix knob: the sends set the level.
 - Changes are smoothed over 10 ms. A TYPE change, or a change of a zone that swaps the algorithm (RINGS' model, CLOUDSEED's character), fades out, clears and fades in: a short gap, no click.
 - The paired tracks that share a voice (RS/CP, MT/HT, CH/OH, CY/CB) send at the louder of their two send levels.
 - The return is soft-limited (-6 dBFS PRE, -12 dBFS POST), except STUTTER's, which returns at unity. A runaway or invalid value clears the effect instead of blasting.
+
+**New in 0.5.0:** two user effects, PHASER and BBD, play in the UFX slots (TYPE 64..67): see [PHASER and BBD](/sidecar-expander/using/user-effects/).
 
 ## Which effects where
 

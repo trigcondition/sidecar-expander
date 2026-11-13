@@ -91,6 +91,7 @@ The Sidecar runs two send effects, **SEND FX 1** and **SEND FX 2**. Every track 
 | A **TYPE** | the effect: OFF, CHORUS, COMB, CRUSH, RINGMOD, HALO, and on the Pi RINGS, CLOUDSEED, STUTTER |
 | B **P1 ROUTE** | **PRE**: the return enters before the Rytm's analog distortion and compressor (the default). **POST**: it is added after them, clean |
 | C..F **P2..P5** | the effect's own knobs, with its own labels (RATE, DCY, MODL...) |
+| G **BASE**, H **WID** | 0.5.0: the return's high-pass edge and the band's width above it ([Send effects](/sidecar-expander/using/send-effects/#common-to-every-effect)) |
 
 - The TYPE list comes from the Sidecar, so it shows the effects your Sidecar plays. An effect it cannot play shows as `!NAME` and stays silent.
 - TYPE and ROUTE are stored in the kit and cannot be p-locked. P2..P5 can be p-locked on the FX track.

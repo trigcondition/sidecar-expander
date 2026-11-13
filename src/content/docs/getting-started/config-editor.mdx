@@ -1,0 +1,15 @@
+---
+title: Card config editor
+description: Pick your Pi, display, network and options; get the SD card's config.txt and cmdline.txt (and a Wi-Fi file) to copy or download. Runs in your browser, nothing is sent or stored.
+template: splash
+tableOfContents: false
+sidebar:
+  order: 5
+---
+import ConfigEditor from '../../../components/ConfigEditor.astro';
+
+Choose the board, the display and the settings; the card's `config.txt` and `cmdline.txt` change as you go. Copy them or download them, and put them at the top level of the Sidecar SD card in place of the card's own (unzip the [release card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card) first). With nothing changed you get the release card's files exactly. Everything runs in this page: nothing is sent, nothing is stored, and the page works offline.
+
+<ConfigEditor />
+
+Every option here is one the chosen Sidecar version reads (0.4.4 is the current release; 0.5.0 is coming and adds the web update and the USB-C network); the [install page](/sidecar-expander/getting-started/install-pi/#options-cmdlinetxt) and [The display](/sidecar-expander/using/display/) explain them in more detail. A setting saved on the unit itself (Settings on the touchscreen, the SIDECAR menu on the Rytm) can win over `cmdline.txt`: the USB-C mode, for example, follows the saved one.

@@ -25,6 +25,10 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
 
 ## Make the SD card
 
+**The easy way (from Sidecar 0.5.0): unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card: the 800x480 card set below, the web app (`/.rytm/www-next/`), the starter content, every user machine and user effect of the release in `/Plugins/`, and some free demo material (a MULTISAMPLE instrument, a capture for INSERT AMP, one-shots of the starter machines). Check it against `SHA256SUMS` and format the card (step 2 below), then copy **everything** in the zip to the card's top level, including the hidden folder `.rytm` (Mac Finder: Cmd+Shift+. shows it). `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600`, or use the 1024x600 card zip.
+
+The card zips alone, step by step:
+
 1. Check the download: in the download folder, `shasum -a 256 -c SHA256SUMS --ignore-missing` must say `OK` for the zip (Windows: `certutil -hashfile <file> SHA256` and compare with `SHA256SUMS`).
 2. Format the card as **FAT32** with one partition (MBR):
    - macOS: Disk Utility > Erase, Format "MS-DOS (FAT)", Scheme "Master Boot Record".
@@ -88,6 +92,8 @@ Wi-Fi is off in the package; see [Wi-Fi (off by default)](#wi-fi-off-by-default)
 
 One line of `name=value` options, separated by spaces. The release sets `sdport=0`, which turns off writing boot files over the network. Leave it in.
 
+**Easier:** the [card config editor](/sidecar-expander/getting-started/config-editor/) writes `config.txt` and `cmdline.txt` for you: pick the Pi, the display, the network and the options, then copy or download the two files (and a `sidecar-wifi.txt` if you want Wi-Fi). It runs in your browser; nothing is sent or stored.
+
 | Option | Default | |
 |---|---|---|
 | `out=tracks\|main` | tracks | voices on their tracks' channels (what the mods expect), or summed on MAIN (a stock Rytm) |
@@ -128,6 +134,8 @@ disable_overscan=1
 For another display, change the `hdmi_cvt` line to its resolution and add `width=` and `height=` with the same values to `cmdline.txt`. For a 1024x600 display, use the 1024x600 card zip (or see [The display](/sidecar-expander/using/display/#screen-sizes) for the lines). Leave the block that starts `# sidecar sdboot begin` as it is: without it the Pi does not start the engine.
 
 The Pi 5 has display lines of its own under `[pi5]`; only `hdmi_force_hotplug=1` matters there (see [Raspberry Pi 5](#raspberry-pi-5)). A DSI display needs no line on either board.
+
+The [card config editor](/sidecar-expander/getting-started/config-editor/) writes these lines for each display, the rotation of a DSI display included.
 
 ## Starter content
 
@@ -208,7 +216,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 | DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
 | Wi-Fi | <span class="sc-ok">hardware</span> | <span class="sc-ok">hardware</span> |
 | Overbridge passthrough (USB-C mode OVERBRIDGE) | opt-in, new in 0.4.1 (<span class="sc-ok">hardware</span>): [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar) | opt-in, new in 0.4.2 (<span class="sc-ok">hardware</span>, on a powered hub port; a USB-C power and data splitter is recommended) |
-| Updating | copy the new files over the old ones | the same (no network update on the Pi 5) |
+| Updating | copy the new files over the old ones | the same; from 0.5.0 also [from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) |
 
 What is different on the Pi 5 for now:
 
@@ -219,7 +227,7 @@ What is different on the Pi 5 for now:
 - **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up). From 0.4.0 the UI uses the panel's 1280x720 by default (<span class="sc-test">in testing</span>: not yet run on the panel); `res=1024x600` in `/.rytm/display.txt` gives the older 1024x600 UI, centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
 - **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).
-- **Updating**: copy the new release's files over the old ones (as on the Pi 4). There is no update over the network on a Pi 5 yet.
+- **Updating**: copy the new release's files over the old ones (as on the Pi 4). From 0.5.0 you can also update from the web page ([Updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
 - If the Pi 5 shows its boot diagnostics screen instead of starting, update its bootloader with Raspberry Pi Imager ("Misc utility images", "Bootloader"), then try again.
 - The serial console (for tester reports) is on the same pins as the Pi 4's (GPIO14/15, pins 8 and 10, 921600 baud).
 
