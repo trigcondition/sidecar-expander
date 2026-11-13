@@ -268,6 +268,15 @@ def root_entries(img):
 
 
 class ShortNames(unittest.TestCase):
+    def test_non_ascii_gets_alias(self):
+        # upper() of a non-ASCII letter can change it or grow it (ß -> SS): such names get NAME~N and an LFN
+        for n in ("\u00df.txt", "\u00df\u00df\u00df\u00df\u00df.txt", "caf\u00e9.txt"):
+            s, lfn, nt = m.short_name(n, set())
+            self.assertEqual(len(s), 11, n)
+            self.assertTrue(lfn, n)
+            self.assertEqual(nt, 0, n)
+            self.assertIn(b"~", s, n)
+
     def test_plain_names_no_alias(self):
         tmp = tempfile.mkdtemp()
         try:

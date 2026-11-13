@@ -110,7 +110,7 @@ def short_name(name, taken):
     base, dot, ext = name.rpartition(".")
     if not dot:
         base, ext = name, ""
-    ok = (1 <= len(base) <= 8 and len(ext) <= 3 and "." not in base and " " not in name
+    ok = (name.isascii() and 1 <= len(base) <= 8 and len(ext) <= 3 and "." not in base and " " not in name
           and all(c in _SHORT_OK for c in (base + ext).upper()))
     if ok:
         s = (base.upper().ljust(8) + ext.upper().ljust(3)).encode("latin-1")
