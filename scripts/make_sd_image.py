@@ -81,29 +81,57 @@ def _clean_short(s):
     return "".join(c if c in _SHORT_OK else "_" for c in s.upper().replace(" ", ""))
 
 
+_ILLEGAL = set('"*/:<>?\\|')
+
+
+def check_dir_names(names, where=""):
+    """Refuse names FAT cannot hold and names that collide ignoring case in one folder."""
+    seen = {}
+    for n in names:
+        if not n or n in (".", "..") or n.endswith((".", " ")) or any(c in _ILLEGAL or ord(c) < 32 for c in n):
+            raise SystemExit("a name FAT cannot hold: %r in %s" % (n, where or "/"))
+        k = n.upper()
+        if k in seen:
+            raise SystemExit("names that differ only in case: %r and %r in %s" % (seen[k], n, where or "/"))
+        seen[k] = n
+
+
+def _case_bits(part, bit):
+    """(flag, mixed) of a base or extension: flag = NT lower-case bit when it has lower case letters only."""
+    low, up = any(c.islower() for c in part), any(c.isupper() for c in part)
+    return (bit if low and not up else 0), (low and up)
+
+
 def short_name(name, taken):
-    """An 8.3 name (11 bytes) for NAME, unique in TAKEN (a set of 11-byte names); returns (short11, needs_lfn)."""
+    """The 8.3 name (11 bytes) of NAME, unique in TAKEN (a set of 11-byte names); returns (short11, needs_lfn, nt) where
+    nt is the NT case byte (0x08 base lower case, 0x10 extension lower case). A name that is a valid 8.3 name ignoring
+    case gets the plain upper-case short name (no ~N): without LFN entries, with the NT bits, when each part is all
+    upper or all lower case; with LFN entries when a part is mixed case. Other names get NAME~N and LFN entries."""
     base, dot, ext = name.rpartition(".")
     if not dot:
         base, ext = name, ""
+    ok = (1 <= len(base) <= 8 and len(ext) <= 3 and "." not in base and " " not in name
+          and all(c in _SHORT_OK for c in (base + ext).upper()))
+    if ok:
+        s = (base.upper().ljust(8) + ext.upper().ljust(3)).encode("latin-1")
+        bf, bm = _case_bits(base, 0x08)
+        ef, em = _case_bits(ext, 0x10)
+        if s not in taken:
+            if bm or em:
+                return s, True, 0
+            return s, False, bf | ef
     lead = base.lstrip(".")
     if base == "" and dot:      # ".rytm": Windows drops the leading dot
         lead = ext
         ext = ""
     cb, ce = _clean_short(lead), _clean_short(ext)[:3]
-    exact = (name == name.upper() and 1 <= len(lead) <= 8 and len(ext) <= 3 and cb == lead and ce == ext
-             and not name.startswith(".") and name.count(".") <= 1 and " " not in name)
-    if exact:
-        s = cb.ljust(8) + ce.ljust(3)
-        if s.encode("latin-1") not in taken:
-            return s.encode("latin-1"), False
     n = 1
     while True:
         tail = "~%d" % n
         s = (cb[:8 - len(tail)] + tail).ljust(8) + ce.ljust(3)
         b = s.encode("latin-1")
         if b not in taken:
-            return b, True
+            return b, True, 0
         n += 1
 
 
@@ -133,9 +161,9 @@ def lfn_entries(name, short11):
     return out
 
 
-def dir_entry(short11, attr, cluster, size, date):
+def dir_entry(short11, attr, cluster, size, date, nt=0):
     d, t = fat_datetime(date)
-    return struct.pack("<11sBBBHHHHHHHI", short11, attr, 0, 0, t, d, d, cluster >> 16, t, d, cluster & 0xFFFF, size)
+    return struct.pack("<11sBBBHHHHHHHI", short11, attr, nt, 0, t, d, d, cluster >> 16, t, d, cluster & 0xFFFF, size)
 
 
 # ---- tree --------------------------------------------------------------------------------------------------------
@@ -152,7 +180,9 @@ class Node:
 
 def scan(path, name=""):
     n = Node(name, path, True)
-    for fn in sorted(os.listdir(path)):
+    names = sorted(os.listdir(path))
+    check_dir_names(names, path)
+    for fn in names:
         p = os.path.join(path, fn)
         if os.path.islink(p) and not os.path.exists(p):
             raise SystemExit("broken symlink: %s" % p)
@@ -182,7 +212,7 @@ def assign_clusters(root, date):
     def count_entries(node, is_root):
         taken, n = set(), 1 if is_root else 2
         for c in node.children:
-            s11, need_lfn = short_name(c.name, taken)
+            s11, need_lfn, c._nt = short_name(c.name, taken)
             taken.add(s11)
             c._short, c._lfn = s11, need_lfn
             n += 1 + (len(lfn_entries(c.name, s11)) if need_lfn else 0)
@@ -212,7 +242,7 @@ def assign_clusters(root, date):
         for c in node.children:
             if c._lfn:
                 ents.extend(lfn_entries(c.name, c._short))
-            ents.append(dir_entry(c._short, 0x10 if c.is_dir else 0x20, c.first, 0 if c.is_dir else c.size, date))
+            ents.append(dir_entry(c._short, 0x10 if c.is_dir else 0x20, c.first, 0 if c.is_dir else c.size, date, c._nt))
         node.entries = b"".join(ents).ljust(node.nclusters * CLUSTER, b"\x00")
         for c in node.children:
             if c.is_dir:

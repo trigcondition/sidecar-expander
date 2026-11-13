@@ -92,7 +92,10 @@ class Reader:
                 u = b"".join(lfn[k] for k in sorted(lfn))
                 name = u.decode("utf-16-le").split("\x00")[0]
             else:
-                name = (short[:8].decode().rstrip() + ("." + short[8:].decode().rstrip() if short[8:].strip() else ""))
+                b, x = short[:8].decode().rstrip(), short[8:].decode().rstrip()
+                b = b.lower() if e[12] & 0x08 else b
+                x = x.lower() if e[12] & 0x10 else x
+                name = b + ("." + x if x else "")
             lfn = {}
             cl = (struct.unpack_from("<H", e, 20)[0] << 16) | struct.unpack_from("<H", e, 26)[0]
             size = struct.unpack_from("<I", e, 28)[0]
@@ -212,7 +215,7 @@ class Layout(unittest.TestCase):
         b = m.short_name("very long plugin name two.rmp", taken)[0]
         self.assertNotEqual(a, b)
         self.assertEqual(a, b"VERYLO~1RMP")
-        self.assertEqual(m.short_name("KERNEL8.IMG", set()), (b"KERNEL8 IMG", False))
+        self.assertEqual(m.short_name("KERNEL8.IMG", set())[:2], (b"KERNEL8 IMG", False))
         self.assertEqual(m.short_name(".rytm", set())[0], b"RYTM~1     ")
 
     def test_too_small_size_refused(self):
@@ -244,6 +247,112 @@ class Layout(unittest.TestCase):
         z2 = os.path.join(self.tmp, "b.img.zip")
         self.assertEqual(m.write_zip(self.img, z2, "a.img"), sha(z2))
         self.assertEqual(sha(z), sha(z2), "the zip is reproducible")
+
+
+def root_entries(img):
+    """The root directory's raw entries of an image: list of (short11, attr, ntres, lfn_count_before)."""
+    out, lfn = [], 0
+    with open(img, "rb") as f:
+        f.seek((m.START_LBA + m.DATA_START) * 512)
+        raw = f.read(m.CLUSTER)
+    for i in range(0, len(raw), 32):
+        e = raw[i:i + 32]
+        if e[0] == 0:
+            break
+        if e[11] == 0x0F:
+            lfn += 1
+            continue
+        out.append((e[0:11], e[11], e[12], lfn))
+        lfn = 0
+    return {k: (a, nt, l) for k, a, nt, l in out}
+
+
+class ShortNames(unittest.TestCase):
+    def test_plain_names_no_alias(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            tree = os.path.join(tmp, "t"); os.mkdir(tree)
+            for n in ("config.txt", "cmdline.txt", "start4.elf", "fixup4.dat", "kernel_2712.img", "Readme.txt", "UPPER.TXT",
+                      "armstub8-rpi4.bin", "bcm2711-rpi-4-b.dtb", "noext", "Mixed.TXT"):
+                with open(os.path.join(tree, n), "wb") as f:
+                    f.write(b"x")
+            for d in ("overlays", "firmware"):
+                os.mkdir(os.path.join(tree, d))
+            img = os.path.join(tmp, "a.img")
+            m.build_image(tree, img)
+            e = root_entries(img)
+            self.assertEqual(e[b"CONFIG  TXT"], (0x20, 0x18, 0))      # base and extension lower case, no LFN
+            self.assertEqual(e[b"CMDLINE TXT"], (0x20, 0x18, 0))
+            self.assertEqual(e[b"START4  ELF"], (0x20, 0x18, 0))
+            self.assertEqual(e[b"FIXUP4  DAT"], (0x20, 0x18, 0))
+            self.assertEqual(e[b"UPPER   TXT"], (0x20, 0x00, 0))
+            self.assertEqual(e[b"NOEXT      "], (0x20, 0x08, 0))
+            self.assertEqual(e[b"OVERLAYS   "], (0x10, 0x08, 0))
+            self.assertEqual(e[b"FIRMWARE   "], (0x10, 0x08, 0))
+            self.assertEqual(e[b"README  TXT"], (0x20, 0x00, 1))      # mixed case: LFN + plain short, no NT bits
+            self.assertEqual(e[b"MIXED   TXT"], (0x20, 0x00, 1))      # mixed base, upper ext
+            self.assertEqual(e[b"KERNEL~1IMG"][0], 0x20)              # 11 chars base: needs ~1 and LFN
+            self.assertGreaterEqual(e[b"KERNEL~1IMG"][2], 1)
+            self.assertGreaterEqual(e[b"ARMSTU~1BIN"][2], 1)
+            self.assertFalse([k for k in e if k.startswith(b"CONFIG~")])
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_plain_collision_falls_back_to_alias(self):
+        taken = {b"README  TXT"}
+        self.assertEqual(m.short_name("Readme.txt", taken)[:2], (b"README~1TXT", True))
+
+    def test_reader_names(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            tree = os.path.join(tmp, "t"); os.mkdir(tree)
+            for n in ("config.txt", "Readme.txt", "a long name.bin"):
+                with open(os.path.join(tree, n), "wb") as f:
+                    f.write(b"x")
+            img = os.path.join(tmp, "a.img")
+            m.build_image(tree, img)
+            r = Reader(img)
+            try:
+                self.assertEqual(sorted(n for n, _ in r.walk()), ["Readme.txt", "a long name.bin", "config.txt"])
+            finally:
+                r.f.close()
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_case_collision_refused(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            tree = os.path.join(tmp, "t"); os.mkdir(tree)
+            for n in ("File.txt", "file.TXT"):
+                with open(os.path.join(tree, n), "wb") as f:
+                    f.write(b"x")
+            if len(os.listdir(tree)) == 2:      # a case-sensitive file system
+                with self.assertRaises(SystemExit):
+                    m.build_image(tree, os.path.join(tmp, "a.img"))
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_check_dir_names(self):
+        m.check_dir_names(["a.txt", "b.txt"])
+        with self.assertRaises(SystemExit):
+            m.check_dir_names(["File.txt", "file.TXT"])
+        with self.assertRaises(SystemExit):
+            m.check_dir_names(["a*b"])
+
+    def test_illegal_names_refused(self):
+        for bad in ("a?b.txt", "a:b", 'q"q', "a<b", "trailing.", "trailing ", "tab\tname", "a|b"):
+            tmp = tempfile.mkdtemp()
+            try:
+                tree = os.path.join(tmp, "t"); os.mkdir(tree)
+                try:
+                    with open(os.path.join(tree, bad), "wb") as f:
+                        f.write(b"x")
+                except OSError:
+                    continue
+                with self.assertRaises(SystemExit, msg=repr(bad)):
+                    m.build_image(tree, os.path.join(tmp, "a.img"))
+            finally:
+                shutil.rmtree(tmp)
 
 
 def slurp(p):
