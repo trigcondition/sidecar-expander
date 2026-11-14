@@ -25,6 +25,10 @@ The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the pictur
 
 ## Make the SD card
 
+**The easy way (from Sidecar 0.5.0): unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card: the 800x480 card set below, the web app (`/.rytm/www-next/`), the starter content, every user machine and user effect of the release in `/Plugins/`, and some free demo material (a MULTISAMPLE instrument, a capture for INSERT AMP, one-shots of the starter machines). Check it against `SHA256SUMS` and format the card (step 2 below), then copy **everything** in the zip to the card's top level, including the hidden folder `.rytm` (Mac Finder: Cmd+Shift+. shows it). `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600`, or use the 1024x600 card zip.
+
+The card zips alone, step by step:
+
 1. Check the download: in the download folder, `shasum -a 256 -c SHA256SUMS --ignore-missing` must say `OK` for the zip (Windows: `certutil -hashfile <file> SHA256` and compare with `SHA256SUMS`).
 2. Format the card as **FAT32** with one partition (MBR):
    - macOS: Disk Utility > Erase, Format "MS-DOS (FAT)", Scheme "Master Boot Record".

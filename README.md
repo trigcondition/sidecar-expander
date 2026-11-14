@@ -72,7 +72,7 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
 
 1. **Build the Rytm firmware 0.4.4 from your stock OS file:** with elekloader, OS 1.74: `core-0.1-os1.74.elemod` + `rytm-sidecar-0.4.4-os1.74.elemod`, version set to 1.74; OS 1.73: `core-0.1.elemod` + `rytm-sidecar-0.4.4.elemod`, version 1.73, or the browser patcher (build `rel0-4-4-os1.74` for 1.74, `rel0-4-4` for 1.73); both give the same `.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/), [PATCHER.md](PATCHER.md)).
 2. **Flash it:** send the patched `.syx` with Transfer and confirm on the Rytm.
-3. **Set up the Sidecar** (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md).
+3. **Set up the Sidecar** (Pi 4B or Pi 5): [INSTALL-PI.md](INSTALL-PI.md). The easy way (from Sidecar 0.5.0): unzip the release's starter zip, `sidecar-<version>-starter.zip`, onto a FAT32 card: the card files, the web app, every user machine and user effect, the starter content and some free demo samples in one zip.
 4. **Connect:** plug the Rytm's USB cable into the Sidecar's host port and power both. On the Rytm, choose an external machine on a track, or set a SEND FX TYPE.
 5. **Pair your browser:** open `http://sidecar.local` and enter the 8-digit code from the Rytm (SIDECAR MENU > WEB UI) or the touchscreen.
 

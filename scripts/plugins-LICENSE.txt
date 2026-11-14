@@ -1,5 +1,6 @@
 Sidecar | Expander user machines (sc_acid, sc_wavepad, sc_metal, sc_snare, sc_pluck, sc_grain, nusaw, vox, hush1,
-raffo, sophie; modele under its own licence: see the end)
+raffo, sophie; modele under its own licence: see the end) and, from 0.5.0, the user effects (ufx_pingpong,
+ufx_phaser, ufx_bbd); mist, from 0.5.0, has its own mist-LICENSE.txt (MIT: ours, Beads', stmlib's) and mist-NOTICE.txt
 
 MIT License
 
