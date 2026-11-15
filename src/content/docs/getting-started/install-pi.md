@@ -235,6 +235,7 @@ What is different on the Pi 5 for now:
 
 - To update, copy the new release's files over the old ones on the card. Your samples, recordings, `/Plugins/` and `/.rytm/` stay. Each package's `BUILD-INFO-pi.txt` names the kernel it carries.
 - **From 0.4.0, 0.4.1, 0.4.2 or 0.4.3 to 0.4.4:** copy the new card, and flash the Rytm firmware 0.4.4 for the held step's values on the SRC view and the CONNECTED screen at the Rytm's boot; a Rytm left on the Rytm firmware 0.4.0 works with the 0.4.4 card too ([Release notes](/sidecar-expander/release-notes/#sidecar-044)). To go back, flash the Rytm firmware 0.4.0 or the stock OS ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/#the-rytm-firmware-040-older)).
+- **A card made from the SD card image** grows to the card's size on its first boot (0.5.0): see [Storage](/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050).
 - To stop using Sidecar, reformat the card. Nothing on the Pi itself is changed.
 
 ## Check that it works

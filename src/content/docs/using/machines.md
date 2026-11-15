@@ -7,6 +7,8 @@ sidebar:
 
 The Sidecar renders up to **8 voices**, one per Rytm voice: all 12 tracks can choose a Sidecar machine, and like the Rytm's own pairs, RS/CP, MT/HT, CH/OH and CY/CB share one voice, so eight sound at once. A track on a Sidecar machine sends its trigs and knob values to the Sidecar, which plays the voice and returns it on the track's own channel, through the track's analog filter and amp.
 
+**Levels (0.5.0).** Sidecar voices are about **9 dB quieter** than in 0.4.x, because they clipped at the Rytm's track ceiling. A soft limit now rounds off the loudest peaks at that ceiling instead of clipping them. Against the Rytm's own voices a Sidecar voice sits lower than before: set the balance with the track's level. A level of 0 is silent on DAISYSP, and the level and velocity of PLAITS change its volume.
+
 Beside the machines on this page:
 
 - three polyphonic machines, **MULTISAMPLE**, **WAVETABLE** and **GRANULAR**, and poly tracks on every machine: see [Poly machines](/sidecar-expander/using/poly-machines/) and [Poly mode](/sidecar-expander/using/sequencer/);

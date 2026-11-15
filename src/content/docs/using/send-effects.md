@@ -19,7 +19,7 @@ The two send effects are FX buses 1 and 2 of the [insert FX](/sidecar-expander/u
 - The paired tracks that share a voice (RS/CP, MT/HT, CH/OH, CY/CB) send at the louder of their two send levels.
 - The return is soft-limited (-6 dBFS PRE, -12 dBFS POST), except STUTTER's, which returns at unity. A runaway or invalid value clears the effect instead of blasting.
 
-**New in 0.5.0:** two user effects, PHASER and BBD, play in the UFX slots (TYPE 64..67): see [PHASER and BBD](/sidecar-expander/using/user-effects/).
+**New in 0.5.0:** four user effects, PHASER, BBD, NIMBUS and GALACTIC, play in the UFX slots (TYPE 64..67): see [User effects](/sidecar-expander/using/user-effects/).
 
 ## Which effects where
 

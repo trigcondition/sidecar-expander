@@ -176,6 +176,7 @@ The ring (LEFT / RIGHT) runs SIDECAR, SYSTEM, REC, SCOPE, SAMPLE, AUTO, SONG, PR
 - **Stock screens step the page aside.** A Rytm menu, window, file browser or prompt (GLOBAL, the PATTERN or TRACK menu, SAVE, the sample browser, a TRK LEVEL readout) shows over the page; when it closes, the page is back.
 - **Footers** say what YES and NO do, in one form: `YES: MENU  NO: LEAVE` on SIDECAR, `YES: OPEN  NO: BACK` in the menu, `UP / DOWN: MORE  NO: BACK` on KEYS.
 - The **encoders** A..H on a voice page change the shown voice's parameters until the Rytm's own value moves (its knob, a p-lock, another sound). Such an edit is not saved in the kit.
+- **How the knobs and keys feel** (0.5.0): knobs with a neutral middle stop at it, FUNC + turn takes bigger steps, holding UP scrolls a list and held arrows repeat ([Key combinations](/sidecar-expander/using/key-combinations/#knobs-and-keys-how-they-feel-050)).
 - A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later.
 
 ### Tracks and voices

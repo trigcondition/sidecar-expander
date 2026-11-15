@@ -7,7 +7,7 @@ sidebar:
 
 **UP is the Sidecar key.** Hold UP and press a second key. The stock Rytm leaves all of these combinations free, so nothing of the Rytm's own is lost. UP alone still moves the cursor in the Rytm's menus.
 
-- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. The Rytm shows every UP + key on one screen, in two columns, and lights T1..T14 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
+- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. On a page where UP scrolls a list, holding UP scrolls instead ([below](#knobs-and-keys-how-they-feel-050)). The Rytm shows every UP + key on one screen, in two columns, and lights T1..T14 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
 - **No touchscreen needed:** every page opened from T7..T14 and every UP + key combination works on the Rytm's own screen.
 - **The SIDECAR MENU** (UP + YES, then YES) lists every Sidecar page with its shortcut.
 - **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older forms.
@@ -36,7 +36,7 @@ sidebar:
 | **UP + T11** | SONG |
 | **UP + T12** | PROJECT |
 | **UP + T13** | POOL |
-| **UP + T14** | [MORPH](/sidecar-expander/using/morph/) on the Rytm's screen (0.5.0) |
+| **UP + T14** | the Rytm's own key. It becomes the [MORPH](/sidecar-expander/using/morph/) page in 0.5.1 |
 
 - T1..T6 are the touchscreen's pages alone. T8..T14 open on the touchscreen when one is connected and has the page, else on the Rytm's screen.
 - No trig is placed: while UP is held the trig keys only pick pages.
@@ -95,6 +95,13 @@ The TRK and FUNC forms of the 0.3 test builds still work: **TRK + YES**, **TRK +
 | **T1 / T2 / T3 / T4** | the SONG page | arm / replay / marker / setup checklist ([Song recorder](/sidecar-expander/using/song-recorder/)) |
 
 PLAY, STOP and RECORD always reach the Rytm, also while a Sidecar page is open.
+
+### Knobs and keys: how they feel (0.5.0)
+
+- **A knob stops at its centre.** On pan, EQ, tone and LFO depth (the knobs with a neutral middle), a turn that reaches the middle stops there. Keep turning, about three more clicks, to leave it. A knob that you find at its centre holds too. A turn back gives the clicks back. The detent forgets itself after about 1.5 s without a turn. It is not on every knob: CHOP's fields, DSP SAMPLE's TUN and FIN and some send FX knobs have none.
+- **FUNC + turn takes bigger steps.** On the Sidecar's pages it moves a knob in steps of 8 on a 0..127 value, and a list by a whole zone. On a **TUN** knob it moves an octave (12 semitones). The REC page's playback level takes bigger steps too. FUNC + turn leaves a centre at once. Some pages keep their own FUNC meaning: SEQ, CHOP, FILL, SAMPLE EDIT and the SAMPLE page.
+- **Holding UP scrolls a list** on the pages whose rows UP and DOWN move (the SIDECAR MENU, KEYS, MIDI, PROJECT, USER SLOTS and the SEQ page): the combo map does not open there. On a voice page, SCOPE, INSERT and the other pages UP does not scroll, so holding it still shows the map. On CHOP and FILL, UP is a modifier and the map still shows.
+- **Holding a key repeats it.** UP and DOWN on a scrolling page, and LEFT and RIGHT on a page that uses them, repeat after 0.4 s, then every 80 ms. The repeat stops when you let go, press any other key, change the page or leave it. The SEQ page does not repeat, and neither does the ring of pages.
 
 **Pages that replace the Rytm's page.** The poly SEQ page, UP + FX, UP + AMP and UP + LFO (and POOL, POLY CONFIG, the SIDECAR MENU and KEYS) take the Rytm's screen like the SRC view does: no page dots, and LEFT / RIGHT do not jump to other Sidecar pages (on the LFO page they step the LFO, on the INSERT page RIGHT opens the EQ view). Leave with **NO** (one press, from 0.4.4), or press the same UP + key again. UP and DOWN on these pages are the Rytm's (in CHRO mode the pads' range), except on POOL, CHOP, the SIDECAR MENU, KEYS, WEB UI and USB-C, which use them, and on the SEQ page's track menu.
 

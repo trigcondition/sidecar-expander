@@ -19,6 +19,14 @@ The Sidecar boots from its **SD card**, which stays the place of record: project
 | USB drives (up to three) | `USB`, `USB2`, `USB3` | Pi 4B, Pi 5 |
 | NVMe SSD on the PCIe connector | `NVME` | Pi 5 |
 
+## The SD card image grows to fill the card (0.5.0)
+
+The Sidecar's **SD card image** is about 2.5 GiB. On its **first boot** from a larger card, the Sidecar stretches the image's one partition and its FAT32 volume to fill the whole card, so the room for samples, recordings and projects is the card's size. It runs once, before anything else uses the card.
+
+- **A power cut is safe.** The Sidecar writes the new sizes in an order that never leaves a wrong free-space count, and reads what it wrote back to check it. If a check fails, it logs the reason.
+- **It leaves a card alone** that is not the image's layout (more than one partition, or a volume that is not the image's own), a card with less than 64 MiB to gain, and a card that is already full size. A card you formatted yourself and copied the files onto is already as large as the card.
+- **`sdgrow=0` turns it off.** The log says how long a grow took.
+
 ## Saves are instant, and safe in a power cut
 
 <span class="sc-ok">hardware</span> (2026-10-26: no clicks on kit and pattern changes, a power cut after an edit kept everything). When a project loads, the Sidecar reads its small files (the poly patterns, the LFOs, the insert settings, the pool lists) into RAM. While you play:

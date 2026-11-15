@@ -1,18 +1,18 @@
 ---
-title: PHASER and BBD (user effects)
-description: "PHASER, a stereo phaser, and BBD, a bucket-brigade delay: two send FX plugins for the Pi, with every knob, the tempo-synced values and the Rytm's knob names."
+title: User effects (PHASER, BBD, NIMBUS, GALACTIC)
+description: "PHASER, BBD, NIMBUS and GALACTIC: four send FX plugins for the Pi, with every knob, the tempo-synced values and the Rytm's knob names."
 sidebar:
   order: 2.05
 ---
 
 <span class="sc-test">in testing</span> New in 0.5.0 (Sidecar on the Pi).
 
-**PHASER** and **BBD** are **user effects**: plugins that play in a send FX slot, next to the [send effects](/sidecar-expander/using/send-effects/). They are Plugin API 3 packages, so they need the Sidecar 0.5.0.
+**PHASER**, **BBD**, **NIMBUS** and **GALACTIC** are **user effects**: plugins that play in a send FX slot, next to the [send effects](/sidecar-expander/using/send-effects/). They are Plugin API 3 packages, so they need the Sidecar 0.5.0.
 
 - A user effect takes a send FX slot's TYPE 64..67 (UFX1..UFX4). The send level is its mix: the return is the effect only, as for the built-in effects.
 - It has **four knobs**, on the Rytm's P2..P5 of the SEND FX page (P1 is the ROUTE, PRE / POST).
 - **The Rytm shows the effect's own knob names** and the names of the zones of a stepped knob. It needs no Rytm update for that.
-- **Put one in a slot** with the console: `um=fx:<n>:<id>`, with `n` the slot 1..4 and `id` `fx.phaser` or `fx.bbd`. The slots are kept per project.
+- **Put one in a slot** with the console: `um=fx:<n>:<id>`, with `n` the slot 1..4 and `id` `fx.phaser`, `fx.bbd`, `fx.nimbus` or `fx.galactic`. The slots are kept per project.
 - The input is mono (the tracks' sends added up). The return is stereo.
 
 ## PHASER
@@ -46,3 +46,30 @@ A bucket-brigade style analog delay: a model of how such pedals behave, not of o
 
 - **Memory:** the line is 2.5 s long where there is room, and 1.1 s at least. A slot takes about 1.9 MB.
 - **The line keeps its audio** when the slot's TYPE moves to another effect. Going back to BBD can replay the old repeats for a moment.
+
+## NIMBUS
+
+A big ambient reverb with an ensemble: a pad that follows the harmony of what you send to it, in the spirit of an ensemble reverb pedal. It listens to the send with 48 bands a semitone apart (C3 to B6). The bands that stand out each play a sine at the pitch they heard, with a slow swell, through a three-voice string-ensemble chorus and into the reverb. Drums make the pad too: a kick or a snare with a clear pitch leaves a held tone.
+
+| Knob | Values | What it does | Default |
+|---|---|---|---|
+| **DCY** | 0..127 | the decay time, 0.5 s to 64 s, exponential (64: about 6 s; 96: about 20 s) | 96 |
+| **ENS** | 0..127 | how much of the pad goes into the reverb. 0 is the reverb alone | 64 |
+| **TONE** | 0..127 | the damping in the reverb's loop, 500 Hz up to 18 kHz | 80 |
+| **MOD** | 0..127 | the depth of the slow modulation of the reverb's delay lines (64: as designed) | 64 |
+
+- **It is the most demanding user effect** for the processor, so far. A slot takes about 1.2 MB.
+
+## GALACTIC
+
+Airwindows' Galactic, by Chris Johnson, ported to the Sidecar: a huge, soft, drifting space for endless washes. It is always fully wet, so the send level is its mix.
+
+| Knob | Values | What it does | Default |
+|---|---|---|---|
+| **REPL** | 0..127 | Replace: how fast new sound replaces the old. Low: the tail regenerates for longer. 0 holds what is in it and lets nothing new in | 38 |
+| **BRT** | 0..127 | Brightness: the low-pass before and after the tank | 64 |
+| **DTUN** | 0..127 | Detune: the speed of the vibrato before the delays, the drifting, chorused character | 64 |
+| **BIG** | 0..127 | Bigness: the size of the space (every delay time) | 127 |
+
+- The send's mono sum feeds both sides. The stereo comes from the two phases of the vibrato.
+- A slot takes about 1.1 MB.

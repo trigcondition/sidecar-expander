@@ -20,7 +20,7 @@ On a Rytm without the 0.5.0 firmware, UP + RIGHT stays the Rytm's own key. Open 
 
 ## The knobs
 
-Each label on the page starts with its encoder letter: **A TGT, B FR, C TO, D ORD, E TRG, F EVRY, G OFS, H SEED**. With VELOCITY as the target, the first label reads **A VELOCITY**. The header reads **LOCK TRK n/72**: the number of lock tracks in use in the pattern, not the number of locks.
+The knobs **A..H** set the values below, in this order, and the page keeps each knob's letter beside its value. The page also shows how many of the pattern's 72 lock tracks are in use (not the number of locks). The footer names what **YES** and **NO** do. Holding **FUNC** changes it to the clear and undo keys below.
 
 | Knob | | |
 |---|---|---|
@@ -36,6 +36,7 @@ Each label on the page starts with its encoder letter: **A TGT, B FR, C TO, D OR
 - **YES** fills.
 - **FUNC + YES** clears the target on those trigs: the lock is removed, and a velocity goes back to the default.
 - **FUNC + NO** undoes the last fill or clear (one level).
+- **NO** goes back (leaves FILL).
 
 Defaults: the machine's main target, ORDER UP (VELOCITY: RND), TRIGS ALL and a fresh seed. Empty or OFF pool rows and empty preset rows are skipped. For SAMPLE, FROM and TO start on the rows of your last quick load (RIGHT in the sample list, or several files in one go), or else on the sample the kit plays.
 
@@ -74,7 +75,7 @@ MD's TYPE lists the types of the engine the track plays now. A TYPE fill over tr
 
 | Note | Meaning |
 |---|---|
-| `FILLED 8: FN+NO UNDO` / `CLEARED 8` | done and checked, 8 trigs written |
+| `FILLED 8` / `CLEARED 8` | done and checked, 8 trigs written. A hint for the undo may follow |
 | `NO CHANGE` / `NOTHING TO CLEAR` | the pattern already held those values |
 | `NO TRIGS TO FILL` | no trig on the track within its length, through TRIGS, EVERY and OFFSET |
 | `NO VALUES IN RANGE` | FROM .. TO holds only empty or OFF rows |

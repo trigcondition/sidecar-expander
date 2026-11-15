@@ -86,9 +86,9 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 
 ## Then: 0.5.0 and later
 
-Planned, in no fixed order. Scenes, live sampling and the looper are 0.5.0's main features:
+Planned, in no fixed order. The looper, sidechain, morph scenes and the learn rows of the MIDI page moved from 0.5.0 to **0.5.1**:
 
-- **The "Octa release":** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
+- **The "Octa release" (0.5.1):** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
 - **PERF mode, like the Analog Four MKII's:** a mode for playing live. The DATA ENTRY knobs play the PERF macros, the pads pick scenes, FUNC + QPERF morphs between scenes and QPERF alone stays the QPERF macro. Trig keys 1 to 12 mute the twelve tracks and RTRG + a trig key solos one. Trig keys 13 to 16 are your own macros, toggle or momentary: hold one and turn the LEVEL/DATA knob to set its parameters.
 - **Temp save:** FUNC + YES saves the active pattern and its kit, the Sidecar's tracks, steps and scenes with them; FUNC + NO brings both back, so you can try something and return to where you were.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).

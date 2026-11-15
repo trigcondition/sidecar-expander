@@ -65,7 +65,7 @@ In 0.5.0 the LFOs move Sidecar destinations only. Neither the A nor the B list h
 
 - **Why:** an LFO on a Rytm parameter made the Rytm slow to respond.
 - **An LFO saved on a Rytm parameter** (an LFO A from an earlier 0.5.0-dev build) **loads as OFF.** The rest of the file is kept, and the next save writes OFF.
-- **The XY pad, scenes and MIDI learn** still reach the Rytm's own parameters. See [The Rytm's own parameters](/sidecar-expander/using/rytm-params/).
+- **The XY pad and MIDI learn** still reach the Rytm's own parameters. See [The Rytm's own parameters](/sidecar-expander/using/rytm-params/).
 
 ## Old kits, rollback and numbers
 
