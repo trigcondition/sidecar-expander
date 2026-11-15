@@ -21,6 +21,8 @@ The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on t
 | Raspberry Pi Touch Display 2, 5" | not supported | <span class="sc-test">in testing</span> (0.3.2: support added, untested here) |
 | Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
 
+**Settings for the card.** The [card config editor](/sidecar-expander/getting-started/config-editor/) makes the `config.txt` and `cmdline.txt` lines for these displays from a form.
+
 **Connecting.** HDMI goes to the Pi's **micro-HDMI 0** (next to the power socket), USB touch to a USB-A port. With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards).
 
 - To turn a DSI display by 180 degrees: `lcd_rotate=2` under `[pi4]` in `config.txt` (Pi 4) or `dsi_rotate=180` in `cmdline.txt` (Pi 5). `dsitouch_inv=1`, `2` or `3` mirrors the DSI touch in x, y or both.

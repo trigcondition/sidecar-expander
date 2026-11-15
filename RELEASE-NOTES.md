@@ -16,7 +16,9 @@
 | Part | File |
 |---|---|
 | Rytm firmware, OS 1.74 only | the 0.5.0 `.elemod` files (elekloader, GPL-2.0-or-later), or the 0.5.0 build in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: the .elemod names, the patcher build name and the .syx SHA-256 --> |
-| Sidecar (Raspberry Pi 4B and Pi 5, one card) | the 800x480 and 1024x600 card zips, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: the zip names with the release commit --> |
+| SD card image (new card) | `sidecar-<version>-sd-800x480.img.zip` and `sidecar-<version>-sd-1024x600.img.zip`, each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)) <!-- UNRELEASED: the image names with their hashes --> |
+| Release zip | `sidecar-<version>.zip`: both images, the card files, the Rytm `.elemod` files (no `.syx`), the manual, a quick start <!-- UNRELEASED: the zip name and hash --> |
+| Card files (copy by hand) | the 800x480 and 1024x600 card zips, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: the zip names with the release commit --> |
 | Update file (Pi 4 and Pi 5) | `sidecar-<version>.scu`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) <!-- UNRELEASED: the file name and its .sha256 --> |
 | User machines (Pi) | <!-- UNRELEASED: the plugins zip name and what it holds --> |
 | Starter content | <!-- UNRELEASED: the zip name --> |
@@ -45,6 +47,10 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 - **SAMPLE EDIT.** Crop, normalise, trim, fade, reverse and gain a sample from the pool, hear the edit on the track while you work, undo, and save the region as a new file. The original is never written ([SAMPLE EDIT](https://trigcondition.github.io/sidecar-expander/using/sample-edit/)).
 - **The sample browser previews, quick-loads and edits** (with the Rytm firmware 0.5.0). **FUNC + YES** on a file plays it while YES is held, and **knob H** sets the preview **level** (-40 to -6 dB, default -9 dB). **RIGHT** loads a file and moves on to the next empty row. **FUNC + LEFT / RIGHT** change the bank. **FUNC + RIGHT** on a file opens a file menu: LOAD, LOAD TO NEXT EMPTY, PREVIEW, SAMPLE EDIT and INFO ([Pools](https://trigcondition.github.io/sidecar-expander/using/pools/#quick-load-and-the-file-menu-050)).
 - **MIST, a texture user machine** (Plugin API 3, with the 0.5.0 Sidecar). A granular texture over a built-in oscillator or wavetable, played at the trig's note: SRC, TIME, SIZE, DENS, PTCH, SHAP, FDBK, SPRD, MIX, then RVB, FRZ, QUAL, BANK, WAVE and more. It is a plugin shipped on its own, not in the starter set ([MIST](https://trigcondition.github.io/sidecar-expander/using/mist/)).
+
+**Install**
+
+- **SD card images.** One ready card image for each screen size (800x480 and 1024x600), written with Raspberry Pi Imager or balenaEtcher: no formatting, no copying. The image grows to fill the card on its first boot (SD grow, below). The release zip `sidecar-<version>.zip` holds everything: both images, the card files for copying by hand, the Rytm `.elemod` files (never a `.syx`) with the patcher link, the manual and a quick start. The images are also separate downloads ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)).
 
 **FILL**
 
@@ -110,7 +116,7 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 
 **Storage and web**
 
-- **SD grow.** A card made from the Sidecar's SD card image (about 2.5 GiB) grows on its first boot: its one partition and its FAT32 volume stretch to use the whole SD card, safely across a power cut. `sdgrow=0` turns it off ([Storage](https://trigcondition.github.io/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050)).
+- **SD grow.** The SD card image grows on its first boot: its one partition and its FAT32 volume stretch to use the whole SD card (up to 512 GiB), safely across a power cut. `sdgrow=0` in `cmdline.txt` turns it off ([Storage](https://trigcondition.github.io/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050)).
 - **The user effects file survives read errors.**
 - **Web pages are no longer blank on Safari.**
 

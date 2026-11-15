@@ -29,12 +29,12 @@ sidebar:
 | No Sidecar voices after the Pi restarted, while the Rytm stayed on | seen once: the Sidecar's audio to the Rytm stayed silent. Restart the Rytm |
 | STUTTER is silent or always on | see [Set up STUTTER](/sidecar-expander/using/send-effects/#set-up-stutter-route-to-main): ROUTE TO MAIN off, P2 at 0 first |
 | The Rytm froze | power cycle it, and report what the Sidecar was doing |
-| The Pi does not start | the `# sidecar sdboot begin` block must stay in `config.txt`; use the official supply: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5 (a weak supply browns out with a display attached). A Pi 5 showing its boot diagnostics screen needs a bootloader update |
+| The Pi does not start | the `# sidecar sdboot begin` block must stay in `config.txt` (the [card config editor](/sidecar-expander/getting-started/config-editor/) writes a fresh `config.txt` and `cmdline.txt` for your board and display); use the official supply: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5 (a weak supply browns out with a display attached). A Pi 5 showing its boot diagnostics screen needs a bootloader update |
 | `POWER TOO WEAK` on the display, a Power warning on the web page | the supply is too weak: the official one, plugged in directly (Pi 5: the 27 W (5 V 5 A) adapter; Pi 4: the official 15 W (5.1 V 3 A) supply; the message names the board's own) |
 | Pi 5: the web page is slow over Wi-Fi, "503 busy" | power the Pi 5 from the 27 W adapter directly, not from a hub's port |
 | Clicks or muted voices when the Pi is hot, `CLOCK LOWERED` on STATUS | the temperature on the Status tab: see [Keeping it cool](#keeping-it-cool) |
 | The Pi restarted by itself | see [After an unexpected restart](#after-an-unexpected-restart) |
-| Pi 5: no picture on HDMI | micro-HDMI 0 (next to USB-C), connected before power-on; `hdmi_force_hotplug=1` under `[pi5]` in `config.txt` |
+| Pi 5: no picture on HDMI | micro-HDMI 0 (next to USB-C), connected before power-on; `hdmi_force_hotplug=1` under `[pi5]` in `config.txt` (the [card config editor](/sidecar-expander/getting-started/config-editor/) makes the file) |
 
 ## Keeping it cool
 

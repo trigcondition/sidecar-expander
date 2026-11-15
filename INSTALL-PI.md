@@ -8,7 +8,7 @@ Sidecar, the full Raspberry Pi version of Sidecar | Expander, **works on the Pi 
 
 - A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5, or one as good.
-- A **microSD card**, any size from 1 GB up. Its contents are replaced.
+- A **microSD card**, 4 GB or more for the card image (copying the files by hand: any size from 1 GB up). Its contents are replaced.
 - A **USB A-to-B cable** from the Pi to the Rytm.
 - Optional:
   - an **800x480 HDMI display** (a USB touch panel works too);
@@ -17,7 +17,17 @@ Sidecar, the full Raspberry Pi version of Sidecar | Expander, **works on the Pi 
 
 ## Make the SD card
 
-**The easy way (from Sidecar 0.5.0): unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card in one zip: the 800x480 card set below (both boards' engines, `sdboot.img`, `config.txt`, `cmdline.txt`), the web app (`/.rytm/www-next/`), the starter content (`/JUNO/Factory/`, `/DX7/`), every user machine and user effect of the release in `/Plugins/`, and some free demo material: a MULTISAMPLE instrument (`/MULTISAMPLE/SidecarTest/`), a capture for INSERT AMP (`/NAM/`) and one-shots of the starter machines (`/Samples/Starter/`). Check it against `SHA256SUMS`, format the card as below (step 2), then copy **everything** in the zip to the card's top level, including the folder `.rytm`: it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic web page. `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where and where every file comes from. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600` (the 1024x600 card has them), or use the 1024x600 card zip.
+**The easiest way (from Sidecar 0.5.0): write the SD card image with Raspberry Pi Imager.** The release has a ready card image for each screen size: `sidecar-<version>-sd-800x480.img.zip` (an 800x480 HDMI display, a DSI display or none) and `sidecar-<version>-sd-1024x600.img.zip` (a 1024x600 HDMI display). One image boots both the Pi 4B and the Pi 5. Both are also in the release zip `sidecar-<version>.zip`. Use a microSD card of 4 GB or more: its contents are replaced, and nothing has to be formatted first.
+
+1. **Download** the image for your screen size from the release, and check it against its `.sha256`. Do not unzip it.
+2. **Open [Raspberry Pi Imager](https://www.raspberrypi.com/software/).** Choose Device (a Raspberry Pi 4 or a Raspberry Pi 5: it does not matter, the image is the same), then Choose OS: scroll to the bottom, pick **Use custom** and select the downloaded `.img.zip` (Imager unpacks it itself). Then Choose Storage (your SD card) and press Next.
+3. **When Imager asks about OS customisation, choose No.** Its Wi-Fi, user and SSH settings are for Raspberry Pi OS and do nothing on the Sidecar. Wi-Fi and the other settings go through the [card config editor](https://trigcondition.github.io/sidecar-expander/getting-started/config-editor/), below.
+4. **Write.** Wait for the write and for Imager's check of it, then eject the card. If you want to change the card's settings, do it now (the card config editor, below) before you start the Pi.
+5. **Put the card in the Pi and switch it on.** On its first start the Sidecar stretches the card's one partition to the whole card. That takes a moment, once ([SD grow](https://trigcondition.github.io/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050); `sdgrow=0` in `cmdline.txt` turns it off).
+
+**balenaEtcher** works too: "Flash from file", pick the `.img.zip` as it is, select the card, Flash. The image holds the same files as the starter zip below.
+
+**Or copy the files by hand** (any card size from 1 GB up). **Unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card in one zip: the 800x480 card set below (both boards' engines, `sdboot.img`, `config.txt`, `cmdline.txt`), the web app (`/.rytm/www-next/`), the starter content (`/JUNO/Factory/`, `/DX7/`), every user machine and user effect of the release in `/Plugins/`, and some free demo material: a MULTISAMPLE instrument (`/MULTISAMPLE/SidecarTest/`), a capture for INSERT AMP (`/NAM/`) and one-shots of the starter machines (`/Samples/Starter/`). Check it against `SHA256SUMS`, format the card as below (step 2), then copy **everything** in the zip to the card's top level, including the folder `.rytm`: it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic web page. `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where and where every file comes from. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600` (the 1024x600 card has them), or use the 1024x600 card zip.
 
 The card zips alone, step by step:
 
