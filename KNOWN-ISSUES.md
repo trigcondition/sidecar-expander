@@ -2,7 +2,16 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.4.4 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.4.4, built with elekloader on OS 1.74 or OS 1.73; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.4 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.5.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.5.0, built with elekloader on OS 1.74 only; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.5 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.5.0
+
+- **After a rollback to an older Sidecar build the LFOs show OFF.** The older build does not read the new LFO files. It leaves them alone, so going back to 0.5.0 brings them back.
+- **The CHOP editor's audition ignores GATE:** YES in the editor plays the selected slice to its end. Trigs and pads obey GATE.
+- **SONG Restore still uses the old write** until a later release. A fill that a SONG Restore removed comes back after a power-off. FILL does not write while the pattern is changing.
+- **The Rytm firmware 0.5.0 is for OS 1.74 only.** A Rytm on OS 1.73 needs Elektron's stock OS 1.74 first, or stays on the Rytm firmware 0.4.4 (the 0.5.0 card works with it, without what needs the Rytm firmware 0.5.0).
+- **MORPH, the looper, sidechain and the MIDI page's learn rows** come in 0.5.1: UP + T14 shows "MORPH: 0.5.1". A project's morph settings stay in its files.
+- The 0.4.4 items below still apply.
 
 ## New in 0.4.4
 
