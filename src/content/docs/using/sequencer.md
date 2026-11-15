@@ -5,7 +5,7 @@ sidebar:
   order: 3.2
 ---
 
-A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
+A Rytm track plays one note per step. In **poly mode** the Sidecar sequences the track itself: chords and several notes per step, each note with its own velocity, length and micro timing, up to 8 pages of 16 steps, trig conditions, and p-locks on the Sidecar's parameters and, from 0.5.0, on the Rytm's own FILTER, AMP and LFO. You still edit on the Rytm: GRID REC, the trig keys, the pads and the knobs. The Rytm stays the master: PLAY, STOP, tempo, pattern changes and mutes are the Rytm's, and the Sidecar follows them. The Rytm's screens call such a track a **POLY TRACK**.
 
 <span class="sc-test">in testing</span>
 
@@ -224,6 +224,9 @@ Hold one or more trigs and press a page key. The SEQ page becomes a lock page wi
 |---|---|
 | **SRC** | A..H: P1..P8 of the track's Sidecar machine |
 | **SMPL** | A..H: P9..P16 (for example CHD INV SPR VOI) |
+| **FLTR** | A..E: the arp (MODE SPD RNG GATE SWNG); F..H: the Rytm's own filter FRQ RES ENV (0.5.0) |
+| **AMP** | A..H: the Rytm's own AMP page: ATK HLD DEC OVR DEL REV PAN VOL (0.5.0) |
+| **LFO** | the Rytm's own track LFO: SPD MUL FAD, WAV SPH MOD DEP (DEST is not locked) (0.5.0) |
 | **FX** | A..D: SEND FX 1 P2..P5, E..H: SEND FX 2 P2..P5 |
 | **FX** again | the **INS** page: A..D INSERT A P1..P4, E..H INSERT B P1..P4 ([Insert FX](/sidecar-expander/using/insert-fx/)) |
 
@@ -235,7 +238,7 @@ Hold one or more trigs and press a page key. The SEQ page becomes a lock page wi
 - Up to 12 locks per step. Copy, paste, clear and undo carry the locks with the steps.
 - Letting go of the trigs goes back to the view you were on.
 
-FLTR, AMP and LFO under a held trig show a page explaining that the analog side and the Sidecar's LFOs are not locked per step.
+From 0.5.0 (with the Rytm firmware 0.5.0) the FLTR, AMP and LFO lock pages lock the Rytm's **own** parameters of the poly track's Rytm track, as stock p-locks do. Such a lock sets the value at its step and lets go at the next step without it, or at STOP: the Rytm's own value comes back ([The Rytm's own parameters](/sidecar-expander/using/rytm-params/)). On a pinned track the envelope words stay with the Sidecar's envelope and cannot be locked. The Sidecar's own LFOs are not locked per step.
 
 ![LOCK SRC on a 6-OP FM track: the locked knobs framed, the step and value in the bottom bar](../../../assets/rytm/sc-seq-lock-src.png)
 ![LOCK INS: the insert chain's knobs](../../../assets/rytm/sc-seq-lock-ins.png)
@@ -361,7 +364,7 @@ Trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds, still works. 
 - Poly per pattern: a track is poly in the patterns where you made it so.
 - NOTE EDIT: walk and edit single notes with DATA and A..E, select, delete and undo.
 - Up to 8 pages of 16 steps per track, with a page map on the trig LEDs.
-- P-locks on the Sidecar machine's 16 parameters, the send FX and the inserts; lock trigs.
+- P-locks on the Sidecar machine's 16 parameters, the send FX, the inserts, the arp and (0.5.0) the Rytm's own FILTER, AMP and LFO; lock trigs.
 - Step preview (trig held + YES), live recording with quantise off or 1/16.
 - Follows PLAY, pause, STOP, tempo, pattern changes (queued, chained, jumps), mutes and SCALE lengths.
 - Copy, paste, clear and undo of patterns, tracks, pages and held steps through the Rytm's own gestures; SAVE and RELOAD of patterns and tracks.
@@ -378,7 +381,7 @@ Trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds, still works. 
 - **GROUP** is stored, not played: tracks pooled into one instrument come later.
 - SPREAD needs the voice on OUT PRE or POST; on TRK the track is mono.
 - **Shared voices.** RS/CP, MT/HT, CH/OH and CY/CB share one voice; a poly track is best on BD, SD, BT or LT.
-- **No analog p-locks on poly steps**: FLTR, AMP and the Rytm's own FX are not locked per step, and the Sidecar's LFOs are not locked per step.
+- **The Rytm's FX track and the Sidecar's LFOs are not locked per step** on poly steps. The Rytm's own FILTER, AMP and LFO are, from 0.5.0.
 - **No retrigs.** A FILL latched on the Rytm is not seen (only FILL held).
 - A condition is decided when its step is planned (about 32 ms ahead); an edit just then can decide a PRE or A:B step again.
 - Poly tracks use the Sidecar's own swing, set per track.
