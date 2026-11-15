@@ -32,7 +32,7 @@ const STEPS = [
 const docs = (p: string) => `${base}/${p}`;
 ---
 
-<div class="sg not-content" id="sg" data-steps={STEPS.length} data-copy={JSON.stringify(STEPS.map((s) => ({ t: s.t, d: s.d })))}>
+<div class="sg not-content" id="sg" data-steps={STEPS.length} data-step-text={JSON.stringify(STEPS.map((s) => ({ t: s.t, d: s.d })))}>
   <header class="sg-head">
     <p class="sg-label">Sidecar 0.5.0 · Analog Rytm MKII + Raspberry Pi 4B / 5</p>
     <p class="sg-title">Set up Sidecar in seven steps</p>
@@ -551,7 +551,7 @@ const docs = (p: string) => `${base}/${p}`;
   const root = document.getElementById('sg');
   if (root) {
     const N = Number(root.dataset.steps);
-    const STEPS = JSON.parse(root.dataset.copy || '[]');
+    const STEPS = JSON.parse(root.dataset.stepText || '[]');
     const rail = root.querySelectorAll<HTMLButtonElement>('.sg-step');
     const panels = root.querySelectorAll<HTMLElement>('.sg-panel');
     const svg = root.querySelector('.sg-stage svg') as SVGSVGElement;
