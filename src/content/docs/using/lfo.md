@@ -1,6 +1,6 @@
 ---
 title: LFOs
-description: "The Sidecar's 26 LFOs (A and B on every Rytm track): targets on the voices, the send effects, the insert chains, the OUT route and the master (Sidecar targets only, none on the Rytm's own parameters); the target list; the LFO page on the Rytm (UP + LFO) and the DESIGN wave."
+description: "The Sidecar's 26 LFOs (A and B on every Rytm track): targets on the voices, the send effects, the insert chains, the OUT route and the master (an A LFO also on the Rytm's own parameters, a B LFO on Sidecar targets only); the target list; the LFO page on the Rytm (UP + LFO) and the DESIGN wave."
 sidebar:
   order: 3
 ---
@@ -11,7 +11,8 @@ The Sidecar has its own LFOs: **26** on the Sidecar (Pi), **4** on the Sidecar M
 
 **Two LFOs a track (0.5.0).** Each of the 12 Rytm tracks and the FX track has an **A** and a **B** LFO: T1A, T1B, T2A ... T12B, FXA, FXB. Which track an LFO belongs to only decides where you find it on the LFO page. It can still aim at any target its kind allows.
 
-- **A and B** aim only at the Sidecar's own targets: the voices, the send effects, the inserts, the master, the sends and the OUT routes. Neither aims at the Rytm's own parameters ([why](#no-lfos-on-the-rytms-parameters-050)).
+- **A** may aim at anything: the Sidecar's own targets (the voices, the send effects, the inserts, the master, the sends and the OUT routes) and the Rytm's own parameters ([below](#lfos-on-the-rytms-parameters-050)).
+- **B** aims only at the Sidecar's own targets. It never uses the link to the Rytm.
 - The **Sidecar Mini keeps its 4 LFOs**, numbered 1 to 4 as before.
 
 Since 0.3.0 they follow the Rytm's kit **SAVE** and **RELOAD** (YES + KIT / NO + KIT, or the KIT menu), the way poly patterns follow pattern SAVE and RELOAD: change an LFO, reload the kit, and the saved LFO comes back ([Saving and reloading](/sidecar-expander/using/key-combinations/#saving-and-reloading-the-rytms-own-keys)).
@@ -30,7 +31,7 @@ On an insert or the OUT route an LFO is an offset on top of the knob or the step
 
 ## The target list (0.5.0)
 
-On the LFO page, the **TGT** list is the same for A and B. It runs: OFF, then the eight voices **V1..V8** one by one, then FX1, FX2, the inserts, the outs, the master and the sends. There are no entries for the Rytm's tracks.
+On the LFO page, the **TGT** list runs: OFF, then the eight voices **V1..V8** one by one, then FX1, FX2, the inserts, the outs, the master and the sends. On an **A** LFO it goes on with one entry for each Rytm track (**RT1..RT12**) and **RFX**, the FX track, last. A **B** LFO's list ends before RT1.
 
 A voice's **PAR** list shows only the parameters its machine names, by the machine's own names. A machine that names none (it has not reported yet, or a user machine without labels) lists all 16, so a voice is never left without a list. On **SAMPLER** the list starts at TUNE (TUNE FINE SMP PLAY STRT END LOOP LEV), with no empty P1..P8. When you pick a voice, PAR lands on P2 if the machine names it, else on its first named parameter. The web page's PAR list follows the same rule.
 
@@ -59,13 +60,15 @@ Hold **UP** and press **LFO** to open the remote pages straight on the LFO page,
 
 <small>Screenshots: the emulator with the Sidecar's host code (mock values).</small>
 
-## No LFOs on the Rytm's parameters (0.5.0)
+## LFOs on the Rytm's parameters (0.5.0)
 
-In 0.5.0 the LFOs move Sidecar destinations only. Neither the A nor the B list has a Rytm target (the RT tracks and RFX).
+An **A** LFO can move the Rytm's own sound parameters: pick **RT1..RT12** (a track) or **RFX** (the FX track) as the target, then a parameter. The list is in [The Rytm's own parameters](/sidecar-expander/using/rytm-params/). The LFO adds an **offset**, in steps, on top of the Rytm's value. The kit is never written.
 
-- **Why:** an LFO on a Rytm parameter made the Rytm slow to respond.
-- **An LFO saved on a Rytm parameter** (an LFO A from an earlier 0.5.0-dev build) **loads as OFF.** The rest of the file is kept, and the next save writes OFF.
-- **The XY pad and MIDI learn** still reach the Rytm's own parameters. See [The Rytm's own parameters](/sidecar-expander/using/rytm-params/).
+- **No limit on the number of LFOs** on the Rytm, but the link has room for about 16 KB/s. Thirteen A LFOs at 20 Hz use about 12.6 KB/s.
+- **When the link is full,** the LFO page's footer says `RYTM LINK FULL: SLOWER`, and the touchscreen and the web page's LFO tab show the same warning. The LFOs then update more slowly, the oldest first, and none starves. A p-lock or a release always keeps its priority.
+- **Whole values only:** an LFO cannot move a list word (a wave, a filter type) or another LFO's destination.
+- **A saved file** from a build before the two LFOs a track is read as it is.
+- The XY pad and MIDI learn reach the Rytm's own parameters too.
 
 ## Old kits, rollback and numbers
 

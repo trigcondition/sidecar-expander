@@ -1,13 +1,13 @@
 ---
 title: The Rytm's own parameters
-description: "In 0.5.0 the Sidecar's XY pad, MIDI learn and poly-track p-locks can move the Rytm's own sound parameters: which ones, how each source acts, what happens to the kit, scenes and the link."
+description: "In 0.5.0 the Sidecar's LFOs, XY pad, MIDI learn and poly-track p-locks can move the Rytm's own sound parameters: which ones, how each source acts, what happens to the kit, scenes and the link."
 sidebar:
   order: 3.02
 ---
 
 <span class="sc-test">in testing</span> New in 0.5.0. It needs the **Rytm firmware 0.5.0** and the Sidecar 0.5.0. On an older Rytm the targets stay in your files, but nothing is sent.
 
-From 0.5.0 the Sidecar can move the Rytm's **own** sound parameters: a track's filter, amp, LFO, synth and sample pages, its trig velocity and velocity-mod amounts, and the FX track's delay, reverb, distortion and compressor. The XY pad, MIDI learn and the p-locks of [poly tracks](/sidecar-expander/using/sequencer/) can be the source. **The [LFOs](/sidecar-expander/using/lfo/) cannot:** in 0.5.0 they move Sidecar destinations only, because an LFO on a Rytm parameter made the Rytm slow to respond. An LFO saved on a Rytm parameter by an earlier 0.5.0-dev build loads as OFF.
+From 0.5.0 the Sidecar can move the Rytm's **own** sound parameters: a track's filter, amp, LFO, synth and sample pages, its trig velocity and velocity-mod amounts, and the FX track's delay, reverb, distortion and compressor. The LFOs, the XY pad, MIDI learn and the p-locks of [poly tracks](/sidecar-expander/using/sequencer/) can be the source. An **A** [LFO](/sidecar-expander/using/lfo/) can be the source too; a **B** LFO moves Sidecar targets only.
 
 ## The kit is never written
 
@@ -20,7 +20,7 @@ The Sidecar does not set the Rytm's stored value. It sends an **offset** or an *
 
 ## Where to find the targets
 
-The Rytm's parameters are not in the LFO page's lists. Use the XY pad or MIDI learn. On the touchscreen, the XY picker lists the Rytm's tracks (BD .. CB) and **RFX**, the FX track, last.
+On the LFO page, an A LFO's target list has **RT1..RT12** and **RFX** after the Sidecar's targets; the XY pad and MIDI learn have their own pickers. On the touchscreen, the XY picker lists the Rytm's tracks (BD .. CB) and **RFX**, the FX track, last.
 
 ## The parameters
 
@@ -39,14 +39,14 @@ The Rytm's parameters are not in the LFO page's lists. Use the XY pad or MIDI le
 | RFX compressor | THR MUP MIX CVOL |
 | RFX LFO | SPD FAD DEP |
 
-- **Whole values only:** the list words (the track LFO's multiplier, wave and mode; the sample slot and loop; the filter type; the compressor's attack, release, ratio and sidechain EQ) cannot follow the XY pad or MIDI learn. A p-lock can set them.
+- **Whole values only:** the list words (the track LFO's multiplier, wave and mode; the sample slot and loop; the filter type; the compressor's attack, release, ratio and sidechain EQ) cannot follow an LFO, the XY pad or MIDI learn. A p-lock can set them.
 - **VEL** acts on trigs the Rytm's sequencer plays. Pads and live play keep their own velocity.
 - On a track that plays a Sidecar machine, the synth and sample words are the machine's own parameters. They are not Rytm targets: use that voice's parameters in the PAR list.
 - The LFO's own destination is not offered.
 
 ## How each source acts
 
-- **The XY pad and MIDI learn** add an **offset** to the Rytm's value. Two sources on one parameter add up, and the Rytm limits the sum to the parameter's range.
+- **An LFO, the XY pad and MIDI learn** add an **offset** to the Rytm's value. Two sources on one parameter add up, and the Rytm limits the sum to the parameter's range.
 - **A p-lock on a poly track** (the FLTR, AMP and LFO pages) overrides the value at the step. It holds until the track's next trig without that lock, a failed lock condition, or STOP. On a pinned track the envelope words stay with the Sidecar's own envelope and are refused as locks.
 
 ## The link
