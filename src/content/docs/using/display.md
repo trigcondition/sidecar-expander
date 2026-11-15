@@ -88,6 +88,7 @@ When the Rytm's link comes up or drops, a banner slides over the top of the scre
 |---|---|
 | **UI style** | OLED or SIDECAR (also `uistyle=oled\|sidecar` on the console or the web page; `classic` is still accepted and means SIDECAR) |
 | **Screensaver** | Off, 15 min, 1 h (default) or 4 h without a touch: the screen goes black. Any touch wakes it, and that touch only wakes the screen. Rytm activity does not keep it awake. |
+| **Touch: Calibrate** | the four-cross touch calibration ([Touch](#touch)) |
 | **Touch test** | a tap counter and the raw touch readout. It leaves HOME after the first tap; it lives here from then on. |
 | **Brightness** | 5 to 100 %. It dims the picture (the panel has no software backlight control); even the darkest setting stays readable, so you can always find the slider again. |
 | **Look** | STUDIO or STAGE |
@@ -100,7 +101,9 @@ A weak supply shows in the title bar in the alert look, with a short text naming
 
 ## Touch
 
-If touch is offset or mirrored, read the raw values from the touch test and set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`. Touch errors on the panel's USB link are recovered automatically.
+If a touch lands in the wrong place (offset, mirrored or turned), calibrate it: **Settings > Display > Touch: Calibrate** shows a cross near each corner in turn (top left, top right, bottom right, bottom left). Touch each one precisely. Four touches that do not make a screen (a cross missed) are refused and the crosses start again. The result is stored on the card in `/.rytm/display.txt` as `touchcal=` and kept through updates; **RESET** (or `touchcal=off` on the web page's console) goes back to the default. The calibration wins over `touchscreen=` in `cmdline.txt`.
+
+Without the calibration you can still set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`, with the raw values from the touch test. Touch errors on the panel's USB link are recovered automatically.
 
 ## Cost
 

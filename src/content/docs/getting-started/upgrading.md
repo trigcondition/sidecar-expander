@@ -20,6 +20,7 @@ This page is for a Sidecar that already runs. For a new one, use [Set up Sidecar
    - **The card files include `config.txt` and `cmdline.txt`.** They replace yours, together with any option you added (the Ethernet address, Wi-Fi, the display, the USB-C mode). **Keep a copy of your `cmdline.txt` and `config.txt` first** and put your lines back, or make new files with the [card config editor](/sidecar-expander/getting-started/config-editor/): paste your old files into it first and it keeps the options it does not manage.
 5. **Put the card back in the Pi and switch it on.** Open `sidecar.local`: the new web page opens. If the browser shows the old page, force a reload (Cmd+Shift+R, or Ctrl+F5 on Windows and Linux). The old page is still there at `sidecar.local/classic`.
 6. **If the classic page still comes up,** the `www-next` folder did not get copied. Repeat step 4 with hidden files shown.
+7. **If a touch lands in the wrong place** on the touchscreen after the upgrade, calibrate it: on the touchscreen open **Settings > Display > Touch: Calibrate** and touch the four crosses as they appear, one at each corner. The calibration is kept on the card ([Touch](/sidecar-expander/using/display/#touch)). If you cannot reach the button, set `touchcal=off` from the web page's console and try again.
 
 An alternative: write the 0.5.0 **SD card image** to a **new** card with Raspberry Pi Imager ([Set up Sidecar](/sidecar-expander/getting-started/setup/), step 5). It erases that card, so copy your samples and `/Plugins/` over from the old card first.
 
