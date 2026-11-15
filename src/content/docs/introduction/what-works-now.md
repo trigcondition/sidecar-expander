@@ -90,7 +90,7 @@ The 0.4.4 card, with the Rytm firmware 0.4.4 (a new Rytm flash; a Rytm on the Ry
 | A held step's values on the SRC view: while you hold a step in GRID RECORDING, the view shows its locks and follows your knob turns on them (Rytm firmware 0.4.4) | <span class="sc-test">in testing</span> (emulator) |
 | Knob turns on the SRC view show at most every 100 ms while a pattern plays (200 ms in 0.4.3) | new in 0.4.4 |
 | UP / DOWN (the CHRO pads' octave keys) stay the Rytm's on the SEQ page's questions and the ARP page; a page alone takes them only when it uses them | fixed in 0.4.4 |
-| One NO leaves a page opened by its shortcut (UP + key, TRK + key, UP + a trig key), also UP + AMP's OUT view; NO on the SIDECAR MENU goes back to SIDECAR | fixed in 0.4.4 |
+| One NO leaves a page opened by its shortcut (UP + key, UP + a trig key), also UP + AMP's OUT view; NO on the SIDECAR MENU goes back to SIDECAR | fixed in 0.4.4 |
 | The CONNECTED screen when the Rytm boots with the Sidecar already attached (Rytm firmware 0.4.4) | <span class="sc-test">in testing</span> (emulator) |
 
 ## New in 0.4.3
@@ -209,7 +209,7 @@ Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on th
 | [Sampler and auto-sampler](/sidecar-expander/using/sampling/), takes into the pool | <span class="sc-test">in testing</span> |
 | [Song recorder](/sidecar-expander/using/song-recorder/) | <span class="sc-test">in testing</span> |
 | [The touchscreen](/sidecar-expander/using/touchscreen/): OLED and CLASSIC themes, the STAGE look, navigation keys with their UP + T shortcuts, SEQ, PAT, VOICE, INSERT FX, SONG, REC with playback, SCOPE, STATUS, PROJECT, POOL; 800x480 and 1024x600 | <span class="sc-test">in testing</span> (OLED and SEQ used on a Pi 4 with a 7" DSI panel) |
-| On the Rytm: **UP as the Sidecar key** (UP + T1..T13, UP + YES / TRIG / SRC / LFO / FX / AMP, one-handed step copy with trig + UP + RECORD / STOP / PLAY; the TRK and FUNC forms kept), the SIDECAR MENU, the KEYS page and UP held for the combo map, TRK's LED blinking while a Sidecar page has the keys ([Key combinations](/sidecar-expander/using/key-combinations/)) | <span class="sc-test">in testing</span> (emulator, `rui1046` .. `rui1048`) |
+| On the Rytm: **UP as the Sidecar key** (UP + T1..T13, UP + YES / TRIG / SRC / LFO / FX / AMP, one-handed step copy with trig + UP + RECORD / STOP / PLAY; the FUNC form kept, the TRK forms gone in 0.5.0), the SIDECAR MENU, the KEYS page and UP held for the combo map, TRK's LED blinking while a Sidecar page has the keys ([Key combinations](/sidecar-expander/using/key-combinations/)) | <span class="sc-test">in testing</span> (emulator, `rui1046` .. `rui1048`) |
 | [The recorder](/sidecar-expander/using/recorder/): stereo voice files and the PRE / POST sources for voices on the OUT route; the touchscreen's REC page with playback | <span class="sc-test">in testing</span> (Mac) |
 | Poly mode: [poly per pattern](/sidecar-expander/using/sequencer/#poly-tracks-belong-to-the-pattern) (a new pattern has none), TURN OFF closing the poly page at once, RESTORE n NOTES? when a track is made poly again | <span class="sc-ok">hardware</span> (first round; the newest build is being checked) |
 | Poly mode: [NOTE EDIT](/sidecar-expander/using/sequencer/#note-edit), Push 3 style: DATA walks the notes, A..E edit, select, delete, undo, a scrolling pitch window | <span class="sc-ok">hardware</span> (first round; the new screen is being checked) |

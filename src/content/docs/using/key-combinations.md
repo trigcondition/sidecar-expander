@@ -71,10 +71,9 @@ sidebar:
 ![KEYS, the UP combinations: UP+YES SIDECAR (YES: MENU), UP+TRIG SEQ (POLY TRACK), UP+SRC SOURCE LIST, UP+LFO SIDECAR LFOS, UP+FX INSERT FX, UP+AMP INSERT OUT VIEW](../../../assets/rytm/sc-keys-combos.png)
 
 :::note[Older forms still work]
-The TRK and FUNC forms of the 0.3 test builds still work: **TRK + YES**, **TRK + TRIG**, **TRK + LFO**, **TRK + FX**, and **trig held + FUNC + RECORD / STOP / PLAY**. The KEYS page lists them after the UP forms.
+The older form **trig held + FUNC + RECORD / STOP / PLAY** of the 0.3 test builds still works. The first version's track shortcuts (**TRK + YES**, **TRK + TRIG**, **TRK + LFO**, **TRK + FX**) are gone in 0.5.0: use **UP** with the same key. TRK is the Rytm's own key again ([TRK and the remote pages](/sidecar-expander/using/rytm-side/#keys-and-knobs-on-a-page)).
 :::
 
-![KEYS, the older forms: TRK+TRIG = UP+TRIG, TRK+LFO = UP+LFO, TRK+FX = UP+FX, T+FUNC+REC = T+UP+REC and so on](../../../assets/rytm/sc-keys-legacy.png)
 
 ## On the remote pages
 
@@ -83,7 +82,7 @@ The TRK and FUNC forms of the 0.3 test builds still work: **TRK + YES**, **TRK +
 | **YES** | the SIDECAR page | the **SIDECAR MENU**: every page with its shortcut |
 | **UP / DOWN**, **YES** | the SIDECAR MENU | pick a page / open it |
 | **YES** on WEB UI | the SIDECAR MENU | the web page's pairing code and settings: WEB UI ON / OFF, CODE, PAIRED DEVICES, NEW CODE, FORGET DEVICES ([Pairing a browser](/sidecar-expander/using/web-ui/#pairing-a-browser)) |
-| **NO** | a remote page | a page opened by its shortcut (UP + key, TRK + key, UP + a trig key): leave at once (0.4.4). A page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and the SIDECAR MENU itself: back to SIDECAR. On SIDECAR: leave. NO acts when you let go of it, so NO held + KIT / PATTERN / TRACK stays the Rytm's reload (below) |
+| **NO** | a remote page | a page opened by its shortcut (UP + key, UP + a trig key): leave at once (0.4.4). A page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and the SIDECAR MENU itself: back to SIDECAR. On SIDECAR: leave. NO acts when you let go of it, so NO held + KIT / PATTERN / TRACK stays the Rytm's reload (below) |
 | **LEFT / RIGHT** | a page in the ring (SIDECAR, SYSTEM, REC, SCOPE ...) | the previous / next page |
 | **LEFT / RIGHT** | the LFO page | the previous / next LFO (in the design view: the step) |
 | **RIGHT**, LEFT or NO | the INSERT page | the EQ view, and back (opened by UP + AMP, the OUT view: NO leaves the page) |

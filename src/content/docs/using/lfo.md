@@ -48,7 +48,7 @@ Two LFOs on one parameter add up. Selectors that are read only at a trig (6-OP F
 
 ## The LFO page on the Rytm
 
-Hold **UP** and press **LFO** to open the remote pages straight on the LFO page, or pick LFO in the SIDECAR MENU (UP + YES, then YES). TRK + LFO, the older form, still works.
+Hold **UP** and press **LFO** to open the remote pages straight on the LFO page, or pick LFO in the SIDECAR MENU (UP + YES, then YES).
 
 - **UP + LFO shows the selected track's two LFOs** (A and B) in 0.5.0. **LEFT / RIGHT** go between A and B (the same as knob A). **FUNC + A** steps to another track and the page stays there until the Rytm selects a track again. The FX track's pair is reached with FUNC + A.
 - **The page replaces the Rytm's page** like SRC: no page dots and no siblings. In the design view LEFT / RIGHT step the design step. Leave with **NO** (from the design view, NO goes to the main view first) or **UP + LFO** again; leaving drops the design view.

@@ -348,7 +348,7 @@ The [song recorder](/sidecar-expander/using/song-recorder/) records the Rytm's p
 | UP + T1..T13 | anywhere | the pages (above) |
 
 :::note[Older forms]
-TRK + TRIG and trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds, still work.
+Trig held + FUNC + RECORD / STOP / PLAY, from the 0.3 test builds, still works. TRK + TRIG is gone in 0.5.0: use UP + TRIG.
 :::
 
 ## Features
