@@ -23,7 +23,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   <div class="ce-start">
     <div class="ce-start-text">
       <p class="ce-kicker">Start from</p>
-      <p class="ce-start-sub">The Sidecar <span class="ce-vname">{CARD.version}</span> card's own files<span id="ce-vcommit"> (<code>{CARD.commit}</code>)</span>, or the files on your card.</p>
+      <p class="ce-start-sub">The Sidecar <span class="ce-vname">{CARD.version}</span> card's own files<span id="ce-vcommit">{CARD.commit ? <> (<code>{CARD.commit}</code>)</> : ' (as its card scripts write them; not released yet)'}</span>, or the files on your card.</p>
     </div>
     <div class="ce-start-actions">
       <button type="button" class="ce-btn" id="ce-reset">The card's files</button>
@@ -57,11 +57,11 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
             <label><input type="radio" name="version" value={v.id} checked={i === 0} /><span>{v.label}<small>{v.note}</small></span></label>
           ))}
         </fieldset>
-        <p class="ce-hint">The files are written for this version: an option it does not read is never written. 0.5.0 adds the web update and the USB-C network.</p>
+        <p class="ce-hint">The files are written for this version: an option it does not read is never written. 0.4.4 lacks the web update and the USB-C network.</p>
       </section>
 
       <section class="ce-sec" aria-labelledby="ce-h-board">
-        <p class="ce-num">01</p>
+        <p class="ce-num">02</p>
         <h2 id="ce-h-board">Board</h2>
         <fieldset class="ce-seg">
           <legend class="sr-only">Which Raspberry Pi</legend>
@@ -355,7 +355,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
     hit.checked = true;
   };
 
-  let o = C.defaults(C.VERSIONS[0].id); // the options: in memory only
+  let o = C.defaults(C.CARD.version); // the options: in memory only
   const vinfo = () => C.VERSIONS.find((v) => v.id === o.version)!;
   let refConfig = C.generateConfig(o);
   let texts = { config: '', cmdline: '', wifi: '' };
@@ -648,7 +648,7 @@ const valueLabel = (k: K, v: string) => (k.key === 'gadget' && v === '0' ? '0 (o
   // a fresh page always starts from the card: nothing a browser restored (a password, a code) survives a reload
   writeForm();
   update();
-  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { clearPaste(); loaded = { config: null, cmdline: null }; $('ce-loaded').hidden = true; o = C.defaults(C.VERSIONS[0].id); writeForm(); update(); } });
+  window.addEventListener('pageshow', (e) => { if ((e as PageTransitionEvent).persisted) { clearPaste(); loaded = { config: null, cmdline: null }; $('ce-loaded').hidden = true; o = C.defaults(C.CARD.version); writeForm(); update(); } });
 </script>
 
 <style is:global>
