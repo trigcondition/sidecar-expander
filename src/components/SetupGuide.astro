@@ -1,5 +1,5 @@
 ---
-// "Set up Sidecar": the whole setup on one page, six steps with a bench scene (a laptop, the Rytm, a Pi, an SD card).
+// "Set up Sidecar": the whole setup on one page, seven steps with a bench scene (a laptop, the Rytm, a Pi, an SD card).
 // The user moves with Back / Next or the step rail: no autoplay. Each step does its job here: the patcher is the site's
 // own page (public/patcher) in a frame, the config editor is src/components/ConfigEditor.astro, the downloads are the
 // GitHub release assets named by RELEASE below (fill at release: see the UNRELEASED mark in the page that uses this).
@@ -21,6 +21,7 @@ const SIZES = [
   { res: '1024x600', title: '1024x600', note: 'A 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194).' },
 ];
 const STEPS = [
+  { t: 'What you need', s: 'The parts and tools, as a checklist.', d: 'Lay out the parts: a Raspberry Pi 4B or Pi 5, a microSD card, the official power supply, a heatsink or fan, a short USB A-to-B cable, and a display if you want one. Tick them off as you go.' },
   { t: 'Back up and get the stock OS', s: 'Back up with Transfer, then get Elektron\'s OS 1.74.', d: 'Back up your projects, kits, sounds and samples with Transfer. Then download Analog-Rytm_MKII_OS1.74 from Elektron\'s Rytm MKII support page and unzip it.' },
   { t: 'Patch it in your browser', s: 'Drop the stock file on the patcher.', d: 'Drop the stock .syx on the patcher, press Patch, then Save .syx. Everything happens in your browser; nothing is uploaded.' },
   { t: 'Flash the Rytm', s: 'Send the patched file with Transfer.', d: 'Connect the Rytm to your computer over USB and drop the patched file on Transfer. Confirm on the Rytm. If it stays on "Success! Rebooting", switch it off and on.' },
@@ -34,7 +35,7 @@ const docs = (p: string) => `${base}/${p}`;
 <div class="sg not-content" id="sg" data-steps={STEPS.length} data-copy={JSON.stringify(STEPS.map((s) => ({ t: s.t, d: s.d })))}>
   <header class="sg-head">
     <p class="sg-label">Sidecar 0.5.0 · Analog Rytm MKII + Raspberry Pi 4B / 5</p>
-    <p class="sg-title">Set up Sidecar in six steps</p>
+    <p class="sg-title">Set up Sidecar in seven steps</p>
     <p class="sg-sub">From a stock Rytm to playing Sidecar machines: patch and flash the Rytm, write the Pi's SD card, connect, play. Prefer text? <a href={docs('getting-started/start-here/')}>Start here</a> has the same steps.</p>
   </header>
 
@@ -57,9 +58,9 @@ const docs = (p: string) => `${base}/${p}`;
           <title id="sg-scene-title">A laptop, an Analog Rytm and a Raspberry Pi on a desk, showing the current setup step</title>
           <line x1="20" y1="420" x2="780" y2="420" stroke="var(--border)" stroke-width="2"></line>
 
-          <path class="cable" data-on="3" d="M300 330 C 360 330, 380 210, 470 190"></path>
-          <path class="cable" data-on="5 6" d="M600 210 C 610 260, 640 270, 640 300"></path>
-          <path class="cable" data-on="6" d="M780 360 C 760 360, 740 350, 722 350" style="stroke: var(--warm)"></path>
+          <path class="cable" data-on="4" d="M300 330 C 360 330, 380 210, 470 190"></path>
+          <path class="cable" data-on="1 6 7" d="M600 210 C 610 260, 640 270, 640 300"></path>
+          <path class="cable" data-on="1 7" d="M780 360 C 760 360, 740 350, 722 350" style="stroke: var(--warm)"></path>
 
           <g>
             <rect x="40" y="130" width="260" height="180" rx="10" fill="var(--device)"></rect>
@@ -67,6 +68,19 @@ const docs = (p: string) => `${base}/${p}`;
             <path d="M20 312 H320 L306 330 H34 Z" fill="var(--device-2)"></path>
 
             <g class="fade" data-on="1">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Shopping list</text>
+              <g class="ui" font-size="10" fill="var(--text)">
+                <rect x="66" y="172" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="180">Analog Rytm MKII, OS 1.74</text>
+                <rect x="66" y="188" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="196">Raspberry Pi 5 (or 4B), 4 GB+</text>
+                <rect x="66" y="204" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="212">microSD card, 4 GB or more</text>
+                <rect x="66" y="220" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="228">Official USB-C supply</text>
+                <rect x="66" y="236" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="244">Heatsink or fan</text>
+                <rect x="66" y="252" width="9" height="9" rx="2" fill="none" stroke="var(--label)"></rect><text x="82" y="260">Short USB A-to-B cable</text>
+                <rect x="66" y="268" width="9" height="9" rx="2" fill="none" stroke="var(--label)" stroke-dasharray="2 2"></rect><text x="82" y="276" fill="var(--label)">A display (optional)</text>
+              </g>
+            </g>
+            <g class="fade" data-on="2">
               <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
               <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">support page · Analog Rytm MKII</text>
               <text x="66" y="186" class="ui" font-size="12" font-weight="700" fill="var(--text)">Downloads</text>
@@ -77,7 +91,7 @@ const docs = (p: string) => `${base}/${p}`;
               <text x="66" y="272" class="ui" font-size="10" fill="var(--label)">Back up with Transfer first</text>
             </g>
 
-            <g class="fade" data-on="2">
+            <g class="fade" data-on="3">
               <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
               <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Sidecar patcher · runs in your browser</text>
               <rect x="66" y="172" width="208" height="58" rx="6" fill="none" stroke="var(--label)" stroke-dasharray="4 4"></rect>
@@ -90,7 +104,7 @@ const docs = (p: string) => `${base}/${p}`;
               <text x="66" y="288" class="ui" font-size="9.5" fill="var(--label)">Nothing is uploaded</text>
             </g>
 
-            <g class="fade" data-on="3">
+            <g class="fade" data-on="4">
               <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
               <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Transfer</text>
               <text x="66" y="190" class="ui" font-size="12" font-weight="700" fill="var(--text)">Sending OS to Rytm</text>
@@ -101,7 +115,7 @@ const docs = (p: string) => `${base}/${p}`;
               <text x="66" y="272" class="ui" font-size="9.5" fill="var(--label)">"Success! Rebooting"? Power cycle it.</text>
             </g>
 
-            <g class="fade" data-on="4">
+            <g class="fade" data-on="5">
               <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
               <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Raspberry Pi Imager</text>
               <g class="ui" font-size="9" text-anchor="middle">
@@ -119,7 +133,7 @@ const docs = (p: string) => `${base}/${p}`;
               <text x="66" y="282" class="ui" font-size="9.5" fill="var(--label)">Wi-Fi or another setting? Config editor.</text>
             </g>
 
-            <g class="fade" data-on="6">
+            <g class="fade" data-on="7">
               <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
               <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">sidecar.local</text>
               <text x="66" y="190" class="ui" font-size="12" font-weight="700" fill="var(--text)">Sidecar</text>
@@ -130,7 +144,7 @@ const docs = (p: string) => `${base}/${p}`;
               <text x="115" y="254" class="ui" font-size="10" fill="var(--label)" text-anchor="middle">Voices</text>
               <text x="225" y="254" class="ui" font-size="10" fill="var(--label)" text-anchor="middle">Mix</text>
             </g>
-            <g class="fade" data-on="5">
+            <g class="fade" data-on="6">
               <text x="170" y="222" class="ui" font-size="11" fill="var(--label)" text-anchor="middle">Laptop not needed now</text>
             </g>
           </g>
@@ -139,21 +153,21 @@ const docs = (p: string) => `${base}/${p}`;
             <rect x="460" y="60" width="310" height="150" rx="8" fill="var(--device)"></rect>
             <rect x="474" y="72" width="282" height="8" rx="2" fill="var(--device-2)"></rect>
             <rect x="560" y="92" width="110" height="56" rx="3" fill="var(--screen)"></rect>
-            <g class="fade" data-on="1 2 4">
+            <g class="fade" data-on="1 2 3 5">
               <text x="615" y="118" class="px" font-size="10" text-anchor="middle">STOCK OS</text>
               <text x="615" y="134" class="px" font-size="10" text-anchor="middle">1.74</text>
             </g>
-            <g class="fade" data-on="3">
+            <g class="fade" data-on="4">
               <text x="615" y="114" class="px" font-size="9" text-anchor="middle">RECEIVING OS</text>
               <rect x="574" y="124" width="82" height="6" fill="none" stroke="var(--pixel)"></rect>
               <rect x="576" y="126" width="52" height="2" fill="var(--pixel)"></rect>
             </g>
-            <g class="fade" data-on="5">
+            <g class="fade" data-on="6">
               <text x="615" y="114" class="px" font-size="9" text-anchor="middle">USB CONFIG</text>
               <rect x="574" y="122" width="82" height="13" fill="var(--pixel)"></rect>
               <text x="615" y="132" class="px" font-size="9" text-anchor="middle" style="fill: var(--screen)">OVERBRIDGE</text>
             </g>
-            <g class="fade" data-on="6">
+            <g class="fade" data-on="7">
               <text x="615" y="114" class="px" font-size="10" text-anchor="middle">SIDECAR</text>
               <text x="615" y="132" class="px" font-size="9" text-anchor="middle">CONNECTED_</text>
             </g>
@@ -166,7 +180,7 @@ const docs = (p: string) => `${base}/${p}`;
               <rect x="480" y="158" width="20" height="14" rx="2"></rect><rect x="503" y="158" width="20" height="14" rx="2"></rect><rect x="526" y="158" width="20" height="14" rx="2"></rect><rect x="549" y="158" width="20" height="14" rx="2"></rect><rect x="572" y="158" width="20" height="14" rx="2"></rect><rect x="595" y="158" width="20" height="14" rx="2"></rect>
               <rect x="480" y="176" width="20" height="14" rx="2"></rect><rect x="503" y="176" width="20" height="14" rx="2"></rect><rect x="526" y="176" width="20" height="14" rx="2"></rect><rect x="549" y="176" width="20" height="14" rx="2"></rect><rect x="572" y="176" width="20" height="14" rx="2"></rect><rect x="595" y="176" width="20" height="14" rx="2"></rect>
             </g>
-            <g class="fade" data-on="6">
+            <g class="fade" data-on="7">
               <rect x="480" y="158" width="20" height="14" rx="2" fill="var(--warm)"></rect>
               <rect x="549" y="176" width="20" height="14" rx="2" fill="var(--warm)"></rect>
             </g>
@@ -185,24 +199,39 @@ const docs = (p: string) => `${base}/${p}`;
             <g fill="#d6b34c"><rect x="660" y="384" width="54" height="8" rx="1"></rect></g>
             <rect x="716" y="344" width="10" height="14" rx="2" fill="#c8ccd2"></rect>
             <circle cx="578" cy="392" r="4" fill="var(--border)"></circle>
-            <circle cx="578" cy="392" r="4" fill="var(--ok)" class="fade" data-on="6"></circle>
+            <circle cx="578" cy="392" r="4" fill="var(--ok)" class="fade" data-on="7"></circle>
             <text x="560" y="426" class="ui" font-size="11" fill="var(--label)">Raspberry Pi 4B / 5</text>
             <rect x="552" y="356" width="10" height="20" rx="1" fill="#9aa1a9"></rect>
           </g>
 
-          <g id="sg-sd" class="fade" data-on="4 5 6">
+          <g class="fade" data-on="1">
+            <rect x="344" y="262" width="104" height="66" rx="4" fill="var(--device)" stroke="var(--device-2)"></rect>
+            <rect x="350" y="268" width="92" height="54" rx="2" fill="var(--screen)"></rect>
+            <path d="M386 328 H406 L412 344 H380 Z" fill="var(--device-2)"></path>
+            <text x="396" y="356" class="ui" font-size="10" fill="var(--label)" text-anchor="middle">display (optional)</text>
+            <rect x="748" y="338" width="32" height="40" rx="4" fill="var(--device-2)"></rect>
+            <text x="764" y="392" class="ui" font-size="9" fill="var(--label)" text-anchor="middle">USB-C supply</text>
+            <g fill="var(--device-2)" stroke="var(--label)" stroke-width="0.8">
+              <rect x="610" y="342" width="36" height="36" rx="2"></rect>
+              <path d="M614 346 V374 M620 346 V374 M626 346 V374 M632 346 V374 M638 346 V374 M644 346 V374"></path>
+            </g>
+            <text x="352" y="420" class="ui" font-size="10" fill="var(--label)" text-anchor="middle" transform="translate(0 -4)">microSD</text>
+            <text x="652" y="262" class="ui" font-size="10" fill="var(--label)">USB A-to-B, no hub</text>
+          </g>
+
+          <g id="sg-sd" class="fade" data-on="1 5 6 7">
             <path d="M0 0 H22 L28 6 V34 H0 Z" fill="var(--sd)"></path>
             <rect x="4" y="4" width="14" height="5" fill="#ffffff" opacity=".6"></rect>
             <text x="14" y="26" class="ui" font-size="7" fill="#fff" text-anchor="middle">SD</text>
           </g>
 
-          <g class="fade" data-on="6">
+          <g class="fade" data-on="7">
             <text x="742" y="384" class="ui" font-size="10" fill="var(--warm)" text-anchor="end">official supply</text>
           </g>
-          <g class="fade" data-on="5">
+          <g class="fade" data-on="6">
             <text x="652" y="262" class="ui" font-size="10" fill="var(--label)">USB, no hub</text>
           </g>
-          <g class="fade" data-on="3">
+          <g class="fade" data-on="4">
             <text x="352" y="248" class="ui" font-size="10" fill="var(--label)">USB</text>
           </g>
         </svg>
@@ -215,22 +244,77 @@ const docs = (p: string) => `${base}/${p}`;
 
       <div class="sg-panels">
         <section class="sg-panel" id="sg-panel-1" aria-labelledby="sg-h-1">
-          <h2 id="sg-h-1" tabindex="-1"><span class="sg-hn">1</span> Back up and get the stock OS</h2>
+          <h2 id="sg-h-1" tabindex="-1"><span class="sg-hn">1</span> What you need</h2>
+          <p>A shopping list for the whole setup. Tick what you have; the ticks stay in this browser only. <span class="sg-count" id="sg-need-count" aria-live="polite"></span></p>
+          <ul class="sg-need">
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="rytm" data-req="1" /><span><b>Analog Rytm MKII on OS 1.74</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">Sidecar adds to the Rytm. The stock OS 1.74 file comes in the next step. A <b>computer</b> with a USB port and an SD card slot or reader (<b>Required</b>) patches and flashes the Rytm and writes the card.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="pi" data-req="1" /><span><b>Raspberry Pi 5 (recommended) or Raspberry Pi 4 Model B (works), 4 GB or more</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">One card boots both boards. The Pi 5 gives a lot more headroom (processor power for more voices and effects); Sidecar works on a Pi 4B too. <b>2 GB</b> of memory is the minimum; <b>4 GB or more</b> is recommended, so the unit is ready for future releases. See <a href={docs('introduction/hardware/')}>Hardware</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="sd" data-req="1" /><span><b>A microSD card, 4 GB or more</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">Its contents are replaced. The SD card image grows to fill the card on its first boot, up to 512 GiB (more is not used). A fast, larger card is better for the recorder. Dirtywave keeps a list of tested cards for its M8 tracker: <a href="https://dirtywave.com/pages/recommended-microsd-cards" target="_blank" rel="noopener">Dirtywave's recommended microSD cards</a>. It is a list for another device, not tested by Sidecar, but it is a good place to start. See <a href={docs('using/storage/#the-sd-card-image-grows-to-fill-the-card-050')}>Storage</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="psu" data-req="1" /><span><b>The official USB-C power supply</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">Pi 4: the official 5.1 V 3 A supply. Pi 5: the official 27 W (5 V 5 A) supply. Plug it in directly, not through a hub. The Sidecar warns on the display and the web page when the supply is too weak. See <a href={docs('getting-started/install-pi/#raspberry-pi-5')}>Raspberry Pi 5</a> and <a href={docs('using/troubleshooting/')}>Troubleshooting</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="cool" data-req="1" /><span><b>A heatsink or a fan</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">The Pi runs the audio at full clock and slows itself down when it is too hot, and the sound can drop out. At least a heatsink on the chip; a case fan is better. On a Pi 5 the official <b>Active Cooler</b> or a case fan on the fan header: the Sidecar drives that header itself (<a href={docs('using/pi5-fan/')}>AUTO, ON or OFF</a>). A case with its own display controls its own fan. See <a href={docs('using/troubleshooting/#keeping-it-cool')}>Keeping it cool</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="usb" data-req="1" /><span><b>A short USB A-to-B cable</b> <em class="sg-req">Required</em></span></label>
+              <p class="sg-why">From the Rytm's USB port to a USB-A port on the Pi, with a good cable like the one that comes with the Rytm. <b>No hub.</b> See <a href={docs('introduction/hardware/')}>Hardware</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="display" /><span><b>A touch display</b> <em class="sg-opt">Optional</em></span></label>
+              <p class="sg-why">Everything on the display is also on the Rytm and the web page, so you can go without one. Pick yours: it chooses the card image in step 5.</p>
+              <fieldset class="sg-size sg-disp">
+                <legend>Your display</legend>
+                <label class="sg-choice"><input type="radio" name="sg-disp" value="800x480" checked /><span><b>HDMI 800x480 with USB touch</b><small>5" and 7" HDMI touch displays (Waveshare). Image: 800x480.</small></span></label>
+                <label class="sg-choice"><input type="radio" name="sg-disp" value="1024x600" /><span><b>HDMI 1024x600 with USB touch</b><small>The GeeekPi 7" (EP-0194). The documentation lists it as expected to work, not yet confirmed on hardware. Image: 1024x600.</small></span></label>
+                <label class="sg-choice"><input type="radio" name="sg-disp" value="800x480" /><span><b>DSI touch display</b><small>A 7" DSI display made like the official one (the OSOYOO 7" DSI V4.0 is confirmed on a Pi 4), or the official Raspberry Pi 7" Touch Display. On a Pi 5: the Raspberry Pi Touch Display 2, 7" (confirmed; the 5" is untested). Image: 800x480.</small></span></label>
+                <label class="sg-choice"><input type="radio" name="sg-disp" value="800x480" /><span><b>No display</b><small>The Rytm and the web page are enough. Image: 800x480.</small></span></label>
+              </fieldset>
+              <p class="sg-why">Connect an HDMI display to the Pi's <b>micro-HDMI 0</b> (next to the power socket) before power-on. On a Pi 5 an HDMI display is scaled and slightly soft. See <a href={docs('using/display/#which-displays-work')}>Which displays work</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="eth" /><span><b>An Ethernet cable</b> <em class="sg-opt">Optional</em></span></label>
+              <p class="sg-why">For the web page at <code>sidecar.local</code> and for updates from your computer, without Wi-Fi. See <a href={docs('using/web-ui/')}>The web page</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="split" /><span><b>A USB-C power and data splitter, for a Pi 5 with a computer</b> <em class="sg-opt">Optional, Pi 5 only</em></span></label>
+              <p class="sg-why">Only if the Pi 5's USB-C port also goes to a computer (computer audio and MIDI, Overbridge through the Sidecar, or the web page over the USB-C cable). That port is also the Pi 5's power input, and a computer or hub port gives it only about 1.5 A: weak ports give under-voltage and resets. A splitter takes power from the 27 W supply and passes the data on to the computer; a header-pin power adapter does the same job. You do <b>not</b> need it for a plain setup: the Rytm has its own supply. See <a href={docs('using/usb-audio-midi/#powering-a-pi-5-with-a-computer-attached')}>Powering a Pi 5 with a computer attached</a>.</p>
+            </li>
+            <li class="sg-item">
+              <label class="sg-tick"><input type="checkbox" data-need="usbc" /><span><b>A USB-C data cable, for a Pi 5</b> <em class="sg-opt">Optional, Pi 5 only</em></span></label>
+              <p class="sg-why">The Pi 5's USB-C port can carry its web page to your computer, with no Wi-Fi or Ethernet, as well as audio and MIDI. It is new in 0.5.0 (tried with a Mac). See the <a href={docs('release-notes/')}>release notes</a>.</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-2" aria-labelledby="sg-h-2">
+          <h2 id="sg-h-2" tabindex="-1"><span class="sg-hn">2</span> Back up and get the stock OS</h2>
           <p><b>Back up first.</b> Use Transfer (Elektron's tool for the Rytm) to back up your projects, kits, sounds and samples. Then you can always go back: see <a href={docs('getting-started/recovery/')}>Recovery to stock</a>.</p>
           <p>Download Elektron's OS 1.74 for the Analog Rytm MKII from Elektron's own support page, and unzip it. You need the file <code>Analog-Rytm_MKII_OS1.74.syx</code>. Sidecar does not host Elektron's file and never will.</p>
           <p class="sg-actions"><a class="sg-btn" href="https://www.elektron.se/support-downloads/analog-rytm-mkii" target="_blank" rel="noopener">Elektron: Analog Rytm MKII support page</a></p>
           <p class="sg-note">Already on OS 1.73, or want to stay there? See <a href={docs('getting-started/patch-and-flash/#which-os-174-or-173')}>which OS</a>.</p>
         </section>
 
-        <section class="sg-panel" id="sg-panel-2" aria-labelledby="sg-h-2">
-          <h2 id="sg-h-2" tabindex="-1"><span class="sg-hn">2</span> Patch it in your browser</h2>
+        <section class="sg-panel" id="sg-panel-3" aria-labelledby="sg-h-3">
+          <h2 id="sg-h-3" tabindex="-1"><span class="sg-hn">3</span> Patch it in your browser</h2>
           <p>This is the Sidecar patcher. Leave the build on its default (the first in the list), drop the stock <code>Analog-Rytm_MKII_OS1.74.syx</code> on it, press <b>Patch</b>, then <b>Save .syx</b>. Your file never leaves your computer.</p>
           <iframe class="sg-frame" title="Sidecar patcher" src={`${base}/patcher/`} loading="lazy" height="780"></iframe>
           <p class="sg-note">The patcher does not show? <a href={`${base}/patcher/`} target="_blank" rel="noopener">Open it in its own tab</a>. The hashes to check are on <a href={docs('getting-started/patch-and-flash/')}>Patch and flash the Rytm</a>. Never share the patched <code>.syx</code>: it holds Elektron's firmware.</p>
         </section>
 
-        <section class="sg-panel" id="sg-panel-3" aria-labelledby="sg-h-3">
-          <h2 id="sg-h-3" tabindex="-1"><span class="sg-hn">3</span> Flash the Rytm</h2>
+        <section class="sg-panel" id="sg-panel-4" aria-labelledby="sg-h-4">
+          <h2 id="sg-h-4" tabindex="-1"><span class="sg-hn">4</span> Flash the Rytm</h2>
           <ol class="sg-list">
             <li>Connect the Rytm to your computer with a USB cable, and open Transfer.</li>
             <li>Drop the patched <code>.syx</code> on Transfer and confirm on the Rytm.</li>
@@ -240,8 +324,8 @@ const docs = (p: string) => `${base}/${p}`;
           <p class="sg-note">If the Rytm does not boot, hold FUNC while you power on for the STARTUP menu: <a href={docs('getting-started/recovery/')}>Recovery to stock</a>.</p>
         </section>
 
-        <section class="sg-panel" id="sg-panel-4" aria-labelledby="sg-h-4">
-          <h2 id="sg-h-4" tabindex="-1"><span class="sg-hn">4</span> Make the SD card</h2>
+        <section class="sg-panel" id="sg-panel-5" aria-labelledby="sg-h-5">
+          <h2 id="sg-h-5" tabindex="-1"><span class="sg-hn">5</span> Make the SD card</h2>
           <fieldset class="sg-size">
             <legend>1. Pick your screen size</legend>
             {SIZES.map((z, i) => (
@@ -277,8 +361,8 @@ const docs = (p: string) => `${base}/${p}`;
           </details>
         </section>
 
-        <section class="sg-panel" id="sg-panel-5" aria-labelledby="sg-h-5">
-          <h2 id="sg-h-5" tabindex="-1"><span class="sg-hn">5</span> Connect</h2>
+        <section class="sg-panel" id="sg-panel-6" aria-labelledby="sg-h-6">
+          <h2 id="sg-h-6" tabindex="-1"><span class="sg-hn">6</span> Connect</h2>
           <ol class="sg-list">
             <li>Put the SD card in the Pi.</li>
             <li>Connect the Rytm's USB port to a USB-A port of the Pi with a good, short USB A-to-B cable (like the one that came with the Rytm). <b>No hub.</b></li>
@@ -287,8 +371,8 @@ const docs = (p: string) => `${base}/${p}`;
           <p class="sg-note">Optional: a touch display on the Pi's micro-HDMI 0 (<a href={docs('using/display/')}>which displays work</a>), and an Ethernet cable to your computer for the web page. Pi 5: <a href={docs('getting-started/install-pi/#raspberry-pi-5')}>what is different</a>.</p>
         </section>
 
-        <section class="sg-panel" id="sg-panel-6" aria-labelledby="sg-h-6">
-          <h2 id="sg-h-6" tabindex="-1"><span class="sg-hn">6</span> Power up and play</h2>
+        <section class="sg-panel" id="sg-panel-7" aria-labelledby="sg-h-7">
+          <h2 id="sg-h-7" tabindex="-1"><span class="sg-hn">7</span> Power up and play</h2>
           <ol class="sg-list">
             <li>Power the Pi with its official supply (5.1 V 3 A for a Pi 4B, 27 W for a Pi 5).</li>
             <li>After about <b>11 seconds</b> the Rytm shows the Sidecar's connect screen.</li>
@@ -404,6 +488,18 @@ const docs = (p: string) => `${base}/${p}`;
   .sg-dl-in { display: block; text-align: center; }
   .sg-dl-verb { white-space: nowrap; font-weight: 700; }
   .sg-dl-name { display: inline-block; max-width: 100%; overflow-wrap: break-word; word-break: normal; font-weight: 500; }
+  .sg-need { list-style: none; margin: 0 0 0.5rem; padding: 0; display: grid; gap: 0.6rem; }
+  .sg-item { border: 1px solid var(--border); border-radius: var(--radius-control); padding: 0.6rem 0.85rem 0.2rem; }
+  .sg-tick { display: flex; gap: 0.7rem; align-items: flex-start; min-height: var(--target); cursor: pointer; padding-top: 0.3rem; }
+  .sg-tick input { width: 1.25rem; height: 1.25rem; margin-top: 0.15rem; accent-color: var(--accent); flex: none; }
+  .sg-tick:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .sg-tick:has(input:checked) b { text-decoration: line-through; text-decoration-thickness: 1px; opacity: 0.8; }
+  .sg-req, .sg-opt { font-style: normal; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.05rem 0.5rem; border-radius: 999px; white-space: nowrap; margin-left: 0.25rem; }
+  .sg-req { color: var(--on-accent); background: var(--accent); }
+  .sg-opt { color: var(--label); border: 1px solid var(--control-border); }
+  .sg-why { margin: 0 0 0.6rem 2rem; color: var(--label); font-size: 0.9375rem; }
+  .sg-disp { margin: 0 0 0.6rem 2rem; }
+  .sg-count { color: var(--accent); font-weight: 700; }
   .sg-btn[disabled] { opacity: 0.4; cursor: default; }
   .sg-frame { width: 100%; height: 780px; border: 1px solid var(--border); border-radius: var(--radius-control); background: #fff; margin-bottom: 0.8rem; }
   .sg-size { border: 0; padding: 0; margin: 0 0 1rem; display: grid; gap: 0.5rem; }
@@ -474,7 +570,7 @@ const docs = (p: string) => `${base}/${p}`;
         el.classList.toggle('on', (el.getAttribute('data-on') || '').split(' ').includes(String(cur)));
       });
       // the SD card: by the laptop in step 4, in the Pi's slot from step 5
-      sd.setAttribute('transform', cur >= 5 ? 'translate(532 352) rotate(90 14 17)' : 'translate(330 360)');
+      sd.setAttribute('transform', cur >= 6 ? 'translate(532 352) rotate(90 14 17)' : 'translate(330 360)');
       capK.textContent = `Step ${cur} of ${N}`;
       capT.textContent = STEPS[cur - 1]?.t || '';
       capD.textContent = STEPS[cur - 1]?.d || '';
@@ -511,6 +607,34 @@ const docs = (p: string) => `${base}/${p}`;
         sha.href = `${dl.dataset.base}${file}.sha256`;
         name.textContent = file;
         sceneImg.textContent = file;
+      }),
+    );
+
+
+    // step 1: the ticks stay in this browser (localStorage may be missing: then they just do not stay)
+    const needs = root.querySelectorAll<HTMLInputElement>('input[data-need]');
+    const count = root.querySelector('#sg-need-count') as HTMLElement | null;
+    let saved: Record<string, boolean> = {};
+    try { saved = JSON.parse(localStorage.getItem('sidecar-setup-need') || '{}'); } catch (e) { saved = {}; }
+    const tally = () => {
+      const req = [...needs].filter((i) => i.dataset.req);
+      const done = req.filter((i) => i.checked).length;
+      if (count) count.textContent = `${done} of ${req.length} required parts ticked.`;
+    };
+    needs.forEach((i) => {
+      if (saved[i.dataset.need || ''] === true) i.checked = true;
+      i.addEventListener('change', () => {
+        saved[i.dataset.need || ''] = i.checked;
+        try { localStorage.setItem('sidecar-setup-need', JSON.stringify(saved)); } catch (e) { /* no storage */ }
+        tally();
+      });
+    });
+    tally();
+    // the display picked in step 1 picks the image in step 5
+    root.querySelectorAll<HTMLInputElement>('input[name="sg-disp"]').forEach((d) =>
+      d.addEventListener('change', () => {
+        const r = root.querySelector<HTMLInputElement>(`input[name="sg-res"][value="${d.value}"]`);
+        if (r && d.checked) { r.checked = true; r.dispatchEvent(new Event('change')); }
       }),
     );
 

@@ -6,7 +6,7 @@ Sidecar, the full Raspberry Pi version of Sidecar | Expander, **works on the Pi 
 
 ## You need
 
-- A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**.
+- A **Raspberry Pi 5** (recommended: a lot more headroom) or a **Raspberry Pi 4 Model B** (works). 2 GB of memory is the minimum, 4 GB or more is recommended.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5, or one as good.
 - A **microSD card**, 4 GB or more for the card image (copying the files by hand: any size from 1 GB up). Its contents are replaced.
 - A **USB A-to-B cable** from the Pi to the Rytm.

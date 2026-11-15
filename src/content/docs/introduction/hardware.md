@@ -23,7 +23,7 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 :::
 
 
-- A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**. One SD card set boots both.
+- A **Raspberry Pi 5** (recommended: it has a lot more headroom, for more voices and effects) or a **Raspberry Pi 4 Model B** (works). **2 GB** of memory is the minimum and **4 GB or more** is recommended, so the unit is ready for future releases. One SD card set boots both.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, **27 W** for the Pi 5, plugged in directly (not through a hub).
 - A **heatsink or a fan** (a case with a fan, or at least a heatsink on the SoC). The Pi runs the Sidecar's audio at full clock; above its temperature limit it slows itself down to 600 MHz, and the sound can drop out. See [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool).
 - A **microSD card**, 1 GB or more. A fast, larger card is better for the recorder.
