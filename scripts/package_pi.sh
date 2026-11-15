@@ -180,8 +180,9 @@ fi
 out="$here/dist/pi/plugins"
 mkdir -p "$out"
 plugs=(sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw vox hush1 raffo sophie modele)   # sophie: 0.4.0; modele: 0.4.1
-# 0.5.0 (Plugin API 3), when the commit has them: the user effects PINGPONG, PHASER and BBD, the user machine MIST
-for p in ufx_pingpong ufx_phaser ufx_bbd mist; do [ -f "$wt/plugins/$p/Makefile" ] && plugs+=("$p"); done
+# 0.5.0 (Plugin API 3), when the commit has them: the user effects PHASER, BBD, NIMBUS and GALACTIC, the user machine
+# MIST. PINGPONG (plugins/ufx_pingpong) is the firmware repo's example effect, not shipped
+for p in ufx_phaser ufx_bbd ufx_nimbus ufx_galactic mist; do [ -f "$wt/plugins/$p/Makefile" ] && plugs+=("$p"); done
 for p in "${plugs[@]}"; do
   rm -f "$wt/plugins/$p/$p.a64.rmp" "$wt/plugins/$p/$p.a64.elf"
   make -C "$wt/plugins/$p" a64 PY=python3 >/dev/null
