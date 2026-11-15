@@ -20,10 +20,15 @@ import lfoDesign from '../../assets/rytm/remote-lfo-design.png';
 import connect from '../../assets/rytm/remote-connect.png';
 import rec from '../../assets/rytm/remote-rec.png';
 import play from '../../assets/rytm/remote-play.png';
-import piRecord from '../../assets/ui/pi-record.png';
-import piSound from '../../assets/ui/pi-sound.png';
-import piMachines from '../../assets/ui/pi-machines.png';
-import piLfo from '../../assets/ui/pi-lfo.png';
+import webRec from '../../assets/ui/web-rec.png';
+import webUsb from '../../assets/ui/web-usb.png';
+import webVoices from '../../assets/ui/web-voices.png';
+import webMod from '../../assets/ui/web-modulation.png';
+import webSeq from '../../assets/ui/web-seq.png';
+import webMix from '../../assets/ui/web-mix.png';
+import sidecarHome from '../../assets/touch/sidecar-home.png';
+import sidecarSeq from '../../assets/touch/sidecar-seq-chord.png';
+import sidecarRec from '../../assets/touch/sidecar-rec-recording.png';
 import seqMake from '../../assets/rytm/sc-seq-make.png';
 import seqHeld from '../../assets/rytm/sc-seq-held.png';
 import seqLock from '../../assets/rytm/sc-seq-lock-src.png';
@@ -108,7 +113,7 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 </Feature>
 
 <Feature flip kicker="Modulation" title="LFOs, with your own wave" href="/sidecar-expander/using/lfo/" shots={[
-  { src: piLfo, alt: 'The web page LFO tab' },
+  { src: webMod, alt: 'The web page Voices tab, Modulation: two LFOs for track 1' },
 ]}>
   <p>Eight LFOs on any parameter of a Sidecar voice or effect, saved per kit. Free or synced to the Rytm, retriggered by a trig or PLAY, and a DESIGN wave of 16 steps you draw on the Rytm (UP + LFO) or in the browser. <span class="sc-test">in testing</span></p>
 </Feature>
@@ -116,29 +121,32 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 <Feature kicker="Recording" title="Record every track, play it back" href="/sidecar-expander/using/recorder/" shots={[
   { src: rec, alt: 'The REC page, armed', pixel: true },
   { src: play, alt: 'The REC page playing a channel of a take', pixel: true },
-  { src: piRecord, alt: 'The web page Record tab with takes' },
+  { src: webRec, alt: 'The web page Rec tab' },
 ]}>
   <p>Record the Rytm's tracks, the Sidecar's voices and the effect returns to the SD card, one aligned WAV per source, from the Rytm's REC page or armed to PLAY. On the Pi, play a take's channel back into the Rytm's mix. The Rytm's own delay and reverb can be recorded as their own channels.</p>
 </Feature>
 
 <Feature flip kicker="Computer audio" title="An audio interface for your DAW" href="/sidecar-expander/using/usb-audio-midi/" shots={[
-  { src: piSound, alt: 'The web page Sound tab' },
+  { src: webUsb, alt: 'The web page Settings tab, USB-C mode' },
 ]}>
   <p>With the Sidecar on the Rytm's USB port, its own USB port becomes a class-compliant audio and MIDI device for your computer: multi-channel on the Pi 4. No driver needed.</p>
 </Feature>
 
 <Feature kicker="Web UI and plugins" title="Manage it from a browser" href="/sidecar-expander/using/web-ui/" shots={[
-  { src: piMachines, alt: 'The web page User machines tab' },
+  { src: webMix, alt: 'The web page Mix tab: mixer strips, EQ with spectrum, inserts, output and sends' },
+  { src: webSeq, alt: 'The web page Seq tab: the piano roll and the note inspector' },
+  { src: webVoices, alt: 'The web page Voices tab' },
 ]}>
-  <p>The Pi serves its own page at <code>sidecar.local</code>. Install user machines, see the CPU and memory, fill the sample pool, browse and upload whole sample folders, set up Wi-Fi. Nothing leaves your network.</p>
+  <p>The Pi serves its own page at <code>sidecar.local</code>, new in 0.5.0 and in the same look as the touchscreen: a mixer with EQ and spectrum, a piano roll, the voices and LFOs, the recorder and the library, with a live connection and updating from the page. Install user machines and effects, fill the sample pool, set up Wi-Fi. Nothing leaves your network.</p>
 </Feature>
 
 <Feature flip kicker="Touchscreen (optional)" title="A screen of its own, if you want one" href="/sidecar-expander/using/display/" shots={[
   { src: touchHome, alt: 'The touchscreen home page in the OLED theme' },
-  { src: touchClassic, alt: 'The touchscreen home page in the CLASSIC theme' },
-  { src: touchStage, alt: 'The touchscreen home page in the STAGE look' },
+  { src: sidecarHome, alt: 'The touchscreen home page in the SIDECAR theme' },
+  { src: sidecarSeq, alt: 'The SEQ page in the SIDECAR theme with the CHORD tool' },
+  { src: sidecarRec, alt: 'The REC page in the SIDECAR theme while recording' },
 ]}>
-  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. In 0.3.0 it follows the track you select on the Rytm, in an OLED or a CLASSIC theme, at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
+  <p>Not needed to play or edit: everything is on the Rytm's own screen. Add one and the Pi drives a touch display: the voices by track, the pattern, the recorder and the project at a glance, with settings, screensaver and brightness by touch. It follows the track you select on the Rytm, in the OLED theme or, new in 0.5.0, the SIDECAR theme (the look of the new web page), at 800x480 or 1024x600, with pages for the sequencer, the pattern, the voice, the inserts, songs, the recorder, the scope, projects and pools. <span class="sc-test">in testing</span></p>
 </Feature>
 
 <Feature kicker="Poly mode · 0.3.0" title="A sequencer for poly tracks" href="/sidecar-expander/using/sequencer/" shots={[

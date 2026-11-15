@@ -80,7 +80,7 @@ An **A** LFO can move the Rytm's own sound parameters: pick **RT1..RT12** (a tra
 
 The web page has an **LFO** tab with the same settings per LFO: target, parameter, wave, rate, sync, retrig, depth, and the design steps. In 0.3.0 its target list has the I, B and O targets too. In 0.5.0 it shows a bar of tracks (T1..T12, FX) with that track's two LFOs, and it follows the track you select on the Rytm. Neither list has Rytm parameters, and a voice's PAR list shows only the parameters its machine names.
 
-![The Pi page's LFO tab: LFO 1 on V3, LFO 2 on FX1 with a DESIGN wave, the design grid with HOLD / RAMP / SMTH and the presets](../../../assets/ui/pi-lfo.png)
+![The web page's Voices tab, Modulation: LFO A and LFO B of a track, the second with a DESIGN wave, the design grid with HOLD / RAMP / SMTH and the presets](../../../assets/ui/web-modulation.png)
 
 <small>Screenshot: the 0.1.0 web page with mock data.</small>
 
