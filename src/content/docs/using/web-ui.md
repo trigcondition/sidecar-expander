@@ -116,6 +116,8 @@ In **Settings > Storage**:
 
 ## Updating from the web page (0.5.0)
 
+Upgrading from 0.4.4, which cannot update itself, is done by card: [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/).
+
 <span class="sc-test">in testing</span> From 0.5.0 a Sidecar can update itself from its page, on the Pi 4 and the Pi 5: **Settings > Update**. You do not need the SD card in a computer. You download one file from the release page and pick it on the page. The Sidecar does not download anything itself.
 
 1. Download `sidecar-<version>.scu` from the release page. It is one file for the Pi 4 and the Pi 5, with a `.sha256` beside it.

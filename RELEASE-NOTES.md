@@ -29,6 +29,8 @@ Downloads: <!-- UNRELEASED: the release-page links for sidecar-firmware and side
 
 ### Upgrading from 0.4.4
 
+Full steps, also for the new web page: [Upgrade an existing Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/upgrading/).
+
 1. **Flash the Rytm firmware 0.5.0** ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Back up every project first. The Rytm must run OS 1.74. A Rytm on OS 1.73 needs Elektron's OS 1.74 first.
 2. **Copy the new card files** over the old ones (your samples, recordings, `/Plugins/` and `/.rytm/` stay), or update a Pi that already runs 0.5.0 from its web page.
 
