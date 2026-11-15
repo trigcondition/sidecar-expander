@@ -68,7 +68,7 @@ The Pi has no clock of its own. The web page sets the Pi's clock and time zone f
 - Playback continues when you leave the page and shows again when you come back. It ends at the take's end, when a recording starts or arms, and when its take is deleted.
 
 ![REC (OLED), TAKES: TAKE_002 playing at 21:00 / 1:02:05 with its progress bar, DEL per take](../../../assets/touch/oled-rec-playing.png)
-![REC (CLASSIC), recording](../../../assets/touch/classic-rec-recording.png)
+![REC (SIDECAR theme), recording: the timer, the stems, the voices and the returns](../../../assets/touch/sidecar-rec-recording.png)
 
 <small>Screenshots: rendered off-device by the Sidecar's own UI code, with made-up data.</small>
 

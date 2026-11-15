@@ -151,7 +151,7 @@ After the import the page says where it went: `IMPORTED TO SLOT 005`.
 - **Eject** before pulling it: the touchscreen's EJECT, the Rytm page's T5, the web page's **Eject**. Pulled during an import, the job stops and the card stays exactly as before.
 - Samples stay on the SD card for now: a stick holds bundles and [recordings](/sidecar-expander/using/recorder/#recording-to-a-usb-drive).
 
-![The PROJECT page in the CLASSIC theme with a USB stick picked](../../../assets/touch/classic-project-usb.png)
+![The PROJECT page in the SIDECAR theme with a USB stick picked](../../../assets/touch/sidecar-project-usb.png)
 
 ## Limitations
 

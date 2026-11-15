@@ -127,7 +127,7 @@ A row in use carries a mark: filled when voices play it now (`X3`: three voices)
 
 ![The machine view's POOL (OLED): SAMPLES of GRANULAR SD, bank A, KICK 909 ST RAM X2, HAT CLOSED LOADING, !CHOIR AAH MISSING, ~VINYL CRACKLE CHANGED, RAM 412 MB 40%](../../../assets/touch/oled-pool-samples.png)
 ![The POOL page (OLED): tabs SAMPLES 22, TABLES 8, INSTR 6](../../../assets/touch/oled-pool-page-samples.png)
-![The POOL page in the CLASSIC theme on INSTRUMENTS](../../../assets/touch/classic-pool-page-instr.png)
+![The POOL page in the SIDECAR theme on INSTRUMENTS](../../../assets/touch/sidecar-pool-page-instr.png)
 
 ## On the web page
 
