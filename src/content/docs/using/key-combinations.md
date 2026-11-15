@@ -10,7 +10,7 @@ sidebar:
 - **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. On a page where UP scrolls a list, holding UP scrolls instead ([below](#knobs-and-keys-how-they-feel-050)). The Rytm shows every UP + key on one screen, in two columns, and lights T1..T14 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
 - **No touchscreen needed:** every page opened from T7..T14 and every UP + key combination works on the Rytm's own screen.
 - **The SIDECAR MENU** (UP + YES, then YES) lists every Sidecar page with its shortcut.
-- **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older forms.
+- **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older **trig held + FUNC** forms (the TRK forms are no longer listed).
 - While a Sidecar page has the Rytm's keys, **TRK's LED blinks** slowly.
 
 "Hold" means: hold the first key, then press the second. "T1".."T16" are the trig keys.
