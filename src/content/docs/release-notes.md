@@ -51,6 +51,7 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](/sidecar-expander/release-n
 
 **Install**
 
+- **Set up Sidecar, one page.** A step-by-step page with the whole setup in it: the stock OS, the patcher, flashing, the SD card image for your screen with the card config editor, connecting and playing ([Set up Sidecar](/sidecar-expander/getting-started/setup/)).
 - **SD card images.** One ready card image for each screen size (800x480 and 1024x600), written with Raspberry Pi Imager or balenaEtcher: no formatting, no copying. The image grows to fill the card on its first boot (SD grow, below). The release zip `sidecar-<version>.zip` holds everything: both images, the card files for copying by hand, the Rytm `.elemod` files (never a `.syx`) with the patcher link, the manual and a quick start. The images are also separate downloads ([Install](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)).
 
 **FILL**

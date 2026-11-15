@@ -1,0 +1,522 @@
+---
+// "Set up Sidecar": the whole setup on one page, six steps with a bench scene (a laptop, the Rytm, a Pi, an SD card).
+// The user moves with Back / Next or the step rail: no autoplay. Each step does its job here: the patcher is the site's
+// own page (public/patcher) in a frame, the config editor is src/components/ConfigEditor.astro, the downloads are the
+// GitHub release assets named by RELEASE below (fill at release: see the UNRELEASED mark in the page that uses this).
+// Styled with the tokens of the Pi's new web UI (web-next: "UV night"), scoped to .sg so the rest of the site is
+// unchanged. Fonts (Space Grotesk, Doto; SIL OFL 1.1, notices in public/fonts/) are bundled from src/assets/fonts.
+import ConfigEditor from './ConfigEditor.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const RELEASE = {
+  repo: 'https://github.com/trigcondition/sidecar-firmware/releases',
+  tag: 'v0.5.0',
+  version: '0.5.0',
+};
+const image = (res: string) => `sidecar-${RELEASE.version}-sd-${res}.img.zip`;
+const imageUrl = (res: string) => `${RELEASE.repo}/download/${RELEASE.tag}/${image(res)}`;
+const releasePage = `${RELEASE.repo}/tag/${RELEASE.tag}`;
+const SIZES = [
+  { res: '800x480', title: '800x480', note: 'An 800x480 HDMI touch display (such as the 5" and 7" ones), a DSI display, or no display.' },
+  { res: '1024x600', title: '1024x600', note: 'A 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194).' },
+];
+const STEPS = [
+  { t: 'Back up and get the stock OS', s: 'Back up with Transfer, then get Elektron\'s OS 1.74.', d: 'Back up your projects, kits, sounds and samples with Transfer. Then download Analog-Rytm_MKII_OS1.74 from Elektron\'s Rytm MKII support page and unzip it.' },
+  { t: 'Patch it in your browser', s: 'Drop the stock file on the patcher.', d: 'Drop the stock .syx on the patcher, press Patch, then Save .syx. Everything happens in your browser; nothing is uploaded.' },
+  { t: 'Flash the Rytm', s: 'Send the patched file with Transfer.', d: 'Connect the Rytm to your computer over USB and drop the patched file on Transfer. Confirm on the Rytm. If it stays on "Success! Rebooting", switch it off and on.' },
+  { t: 'Make the SD card', s: 'Write the image for your screen.', d: 'In Raspberry Pi Imager: choose your Pi, then Use custom and the Sidecar image for your screen size, then the SD card. Answer No to customisation. Need Wi-Fi or another setting? Use the card config editor.' },
+  { t: 'Connect', s: 'Card in the Pi, USB to the Rytm.', d: 'Put the card in the Pi. Connect the Rytm\'s USB port to a USB-A port on the Pi, with no hub. On the Rytm, set SETTINGS > SYSTEM > USB CONFIG to Overbridge.' },
+  { t: 'Power up and play', s: 'Power the Pi. Pick an EXT machine.', d: 'Power the Pi with its official supply. After about 11 seconds the Rytm shows the Sidecar screen. Pick an EXT machine on a track and play. Hold UP to see every shortcut, and open sidecar.local for the web page.' },
+];
+const docs = (p: string) => `${base}/${p}`;
+---
+
+<div class="sg not-content" id="sg" data-steps={STEPS.length} data-copy={JSON.stringify(STEPS.map((s) => ({ t: s.t, d: s.d })))}>
+  <header class="sg-head">
+    <p class="sg-label">Sidecar 0.5.0 · Analog Rytm MKII + Raspberry Pi 4B / 5</p>
+    <p class="sg-title">Set up Sidecar in six steps</p>
+    <p class="sg-sub">From a stock Rytm to playing Sidecar machines: patch and flash the Rytm, write the Pi's SD card, connect, play. Prefer text? <a href={docs('getting-started/start-here/')}>Start here</a> has the same steps.</p>
+  </header>
+
+  <div class="sg-main">
+    <ol class="sg-rail" id="sg-rail" aria-label="Setup steps">
+      {STEPS.map((s, i) => (
+        <li>
+          <button type="button" class="sg-step" data-n={i + 1} id={`sg-step-${i + 1}`} aria-controls={`sg-panel-${i + 1}`}>
+            <span class="sg-n">{i + 1}</span>
+            <span class="sg-t">{s.t}</span>
+            <span class="sg-d">{s.s}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+
+    <div class="sg-work">
+      <section class="sg-stage" aria-label="The current step, drawn">
+        <svg viewBox="0 0 800 460" role="img" aria-labelledby="sg-scene-title">
+          <title id="sg-scene-title">A laptop, an Analog Rytm and a Raspberry Pi on a desk, showing the current setup step</title>
+          <line x1="20" y1="420" x2="780" y2="420" stroke="var(--border)" stroke-width="2"></line>
+
+          <path class="cable" data-on="3" d="M300 330 C 360 330, 380 210, 470 190"></path>
+          <path class="cable" data-on="5 6" d="M600 210 C 610 260, 640 270, 640 300"></path>
+          <path class="cable" data-on="6" d="M780 360 C 760 360, 740 350, 722 350" style="stroke: var(--warm)"></path>
+
+          <g>
+            <rect x="40" y="130" width="260" height="180" rx="10" fill="var(--device)"></rect>
+            <rect x="52" y="142" width="236" height="156" rx="4" fill="var(--screen-lt)"></rect>
+            <path d="M20 312 H320 L306 330 H34 Z" fill="var(--device-2)"></path>
+
+            <g class="fade" data-on="1">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">support page · Analog Rytm MKII</text>
+              <text x="66" y="186" class="ui" font-size="12" font-weight="700" fill="var(--text)">Downloads</text>
+              <rect x="66" y="196" width="208" height="34" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
+              <text x="76" y="217" class="ui" font-size="9.5" fill="var(--text)">Analog-Rytm_MKII_OS1.74.syx</text>
+              <rect x="66" y="242" width="208" height="6" rx="3" fill="var(--border)"></rect>
+              <rect x="66" y="242" width="208" height="6" rx="3" fill="var(--accent)"></rect>
+              <text x="66" y="272" class="ui" font-size="10" fill="var(--label)">Back up with Transfer first</text>
+            </g>
+
+            <g class="fade" data-on="2">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Sidecar patcher · runs in your browser</text>
+              <rect x="66" y="172" width="208" height="58" rx="6" fill="none" stroke="var(--label)" stroke-dasharray="4 4"></rect>
+              <text x="170" y="196" class="ui" font-size="9.5" fill="var(--text)" text-anchor="middle">OS1.74.syx</text>
+              <text x="170" y="214" class="ui" font-size="9.5" fill="var(--label)" text-anchor="middle">stock file dropped</text>
+              <rect x="66" y="242" width="96" height="26" rx="5" fill="var(--accent)"></rect>
+              <text x="114" y="259" class="ui" font-size="11" font-weight="700" fill="var(--on-accent)" text-anchor="middle">Patch</text>
+              <rect x="178" y="242" width="96" height="26" rx="5" fill="none" stroke="var(--text)"></rect>
+              <text x="226" y="259" class="ui" font-size="11" font-weight="700" fill="var(--text)" text-anchor="middle">Save .syx</text>
+              <text x="66" y="288" class="ui" font-size="9.5" fill="var(--label)">Nothing is uploaded</text>
+            </g>
+
+            <g class="fade" data-on="3">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Transfer</text>
+              <text x="66" y="190" class="ui" font-size="12" font-weight="700" fill="var(--text)">Sending OS to Rytm</text>
+              <text x="66" y="208" class="ui" font-size="9" fill="var(--label)">patched .syx</text>
+              <rect x="66" y="222" width="208" height="8" rx="4" fill="var(--border)"></rect>
+              <rect x="66" y="222" width="140" height="8" rx="4" fill="var(--accent)"></rect>
+              <text x="66" y="258" class="ui" font-size="9.5" fill="var(--label)">Confirm on the Rytm. Stuck on</text>
+              <text x="66" y="272" class="ui" font-size="9.5" fill="var(--label)">"Success! Rebooting"? Power cycle it.</text>
+            </g>
+
+            <g class="fade" data-on="4">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">Raspberry Pi Imager</text>
+              <g class="ui" font-size="9" text-anchor="middle">
+                <rect x="62" y="172" width="70" height="40" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
+                <text x="97" y="188" fill="var(--label)">DEVICE</text><text x="97" y="203" fill="var(--text)" font-weight="700">Pi 4 / Pi 5</text>
+                <rect x="135" y="172" width="70" height="40" rx="4" fill="var(--bg)" stroke="var(--accent)"></rect>
+                <text x="170" y="188" fill="var(--label)">OS</text><text x="170" y="203" fill="var(--text)" font-weight="700">Use custom</text>
+                <rect x="208" y="172" width="70" height="40" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
+                <text x="243" y="188" fill="var(--label)">STORAGE</text><text x="243" y="203" fill="var(--text)" font-weight="700">SD card</text>
+              </g>
+              <text x="66" y="230" class="ui sg-img" font-size="8.5" fill="var(--text)" id="sg-scene-img">sidecar-0.5.0-sd-800x480.img.zip</text>
+              <text x="66" y="246" class="ui" font-size="9.5" fill="var(--label)">Customisation? <tspan fill="var(--text)" font-weight="700">No</tspan></text>
+              <rect x="66" y="254" width="208" height="6" rx="3" fill="var(--border)"></rect>
+              <rect x="66" y="254" width="208" height="6" rx="3" fill="var(--sd)"></rect>
+              <text x="66" y="282" class="ui" font-size="9.5" fill="var(--label)">Wi-Fi or another setting? Config editor.</text>
+            </g>
+
+            <g class="fade" data-on="6">
+              <rect x="52" y="142" width="236" height="20" fill="var(--border)"></rect>
+              <text x="62" y="156" class="ui" font-size="10" fill="var(--label)">sidecar.local</text>
+              <text x="66" y="190" class="ui" font-size="12" font-weight="700" fill="var(--text)">Sidecar</text>
+              <circle cx="72" cy="208" r="4" fill="var(--ok)"></circle>
+              <text x="82" y="212" class="ui" font-size="10" fill="var(--text)">Rytm connected</text>
+              <rect x="66" y="224" width="98" height="52" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
+              <rect x="176" y="224" width="98" height="52" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
+              <text x="115" y="254" class="ui" font-size="10" fill="var(--label)" text-anchor="middle">Voices</text>
+              <text x="225" y="254" class="ui" font-size="10" fill="var(--label)" text-anchor="middle">Mix</text>
+            </g>
+            <g class="fade" data-on="5">
+              <text x="170" y="222" class="ui" font-size="11" fill="var(--label)" text-anchor="middle">Laptop not needed now</text>
+            </g>
+          </g>
+
+          <g>
+            <rect x="460" y="60" width="310" height="150" rx="8" fill="var(--device)"></rect>
+            <rect x="474" y="72" width="282" height="8" rx="2" fill="var(--device-2)"></rect>
+            <rect x="560" y="92" width="110" height="56" rx="3" fill="var(--screen)"></rect>
+            <g class="fade" data-on="1 2 4">
+              <text x="615" y="118" class="px" font-size="10" text-anchor="middle">STOCK OS</text>
+              <text x="615" y="134" class="px" font-size="10" text-anchor="middle">1.74</text>
+            </g>
+            <g class="fade" data-on="3">
+              <text x="615" y="114" class="px" font-size="9" text-anchor="middle">RECEIVING OS</text>
+              <rect x="574" y="124" width="82" height="6" fill="none" stroke="var(--pixel)"></rect>
+              <rect x="576" y="126" width="52" height="2" fill="var(--pixel)"></rect>
+            </g>
+            <g class="fade" data-on="5">
+              <text x="615" y="114" class="px" font-size="9" text-anchor="middle">USB CONFIG</text>
+              <rect x="574" y="122" width="82" height="13" fill="var(--pixel)"></rect>
+              <text x="615" y="132" class="px" font-size="9" text-anchor="middle" style="fill: var(--screen)">OVERBRIDGE</text>
+            </g>
+            <g class="fade" data-on="6">
+              <text x="615" y="114" class="px" font-size="10" text-anchor="middle">SIDECAR</text>
+              <text x="615" y="132" class="px" font-size="9" text-anchor="middle">CONNECTED_</text>
+            </g>
+            <g fill="var(--device-2)">
+              <circle cx="690" cy="104" r="9"></circle><circle cx="714" cy="104" r="9"></circle><circle cx="738" cy="104" r="9"></circle>
+              <circle cx="690" cy="134" r="9"></circle><circle cx="714" cy="134" r="9"></circle><circle cx="738" cy="134" r="9"></circle>
+              <circle cx="500" cy="104" r="12"></circle><circle cx="530" cy="104" r="9"></circle>
+            </g>
+            <g fill="var(--device-2)">
+              <rect x="480" y="158" width="20" height="14" rx="2"></rect><rect x="503" y="158" width="20" height="14" rx="2"></rect><rect x="526" y="158" width="20" height="14" rx="2"></rect><rect x="549" y="158" width="20" height="14" rx="2"></rect><rect x="572" y="158" width="20" height="14" rx="2"></rect><rect x="595" y="158" width="20" height="14" rx="2"></rect>
+              <rect x="480" y="176" width="20" height="14" rx="2"></rect><rect x="503" y="176" width="20" height="14" rx="2"></rect><rect x="526" y="176" width="20" height="14" rx="2"></rect><rect x="549" y="176" width="20" height="14" rx="2"></rect><rect x="572" y="176" width="20" height="14" rx="2"></rect><rect x="595" y="176" width="20" height="14" rx="2"></rect>
+            </g>
+            <g class="fade" data-on="6">
+              <rect x="480" y="158" width="20" height="14" rx="2" fill="var(--warm)"></rect>
+              <rect x="549" y="176" width="20" height="14" rx="2" fill="var(--warm)"></rect>
+            </g>
+            <g fill="var(--device-2)">
+              <rect x="630" y="158" width="9" height="32" rx="2"></rect><rect x="643" y="158" width="9" height="32" rx="2"></rect><rect x="656" y="158" width="9" height="32" rx="2"></rect><rect x="669" y="158" width="9" height="32" rx="2"></rect>
+              <rect x="682" y="158" width="9" height="32" rx="2"></rect><rect x="695" y="158" width="9" height="32" rx="2"></rect><rect x="708" y="158" width="9" height="32" rx="2"></rect><rect x="721" y="158" width="9" height="32" rx="2"></rect><rect x="734" y="158" width="9" height="32" rx="2"></rect><rect x="747" y="158" width="9" height="32" rx="2"></rect>
+            </g>
+            <text x="470" y="52" class="ui" font-size="11" fill="var(--label)">Analog Rytm MKII</text>
+          </g>
+
+          <g>
+            <rect x="560" y="296" width="160" height="108" rx="7" fill="var(--pcb)"></rect>
+            <rect x="574" y="300" width="26" height="22" rx="2" fill="#c8ccd2"></rect><rect x="606" y="300" width="26" height="22" rx="2" fill="#c8ccd2"></rect>
+            <rect x="640" y="300" width="30" height="24" rx="2" fill="#c8ccd2"></rect>
+            <rect x="608" y="340" width="40" height="40" rx="3" fill="#20262c"></rect>
+            <g fill="#d6b34c"><rect x="660" y="384" width="54" height="8" rx="1"></rect></g>
+            <rect x="716" y="344" width="10" height="14" rx="2" fill="#c8ccd2"></rect>
+            <circle cx="578" cy="392" r="4" fill="var(--border)"></circle>
+            <circle cx="578" cy="392" r="4" fill="var(--ok)" class="fade" data-on="6"></circle>
+            <text x="560" y="426" class="ui" font-size="11" fill="var(--label)">Raspberry Pi 4B / 5</text>
+            <rect x="552" y="356" width="10" height="20" rx="1" fill="#9aa1a9"></rect>
+          </g>
+
+          <g id="sg-sd" class="fade" data-on="4 5 6">
+            <path d="M0 0 H22 L28 6 V34 H0 Z" fill="var(--sd)"></path>
+            <rect x="4" y="4" width="14" height="5" fill="#ffffff" opacity=".6"></rect>
+            <text x="14" y="26" class="ui" font-size="7" fill="#fff" text-anchor="middle">SD</text>
+          </g>
+
+          <g class="fade" data-on="6">
+            <text x="742" y="384" class="ui" font-size="10" fill="var(--warm)" text-anchor="end">official supply</text>
+          </g>
+          <g class="fade" data-on="5">
+            <text x="652" y="262" class="ui" font-size="10" fill="var(--label)">USB, no hub</text>
+          </g>
+          <g class="fade" data-on="3">
+            <text x="352" y="248" class="ui" font-size="10" fill="var(--label)">USB</text>
+          </g>
+        </svg>
+        <div class="sg-caption" aria-live="polite">
+          <p class="sg-label" id="sg-cap-k">Step 1 of 6</p>
+          <p class="sg-cap-t" id="sg-cap-t"></p>
+          <p class="sg-cap-d" id="sg-cap-d"></p>
+        </div>
+      </section>
+
+      <div class="sg-panels">
+        <section class="sg-panel" id="sg-panel-1" aria-labelledby="sg-h-1">
+          <h2 id="sg-h-1" tabindex="-1"><span class="sg-hn">1</span> Back up and get the stock OS</h2>
+          <p><b>Back up first.</b> Use Transfer (Elektron's tool for the Rytm) to back up your projects, kits, sounds and samples. Then you can always go back: see <a href={docs('getting-started/recovery/')}>Recovery to stock</a>.</p>
+          <p>Download Elektron's OS 1.74 for the Analog Rytm MKII from Elektron's own support page, and unzip it. You need the file <code>Analog-Rytm_MKII_OS1.74.syx</code>. Sidecar does not host Elektron's file and never will.</p>
+          <p class="sg-actions"><a class="sg-btn" href="https://www.elektron.se/support-downloads/analog-rytm-mkii" target="_blank" rel="noopener">Elektron: Analog Rytm MKII support page</a></p>
+          <p class="sg-note">Already on OS 1.73, or want to stay there? See <a href={docs('getting-started/patch-and-flash/#which-os-174-or-173')}>which OS</a>.</p>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-2" aria-labelledby="sg-h-2">
+          <h2 id="sg-h-2" tabindex="-1"><span class="sg-hn">2</span> Patch it in your browser</h2>
+          <p>This is the Sidecar patcher. Leave the build on its default (the first in the list), drop the stock <code>Analog-Rytm_MKII_OS1.74.syx</code> on it, press <b>Patch</b>, then <b>Save .syx</b>. Your file never leaves your computer.</p>
+          <iframe class="sg-frame" title="Sidecar patcher" src={`${base}/patcher/`} loading="lazy" height="780"></iframe>
+          <p class="sg-note">The patcher does not show? <a href={`${base}/patcher/`} target="_blank" rel="noopener">Open it in its own tab</a>. The hashes to check are on <a href={docs('getting-started/patch-and-flash/')}>Patch and flash the Rytm</a>. Never share the patched <code>.syx</code>: it holds Elektron's firmware.</p>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-3" aria-labelledby="sg-h-3">
+          <h2 id="sg-h-3" tabindex="-1"><span class="sg-hn">3</span> Flash the Rytm</h2>
+          <ol class="sg-list">
+            <li>Connect the Rytm to your computer with a USB cable, and open Transfer.</li>
+            <li>Drop the patched <code>.syx</code> on Transfer and confirm on the Rytm.</li>
+            <li>Wait for the Rytm to restart. After an OS upgrade it may also update its bootstrap at the first restart: <b>do not turn the power off then</b>.</li>
+          </ol>
+          <p class="sg-tip"><b>Tip:</b> if the Rytm stays on <b>"Success! Rebooting"</b>, that is stock behaviour. Power cycle it.</p>
+          <p class="sg-note">If the Rytm does not boot, hold FUNC while you power on for the STARTUP menu: <a href={docs('getting-started/recovery/')}>Recovery to stock</a>.</p>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-4" aria-labelledby="sg-h-4">
+          <h2 id="sg-h-4" tabindex="-1"><span class="sg-hn">4</span> Make the SD card</h2>
+          <fieldset class="sg-size">
+            <legend>1. Pick your screen size</legend>
+            {SIZES.map((z, i) => (
+              <label class="sg-choice">
+                <input type="radio" name="sg-res" value={z.res} checked={i === 0} />
+                <span><b>{z.title}</b><small>{z.note}</small></span>
+              </label>
+            ))}
+          </fieldset>
+          <p class="sg-label">2. Download the image</p>
+          <p class="sg-actions">
+            <a class="sg-btn sg-btn-main" id="sg-dl" href={imageUrl('800x480')} data-base={`${RELEASE.repo}/download/${RELEASE.tag}/`} data-ver={RELEASE.version} download><span>Download <span id="sg-dl-name">{image('800x480')}</span></span></a>
+            <a class="sg-btn" id="sg-dl-sha" href={`${imageUrl('800x480')}.sha256`}>.sha256</a>
+            <a class="sg-btn" href={releasePage} target="_blank" rel="noopener">The release page</a>
+          </p>
+          <p class="sg-note">Do not unzip it: Raspberry Pi Imager reads the <code>.img.zip</code> itself. The same images are in the release zip <code>sidecar-{RELEASE.version}.zip</code>. To check the download, in its folder run <code>shasum -a 256 -c</code> with the <code>.sha256</code> file beside it (Windows: <code>certutil -hashfile &lt;file&gt; SHA256</code> and compare).</p>
+          <p class="sg-label">3. Write it with Raspberry Pi Imager</p>
+          <ol class="sg-list">
+            <li><a href="https://www.raspberrypi.com/software/" target="_blank" rel="noopener">Download and open Raspberry Pi Imager</a>. Use a microSD card of 4 GB or more: its contents are replaced.</li>
+            <li><b>Choose Device:</b> a Raspberry Pi 4 or a Raspberry Pi 5. It does not matter: one image boots both.</li>
+            <li><b>Choose OS:</b> scroll to the bottom, pick <b>Use custom</b>, and select the downloaded <code>.img.zip</code>.</li>
+            <li><b>Choose Storage:</b> your SD card. Then <b>Next</b>.</li>
+            <li>Asked about <b>OS customisation</b>, choose <b>No</b>. Its Wi-Fi, user and SSH settings are for Raspberry Pi OS and do nothing on Sidecar.</li>
+            <li>Write, wait for the check, and eject the card.</li>
+          </ol>
+          <p class="sg-note">balenaEtcher works too ("Flash from file", the same <code>.img.zip</code>). Or copy the card files by hand: <a href={docs('getting-started/install-pi/#make-the-sd-card')}>Install Sidecar</a>. On its first start the card grows to fill the SD card, which takes a moment, once.</p>
+          <details class="sg-more">
+            <summary>4. Optional: Wi-Fi, screen size and other settings (card config editor)</summary>
+            <div class="sg-more-body">
+              <p>After writing the card, open it on your computer (it shows as <code>SIDECAR</code>). Paste its <code>config.txt</code> and <code>cmdline.txt</code> into the editor, change what you need, and put the files it makes on the card in place of the card's own. Do it before you start the Pi. Everything runs in this page: nothing is sent. More: <a href={docs('getting-started/config-editor/')}>the card config editor</a>.</p>
+              <ConfigEditor />
+            </div>
+          </details>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-5" aria-labelledby="sg-h-5">
+          <h2 id="sg-h-5" tabindex="-1"><span class="sg-hn">5</span> Connect</h2>
+          <ol class="sg-list">
+            <li>Put the SD card in the Pi.</li>
+            <li>Connect the Rytm's USB port to a USB-A port of the Pi with a good, short USB A-to-B cable (like the one that came with the Rytm). <b>No hub.</b></li>
+            <li>On the Rytm, set <b>SETTINGS &gt; SYSTEM &gt; USB CONFIG</b> to the <b>Overbridge</b> mode. That is the only Rytm setting Sidecar needs.</li>
+          </ol>
+          <p class="sg-note">Optional: a touch display on the Pi's micro-HDMI 0 (<a href={docs('using/display/')}>which displays work</a>), and an Ethernet cable to your computer for the web page. Pi 5: <a href={docs('getting-started/install-pi/#raspberry-pi-5')}>what is different</a>.</p>
+        </section>
+
+        <section class="sg-panel" id="sg-panel-6" aria-labelledby="sg-h-6">
+          <h2 id="sg-h-6" tabindex="-1"><span class="sg-hn">6</span> Power up and play</h2>
+          <ol class="sg-list">
+            <li>Power the Pi with its official supply (5.1 V 3 A for a Pi 4B, 27 W for a Pi 5).</li>
+            <li>After about <b>11 seconds</b> the Rytm shows the Sidecar's connect screen.</li>
+            <li>Pick an <b>EXT machine</b> on a track and play it.</li>
+            <li><b>Hold UP</b> to see every shortcut.</li>
+            <li>Open <code>sidecar.local</code> in a browser, with the Pi on Ethernet, for the web page: <a href={docs('getting-started/install-pi/#first-boot-over-ethernet-sidecarlocal')}>pairing your browser</a>.</li>
+          </ol>
+          <p class="sg-label">Where next</p>
+          <ul class="sg-links">
+            <li><a href={docs('using/machines/')}>Voices and machines</a></li>
+            <li><a href={docs('using/key-combinations/')}>Key combinations</a></li>
+            <li><a href={docs('using/sequencer/')}>Sequencer and poly tracks</a></li>
+            <li><a href={docs('using/troubleshooting/')}>Troubleshooting</a></li>
+            <li><a href={docs('about/community/')}>Ask on Discord</a></li>
+            <li><a href={docs('release-notes/')}>Release notes</a></li>
+          </ul>
+        </section>
+
+        <nav class="sg-nav" aria-label="Step navigation">
+          <button type="button" class="sg-btn" id="sg-prev">Back</button>
+          <span class="sg-prog" aria-hidden="true"><i id="sg-bar"></i></span>
+          <button type="button" class="sg-btn sg-btn-main" id="sg-next">Next</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <p class="sg-foot">Full instructions: <a href={docs('getting-started/start-here/')}>Start here</a>. You can always go back to the stock OS: <a href={docs('getting-started/recovery/')}>Recovery to stock</a>.</p>
+</div>
+
+<style is:global>
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: swap; src: url('../assets/fonts/space-grotesk-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 500; font-display: swap; src: url('../assets/fonts/space-grotesk-latin-500-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: swap; src: url('../assets/fonts/space-grotesk-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Doto'; font-style: normal; font-weight: 600; font-display: swap; src: url('../assets/fonts/doto-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Doto'; font-style: normal; font-weight: 900; font-display: swap; src: url('../assets/fonts/doto-latin-900-normal.woff2') format('woff2'); }
+
+  /* the tokens of the Pi's web UI ("UV night"), scoped to this page; the light set is the same hues on a pale ground */
+  .sg {
+    --bg: #08071a; --card: #110f28; --border: #2c2950; --control-border: #6a64a0;
+    --text: #eeedff; --label: #bdb9e8; --accent: #9a97ff; --warm: #ff7a5c; --focus: #ffd166;
+    --on-accent: #08071a; --accent-tint: rgba(154, 151, 255, 0.12); --ok: #5fd08a;
+    --card-texture: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    --device: #1d1a42; --device-2: #2f2b58; --screen: #05040f; --screen-lt: #17153a; --pixel: #eeedff;
+    --pcb: #2f8a5c; --sd: #5b8cf0;
+    --radius-card: 0.875rem; --radius-control: 0.5625rem; --target: 2.75rem;
+    --font-ui: 'Space Grotesk', system-ui, sans-serif; --font-dot: 'Doto', 'Space Grotesk', ui-monospace, monospace;
+    /* the card config editor inside takes the page's colours */
+    --sl-color-white: var(--text); --sl-color-gray-1: var(--text); --sl-color-gray-2: var(--label); --sl-color-gray-3: var(--label);
+    --sl-color-gray-4: var(--control-border); --sl-color-gray-5: var(--border); --sl-color-gray-6: var(--card); --sl-color-black: var(--bg);
+    --sl-color-accent: var(--accent); --sl-color-accent-high: var(--accent); --sl-color-accent-low: var(--accent-tint);
+    font-family: var(--font-ui); color: var(--text); color-scheme: dark;
+    max-width: 72rem; margin: 0 auto; padding: 1.25rem; border-radius: var(--radius-card);
+    background: var(--bg); border: 1px solid var(--border);
+  }
+  :root[data-theme='light'] .sg {
+    --bg: #f3f2ff; --card: #ffffff; --border: #d3d0ee; --control-border: #5f59a6;
+    --text: #14122e; --label: #4a4678; --accent: #4a45d6; --warm: #c2411f; --focus: #9a5b00;
+    --on-accent: #ffffff; --accent-tint: rgba(74, 69, 214, 0.09); --ok: #1c7c45;
+    --card-texture: none;
+    --device: #c9c6ea; --device-2: #aeaad9; --screen: #0b0a22; --screen-lt: #ffffff; --pixel: #eeedff;
+    color-scheme: light;
+  }
+  .sg *, .sg *::before, .sg *::after { box-sizing: border-box; }
+  .sg a { color: var(--accent); text-underline-offset: 0.15em; }
+  .sg a:hover { text-decoration-thickness: 2px; }
+  .sg code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; background: var(--accent-tint); padding: 0.05em 0.35em; border-radius: 0.3em; overflow-wrap: anywhere; }
+  .sg :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .sg-label { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--label); margin: 0 0 0.35rem; font-weight: 500; }
+  .sg-head { margin-bottom: 1.25rem; }
+  .sg-title { font-family: var(--font-dot); font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.6rem); line-height: 1.1; margin: 0 0 0.5rem; color: var(--text); letter-spacing: 0; border: 0; }
+  .sg-sub { margin: 0; max-width: 62ch; color: var(--label); font-size: 1rem; line-height: 1.55; }
+
+  .sg-main { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+  .sg-rail { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; position: sticky; top: 1rem; }
+  .sg-step { width: 100%; text-align: left; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.1rem 0.75rem; min-height: var(--target); padding: 0.65rem 0.75rem; cursor: pointer;
+    background: var(--card); background-image: var(--card-texture); background-size: 5px 5px; color: var(--text); font: inherit; border: 1px solid var(--border); border-radius: var(--radius-control); }
+  .sg-step:hover { border-color: var(--control-border); }
+  .sg-n { grid-row: span 2; width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 1.5px solid var(--control-border); display: grid; place-items: center; font-family: var(--font-dot); font-weight: 900; font-size: 1rem; color: var(--label); align-self: center; }
+  .sg-t { font-weight: 700; font-size: 0.9375rem; line-height: 1.25; }
+  .sg-d { color: var(--label); font-size: 0.8125rem; line-height: 1.35; }
+  .sg-step[aria-current='step'] { border: 2px solid var(--accent); background-color: var(--accent-tint); padding: calc(0.65rem - 1px) calc(0.75rem - 1px); }
+  .sg-step[aria-current='step'] .sg-n { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .sg-step.done .sg-n { border-color: var(--ok); color: var(--ok); }
+
+  .sg-work { display: grid; gap: 1rem; min-width: 0; }
+  .sg-stage, .sg-panel, .sg-nav { background: var(--card); background-image: var(--card-texture); background-size: 5px 5px; border: 1px solid var(--border); border-radius: var(--radius-card); }
+  .sg-stage { overflow: hidden; }
+  .sg-stage svg { display: block; width: 100%; height: auto; aspect-ratio: 800 / 460; }
+  .sg-stage .ui { font-family: var(--font-ui); }
+  .sg-stage .px { font-family: var(--font-dot); font-weight: 900; fill: var(--pixel); }
+  .sg-caption { border-top: 1px solid var(--border); padding: 0.85rem 1.1rem 1rem; }
+  .sg-cap-t { margin: 0; font-weight: 700; font-size: 1.15rem; }
+  .sg-cap-d { margin: 0.25rem 0 0; color: var(--label); max-width: 70ch; line-height: 1.5; }
+
+  .sg-panel { padding: 1.1rem 1.25rem 1.25rem; }
+  .sg-panel h2 { margin: 0 0 0.75rem; font-size: 1.35rem; font-weight: 700; display: flex; gap: 0.6rem; align-items: baseline; border: 0; color: var(--text); }
+  .sg-panel h2:focus { outline: none; }
+  .sg-panel h2:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+  .sg-hn { font-family: var(--font-dot); font-weight: 900; color: var(--accent); }
+  .sg-panel p, .sg-panel li { line-height: 1.6; }
+  .sg-panel p { margin: 0 0 0.8rem; }
+  .sg-list { margin: 0 0 0.9rem; padding-left: 1.3rem; display: grid; gap: 0.3rem; }
+  .sg-links { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); list-style: none; padding: 0; }
+  .sg-note { color: var(--label); font-size: 0.9375rem; }
+  .sg-tip { border-left: 3px solid var(--warm); background: color-mix(in srgb, var(--warm) 14%, transparent); padding: 0.6rem 0.85rem; border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+  .sg-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .sg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--target); padding: 0.45rem 1rem; font: 700 0.9375rem var(--font-ui); text-decoration: none; cursor: pointer; text-align: center;
+    color: var(--text); background: transparent; border: 1px solid var(--control-border); border-radius: var(--radius-control); max-width: 100%; overflow-wrap: anywhere; }
+  .sg-btn:hover { border-color: var(--accent); }
+  .sg a.sg-btn { color: var(--text); }
+  .sg-btn-main, .sg a.sg-btn-main { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .sg-btn[disabled] { opacity: 0.4; cursor: default; }
+  .sg-frame { width: 100%; height: 780px; border: 1px solid var(--border); border-radius: var(--radius-control); background: #fff; margin-bottom: 0.8rem; }
+  .sg-size { border: 0; padding: 0; margin: 0 0 1rem; display: grid; gap: 0.5rem; }
+  .sg-size legend { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--label); padding: 0; margin-bottom: 0.5rem; font-weight: 500; }
+  .sg-choice { display: flex; gap: 0.75rem; align-items: flex-start; min-height: var(--target); padding: 0.65rem 0.85rem; border: 1px solid var(--control-border); border-radius: var(--radius-control); cursor: pointer; }
+  .sg-choice small { display: block; color: var(--label); font-size: 0.875rem; line-height: 1.4; }
+  .sg-choice input { margin-top: 0.3rem; accent-color: var(--accent); width: 1.1rem; height: 1.1rem; flex: none; }
+  .sg-choice:has(input:checked) { border: 2px solid var(--accent); background: var(--accent-tint); padding: calc(0.65rem - 1px) calc(0.85rem - 1px); }
+  .sg-choice:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .sg-more { border: 1px solid var(--border); border-radius: var(--radius-control); margin-top: 1rem; }
+  .sg-more summary { cursor: pointer; padding: 0.75rem 1rem; font-weight: 700; min-height: var(--target); }
+  .sg-more-body { padding: 0 1rem 1rem; }
+  .sg-nav { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; }
+  .sg-prog { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .sg-prog i { display: block; height: 100%; width: 0; background: var(--accent); }
+  .sg-foot { margin: 1rem 0 0; color: var(--label); font-size: 0.9375rem; }
+
+  /* the scene: a step fades in; the cable and the card move on a step change */
+  .sg-stage .fade { opacity: 0; transition: opacity 0.3s ease; }
+  .sg-stage .fade.on { opacity: 1; }
+  .sg-stage .cable { fill: none; stroke: var(--label); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; transition: stroke-dashoffset 0.6s ease; }
+  .sg-stage .cable.on { stroke-dashoffset: 0; }
+  #sg-sd { transition: transform 0.6s cubic-bezier(0.6, 0.05, 0.3, 1), opacity 0.3s ease; }
+
+  /* JavaScript on: one panel at a time. Off: every panel shows, one under the other */
+  .sg.sg-js .sg-panel { display: none; }
+  .sg.sg-js .sg-panel.on { display: block; }
+  .sg:not(.sg-js) .sg-nav, .sg:not(.sg-js) .sg-stage .sg-caption { display: none; }
+  .sg:not(.sg-js) .sg-stage .fade { opacity: 1; }
+  .sg:not(.sg-js) .sg-stage { display: none; }
+
+  @media (max-width: 52rem) {
+    .sg { padding: 0.9rem; }
+    .sg-main { grid-template-columns: minmax(0, 1fr); }
+    .sg-rail { position: static; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0.35rem; }
+    .sg-step { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 0.4rem; }
+    .sg-n { grid-row: auto; }
+    .sg-t, .sg-d { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .sg-step[aria-current='step'] { padding: calc(0.4rem - 1px); }
+    .sg-frame { height: 860px; }
+    .sg-panel { padding: 0.9rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sg *, .sg *::before, .sg *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<script>
+  const root = document.getElementById('sg');
+  if (root) {
+    const N = Number(root.dataset.steps);
+    const STEPS = JSON.parse(root.dataset.copy || '[]');
+    const rail = root.querySelectorAll<HTMLButtonElement>('.sg-step');
+    const panels = root.querySelectorAll<HTMLElement>('.sg-panel');
+    const svg = root.querySelector('.sg-stage svg') as SVGSVGElement;
+    const sd = root.querySelector('#sg-sd') as SVGGElement;
+    const capK = root.querySelector('#sg-cap-k') as HTMLElement;
+    const capT = root.querySelector('#sg-cap-t') as HTMLElement;
+    const capD = root.querySelector('#sg-cap-d') as HTMLElement;
+    const bar = root.querySelector('#sg-bar') as HTMLElement;
+    const prev = root.querySelector('#sg-prev') as HTMLButtonElement;
+    const next = root.querySelector('#sg-next') as HTMLButtonElement;
+    let cur = 1;
+
+    function show(n: number, user: boolean) {
+      cur = Math.min(N, Math.max(1, n));
+      svg.querySelectorAll<SVGElement>('[data-on]').forEach((el) => {
+        el.classList.toggle('on', (el.getAttribute('data-on') || '').split(' ').includes(String(cur)));
+      });
+      // the SD card: by the laptop in step 4, in the Pi's slot from step 5
+      sd.setAttribute('transform', cur >= 5 ? 'translate(532 352) rotate(90 14 17)' : 'translate(330 360)');
+      capK.textContent = `Step ${cur} of ${N}`;
+      capT.textContent = STEPS[cur - 1]?.t || '';
+      capD.textContent = STEPS[cur - 1]?.d || '';
+      rail.forEach((b, i) => {
+        if (i + 1 === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+        b.classList.toggle('done', i + 1 < cur);
+      });
+      panels.forEach((p, i) => p.classList.toggle('on', i + 1 === cur));
+      prev.disabled = cur === 1;
+      next.textContent = cur === N ? 'Done' : 'Next';
+      next.disabled = cur === N;
+      bar.style.width = `${(cur / N) * 100}%`;
+      try { history.replaceState(null, '', `#step-${cur}`); } catch (e) { /* a sandboxed frame */ }
+      if (user) {
+        root.querySelector('.sg-stage')?.scrollIntoView({ block: 'start' });
+        (root.querySelector(`#sg-h-${cur}`) as HTMLElement | null)?.focus({ preventScroll: true });
+      }
+    }
+
+    rail.forEach((b, i) => b.addEventListener('click', () => show(i + 1, true)));
+    prev.addEventListener('click', () => show(cur - 1, true));
+    next.addEventListener('click', () => show(cur + 1, true));
+
+    // the screen size picks the image
+    const dl = root.querySelector('#sg-dl') as HTMLAnchorElement;
+    const sha = root.querySelector('#sg-dl-sha') as HTMLAnchorElement;
+    const name = root.querySelector('#sg-dl-name') as HTMLElement;
+    const sceneImg = root.querySelector('#sg-scene-img') as SVGTextElement;
+    root.querySelectorAll<HTMLInputElement>('input[name="sg-res"]').forEach((r) =>
+      r.addEventListener('change', () => {
+        if (!r.checked) return;
+        const file = `sidecar-${dl.dataset.ver}-sd-${r.value}.img.zip`;
+        dl.href = `${dl.dataset.base}${file}`;
+        sha.href = `${dl.dataset.base}${file}.sha256`;
+        name.textContent = file;
+        sceneImg.textContent = file;
+      }),
+    );
+
+    root.classList.add('sg-js');
+    const m = /^#step-(\d)$/.exec(location.hash);
+    show(m ? Number(m[1]) : 1, false);
+    window.addEventListener('hashchange', () => {
+      const h = /^#step-(\d)$/.exec(location.hash);
+      if (h && Number(h[1]) !== cur) show(Number(h[1]), false);
+    });
+  }
+</script>
