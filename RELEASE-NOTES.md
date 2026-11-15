@@ -4,9 +4,7 @@
 
 ## Sidecar 0.5.0
 
-<!-- UNRELEASED: this whole entry is a draft. Before the release, fill in every UNRELEASED mark in it from the release build (file names, zip names, hashes, commit, release-page links), take this mark out and run scripts/check_unreleased.py. -->
-
-**The SAMPLER machine, CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, two more LFOs on each Rytm track, user send effects (PHASER, BBD, NIMBUS and GALACTIC), a new web page, updating from the web page, and a fix for clipping voices.** It comes with the **Rytm firmware 0.5.0**, built for **OS 1.74 only**: from 0.5.0 on the Rytm needs OS 1.74, and there is no 0.5.0 build for OS 1.73. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. <!-- UNRELEASED: check the A4 mod and Mini lines against the release. -->
+**The SAMPLER machine, CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, two more LFOs on each Rytm track, user send effects (PHASER, BBD, NIMBUS and GALACTIC), a new web page, updating from the web page, and a fix for clipping voices.** It comes with the **Rytm firmware 0.5.0**, built for **OS 1.74 only**: from 0.5.0 on the Rytm needs OS 1.74, and there is no 0.5.0 build for OS 1.73. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
 
 ### Good to know
 
@@ -15,17 +13,17 @@
 
 | Part | File |
 |---|---|
-| Rytm firmware, OS 1.74 only | the 0.5.0 `.elemod` files (elekloader, GPL-2.0-or-later), or the 0.5.0 build in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware <!-- UNRELEASED: the .elemod names, the patcher build name and the .syx SHA-256 --> |
-| SD card image (new card) | `sidecar-<version>-sd-800x480.img.zip` and `sidecar-<version>-sd-1024x600.img.zip`, each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)) <!-- UNRELEASED: the image names with their hashes --> |
-| Release zip | `sidecar-<version>.zip`: both images, the card files, the Rytm `.elemod` files (no `.syx`), the manual, a quick start <!-- UNRELEASED: the zip name and hash --> |
-| Card files (copy by hand) | the 800x480 and 1024x600 card zips, each with its `.sha256`; `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) <!-- UNRELEASED: the zip names with the release commit --> |
-| Update file (Pi 4 and Pi 5) | `sidecar-<version>.scu`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) <!-- UNRELEASED: the file name and its .sha256 --> |
-| User machines (Pi) | <!-- UNRELEASED: the plugins zip name and what it holds --> |
-| Starter content | <!-- UNRELEASED: the zip name --> |
-| User manual | <!-- UNRELEASED: the manual's name and link --> |
+| Rytm firmware, OS 1.74 only | the 0.5.0 `.elemod` files (elekloader, GPL-2.0-or-later), or the 0.5.0 build in the browser patcher, from Elektron's stock `Analog-Rytm_MKII_OS1.74.syx` ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share a built `.syx`: it holds Elektron's firmware. The files: `core-0.1-os1.74.elemod` (`89c00065…`) and `rytm-sidecar-0.5.0-os1.74.elemod` (`328cecb3…`); the patcher build `rel0-5-0-os1.74`; the built `Analog-Rytm_MKII_OS1.74_rel0-5-0.syx` has SHA-256 `17bcca0119c97676567018f1f42c5f1206948bf632f0444410dd69caa6649514` |
+| SD card image (new card) | `sidecar-0.5.0-sd-800x480.img.zip` (SHA-256 `1e99a38d8c555f4ed731e18069730c24aff0fc7858172c81044a9498bfa99104`) and `sidecar-0.5.0-sd-1024x600.img.zip` (`fa690813dfef28d02551a485f2774328f2dcb2d88b7fc48fa5745cdb2f39b555`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)) |
+| Release zip | `sidecar-0.5.0.zip` (SHA-256 `cd00ff1dfbc33c26d4cb41a64f44b88826689050725d9e202195f45956fce1c5`): both images, the card files, the Rytm `.elemod` files (no `.syx`), the manual, a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.0-06801ee-800x480.zip` and `sidecar-pi-sd-0.5.0-06801ee-1024x600.zip`, each with its `.sha256`, or the starter zip `sidecar-0.5.0-starter.zip` (the 800x480 card files with the user machines, the starter content and demo samples); `BUILD-INFO-pi.txt` names the commit and both kernels ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Update file (Pi 4 and Pi 5) | `sidecar-0.5.0.scu` (SHA-256 `4464b443207139670a4c36a9bd8473759497b6142618a435d4e9ce90922eb6a1`), for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.0.zip`: the 0.4.4 machines (the six starters, NUSAW, VOX, HUSH1, RAFFO, SOPHIE, MODEL E), plus MIST and the user effects PHASER, BBD, NIMBUS and GALACTIC (Plugin API 3) |
+| Starter content | `sidecar-content-0.5.0.zip`: the JUNO and DX7 patches (also on the card) |
+| User manual | `Sidecar-0.5.0-User-Manual.pdf`, on the [Sidecar 0.5.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0) |
 | Checksums | `SHA256SUMS` on each release page |
 
-Downloads: <!-- UNRELEASED: the release-page links for sidecar-firmware and sidecar-mods --> the sidecar-firmware and sidecar-mods 0.5.0 releases.
+Downloads: the [sidecar-firmware 0.5.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0) (the Pi side, the images, the release zip) and the [sidecar-mods 0.5.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.0) (the Rytm firmware's `.elemod` files and their source).
 
 ### Upgrading from 0.4.4
 
@@ -53,7 +51,7 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 **Install**
 
 - **Set up Sidecar, one page.** A step-by-step page with the whole setup in it: the stock OS, the patcher, flashing, the SD card image for your screen with the card config editor, connecting and playing ([Set up Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/setup/)).
-- **SD card images.** One ready card image for each screen size (800x480 and 1024x600), written with Raspberry Pi Imager or balenaEtcher: no formatting, no copying. The image grows to fill the card on its first boot (SD grow, below). The release zip `sidecar-<version>.zip` holds everything: both images, the card files for copying by hand, the Rytm `.elemod` files (never a `.syx`) with the patcher link, the manual and a quick start. The images are also separate downloads ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)).
+- **SD card images.** One ready card image for each screen size (800x480 and 1024x600), written with Raspberry Pi Imager or balenaEtcher: no formatting, no copying. The image grows to fill the card on its first boot (SD grow, below). The release zip `sidecar-0.5.0.zip` holds everything: both images, the card files for copying by hand, the Rytm `.elemod` files (never a `.syx`) with the patcher link, the manual and a quick start. The images are also separate downloads ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/#make-the-sd-card)).
 
 **FILL**
 

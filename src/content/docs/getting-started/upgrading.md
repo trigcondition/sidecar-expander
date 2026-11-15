@@ -13,7 +13,7 @@ This page is for a Sidecar that already runs. For a new one, use [Set up Sidecar
 
 1. **Back up the Rytm's projects** with Transfer. The Rytm must run **OS 1.74**. If it runs an older OS, install Elektron's stock OS 1.74 first ([Recovery to stock](/sidecar-expander/getting-started/recovery/) has the stock files).
 2. **Flash the Rytm firmware 0.5.0** with the patcher ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
-3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.0 release, and check them against their `.sha256`. The release zip `sidecar-<version>.zip` holds them under "Card files". <!-- UNRELEASED: check the names of the card files and the release zip -->
+3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.0 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.0-06801ee-800x480.zip` and `sidecar-pi-sd-0.5.0-06801ee-1024x600.zip`; the release zip `sidecar-0.5.0.zip` holds them too, under "Card files".
 4. **Switch the Pi off, put its SD card in your computer, unzip the card files and copy everything over the card's top level, replacing files.**
    - This includes the **hidden folder `.rytm`**. The Mac's Finder hides it: press Cmd+Shift+. to show it. On Windows turn on "Hidden items" in the Explorer's View menu.
    - Your samples, recordings, `/Plugins/` and the settings in `/.rytm` stay. The new `/.rytm/www-next` folder (the new web page) is added.
@@ -28,7 +28,7 @@ A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.0 card, without 
 
 ## From 0.5.0 onward
 
-1. Download the release's `sidecar-<version>.scu` update file.
+1. Download the release's `sidecar-0.5.0.scu` update file.
 2. Open the web page, **Settings > Update**, and pick the file. It updates the firmware and the web page together ([Updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
 3. When the page says "Updated", reload it.
 
