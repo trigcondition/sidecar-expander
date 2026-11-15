@@ -9,14 +9,14 @@
 // - sidecar-wifi.txt: pi/engine/wifi_conf.cpp parse_import / check_join (docs/pi-engine.md "Wi-Fi without a cable").
 // Nothing here is stored anywhere: the page keeps the options in memory only.
 
-// the release's card (RELEASE: set commit to the 0.5.0 release commit)
-export const CARD = { version: '0.5.0', commit: null, cmdline: 'sdport=0 socmaxtemp=78' };
+// the release's card (0.5.0, release commit 06801ee)
+export const CARD = { version: '0.5.0', commit: '06801ee', cmdline: 'sdport=0 socmaxtemp=78' };
 
 // The Sidecar versions the editor writes for. A key is written only for a version that reads it (KEYS' since). 0.5.0:
 // the 0.5.0 line (sidecar-firmware merge/050-features ea80c4f); its card scripts write the same default files as 0.4.4.
 export const VERSIONS = [
   { id: '0.4.4', label: '0.4.4', note: 'older', commit: '05c4818', cmdline: 'sdport=0 socmaxtemp=78' },
-  { id: '0.5.0', label: '0.5.0', note: 'the current release', commit: null,  // RELEASE: the release commit
+  { id: '0.5.0', label: '0.5.0', note: 'the current release', commit: '06801ee',  // the 0.5.0 release commit
     cmdline: 'sdport=0 socmaxtemp=78' },
 ];
 const vIndex = (v) => VERSIONS.findIndex((x) => x.id === v);
