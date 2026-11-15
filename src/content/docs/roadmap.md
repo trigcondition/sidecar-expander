@@ -84,11 +84,48 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 
 A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes](/sidecar-expander/release-notes/#sidecar-043)): the **CHRO pads play from the first hit** on a selected poly track.
 
-## Then: 0.5.0 and later
+## Released: 0.5.0
 
-Planned, in no fixed order. The looper, sidechain, morph scenes and the learn rows of the MIDI page moved from 0.5.0 to **0.5.1**:
+([Release notes](/sidecar-expander/release-notes/)) New machines, sample tools, effects and a new setup:
 
-- **The "Octa release" (0.5.1):** morph scenes and the Rytm's PERF macros on Sidecar, sequencer and master FX parameters, a crossfader between scenes (the Rytm's knob, the touchscreen, a USB MIDI controller), live sampling, and a master looper for the Octatrack-style transition trick.
+- **[SAMPLER](/sidecar-expander/using/machines/#sampler), [CHOP](/sidecar-expander/using/chop/) and [SAMPLE EDIT](/sidecar-expander/using/sample-edit/):** a Digitakt-style sample player, one sample cut into up to 64 slices, and an editor for the sample pool (crop, normalise, fades, reverse, undo). The sample browser previews and quick-loads ([Pools](/sidecar-expander/using/pools/)).
+- **[FILL](/sidecar-expander/using/fill/):** p-lock a track's trigs with a run of values, in order or at random, saved with the pattern.
+- **[User effects](/sidecar-expander/using/user-effects/):** four user send FX slots (UFX1..UFX4) per project with PHASER, BBD, NIMBUS and GALACTIC, send FX types on the buses and the master, and BASE and WIDTH on the send FX returns ([Send effects](/sidecar-expander/using/send-effects/)). [MIST](/sidecar-expander/using/mist/), a texture user machine.
+- **[The Rytm's own parameters](/sidecar-expander/using/rytm-params/):** Sidecar's LFOs, the XY pad and MIDI learn move the Rytm's own sound parameters, with [two LFOs on each Rytm track](/sidecar-expander/using/lfo/).
+- **Setup and updates:** a ready-made SD card image, the [Set up Sidecar](/sidecar-expander/getting-started/setup/) page, the card config editor, [updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050), the new web page with a live WebSocket API, and the USB-C network on the Pi 5.
+- **A new look and feel:** the SIDECAR theme on the touchscreen and the same look on the web page ([Touchscreen](/sidecar-expander/using/touchscreen/)), knobs that snap to their centre, bigger steps with FUNC, [MIDI settings](/sidecar-expander/using/midi-settings/) and the [Pi 5's fan](/sidecar-expander/using/pi5-fan/).
+- **Fixes:** Sidecar voices no longer clip (about 9 dB lower, with a soft limit), and more ([Fixed in 0.5.0](/sidecar-expander/release-notes/)).
+
+## Next: 0.5.1
+
+Planned for 0.5.1. They moved out of 0.5.0 so that 0.5.0 could ship sooner. Nothing here is a promise of a date:
+
+- **The looper:** a master looper for the Octatrack-style transition trick, with live sampling.
+- **Sidechain:** PUMP and DUCK, the Sidecar's sidechain effects.
+- **Morph v2, and the morph fader back.** The MORPH page (UP + T14), its scenes and the crossfader are hidden in 0.5.0. Projects that use them keep their settings. Morph v2 adds the Rytm's PERF macros and scenes on Sidecar, sequencer and master FX parameters.
+- **The learn rows on the MIDI page:** learn the morph fader and scenes from a MIDI controller.
+- **Poly tracks up to 16 bars** (8 today).
+- **Encoder sensitivity:** a share of a turn per value, and slower 0..127 knobs, as on the Rytm's own.
+- **BASE and WIDTH drawn like the stock send FX's filter graphic** on the Rytm's screen.
+- **Remove the old TRK shortcut code** from the Rytm firmware (optional; the Sidecar no longer uses it).
+
+## Later: planned and being explored
+
+Ideas and plans, not scheduled. "Being explored" means a design or a test exists, not that it will ship.
+
+- **Sidecar send FX instead of the Rytm's own reverb and delay** (planned, as part of a later overhaul of the stock firmware to make headroom). A delay slot and a reverb slot, each with several types: lush new ones by default, and recreations of the stock delay and reverb for those who want the stock sound. Plus two general send slots that hold any effect, or a chain of effects if the Pi has the CPU for it. Open: the CPU budget on a Pi 4 and a Pi 5, how the Rytm's sends and FX track map to the slots, and how this sits with the user effects and the bus send FX.
+- **The reverse of the Rytm's own parameters** (planned): the Rytm's LFOs, scenes and PERF macros reaching the Sidecar's parameters.
+- **Insert FX on the analog voices** (planned): the Rytm tracks' own audio through the Sidecar's inserts.
+- **P-locks on send FX 1 and 2 separately** (being explored).
+- **Song arrangement and a mix view** (being explored): arrange the song from patterns, a mix view that shows clashes, and an export of the stems as a ready project, in the web UI and a later desktop app.
+- **Touch-editable dials** on the touchscreen (planned): drag a dial to change it.
+- **A friendlier AUTO-SAMPLER form** on the web page, with pickers for source, notes and layers (planned).
+- **A graphic LFO page** on the Rytm's screen and the touchscreen (planned).
+- **Convert a Rytm project that uses Rytm samples** into a Sidecar project that plays them on the SAMPLER (being explored).
+- **A common look for the pages the Sidecar draws on the Rytm's screen** (designed): one set of page templates. Parts of it need a new Rytm firmware flash.
+- **More user machines and effects** (being explored): a TB-303-style bass, a Virus-style synth that loads your own Virus presets (never Access's factory banks), the LXR-02 drum engine (its firmware is open source), and more of the open-source Mutable Instruments code: Elements, Rings as a machine, Clouds, Warps, Marbles and others, each with its licence checked first.
+- **A tester page in the web UI** (planned): install beta builds over the air and build the Rytm firmware in the browser from your own stock OS.
+- **Reclaim the Rytm's sample memory per project** (research): in a project that uses no Rytm samples, use that memory for data the Pi can rebuild.
 - **PERF mode, like the Analog Four MKII's:** a mode for playing live. The DATA ENTRY knobs play the PERF macros, the pads pick scenes, FUNC + QPERF morphs between scenes and QPERF alone stays the QPERF macro. Trig keys 1 to 12 mute the twelve tracks and RTRG + a trig key solos one. Trig keys 13 to 16 are your own macros, toggle or momentary: hold one and turn the LEVEL/DATA knob to set its parameters.
 - **Temp save:** FUNC + YES saves the active pattern and its kit, the Sidecar's tracks, steps and scenes with them; FUNC + NO brings both back, so you can try something and return to where you were.
 - **FREEZE:** an analog track auto-sampled into a multisample poly track (2 round robins per note).
@@ -126,8 +163,7 @@ Designed, with parts built.
 - **The machine catalogue.** Project bundles are in 0.3.0; next, a catalogue of machines and effects that finds what a shared project is missing.
 - **The Sidecar Manager / remote UI M2.** A Rytm menu item that turns on what management needs (Wi-Fi, the web server, file access) and turns it off again for performing; richer remote pages for the send FX, user machines and the sample browser.
 - **Borrow a voice for shared tracks.** The Rytm's paired tracks (RS/CP, MT/HT, CH/OH, CY/CB) share one analog voice and choke each other. A Sidecar voice could play one track of a pair, so both sound at once.
-- **User effects (UFX1..UFX4):** loadable send effects, per project, like user machines.
-- **New send effects:** Clouds-style granular texture, a BBD delay, and amp modelling with NAM captures.
+- **More send effects:** a Clouds-style granular texture (BBD is in 0.5.0, amp modelling with NAM captures is an insert).
 - **Real Overbridge through the Sidecar (opt-in).** The Sidecar forwards the instrument's own Overbridge traffic to your computer and presents itself as the connected instrument, so the official Overbridge software works through it while the Sidecar keeps adding its voices and effects. Nothing is stored in the Sidecar: it mirrors the identity of whatever is plugged into its host port at runtime. Off by default, enabled in the settings behind a clear warning (unofficial; Overbridge updates may break it; firmware updates are blocked through it). The class-compliant multichannel mode stays the default.
 
 ## Later
