@@ -12,7 +12,7 @@ description: "Sidecar 0.5.0 (the SAMPLER machine, CHOP, SAMPLE EDIT, FILL, MIST,
 ### Good to know
 
 - **Sidecar voices are about 9 dB quieter than in 0.4.x.** Voices clipped at the Rytm's track ceiling, so every Sidecar voice now plays 9 dB lower, with a soft limit at the ceiling. A sound you balanced against the Rytm's own voices may need a new balance.
-- **MORPH and the looper are not in 0.5.0.** They arrive in **0.5.1**, with sidechain (PUMP and DUCK), the learn rows on the MIDI page and a new version of morph. The MORPH page (UP + T14) is hidden in 0.5.0: UP + T14 stays the Rytm's own key. **A project that uses the Sidecar's morph keeps its settings** (the scenes stay in the project's files), and they work again in 0.5.1.
+- **MORPH and the looper are not in 0.5.0.** They arrive in **0.5.1**, with sidechain (PUMP and DUCK), the learn rows on the MIDI page and a new version of morph. The MORPH page is hidden in 0.5.0: UP + T14 shows "MORPH: 0.5.1". **A project that uses the Sidecar's morph keeps its settings** (the scenes stay in the project's files), and they work again in 0.5.1.
 
 | Part | File |
 |---|---|
