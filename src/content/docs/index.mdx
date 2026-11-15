@@ -59,7 +59,7 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
   <p class="sc-big" translate="no">Sidecar</p>
   <div class="sc-rule">EXPANDER</div>
   <p class="sc-tag">More voices, effects, LFOs, recording and pages for the Analog Rytm MKII and the Analog Four MKII, played and edited from the box itself.</p>
-  <p class="sc-version">Version 0.4.4 · public tester release · Pi 4B and Pi 5</p>
+  <p class="sc-version">Version 0.5.0 · public tester release · Pi 5 and Pi 4B</p>
   <div class="sc-cta">
     <a class="sc-btn primary" href="/sidecar-expander/getting-started/start-here/">Get started</a>
     <a class="sc-btn" href="#features">What it does</a>
@@ -68,13 +68,13 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 
 <Diagram piOnly />
 
-<p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 4B or Pi 5, plus a set of mods to the Rytm's OS 1.74 or 1.73. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
+<p class="sc-lede">A small computer on the Rytm's USB port, a Raspberry Pi 5 or Pi 4B, plus a set of mods to the Rytm's OS 1.74. The Sidecar's voices come back on the Rytm's own tracks, through its analog filters and amps, and its effects sit beside the Rytm's delay and reverb.</p>
 
 <p class="sc-lede"><b>No screen needed.</b> The Rytm's own screen and keys drive everything: the Sidecar draws its pages on the Rytm's display, and holding UP shows the map of every shortcut. The web page on a phone or laptop covers setup. A touchscreen is an optional extra for the piano roll, the scope and the status at a glance.</p>
 
 <div id="video" class="sc-video">
   <p class="sc-video-title">Watch the introduction</p>
-  <p class="sc-lede">The video shows the workflow and the features of Sidecar 0.4.4, in about 20 minutes.</p>
+  <p class="sc-lede">The video shows the workflow and the features of Sidecar 0.4.4 (an earlier release), in about 20 minutes. 0.5.0 adds more: see the release notes.</p>
   <iframe src="https://www.youtube-nocookie.com/embed/b10zwIORtgU" title="Sidecar introduction video" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   <p class="sc-note">Embed blocked? Watch it on YouTube: <a href="https://www.youtube.com/watch?v=b10zwIORtgU">www.youtube.com/watch?v=b10zwIORtgU</a></p>
 </div>
@@ -90,12 +90,12 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
   <p>Pick PLAITS, JUNO, 6-OP FM, DAISYSP, MD or DSP SAMPLE in a track's machine list, like any Rytm machine. DSP SAMPLE plays from the Sidecar's card, with slices, loops and a granular mode. Five user slots load machine plugins: six starter machines come with the release.</p>
 </Feature>
 
-<Feature flip kicker="Send effects" title="Two send effects next to the Rytm's own" href="/sidecar-expander/using/send-effects/" shots={[
+<Feature flip kicker="Send effects" title="Send effects next to the Rytm's own" href="/sidecar-expander/using/send-effects/" shots={[
   { src: halo, alt: 'SEND FX 1 set to HALO with DCY, MOD, TONE, SHIM', pixel: true },
   { src: rings, alt: 'SEND FX 1 set to RINGS', pixel: true },
   { src: stutter, alt: 'SEND FX 2 set to STUTTER', pixel: true },
 ]}>
-  <p>Every track gets two more sends. <b>HALO</b>, a lush plate with FREEZE and SHIMMER, runs on both Sidecars with CHORUS, COMB, CRUSH and RINGMOD; the Pi adds RINGS, CLOUD SEED, STUTTER and, new in 0.3.0, <a href="/sidecar-expander/using/send-effects/#space-pi"><b>SPACE</b></a>: a three-head tape echo with spring reverb, wow and flutter, synced to the Rytm, that runs away into dub throws. Each effect's knobs carry their own names on the Rytm's pages, and PRE / POST decides whether the return goes through the Rytm's analog distortion and compressor.</p>
+  <p>Every track gets two more sends (and 0.5.0 adds user effects: see below). <b>HALO</b>, a lush plate with FREEZE and SHIMMER, runs on both Sidecars with CHORUS, COMB, CRUSH and RINGMOD; the Pi adds RINGS, CLOUD SEED, STUTTER and, new in 0.3.0, <a href="/sidecar-expander/using/send-effects/#space-pi"><b>SPACE</b></a>: a three-head tape echo with spring reverb, wow and flutter, synced to the Rytm, that runs away into dub throws. Each effect's knobs carry their own names on the Rytm's pages, and PRE / POST decides whether the return goes through the Rytm's analog distortion and compressor.</p>
 </Feature>
 
 <Feature kicker="On the Rytm's screen" title="Pages the Sidecar draws for you" href="/sidecar-expander/using/rytm-side/#the-remote-ui" shots={[
@@ -210,17 +210,38 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
   <p>On an Analog Four MKII a track's sound picks a Sidecar machine. Its trigs and knobs go to the Sidecar, and the machine comes back into that voice's own analog filters, overdrive, amp and FX: PLAITS or JUNO through the A4's analog path. Chords on any track, locks and LFOs on the machine's knobs, and the Sidecar's pages on the A4's screen with UP + YES.</p>
 </Feature>
 
+<Feature flip kicker="User effects · 0.5.0" title="Your own send effects: PHASER, BBD, NIMBUS, GALACTIC" href="/sidecar-expander/using/user-effects/" more="User effects" shots={[]}>
+  <p>Four user send FX slots (UFX1..UFX4) in every project, plugins for the Pi: <b>PHASER</b>, <b>BBD</b>, <b>NIMBUS</b>, an ensemble reverb whose pad follows the harmony you send, and <b>GALACTIC</b>, Airwindows' endless wash. The Rytm shows their own knob names. Send FX types now also sit on the buses B1..B3 as well as the master, and <a href="/sidecar-expander/using/send-effects/">BASE and WIDTH</a> shape each return as a band.</p>
+</Feature>
+
+<Feature kicker="Samples · 0.5.0" title="SAMPLER and SAMPLE EDIT" href="/sidecar-expander/using/sample-edit/" more="SAMPLE EDIT" shots={[]}>
+  <p>The <a href="/sidecar-expander/using/machines/#sampler">SAMPLER</a> machine is a Digitakt-style sample player next to DSP SAMPLE. <b>SAMPLE EDIT</b> is a small editor for the pool: crop, normalise, trim, fades, reverse, gain and undo, and it saves a new file, never over the original. The sample browser also previews while you browse (FUNC + YES) and quick-loads.</p>
+</Feature>
+
+<Feature flip kicker="FILL · 0.5.0" title="Fill a track's trigs with a run of values" href="/sidecar-expander/using/fill/" shots={[]}>
+  <p>UP + RIGHT opens FILL: p-lock the sample, engine, preset or velocity of the selected track's trigs with a range of values, in order, backwards or at random, like the fill functions of a tracker. Undo it with FUNC + NO. A fill is kept in the pattern the Rytm stores, so it survives a power-off.</p>
+</Feature>
+
+<Feature kicker="Modulation · 0.5.0" title="Modulate the Rytm's own sound" href="/sidecar-expander/using/rytm-params/" more="The Rytm's own parameters" shots={[]}>
+  <p>The Sidecar's LFOs, the XY pad and MIDI learn can now move the Rytm's own filter, amp, LFO, synth, sample and FX parameters, on top of the knob's value: a kit you save keeps the knob. There are 26 LFOs on the Pi, <a href="/sidecar-expander/using/lfo/">two more on each Rytm track</a>, and an XY pad on the touchscreen with up to four targets per axis.</p>
+</Feature>
+
+<Feature flip kicker="Setup and updates · 0.5.0" title="Set up in one page, update from the browser" href="/sidecar-expander/getting-started/setup/" more="Set up Sidecar" shots={[]}>
+  <p>A ready-made <b>SD card image</b> for your screen size replaces formatting and copying, and the <a href="/sidecar-expander/getting-started/setup/">Set up Sidecar</a> page walks through everything: the shopping list, the patcher, the image and the card config editor. Update the Pi from its <a href="/sidecar-expander/using/web-ui/#updating-from-the-web-page-050">web page</a>, with an automatic fallback if the new version does not start. The web page is new and faster, with a live WebSocket API, and the Pi 5 can serve it over the USB-C cable.</p>
+</Feature>
+
 </div>
 
 <p class="sc-note">Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the <a href="/sidecar-expander/0.2/introduction/pi-vs-teensy/">0.2 docs</a>.</p>
 
 <ul class="sc-links">
   <li><a href="/sidecar-expander/introduction/what-is-sidecar/"><b>Read me first</b><small>what it is, what works, risks</small></a></li>
+  <li><a href="/sidecar-expander/getting-started/setup/"><b>Set up Sidecar</b><small>the whole setup on one page</small></a></li>
   <li><a href="/sidecar-expander/introduction/what-works-now/"><b>What works now</b><small>tested on hardware or in testing</small></a></li>
   <li><a href="/sidecar-expander/patcher/"><b>Rytm patcher</b><small>patch your own OS file, in the browser</small></a></li>
-  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4"><b>Downloads</b><small>the Sidecar 0.4.4 SD cards</small></a></li>
-  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf"><b>User manual</b><small>the 0.4.4 manual as a PDF</small></a></li>
-  <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.4.4</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0"><b>Downloads</b><small>the Sidecar 0.5.0 SD card images</small></a></li>
+  <li><a href="https://github.com/trigcondition/sidecar-firmware/releases/download/v0.5.0/Sidecar-0.5.0-User-Manual.pdf"><b>User manual</b><small>the 0.5.0 manual as a PDF</small></a></li>
+  <li><a href="/sidecar-expander/release-notes/"><b>Release notes</b><small>0.5.0</small></a></li>
   <li><a href="/sidecar-expander/using/sequencer/"><b>Poly mode</b><small>the Sidecar sequencer (0.3.0)</small></a></li>
   <li><a href="/sidecar-expander/using/key-combinations/"><b>Key combinations</b><small>every combo in one table (0.3.0)</small></a></li>
   <li><a href="/sidecar-expander/developers/digitakt/"><b>Digitakt</b><small>experimental, emulator only (0.3.2)</small></a></li>
@@ -230,6 +251,8 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
   <li><a href="https://github.com/trigcondition/sidecar-expander/issues/new/choose"><b>Tester report</b><small>feedback and bugs</small></a></li>
   <li><a href="/sidecar-expander/about/community/"><b>Discord</b><small>the community server: help, ideas, sharing</small></a></li>
 </ul>
+
+<p class="sc-note">New in 0.5.0, with the Rytm firmware 0.5.0 (OS 1.74 only): user send effects (PHASER, BBD, NIMBUS, GALACTIC), the SAMPLER machine and SAMPLE EDIT, FILL, the Rytm's own parameters on the XY pad and MIDI learn, a ready-made SD card image, and updating from the web page. Sidecar voices are about 9 dB quieter than in 0.4.x. See the <a href="/sidecar-expander/release-notes/">release notes</a>.</p>
 
 <p class="sc-note">New in 0.4.4, with the Rytm firmware 0.4.4: a held step's values on the <a href="/sidecar-expander/using/rytm-side/#the-src-view">SRC view</a>, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page opened by its shortcut, and the CONNECTED screen when the Rytm boots after the Sidecar. See the <a href="/sidecar-expander/release-notes/#sidecar-044">release notes</a>.</p>
 
@@ -243,6 +266,6 @@ import mfxTouch from '../../assets/touch/oled-mfx-through.png';
 
 <p class="sc-note">0.3.2 added experimental <a href="/sidecar-expander/developers/digitakt/">Digitakt</a> support (emulator only) and the Touch Display 2 on the Pi 5.</p>
 
-<p class="sc-note">Sidecar 0.4.4 uses the Rytm firmware 0.4.4, which runs on Analog Rytm MKII OS 1.74 and OS 1.73. The Analog Four MKII runs on OS 1.56.</p>
+<p class="sc-note">Sidecar 0.5.0 uses the Rytm firmware 0.5.0, which runs on Analog Rytm MKII OS 1.74 only. The Analog Four MKII runs on OS 1.56.</p>
 
 <p class="sc-note">Unofficial tester release, not affiliated with or endorsed by the maker of the Analog Rytm; "Analog Rytm", "Analog Four", "Digitakt" and "Overbridge" are their trademarks, used only to say what this works with. Nothing you open here uploads your files. Code under the GNU GPL; see the <a href="/sidecar-expander/about/licence/">licence page</a> and the <a href="https://github.com/trigcondition/sidecar-expander/blob/main/THIRD_PARTY_LICENSES">third-party licences</a>.</p>

@@ -7,6 +7,10 @@ sidebar:
 
 The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.4.4, for Sidecar 0.4.4, has two builds of the same mods, one for **OS 1.74** and one for **OS 1.73**. We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
 
+:::note
+Sidecar 0.5.0 comes with the Rytm firmware 0.5.0, built for **OS 1.74 only**. The builds, names and hashes below are those of the Rytm firmware 0.4.4 (the patcher's current default build); the 0.5.0 build is added at release. {/* UNRELEASED: the 0.5.0 patcher build, its name and hashes */}
+:::
+
 :::caution
 Back up first: use Transfer to back up your projects, kits, sounds and samples. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you flash.
 :::

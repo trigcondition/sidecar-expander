@@ -16,8 +16,8 @@ sidebar:
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | In CHRO mode every pad plays the same note on a Sidecar machine or a poly track | the track's sound: **CHROMATIC** on SYNTH or SYN+SMP (FUNC + FLTR); on OFF or SAMPLE the Rytm sends no pitch. A sound keeps the setting when its machine changes, so one track can be off while others work. Also check the track's arpeggiator is off. The MD drums take no pitch from the pads: tune them with PTCH |
 | Chords held on the CHRO pads play one note, or the CHRO pads play nothing on a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB. (Before 0.4.3 the first hit after selecting a poly track could be silent: update the card.) |
-| In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4: before, those pages took UP / DOWN |
-| No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
+| In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4 or later: before, those pages took UP / DOWN |
+| No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4 or later: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
 | The CHRO pads enter no notes into a held step on a poly track (JUNO, DAISYSP, PLAITS) | the pads enter notes only in **CHRO pad mode**: the CHRO key must be lit. The sound's CHROMATIC setting does not decide it. Update the card to 0.5.0: before, JUNO, DAISYSP and PLAITS poly tracks took no pad notes, and live recording missed them |
 | A poly track on JUNO sounds late, or a chord swells in late | a slow JUNO attack (**ATK**) does it: try ATK 0. Also check that the poly track's **LENGTH** and **SPEED** match the Rytm track's |
 | A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
@@ -80,7 +80,7 @@ The releases' own lists are in the release notes: [0.4.4](/sidecar-expander/rele
 ### Rytm mods
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
-- **OS 1.74 and 1.73 only.** There is one build for each. The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
+- **OS 1.74 only (0.5.0).** Sidecar 0.5.0 has one build, for OS 1.74 (0.4.4 and older also had one for 1.73). The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 

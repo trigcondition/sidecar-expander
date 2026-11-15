@@ -7,7 +7,7 @@ sidebar:
 
 ## On the Rytm side
 
-- An **Analog Rytm MKII on OS 1.74 or OS 1.73**. There is one build of the mods for each, built against that exact OS; elekloader refuses a module made for another OS. The 1.74 build has run on a real Rytm.
+- An **Analog Rytm MKII on OS 1.74**. Sidecar 0.5.0 is built for OS 1.74 only; elekloader refuses a module made for another OS. (Sidecar 0.4.4 and older also have a build for OS 1.73.)
   - An older OS: update to 1.74 first (Elektron offers only 1.74 now).
   - You can move between 1.73 and 1.74 in both directions with Elektron's stock files (Elektron offers only 1.74 now, so keep your own copy of 1.73 if you want it): see [Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173).
   - A newer OS than 1.74: not supported yet.
