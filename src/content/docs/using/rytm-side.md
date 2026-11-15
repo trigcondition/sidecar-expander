@@ -191,7 +191,7 @@ On a track that plays a Sidecar machine with a page, the Rytm's **own SRC page**
 
 - Other machines, and analog tracks, show the stock SRC page.
 - The stock machine list, popups and holding BANK show the stock screen while they are up.
-- **TRK (0.5.0).** The Sidecar no longer catches TRK: it is the Rytm's own key. On a Sidecar page, holding TRK lights the current track's pad, as on the stock Rytm. **TRK + pad** selects a track. SEQ, INSERT, ARP and POLY follow the new track. On a track that plays a Rytm synth they close back to the Rytm. On a Sidecar track that is not a sequencer track yet, SEQ offers to make it one. LFO, INSERT's bus view and the global pages stay open. A page also closes when a pattern or kit load moves the selection onto a Rytm-synth track.
+- **TRK (0.5.0).** The Sidecar no longer catches TRK: it is the Rytm's own key. On a Sidecar page, holding TRK lights the current track's pad, as on the stock Rytm. **TRK + pad** selects a track, and so does a plain pad press, as on the Rytm. Track pages never close by themselves: on any track selection SEQ, INSERT, ARP and POLY follow to the new track. On a track that plays a Rytm synth they stay open and show that the track has no Sidecar voice. On a Sidecar track that is not a sequencer track yet, SEQ offers to make it one. LFO, INSERT's bus view and the global pages stay open.
 - Leaving SRC shows the stock page again; UP + YES opens the remote pages as usual and takes precedence.
 - When the Sidecar goes away, the stock SRC page is back within about a second.
 - On the SRC page and SMPL page 2, user-machine knobs the machine does not use show as hatched boxes, like the Rytm's own unused knobs.

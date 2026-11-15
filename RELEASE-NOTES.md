@@ -74,7 +74,7 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 - **Knobs snap to their centre.** Pan, EQ, tone and LFO depth stop at their middle: turn a few more clicks to leave it.
 - **FUNC + turn takes bigger steps.** It moves a knob in larger steps, and TUN by an octave.
 - **Holding UP scrolls a list** instead of opening the shortcut map, on the pages whose rows UP and DOWN move.
-- **TRK is the Rytm's own key again.** The Sidecar no longer catches it. Holding TRK on a Sidecar page lights the current track's pad, as on the stock Rytm, and **TRK + pad** selects a track: SEQ, INSERT, ARP and POLY follow the new track, or close back to the Rytm on a track that plays a Rytm synth. The first version's track shortcuts **TRK + YES, TRK + TRIG, TRK + LFO and TRK + FX are gone**: UP + the same key does each of them ([Key combinations](https://trigcondition.github.io/sidecar-expander/using/key-combinations/)).
+- **TRK is the Rytm's own key again.** The Sidecar no longer catches it. Holding TRK on a Sidecar page lights the current track's pad, as on the stock Rytm, and **TRK + pad** selects a track, as does a plain pad press: SEQ, INSERT, ARP and POLY follow to the new track. They never close by themselves: on a track that plays a Rytm synth they stay open and show that the track has no Sidecar voice, and SEQ on a Sidecar track that is not a sequencer track yet offers to make it one. The first version's track shortcuts **TRK + YES, TRK + TRIG, TRK + LFO and TRK + FX are gone**: UP + the same key does each of them ([Key combinations](https://trigcondition.github.io/sidecar-expander/using/key-combinations/)).
 - **Holding UP, DOWN, LEFT or RIGHT repeats the key** on those pages, after a short wait ([Key combinations](https://trigcondition.github.io/sidecar-expander/using/key-combinations/)).
 
 **Web and connection**
@@ -116,7 +116,7 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 - **Knobs work on Sidecar pages while REC is on.**
 - **A speed (SPD) change continues from the current step,** it no longer jumps.
 - **List knobs are less jumpy.**
-- **TRK + pad follows or closes the page** as described above.
+- **TRK + pad (and a pad press) makes the track pages follow** as described above.
 
 **FILL and transfers**
 
@@ -131,7 +131,6 @@ From 0.4.3 or older, also see [Upgrading from 0.4.3](https://trigcondition.githu
 
 ### Known issues in 0.5.0
 
-- **A track page closes when a pattern or kit load moves the selection onto a Rytm-synth track,** as TRK + pad does.
 - **After a rollback to an older Sidecar build the LFOs show OFF.** The older build does not read the new LFO files. It leaves them alone, so going back to 0.5.0 brings them back.
 - **The CHOP editor's audition ignores GATE:** YES in the editor plays the selected slice to its end. Trigs and pads obey GATE.
 - **SONG Restore still uses the old write** until a later release. A fill that a SONG Restore removed comes back after a power-off. FILL does not write while the pattern is changing.
