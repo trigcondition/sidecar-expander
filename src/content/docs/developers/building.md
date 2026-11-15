@@ -1,6 +1,6 @@
 ---
 title: Building
-description: Building the Pi engine, the Teensy firmware, the Rytm mods, and this site.
+description: Building the Pi engine, the Teensy firmware (Sidecar Mini, frozen), the Rytm mods, and this site.
 sidebar:
   order: 2
 ---
@@ -41,7 +41,7 @@ Since 0.3.0 the Pi's network side is gated by the [pairing code](/sidecar-expand
 - **The development bypass:** `paircode=0` in `cmdline.txt` turns the gate off. The engine says so at boot, once a minute, in `/health`, `/status` and on the STATUS page. Never on a shipped card: `sdboot.py cmdline` shows the line, `sdboot.py cmdline "<the line without paircode=0>"` writes it.
 - Revoking: SIDECAR MENU > WEB UI > FORGET DEVICES, the console's `pair=revoke`, or delete `/.rytm/pair.txt` from the card.
 
-## Teensy firmware
+## Teensy firmware (Sidecar Mini, frozen at 0.1.0)
 
 Arduino CLI with Teensyduino, `-O2`:
 
@@ -62,7 +62,7 @@ The `VERSION` file at the engine's root (`0.1.0`) is the only source of the vers
 
 ## Rytm mods
 
-Python 3.11+, `m68k-elf-binutils`, and your own stock OS 1.73 file in `stock/` (the build refuses any other).
+Python 3.11+, `m68k-elf-binutils`, and your own stock OS 1.74 file in `stock/` (Sidecar 0.5.0 is built for OS 1.74 only; the 0.4.x builds also took a 1.73 file). The build refuses any other.
 
 ```sh
 make setup                                      # venv and the vendored tools at their pinned commits
