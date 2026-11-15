@@ -265,7 +265,7 @@ const docs = (p: string) => `${base}/${p}`;
             </li>
             <li class="sg-item">
               <label class="sg-tick"><input type="checkbox" data-need="cool" data-req="1" /><span><b>A heatsink or a fan</b> <em class="sg-req">Required</em></span></label>
-              <p class="sg-why">The Pi runs the audio at full clock and slows itself down when it is too hot, and the sound can drop out. At least a heatsink on the chip; a case fan is better. On a Pi 5 the official <b>Active Cooler</b> or a case fan on the fan header: the Sidecar drives that header itself (<a href={docs('using/pi5-fan/')}>AUTO, ON or OFF</a>). A case with its own display controls its own fan. See <a href={docs('using/troubleshooting/#keeping-it-cool')}>Keeping it cool</a>.</p>
+              <p class="sg-why">The Pi runs the audio at full clock and slows itself down when it is too hot, and the sound can drop out. We recommend a <b>good passive heatsink</b> (a large aluminium heatsink case): it keeps the Pi cool and it is silent. A fan works too: on a Pi 5 the official Active Cooler or a case fan on the fan header, which the Sidecar drives itself (<a href={docs('using/pi5-fan/')}>AUTO, ON or OFF</a>). A case with its own display controls its own fan. See <a href={docs('using/troubleshooting/#keeping-it-cool')}>Keeping it cool</a>.</p>
             </li>
             <li class="sg-item">
               <label class="sg-tick"><input type="checkbox" data-need="usb" data-req="1" /><span><b>A short USB A-to-B cable</b> <em class="sg-req">Required</em></span></label>

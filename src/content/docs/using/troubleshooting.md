@@ -50,7 +50,7 @@ On a Pi 5 the Sidecar drives the fan header itself (AUTO, ON or OFF): see [The P
 | 78 to 79 °C | the clock is lowered to 600 MHz. Quietly: the STATUS page's CPU line says `CLOCK LOWERED`, and the web page's Temperature tile says so too. No popup |
 | 80 °C and up | the warning: a banner on the touchscreen (`SOC 80C - CLOCK LOWERED TO 600 MHZ`), a popup on the Rytm (`SOC 80C CLOCK LOWERED / TO 600 MHZ (UP+T10)`, or `SIDECAR RUNNING HOT / SEE STATUS` when the clock is not lowered), HOT on the STATUS page. It goes away below 75 °C |
 
-- **Use a fan or a heatsink**, especially in a closed case or with a display attached. This is the real fix. A case fan helps a lot: on a Pi 4 in a display case, 72 °C while playing without the fan, 56 °C within a minute with it.
+- **Use a good heatsink or a fan**, especially in a closed case or with a display attached. This is the real fix. A good passive heatsink (a large aluminium heatsink case) works well and is silent. A case fan helps a lot: on a Pi 4 in a display case, 72 °C while playing without the fan, 56 °C within a minute with it.
 - **Watch the temperature:** the web page's Status tab and the touchscreen's STATUS page (UP + T10). Under 75 °C the Pi always runs at its full clock.
 - The Rytm's popup does not cover a page you are working on: it waits until you close the page.
 - **Lower the clock** while you find a fix: on the touchscreen **Settings > System > CPU clock** (it is not on the web page; the console's `cpumhz=1200` / `cpumhz=1000` or the same word in `cmdline.txt` do the same) runs the Pi at 1200 or 1000 MHz instead of 1500. It runs cooler, and the Sidecar's voice budget follows the clock.
