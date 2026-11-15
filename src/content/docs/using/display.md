@@ -14,7 +14,7 @@ The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on t
 | Display | Pi 4 | Pi 5 |
 |---|---|---|
 | 5" / 7" HDMI LCD with USB touch, 800x480 (Waveshare) | <span class="sc-ok">hardware</span> (the 5") | <span class="sc-ok">hardware</span>, scaled (slightly soft) |
-| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 | expected, to be confirmed: needs the `config.txt` lines below | expected |
+| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 (a case for the Pi 4) | <span class="sc-ok">hardware</span> (the 1024x600 card) | expected |
 | 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
 | Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
 | Raspberry Pi Touch Display 2, 7" | not supported | <span class="sc-ok">hardware</span> (0.3.2: rotated 270 by default, `dsi_rotate=90` the other way up, the 1024x600 UI centred) |
