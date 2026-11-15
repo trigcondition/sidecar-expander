@@ -50,15 +50,15 @@ A column of keys on the right in the OLED theme, and in the SIDECAR theme a row 
 | **VOICE** | VOICE, UP + T4, a voice on HOME | the selected track: its machine, P1..P8 as dials with the Rytm's labels and their values, the machine's panel (the 6-OP FM algorithm, MULTISAMPLE's zones and envelope, DAISYSP's mode), a p-lock heatmap |
 | **Machine view** | UP + T4 on a GRANULAR, WAVETABLE or MULTISAMPLE track | GRANULAR's grains over the source, WAVETABLE's frames, MULTISAMPLE's zones over a keyboard; **POOL** and **ALL POOLS** |
 | **POOL** | UP + T13, POOL in the machine view, ALL POOLS, Settings > Pool | the project's [POOL lists](/sidecar-expander/using/pools/#on-the-touchscreen): banks A..H, rows with their states, the pool RAM |
-| **INSERT FX** | FX, UP + T6 | the selected voice's two insert slots, its sends, its [OUT route](/sidecar-expander/using/stereo-out/) and the three buses ([Insert FX](/sidecar-expander/using/insert-fx/)) |
-| **SONG** | SONG, UP + T11 | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
-| **REC** | REC, UP + T8 | the Overbridge recorder and its takes, with playback (below) |
+| **INSERT FX** | FX, UP + T5 | the selected voice's two insert slots, its sends, its [OUT route](/sidecar-expander/using/stereo-out/) and the three buses ([Insert FX](/sidecar-expander/using/insert-fx/)) |
+| **SONG** | SONG, UP + T6 | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
+| **REC** | REC, UP + T7 | the Overbridge recorder and its takes, with playback (below) |
 | **SCOPE** | UP + T9, a tap on VOICE's scope | a scope of one channel over eleven level meters (below) |
 | **SIDECAR STATUS** | UP + T10, a tap on HOME's NOW panel | voices, CPU, links, versions and the sample library (below) |
 | **PROJECT** | UP + T12, a tap on HOME's PROJECT panel | the card's projects, export and import of [bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project) |
-| **SET** | SET, UP + T5 | Settings: Sound (with the USB-C mode, CLASS or OVERBRIDGE, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)), Send FX, Display, Pool, About, and a System tab (test signals, buffer settings, the CPU clock) |
+| **SET** | SET, UP + T8 | Settings: Sound (with the USB-C mode, CLASS or OVERBRIDGE, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)), Send FX, Display, Pool, About, and a System tab (test signals, buffer settings, the CPU clock) |
 
-The sampler and the auto-sampler (UP + T7) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
+The sampler and the auto-sampler (UP + T11) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
 
 When the Rytm is away, VOICE, INSERT FX and PAT keep the last data and say `NO RYTM: SHOWING LAST`.
 

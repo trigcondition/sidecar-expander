@@ -45,7 +45,7 @@ LEV, PAN and WID are [LFO](/sidecar-expander/using/lfo/) targets: **O1..O8**.
 ## Where to set it
 
 - **On the Rytm:** **UP + AMP** opens the remote **INSERT** page straight on the selected track's **OUT view** (again while open: back to that view). Or **UP + FX** for the INSERT page. The TRACK view's strip ends in the OUT box (`OUT POST`). Press **YES twice** (TRACK > BUS > OUT) for the **OUT view**: A OUT, B LEV, C PAN, D WID, E DEC (DSP SAMPLE only). The line under the title says what is left out. YES or NO goes back.
-- **On the touchscreen:** the **INSERT FX** page (UP + T6): the **OUT** row. Tap the key to step TRK > PRE > POST; LEV, PAN and WID with their values, and the voice's L / R meters while it is on PRE / POST.
+- **On the touchscreen:** the **INSERT FX** page (UP + T5): the **OUT** row. Tap the key to step TRK > PRE > POST; LEV, PAN and WID with their values, and the voice's L / R meters while it is on PRE / POST.
 - **On the console:** `out=V3:post`, `out=V3:lev:100`, `out=V3:pan:64`, `out=V3:wid:64`, `out=V3:dec:off`, `out=list`.
 
 ![The INSERT page on the Rytm: FILTER > EQ > OUT POST, CUT RES MODE DRV, SLOT TYPE BUS SEND](../../../assets/rytm/sc-insert-track-post.png)

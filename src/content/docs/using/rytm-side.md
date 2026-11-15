@@ -132,13 +132,15 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 
 - **UP + YES** (hold UP, press YES) opens the remote pages on **SIDECAR**; UP + YES again leaves.
 - **YES on SIDECAR** opens the **SIDECAR MENU**: every page with its shortcut. UP / DOWN pick a page, YES opens it. A page with nothing to show now is marked with `-` and answers `NOT HERE NOW`. Its **USB-C** row (0.4.1; the Pi 5 from 0.4.2) picks the Sidecar's USB-C mode, CLASS COMPLIANT or OVERBRIDGE (YES twice) ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
-- **UP + a trig key** opens a page directly (UP + T7 SAMPLE, T8 REC, T9 SCOPE, T10 SIDECAR, T11 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
+- **UP + a trig key** opens a page directly (UP + T11 SAMPLE, T7 REC, T9 SCOPE, T10 SIDECAR, T6 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
 - **LEFT / RIGHT**: the previous / next page in the ring. **NO** (0.4.4): on a page opened by its shortcut (UP + key, UP + a trig key), one NO leaves, also on UP + AMP's OUT view. On a page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and on the SIDECAR MENU itself, NO goes back to SIDECAR; on SIDECAR, NO leaves.
 - **Pages that replace the Rytm's page.** SEQ, INSERT (UP + FX, UP + AMP), LFO, POOL, POLY CONFIG, the SIDECAR MENU and KEYS take the Rytm's screen like the SRC view does: they have no page dots and no LEFT / RIGHT siblings. Leave with NO, or press the same UP + key again (UP + AMP again re-aims its OUT view at the selected track). From 0.4.4 a page that stands alone takes UP and DOWN only when it uses them (POOL, CHOP, the SIDECAR MENU, KEYS, WEB UI, USB-C, the SEQ page's track menu); on the others, such as SEQ, ARP, INSERT and LFO, they stay the Rytm's, so in CHRO mode they move the pads' range. The pages of the ring keep them. On the LFO page LEFT / RIGHT step the LFO; on the INSERT page RIGHT opens the EQ view.
 - **Hold UP alone** on the main screen: the combo map, until you let go.
 - The page also closes by itself 1 second after the Sidecar stops answering.
 
 ![The SIDECAR MENU, top: SEQ (UP+TRIG), POLY CONFIG (FUNC+CHRO), SAMPLE (UP+T7), AUTO SAMPLE, SONG (UP+T11), REC (UP+T8)](../../../assets/rytm/sc-menu-top.png)
+
+<small>The picture shows the page keys of an earlier build (before 0.5.0 moved SAMPLE, SONG and REC). The table is the truth.</small>
 ![The SIDECAR MENU, end: INSERT FX (UP+FX), POOL (UP+T13), PROJECT (UP+T12), STATUS (UP+T10), SYSTEM, KEYS (ALL COMBOS) (HOLD UP)](../../../assets/rytm/sc-menu-end.png)
 
 <small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data. No firmware data. On the Rytm the text is the Rytm's own.</small>
@@ -150,13 +152,13 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 | **SIDECAR** | UP + T10 | the eight voices by track with their machines, FX1 and FX2 with TYPE and PRE / POST |
 | **SYSTEM** | | the user slots U1..U5, the recorder, the Overbridge stream and underruns, the render cores' load, the network |
 | **LFO** | UP + LFO | the Sidecar's [LFOs](/sidecar-expander/using/lfo/) and the DESIGN view |
-| **REC** | UP + T8 | the [recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm): record, arm, play a take back |
+| **REC** | UP + T7 | the [recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm): record, arm, play a take back |
 | **SCOPE** | UP + T9 | a scope of the output, a track or the inputs, with a meter per track |
-| **SAMPLE**, **AUTO** | UP + T7, again | the [sampler and the auto-sampler](/sidecar-expander/using/sampling/) |
+| **SAMPLE**, **AUTO** | UP + T11, again | the [sampler and the auto-sampler](/sidecar-expander/using/sampling/) |
 | **POOL** | UP + T13 | the project's [POOL lists](/sidecar-expander/using/pools/#the-pool-page-on-the-rytm) |
 | **SEQ** | UP + TRIG | a [poly track's](/sidecar-expander/using/sequencer/) steps |
 | **INSERT** | UP + FX | the [insert FX](/sidecar-expander/using/insert-fx/) and the [OUT route](/sidecar-expander/using/stereo-out/) |
-| **SONG** | UP + T11 | the [song recorder](/sidecar-expander/using/song-recorder/) |
+| **SONG** | UP + T6 | the [song recorder](/sidecar-expander/using/song-recorder/) |
 | **PROJECT** | UP + T12 | the card's projects and [bundles](/sidecar-expander/using/projects-bundles/#the-rytm-the-project-page) |
 | **MENU**, **KEYS** | YES on SIDECAR; HOLD UP | the page list; every combination |
 

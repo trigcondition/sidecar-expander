@@ -7,8 +7,8 @@ sidebar:
 
 **UP is the Sidecar key.** Hold UP and press a second key. The stock Rytm leaves all of these combinations free, so nothing of the Rytm's own is lost. UP alone still moves the cursor in the Rytm's menus.
 
-- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. On a page where UP scrolls a list, holding UP scrolls instead ([below](#knobs-and-keys-how-they-feel-050)). The Rytm shows every UP + key on one screen, in two columns, and lights T1..T14 in their pages' colours. Its first row, `T1-6 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
-- **No touchscreen needed:** every page opened from T7..T14 and every UP + key combination works on the Rytm's own screen.
+- **Hold UP alone** (about half a second) on the Rytm's main screen: the **combo map**. On a page where UP scrolls a list, holding UP scrolls instead ([below](#knobs-and-keys-how-they-feel-050)). The Rytm shows every UP + key on one screen, in two columns, and lights the keys of the pages in their colours. Its first row, `T1-5,8 TOUCH`, stands for the six pages only a touchscreen has; a touchscreen shows the same map with each of them. Let go of UP to close it.
+- **No touchscreen needed:** every page opened from T6, T7 and T9..T13 and every UP + key combination works on the Rytm's own screen. With no touchscreen connected, the keys of the touchscreen's own pages show nothing on the map.
 - **The SIDECAR MENU** (UP + YES, then YES) lists every Sidecar page with its shortcut.
 - **The KEYS page** (the last row of the SIDECAR MENU) lists every combination, then the older **trig held + FUNC** forms (the TRK forms are no longer listed).
 - While a Sidecar page has the Rytm's keys, **TRK's LED blinks** slowly.
@@ -16,6 +16,8 @@ sidebar:
 "Hold" means: hold the first key, then press the second. "T1".."T16" are the trig keys.
 
 ![The Rytm's combo map while UP is held: T1-6 TOUCH, T7 SAMPLE, T8 REC, T9 SCOPE, T10 STATUS, T11 SONG, T12 PROJECT, T13 POOL, YES PAGES; TRIG SEQ, SRC LIST, LFO LFOS, FX INSERT FX, AMP OUT](../../../assets/rytm/sc-up-map.png)
+
+<small>The picture shows the page keys of an earlier build (before 0.5.0 moved SAMPLE, SONG and REC). The table is the truth.</small>
 
 <small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data. No firmware data.</small>
 
@@ -27,23 +29,25 @@ sidebar:
 | **UP + T2** | SEQ (touchscreen) |
 | **UP + T3** | PAT (touchscreen) |
 | **UP + T4** | VOICE (touchscreen) |
-| **UP + T5** | SET (touchscreen) |
-| **UP + T6** | INSERT FX (touchscreen) |
-| **UP + T7** | SAMPLE on the Rytm's screen; again: AUTO |
-| **UP + T8** | REC |
+| **UP + T5** | INSERT FX (touchscreen) |
+| **UP + T6** | SONG |
+| **UP + T7** | REC |
+| **UP + T8** | SET (touchscreen) |
 | **UP + T9** | SCOPE |
 | **UP + T10** | the Sidecar's STATUS (on the Rytm: the SIDECAR page, with the web page's pairing code on its PAIR line) |
-| **UP + T11** | SONG |
+| **UP + T11** | SAMPLE on the Rytm's screen; again: AUTO |
 | **UP + T12** | PROJECT |
 | **UP + T13** | POOL |
-| **UP + T14** | the Rytm's own key. It becomes the [MORPH](/sidecar-expander/using/morph/) page in 0.5.1 |
+| **UP + T14** | in 0.5.0 a note, `MORPH: 0.5.1`. It becomes the [MORPH](/sidecar-expander/using/morph/) page in 0.5.1 |
 
-- T1..T6 are the touchscreen's pages alone. T8..T14 open on the touchscreen when one is connected and has the page, else on the Rytm's screen.
+- **T1..T5 and T8 are the touchscreen's pages alone.** They are the touchscreen's sidebar, top to bottom (HOME, SEQ, PAT, VOICE, INSERT FX, then SONG and REC on T6 and T7, and SET on T8). On the Rytm they pop a short note saying so. **T6, T7 and T9..T13 open on the Rytm's screen**; the touchscreen shows them too when one is connected and has the page.
 - No trig is placed: while UP is held the trig keys only pick pages.
 - A page that has nothing to show yet (PROJECT before the project list is read, POOL without pools) pops `PROJECT: NOT HERE NOW` on the Rytm instead of opening another page.
 - When the touchscreen takes a page, the Rytm pops a short note saying so.
 
 ![KEYS, first screen: UP+T1 .. UP+T6 open the touchscreen's HOME, SEQ, PAT, VOICE, SET and INSERT FX](../../../assets/rytm/sc-keys-pages.png)
+
+<small>The picture shows the page keys of an earlier build (before 0.5.0 moved SAMPLE, SONG and REC). The table is the truth.</small>
 
 ## UP + another key
 

@@ -288,17 +288,17 @@ Hold **UP** and press a trig key to switch the touchscreen's page (no trig is pl
 | UP + T2 | SEQ (the piano roll) |
 | UP + T3 | PAT (the Rytm's own pattern) |
 | UP + T4 | VOICE (the selected track) |
-| UP + T5 | SET (settings) |
-| UP + T6 | INSERT FX |
-| UP + T7 | SAMPLE on the Rytm's screen (again: AUTO) |
-| UP + T8 | REC |
+| UP + T5 | INSERT FX |
+| UP + T6 | SONG |
+| UP + T7 | REC |
+| UP + T8 | SET (settings) |
 | UP + T9 | SCOPE |
 | UP + T10 | SIDECAR STATUS |
-| UP + T11 | SONG |
+| UP + T11 | SAMPLE on the Rytm's screen (again: AUTO) |
 | UP + T12 | PROJECT |
 | UP + T13 | POOL |
 
-T8..T13 open on the touchscreen when it has the page, else on the Rytm's screen. SEQ, VOICE and the machine view follow the track you select on the Rytm.
+T1..T5 and T8 are the touchscreen's pages alone; T6, T7 and T9..T13 open on the Rytm's screen (and on the touchscreen when one is connected and has the page). SEQ, VOICE and the machine view follow the track you select on the Rytm.
 
 ## What the screens show
 

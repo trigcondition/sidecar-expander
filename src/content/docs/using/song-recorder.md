@@ -50,7 +50,7 @@ A replay overwrites the Rytm's working kit, pattern, settings and mutes. **UNDO 
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-**UP + T11** opens SONG: on the touchscreen when one is connected, else the Rytm's SONG page. The Rytm's SONG page is also in the SIDECAR MENU (UP + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
+**UP + T6** opens SONG: on the touchscreen when one is connected, else the Rytm's SONG page. The Rytm's SONG page is also in the SIDECAR MENU (UP + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
 
 ## With poly tracks and the pools
 

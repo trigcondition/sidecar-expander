@@ -40,7 +40,7 @@ The Pi has no clock of its own. The web page sets the Pi's clock and time zone f
 
 ## The REC page on the Rytm
 
-<span class="sc-ok">hardware</span>. **UP + T8** opens it (with a touchscreen connected, the touchscreen's REC page opens instead), or REC in the SIDECAR MENU (UP + YES, then YES). **YES** records and stops; encoder **A** arms (right) or disarms (left). The page shows the take's time in large digits, its name, the card's free space and the hours left, and the meters with the recorded channels marked.
+<span class="sc-ok">hardware</span>. **UP + T7** opens it (with a touchscreen connected, the touchscreen's REC page opens instead), or REC in the SIDECAR MENU (UP + YES, then YES). **YES** records and stops; encoder **A** arms (right) or disarms (left). The page shows the take's time in large digits, its name, the card's free space and the hours left, and the meters with the recorded channels marked.
 
 - **Channels** (<span class="sc-test">in testing</span>): the trig keys choose what the next take records: T1..T8 the tracks, T9 MAIN, T10 / T11 the inputs (or FX L / R with the FX return). Their lights show it: blue recorded, orange not. Not while a take records.
 - **Playback:** **B** turned picks a channel, **B** pushed plays and stops it, **C** picks the take, **D** sets the level (below).
@@ -52,7 +52,7 @@ The Pi has no clock of its own. The web page sets the Pi's clock and time zone f
 
 ## The REC page on the touchscreen
 
-<span class="sc-test">in testing</span> (Pi, 0.3.0). **UP + T8** on the Rytm, the REC key in the navigation column, or a tap on the home page's REC status.
+<span class="sc-test">in testing</span> (Pi, 0.3.0). **UP + T7** on the Rytm, the REC key in the navigation column, or a tap on the home page's REC status.
 
 - **The transport row:** REC / STOP, ARM / DISARM, the take's time in segment digits with the take's name, 48 kHz and the bit depth, the number of files, the card's free space and the time it holds at this selection, and **TAKES**.
 - **The channels**, in three columns: RYTM STEMS (BD .. CY/CB), SIDECAR VOICES (each named for its tracks, in the Rytm's track order, so a voice sits beside its track's stem) and MIX + RETURNS (MASTER, MAIN L / R, IN L / R or FX L / R, FX 1 / FX 2, then ALL / NONE). Each row has a meter (stereo sources: L over R) and a clip lamp. Tap a channel to record it or not, while idle.
