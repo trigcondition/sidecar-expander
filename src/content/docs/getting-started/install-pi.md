@@ -9,23 +9,36 @@ Sidecar, the full version on the Raspberry Pi, **works on the Pi 4B and the Pi 5
 
 ## You need
 
-- A Raspberry Pi 4 Model B (2 GB or more) with its 5.1 V 3 A USB-C supply, or a Raspberry Pi 5 with its 27 W USB-C supply; and a microSD card (its contents are replaced).
+- A Raspberry Pi 5 (recommended, with its 27 W USB-C supply) or a Raspberry Pi 4 Model B (works, with its 5.1 V 3 A USB-C supply). Memory: 2 GB is the minimum, 4 GB or more is recommended; and a microSD card (its contents are replaced).
 - A USB A-to-B cable to the Rytm.
 - Optional: a touch display (800x480 HDMI with USB touch, a 7" DSI display, or in 0.3.0 1024x600; see [The display](/sidecar-expander/using/display/#which-displays-work)) and an Ethernet cable.
-- From the [Sidecar 0.4.4 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4): one of the two SD card zips (each is one card for the Pi 4B and the Pi 5) and `SHA256SUMS`; optional: `sidecar-pi-plugins-0.4.4.zip` (the user machines), `sidecar-content-0.4.4.zip` (the starter content, also on the card) and the user manual as a PDF, [`Sidecar-0.4.4-User-Manual.pdf`](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf). Sidecar 0.4.4 comes with the Rytm firmware 0.4.4: it is on the [Rytm firmware 0.4.4 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)). A Rytm on the Rytm firmware 0.4.0 works with the 0.4.4 card too, without the held step's values on the SRC view.
+- **From 0.5.0 (the easy way):** from the Sidecar 0.5.0 release, the SD card image for your screen, `sidecar-0.5.0-sd-800x480.img.zip` or `sidecar-0.5.0-sd-1024x600.img.zip` (a card of 4 GB or more). Both are also in the one release zip `sidecar-0.5.0.zip`, which holds everything else too: the card files for copying by hand, the Rytm `.elemod` files (never a `.syx`) with the patcher link, the manual and a quick start.
+- To copy the files by hand instead, from the [Sidecar 0.5.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0): the starter zip `sidecar-0.5.0-starter.zip` (one card for the Pi 5 and the Pi 4B) and `SHA256SUMS`; the same card files are in the release zip `sidecar-0.5.0.zip` under "Card files"; optional: the user manual as a PDF, `Sidecar-0.5.0-User-Manual.pdf`. Sidecar 0.5.0 comes with the Rytm firmware 0.5.0 (OS 1.74 only): it is on the [Rytm firmware 0.5.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.0) ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
 
-| Card zip | For |
+| SD card image | For |
 |---|---|
-| `sidecar-pi-sd-05c4818-800x480.zip`: the **800x480** card | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
-| `sidecar-pi-sd-05c4818-1024x600.zip`: the **1024x600** card | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
+| `sidecar-0.5.0-sd-800x480.img.zip`: the **800x480** image | an 800x480 HDMI display (such as the 5" and 7" HDMI touch displays), a DSI display, or no display |
+| `sidecar-0.5.0-sd-1024x600.img.zip`: the **1024x600** image | a 1024x600 HDMI display, such as the GeeekPi 7" (EP-0194) |
 
-Each zip also has its own `.sha256`; `BUILD-INFO-pi.txt` names the commit, both kernels and each card's `config.txt`.
+Each image also has its own `.sha256`; `BUILD-INFO-pi.txt` (in the card files) names the commit, both kernels and each card's `config.txt`.
 
-The two differ only in the HDMI mode in `config.txt`. The Pi 5 scales the picture either way (below).
+The two images differ only in the HDMI mode in `config.txt`. The Pi 5 scales the picture either way (below).
 
 ## Make the SD card
 
-**The easy way (from Sidecar 0.5.0): unzip the starter zip onto a FAT32 card.** The release's `sidecar-<version>-starter.zip` holds everything for one card: the 800x480 card set below, the web app (`/.rytm/www-next/`), the starter content, every user machine and user effect of the release in `/Plugins/`, and some free demo material (a MULTISAMPLE instrument, a capture for INSERT AMP, one-shots of the starter machines). Check it against `SHA256SUMS` and format the card (step 2 below), then copy **everything** in the zip to the card's top level, including the hidden folder `.rytm` (Mac Finder: Cmd+Shift+. shows it). `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600`, or use the 1024x600 card zip.
+**The easiest way (from Sidecar 0.5.0): write the SD card image with Raspberry Pi Imager.** The release has a ready card image for each screen size: `sidecar-0.5.0-sd-800x480.img.zip` (an 800x480 HDMI display, a DSI display or none) and `sidecar-0.5.0-sd-1024x600.img.zip` (a 1024x600 HDMI display). One image boots both the Pi 4B and the Pi 5. Both are also in the release zip `sidecar-0.5.0.zip`. Use a microSD card of 4 GB or more: its contents are replaced, and nothing has to be formatted first.
+
+1. **Download** the image for your screen size from the release, and check it against its `.sha256`. Do not unzip it.
+2. **Open [Raspberry Pi Imager](https://www.raspberrypi.com/software/).** Choose Device (a Raspberry Pi 4 or a Raspberry Pi 5: it does not matter, the image is the same), then Choose OS: scroll to the bottom, pick **Use custom** and select the downloaded `.img.zip` (Imager unpacks it itself). Then Choose Storage (your SD card) and press Next.
+3. **When Imager asks about OS customisation, choose No.** Its Wi-Fi, user and SSH settings are for Raspberry Pi OS and do nothing on the Sidecar. Wi-Fi and the other settings go through the [card config editor](/sidecar-expander/getting-started/config-editor/), below.
+4. **Write.** Wait for the write and for Imager's check of it, then eject the card. If you want to change the card's settings, do it now (the card config editor, below) before you start the Pi.
+5. **Put the card in the Pi and switch it on.** On its first start the Sidecar stretches the card's one partition to the whole card. That takes a moment, once ([SD grow](/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050); `sdgrow=0` in `cmdline.txt` turns it off).
+
+**balenaEtcher** works too: "Flash from file", pick the `.img.zip` as it is, select the card, Flash. The image holds the same files as the starter zip below.
+
+**Or copy the files by hand** (any card size from 1 GB up). **Unzip the starter zip onto a FAT32 card.** The release's `sidecar-0.5.0-starter.zip` holds everything for one card: the 800x480 card set below, the web app (`/.rytm/www-next/`), the starter content, every user machine and user effect of the release in `/Plugins/`, and some free demo material (a MULTISAMPLE instrument, a capture for INSERT AMP, one-shots of the starter machines). Check it against `SHA256SUMS` and format the card (step 2 below), then copy **everything** in the zip to the card's top level, including the hidden folder `.rytm` (Mac Finder: Cmd+Shift+. shows it). `README-STARTER.txt` and `NOTICE-STARTER.txt` in the zip say what is where. A 1024x600 HDMI display: in `config.txt` change both `hdmi_cvt` lines to `hdmi_cvt=1024 600 60 6 0 0 0` and, under `[pi5]`, set `framebuffer_width=1024` and `framebuffer_height=600`, or use the 1024x600 card zip.
+
+**Then adjust the card's settings, if you need to (the card config editor).** The [card config editor](/sidecar-expander/getting-started/config-editor/) on this site writes the card's `config.txt` and `cmdline.txt` (and a `sidecar-wifi.txt`) from a form: the board, the screen size and kind, the Ethernet address, the web page and its pairing code, Wi-Fi, and the other options of `cmdline.txt`. It runs in your browser and sends nothing. Open the written card on your computer (it shows as `SIDECAR`), and put the files it makes at the card's top level in place of the card's own. Do this after writing the image or copying the files, and before the first start. To keep what the card has, paste its current `config.txt` and `cmdline.txt` into the editor first: lines and options it does not manage are written back as they were. With nothing changed it gives the release card's files. The editor has no field for `sdgrow` (the image's grow on first boot): to turn it off, add ` sdgrow=0` to the one line of `cmdline.txt` by hand, or paste a `cmdline.txt` that has it.
 
 The card zips alone, step by step:
 
@@ -108,6 +121,7 @@ One line of `name=value` options, separated by spaces. The release sets `sdport=
 | `dsi_rotate=90` | 270 | Pi 5, Touch Display 2: the other way up |
 | `touchscreen=minx,maxx,miny,maxy` | | touch calibration, if the touch is off |
 | `screensaver=MIN`, `brightness=PCT` | 60, 100 | override the display settings at boot |
+| `sdgrow=0` | 1 | 0.5.0: turn off the first boot's grow of the SD card image to the whole card ([Storage](/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050)) |
 | `recbuf=MB` | auto | the recorder's memory. Auto gives a Pi 4 256 MB (about 55 s of all channels) and a 1 GB board 64 MB; 0 turns recording off |
 | `cpumhz=1500\|1200\|1000` | 1500 | the CPU clock in MHz (also the touchscreen's Settings > System > CPU clock, or `cpumhz=` on the console). Lower is cooler: [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool) |
 | `socmaxtemp=C` | 78 on new cards | the temperature in °C (40..78) above which the Pi slows itself down to 600 MHz; add it by hand to an older card |
@@ -139,13 +153,13 @@ The [card config editor](/sidecar-expander/getting-started/config-editor/) write
 
 ## Starter content
 
-The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.4.4.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
+The SD card package already holds the **starter content**: `/JUNO/Factory/` (the Juno-106's 128 factory patches) and `/DX7/` (three 32-voice DX7 banks), with `STARTER-CONTENT-README.txt` and its notice. It is also a zip of its own, `sidecar-content-0.5.0.zip`, on the [release page](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0): extract it to the card's root (or upload the folders on `sidecar.local`, Files, Upload folder) if you set up the card before. It only adds files; your own files stay.
 
 On the Rytm: the sample browser's SIDECAR folder → `JUNO/Factory` or `DX7` → **LOAD TO PROJ** adds a patch to the project's list, and the JUNO or 6-OP FM machine's **PAT** knob steps through it.
 
 ## Starter user machines
 
-The release's `sidecar-pi-plugins-0.4.4.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT), new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT) and, new in 0.4.1, `modele.a64.rmp` (MODEL E: GPL-2.0-or-later, with its `modele-LICENSE.txt`, `modele-NOTICE.txt` and complete source `modele-source.tar.gz` beside it). MD is built in since 0.4.0, so its user machine (`mdk_md.a64.rmp`) is no longer in the zip; you can delete it from `/Plugins/`. Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
+The release's `sidecar-pi-plugins-0.5.0.zip` holds the user machines as Pi packages, the same files for the Pi 4B and the Pi 5: the six starters `sc_acid.a64.rmp`, `sc_wavepad.a64.rmp`, `sc_metal.a64.rmp`, `sc_snare.a64.rmp`, `sc_pluck.a64.rmp`, `sc_grain.a64.rmp` (MIT) and, new in 0.3.0, `nusaw.a64.rmp`, `vox.a64.rmp`, `hush1.a64.rmp`, `raffo.a64.rmp` (NUSAW, VOX, HUSH1, RAFFO: MIT), new in 0.4.0, `sophie.a64.rmp` (SOPHIE: MIT) new in 0.4.1, `modele.a64.rmp` (MODEL E: GPL-2.0-or-later, with its `modele-LICENSE.txt`, `modele-NOTICE.txt` and complete source `modele-source.tar.gz` beside it) and, new in 0.5.0 (Plugin API 3, Sidecar 0.5.0 or later), `mist.a64.rmp` (MIST: MIT, with `mist-LICENSE.txt` and `mist-NOTICE.txt`) and the user effects `ufx_phaser.a64.rmp`, `ufx_bbd.a64.rmp`, `ufx_nimbus.a64.rmp` and `ufx_galactic.a64.rmp` (PHASER, BBD, NIMBUS, GALACTIC: MIT; GALACTIC is a port of Airwindows' Galactic). The starter zip and the SD card images already have them all in `/Plugins/`. MD is built in since 0.4.0, so its user machine (`mdk_md.a64.rmp`) is no longer in the zip; you can delete it from `/Plugins/`. Check them against the zip's `SHA256SUMS`; its `LICENSE.txt` has the licences. Upload them on `sidecar.local`, tab **User machines**, or copy them into `/Plugins/` on the card before you put it in the Pi.
 
 ## The remote UI
 
@@ -153,6 +167,7 @@ Use a Rytm build and a Sidecar build of the same line:
 
 | Line | Rytm build | Sidecar build | Opens the Sidecar's pages |
 |---|---|---|---|
+| 0.5.0 release | the Rytm firmware 0.5.0, for OS 1.74 only ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.5.0 SD card image | **UP + YES** |
 | 0.4.4 release | the Rytm firmware 0.4.4, for OS 1.74 or 1.73 ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)) | the 0.4.4 SD card | **UP + YES** |
 | 0.4.0 to 0.4.3 | the Rytm firmware 0.4.0, for OS 1.74 or 1.73 | the 0.4.3 SD card (or 0.4.2, 0.4.1, 0.4.0); the 0.4.4 card works too, without the held step's values on the SRC view | **UP + YES** |
 
@@ -216,7 +231,7 @@ The same card boots a **Raspberry Pi 5** too: its `config.txt` has a section for
 | DSI display | the firmware's: expected, being confirmed | driven by the engine: <span class="sc-test">in testing</span> |
 | Wi-Fi | <span class="sc-ok">hardware</span> | <span class="sc-ok">hardware</span> |
 | Overbridge passthrough (USB-C mode OVERBRIDGE) | opt-in, new in 0.4.1 (<span class="sc-ok">hardware</span>): [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar) | opt-in, new in 0.4.2 (<span class="sc-ok">hardware</span>, on a powered hub port; a USB-C power and data splitter is recommended) |
-| Updating | copy the new files over the old ones | the same (no network update on the Pi 5) |
+| Updating | copy the new files over the old ones | the same; from 0.5.0 also [from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) |
 
 What is different on the Pi 5 for now:
 
@@ -227,14 +242,16 @@ What is different on the Pi 5 for now:
 - **Touch Display 2** (<span class="sc-ok">hardware</span>, the 7"): found by itself, rotated 270 by default (`dsi_rotate=90` for the other way up). From 0.4.0 the UI uses the panel's 1280x720 by default (<span class="sc-test">in testing</span>: not yet run on the panel); `res=1024x600` in `/.rytm/display.txt` gives the older 1024x600 UI, centred. 5" support is added, untested here. Touch after a warm restart may not come back on some setups: power cycle. With thanks to [bandersong](https://github.com/bandersong).
 - **DSI display** (<span class="sc-test">in testing</span>): the official 7" display v1 or a compatible on CAM/DISP 0 or 1 is found by itself, no `config.txt` line; with no DSI panel answering, the Sidecar uses HDMI. Upside down: `dsi_rotate=180` in `cmdline.txt`; `dsi=0` keeps it on HDMI.
 - **Power**: use the official **27 W** USB-C supply, plugged in directly. Fed from a hub's port the Pi 5 ran in reduced-power mode and the web page over Wi-Fi became slow (pages of 5 s, "503 busy"); on the adapter directly it was fast. With a 3 A supply the Pi 5 also limits its USB ports to 600 mA in total. The Sidecar warns about a weak supply: in the log, on the web page's **Power** tile, and in red on the display's bottom line. The warning names the board's official supply: on a Pi 4 "use the official 15 W (5.1 V 3 A) supply" (display `POWER TOO WEAK: use 15 W supply`), on a Pi 5 "use the 27 W (5 V 5 A) adapter directly" (`POWER TOO WEAK: use 27 W adapter`).
-- **Updating**: copy the new release's files over the old ones (as on the Pi 4). There is no update over the network on a Pi 5 yet.
+- **Updating**: copy the new release's files over the old ones (as on the Pi 4); [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/). From 0.5.0 you can also update from the web page ([Updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
 - If the Pi 5 shows its boot diagnostics screen instead of starting, update its bootloader with Raspberry Pi Imager ("Misc utility images", "Bootloader"), then try again.
 - The serial console (for tester reports) is on the same pins as the Pi 4's (GPIO14/15, pins 8 and 10, 921600 baud).
 
 ## Updating and going back
 
+- **Upgrading a running Sidecar:** [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/) has the steps, also for the new web page.
 - To update, copy the new release's files over the old ones on the card. Your samples, recordings, `/Plugins/` and `/.rytm/` stay. Each package's `BUILD-INFO-pi.txt` names the kernel it carries.
 - **From 0.4.0, 0.4.1, 0.4.2 or 0.4.3 to 0.4.4:** copy the new card, and flash the Rytm firmware 0.4.4 for the held step's values on the SRC view and the CONNECTED screen at the Rytm's boot; a Rytm left on the Rytm firmware 0.4.0 works with the 0.4.4 card too ([Release notes](/sidecar-expander/release-notes/#sidecar-044)). To go back, flash the Rytm firmware 0.4.0 or the stock OS ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/#the-rytm-firmware-040-older)).
+- **A card made from the SD card image** grows to the card's size on its first boot (0.5.0): see [Storage](/sidecar-expander/using/storage/#the-sd-card-image-grows-to-fill-the-card-050).
 - To stop using Sidecar, reformat the card. Nothing on the Pi itself is changed.
 
 ## Check that it works

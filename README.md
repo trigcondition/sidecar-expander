@@ -2,9 +2,11 @@
 
 **A voice and feature expander for the Analog Rytm MKII.**
 
-Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 4B is the main target, and the one the measurements are made on; the Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 or 1.73 adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
+Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A **Raspberry Pi 4B or Pi 5** sits on the Rytm's USB port; one SD card boots both. The Pi 5 is recommended (a lot more headroom for voices and effects); the Pi 4B works, and the measurements are made on it. The Pi 5 scales its HDMI picture. A set of mods to the Rytm's OS 1.74 (from 0.5.0; 1.73 up to 0.4.4) adds pages on the Rytm itself to drive it. You play and edit everything from the Rytm.
 
-> **Sidecar 0.4.4** (with the Rytm firmware 0.4.4: a new Rytm flash): a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page opened by its shortcut, and the CONNECTED screen when the Rytm boots after the Sidecar ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-044)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4), the [Rytm firmware 0.4.4](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) (or the [browser patcher](https://trigcondition.github.io/sidecar-expander/patcher/)) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf).
+> **Sidecar 0.5.0** (with the Rytm firmware 0.5.0, OS 1.74 only: a new Rytm flash): user send effects (PHASER, BBD, NIMBUS, GALACTIC), the SAMPLER machine and SAMPLE EDIT, FILL, the Rytm's own parameters on the XY pad and MIDI learn, a ready-made SD card image, updating from the web page and voices about 9 dB quieter ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/)); downloads: the [Sidecar 0.5.0 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.0) and the [Rytm firmware 0.5.0](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.0) (or the [browser patcher](https://trigcondition.github.io/sidecar-expander/patcher/), build `rel0-5-0-os1.74`).
+>
+> Sidecar 0.4.4 (earlier): a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page opened by its shortcut, and the CONNECTED screen when the Rytm boots after the Sidecar ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-044)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.4), the [Rytm firmware 0.4.4](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.4.4) (or the [browser patcher](https://trigcondition.github.io/sidecar-expander/patcher/)) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.4/Sidecar-0.4.4-User-Manual.pdf).
 >
 > **Sidecar 0.4.3** (with the Rytm firmware 0.4.0, unchanged: no new Rytm flash): the CHRO pads play from the first hit on a selected poly track, and on JUNO and the other poly machines ([release notes](https://trigcondition.github.io/sidecar-expander/release-notes/#sidecar-043)); downloads: the [Sidecar (Pi) files](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.4.3) and the [user manual (PDF)](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.4.3/Sidecar-0.4.3-User-Manual.pdf).
 >
@@ -16,7 +18,7 @@ Sidecar adds digital voices, effects and a sequencer to the Analog Rytm MKII. A 
 >
 > **Sidecar Mini (Teensy 4.1) is phased out.** It is frozen at 0.1.0: no new features. Its source stays in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware) (`teensy/`) for reference, and the 0.1.0 release stays on the [releases page](https://github.com/trigcondition/sidecar-expander/releases).
 >
-> The Rytm firmware 0.4.4 has a build for OS 1.74 and one for OS 1.73.
+> The Rytm firmware 0.5.0 is built for OS 1.74 only (0.4.4 and older also have a build for OS 1.73).
 
 Documentation and the browser patcher: <https://trigcondition.github.io/sidecar-expander/>
 
@@ -50,11 +52,11 @@ Most of 0.3.0 is tested in the emulator and on the Mac; a part of it has run on 
 
 ## Requirements
 
-- **An Analog Rytm MKII on OS 1.74 or OS 1.73.** There is one build of the mods for each OS, built against that exact OS. The 1.74 build has run on a real Rytm.
+- **An Analog Rytm MKII on OS 1.74.** Sidecar 0.5.0 is built for OS 1.74 only (0.4.4 and older also have a build for OS 1.73).
   - If your Rytm runs an older OS, update it to 1.74 first (Elektron offers only 1.74 now).
   - **You can move between 1.73 and 1.74 in both directions** with Elektron's stock files (checked on a unit); recovery is the stock file of the OS you want to be on. Elektron offers only 1.74 now, so keep your own copy of 1.73 if you want it. Flash Elektron's stock 1.74 first, which proves recovery, then the Sidecar's 1.74 build; a 1.73 Rytm can also take the 1.74 build directly. Back up your projects before any OS change ([Which OS](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - On the Rytm: SETTINGS > SYSTEM > USB CONFIG set to the Overbridge mode. That is the only setting the Sidecar needs: the Rytm's MIDI port settings (USB MIDI in and out) do not have to be changed for the voices, send effects, user machines or remote pages (tested on hardware). Only STUTTER's tempo sync and the recorder's armed mode use the Rytm's clock and transport over USB (MIDI CONFIG: CLOCK SEND and TRANSPORT SEND).
-- **A Raspberry Pi 4B** (2 GB or more, with a computer: also USB-C audio and MIDI) **or a Raspberry Pi 5** (standalone for now: USB audio and MIDI to the computer are coming; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 or 1024x600 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
+- **A Raspberry Pi 5** (recommended) **or a Raspberry Pi 4B** (works; with a computer: also USB-C audio and MIDI), with 2 GB of memory at least and 4 GB or more recommended (the Pi 5: standalone for now: USB audio and MIDI to the computer are coming; the official 27 W supply, directly), its official USB-C power supply, a blank microSD card (one card set boots both), and optionally an 800x480 or 1024x600 HDMI display and an Ethernet cable. See [INSTALL-PI.md](INSTALL-PI.md).
 - The stock file of your OS: `Analog-Rytm_MKII_OS1.74.syx` from Elektron's `Analog-Rytm_MKII_OS1.74_dist.zip` (Rytm MKII support page), or the `Analog-Rytm_MKII_OS1.73.syx` you have. We do not distribute it.
 - Transfer, the Rytm maker's free transfer app, to send the OS file. For recovery, a DIN MIDI interface is also useful.
 

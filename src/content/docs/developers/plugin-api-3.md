@@ -1,33 +1,43 @@
 ---
-title: Plugin API 3 (proposed)
-description: "A proposed design, not implemented: what is coming for user machines and user effects, so API 2 ports can be retrofitted easily. Host services, memory, guarded setup, stereo, effects, the signal bus, modulation, custom pages."
+title: Plugin API 3
+description: "Plugin API 3 for user machines and user effects on the Pi: what is built in Sidecar 0.5.0 (host header, loader, guard, arena, transport, stereo, send effects) and what is still planned (more effect positions, audio input, the signal bus, modulation hints, custom pages)."
 sidebar:
   order: 4.5
   badge:
-    text: proposed
-    variant: caution
+    text: partly built
+    variant: tip
 ---
 
-:::caution[Proposed. Not implemented. May change before release.]
-Nothing on this page exists in any released engine or SDK. `rmp_api3.h`, every `rmp3_*` name, every limit and every default below is a design for review. Names and layouts may change, and sections may be dropped or moved. Build today against [API 2](/sidecar-expander/developers/writing-user-machines/). There is no date and no version number attached to this work.
+:::note[Partly built in Sidecar 0.5.0]
+The host side of API 3 is built for the Pi 4 and Pi 5: `rmp_api3.h`, the loader, the guard, the slot arena, the transport snapshot, stereo output and **user effects in the send FX slots** (UFX1..UFX4). The rest is planned and marked **planned** below. Each section starts with its status. Where the engine differs from the first design, the section says what the engine does, and the names are the ones in `rmp_api3.h`. Build against [API 2](/sidecar-expander/developers/writing-user-machines/) for anything that must also run on the Sidecar Mini, which stays on API 2.
 :::
 
 For an outside developer, and their coding agent, porting ER-301 units or LXR engines on API 2. Read it to learn what is coming, then follow [Write it this way today](#write-it-this-way-today) so the port needs little work later.
 
-| Need | API 2 today | Proposed |
-|---|---|---|
-| Tempo, transport, song position | none | a snapshot in every block |
-| Memory | 64 KB of state per voice | a slot arena reserved at load, 16 to 64 MB a slot |
-| A crash in `init`, `voice_init`, `params` | the engine stops and reboots | caught, the slot is muted, the engine plays on |
-| Stereo | mono | a second output channel |
-| Audio input, effects | none | one design: machines and effects share the ABI |
-| Reading another slot | none | a signal bus, one block late |
-| Modulation of P1..P16 | the host's LFOs, `params` at most every 5 ms | one host layer, with hints from the plugin, delivered per block |
-| Own pages | labels only | declared pages, no drawing code |
+| Area | API 2 | API 3 | Status in 0.5.0 |
+|---|---|---|---|
+| The header, discovery, capability flags | none | `rmp_api3.h`, `rmp3_host`, `rmp3_plugin` | <span class="sc-ok">built</span> |
+| Loader: dual and API 3 only packages, table checks, `needs` | one table | both | <span class="sc-ok">built</span> |
+| Tempo, transport, song position | none | `b->transport`, a snapshot in every block | <span class="sc-ok">built</span> |
+| Memory | 64 KB of state per voice | a slot arena reserved at load | <span class="sc-ok">built</span> (pool sizes follow the board's RAM) |
+| A crash in `init`, `voice_init`, `params`, `render` | the engine stops and reboots | caught, the slot is muted, the engine plays on | <span class="sc-ok">built</span>: `init` and `setup` run on the control core with a 1 ms limit, not on core 0 |
+| Stereo | mono | `out_channels = 2` | <span class="sc-test">partly built</span>: PRE and POST routes; poly instances still render mono |
+| Effects | none | `RMP3_KIND_EFFECT` in the send FX slots UFX1..UFX4 | <span class="sc-ok">built</span> |
+| Effects on INSERT, bus and master positions | none | `places` | <span class="sc-plan">planned</span> |
+| Audio input (`aux`) | none | `aux_channels`, `b->aux` | <span class="sc-plan">planned</span> |
+| Reading another slot | none | a signal bus, one block late | <span class="sc-plan">planned</span> |
+| Modulation of P1..P16 | the host's LFOs, `params` at most every 5 ms | `b->p`, manifest hints | <span class="sc-test">partly built</span>: the LFOs as before; `b->p` only for effects in a send slot; hints, CCs, PERF macros, envelope followers and morph scenes <span class="sc-plan">planned</span> (morph is off in 0.5.0) |
+| Own pages | labels only | declared pages, no drawing code | <span class="sc-plan">planned</span> |
+| Recovering from an endless loop | reboot | core 0 watches core 3, the slot is skipped | <span class="sc-plan">planned</span> |
+| A muted slot shown as MUTED on the Rytm | none | a slot state | <span class="sc-plan">planned</span>: the web page's JSON and the log say `muted` and why; the Rytm sees the slot READY and silent |
+
+For the shipped effects and how to put one in a slot, see [User effects](/sidecar-expander/using/user-effects/). The sources of the examples and of the shipped effects are the `plugins/ufx_*` folders in the firmware repository.
 
 Sidecar Mini (Teensy) stays on API 2. API 3 is for the Pi 4 and Pi 5.
 
 ## The rules that do not change
+
+**Status:** <span class="sc-ok">built</span>. The guard catches faults and overruns in every plugin call; it does not catch stray writes.
 
 - **`render` runs in real time.** No waiting, no locks, no logging, no card, no allocator. A render core that misses 20 ms stops the engine.
 - **Core 3 has 2 ms.** The output FIFO holds 96 frames, 2 ms. Every control call eats that budget.
@@ -37,7 +47,7 @@ Sidecar Mini (Teensy) stays on API 2. API 3 is for the Pi 4 and Pi 5.
 
 ### Budgets
 
-From the current engine, on a Pi 4 at 1500 MHz.
+From the current engine, on a Pi 4 at 1500 MHz. Numbers marked built below are limits the 0.5.0 engine enforces.
 
 | | Number | Source |
 |---|---|---|
@@ -50,9 +60,10 @@ From the current engine, on a Pi 4 at 1500 MHz.
 | Built-in AMP, one slot | about 4 % of a core, 10 µs | boot bench |
 | Two CLOUDSEEDs | about 13 % of core 2, 32 µs | measured |
 | User insert | under 10 µs a block | proposed |
-| User send or master effect | under 30 µs a block | proposed |
-| A control call | aim 50 µs, limit 500 µs | proposed; 500 µs is the Mini's limit |
-| `view` | 100 µs | proposed |
+| User send effect | under 30 µs a block; muted after 16 calls in a row over 120 µs a 12-frame block, or one call over 2 ms | built |
+| User master effect | under 30 µs a block | planned |
+| A control call | aim 50 µs; three in a row over 500 µs mute the slot, one over 2 ms mutes it at once; `init` and each `setup` call over 1 ms refuse the package | built (API 3 plugins) |
+| `view` | 100 µs | planned |
 
 A Pi 5 runs at 2400 MHz, where the guard's budget is 78 µs of time. Write for the Pi 4: a machine that fits there fits both. No per-plugin benchmark of a Pi 5 against a Pi 4 exists yet.
 
@@ -65,6 +76,8 @@ Eight voices at the LFOs' 5 ms, 50 µs a `params` call, take 8 % of core 3. That
 | Slot arena, new | [below](#memory-the-slot-arena) |
 
 ## Versioning and capability flags
+
+**Status:** <span class="sc-ok">built</span>. A plugin that `needs` a capability the host lacks shows the slot BAD, "needs ...". The 0.5.0 host offers `RMP3_CAP_TRANSPORT`, `RMP3_CAP_STEREO`, `RMP3_CAP_EFFECT`, `RMP3_CAP_GUARD` and, when the board has a pool, `RMP3_CAP_ARENA`. It does not offer `RMP3_CAP_AUDIO_IN`, `RMP3_CAP_BUS`, `RMP3_CAP_BLOCK_P` or `RMP3_CAP_PAGES` (<span class="sc-plan">planned</span>). In `rmp3_host`, `board` is 4 or 5 and `cpu_mhz` is 0 for now. `RMP_API3` (3) is the `api` of an API 3 only table.
 
 Two facts of the current loader decide this:
 
@@ -81,18 +94,19 @@ So there are two ways to build.
 `host->api` stays what it was for a dual plugin, so a plugin that tests `api == 2` keeps working. Discovery goes through the reserved slot.
 
 ```c
-/* sdk/rmp/rmp_api3.h, proposed */
+/* sdk/rmp/rmp_api3.h (excerpt) */
 #include "rmp_api.h"
 
 #define RMP3_MAGIC 0x33504D52u   /* "RMP3" */
 #define RMP3_MINOR 0u            /* grows with fields added at the end; size says how many */
+#define RMP_API3 3u              /* rmp_plugin.api of an API 3 only table */
 #define RMP_H_V3 2               /* rmp_host.reserved[2]: const rmp3_host *, NULL on an older host */
 #define RMP_P_V3 4               /* rmp_plugin.reserved[4]: const rmp3_plugin *, NULL = plain API 2 */
 
 enum {                           /* what a host has (rmp3_host.caps), a plugin needs or wants */
   RMP3_CAP_TRANSPORT = 1u << 0,  /* b->transport */
   RMP3_CAP_ARENA     = 1u << 1,  /* the slot arena */
-  RMP3_CAP_GUARD     = 1u << 2,  /* the setup task, guarded control calls */
+  RMP3_CAP_GUARD     = 1u << 2,  /* guarded setup and control calls */
   RMP3_CAP_STEREO    = 1u << 3,  /* out[1] */
   RMP3_CAP_AUDIO_IN  = 1u << 4,  /* in[], aux[] */
   RMP3_CAP_EFFECT    = 1u << 5,  /* RMP3_KIND_EFFECT */
@@ -106,7 +120,7 @@ typedef struct rmp3_host {       /* 96 B on AArch64 */
   uint32_t size;                 /* sizeof as the host was built: never read past it */
   uint32_t minor;
   uint32_t caps;                 /* RMP3_CAP_* */
-  uint32_t board;                /* 4 or 5 */
+  uint32_t board;                /* 4 or 5; 0 on the Mac's test host */
   uint32_t cpu_mhz;              /* the clock now */
   uint32_t arena_limit;          /* the most one slot's arena may be, bytes */
   uint32_t reserved0;
@@ -264,9 +278,11 @@ Write `render` for any `n`. A voice gets 12, an effect up to 16.
 
 ## Host services: tempo, transport, song position
 
-**Today** the engine has the clock but gives it to no plugin. Core 3 reads the Rytm's MIDI realtime bytes and song position (F8, FA, FB, FC, F2), keeps a tick length and a position, and the LFOs and GRANULAR read them.
+**Status:** <span class="sc-ok">built</span>. `b->transport` is in every block. The structure is `rmp3_transport` with the flags `RMP3_T_RUNNING`, `CLOCKED`, `LOCKED`, `START`, `STOP` and `JUMP`; `lead_frames` is the estimate of 385. Bar length and the time signature are not reported (<span class="sc-plan">planned</span>, they would need a Rytm change).
 
-**Proposed:** `b->transport`, a snapshot.
+**Before 0.5.0** the engine had the clock but gave it to no plugin. Core 3 reads the Rytm's MIDI realtime bytes and song position (F8, FA, FB, FC, F2), keeps a tick length and a position, and the LFOs and GRANULAR read them.
+
+**Built:** `b->transport`, a snapshot.
 
 | | |
 |---|---|
@@ -286,6 +302,8 @@ Write `render` for any `n`. A voice gets 12, an effect up to 16.
 
 ## Memory: the slot arena
 
+**Status:** <span class="sc-ok">built</span>. The pool is `plugram=` MB (the defaults in the table below; none under 2 GB), a slot's arena is at most a quarter of the pool, and the same sizes hold on the Pi 4 and the Pi 5. `states` defaults to 8 for a machine, 40 for a poly machine (the `RMP_HF_INSTANCES` flag) and 2 for an effect.
+
 One arena per slot, reserved when the slot loads, before `setup`. `render` never asks for memory: there is no call to ask with.
 
 ```text
@@ -294,9 +312,10 @@ slot arena = shared part + states × voice part
 
 - **The pool:** one block of `plugram=` MB, taken from the heap at boot, before the pool RAM. It has to be one boot-time block: Circle does not reuse a freed block over 512 KB.
 - **`min` and `want`:** the host grants `want`, else `min`, else the slot shows `!ROOM`. Read what you got: a plugin sizes its buffers from `arena_bytes`, so the same package uses more on a bigger board.
-- **Load:** the arena is zeroed by core 0 in pieces, the slot stays LOADING meanwhile. It is never zeroed on core 3.
-- **Reuse:** space comes back at the next full reload with no voice playing, as with the code and data arenas today.
-- **States:** default 8 for a machine, 2 for an effect, 40 at most. A voice past `states` stays silent, and the page says `!ROOM`. Poly machines (`max_voices` over 1) must set it.
+- **Load:** the arena is zeroed on the control core in pieces of 256 KB, one in each idle step, and the slot stays LOADING meanwhile.
+- **Reuse:** when a slot loads again, empties or takes another plugin, its block goes to the top of the pool or to a short list of free blocks that a later load reuses. Only when the free space is there but in pieces does a load reload every slot.
+- **States:** default 8 for a machine, 40 for a package with the `RMP_HF_INSTANCES` flag (a poly machine), 2 for an effect. A voice past `states` stays silent, and the slot says so in words ("no room: ..."). `rmp3_voice.instance` is -1 for a voice's own state and the arena part of poly instance `i` is part `8 + i`.
+- **No guard words:** arena parts are not cleared between occupants and an overrun into the next part is not caught.
 - **After the load:** `voice_init` zeroes the state, not the arena. Keep offsets in the state, and clear what you need in pieces: the built-in send FX clear at most 24 KB a block.
 - **Pointers:** the host gives them to `setup` and `voice_attach`. Keep them in the state, never in a global: slots naming one package share `.data` and `.bss`.
 - **Not code:** arena memory is ordinary, not executable.
@@ -316,21 +335,23 @@ For scale: 8 s of stereo float is 3.84 MB. Today's 64 KB of state holds 0.68 s o
 
 ## Protected setup callbacks
 
-**Today:** a fault in `init`, `voice_init`, `params`, `note_on` or `note_off` runs outside the guard. The exception handler takes it as fatal, core 0 stops the stream and the Pi reboots. Only `render` on cores 1 and 2 is guarded.
+**Status:** <span class="sc-ok">built</span>, with one difference from the first design: `init` and `setup` run on the control core (core 3) in the load's idle step, with a limit of **1 ms a call**, not in a core 0 task with 100 ms. A `setup` that needs more returns `RMP3_SETUP_MORE` and is called again from the next idle step, up to 4000 times, with the engine playing in between. The recovery from an endless loop is <span class="sc-plan">planned</span>.
 
-**Proposed:** the same mechanism on the control side. The render guard already jumps back into its core's loop from the exception handler; each guarded core gets that jump buffer, and every plugin call goes through one trampoline.
+**Before 0.5.0** a fault in `init`, `voice_init`, `params`, `note_on` or `note_off` ran outside the guard. The exception handler takes it as fatal, core 0 stops the stream and the Pi reboots. Only `render` on cores 1 and 2 is guarded.
+
+**Built:** the same mechanism on the control side. The render guard already jumps back into its core's loop from the exception handler; each guarded core gets that jump buffer, and every plugin call goes through one trampoline.
 
 | Call | Runs on | Time | A fault | Too long |
 |---|---|---|---|---|
-| `init`, `setup` | a setup task on core 0, no voices on the slot | limit 100 ms | slot BAD, "crashed in setup", image unloaded | slot BAD |
+| `init`, `setup` | the control core (core 3), in the load's idle step | limit 1 ms a call; `setup` may return `RMP3_SETUP_MORE` | slot BAD, the package refused | package refused |
 | `voice_init`, `voice_attach`, `voice_enter`, `voice_leave` | core 3 | aim 50 µs, limit 500 µs | every voice on the slot muted | three in a row: muted |
 | `params`, `note_on`, `note_off`, `load_entry`, `view` | core 3 | the same | the same | the same |
 | `render` | render core | as today | the voice muted | as today |
 | effect `render` on core 2 | after the block | declared | the slot muted, returns silent | muted when core 2 is overloaded |
 
-Moving `init` off core 3 is the point of `setup`: table building belongs there, with up to 100 ms of room. A `setup` over that is a refused package, not a stall.
+`setup` is where table building belongs: do it in pieces of under 1 ms and return `RMP3_SETUP_MORE` until done. A call over 1 ms is a refused package, not a stall.
 
-**After a fault** the slot's states and shared part count as lost. The slot shows MUTED, with `crashed in params at +0x1234` in the log, the offset inside the code. The next assign or reload re-zeroes the states, zeroes the arena and runs `voice_init` again.
+**After a fault** the slot's states and shared part count as lost. The slot is muted: the web page's JSON says `muted` and why (`muted: crashed in params at +0x84`, the offset inside the code) and the log says it too. The Rytm still sees the slot READY, silent (planned as a slot state on the Rytm). A fault also mutes every slot that shares the faulting slot's image. The next assign or reload re-zeroes the states, zeroes the arena and runs `voice_init` again.
 
 **What is caught**
 
@@ -350,9 +371,11 @@ Host calls run inside the guard too. `log` copies its string with a bounded, fau
 
 ## Stereo output
 
-**Today** `render` is mono, and a voice on OUT PRE or POST is a stereo pair with L = R.
+**Status:** <span class="sc-test">partly built</span>. `out_channels = 2` works on voices routed OUT PRE and POST (`out[1]` is written), and on TRK `out[1]` is NULL and `RMP3_B_MONO_OUT` is set. Poly instances of a stereo plugin still render mono (`out[1]` is NULL for them).
 
-**Proposed:** declare `out_channels = 2`.
+**Before 0.5.0** `render` was mono, and a voice on OUT PRE or POST is a stereo pair with L = R.
+
+**Built:** declare `out_channels = 2`.
 
 | OUT route | `b->out` | What goes back |
 |---|---|---|
@@ -364,30 +387,35 @@ Host calls run inside the guard too. `log` copies its string with a bounded, fau
 - Write a sensible mono mix on TRK, not just L. Do not assume a route: it can change while a voice plays, with an 8 ms crossfade.
 - The level, the clip to ±1 and NaN to 0 apply per channel, as they do to mono today.
 - The voice's INSERT chain already runs in stereo on PRE and POST. LEV, PAN and WID stay the host's.
-- Poly instances mix per channel into the voice. A mono instance goes to both sides.
+- Poly instances of a stereo plugin still render mono in 0.5.0: their `out[1]` is NULL.
 - A stereo render costs what your code costs: one voice budget, not two.
 
 ## Effects and audio input
 
+**Status:** <span class="sc-test">partly built</span>. **Built:** effects (`kind = RMP3_KIND_EFFECT`, API 3 only) in the **send FX slots**, the UFX1..UFX4 slots (TYPE ids 64..67). **Planned:** the INSERT, bus and master positions, and audio input (`aux`). Only `RMP3_AT_SEND` is accepted today.
+
 One design: loadable effects (the reserved UFX1..UFX4) are packages with `kind = RMP3_KIND_EFFECT`, API 3 only. Same loader, same guard, same manifest, same page format. Built-in effects stay as they are.
 
-A project's slot map `/.rytm/fxslots/<project>.txt` names the package in UFX1..UFX4. The kit stores the tag, so a kit on a Sidecar without that effect shows `!NAME`. TYPE ids 64..67 are UFX1..UFX4, on send slots and INSERT slots alike. One package can sit in several positions; each position is one state.
+A project's slot map `/.rytm/fxslots/<project>.txt` names the package in UFX1..UFX4. The kit stores the tag, so a kit on a Sidecar without that effect shows `!NAME`. TYPE ids 64..67 are UFX1..UFX4. In 0.5.0 they are on the send slots only; the INSERT positions are planned. One package can sit in several positions; each position is one state.
 
-| Position (`places`) | Runs on | `n` | Input | Output | Dry / wet |
-|---|---|---|---|---|---|
-| `RMP3_AT_INSERT`, 2 slots on each of 8 voices | the voice's render core, after the voice | 12 | the voice: mono on TRK, stereo on PRE / POST | replaces it | the plugin's own MIX |
-| `RMP3_AT_BUS`, 2 slots on each of 3 buses | core 2, after its block | up to 16 | stereo | replaces it | the plugin's own MIX |
-| `RMP3_AT_SEND`, FX1 and FX2 | core 2, after its block | up to 16 | mono: stems × send levels. `in[1]` NULL | stereo, **wet only** (`RMP3_B_WET_ONLY`) | the track's send knob |
-| `RMP3_AT_MASTER`, in a build with a master chain | core 2, after the send FX | up to 16 | stereo | replaces it | the plugin's own MIX; off is bypass, bit for bit |
+| Position (`places`) | Status | Runs on | `n` | Input | Output | Dry / wet |
+|---|---|---|---|---|---|---|
+| `RMP3_AT_INSERT`, 2 slots on each of 8 voices | planned | the voice's render core, after the voice | 12 | the voice: mono on TRK, stereo on PRE / POST | replaces it | the plugin's own MIX |
+| `RMP3_AT_BUS`, 2 slots on each of 3 buses | planned | core 2, after its block | up to 16 | stereo | replaces it | the plugin's own MIX |
+| `RMP3_AT_SEND`, FX1 and FX2 | built | core 2, after its block | up to 16 | mono: stems × send levels. `in[1]` NULL | stereo, **wet only** (`RMP3_B_WET_ONLY`) | the track's send knob |
+| `RMP3_AT_MASTER`, in a build with a master chain | planned | core 2, after the send FX | up to 16 | stereo | replaces it | the plugin's own MIX; off is bypass, bit for bit |
 
 - **A mono voice chain and a stereo effect:** `out[1]` and `in[1]` are NULL, as for a machine on TRK. Handle it, or leave `RMP3_AT_INSERT` out of `places`.
 - **In a send slot, ignore your MIX knob.** `RMP3_B_WET_ONLY` says so.
-- **Fades are the host's.** A TYPE change fades 5 ms on an insert and 10 ms on a send, then starts a fresh state, so a new effect never clicks. Do not fade in yourself.
+- **Fades are the host's.** A TYPE change fades (10 ms on a send, 5 ms planned on an insert), then starts a fresh state, so a new effect never clicks. Do not fade in yourself.
 - **Latency:** declare `latency_frames`, 0 to 4096 (85 ms, the built-in delay line). The host does not delay anything else to match: the Rytm's 12 tracks have no common delay compensation, and a voice arriving later is your sound. Keep your own dry path aligned if you have a MIX knob.
-- **Knobs:** P1..P8 with labels and lists, as a machine's. On a Rytm send slot only four kit words exist (P2..P5 of the send page), so P1..P4 of the effect are the ones stored in the Rytm's kit and on its knobs. P5..P8 live in the Sidecar's kit file and on host-drawn pages. An INSERT slot has four knobs on today's page.
-- **Effects are guarded and budgeted** by `cpu_permille`, as machines are.
+- **Knobs (send slot, built):** the slot's P2..P5 reach the effect as P1..P4 in `b->p`, with `p_changed`. The Rytm shows the effect's own knob names (the host sends them from the manifest). P1..P8 with labels and lists, as a machine's. On a Rytm send slot only four kit words exist (P2..P5 of the send page), so P1..P4 of the effect are the ones stored in the Rytm's kit and on its knobs. P5..P8 live in the Sidecar's kit file and on host-drawn pages. An INSERT slot has four knobs on today's page.
+- **Effects are guarded and budgeted** on core 2: 16 calls in a row over 120 µs a 12-frame block, or one call over 2 ms, mute the effect.
+- **Installing:** `um=fx:<n>:<id>` on the console, the USER SLOTS page on the Rytm (rows UFX1..UFX4) or the Effects section of the web page's User machines card put an installed effect in UFX`n`; the assignment is kept per project in `/.rytm/fxslots/<project>.txt`.
 
 ### Audio input
+
+**Status:** <span class="sc-plan">planned</span>. `aux_channels`, `in[]` and `aux[]` are in the header, but the host does not offer `RMP3_CAP_AUDIO_IN`.
 
 A machine or an effect may declare a side input with `aux_channels`: a vocoder, a sidechain key, a machine that plays the input. The user picks the source on a page. It is never the plugin's choice.
 
@@ -405,6 +433,8 @@ A machine or an effect may declare a side input with `aux_channels`: a vocoder, 
 - An empty or refused source reads zeros. `b->aux` is never a dangling pointer.
 
 ## Host signal bus
+
+**Status:** <span class="sc-plan">planned</span>. `sig_out`, `sig_in` and the block's signal fields are in the header. The host does not offer `RMP3_CAP_BUS`: a plugin that declares signals gets silence in and a sink out, and a plugin that `needs` the bus is refused.
 
 Slots exchange audio and control signals through the host, never through shared globals. The ABI hooks come now; the routing UI comes later. Until then a route is set on the console, and an unrouted input reads silence.
 
@@ -430,6 +460,8 @@ block g+1:  publishers write bank (g+1) & 1      readers read what g wrote
 A published control signal is also a [modulation source](#host-side-modulation).
 
 ## Host-side modulation
+
+**Status:** <span class="sc-test">partly built</span>. The Sidecar's LFOs (26 on the Pi in 0.5.0) move P1..P16 of user machines through `params`, as before. `b->p` and `p_changed` are handed to **effects in a send slot** (the slot's P2..P5 as P1..P4), without `RMP3_CAP_BLOCK_P`. Machines do not get `b->p` yet. The manifest's `mod` hints, CCs, PERF macros, envelope followers and trigs as sources are <span class="sc-plan">planned</span>. Morph scenes are <span class="sc-plan">planned</span> too: morph is off in 0.5.0.
 
 One modulation layer in the host, shared with morph scenes. No plugin cooperation is needed: every plugin, API 1 and 2 included, can be modulated on P1..P16.
 
@@ -476,6 +508,8 @@ With `b->p`, recompute only what `p_changed` names, and keep that work inside th
 Build the machine for a value that moves. Do not rebuild tables, reallocate or restart on a `cont` knob. If a knob restarts something, declare it `step` or `trig`.
 
 ## Custom pages
+
+**Status:** <span class="sc-plan">planned</span>. `rmp3_page`, `rmp3_cell`, `rmp3_view` and the `view` call are in the header as declarations only. The host does not offer `RMP3_CAP_PAGES` and never calls `view`. A user machine's page is still the stock SRC page with its manifest labels.
 
 A plugin declares its pages as data. It ships no drawing code, and it needs no Rytm flash: the Rytm side stays blit and input, and all layout is host code.
 
@@ -600,6 +634,8 @@ typedef struct rmp3_page {       /* 64 B, then nrytm + ntouch cells */
 
 ## Compatibility
 
+**Status:** <span class="sc-ok">built</span>. A test plays every API 2 package in the repository through the 0.5.0 host and compares the sound with the API 2 host's: the results are identical.
+
 - **API 1 and API 2 plugins keep working, unchanged and not rebuilt.** `RMP_API_MIN` stays 1, every table stays its size, and format 3..5 packages load as they do.
 - **An unchanged plugin on an API 3 host gains** guarded control calls, host modulation and a page made from its manifest. It stays mono, with no arena and no clock.
 - **The `id` stays.** A new id orphans users' sounds through the sound tag. Add `compatible_from` as usual. Keep P numbers stable; add new ones at the end.
@@ -638,6 +674,8 @@ An API 3 host calls `g3.render` and never the old one. An older host calls `g_re
 | `manifest.json` | new keys `pages`, `mod`, `mod_lo`, `mod_hi`, `smooth_ms` | the packer is the new SDK's; the old one refuses unknown keys |
 
 ## Write it this way today
+
+**Status:** the advice holds. The arena, the transport and stereo exist now, so steps 3 and 5 can use them; the others (audio input, the bus, pages) do not yet.
 
 Do these now, on API 2. The retrofit then touches one file.
 
@@ -694,6 +732,8 @@ static void g_render3(void *s, const rmp3_block *b) {
 
 ## Worked examples
 
+**Status:** the two examples are design sketches, not shipped code. Shipped effects are PHASER, BBD, NIMBUS and GALACTIC, and PINGPONG is the tempo-synced stereo delay used as the example in the firmware repository (`plugins/ufx_*`).
+
 These are shapes, not ported code. Before a port, check the project's licence: see [Licence and bundling](/sidecar-expander/developers/writing-user-machines/#licence-and-bundling). Use your own names. The ER-301's graph of units and its Lua layer are out of scope: a port is one unit, or one fixed chain, as C or C++.
 
 ### An ER-301 glitch unit
@@ -731,6 +771,8 @@ One drum per track, as on [one track, one voice](/sidecar-expander/developers/wr
 What stays impossible on both: one call that renders the whole kit, and choke groups across tracks. A pair like CH/OH still shares a voice.
 
 ## Open questions
+
+Answered by the 0.5.0 engine: **2** (`init` and `setup` run on the control core with a 1 ms limit, in pieces) and **9** (effect faults on core 2 are caught and mute the effect). Question 8 for a send slot: the effect gets a mono input and writes stereo wet. The rest are still open.
 
 Plainly open, in the order they matter.
 

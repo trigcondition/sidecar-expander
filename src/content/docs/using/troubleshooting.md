@@ -12,11 +12,14 @@ sidebar:
 | The Rytm shows the Sidecar machines but nothing plays, and nothing comes from the Pi | the Pi has not started the Sidecar. The card's files must be at its top level, not in a folder ([Check the card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)); the Rytm in a USB-A port of the Pi, not USB-C; the official supply. Pi 5: a red LED means it is off, press its power button once |
 | The card shows as `bootfs`, or holds `initramfs8`, `initramfs_2712` or `fixup_cd.dat` | it is still a Raspberry Pi OS card, and the Pi starts that instead of the Sidecar (its `config.txt` is Raspberry Pi OS's). Erase the card to FAT32 (Raspberry Pi Imager: CHOOSE OS > Erase), then copy the card zip's contents again ([Make the SD card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card)). Use the `sidecar-pi-sd-…` zip, not GitHub's "Source code" zip |
 | No Sidecar voices | USB CONFIG is the Overbridge mode; the Rytm is plugged straight in, no hub; the Sidecar's log shows `ob: streaming` and `MIDI attached` (`sidecar.local` Log & console tab) |
+| Sidecar voices are quieter than before, or than the Rytm's own voices | from 0.5.0 every Sidecar voice plays about 9 dB lower, so it no longer clips at the track ceiling. Set the balance with the track's level ([Voices and machines](/sidecar-expander/using/machines/)) |
 | Voices silent right after plugging in | once the Rytm sent no USB MIDI for about 50 seconds while its audio already streamed. Wait a minute, or replug the USB cable |
 | In CHRO mode every pad plays the same note on a Sidecar machine or a poly track | the track's sound: **CHROMATIC** on SYNTH or SYN+SMP (FUNC + FLTR); on OFF or SAMPLE the Rytm sends no pitch. A sound keeps the setting when its machine changes, so one track can be off while others work. Also check the track's arpeggiator is off. The MD drums take no pitch from the pads: tune them with PTCH |
 | Chords held on the CHRO pads play one note, or the CHRO pads play nothing on a poly track | SETTINGS > MIDI CONFIG > PORT CONFIG: **PAD DEST** = INT+EXT and OUTPUT TO including USB. (Before 0.4.3 the first hit after selecting a poly track could be silent: update the card.) |
-| In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4: before, those pages took UP / DOWN |
-| No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
+| In CHRO mode UP / DOWN do not move the pads' range on the SEQ page (UP + TRIG) or the ARP page (UP + FLTR) | update the card to 0.4.4 or later: before, those pages took UP / DOWN |
+| No CONNECTED screen when the Rytm is switched on after the Sidecar | flash the Rytm firmware 0.4.4 or later: the Rytm firmware 0.4.0 shows it only when the Sidecar connects to a Rytm that is already on |
+| The CHRO pads enter no notes into a held step on a poly track (JUNO, DAISYSP, PLAITS) | the pads enter notes only in **CHRO pad mode**: the CHRO key must be lit. The sound's CHROMATIC setting does not decide it. Update the card to 0.5.0: before, JUNO, DAISYSP and PLAITS poly tracks took no pad notes, and live recording missed them |
+| A poly track on JUNO sounds late, or a chord swells in late | a slow JUNO attack (**ATK**) does it: try ATK 0. Also check that the poly track's **LENGTH** and **SPEED** match the Rytm track's |
 | A MIDI keyboard on the Pi plays the FM and poly tracks but not JUNO, PLAITS, DAISYSP or the Rytm's own tracks | SETTINGS > MIDI CONFIG > PORT CONFIG: **RECEIVE NOTES** on and INPUT FROM including USB ([MIDI keyboards on the Pi](/sidecar-expander/using/usb-audio-midi/#midi-keyboards-on-the-pi)) |
 | A track shows `!NAME` | the Sidecar cannot play that machine or effect: see [!NAME on the Rytm](/sidecar-expander/using/user-machines/#name-on-the-rytm) |
 | P2..P5 show numbers, not names | the Sidecar's firmware is older than the mods: update it |
@@ -26,12 +29,12 @@ sidebar:
 | No Sidecar voices after the Pi restarted, while the Rytm stayed on | seen once: the Sidecar's audio to the Rytm stayed silent. Restart the Rytm |
 | STUTTER is silent or always on | see [Set up STUTTER](/sidecar-expander/using/send-effects/#set-up-stutter-route-to-main): ROUTE TO MAIN off, P2 at 0 first |
 | The Rytm froze | power cycle it, and report what the Sidecar was doing |
-| The Pi does not start | the `# sidecar sdboot begin` block must stay in `config.txt`; use the official supply: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5 (a weak supply browns out with a display attached). A Pi 5 showing its boot diagnostics screen needs a bootloader update |
+| The Pi does not start | the `# sidecar sdboot begin` block must stay in `config.txt` (the [card config editor](/sidecar-expander/getting-started/config-editor/) writes a fresh `config.txt` and `cmdline.txt` for your board and display); use the official supply: 5.1 V 3 A for the Pi 4, 27 W for the Pi 5 (a weak supply browns out with a display attached). A Pi 5 showing its boot diagnostics screen needs a bootloader update |
 | `POWER TOO WEAK` on the display, a Power warning on the web page | the supply is too weak: the official one, plugged in directly (Pi 5: the 27 W (5 V 5 A) adapter; Pi 4: the official 15 W (5.1 V 3 A) supply; the message names the board's own) |
 | Pi 5: the web page is slow over Wi-Fi, "503 busy" | power the Pi 5 from the 27 W adapter directly, not from a hub's port |
 | Clicks or muted voices when the Pi is hot, `CLOCK LOWERED` on STATUS | the temperature on the Status tab: see [Keeping it cool](#keeping-it-cool) |
 | The Pi restarted by itself | see [After an unexpected restart](#after-an-unexpected-restart) |
-| Pi 5: no picture on HDMI | micro-HDMI 0 (next to USB-C), connected before power-on; `hdmi_force_hotplug=1` under `[pi5]` in `config.txt` |
+| Pi 5: no picture on HDMI | micro-HDMI 0 (next to USB-C), connected before power-on; `hdmi_force_hotplug=1` under `[pi5]` in `config.txt` (the [card config editor](/sidecar-expander/getting-started/config-editor/) makes the file) |
 
 ## Keeping it cool
 
@@ -39,13 +42,15 @@ The Pi 4B runs the Sidecar at 1500 MHz. When the chip gets too hot the Pi protec
 
 **Idle sleep (0.4.0):** all four cores now sleep while they wait instead of spinning, so the Pi runs cooler: on a Pi 5 with a light load, 66 °C flat where it reached 79 °C in 16 minutes before. `/status` shows it as "idle". `idlewfe=0` in `cmdline.txt` turns it off.
 
+On a Pi 5 the Sidecar drives the fan header itself (AUTO, ON or OFF): see [The Pi 5's fan](/sidecar-expander/using/pi5-fan/).
+
 | Temperature | What you see |
 |---|---|
 | below 78 °C | nothing: the full clock |
 | 78 to 79 °C | the clock is lowered to 600 MHz. Quietly: the STATUS page's CPU line says `CLOCK LOWERED`, and the web page's Temperature tile says so too. No popup |
 | 80 °C and up | the warning: a banner on the touchscreen (`SOC 80C - CLOCK LOWERED TO 600 MHZ`), a popup on the Rytm (`SOC 80C CLOCK LOWERED / TO 600 MHZ (UP+T10)`, or `SIDECAR RUNNING HOT / SEE STATUS` when the clock is not lowered), HOT on the STATUS page. It goes away below 75 °C |
 
-- **Use a fan or a heatsink**, especially in a closed case or with a display attached. This is the real fix. A case fan helps a lot: on a Pi 4 in a display case, 72 °C while playing without the fan, 56 °C within a minute with it.
+- **Use a good heatsink or a fan**, especially in a closed case or with a display attached. This is the real fix. A good passive heatsink (a large aluminium heatsink case) works well and is silent. A case fan helps a lot: on a Pi 4 in a display case, 72 °C while playing without the fan, 56 °C within a minute with it.
 - **Watch the temperature:** the web page's Status tab and the touchscreen's STATUS page (UP + T10). Under 75 °C the Pi always runs at its full clock.
 - The Rytm's popup does not cover a page you are working on: it waits until you close the page.
 - **Lower the clock** while you find a fix: on the touchscreen **Settings > System > CPU clock** (it is not on the web page; the console's `cpumhz=1200` / `cpumhz=1000` or the same word in `cmdline.txt` do the same) runs the Pi at 1200 or 1000 MHz instead of 1500. It runs cooler, and the Sidecar's voice budget follows the clock.
@@ -75,7 +80,7 @@ The releases' own lists are in the release notes: [0.4.4](/sidecar-expander/rele
 ### Rytm mods
 
 - **User FX slots are not available yet.** The TYPE list offers the built-in effects only.
-- **OS 1.74 and 1.73 only.** There is one build for each. The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
+- **OS 1.74 only (0.5.0).** Sidecar 0.5.0 has one build, for OS 1.74 (0.4.4 and older also had one for 1.73). The 1.74 build has run on a real Rytm. On any other OS, first flash Elektron's stock 1.74 file, as any OS update. You can move between 1.73 and 1.74 in both directions with Elektron's stock files; back up your projects first, and keep your own copy of 1.73, which Elektron no longer offers ([Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)).
 - **The sample browser can lag** while you scroll a large folder with the Sidecar connected. Report the folder size and whether the sequencer was running.
 - The slot menu can hold the screen for up to 2 seconds while the Sidecar answers.
 

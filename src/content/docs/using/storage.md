@@ -19,6 +19,14 @@ The Sidecar boots from its **SD card**, which stays the place of record: project
 | USB drives (up to three) | `USB`, `USB2`, `USB3` | Pi 4B, Pi 5 |
 | NVMe SSD on the PCIe connector | `NVME` | Pi 5 |
 
+## The SD card image grows to fill the card (0.5.0)
+
+The release's **SD card image** (one for 800x480, one for 1024x600) is small, about 3 GiB once written. On its **first boot** from a larger card, the Sidecar stretches the image's one partition and its FAT32 volume to fill the card, so the room for samples, recordings and projects is the card's size, up to 512 GiB. The first boot takes a little longer. It runs once, before anything else uses the card. The log says `SD: grew the card from X MB to Y MB`. See [Make the SD card](/sidecar-expander/getting-started/install-pi/#make-the-sd-card) for writing the image.
+
+- **A power cut is safe.** The Sidecar writes the new sizes in an order that always leaves a card that boots, and reads each write back to check it. If a check fails, it stops and logs the reason. The next boot tries again.
+- **It leaves a card alone** that is not the image's own: a card you formatted yourself, one with more than one partition, or a volume that is not the image's. It also leaves a card with less than 64 MiB to gain, and a card that is already full size.
+- **`sdgrow=0` in `cmdline.txt` turns it off** (the default is 1). Add it by hand to the one line of `cmdline.txt`: the [card config editor](/sidecar-expander/getting-started/config-editor/) has no field for it, but keeps it when you paste the card's `cmdline.txt` in. An engine test mode never grows the card.
+
 ## Saves are instant, and safe in a power cut
 
 <span class="sc-ok">hardware</span> (2026-10-26: no clicks on kit and pattern changes, a power cut after an edit kept everything). When a project loads, the Sidecar reads its small files (the poly patterns, the LFOs, the insert settings, the pool lists) into RAM. While you play:
@@ -48,7 +56,7 @@ The log and the web page say which it is: "GPT partition table: use the MBR sche
 - **Eject before pulling it:** the web page's **Eject**, the PROJECT page's EJECT, or `stor=eject:USB` on the console. It then says "ejected: safe to remove". A drive pulled while mounted is unmounted at once; a write in progress can be lost (FAT32 has no journal).
 - An ejected drive left plugged in: `stor=rescan` (Pi 4) brings it back; on the Pi 5 unplug and plug it.
 - A drive that did not mount (wrong format) and was re-formatted: plug it in again, or `stor=mount:USB`.
-- Some sticks need `usbpowerdelay=1500` in `cmdline.txt` to be found.
+- Some sticks need `usbpowerdelay=1500` in `cmdline.txt` to be found (add it by hand; the [card config editor](/sidecar-expander/getting-started/config-editor/) keeps options it has no field for).
 
 ## NVMe SSD (Pi 5)
 

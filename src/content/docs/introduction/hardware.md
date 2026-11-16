@@ -7,7 +7,7 @@ sidebar:
 
 ## On the Rytm side
 
-- An **Analog Rytm MKII on OS 1.74 or OS 1.73**. There is one build of the mods for each, built against that exact OS; elekloader refuses a module made for another OS. The 1.74 build has run on a real Rytm.
+- An **Analog Rytm MKII on OS 1.74**. Sidecar 0.5.0 is built for OS 1.74 only; elekloader refuses a module made for another OS. (Sidecar 0.4.4 and older also have a build for OS 1.73.)
   - An older OS: update to 1.74 first (Elektron offers only 1.74 now).
   - You can move between 1.73 and 1.74 in both directions with Elektron's stock files (Elektron offers only 1.74 now, so keep your own copy of 1.73 if you want it): see [Which OS](/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173).
   - A newer OS than 1.74: not supported yet.
@@ -23,9 +23,9 @@ Sidecar Mini (Teensy 4.1) is frozen at 0.1.0; its docs are in the [0.2 docs](/si
 :::
 
 
-- A **Raspberry Pi 4 Model B** (2 GB or more) or a **Raspberry Pi 5**. One SD card set boots both.
+- A **Raspberry Pi 5** (recommended: it has a lot more headroom, for more voices and effects) or a **Raspberry Pi 4 Model B** (works). **2 GB** of memory is the minimum and **4 GB or more** is recommended, so the unit is ready for future releases. One SD card set boots both.
 - The official **USB-C power supply**: 5.1 V 3 A for the Pi 4, **27 W** for the Pi 5, plugged in directly (not through a hub).
-- A **heatsink or a fan** (a case with a fan, or at least a heatsink on the SoC). The Pi runs the Sidecar's audio at full clock; above its temperature limit it slows itself down to 600 MHz, and the sound can drop out. See [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool).
+- A **heatsink or a fan**. We recommend a **good passive heatsink** (a large aluminium heatsink case): it keeps the Pi cool and it is silent. A fan works too: a case fan, or on a Pi 5 the official Active Cooler on the fan header, which the Sidecar drives ([The Pi 5's fan](/sidecar-expander/using/pi5-fan/)). The Pi runs the Sidecar's audio at full clock; above its temperature limit it slows itself down to 600 MHz, and the sound can drop out. See [Keeping it cool](/sidecar-expander/using/troubleshooting/#keeping-it-cool).
 - A **microSD card**, 1 GB or more. A fast, larger card is better for the recorder.
 - A **USB A-to-B cable** from the Pi to the Rytm.
 - Optional: a **touch display**. Not needed to play or edit: the Sidecar's pages open on the Rytm's own screen, and the web page covers setup ([A screen is optional](/sidecar-expander/introduction/what-is-sidecar/#a-screen-is-optional)). It adds the piano roll, the scope and the status at a glance. Displays: an 800x480 HDMI display with USB touch (tested with a 5" HDMI LCD), a 7" DSI display compatible with the official display v1 (tested with the OSOYOO 7" DSI on a Pi 4), or in 0.3.0 a 1024x600 HDMI display. See [The display](/sidecar-expander/using/display/#which-displays-work).

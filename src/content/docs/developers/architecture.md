@@ -1,22 +1,26 @@
 ---
 title: Architecture
-description: The shared core, the Pi engine on Circle, the Teensy host build, and the Rytm mods.
+description: The shared core, the Pi engine on Circle (Pi 4B and Pi 5), the frozen Sidecar Mini, and the Rytm mods.
 sidebar:
   order: 1
 ---
 
-Sidecar has three code bases: the **engine** (one shared core with a Teensy, a Pi and a Mac port), the **Rytm mods** (built on elekloader), and the **web tools** (the patcher and the consoles). The source is public: the engine in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware), the mods in [sidecar-mods](https://github.com/trigcondition/sidecar-mods).
+Sidecar has three code bases: the **engine** (one shared core, run on the Raspberry Pi; a Mac port is for tests and the emulator link, and the frozen Sidecar Mini has its own build), the **Rytm mods** (built on elekloader), and the **web tools** (the patcher and the consoles). The source is public: the engine in [sidecar-firmware](https://github.com/trigcondition/sidecar-firmware), the mods in [sidecar-mods](https://github.com/trigcondition/sidecar-mods).
 
 ```
-              USB (the Sidecar is the host, Overbridge mode)
- Analog Rytm MKII  ─────────────────────────────────────────  Sidecar (Teensy 4.1 or Pi 4B)
- ┌───────────────────────┐   audio: 12 ch in / 12 ch out      ┌──────────────────────────────┐
- │ patched OS 1.73        │ ◄────────────────────────────────► │ platform layer               │
- │  + elekloader core     │   USB MIDI: host-link SysEx        │   USB host, Overbridge, MIDI │
- │  + Sidecar mods        │   F0 7D 52 54 <cmd> ... F7         │ core/  (shared, C++17)       │
- │    EXT machines, pages │ ◄────────────────────────────────► │   voices, host link, pool,   │
- │    report trigs/knobs  │                                    │   send FX, user slots, UI    │
- └───────────────────────┘                                    └──────────────────────────────┘
+ Analog Rytm MKII                    Raspberry Pi 4B / Pi 5
+ ┌──────────────────────┐          ┌───────────────────────────┐
+ │ patched OS 1.74      │   USB    │ USB host: Overbridge, MIDI│
+ │ + elekloader core    │ ◄──────► │ core/ (shared C++17):     │
+ │ + Sidecar mods:      │12 ch each│   voices, send FX,        │
+ │   EXT machines,      │way audio,│   user FX, host link,     │
+ │   pages, reports     │host-link │   pool                    │
+ │                      │  SysEx   │ web server, /ws, web app  │
+ │                      │          │ touchscreen UI (LVGL)     │
+ └──────────────────────┘          └─────────┬────────┬────────┘
+                                             │        │
+                                      touchscreen  browser,
+                                      (HDMI/DSI)   computer
 ```
 
 ## The audio path
@@ -28,7 +32,7 @@ Sidecar has three code bases: the **engine** (one shared core with a Teensy, a P
 
 ## The shared core (`core/`)
 
-Portable C++17, built from one source for the Teensy, the Pi and the Mac (tests, emulator link).
+Portable C++17, built from one source for the Pi, the Mac (tests, emulator link) and the frozen Sidecar Mini.
 
 | Part | What |
 |---|---|
@@ -36,19 +40,19 @@ Portable C++17, built from one source for the Teensy, the Pi and the Mac (tests,
 | `voices.*`, `machines.h` | the 8 voices and the machines; the voice byte's machine bits select PLAITS, JUNO, DAISYSP, DSP SAMPLE, MD (DIGIDRUM before 0.3.0), 6-OP FM or U1..U5 |
 | `host_link.*`, `sysex.*`, `slots.*` | the host-link protocol in and out ([Host-link protocol](/sidecar-expander/developers/host-link-protocol/)) |
 | `notes.*` | the note adapter: a stock Rytm's MIDI notes as the mods' reports |
-| `main_out.h` | the voices summed on MAIN for a stock Rytm, with a fade-in and a -12 dBFS limit |
+| `main_out.h` | the voices summed on MAIN for a stock Rytm, with a fade-in and a soft limit at the -12 dBFS track ceiling (0.5.0) |
 | `fx/` | the send effects (`SendFx`, header-only, no allocation) and their knob labels |
 | `pool/`, `presets/` | the card index, the per-project sample pool, the JUNO and DX7 libraries |
 | `user/` | the user machine glue for the Pi and the Mac (scan, slots, loading) |
 | `ui/` | the remote UI: 1-bit canvas, fonts, widgets, page declarations, the remote host |
-| `lfo.*` | the Sidecar LFOs (8 on the Pi, 4 on the Mini) |
+| `lfo.*` | the Sidecar LFOs (26 on the Pi in 0.5.0, 4 on the Mini) |
 | `rec/` | the recorder code shared by both Sidecars (WAV headers, names, the Mini's recorder) |
 
 Rules: one engine per program; one `render_voices` call per 12-frame block, or disjoint voice ranges on several cores (the Pi); the render path never allocates, blocks or logs; every new SysEx message goes through `sysex.*` with a test against the protocol reference.
 
 ## The Pi engine (`pi/engine`)
 
-A **bare-metal kernel on Circle** for the Pi 4: no Linux, four cores with fixed roles.
+A **bare-metal kernel on Circle** for the Pi 4B and the Pi 5 (one SD card boots both, with a kernel for each): no Linux, four cores with fixed roles.
 
 | Core | Role |
 |---|---|
@@ -59,23 +63,19 @@ A **bare-metal kernel on Circle** for the Pi 4: no Linux, four cores with fixed 
 
 - **Overbridge host:** a Circle USB driver for the Rytm's streaming interfaces, with two patches to Circle's xHCI.
 - **USB-C gadget:** a composite USB Audio Class 2 + USB MIDI device of our own for a computer, on the Pi's USB-C port (in testing).
-- **Network and web:** Ethernet with a static link-local address, mDNS (`sidecar.local`, patched for macOS's lookups), Circle's HTTP server with at most 4 connections; Wi-Fi in testing (either/or with Ethernet).
+- **Network and web:** Ethernet with a static link-local address, mDNS (`sidecar.local`, patched for macOS's lookups), Circle's HTTP server with at most 4 connections, the live WebSocket API at `/ws`, and the web app served from the card (`/.rytm/www-next/`, not built into the kernel); Wi-Fi in testing (either/or with Ethernet); on the Pi 5, the web page also over the USB-C cable.
 - **Display:** LVGL 9 on core 0's loop, an 800x480 frame buffer, USB HID touch with error recovery.
 - **Heap buffers:** the send effects (about 4.8 MB) and the core's large buffers are allocated from Circle's heap once at boot, so the kernel image stays small.
 - **Guard:** each voice's render is timed; a voice over budget three blocks running, or one that faults, is muted while the others play. A render core that misses 20 ms is fatal: a clean stop and a reboot. A hardware watchdog covers core 0.
 - **SD boot:** the card holds `sdboot.img`, a small loader patched from Circle's serial bootloader, and `engine.img` (the kernel with a checked header). sdboot checks the image and starts it after a 1 s window in which a development flasher can take over. Boot to the first audio: about 11.5 s.
 
-## The Teensy host build (`teensy/`)
+## The Sidecar Mini (`teensy/`)
 
-The Teensy 4.1 runs the same core in one Arduino sketch, `voiceloop`, built with the USB host transport (`RYTM_USB_HOST`): the Rytm on the 5-pin host port, the console (and in testing, USB audio) on the micro-USB device port.
-
-- One core, so voices render in the USB host interrupt's cadence; hot code sits in ITCM, everything else in flash (`CORE_COLD`). The build checks ITCM and RAM headroom and refuses a build that grows past its limits.
-- The plugin store is 4 MB of flash (LittleFS); loaded machines run from a 32 KB executable arena.
-- No PSRAM is required for anything. PSRAM only adds headroom.
+The Teensy 4.1 build, the **Sidecar Mini**, is frozen at 0.1.0: it runs the same core in one Arduino sketch and is not part of the current releases. Its documentation is in the [0.2 docs](/sidecar-expander/0.2/introduction/pi-vs-teensy/).
 
 ## The Rytm mods
 
-The mods patch the Rytm's MAIN OS 1.73 image and nothing else (the bootloader, FPGA and other sections are untouched; the build checks they come back byte-identical).
+The mods patch the Rytm's MAIN OS 1.74 image (Sidecar 0.5.0 is built for OS 1.74 only; 0.4.4 and older also had a build for OS 1.73) and nothing else (the bootloader, FPGA and other sections are untouched; the build checks they come back byte-identical).
 
 - **elekloader** provides the code space: its Rytm core (`core-ar2`) appends a blob to the OS that is copied at early boot into a fixed 128 KB DDR area, where the larger mods live. Each mod is built as an elekloader module whose patch sites are pinned to the stock bytes they replace.
 - **Patch sites, conceptually:** small detours at a few firmware entry points hand control to mod code: a hidden machine slot becomes an EXT machine (its source silenced, its trig and knob values reported); a page's key press cycles to an extra page; the sample browser's directory model gains the SIDECAR folder; the SysEx router passes our messages to the mods; the screen and key path gain the remote page. Reports go out over the Rytm's own USB MIDI sender, without waiting on a busy USB link.

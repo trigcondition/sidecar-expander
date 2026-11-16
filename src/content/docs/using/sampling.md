@@ -23,7 +23,7 @@ One take to the card, from: <span class="sc-test">in testing</span>
 - **Files:** `/Samples/<project>/<name>.wav` (and the slices).
 - **Into the pool:** the take goes into the project's **SAMPLES** [POOL](/sidecar-expander/using/pools/), the first free row of the bank last shown (bank A by default, else the next bank with room); the page says `TAKE -> A012`. GRANULAR and [CHOP](/sidecar-expander/using/chop/) can pick it from there (DSP SAMPLE after the next boot). Its slice map goes into **INSTRUMENTS** the same way, for MULTISAMPLE.
 
-**On the Rytm:** the remote page **SAMPLE**, next to SCOPE (UP + T7 opens it). A source, B start, C bars, D slices; **YES** arms, records and stops; A pushed cancels. The page shows the level, the take's time, the last take and the tempo.
+**On the Rytm:** the remote page **SAMPLE**, next to SCOPE (UP + T11 opens it). A source, B start, C bars, D slices; **YES** arms, records and stops; A pushed cancels. The page shows the level, the take's time, the last take and the tempo.
 
 ![The SAMPLE page on the Rytm: IN L/R, THR, 2 BAR, TRANS, the L and R levels with the threshold marker, YES ARM](../../../assets/rytm/sc-sample.png)
 
@@ -43,7 +43,7 @@ Plays notes, records them, trims, finds loops and writes a MULTISAMPLE instrumen
 
 - **Plan:** notes LO..HI every STEP semitones, velocity layers (1..8), round robins (1..4), the hold time, the release tail, the gap.
 - One gain for the whole instrument (velocity layers keep their relation), zones split between the sampled notes, loops found on sustained sounds, silent takes left out.
-- **On the Rytm:** the remote page **AUTO** (UP + T7 twice): A SRC, B the entry (PATCH, VOICE, TRACK or the MIDI output and channel; push B for EXT's input L+R / L / R), C LO, D HI, E STEP, F LAYER, G RR, H HOLD. **YES** starts; A pushed cancels after the current note. The bottom bar shows the progress (`C4 v100 3/24`).
+- **On the Rytm:** the remote page **AUTO** (UP + T11 twice): A SRC, B the entry (PATCH, VOICE, TRACK or the MIDI output and channel; push B for EXT's input L+R / L / R), C LO, D HI, E STEP, F LAYER, G RR, H HOLD. **YES** starts; A pushed cancels after the current note. The bottom bar shows the progress (`C4 v100 3/24`).
 - **On the web page:** Record tab, **Auto-sampler**.
 
 ![The AUTO page on the Rytm with EXT: USB 1, C1..C7, every 6 semitones, 1 layer, 1 round robin, hold 1.8 s, YES 13T IN L+R LOOP](../../../assets/rytm/sc-auto-ext.png)

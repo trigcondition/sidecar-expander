@@ -10,11 +10,11 @@ A user machine is a plain C or C++ sound generator with a fixed C ABI. It is bui
 The same source can also build a Sidecar Mini package (RMP1) and a native library for tests on a Mac. This page is about the Pi.
 
 :::note[What may come next]
-[Plugin API 3](/sidecar-expander/developers/plugin-api-3/) is a proposed design, not implemented: tempo, memory, guarded setup, stereo, effects, a signal bus, modulation, custom pages. Its section [Write it this way today](/sidecar-expander/developers/plugin-api-3/#write-it-this-way-today) says how to structure an API 2 port now, so a retrofit stays small.
+[Plugin API 3](/sidecar-expander/developers/plugin-api-3/) is partly built in 0.5.0: tempo and transport, a slot arena for much more memory, guarded setup and control calls, stereo output and user effects in the send FX slots. Its page has the status table of what is built and what is planned (more effect positions, audio input, a signal bus, modulation hints, custom pages). A machine still builds as API 2, or as a dual package with an API 3 table ([API 3 in a machine](#api-3-in-a-machine)); its section [Write it this way today](/sidecar-expander/developers/plugin-api-3/#write-it-this-way-today) still says how to structure a port.
 :::
 
 :::note[How far this was tested]
-The build steps, the example and the host tests below were run on an Apple silicon Mac, from a clean checkout of the 0.3.2 engine. The steps that need a Sidecar (copying to a real card, the web page, the Rytm's menu) were not part of that run. The console assign was run on the Mac core library, not on a Pi.
+The build steps and the example below were run (build only) on an Apple silicon Mac against the 0.5.0 headers: `make a64` in the Docker image gave `my_tone.a64.rmp: my.tone image 4096 B + bss 8 B, 10 relocations`. The host tests were run on an earlier engine. The steps that need a Sidecar (copying to a real card, the web page, the Rytm's menu) were not part of that run. The console assign was run on the Mac core library, not on a Pi.
 :::
 
 ## Build a machine in ten minutes
@@ -26,7 +26,7 @@ You need git, Docker, [uv](https://docs.astral.sh/uv/) and Python 3.12 or later.
 ```sh
 git clone https://github.com/trigcondition/sidecar-firmware
 cd sidecar-firmware
-git checkout v0.3.2
+git checkout dev   # the 0.5.0 code; the release tag once it is out
 uv sync
 docker build -t rytm-circle pi/circle
 ```
@@ -145,13 +145,14 @@ Then pick U1 as a track's machine. [User machines](/sidecar-expander/using/user-
 | Block | `render` writes 12 samples, 250 µs of audio (`host->max_block`; the Pi always asks for 12, but write your loop for `n`) |
 | Output | mono float, written not added, nominal ±1. The host clips to ±1 and turns a NaN into 0 |
 | Voices | 8 at most, each with its own state. Voices 0-3 render on core 1, voices 4-7 on core 2, at the same time |
-| Control calls | `init`, `voice_init`, `params`, `note_on`, `note_off`, `load_entry` run on core 3, between render blocks, never at the same time as `render` |
-| State | `state_bytes` per voice, 64 KB at most, zeroed before `voice_init` |
-| Memory | no allocator. Everything mutable goes in the state |
+| Control calls | `init`, `voice_init`, `params`, `note_on`, `note_off`, `load_entry` run on core 3, between render blocks, never at the same time as `render`. Since 0.5.0 they are guarded: a fault mutes the slot |
+| State | `state_bytes` per voice, **64 KB at most** (the engine refuses "state too big"), zeroed before `voice_init`. 8 voices and 32 poly instances can each have one: 2.56 MB in all |
+| More memory | the API 3 **slot arena**: a shared part and one part for each state, reserved when the slot loads. A slot's arena is at most a quarter of the arena pool, which is 16, 32 or 64 MB on a board with 2, 4 or 8 GB or more (`plugram=` sets the pool, up to 1024 MB). The sizes follow the board's RAM, not whether it is a Pi 4 or a Pi 5. See [API 3 in a machine](#api-3-in-a-machine) |
+| Memory | no allocator. Everything mutable goes in the state, or in the arena |
 
 ### The ABI
 
-The header is `sdk/rmp/rmp_api.h` (API 2; API 1 plugins still load). A plugin exports exactly one table, `rmp_entry`, declared with `RMP_ENTRY`.
+The header is `sdk/rmp/rmp_api.h` (`RMP_API` is 2; API 1 plugins still load). A plugin exports exactly one table, `rmp_entry`, declared with `RMP_ENTRY`. A plugin declares the API it was built for in the table's `api` (2 for a machine, 3 for an API 3 only effect). `sizeof(rmp_plugin)` is 128 bytes on the Pi (`RMP_PLUGIN_BYTES_A64`); `reserved[RMP_P_V3]` (4) points at an optional `rmp3_plugin` ([API 3 in a machine](#api-3-in-a-machine)).
 
 | Member | |
 |---|---|
@@ -172,8 +173,8 @@ Keep `render` to a steady, bounded amount of work: no waiting, no logging, no ca
 - **What actually mutes:** a voice over its budget while its render core is overloaded (the core's block took 80 % or more), 200 blocks in a row (50 ms). A short burst never mutes.
 - **Plan for less than the budget.** Four voices share a core, so a machine meant for every voice should stay under about 50 µs a block (20 % of a block). Over that, the machine plays alone but glitches in a full kit, and nothing mutes it if each voice is under budget.
 - **A fault in `render`** mutes that voice at once. The other voices play on. The stats show `!<MACHINE>`, the touchscreen MUTED, until the console's `:unmute` or until the voice changes machine.
-- **A hang in `render` is fatal.** A render core that does not finish its block in 20 ms stops the engine, which reboots. The guard does not cut off an endless loop on the Pi.
-- **The control calls have no guard.** A fault in `init`, `voice_init`, `params`, `note_on` or `note_off` stops the engine and reboots it. They also delay core 3, which feeds the audio FIFO: keep them to microseconds. A heavy setup belongs spread over `render` blocks.
+- **A hang is fatal.** A render core that does not finish its block in 20 ms stops the engine, which reboots, and an endless loop in a control call stops core 3. The guard does not cut off an endless loop on the Pi (planned).
+- **The control calls are guarded (0.5.0).** A fault in `init`, `voice_init`, `params`, `note_on`, `note_off` or `load_entry` mutes the slot, and the engine plays on; a fault in `init` refuses the package. They still delay core 3, which feeds the audio FIFO (2 ms): keep them to microseconds. For an API 3 plugin, three control calls in a row over 500 µs mute the slot, one over 2 ms mutes it at once, and `init` or one `setup` call over 1 ms refuses the package. Heavy setup goes in `setup`, in pieces ([API 3](/sidecar-expander/developers/plugin-api-3/#protected-setup-callbacks)). An API 2 plugin is never muted for being late, only for faulting.
 - **Stray writes are not caught.** The guard sees faults and overruns only.
 
 The web page's installed list shows the measured time per voice once a machine has played (`ns` and `block_ns` in `GET /um`). Timings on a Mac are about 13 times too good for a Pi 4 core.
@@ -310,7 +311,7 @@ RMP_ENTRY const rmp_plugin rmp_entry = {
 | `load_entry(state, bytes, len, values)` | a native preset: set the voice's hidden state and fill `values[k]` for P(k+1)'s 0..127 (-1 untouched). 0 means taken. Runs on core 3, between render blocks |
 | `voice_enter(state)` | after `voice_init`, each time a voice starts this slot |
 | `voice_leave(state)` | before the voice leaves the slot, or the slot unloads |
-| `host` `pool_info`, `pool_read` | read the project's pool samples: get them with `rmp_pool_info_of(host)` and `rmp_pool_read_of(host)`. On the Pi they read the sample RAM's copy, mono int16. The first `pool_info` for a slot answers NOT_READY; EMPTY without sample RAM. `pool_read` works from `render`; `plugins/sc_grain` keeps a built-in sample instead, `plugins/v2_test` shows the pool calls |
+| `host` `pool_info`, `pool_read` | read the project's pool samples: get them with `rmp_pool_info_of(host)` and `rmp_pool_read_of(host)`. On the Pi they read the pool RAM's copy (`poolram=`, 1024 MB by default, 3072 MB on an 8 GB board; `pool_read` hands you floats). The first `pool_info` for a slot answers NOT_READY; EMPTY when the pool RAM is off or the sample is not there after 10 s. `pool_read` works from `render`; `plugins/sc_grain` keeps a built-in sample instead, `plugins/v2_test` shows the pool calls |
 
 ## Polyphony
 
@@ -368,15 +369,15 @@ The image's `.data` and `.bss` exist, but they are one copy for all voices of a 
 | Tables in `const` data | One voice writing a global that another reads: core 1 and core 2 render at the same time, in no set order, and the ABI has no lock |
 | The host table in a global | Writing a global from `render` in a machine with `max_voices` over 1 |
 
-There is no way, in 0.3.2 or 0.4.0, for a machine to:
+There is no way, as an API 2 machine, to:
 
-- hear another voice's audio, or the Rytm's (no sidechain, no shared bus);
-- learn which track or voice it is on, or the tempo, or the step;
-- produce stereo: `render` is mono;
-- read card files, other than presets and pool samples;
-- allocate memory.
+- hear another voice's audio, or the Rytm's (no sidechain, no shared bus: planned in API 3);
+- learn which track or voice it is on;
+- read card files, other than presets and pool samples.
 
-For what may change this, see the proposed [Plugin API 3](/sidecar-expander/developers/plugin-api-3/).
+An API 3 table adds, in 0.5.0: the tempo, the transport and the song position (`b->transport`), stereo on the PRE and POST routes, and memory from the slot arena (no allocator call: the host reserves it at load).
+
+For what API 3 builds and what it plans, see the [Plugin API 3](/sidecar-expander/developers/plugin-api-3/) status table.
 
 ## The package
 
@@ -397,11 +398,11 @@ An RMPA file is:
 | Relocations | 64-bit words, and ADRPs that reach the data part. The loader places the two parts apart: code in an executable arena, data in ordinary memory |
 | Manifest | names, knobs, list names, labels |
 
-The packer refuses static constructors, undefined symbols, other relocation types, extra loadable sections, an image over 1 MB and a bad manifest, with a message that says which.
+The packer refuses static constructors, undefined symbols, other relocation types, extra loadable sections, an image over 1 MB (code, data and bss together) and a bad manifest, with a message that says which. For an API 3 table it also checks that `reserved[4]` points inside the image, the magic and size, and that an effect is API 3 only; it sets the header flags `RMP_HF_API3` and `RMP_HF_EFFECT`.
 
 The format number tells a host what it must understand: **3** the plain case, **4** a list that follows another (RLB2 labels), **5** a list over 16 names (0.4.0). A host that does not know a format refuses the package with "format not supported" rather than show wrong names.
 
-At the scan, the engine checks the header, CRC, entry table, manifest, target and sizes. A Sidecar Mini package is refused on the Pi. RMP1 for the Mini comes from a plain `make`, which needs Teensyduino's `arm-none-eabi-gcc`; that was not run here. `make -C plugins/my_tone libmy_tone.dylib` builds only the Mac library, without it.
+At the scan, the engine checks the header, CRC, entry table, manifest, target and sizes: the state (at most 64 KB), the code (the 4 MB code arena) and the data (the 4 MB data arena). For an API 3 table it also checks, before any plugin code runs, that every pointer lies inside the code, the magic, size and kind, the signal and channel counts, `states` and `latency_frames`, and that the host has what `needs` names. An API 1 or 2 table with no `init` or no `render` is refused. A Sidecar Mini package is refused on the Pi. RMP1 for the Sidecar Mini (frozen at 0.1.0) comes from a plain `make`, which needs Teensyduino's `arm-none-eabi-gcc`; that was not run here. `make -C plugins/my_tone libmy_tone.dylib` builds only the Mac library, without it.
 
 ## Test on the host
 
@@ -465,9 +466,7 @@ For bigger checks, each ported machine has a `make check` to copy from, for exam
 
 ## 0.3.2 and 0.4.0
 
-:::caution
-0.4.0 is not released. This section describes the development line and may change.
-:::
+This section is the history of the 0.4.0 change.
 
 The plugin ABI does not change: API 2, the same `sdk/rmp`, the same build. Packages made for 0.3.2 load on 0.4.0.
 
@@ -486,6 +485,22 @@ Details of the longer lists:
 - Your plugin needs no change for this: it reads `(int)value * 36 >> 7` in both cases.
 - A knob named by `type_labels` as the list that picks a label set keeps the limit of 16 names, and all the lists of `lists` together have at most 32 names.
 - The example is MODEL E (`plugins/modele`, 0.4.0), with 36 oscillator range and wave pairs on P1..P3. These lists have been tested in the emulator only, not on a Rytm.
+
+## API 3 in a machine
+
+Most machines stay API 2. Add an API 3 table when you need more than 64 KB, the tempo, or stereo. Build a **dual** package: an API 2 table (`.api = 2`, `.render` as before) with `reserved[RMP_P_V3]` pointing at an `rmp3_plugin`, from `sdk/rmp/rmp_api3.h`. An older host loads it as a plain API 2 machine; the 0.5.0 host calls the `rmp3_plugin`'s `render` with one `rmp3_block` instead.
+
+- **Memory:** ask for it in the table (`shared_min`, `shared_want`, `voice_min`, `voice_want`). The host grants `want`, else `min`, else the slot shows a "no room" message. `setup(const rmp3_setup *)` and `voice_attach(void *state, const rmp3_voice *)` hand you the pointers: keep them in the state, never in a global.
+- **Setup:** `init` and each `setup` call must stay under 1 ms. Return `RMP3_SETUP_MORE` from `setup` to be called again from the next idle step. Build tables there, in pieces.
+- **The block:** `render(void *state, const rmp3_block *b)` gets `b->n` frames (1 to 16; 12 on a voice), `b->out[0..1]`, `b->transport` and, for an effect, `b->in` and `b->p`.
+- **Stereo:** `out_channels = 2` writes both channels on OUT PRE and POST; on TRK `out[1]` is NULL and `RMP3_B_MONO_OUT` is set. Poly instances still render mono.
+- **Capabilities:** the 0.5.0 host offers `RMP3_CAP_TRANSPORT`, `STEREO`, `EFFECT`, `GUARD` and `ARENA`. A plugin that `needs` another (audio input, the bus, block-rate parameters, pages) is refused.
+- **A dual package is held to the API 3 limits** from its `init` on (1 ms, three late calls in a row, one over 2 ms), though an API 2 host never reads the table.
+- **Packing:** `make a64` does it; the packer sets `RMP_HF_API3`. Poly machines (`max_voices` over 1) get 40 states by default.
+
+### User effects
+
+An effect is an API 3 only package: `.api = 3`, `.render` NULL, `rmp3_plugin.kind = RMP3_KIND_EFFECT`. It plays in a **send FX slot**, UFX1..UFX4 (TYPE 64..67), next to the user machines. Its input is the mono sum of the sends, its output stereo and wet only (`RMP3_B_WET_ONLY`), in blocks of up to 16 frames; the slot's P2..P5 reach it as P1..P4 in `b->p`. It is budgeted on core 2: 16 calls in a row over 120 µs a 12-frame block, or one call over 2 ms, mute it. INSERT, bus and master positions are planned. Install it with `um=fx:<n>:<id>`, the USER SLOTS page or the web page's User machines card. Read `plugins/ufx_phaser` (a 4-knob stereo phaser; its Makefile is the three lines above with `NAME := ufx_phaser`) and `plugins/ufx_pingpong` (a tempo-synced delay that uses the arena and the transport). See [User effects](/sidecar-expander/using/user-effects/) for the shipped ones.
 
 ## Licence and bundling
 
@@ -507,14 +522,20 @@ The repository is **GPL-2.0-or-later**. The starter machines and the ported mach
 
 ## Limits
 
-| | Pi | Sidecar Mini (Teensy 4.1) |
+| | Pi (0.5.0) | Sidecar Mini (Teensy 4.1, frozen at 0.1.0) |
 |---|---|---|
-| Image | 1 MB; an upload 2 MB | 64 KB package (the store's cap) |
-| Loaded, all slots | 4 MB code, 4 MB data | 32 KB arena |
-| State per voice | 64 KB | 16 KB without PSRAM |
+| Image (code, data and bss) | 1 MB | 64 KB package (the store's cap) |
+| Loaded, all slots | 4 MB code arena, 4 MB data arena | 32 KB arena |
+| State per voice (API 2 `state_bytes`) | 64 KB; 8 voices and 32 poly instances: 2.56 MB | 16 KB without PSRAM |
+| Slot arena (API 3) | at most a quarter of the arena pool: 16, 32 or 64 MB on 2, 4 or 8 GB or more | none |
+| Arena pool (`plugram=`) | 64, 128 or 256 MB by RAM (none under 2 GB), at most 1024 MB | none |
+| Pool samples a machine reads | the pool RAM, `poolram=`: 1024 MB, 3072 MB on 8 GB or more | the board's PSRAM or a head and ring |
+| States in an arena | 8 for a machine, 40 for a poly machine, 2 for an effect | none |
 | Render call | 12 samples at 48 kHz | 12 samples at 48 kHz |
 | Machines listed on the Rytm | 32 | 32 |
 | Presets per machine | 127 | 127 |
+
+The Pi 4 and the Pi 5 have the same limits: the sizes follow the board's RAM. What differs is speed (the Pi 5 runs at 2400 MHz, the Pi 4 at 1500 MHz); write for the Pi 4.
 
 A slot with the same package as another shares its image. When the arenas fill up, the engine reloads everything once; if the machine still does not fit, the slot shows `!ROOM`.
 

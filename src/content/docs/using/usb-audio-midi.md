@@ -84,6 +84,8 @@ A USB MIDI keyboard in one of the Pi's USB-A ports, or the computer on USB-C, pl
 - **6-OP FM, MULTISAMPLE, WAVETABLE, GRANULAR and poly tracks:** the Sidecar plays the notes itself, polyphonic.
 - **JUNO, PLAITS, DAISYSP and the Rytm's own tracks:** the Sidecar sends the notes to the Rytm on its auto channel, and the Rytm plays them. For this, turn on **RECEIVE NOTES** in SETTINGS > MIDI CONFIG > PORT CONFIG, with INPUT FROM including USB. With RECEIVE NOTES off these notes are silent.
 
+The keyboard route (SELECTED or CHANNEL), the auto channel and the computer's notes are set on the Rytm's SIDECAR MENU, on the touchscreen or on the console: see [MIDI settings](/sidecar-expander/using/midi-settings/).
+
 ## OS updates through the Sidecar
 
 <span class="sc-test">in testing</span>. New in 0.4.0, from work by [Iced-Cream](https://github.com/Iced-Cream).

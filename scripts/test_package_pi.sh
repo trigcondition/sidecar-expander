@@ -24,4 +24,9 @@ mkdir "$t/gz"; echo 'cmdline.txt paircode=12345678' | gzip -n > "$t/gz/w.js.gz"
 check "$t/gz" && bad "paircode inside .gz not refused" || ok "paircode inside .gz refused"
 mkdir "$t/gz2"; echo 'c=00ff 0000000000000000000000000000000000000000000000000000000000000000' | gzip -n > "$t/gz2/p.gz"
 check "$t/gz2" && bad "pair line inside .gz not refused" || ok "pair line inside .gz refused"
+
+# 3. the release zip and image parts (0.5.0): a .syx in RYTM_MODS is refused, both images are made, the patcher is linked
+grep -q "find \"\$RYTM_MODS\" -iname '\*.syx'" "$here/package_pi.sh" && ok "a .syx in RYTM_MODS is refused" || bad "no .syx refusal for RYTM_MODS"
+grep -q 'for res in 800x480 1024x600; do' "$here/package_pi.sh" && grep -q 'sd-\$res\$tsuf.img.zip' "$here/package_pi.sh" && ok "both images are built" || bad "image loop"
+grep -q 'sidecar-expander/patcher/' "$here/package_pi.sh" && ok "the patcher is linked" || bad "no patcher link"
 exit $fail

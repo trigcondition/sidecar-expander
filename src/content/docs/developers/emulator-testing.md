@@ -5,7 +5,7 @@ sidebar:
   order: 8
 ---
 
-Nothing goes onto a real Rytm untested. A separate project, **rytm-emu**, emulates the Analog Rytm MKII well enough to boot the stock OS 1.73 and the modded builds, show the screen, press keys and turn knobs, and act as a USB device for a host.
+Nothing goes onto a real Rytm untested. A separate project, **rytm-emu**, emulates the Analog Rytm MKII well enough to boot the stock OS 1.74 (1.73 for the 0.4.x builds) and the modded builds, show the screen, press keys and turn knobs, and act as a USB device for a host.
 
 ## What it gives
 

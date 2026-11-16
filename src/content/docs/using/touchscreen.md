@@ -1,6 +1,6 @@
 ---
-title: The touchscreen (0.3)
-description: "The Pi's touchscreen in 0.3.0: the OLED and CLASSIC themes and the STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600."
+title: The touchscreen
+description: "The Pi's touchscreen: the OLED and SIDECAR themes (SIDECAR new in 0.5.0, replacing CLASSIC) and the OLED STAGE look, the navigation keys with their UP + T shortcuts, the pages (HOME, SEQ, PAT, VOICE, INSERT FX, SONG, REC, SCOPE, STATUS, PROJECT, POOL, SET), 800x480 and 1024x600."
 sidebar:
   order: 7.1
 ---
@@ -11,24 +11,30 @@ The touchscreen follows the Rytm: it shows the track you select there, and the R
 
 ## Themes and looks
 
-Two themes, each with every page. Switch with **Settings > Display > UI style** (applied at once, stored on the card); `uistyle=classic` in `cmdline.txt` also gives the boot screen the CLASSIC look.
+Two themes, each with every page. Switch with **Settings > Display > UI style: OLED / SIDECAR** (applied at once, no reboot, stored on the card as `uistyle=oled|sidecar`). The console and the web page take the same command.
 
 | Theme | Look |
 |---|---|
-| **OLED** (default) | The screen drawn as a zoomed-in dot-matrix OLED: 400x240 dots, each 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings. |
-| **CLASSIC** | The controls drawn as the Rytm's hardware: rubber keys, trig keys with LEDs, knob caps with LED rings, the teal FUNC key, black display windows. |
+| **SIDECAR** (new in 0.5.0) | The look of the new [web page](/sidecar-expander/using/web-ui/) on the touchscreen: a night-blue screen, cards with their title as a lavender pill on the top edge, pill keys and segments (the selected one filled), knobs as arcs with the value inside, rounded meters, rounded notes in the piano roll. A header carries the Sidecar logo and the page's name. At 800x480 the page keys T1..T8 are a row of pills in the header; from 1024x600 they are a rail on the right. Text is in Space Grotesk, with big numbers in a dot font. |
+| **OLED** | The screen drawn as a zoomed-in dot-matrix OLED: 400x240 dots, each 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings. |
 
-**Settings > Display > LOOK: STUDIO / STAGE** (OLED). STUDIO is the dot look above (the default). **STAGE** draws every dot as a whole 2x2 cell, without the grid lines, and lifts every grey a step: easier to read on a stage and at an angle.
+**SIDECAR replaced CLASSIC** (the Rytm's hardware look: rubber keys, trig keys with LEDs, knob caps) under the same setting. The CLASSIC theme is gone and cannot be chosen any more. A card or a `cmdline.txt` that says `uistyle=classic` comes up in SIDECAR, and the next save of the display settings writes `uistyle=sidecar`; the console still accepts `classic` and takes it as SIDECAR. `uistyle=` in `cmdline.txt` also gives the boot screen the SIDECAR look (the logo over the wordmark on the night blue), because the boot screen is drawn before the card is read.
+
+**Settings > Display > LOOK: STUDIO / STAGE** applies to the OLED theme only. STUDIO is the dot look above. **STAGE** draws every dot as a whole 2x2 cell, without the grid lines, and lifts every grey a step: easier to read on a stage and at an angle.
 
 **Colours mean one thing each** (OLED): teal text is always inverted (black on teal) and means "look here", with the reason spelled out; an error blinks for 3 s, then stays. Loading is dim with moving dots. Playing is white.
 
+![The home page in the SIDECAR theme: TRACKS, NOW with the pattern and the recorder, SIDECAR with the network, PROJECT U1..U5, the page keys in the header](../../../assets/touch/sidecar-home.png)
+![The same page at 1024x600: the page keys as a rail on the right](../../../assets/touch/wide-sidecar-home.png)
+![The boot screen in the SIDECAR theme](../../../assets/touch/sidecar-boot.png)
 ![The OLED home page (STUDIO): VOICES by track, NOW with the pattern and the recorder, PROJECT U1..U5, the navigation keys](../../../assets/touch/oled-home.png)
-![The same page in the STAGE look: whole dots, lighter greys](../../../assets/touch/oled-stage-home.png)
-![The CLASSIC home page](../../../assets/touch/classic-home.png)
+![The same OLED page in the STAGE look: whole dots, lighter greys](../../../assets/touch/oled-stage-home.png)
+
+<small>The SIDECAR screenshots are rendered off the device by the Sidecar's own UI code (0.5.0), with made-up data. The OLED ones are from the 0.3 and 0.4 releases.</small>
 
 ## Navigation
 
-A column of keys on the right (CLASSIC: in the title bar) in both themes: **HOME, SEQ, PAT, VOICE, FX, SONG, REC, SET**. Each key is captioned with the trig key that opens it from the Rytm with **UP** held (T1 HOME, T2 SEQ, T3 PAT, T4 VOICE, T5 SET, T6 FX, T8 REC, T11 SONG). Every page lights its own key or its parent's (SCOPE lights VOICE, STATUS lights HOME), never SET for a page that is not a setting.
+A column of keys on the right in the OLED theme, and in the SIDECAR theme a row of pills in the header (a rail on the right from 1024x600): **HOME, SEQ, PAT, VOICE, FX, SONG, REC, SET**. Each key is captioned with the trig key that opens it from the Rytm with **UP** held (T1 HOME, T2 SEQ, T3 PAT, T4 VOICE, T5 SET, T6 FX, T8 REC, T11 SONG). Every page lights its own key or its parent's (SCOPE lights VOICE, STATUS lights HOME), never SET for a page that is not a setting.
 
 **Hold UP** on the Rytm: the touchscreen shows the map of every UP + key until you let go (the Rytm shows the same map). See [Key combinations](/sidecar-expander/using/key-combinations/).
 
@@ -44,15 +50,15 @@ A column of keys on the right (CLASSIC: in the title bar) in both themes: **HOME
 | **VOICE** | VOICE, UP + T4, a voice on HOME | the selected track: its machine, P1..P8 as dials with the Rytm's labels and their values, the machine's panel (the 6-OP FM algorithm, MULTISAMPLE's zones and envelope, DAISYSP's mode), a p-lock heatmap |
 | **Machine view** | UP + T4 on a GRANULAR, WAVETABLE or MULTISAMPLE track | GRANULAR's grains over the source, WAVETABLE's frames, MULTISAMPLE's zones over a keyboard; **POOL** and **ALL POOLS** |
 | **POOL** | UP + T13, POOL in the machine view, ALL POOLS, Settings > Pool | the project's [POOL lists](/sidecar-expander/using/pools/#on-the-touchscreen): banks A..H, rows with their states, the pool RAM |
-| **INSERT FX** | FX, UP + T6 | the selected voice's two insert slots, its sends, its [OUT route](/sidecar-expander/using/stereo-out/) and the three buses ([Insert FX](/sidecar-expander/using/insert-fx/)) |
-| **SONG** | SONG, UP + T11 | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
-| **REC** | REC, UP + T8 | the Overbridge recorder and its takes, with playback (below) |
+| **INSERT FX** | FX, UP + T5 | the selected voice's two insert slots, its sends, its [OUT route](/sidecar-expander/using/stereo-out/) and the three buses ([Insert FX](/sidecar-expander/using/insert-fx/)) |
+| **SONG** | SONG, UP + T6 | the song recorder's timeline, ARM, REPLAY ([Song recorder](/sidecar-expander/using/song-recorder/)) |
+| **REC** | REC, UP + T7 | the Overbridge recorder and its takes, with playback (below) |
 | **SCOPE** | UP + T9, a tap on VOICE's scope | a scope of one channel over eleven level meters (below) |
 | **SIDECAR STATUS** | UP + T10, a tap on HOME's NOW panel | voices, CPU, links, versions and the sample library (below) |
 | **PROJECT** | UP + T12, a tap on HOME's PROJECT panel | the card's projects, export and import of [bundles](/sidecar-expander/using/projects-bundles/#the-touchscreen-project) |
-| **SET** | SET, UP + T5 | Settings: Sound (with the USB-C mode, CLASS or OVERBRIDGE, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)), Send FX, Display, Pool, About, and a System tab (test signals, buffer settings, the CPU clock) |
+| **SET** | SET, UP + T8 | Settings: Sound (with the USB-C mode, CLASS or OVERBRIDGE, 0.4.1: [Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)), Send FX, Display, Pool, About, and a System tab (test signals, buffer settings, the CPU clock) |
 
-The sampler and the auto-sampler (UP + T7) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
+The sampler and the auto-sampler (UP + T11) open on the Rytm's screen; the touchscreen has no pages for them, nor for the LFOs and Wi-Fi (those are on the Rytm and the web page). The touch test lives on Settings > Display; it leaves HOME after the first tap.
 
 When the Rytm is away, VOICE, INSERT FX and PAT keep the last data and say `NO RYTM: SHOWING LAST`.
 
@@ -77,9 +83,9 @@ The step grid is drawn behind every page shown, playing or stopped. Drag on the 
 When you edit with **NOTE EDIT** on the Rytm, the roll follows the same note: it selects it, shows the page it is on and scrolls its row into view, and the playhead does not move the window meanwhile. The step editor lists only the pattern's poly tracks (a track that is off answers "not a seq track").
 
 ![SEQ while the Rytm plays: VIEW: TAP DRAW TO EDIT](../../../assets/touch/oled-seq-view.png)
-![SEQ in the CLASSIC theme with the CHORD tool: MIN7 stamped, inversion R, strum 12](../../../assets/touch/classic-seq-chord.png)
+![SEQ in the SIDECAR theme with the CHORD tool: MIN7 stamped, inversion R, strum 12](../../../assets/touch/sidecar-seq-chord.png)
 ![SEQ with the POLY tool (OLED): VOICES 4, ROTATE, the line POLY T9 ROTATE: FM 4 INST 4 NOTES 4.88%](../../../assets/touch/oled-seq-poly.png)
-![The POLY tool in the CLASSIC theme](../../../assets/touch/classic-seq-poly.png)
+![The POLY tool in the SIDECAR theme](../../../assets/touch/sidecar-seq-poly.png)
 
 ### VOICE and the machine view
 
@@ -93,7 +99,7 @@ The [recorder](/sidecar-expander/using/recorder/) on the touchscreen: REC / STOP
 **TAKES** lists the newest 64 takes, newest first, with their date; **drag** the list to scroll it. Before REC or ARM the page warns if the selected channels may be more than the drive can write (you can go ahead anyway: [the speed warning](/sidecar-expander/using/recorder/#the-speed-warning)). **Playback:** tap a take's row to play it into the Rytm's MAIN (its MASTER mix if the take has one, else its first file); tap again to pause, once more to go on; tap another take to switch. **STOP** goes back to the start. The playing row shows `elapsed / length` and a progress bar. Playback continues when you leave the page, and ends at the take's end, when a recording starts or arms, or when the take is deleted.
 
 ![REC (OLED), TAKES: TAKE_002 playing at 21:00 / 1:02:05 with its progress bar, DEL per take](../../../assets/touch/oled-rec-playing.png)
-![REC (CLASSIC), recording](../../../assets/touch/classic-rec-recording.png)
+![REC (SIDECAR), recording: the timer, the stems, the voices and the returns](../../../assets/touch/sidecar-rec-recording.png)
 
 ### SCOPE
 

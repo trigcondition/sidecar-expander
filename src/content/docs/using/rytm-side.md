@@ -91,6 +91,7 @@ The Sidecar runs two send effects, **SEND FX 1** and **SEND FX 2**. Every track 
 | A **TYPE** | the effect: OFF, CHORUS, COMB, CRUSH, RINGMOD, HALO, and on the Pi RINGS, CLOUDSEED, STUTTER |
 | B **P1 ROUTE** | **PRE**: the return enters before the Rytm's analog distortion and compressor (the default). **POST**: it is added after them, clean |
 | C..F **P2..P5** | the effect's own knobs, with its own labels (RATE, DCY, MODL...) |
+| G **BASE**, H **WID** | 0.5.0: the return's high-pass edge and the band's width above it ([Send effects](/sidecar-expander/using/send-effects/#common-to-every-effect)) |
 
 - The TYPE list comes from the Sidecar, so it shows the effects your Sidecar plays. An effect it cannot play shows as `!NAME` and stays silent.
 - TYPE and ROUTE are stored in the kit and cannot be p-locked. P2..P5 can be p-locked on the FX track.
@@ -129,15 +130,17 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 
 ### Opening, moving, leaving
 
-- **UP + YES** (hold UP, press YES) opens the remote pages on **SIDECAR**; UP + YES again leaves. TRK + YES still works.
+- **UP + YES** (hold UP, press YES) opens the remote pages on **SIDECAR**; UP + YES again leaves.
 - **YES on SIDECAR** opens the **SIDECAR MENU**: every page with its shortcut. UP / DOWN pick a page, YES opens it. A page with nothing to show now is marked with `-` and answers `NOT HERE NOW`. Its **USB-C** row (0.4.1; the Pi 5 from 0.4.2) picks the Sidecar's USB-C mode, CLASS COMPLIANT or OVERBRIDGE (YES twice) ([Overbridge through the Sidecar](/sidecar-expander/using/usb-audio-midi/#overbridge-through-the-sidecar)).
-- **UP + a trig key** opens a page directly (UP + T7 SAMPLE, T8 REC, T9 SCOPE, T10 SIDECAR, T11 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
-- **LEFT / RIGHT**: the previous / next page in the ring. **NO** (0.4.4): on a page opened by its shortcut (UP + key, TRK + key, UP + a trig key), one NO leaves, also on UP + AMP's OUT view. On a page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and on the SIDECAR MENU itself, NO goes back to SIDECAR; on SIDECAR, NO leaves.
+- **UP + a trig key** opens a page directly (UP + T11 SAMPLE, T7 REC, T9 SCOPE, T10 SIDECAR, T6 SONG, T12 PROJECT, T13 POOL), **UP + TRIG / LFO / FX** open SEQ, LFO and INSERT, and **UP + AMP** the INSERT page's OUT view. **POLY CONFIG** is the last item of the Rytm's own track menu (FUNC + CHRO). See [Key combinations](/sidecar-expander/using/key-combinations/).
+- **LEFT / RIGHT**: the previous / next page in the ring. **NO** (0.4.4): on a page opened by its shortcut (UP + key, UP + a trig key), one NO leaves, also on UP + AMP's OUT view. On a page reached by LEFT / RIGHT or picked in the SIDECAR MENU, and on the SIDECAR MENU itself, NO goes back to SIDECAR; on SIDECAR, NO leaves.
 - **Pages that replace the Rytm's page.** SEQ, INSERT (UP + FX, UP + AMP), LFO, POOL, POLY CONFIG, the SIDECAR MENU and KEYS take the Rytm's screen like the SRC view does: they have no page dots and no LEFT / RIGHT siblings. Leave with NO, or press the same UP + key again (UP + AMP again re-aims its OUT view at the selected track). From 0.4.4 a page that stands alone takes UP and DOWN only when it uses them (POOL, CHOP, the SIDECAR MENU, KEYS, WEB UI, USB-C, the SEQ page's track menu); on the others, such as SEQ, ARP, INSERT and LFO, they stay the Rytm's, so in CHRO mode they move the pads' range. The pages of the ring keep them. On the LFO page LEFT / RIGHT step the LFO; on the INSERT page RIGHT opens the EQ view.
 - **Hold UP alone** on the main screen: the combo map, until you let go.
 - The page also closes by itself 1 second after the Sidecar stops answering.
 
 ![The SIDECAR MENU, top: SEQ (UP+TRIG), POLY CONFIG (FUNC+CHRO), SAMPLE (UP+T7), AUTO SAMPLE, SONG (UP+T11), REC (UP+T8)](../../../assets/rytm/sc-menu-top.png)
+
+<small>The picture shows the page keys of an earlier build (before 0.5.0 moved SAMPLE, SONG and REC). The table is the truth.</small>
 ![The SIDECAR MENU, end: INSERT FX (UP+FX), POOL (UP+T13), PROJECT (UP+T12), STATUS (UP+T10), SYSTEM, KEYS (ALL COMBOS) (HOLD UP)](../../../assets/rytm/sc-menu-end.png)
 
 <small>Renders of the Rytm-screen pages: the Sidecar's own page code on the host, with made-up data. No firmware data. On the Rytm the text is the Rytm's own.</small>
@@ -149,13 +152,13 @@ The remote UI lets the Sidecar draw its own pages on the Rytm's screen. The Rytm
 | **SIDECAR** | UP + T10 | the eight voices by track with their machines, FX1 and FX2 with TYPE and PRE / POST |
 | **SYSTEM** | | the user slots U1..U5, the recorder, the Overbridge stream and underruns, the render cores' load, the network |
 | **LFO** | UP + LFO | the Sidecar's [LFOs](/sidecar-expander/using/lfo/) and the DESIGN view |
-| **REC** | UP + T8 | the [recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm): record, arm, play a take back |
+| **REC** | UP + T7 | the [recorder](/sidecar-expander/using/recorder/#the-rec-page-on-the-rytm): record, arm, play a take back |
 | **SCOPE** | UP + T9 | a scope of the output, a track or the inputs, with a meter per track |
-| **SAMPLE**, **AUTO** | UP + T7, again | the [sampler and the auto-sampler](/sidecar-expander/using/sampling/) |
+| **SAMPLE**, **AUTO** | UP + T11, again | the [sampler and the auto-sampler](/sidecar-expander/using/sampling/) |
 | **POOL** | UP + T13 | the project's [POOL lists](/sidecar-expander/using/pools/#the-pool-page-on-the-rytm) |
 | **SEQ** | UP + TRIG | a [poly track's](/sidecar-expander/using/sequencer/) steps |
 | **INSERT** | UP + FX | the [insert FX](/sidecar-expander/using/insert-fx/) and the [OUT route](/sidecar-expander/using/stereo-out/) |
-| **SONG** | UP + T11 | the [song recorder](/sidecar-expander/using/song-recorder/) |
+| **SONG** | UP + T6 | the [song recorder](/sidecar-expander/using/song-recorder/) |
 | **PROJECT** | UP + T12 | the card's projects and [bundles](/sidecar-expander/using/projects-bundles/#the-rytm-the-project-page) |
 | **MENU**, **KEYS** | YES on SIDECAR; HOLD UP | the page list; every combination |
 
@@ -175,6 +178,7 @@ The ring (LEFT / RIGHT) runs SIDECAR, SYSTEM, REC, SCOPE, SAMPLE, AUTO, SONG, PR
 - **Stock screens step the page aside.** A Rytm menu, window, file browser or prompt (GLOBAL, the PATTERN or TRACK menu, SAVE, the sample browser, a TRK LEVEL readout) shows over the page; when it closes, the page is back.
 - **Footers** say what YES and NO do, in one form: `YES: MENU  NO: LEAVE` on SIDECAR, `YES: OPEN  NO: BACK` in the menu, `UP / DOWN: MORE  NO: BACK` on KEYS.
 - The **encoders** A..H on a voice page change the shown voice's parameters until the Rytm's own value moves (its knob, a p-lock, another sound). Such an edit is not saved in the kit.
+- **How the knobs and keys feel** (0.5.0): knobs with a neutral middle stop at it, FUNC + turn takes bigger steps, holding UP scrolls a list and held arrows repeat ([Key combinations](/sidecar-expander/using/key-combinations/#knobs-and-keys-how-they-feel-050)).
 - A turn shows at once: the Rytm echoes the new value in the bottom bar itself, and the Sidecar's redrawn frame follows about 25 ms later.
 
 ### Tracks and voices
@@ -188,7 +192,8 @@ Twelve tracks can choose a Sidecar machine; eight Sidecar voices sound at once. 
 On a track that plays a Sidecar machine with a page, the Rytm's **own SRC page** shows the Sidecar's machine page with its graphics: JUNO's envelope and filter, the FM algorithm, DSP SAMPLE's waveform, GRAIN's cloud, and in 0.3.0 GRANULAR's grains, WAVETABLE's frames and MULTISAMPLE's zones. It is drawn from the Rytm's own values, so every key and knob stays the Rytm's: edits, p-locks, kits and saving work as on a stock SRC page. The bottom bar names the last knob you turned (for example `BD CUT:73`).
 
 - Other machines, and analog tracks, show the stock SRC page.
-- The stock machine list, popups and holding TRK or BANK show the stock screen while they are up.
+- The stock machine list, popups and holding BANK show the stock screen while they are up.
+- **TRK (0.5.0).** The Sidecar no longer catches TRK: it is the Rytm's own key. On a Sidecar page, holding TRK lights the current track's pad, as on the stock Rytm. **TRK + pad** selects a track, and so does a plain pad press, as on the Rytm. Track pages never close by themselves: on any track selection SEQ, INSERT, ARP and POLY follow to the new track. On a track that plays a Rytm synth they stay open and show that the track has no Sidecar voice. On a Sidecar track that is not a sequencer track yet, SEQ offers to make it one. LFO, INSERT's bus view and the global pages stay open.
 - Leaving SRC shows the stock page again; UP + YES opens the remote pages as usual and takes precedence.
 - When the Sidecar goes away, the stock SRC page is back within about a second.
 - On the SRC page and SMPL page 2, user-machine knobs the machine does not use show as hatched boxes, like the Rytm's own unused knobs.
@@ -203,9 +208,9 @@ New in 0.3 (<span class="sc-test">in testing</span>, emulator):
 
 ### More pages
 
-**Connect screen** <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds (with the Rytm firmware 0.4.4 also when the Rytm is switched on with the Sidecar already attached, once it has started): the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). Its footer names the key that opens the pages (`UP+YES: SIDECAR PAGES` in 0.3.0, `TRK + YES` with `rui1027d`, as in the pictures). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
+**Connect screen** <span class="sc-ok">hardware</span> (the `rui1027d` Rytm build). When the Sidecar connects to a Rytm that is already on, or the cable is plugged back in, a USB screen shows for 3 seconds (with the Rytm firmware 0.4.4 also when the Rytm is switched on with the Sidecar already attached, once it has started): the Sidecar's name, CONNECTED, the voices and effects, and the Pi's address (or USB AUDIO+MIDI). Its footer names the key that opens the pages (`UP+YES: SIDECAR PAGES` in 0.3.0, `TRK + YES` with `rui1027d`, an older form that 0.5.0 no longer uses; some pictures still show it). PLAY, STOP, RECORD and the pads keep working under it; an arrow, YES or NO only closes it, any other key or knob closes it and does its normal job.
 
-![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, TRK + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
+![The connect screen: a USB icon, CONNECTED, 8 VOICES 2 FX, USB AUDIO+MIDI, UP + YES: SIDECAR PAGES](../../../assets/rytm/remote-connect.png)
 ![The connect screen on the Pi with its network address](../../../assets/rytm/remote-connect-ip.png)
 
 **SCOPE and meters** <span class="sc-ok">hardware</span>. The Rytm's output, a track or the inputs (sources in track order: MAIN, BD, SD, RS/CP, BT, LT, MT/HT, CH/OH, CY/CB, IN L, IN R) as a scope, with a level meter per track and a 1-second peak hold. Knob A: the source, B: the timebase (21 ms to 1.4 s), C: the gain.

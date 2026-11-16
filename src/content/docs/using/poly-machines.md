@@ -49,7 +49,7 @@ A multisampled instrument player. Instruments are **SFZ** files (a subset of the
 - **Tonverk instruments (0.4.0):** MULTISAMPLE also reads Elektron Tonverk's `.elmulti` files, in the pools, the browser and bundles, beside `.sfz`. The format is not publicly documented; it is read from a public description and real files, so its conventions are unverified: key ranges go to the nearer root, velocity layers from each layer's value, loop crossfades are ignored (a hard loop jump). <span class="sc-test">in testing</span>
 - Very short Rytm trigs always sound (0.3.0): a note let go before it started still plays its attack, then releases.
 
-![The touchscreen's VOICE page for MULTISAMPLE (CLASSIC theme): INST, VEL, LEV, RTRG, ATK, DEC, SUS, REL, UPRIGHT PIANO with 6 zones, the envelope and the p-locks of the Rytm's pattern](../../../assets/touch/classic-voice-multisample.png)
+![The touchscreen's VOICE page for MULTISAMPLE (SIDECAR theme): INST, VEL, LEV, RTRG, ATK, DEC, SUS, REL, UPRIGHT PIANO with 6 zones, the envelope and the p-locks of the Rytm's pattern](../../../assets/touch/sidecar-voice-multisample.png)
 
 ## WAVETABLE
 

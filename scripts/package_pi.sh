@@ -30,6 +30,17 @@
 # 800x480 card set (with the starter content and the web app), every user machine and user effect of the release in
 # /Plugins, the commit's free demo material (/MULTISAMPLE/SidecarTest, /NAM, renders of the sc_* starters in
 # /Samples/Starter) and README-STARTER.txt / NOTICE-STARTER.txt; licences in /Licenses.
+# The SD card images (0.5.0): dist/pi/sidecar-<VERSION>-sd-800x480.img.zip and -1024x600.img.zip (+ .sha256), a raw
+# MBR + FAT32 image of each starter tree for Raspberry Pi Imager / balenaEtcher (scripts/make_sd_image.py; the Pi
+# grows the partition on first boot). The two starter trees differ only in config.txt (checked).
+# The release zip (0.5.0): dist/pi/sidecar-<VERSION>.zip: README-FIRST.txt, "SD card image/" (both images),
+# "Card files/<size>/" (the starter trees), "Rytm/" (the .elemod files, never a .syx, and the patcher link),
+# "Manual/" (when MANUAL is given), "Licenses/" and SHA256SUMS. Needs RYTM_MODS; without it no release zip is made.
+#   RYTM_MODS     a folder with the release's Rytm mod files: *.elemod (required), LICENSE, NOTICE, TOOLCHAIN*.txt
+#                 (copied when present). Refused if it holds a .syx or no .elemod. The elekloader source tarballs stay
+#                 on the Rytm release page (release_guard refuses them nested in a zip: its third-party exemption
+#                 goes by the outer file name); Rytm/PATCHER-LINK.txt points there
+#   MANUAL        the user manual PDF (copied as Manual/Sidecar-<VERSION>-User-Manual.pdf); left out when not set
 set -euo pipefail
 repo=${1:?usage: package_pi.sh RYTM_TEENSY_REPO COMMIT}
 commit=${2:?usage: package_pi.sh RYTM_TEENSY_REPO COMMIT}
@@ -169,8 +180,9 @@ fi
 out="$here/dist/pi/plugins"
 mkdir -p "$out"
 plugs=(sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw vox hush1 raffo sophie modele)   # sophie: 0.4.0; modele: 0.4.1
-# 0.5.0 (Plugin API 3), when the commit has them: the user effects PINGPONG, PHASER and BBD, the user machine MIST
-for p in ufx_pingpong ufx_phaser ufx_bbd mist; do [ -f "$wt/plugins/$p/Makefile" ] && plugs+=("$p"); done
+# 0.5.0 (Plugin API 3), when the commit has them: the user effects PHASER, BBD, NIMBUS and GALACTIC, the user machine
+# MIST. PINGPONG (plugins/ufx_pingpong) is the firmware repo's example effect, not shipped
+for p in ufx_phaser ufx_bbd ufx_nimbus ufx_galactic mist; do [ -f "$wt/plugins/$p/Makefile" ] && plugs+=("$p"); done
 for p in "${plugs[@]}"; do
   rm -f "$wt/plugins/$p/$p.a64.rmp" "$wt/plugins/$p/$p.a64.elf"
   make -C "$wt/plugins/$p" a64 PY=python3 >/dev/null
@@ -299,28 +311,131 @@ rytmtxt="."
 [ -z "$web" ] || rytmtxt=", including the folder .rytm (the web app):
    it is hidden on a Mac (Finder: Cmd+Shift+. shows it) and on Linux. Without it the Sidecar serves its classic
    web page instead."
-cat > "$st/README-STARTER.txt" <<EOF
-Sidecar $ver starter: everything for a new SD card in one zip
+# README-STARTER.txt of one card tree (the 800x480 and the 1024x600 one differ in this text and in config.txt)
+starter_readme() {
+cat <<EOF
+Sidecar $ver: the card files ($1)
+
+These are all the files of one Sidecar SD card. The easiest way to make the card is the SD card image of the release
+(sidecar-$ver-sd-$1.img.zip, written with Raspberry Pi Imager or balenaEtcher). To copy the files by hand instead:
 
 1. Format a microSD card as FAT32 with one partition (MBR).
-2. Unzip this zip and copy everything in it to the card's top level$rytmtxt
+2. Copy everything in this folder to the card's top level$rytmtxt
 3. Put the card in the Raspberry Pi 4B or Pi 5 and switch it on.
 
-The card set is the 800x480 one (an 800x480 HDMI display, a DSI display or none). A 1024x600 HDMI display: in
+EOF
+if [ "$1" = 800x480 ]; then
+cat <<EOF
+This card set is the 800x480 one (an 800x480 HDMI display, a DSI display or none). A 1024x600 HDMI display: in
 config.txt change both hdmi_cvt lines to "hdmi_cvt=1024 600 60 6 0 0 0" and, under [pi5], set framebuffer_width=1024
-and framebuffer_height=600 (the 1024x600 card has them), or use sidecar-pi-sd-*-1024x600.zip.
+and framebuffer_height=600 (the 1024x600 card has them), or use the 1024x600 files.
+EOF
+else
+cat <<EOF
+This card set is the 1024x600 one (a 1024x600 HDMI display). An 800x480 display, a DSI display or none: use the
+800x480 files.
+EOF
+fi
+cat <<EOF
 What is where: /Plugins (user machines and effects: load them in a U1..U5 slot or a send FX slot), /JUNO, /DX7,
 /MULTISAMPLE (an instrument), /NAM (a capture for INSERT AMP), /Samples/Starter (demo one-shots), /Licenses.
 NOTICE-STARTER.txt lists where every file comes from. The install guide: INSTALL-PI.md in the sidecar-expander
 repository.
 EOF
+}
+starter_readme 800x480 > "$st/README-STARTER.txt"
 shipcheck "$st"
 [ "$(ls -A "$st/.rytm" 2>/dev/null)" = www-next ] || [ -z "$web" ] || { echo "starter: /.rytm holds more than www-next"; exit 1; }
 sz="sidecar-$ver-starter$tsuf.zip"
 mkzip "$st" "$here/dist/pi/$sz"
 ( cd "$here/dist/pi" && shasum -a 256 "$sz" > "$sz.sha256" )
 echo "starter zip: $sz sha256 $(cut -d' ' -f1 "$here/dist/pi/$sz.sha256") ($(find "$st" -type f | wc -l | tr -d ' ') files)" >> "$info"
-rm -rf "$st"
-# SHA256SUMS of every zip and the update file (what INSTALL-PI.md checks against)
+
+# the 1024x600 starter tree: the 800x480 one with the 1024x600 config.txt (and its README). The two card sets must
+# differ in nothing else.
+diff -rq "$here/dist/pi/sd-800x480" "$here/dist/pi/sd-1024x600" > "$here/dist/pi/.carddiff" || true
+[ "$(cat "$here/dist/pi/.carddiff")" = "Files $here/dist/pi/sd-800x480/config.txt and $here/dist/pi/sd-1024x600/config.txt differ" ] \
+  || { echo "the 800x480 and 1024x600 card sets differ in more than config.txt:"; cat "$here/dist/pi/.carddiff"; exit 1; }
+rm -f "$here/dist/pi/.carddiff"
+st2="$here/dist/pi/.starter-1024x600"; rm -rf "$st2"; mkdir -p "$st2"
+cp -R "$st/." "$st2/"
+cp "$here/dist/pi/sd-1024x600/config.txt" "$st2/config.txt"
+starter_readme 1024x600 > "$st2/README-STARTER.txt"
+shipcheck "$st2"
+
+# the SD card images (scripts/make_sd_image.py: MBR + FAT32, reproducible; the Pi grows the partition on first boot)
+for res in 800x480 1024x600; do
+  tree=$st; [ $res = 800x480 ] || tree=$st2
+  python3 "$here/scripts/make_sd_image.py" "$tree" "$here/dist/pi/sidecar-$ver-sd-$res$tsuf.img.zip"
+  echo "SD card image: sidecar-$ver-sd-$res$tsuf.img.zip sha256 $(cut -d' ' -f1 "$here/dist/pi/sidecar-$ver-sd-$res$tsuf.img.zip.sha256")" >> "$info"
+done
+
+# the release zip: sidecar-<VERSION>.zip, everything in one (needs RYTM_MODS)
+if [ -z "${RYTM_MODS:-}" ]; then
+  echo "RYTM_MODS is not set: no release zip (sidecar-$ver$tsuf.zip)"
+else
+  [ -d "$RYTM_MODS" ] || { echo "RYTM_MODS: $RYTM_MODS is not a folder"; exit 1; }
+  ls "$RYTM_MODS"/*.elemod >/dev/null 2>&1 || { echo "RYTM_MODS: no .elemod file in $RYTM_MODS"; exit 1; }
+  ! find "$RYTM_MODS" -iname '*.syx' | grep . || { echo "RYTM_MODS holds a .syx (above): never ship one"; exit 1; }
+  rel="$here/dist/pi/.release"; rm -rf "$rel"; mkdir -p "$rel/SD card image" "$rel/Card files" "$rel/Rytm" "$rel/Licenses"
+  for res in 800x480 1024x600; do
+    cp "$here/dist/pi/sidecar-$ver-sd-$res$tsuf.img.zip" "$here/dist/pi/sidecar-$ver-sd-$res$tsuf.img.zip.sha256" "$rel/SD card image/"
+  done
+  mkdir "$rel/Card files/800x480" "$rel/Card files/1024x600"
+  cp -R "$st/." "$rel/Card files/800x480/"
+  cp -R "$st2/." "$rel/Card files/1024x600/"
+  cp "$RYTM_MODS"/*.elemod "$rel/Rytm/"
+  for f in LICENSE NOTICE 'TOOLCHAIN*.txt'; do
+    for g in "$RYTM_MODS"/$f; do [ -f "$g" ] && cp "$g" "$rel/Rytm/"; done
+  done
+  ( cd "$rel/Rytm" && shasum -a 256 *.elemod > SHA256SUMS )
+  cat > "$rel/Rytm/PATCHER-LINK.txt" <<EOF
+The web patcher for the Rytm: https://trigcondition.github.io/sidecar-expander/patcher/
+Step by step: https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/
+The source of elekloader's parts (GPL) is on the Rytm firmware release page: https://github.com/trigcondition/sidecar-mods/releases
+EOF
+  if [ -n "${MANUAL:-}" ]; then
+    [ -f "$MANUAL" ] || { echo "MANUAL: $MANUAL is not a file"; exit 1; }
+    mkdir "$rel/Manual"; cp "$MANUAL" "$rel/Manual/Sidecar-$ver-User-Manual.pdf"
+  fi
+  cp "$here/LICENSE" "$rel/Licenses/LICENSE.txt"
+  cp "$here/THIRD_PARTY_LICENSES" "$rel/Licenses/THIRD_PARTY_LICENSES.txt"
+  cp "$here/licenses/"*.txt "$rel/Licenses/"
+  cat > "$rel/README-FIRST.txt" <<EOF
+Sidecar $ver
+
+Two things to set up: the SD card for the Raspberry Pi 4B or 5, and the Analog Rytm.
+
+1. The SD card
+   Easiest: write an image. In the folder "SD card image" take the file for your display:
+     sidecar-$ver-sd-800x480.img.zip   an 800x480 HDMI display, a DSI display or none
+     sidecar-$ver-sd-1024x600.img.zip  a 1024x600 HDMI display
+   Write it, still zipped, to a microSD card of 4 GB or more with Raspberry Pi Imager (Choose OS > Use custom)
+   or balenaEtcher (Flash from file). Nothing has to be formatted first. Put the card in the Pi and switch it on.
+   Or copy the files: format a card as FAT32, then copy everything inside "Card files/800x480" (or 1024x600) to
+   the card's top level, including the hidden folder .rytm.
+
+2. The Rytm
+   Patch your own stock Rytm OS in the web patcher, with the files in the folder "Rytm":
+     https://trigcondition.github.io/sidecar-expander/patcher/
+   Step by step: https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/
+   We do not ship Elektron's firmware. Back up your projects first.
+
+More: the manual (the PDF in the folder "Manual", if it is in this zip) and the documentation at
+https://trigcondition.github.io/sidecar-expander/
+SHA256SUMS lists every file in this zip. Licences: the folder "Licenses".
+EOF
+  ( cd "$rel" && find . -type f ! -name SHA256SUMS -print0 | LC_ALL=C sort -z | xargs -0 shasum -a 256 | sed 's#  \./#  #' > SHA256SUMS )
+  # no firmware file: no .syx in Rytm/ (the card files carry the JUNO / DX7 patch .syx of the starter content)
+  ! find "$rel/Rytm" "$rel/SD card image" -iname '*.syx' | grep . || { echo "a .syx is in the release zip's Rytm folder"; exit 1; }
+  shipcheck "$rel"
+  rz="sidecar-$ver$tsuf.zip"
+  mkzip "$rel" "$here/dist/pi/$rz"
+  ( cd "$here/dist/pi" && shasum -a 256 "$rz" > "$rz.sha256" )
+  echo "release zip: $rz sha256 $(cut -d' ' -f1 "$here/dist/pi/$rz.sha256") ($(find "$rel" -type f | wc -l | tr -d ' ') files)" >> "$info"
+  rm -rf "$rel"
+fi
+rm -rf "$st" "$st2"
+# SHA256SUMS of every zip (card, plugins, starter, image, release) and the update file (what INSTALL-PI.md checks against)
 ( cd "$here/dist/pi" && shasum -a 256 *.zip $(ls *.scu 2>/dev/null) > SHA256SUMS )
 echo "dist/pi from rytm-teensy $full (worktree $wt)"

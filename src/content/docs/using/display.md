@@ -1,6 +1,6 @@
 ---
 title: The display (Pi)
-description: "The Pi's touch display: which displays work, 800x480 and 1024x600, connecting HDMI and DSI, the boot screen, the OLED and CLASSIC themes and the STAGE look, the connection animation, screensaver, brightness and touch."
+description: "The Pi's touch display: which displays work, 800x480 and 1024x600, connecting HDMI and DSI, the boot screen, the OLED and SIDECAR themes and the STAGE look, the connection animation, screensaver, brightness and touch."
 sidebar:
   order: 7
 ---
@@ -14,12 +14,14 @@ The Pi can drive a touch display: HDMI with USB touch, or a DSI touchscreen on t
 | Display | Pi 4 | Pi 5 |
 |---|---|---|
 | 5" / 7" HDMI LCD with USB touch, 800x480 (Waveshare) | <span class="sc-ok">hardware</span> (the 5") | <span class="sc-ok">hardware</span>, scaled (slightly soft) |
-| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 | expected, to be confirmed: needs the `config.txt` lines below | expected |
+| 7" HDMI 1024x600 with USB touch: the GeeekPi EP-0194 (a case for the Pi 4) | <span class="sc-ok">hardware</span> (the 1024x600 card) | expected |
 | 7" DSI compatible with the official display v1 (OSOYOO 7" DSI V4.0) | <span class="sc-ok">hardware</span> | <span class="sc-test">in testing</span> (built, not yet run) |
 | Official Raspberry Pi 7" Touch Display (v1, DSI) | expected (the same path as the compatibles) | <span class="sc-test">in testing</span> (built, not yet run) |
 | Raspberry Pi Touch Display 2, 7" | not supported | <span class="sc-ok">hardware</span> (0.3.2: rotated 270 by default, `dsi_rotate=90` the other way up, the 1024x600 UI centred) |
 | Raspberry Pi Touch Display 2, 5" | not supported | <span class="sc-test">in testing</span> (0.3.2: support added, untested here) |
 | Raspberry Pi Touch Display 2 | not supported | not supported (untested; portrait 720x1280) |
+
+**Settings for the card.** The [card config editor](/sidecar-expander/getting-started/config-editor/) makes the `config.txt` and `cmdline.txt` lines for these displays from a form.
 
 **Connecting.** HDMI goes to the Pi's **micro-HDMI 0** (next to the power socket), USB touch to a USB-A port. With a DSI display and HDMI both connected, the Sidecar draws on the DSI display; `dsi=0` in `cmdline.txt` keeps it on HDMI. With no DSI panel answering, the Sidecar uses HDMI (both boards).
 
@@ -51,20 +53,20 @@ disable_overscan=1
 
 Nothing else is needed: the frame buffer is then 1024x600 and the UI follows. On the Pi 5 only `hdmi_force_hotplug=1` matters (it is on the card); if the 1024x600 layout is not picked, put `res=1024x600` in `cmdline.txt`. The boot log's `display: EDID:` line says what the panel reports.
 
-![The CLASSIC home page at 1024x600](../../../assets/touch/wide-classic-home.png)
+![The home page in the SIDECAR theme at 1024x600: the T1..T8 keys as a rail on the right](../../../assets/touch/wide-sidecar-home.png)
 
 ## Boot screen
 
-SIDECAR / EXPANDER in the dot-matrix font over a row of eight segments, drawn straight after the engine starts; a segment lights per boot stage (the SD card, the send FX, the card, the console, the render cores, USB, the display). The home page follows a few seconds later. With `uistyle=classic` in `cmdline.txt` the boot screen has the CLASSIC look; `display=0` turns it off with the display.
+SIDECAR / EXPANDER in the dot-matrix font over a row of eight segments, drawn straight after the engine starts; a segment lights per boot stage (the SD card, the send FX, the card, the console, the render cores, USB, the display). The home page follows a few seconds later. With `uistyle=sidecar` in `cmdline.txt` the boot screen has the SIDECAR look (the logo over the wordmark on the night blue); `display=0` turns it off with the display.
 
 ![The boot screen: SIDECAR / EXPANDER with three of eight segments lit](../../../assets/touch/oled-boot.png)
 
 ## Themes and looks
 
-Two themes, each with every page, switched with **Settings > Display > UI style** (applied at once, stored on the card):
+Two themes (OLED and SIDECAR), each with every page, switched with **Settings > Display > UI style** (applied at once, stored on the card):
 
 - **OLED** (the default): the screen drawn as a zoomed-in dot-matrix OLED, 400x240 dots of 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings.
-- **CLASSIC**: the controls drawn as the Rytm's hardware: rubber keys, trig keys with LEDs, knob caps with LED rings, the teal FUNC key, black display windows.
+- **SIDECAR** (new in 0.5.0): the look of the new [web page](/sidecar-expander/using/web-ui/) on the touchscreen: a night-blue screen, cards with their title as a pill on the top edge, pill keys, knobs as arcs with the value inside. It replaced CLASSIC (the Rytm's hardware look): a card or `cmdline.txt` that says `uistyle=classic` now comes up in SIDECAR. See [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
 
 **LOOK: STUDIO / STAGE** (OLED): STUDIO is the dot look (the default); **STAGE** draws every dot as a whole cell, without the grid lines, and lifts every grey a step, for reading at an angle and on a stage.
 
@@ -72,21 +74,21 @@ Pictures of both themes and the STAGE look: [The touchscreen](/sidecar-expander/
 
 ## The connection animation
 
-When the Rytm's link comes up or drops, a banner slides over the top of the screen, modelled on the Rytm's own CONNECTED splash: it opens as a curtain from the left, the word slides in, a row of dots (CLASSIC: LEDs) sweeps across, lit left to right for **CONNECTED** (about 1.4 s) and put out right to left for **DISCONNECTED** (about 1.1 s), then the curtain leaves to the right. It plays only on a change of the link, never on a page change.
+When the Rytm's link comes up or drops, a banner slides over the top of the screen, modelled on the Rytm's own CONNECTED splash: it opens as a curtain from the left, the word slides in, a row of dots sweeps across, lit left to right for **CONNECTED** (about 1.4 s) and put out right to left for **DISCONNECTED** (about 1.1 s), then the curtain leaves to the right. It plays only on a change of the link, never on a page change.
 
 ![The OLED connection banner: CONNECTED over the title bar](../../../assets/touch/oled-connected.png)
-![The CLASSIC banner: RYTM DISCONNECTED with the LED sweep](../../../assets/touch/classic-disconnected.png)
 
 ## Settings > Display
 
-![Settings > Display (OLED): UI STYLE OLED / CLASSIC, SCREENSAVER OFF / 15 MIN / 1 H / 4 H, TOUCH TEST, BRIGHTNESS 100 %, LOOK STUDIO / STAGE](../../../assets/touch/oled-settings-display.png)
+![Settings > Display (OLED): UI STYLE OLED / SIDECAR, SCREENSAVER OFF / 15 MIN / 1 H / 4 H, TOUCH TEST, BRIGHTNESS 100 %, LOOK STUDIO / STAGE](../../../assets/touch/oled-settings-display.png)
 
 <small>Screenshots: rendered off-device by the Sidecar's own UI code, with made-up data.</small>
 
 | Setting | |
 |---|---|
-| **UI style** | OLED or CLASSIC (also `uistyle=oled\|classic` on the console or the web page) |
+| **UI style** | OLED or SIDECAR (also `uistyle=oled\|sidecar` on the console or the web page; `classic` is still accepted and means SIDECAR) |
 | **Screensaver** | Off, 15 min, 1 h (default) or 4 h without a touch: the screen goes black. Any touch wakes it, and that touch only wakes the screen. Rytm activity does not keep it awake. |
+| **Touch: Calibrate** | the four-cross touch calibration ([Touch](#touch)) |
 | **Touch test** | a tap counter and the raw touch readout. It leaves HOME after the first tap; it lives here from then on. |
 | **Brightness** | 5 to 100 %. It dims the picture (the panel has no software backlight control); even the darkest setting stays readable, so you can always find the slider again. |
 | **Look** | STUDIO or STAGE |
@@ -99,7 +101,9 @@ A weak supply shows in the title bar in the alert look, with a short text naming
 
 ## Touch
 
-If touch is offset or mirrored, read the raw values from the touch test and set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`. Touch errors on the panel's USB link are recovered automatically.
+If a touch lands in the wrong place (offset, mirrored or turned), calibrate it: **Settings > Display > Touch: Calibrate** shows a cross near each corner in turn (top left, top right, bottom right, bottom left). Touch each one precisely. Four touches that do not make a screen (a cross missed) are refused and the crosses start again. The result is stored on the card in `/.rytm/display.txt` as `touchcal=` and kept through updates; **RESET** (or `touchcal=off` on the web page's console) goes back to the default. The calibration wins over `touchscreen=` in `cmdline.txt`.
+
+Without the calibration you can still set `touchscreen=minx,maxx,miny,maxy` in `cmdline.txt`, with the raw values from the touch test. Touch errors on the panel's USB link are recovered automatically.
 
 ## Cost
 

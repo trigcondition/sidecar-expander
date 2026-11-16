@@ -27,7 +27,7 @@ The SONG pages say what is missing (`! ENCODER DEST INT, OUTPUT CH AUTO`); **CFG
 The touchscreen's SONG page is the take as a timeline (read only): bars and markers, pattern blocks, scenes, PERF, tempo, the 12 mutes, and the parameter lanes that moved most (Rytm in blue, Sidecar in teal). Drag scrolls; **- / +** zoom; **FOLLOW** keeps the playhead in view; **< >** load the project's other takes.
 
 ![The touchscreen's SONG timeline (OLED)](../../../assets/touch/oled-song-timeline.png)
-![The touchscreen's SONG timeline (CLASSIC): take-004, 33 bars, PTN A01 A02 A03 A01, scenes, PERF, BPM, mutes, parameter lanes; ARM REPLAY < > - + FOLLOW CFG](../../../assets/touch/classic-song-timeline.png)
+![The touchscreen's SONG timeline (SIDECAR theme): take-004, 33 bars, PTN A01 A02 A03 A01, scenes, PERF, BPM, mutes, parameter lanes; ARM REPLAY < > - + FOLLOW CFG](../../../assets/touch/sidecar-song-timeline.png)
 
 ## Replay
 
@@ -50,7 +50,7 @@ A replay overwrites the Rytm's working kit, pattern, settings and mutes. **UNDO 
 
 <small>Screenshots: rendered off-device by the Sidecar's own page code, with made-up data.</small>
 
-**UP + T11** opens SONG: on the touchscreen when one is connected, else the Rytm's SONG page. The Rytm's SONG page is also in the SIDECAR MENU (UP + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
+**UP + T6** opens SONG: on the touchscreen when one is connected, else the Rytm's SONG page. The Rytm's SONG page is also in the SIDECAR MENU (UP + YES, then YES), listed once a take exists on the card or the touchscreen armed one.
 
 ## With poly tracks and the pools
 

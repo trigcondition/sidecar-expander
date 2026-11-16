@@ -2,7 +2,7 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's OS 1.74 or OS 1.73: one build for each. We do not distribute firmware, stock or modified. You patch **your own** stock file on your own computer, and the patcher checks that the result is bit-identical to the build we tested.
+The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's OS 1.74. From 0.5.0 on there is one build, for OS 1.74 only; the older releases (0.4.4 and before) also have builds for OS 1.73. We do not distribute firmware, stock or modified. You patch **your own** stock file on your own computer, and the patcher checks that the result is bit-identical to the build we tested.
 
 ## What you need
 
@@ -19,7 +19,7 @@ The Rytm side of Sidecar | Expander is a set of mods to the Analog Rytm MKII's O
 
 Open the patcher page: <https://trigcondition.github.io/sidecar-expander/patcher/>.
 
-1. Pick the mod build for your OS. For Sidecar 0.4.4: `rel0-4-4-os1.74` (OS 1.74, the default: the OS Elektron offers now) or `rel0-4-4` (OS 1.73). You can move between 1.73 and 1.74 in both directions with Elektron's stock files; recovery is the stock file of the OS you want to be on. Back up every project first ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/#which-os-174-or-173)). Older builds: `rel0-4-0-os1.74` (OS 1.74) and `rel0-4-0` (OS 1.73) for Sidecar 0.4.0 to 0.4.3; all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
+1. Pick the mod build. For Sidecar 0.5.0: `rel0-5-0-os1.74` (OS 1.74 only, the default). A Rytm on OS 1.73 needs Elektron's stock OS 1.74 first; you can move between 1.73 and 1.74 in both directions with Elektron's stock files, and recovery is the stock file of the OS you want to be on. Back up every project first ([Patch and flash the Rytm](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Older builds: `rel0-4-4-os1.74` (OS 1.74) and `rel0-4-4` (OS 1.73, the last build for 1.73) for Sidecar 0.4.4; `rel0-4-0-os1.74` (OS 1.74) and `rel0-4-0` (OS 1.73) for Sidecar 0.4.0 to 0.4.3; all OS 1.73: `rel0-3-1` for Sidecar 0.3.1 and 0.3.2, `rel0-3-0` for Sidecar 0.3.0; for Sidecar 0.2.0, `rui1027d` (the mods plus the remote pages) or `sfx1021` (the same mods without them).
 2. Drop your stock `.syx` on the page, or click to choose it. The page names the file the build needs.
 3. Press **Patch**, then **Save**.
 
@@ -29,18 +29,19 @@ The file is read and patched by JavaScript in the page itself. Nothing is upload
 
 Python 3.8 or newer, with no extra packages. From a copy of this repository:
 
-    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.74.syx public/patcher/patches/sidecar-rel0-4-4-os1.74.json
+    python3 public/patcher/sidecar_patch.py ~/Downloads/Analog-Rytm_MKII_OS1.74.syx public/patcher/patches/sidecar-rel0-5-0-os1.74.json
 
-This writes `Analog-Rytm_MKII_OS1.74_rel0-4-4.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
+This writes `Analog-Rytm_MKII_OS1.74_rel0-5-0.syx` next to the stock file (use `-o` to choose another path). It takes a few seconds.
 
 ## Check the result
 
 Both patchers check the result themselves and save nothing if it is wrong. To check it yourself:
 
-    shasum -a 256 Analog-Rytm_MKII_OS1.74_rel0-4-4.syx
+    shasum -a 256 Analog-Rytm_MKII_OS1.74_rel0-5-0.syx
 
 | Build | Output file | SHA-256 |
 |---|---|---|
+| rel0-5-0-os1.74 | `Analog-Rytm_MKII_OS1.74_rel0-5-0.syx` | `17bcca0119c97676567018f1f42c5f1206948bf632f0444410dd69caa6649514` |
 | rel0-4-4 | `Analog-Rytm_MKII_OS1.73_rel0-4-4.syx` | `421cccc9dd16709f3981a1e4f0155bfdcabb337f2130ceb6fee26431967acf26` |
 | rel0-4-4-os1.74 | `Analog-Rytm_MKII_OS1.74_rel0-4-4.syx` | `3bb035a2035857c0a3035dfb95fab0703191a4f8fdd1b8de3a31302d2770d77c` |
 | rel0-4-0 | `Analog-Rytm_MKII_OS1.73_rel0-4-0.syx` | `07780e9eb4bce7f71c83da3134ede4782f7ea7af211eb6787c670607707bff18` |
@@ -94,6 +95,6 @@ Make the patch files from a rytm-mods build:
     scripts/make_patches.py --mods <rytm-mods checkout> --dir <build folder> --commit <rytm-mods commit> [TAG ...]
     scripts/test_patcher.sh <build folder>
 
-`--dir` holds the stock `.syx` and the built `Analog-Rytm_MKII_OS1.73_<tag>.syx` files; a build whose stock file or built file has another name says so in `builds.json` (`stock_name`, `built`: the OS 1.74 build reads `Analog-Rytm_MKII_OS1.74.syx` and `Analog-Rytm_MKII_OS1.74_rel0-4-0.syx`). The tags and their titles are listed in `public/patcher/builds.json`. rytm-mods' `tools/release_patch.py` refuses to write a patch unless the records rebuild the built `.syx` byte for byte and no literal holds 4 consecutive bytes found in any stock section. `test_patcher.sh` runs both patchers (the JavaScript one in Node) and compares their output with the builds.
+`--dir` holds the stock `.syx` and the built `Analog-Rytm_MKII_OS1.73_<tag>.syx` files; a build whose stock file or built file has another name says so in `builds.json` (`stock_name`, `built`: the OS 1.74 build reads `Analog-Rytm_MKII_OS1.74.syx` and `Analog-Rytm_MKII_OS1.74_rel0-5-0.syx`). The tags and their titles are listed in `public/patcher/builds.json`. rytm-mods' `tools/release_patch.py` refuses to write a patch unless the records rebuild the built `.syx` byte for byte and no literal holds 4 consecutive bytes found in any stock section. `test_patcher.sh` runs both patchers (the JavaScript one in Node) and compares their output with the builds.
 
 A box other than the Rytm: its entry in `builds.json` names its `stock_name` and its `tool` under `--mods` (`a4/tools/a4_patch.py` in sidecar-mods), and `--dir` holds its stock file and build. A build marked `unreleased` stays hidden and stops the deploy: on release day fill in its SHA256 slots (in double braces), delete the key and rerun `make_patches.py`. `check_unreleased.py` also stops the deploy while a slot in double braces (a hash, or the card zips' `COMMIT`) is left in any published file (`src/`, `public/`, the root `.md` files), while a bare `COMMIT` is left in a file name, and while an unreleased mark (an HTML comment) is left in a current page, a root `.md` file or `public/`. Only the slot form (double braces around an uppercase word, such as `COMMIT` or `SHA256 ...`) counts.

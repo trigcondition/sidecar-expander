@@ -98,14 +98,14 @@ MODL's text shows on the Rytm's INSERT page and on the touchscreen's INSERT FX p
 
 ## Editing
 
-- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU; TRK + FX, the older form, still works). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view. **RIGHT**, from any of its views, opens the **EQ view**: a post EQ after the two slots, A HPF, B LPF, C LOW, D HIGH (LEFT or NO goes back; YES swaps between the voice's EQ and its bus's). The EQ has no p-locks.
+- **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view. **RIGHT**, from any of its views, opens the **EQ view**: a post EQ after the two slots, A HPF, B LPF, C LOW, D HIGH (LEFT or NO goes back; YES swaps between the voice's EQ and its bus's). The EQ has no p-locks.
 
 The INSERT page **replaces the Rytm's page** like SRC: no page dots and no LEFT / RIGHT siblings. Leave with **NO**, or press **UP + FX** again; **UP + AMP** again aims the OUT view at the track now selected.
 ![The INSERT page's TRACK view on the Rytm: CRUSH in slot A, B empty, OUT POST; RATE BITS DRV MIX, SLOT TYPE BUS SEND; YES: BUSES, FUNC+G: TRACK](../../../assets/rytm/sc-insert-out-box.png)
 
 <small>Render of the Rytm-screen page: the Sidecar's own page code on the host, with made-up data.</small>
 
-- **On the touchscreen:** the **INSERT FX** page (FX, UP + T6 on the Rytm, or Settings > Send FX > Inserts): the voice's two slots as dials with their values, a key per track, the three sends, each bus's chain and return, and the **OUT** row (TRK / PRE / POST, LEV, PAN, WID). It follows the Rytm's selected track; the knobs are the Rytm's (`KNOBS ON RYTM`), the TYPE and OUT keys edit.
+- **On the touchscreen:** the **INSERT FX** page (FX, UP + T5 on the Rytm, or Settings > Send FX > Inserts): the voice's two slots as dials with their values, a key per track, the three sends, each bus's chain and return, and the **OUT** row (TRK / PRE / POST, LEV, PAN, WID). It follows the Rytm's selected track; the knobs are the Rytm's (`KNOBS ON RYTM`), the TYPE and OUT keys edit.
 - **P-locks:** on a [poly track](/sidecar-expander/using/sequencer/#p-locks-on-poly-steps), hold trigs and press **FX** twice: the INS lock page (A..D INSERT A P1..P4, E..H INSERT B P1..P4).
 - **LFOs:** targets I1..I8 (the voices' chains) and B1..B3 (the buses' chains), on top of the knob or lock; O1..O8 move the OUT route's LEV, PAN and WID ([LFOs](/sidecar-expander/using/lfo/#targets)).
 
