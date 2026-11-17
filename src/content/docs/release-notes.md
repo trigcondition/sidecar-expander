@@ -1,7 +1,72 @@
 ---
 title: Release notes
-description: "Sidecar 0.5.0 (the SAMPLER machine, a better CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, user effects with NIMBUS and GALACTIC, the web update, voices 9 dB lower), 0.4.4 (a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, the CONNECTED screen at the Rytm's boot; the Rytm firmware 0.4.4), 0.4.3 (CHRO pad fixes on poly tracks: the first hit, JUNO and the other machines, PAD OCT; fewer Rytm screen redraws), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
+description: "Sidecar 0.5.1 (Pi only: new themes and layouts, touch controls, the community machine catalog, BP303, the USB unplug fix), Sidecar 0.5.0 (the SAMPLER machine, a better CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, user effects with NIMBUS and GALACTIC, the web update, voices 9 dB lower), 0.4.4 (a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, the CONNECTED screen at the Rytm's boot; the Rytm firmware 0.4.4), 0.4.3 (CHRO pad fixes on poly tracks: the first hit, JUNO and the other machines, PAD OCT; fewer Rytm screen redraws), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
 ---
+
+## Sidecar 0.5.1
+
+**New touchscreen themes and layouts, touch controls on the Pi's screen, a catalog of community machines in the web page, the BP303 bass machine, and a fix for a USB-C cable pulled in the middle of traffic.** This is a **Pi-only update. The Rytm stays on the Rytm firmware 0.5.0: no flash.** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+### Good to know
+
+- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE come in 0.5.2.** 0.5.0 said 0.5.1; they moved. 0.5.1 keeps the 0.5.0 WAVETABLE. UP + T14 still shows "MORPH: 0.5.1" on a 0.5.0 build; on 0.5.1 it says 0.5.2. A project that uses the Sidecar's morph keeps its settings.
+- **The new themes are chosen in Settings > Display (UI style).** The default stays what you know (OLED).
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.scu` (SHA-256 `{{SHA256 sidecar-0.5.1.scu, first 8 ... last 6}}`), for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0 |
+| SD card image (new card) | `sidecar-0.5.1-sd-800x480.img.zip` (`{{SHA256 sidecar-0.5.1-sd-800x480.img.zip, first 8 ... last 6}}`) and `sidecar-0.5.1-sd-1024x600.img.zip` (`{{SHA256 sidecar-0.5.1-sd-1024x600.img.zip, first 8 ... last 6}}`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.zip` (`{{SHA256 sidecar-0.5.1.zip, first 8 ... last 6}}`): both images, the card files, the Rytm `.elemod` files (the 0.5.0 ones, no `.syx`), the manual, a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1-{{COMMIT}}-800x480.zip` and `sidecar-pi-sd-0.5.1-{{COMMIT}}-1024x600.zip`, each with its `.sha256`, or the starter zip `sidecar-0.5.1-starter.zip`; `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.zip`: the 0.5.0 set plus **BP303** |
+| Starter content | `sidecar-content-0.5.1.zip` |
+| Rytm firmware | unchanged: the 0.5.0 build (`rel0-5-0-os1.74` in the [patcher](/sidecar-expander/patcher/)) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1). The Rytm firmware stays the [sidecar-mods 0.5.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.0).
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/).
+
+**From 0.5.0 (the easy way, three steps):**
+
+1. Download `sidecar-0.5.1.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file.
+3. Wait for the trial boot (the page follows it) until it says the update is done.
+
+If the Sidecar does not come back, power it off and on: it runs 0.5.0 again. Your projects, samples, `/Plugins` and settings stay. No Rytm flash.
+
+**From 0.4.x:** flash the Rytm firmware 0.5.0 if it is not on the Rytm yet (OS 1.74), then copy the 0.5.1 card files over the card, or write the 0.5.1 SD card image to a new card, as for 0.5.0.
+
+### New in 0.5.1
+
+**Themes and touch**
+
+- **New touchscreen themes.** SIDECAR is redrawn in the layout language of **GRID**, a new theme, and SIDECAR has three more contrast options: **High blue**, **High green** and **Viper** (Settings > Display > Contrast). Text is Arimo Bold ([The display](/sidecar-expander/using/display/#themes-and-looks)).
+- **Sections with sub-page rows.** The eight navigation keys are sections; each has a row of sub-pages under the header (nothing was dropped). **HOME** is now an Overview (the pattern, the XY pad, the send FX, the eight voices, the recorder, health and links) and a Perform page.
+- **Touch controls.** Bigger touch targets; drag the VOICE, INSERT FX, MASTER FX and OUT knobs on the Pi's own screen (a double tap resets).
+
+**Machines**
+
+- **The catalog of community machines** (Voices > User machines > Catalog in the web page): lists the community registry's machines and effects for your board and installs one. **Your browser needs internet; the Sidecar does not.** The browser downloads the package and checks its SHA-256, then sends it to the Sidecar, whose loader checks it again. Every entry is marked "community" (native code, no sandbox, not tested by Sidecar). [The machine catalog](/sidecar-expander/using/machine-catalog/).
+- **BP303**, a 303-style bass line user machine (MIT; a port of BLACKPYRAMIDS_303 and Open303), in the plugins zip ([User machines](/sidecar-expander/using/user-machines/)).
+
+**Other**
+
+- **The remote service on the USB-C cable** (a headless feed with an open protocol, for companion apps). Nothing changes for you unless a client uses it.
+
+### Fixed in 0.5.1
+
+- **A USB host that vanishes mid-traffic** (the cable pulled, a computer asleep) no longer halts the Pi. It comes back when the cable is plugged in again.
+
+### Known issues in 0.5.1
+
+Still open from 0.5.0:
+
+- **After a rollback to an older Sidecar build the LFOs show OFF.** The older build does not read the new LFO files; going back to 0.5.0 brings them back.
+- **The CHOP editor's audition ignores GATE:** trigs and pads obey it.
+- **SONG Restore still uses the old write:** a fill that a SONG Restore removed comes back after a power-off.
 
 ## Sidecar 0.5.0
 
@@ -10,7 +75,7 @@ description: "Sidecar 0.5.0 (the SAMPLER machine, a better CHOP, SAMPLE EDIT, FI
 ### Good to know
 
 - **Sidecar voices are about 9 dB quieter than in 0.4.x.** Voices clipped at the Rytm's track ceiling, so every Sidecar voice now plays 9 dB lower, with a soft limit at the ceiling. A sound you balanced against the Rytm's own voices may need a new balance.
-- **MORPH and the looper are not in 0.5.0.** They arrive in **0.5.1**, with sidechain (PUMP and DUCK), the learn rows on the MIDI page and a new version of morph. The MORPH page is hidden in 0.5.0: UP + T14 shows "MORPH: 0.5.1". **A project that uses the Sidecar's morph keeps its settings** (the scenes stay in the project's files), and they work again in 0.5.1.
+- **MORPH and the looper are not in 0.5.0.** They were announced for 0.5.1 and now arrive in **0.5.2**, with sidechain (PUMP and DUCK), the learn rows on the MIDI page and a new version of morph. The MORPH page is hidden in 0.5.0: UP + T14 shows "MORPH: 0.5.1" (0.5.1 itself says 0.5.2). **A project that uses the Sidecar's morph keeps its settings** (the scenes stay in the project's files), and they work again in 0.5.2.
 
 | Part | File |
 |---|---|
