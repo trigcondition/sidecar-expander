@@ -183,6 +183,8 @@ plugs=(sc_acid sc_wavepad sc_metal sc_snare sc_pluck sc_grain nusaw vox hush1 ra
 # 0.5.0 (Plugin API 3), when the commit has them: the user effects PHASER, BBD, NIMBUS and GALACTIC, the user machine
 # MIST. PINGPONG (plugins/ufx_pingpong) is the firmware repo's example effect, not shipped
 for p in ufx_phaser ufx_bbd ufx_nimbus ufx_galactic mist; do [ -f "$wt/plugins/$p/Makefile" ] && plugs+=("$p"); done
+# 0.5.1: the user machine BP303 (a 303-style bass voice, MIT: BLACKPYRAMIDS_303 and Open303)
+[ -f "$wt/plugins/bp303/Makefile" ] && plugs+=(bp303)
 for p in "${plugs[@]}"; do
   rm -f "$wt/plugins/$p/$p.a64.rmp" "$wt/plugins/$p/$p.a64.elf"
   make -C "$wt/plugins/$p" a64 PY=python3 >/dev/null
@@ -204,6 +206,13 @@ if [ -f "$out/mist.a64.rmp" ]; then
   cmp -s "$wt/plugins/mist/out/mist.a64.rmp" "$out/mist.a64.rmp" || { echo "mist: make package built another package"; exit 1; }
   cp "$wt/plugins/mist/out/LICENSE.txt" "$out/mist-LICENSE.txt"
   cp "$wt/plugins/mist/out/NOTICE.txt" "$out/mist-NOTICE.txt"
+fi
+# BP303 (0.5.1): MIT, built on BLACKPYRAMIDS_303 (Zac Kyoti and contributors) and Open303 (Robin Schmidt): its licences and notice beside the package
+if [ -f "$out/bp303.a64.rmp" ]; then
+  make -C "$wt/plugins/bp303" package PY=python3 >/dev/null
+  cmp -s "$wt/plugins/bp303/out/bp303.a64.rmp" "$out/bp303.a64.rmp" || { echo "bp303: make package built another package"; exit 1; }
+  cp "$wt/plugins/bp303/out/LICENSE.txt" "$out/bp303-LICENSE.txt"
+  cp "$wt/plugins/bp303/out/NOTICE.txt" "$out/bp303-NOTICE.txt"
 fi
 ! ls "$out"/mdk*.rmp >/dev/null 2>&1 || { echo "an mdkit user machine is in the package (MD is built in)"; exit 1; }
 # the internal test plugins (rytm.sine_test, rytm.fault_test: crashes on purpose) must never ship
@@ -301,7 +310,8 @@ page, built from the firmware's web-next), the starter content /JUNO/Factory and
 /Plugins/*.rmp: the release's user machines and user effects, the same files as sidecar-pi-plugins-$ver.zip. Their
 licences are in /Licenses/plugins/: LICENSE.txt (MIT, with the notices of the code they build on); MODEL E is
 GPL-2.0-or-later (modele-LICENSE.txt, modele-NOTICE.txt, its complete source modele-source.tar.gz); MIST, if present,
-has mist-LICENSE.txt and mist-NOTICE.txt (Beads by Emilie Gillet, MIT).
+has mist-LICENSE.txt and mist-NOTICE.txt (Beads by Emilie Gillet, MIT); BP303, if present, has bp303-LICENSE.txt and
+bp303-NOTICE.txt (BLACKPYRAMIDS_303 by Zac Kyoti and contributors, Open303 by Robin Schmidt, MIT).
 
 EOF
 for n in ${notice[@]+"${notice[@]}"}; do echo "$n"; echo; done
