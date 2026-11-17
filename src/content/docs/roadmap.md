@@ -84,6 +84,15 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 
 A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes](/sidecar-expander/release-notes/#sidecar-043)): the **CHRO pads play from the first hit** on a selected poly track.
 
+## Released: 0.5.1
+
+([Release notes](/sidecar-expander/release-notes/#sidecar-051)) A Pi-only update; the Rytm stays on the Rytm firmware 0.5.0:
+
+- **Themes and layouts:** the GRID theme, SIDECAR in GRID's layout language, the High blue, High green and Viper contrast options, sections with sub-page rows, and HOME as Overview and Perform ([The display](/sidecar-expander/using/display/#themes-and-looks)).
+- **Touch controls:** bigger touch targets, and the VOICE, INSERT FX, MASTER FX and OUT knobs drag on the Pi's screen.
+- **[The machine catalog](/sidecar-expander/using/machine-catalog/)** of community machines in the web page, and the BP303 bass machine.
+- **Fix:** a USB-C cable pulled in the middle of traffic no longer halts the Pi.
+
 ## Released: 0.5.0
 
 ([Release notes](/sidecar-expander/release-notes/)) New machines, sample tools, effects and a new setup:
@@ -96,10 +105,11 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 - **A new look and feel:** the SIDECAR theme on the touchscreen and the same look on the web page ([Touchscreen](/sidecar-expander/using/touchscreen/)), knobs that snap to their centre, bigger steps with FUNC, [MIDI settings](/sidecar-expander/using/midi-settings/) and the [Pi 5's fan](/sidecar-expander/using/pi5-fan/).
 - **Fixes:** Sidecar voices no longer clip (about 9 dB lower, with a soft limit), and more ([Fixed in 0.5.0](/sidecar-expander/release-notes/)).
 
-## Next: 0.5.1
+## Next: 0.5.2
 
-Planned for 0.5.1. They moved out of 0.5.0 so that 0.5.0 could ship sooner. Nothing here is a promise of a date:
+Planned for 0.5.2 (they were announced for 0.5.1, which became a smaller Pi-only update). They moved out of 0.5.0 so that 0.5.0 could ship sooner. Nothing here is a promise of a date:
 
+- **A new WAVETABLE machine** (the Vital-style version; 0.5.1 keeps the 0.5.0 one).
 - **The looper:** a master looper for the Octatrack-style transition trick, with live sampling.
 - **Sidechain:** PUMP and DUCK, the Sidecar's sidechain effects.
 - **Morph v2, and the morph fader back.** The MORPH page (UP + T14), its scenes and the crossfader are hidden in 0.5.0. Projects that use them keep their settings. Morph v2 adds the Rytm's PERF macros and scenes on Sidecar, sequencer and master FX parameters.
@@ -119,7 +129,7 @@ Ideas and plans, not scheduled. "Being explored" means a design or a test exists
 - **Insert FX on the analog voices** (planned): the Rytm tracks' own audio through the Sidecar's inserts.
 - **P-locks on send FX 1 and 2 separately** (being explored).
 - **Song arrangement and a mix view** (being explored): arrange the song from patterns, a mix view that shows clashes, and an export of the stems as a ready project, in the web UI and a later desktop app.
-- **Touch-editable dials** on the touchscreen (planned): drag a dial to change it.
+- **Touch-editable dials on the remaining pages** (planned): VOICE, INSERT FX, MASTER FX and OUT drag since 0.5.1.
 - **A friendlier AUTO-SAMPLER form** on the web page, with pickers for source, notes and layers (planned).
 - **A graphic LFO page** on the Rytm's screen and the touchscreen (planned).
 - **Convert a Rytm project that uses Rytm samples** into a Sidecar project that plays them on the SAMPLER (being explored).

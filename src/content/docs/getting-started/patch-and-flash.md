@@ -1,11 +1,11 @@
 ---
 title: Patch and flash the Rytm
-description: "The Rytm firmware 0.5.0 (for Sidecar 0.5.0, OS 1.74 only; 0.4.4 and 0.4.0 for the older Sidecars, also for OS 1.73): patch your own stock OS 1.74 file in the browser patcher, check it, and send it to the Rytm with Transfer. You can move between 1.73 and 1.74 in both directions with Elektron's own files. Advanced: build the same file with elekloader. The 0.2.0 builds."
+description: "The Rytm firmware 0.5.0 (for Sidecar 0.5.0 and 0.5.1, OS 1.74 only; 0.4.4 and 0.4.0 for the older Sidecars, also for OS 1.73): patch your own stock OS 1.74 file in the browser patcher, check it, and send it to the Rytm with Transfer. You can move between 1.73 and 1.74 in both directions with Elektron's own files. Advanced: build the same file with elekloader. The 0.2.0 builds."
 sidebar:
   order: 2
 ---
 
-The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.5.0, for Sidecar 0.5.0, is built for **OS 1.74 only** (the older Rytm firmware 0.4.4 has a build for OS 1.74 and one for OS 1.73). We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
+The Rytm side of Sidecar is a set of mods to the Rytm's OS. The Rytm firmware 0.5.0, for Sidecar 0.5.0 and 0.5.1, is built for **OS 1.74 only** (the older Rytm firmware 0.4.4 has a build for OS 1.74 and one for OS 1.73). We do not distribute firmware, stock or modified. You build the modified firmware from **your own** stock OS file on your own computer, and check that the result is bit-identical to the build we tested.
 
 :::caution
 Back up first: use Transfer to back up your projects, kits, sounds and samples. Read [Recovery to stock](/sidecar-expander/getting-started/recovery/) before you flash.
@@ -13,7 +13,7 @@ Back up first: use Transfer to back up your projects, kits, sounds and samples. 
 
 ## The Rytm firmware 0.5.0: patch it in your browser
 
-Sidecar 0.5.0 comes with the Rytm firmware 0.5.0, for **OS 1.74 only**: it adds the Rytm side of the SAMPLER machine, the Rytm's own parameters on the XY pad, MIDI learn and poly-track p-locks, UP + RIGHT for FILL, the sample browser's preview, quick load and file menu, and send FX BASE and WIDTH ([Release notes](/sidecar-expander/release-notes/#sidecar-050)). A Rytm on the Rytm firmware 0.4.4 also works with the Sidecar 0.5.0 card, without those. A Rytm on OS 1.73 needs Elektron's stock OS 1.74 first ([below](#which-os-174-or-173)). (The Rytm firmware 0.4.4: [below](#the-rytm-firmware-044-older); 0.4.0: [below](#the-rytm-firmware-040-older); the 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
+Sidecar 0.5.0 and 0.5.1 come with the Rytm firmware 0.5.0 (0.5.1 is Pi only, so there is no new Rytm firmware and nothing new to flash), for **OS 1.74 only**: it adds the Rytm side of the SAMPLER machine, the Rytm's own parameters on the XY pad, MIDI learn and poly-track p-locks, UP + RIGHT for FILL, the sample browser's preview, quick load and file menu, and send FX BASE and WIDTH ([Release notes](/sidecar-expander/release-notes/#sidecar-050)). A Rytm on the Rytm firmware 0.4.4 also works with the Sidecar 0.5.0 card, without those. A Rytm on OS 1.73 needs Elektron's stock OS 1.74 first ([below](#which-os-174-or-173)). (The Rytm firmware 0.4.4: [below](#the-rytm-firmware-044-older); 0.4.0: [below](#the-rytm-firmware-040-older); the 0.3.1 build: the [0.3 docs](/sidecar-expander/0.3/getting-started/patch-and-flash/).) For an Analog Four MKII, see [Analog Four MKII](/sidecar-expander/using/analog-four/#install).
 
 The [patcher](/sidecar-expander/patcher/) turns your stock OS file into the Rytm firmware 0.5.0 in your browser. Nothing is uploaded: the page reads your file and fetches only its own patch files.
 

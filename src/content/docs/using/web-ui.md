@@ -75,10 +75,10 @@ A banner says so when the page is from a newer release than the Sidecar it talks
 
 <small>Screenshots: the 0.5.0 web page (`web-next`) running against the development mock server: the tracks, takes, files and levels are made-up data.</small>
 
-### Morph (coming in 0.5.1)
+### Morph (coming in 0.5.2)
 
 :::caution[Morph is not in 0.5.0]
-The Morph tab of the page is **hidden in 0.5.0**: the scene morph and its fader arrive in **0.5.1**, together with a new version of morph. Nothing on the page works as morph yet. A project that uses the Sidecar's morph keeps its settings. See [MORPH](/sidecar-expander/using/morph/).
+The Morph tab of the page is **hidden in 0.5.0**: the scene morph and its fader arrive in **0.5.2**, together with a new version of morph. Nothing on the page works as morph yet. A project that uses the Sidecar's morph keeps its settings. See [MORPH](/sidecar-expander/using/morph/).
 :::
 
 ### Poly tracks
@@ -124,7 +124,7 @@ Upgrading from 0.4.4, which cannot update itself, is done by card: [Upgrade an e
 2. Open the page and [pair the browser](#pairing-a-browser) if it is not paired yet. Then open **Settings > Update**.
 3. Pick the file. The page checks it at once. A damaged or incomplete download, a file that is not a Sidecar update, or one without this board's firmware is refused before anything is sent. It then says what it will do, for example "Update from 0.5.0 (abc1234) to 0.5.0 (def5678)". The same version again, or an older one, needs the box **Install it anyway**.
 4. Press **Install**. The file goes up with a progress bar, the Sidecar checks it again and restarts into the new version **on trial**. Audio stops for about a minute. Keep the Sidecar switched on until the page says it is done.
-5. After the restart the page reconnects by itself and follows the trial: "Trying 0.5.0 (def5678): permanent in 20 s", then "Updated to 0.5.0 (def5678)". Reload the page: the update brings its own web app.
+5. After the restart the page reconnects by itself and follows the trial: "Trying 0.5.1 (def5678): permanent in 20 s", then "Updated to 0.5.1 (def5678)". Reload the page: the update brings its own web app.
 
 ![The Settings tab, Update: the update file picker and the last crash report](../../../assets/ui/web-update.png)
 

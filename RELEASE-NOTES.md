@@ -2,6 +2,71 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.5.1
+
+**New touchscreen themes and layouts, touch controls on the Pi's screen, a catalog of community machines in the web page, the BP303 bass machine, and a fix for a USB-C cable pulled in the middle of traffic.** This is a **Pi-only update. The Rytm stays on the Rytm firmware 0.5.0: no flash.** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+### Good to know
+
+- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE come in 0.5.2.** 0.5.0 said 0.5.1; they moved. 0.5.1 keeps the 0.5.0 WAVETABLE. UP + T14 still shows "MORPH: 0.5.1" on a 0.5.0 build; on 0.5.1 it says 0.5.2. A project that uses the Sidecar's morph keeps its settings.
+- **The new themes are chosen in Settings > Display (UI style).** The default stays what you know (OLED).
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.scu` (SHA-256 `560d9ee4...289d02`), for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0 |
+| SD card image (new card) | `sidecar-0.5.1-sd-800x480.img.zip` (`ca06d95b...25b59e`) and `sidecar-0.5.1-sd-1024x600.img.zip` (`31a2ea78...445ed6`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.zip` (`2969b56c...c7936d`): both images, the card files, the Rytm `.elemod` files (the 0.5.0 ones, no `.syx`), a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1-c31b591-800x480.zip` and `sidecar-pi-sd-0.5.1-c31b591-1024x600.zip`, each with its `.sha256`, or the starter zip `sidecar-0.5.1-starter.zip`; `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.zip`: the 0.5.0 set plus **BP303** |
+| Starter content | `sidecar-content-0.5.1.zip` |
+| Rytm firmware | unchanged: the 0.5.0 build (`rel0-5-0-os1.74` in the [patcher](https://trigcondition.github.io/sidecar-expander/patcher/)) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1). The Rytm firmware stays the [sidecar-mods 0.5.0 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.0).
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/upgrading/).
+
+**From 0.5.0 (the easy way, three steps):**
+
+1. Download `sidecar-0.5.1.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file.
+3. Wait for the trial boot (the page follows it) until it says the update is done.
+
+If the Sidecar does not come back, power it off and on: it runs 0.5.0 again. Your projects, samples, `/Plugins` and settings stay. No Rytm flash.
+
+**From 0.4.x:** flash the Rytm firmware 0.5.0 if it is not on the Rytm yet (OS 1.74), then copy the 0.5.1 card files over the card, or write the 0.5.1 SD card image to a new card, as for 0.5.0.
+
+### New in 0.5.1
+
+**Themes and touch**
+
+- **New touchscreen themes.** SIDECAR is redrawn in the layout language of **GRID**, a new theme, and SIDECAR has three more contrast options: **High blue**, **High green** and **Viper** (Settings > Display > Contrast). Text is Arimo Bold ([The display](https://trigcondition.github.io/sidecar-expander/using/display/#themes-and-looks)).
+- **Sections with sub-page rows.** The eight navigation keys are sections; each has a row of sub-pages under the header (nothing was dropped). **HOME** is now an Overview (the pattern, the XY pad, the send FX, the eight voices, the recorder, health and links) and a Perform page.
+- **Touch controls.** Bigger touch targets; drag the VOICE, INSERT FX, MASTER FX and OUT knobs on the Pi's own screen (a double tap resets).
+
+**Machines**
+
+- **The catalog of community machines** (Voices > User machines > Catalog in the web page): lists the community registry's machines and effects for your board and installs one. **Your browser needs internet; the Sidecar does not.** The browser downloads the package and checks its SHA-256, then sends it to the Sidecar, whose loader checks it again. Every entry is marked "community" (native code, no sandbox, not tested by Sidecar). [The machine catalog](https://trigcondition.github.io/sidecar-expander/using/machine-catalog/).
+- **BP303**, a 303-style bass line user machine (MIT; a port of BLACKPYRAMIDS_303 and Open303), in the plugins zip ([User machines](https://trigcondition.github.io/sidecar-expander/using/user-machines/)).
+
+**Other**
+
+- **The remote service on the USB-C cable** (a headless feed with an open protocol, for companion apps). Nothing changes for you unless a client uses it.
+
+### Fixed in 0.5.1
+
+- **A USB host that vanishes mid-traffic** (the cable pulled, a computer asleep) no longer halts the Pi. It comes back when the cable is plugged in again.
+
+### Known issues in 0.5.1
+
+Still open from 0.5.0:
+
+- **After a rollback to an older Sidecar build the LFOs show OFF.** The older build does not read the new LFO files; going back to 0.5.0 brings them back.
+- **The CHOP editor's audition ignores GATE:** trigs and pads obey it.
+- **SONG Restore still uses the old write:** a fill that a SONG Restore removed comes back after a power-off.
+
 ## Sidecar 0.5.0
 
 **The SAMPLER machine, CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, two more LFOs on each Rytm track, user send effects (PHASER, BBD, NIMBUS and GALACTIC), a new web page, updating from the web page, and a fix for clipping voices.** It comes with the **Rytm firmware 0.5.0**, built for **OS 1.74 only**: from 0.5.0 on the Rytm needs OS 1.74, and there is no 0.5.0 build for OS 1.73. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.

@@ -38,7 +38,7 @@ sidebar:
 | **UP + T11** | SAMPLE on the Rytm's screen; again: AUTO |
 | **UP + T12** | PROJECT |
 | **UP + T13** | POOL |
-| **UP + T14** | in 0.5.0 a note, `MORPH: 0.5.1`. It becomes the [MORPH](/sidecar-expander/using/morph/) page in 0.5.1 |
+| **UP + T14** | in 0.5.0 a note, `MORPH: 0.5.2`. It becomes the [MORPH](/sidecar-expander/using/morph/) page in 0.5.2 |
 
 - **T1..T5 and T8 are the touchscreen's pages alone.** They are the touchscreen's sidebar, top to bottom (HOME, SEQ, PAT, VOICE, INSERT FX, then SONG and REC on T6 and T7, and SET on T8). On the Rytm they pop a short note saying so. **T6, T7 and T9..T13 open on the Rytm's screen**; the touchscreen shows them too when one is connected and has the page.
 - No trig is placed: while UP is held the trig keys only pick pages.
