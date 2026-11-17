@@ -63,14 +63,21 @@ SIDECAR / EXPANDER in the dot-matrix font over a row of eight segments, drawn st
 
 ## Themes and looks
 
-Two themes (OLED and SIDECAR), each with every page, switched with **Settings > Display > UI style** (applied at once, stored on the card):
+Three themes (OLED, SIDECAR and GRID), each with every page, switched with **Settings > Display > UI style** (applied at once, stored on the card):
 
 - **OLED** (the default): the screen drawn as a zoomed-in dot-matrix OLED, 400x240 dots of 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings.
-- **SIDECAR** (new in 0.5.0): the look of the new [web page](/sidecar-expander/using/web-ui/) on the touchscreen: a night-blue screen, cards with their title as a pill on the top edge, pill keys, knobs as arcs with the value inside. It replaced CLASSIC (the Rytm's hardware look): a card or `cmdline.txt` that says `uistyle=classic` now comes up in SIDECAR. See [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
+- **GRID** (new in 0.5.1): the same layout language as SIDECAR in a dark army-green look: a green-black screen, signal green only for the active and the selected, sage notes, 2 px borders, Arimo Bold in capitals.
+- **SIDECAR** (new in 0.5.0, redrawn in 0.5.1 in GRID's layout language): the look of the new [web page](/sidecar-expander/using/web-ui/) on the touchscreen: a night-blue screen, cards with their title as a pill on the top edge, pill keys, knobs as arcs with the value inside. It replaced CLASSIC (the Rytm's hardware look): a card or `cmdline.txt` that says `uistyle=classic` now comes up in SIDECAR. See [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
 
 **LOOK: STUDIO / STAGE** (OLED): STUDIO is the dot look (the default); **STAGE** draws every dot as a whole cell, without the grid lines, and lifts every grey a step, for reading at an angle and on a stage.
 
-Pictures of both themes and the STAGE look: [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
+**SIDECAR's contrast options** (new in 0.5.1): **Settings > Display > Contrast** (on the SIDECAR theme) is Standard, **High blue**, **High green** or **Viper**. High blue and High green are black with white 2 px edges and one accent colour (blue, or the Rytm's mute-pad green). **Viper** is phosphor greens only, with a graticule behind the scope and meters; alerts are shown as inverted bars with notched corners instead of in a warning colour. The console and the web page take `uicontrast=off|blue|green|viper`.
+
+**Sections (0.5.1).** The eight navigation keys T1..T8 are sections, and each section but SEQ and PAT has a row of sub-pages under the header (for example HOME: Overview, Status, Project, Perform; VOICE: Sound, Insert, Source, Scope). Nothing was dropped. **HOME** opens on an Overview (the pattern, the XY pad, the two send FX, the eight voices, the recorder, health and links); **Perform** is the XY pad with Hold, its targets and quick keys (Kill tails, REC).
+
+**Touch (0.5.1).** Keys are at least 44 px high and list rows at least 36 px. Drag the **VOICE, INSERT FX, MASTER FX and OUT** knobs on the Pi's own screen; a double tap resets one.
+
+Pictures of the themes and the STAGE look: [The touchscreen](/sidecar-expander/using/touchscreen/#themes-and-looks).
 
 ## The connection animation
 
@@ -86,7 +93,8 @@ When the Rytm's link comes up or drops, a banner slides over the top of the scre
 
 | Setting | |
 |---|---|
-| **UI style** | OLED or SIDECAR (also `uistyle=oled\|sidecar` on the console or the web page; `classic` is still accepted and means SIDECAR) |
+| **UI style** | OLED, SIDECAR or GRID (also `uistyle=oled\|sidecar\|guide` on the console or the web page; `classic` is still accepted and means SIDECAR). The default stays OLED. |
+| **Contrast** | SIDECAR only: Standard, High blue, High green or Viper |
 | **Screensaver** | Off, 15 min, 1 h (default) or 4 h without a touch: the screen goes black. Any touch wakes it, and that touch only wakes the screen. Rytm activity does not keep it awake. |
 | **Touch: Calibrate** | the four-cross touch calibration ([Touch](#touch)) |
 | **Touch test** | a tap counter and the raw touch readout. It leaves HOME after the first tap; it lives here from then on. |

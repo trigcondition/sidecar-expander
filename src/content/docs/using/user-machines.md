@@ -24,6 +24,12 @@ Six machines of our own (MIT licence), ready to install:
 | PLUCK | Karplus-Strong string with pick position and body |
 | GRAIN | granular texture over a built-in sample: position, spray, size, density, pitch, reverse |
 
+## New in 0.5.1: BP303
+
+**BP303** is a 303-style bass line machine (MIT), a port of BLACKPYRAMIDS_303 (Zac Kyoti and contributors), which is built on Open303 (Robin Schmidt). It is a package of its own, `bp303.a64.rmp`, in the plugins zip and the starter zip. Knobs: P1 CUT, P2 RES, P3 ENV, P4 DEC, P5 ACC, P6 WAVE, P7 SLID, P8 VOL, P9 TUNE. A note with a velocity above 100 is an **accent**; a trig while the gate is still open is a **slide** (it glides there without a retrigger). Its licences and notice come with the package.
+
+More machines from the community: [The machine catalog](/sidecar-expander/using/machine-catalog/).
+
 ## New in 0.5.0: MIST
 
 **MIST** is a granular texture machine, shipped as a package of its own: see [MIST](/sidecar-expander/using/mist/).

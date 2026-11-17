@@ -11,11 +11,12 @@ The touchscreen follows the Rytm: it shows the track you select there, and the R
 
 ## Themes and looks
 
-Two themes, each with every page. Switch with **Settings > Display > UI style: OLED / SIDECAR** (applied at once, no reboot, stored on the card as `uistyle=oled|sidecar`). The console and the web page take the same command.
+Three themes, each with every page. Switch with **Settings > Display > UI style: OLED / SIDECAR / GRID** (applied at once, no reboot, stored on the card as `uistyle=oled|sidecar|guide`). The console and the web page take the same command.
 
 | Theme | Look |
 |---|---|
 | **SIDECAR** (new in 0.5.0) | The look of the new [web page](/sidecar-expander/using/web-ui/) on the touchscreen: a night-blue screen, cards with their title as a lavender pill on the top edge, pill keys and segments (the selected one filled), knobs as arcs with the value inside, rounded meters, rounded notes in the piano roll. A header carries the Sidecar logo and the page's name. At 800x480 the page keys T1..T8 are a row of pills in the header; from 1024x600 they are a rail on the right. Text is in Space Grotesk, with big numbers in a dot font. |
+| **GRID** (new in 0.5.1) | SIDECAR's layout language in a dark army-green look: signal green only for the active and the selected, sage notes, 2 px borders, Arimo Bold in capitals. See [The display](/sidecar-expander/using/display/#themes-and-looks), which also lists SIDECAR's contrast options (High blue, High green, Viper), the sections with their sub-page rows, and HOME as Overview and Perform. |
 | **OLED** | The screen drawn as a zoomed-in dot-matrix OLED: 400x240 dots, each 2x2 pixels with a dark grid between, dotted outlines, inverted selection, knobs as dot rings. |
 
 **SIDECAR replaced CLASSIC** (the Rytm's hardware look: rubber keys, trig keys with LEDs, knob caps) under the same setting. The CLASSIC theme is gone and cannot be chosen any more. A card or a `cmdline.txt` that says `uistyle=classic` comes up in SIDECAR, and the next save of the display settings writes `uistyle=sidecar`; the console still accepts `classic` and takes it as SIDECAR. `uistyle=` in `cmdline.txt` also gives the boot screen the SIDECAR look (the logo over the wordmark on the night blue), because the boot screen is drawn before the card is read.
