@@ -99,9 +99,36 @@ MD is also **built in** (in the machine slot that was DIGIDRUM, [Voices and mach
 
 ## Install
 
-**On the Pi:** open `sidecar.local`, tab **User machines**, and upload the `.a64.rmp` files (or copy them into `/Plugins/` on the card). Each package is checked (header, size, CRC, API version, target) before it goes in place. Press **Rescan** if you copied files by hand.
+User machines and user effects are `.rmp` files (on the Pi: `.a64.rmp`). They live in the folder `/Plugins/` on the
+Sidecar's SD card. There are three ways to put them there.
 
-The installed list shows each machine's name, version, size, fingerprint, memory, CPU (measured once it has played), the slots that use it, and whether it fits.
+### From the web page (0.5.0 and later)
+
+1. Open the Sidecar's web page: `sidecar.local` in your browser (or the address on the Sidecar's screen).
+2. Go to **Library › Files** and open the folder **`Plugins`**.
+3. Press **Upload files** and choose the `.a64.rmp` files. They go into the open folder. (Don't drop them on the drop
+   zone: that one is for samples and puts files in `/Samples/Inbox`.) Each file is checked (header, size, CRC, API
+   version, board) before it goes in place; a file that does not fit is refused with the reason.
+4. Go to **Voices › User machines**. The new machines are in the installed list at once. If one is missing, press
+   **Rescan the card**.
+5. Put a machine in a slot (U1..U5), see [Assign a slot](#assign-a-slot). User effects go in the slots UFX1..UFX4 on
+   the same page.
+
+To remove a machine, delete its file in **Library › Files › Plugins**. A slot that used it shows the machine as missing
+until you pick another one.
+
+### From the catalog (0.5.1 and later)
+
+**Voices › User machines › Catalog** lists the community machines for your board, with Install and Update buttons.
+Your browser needs internet for this, the Sidecar does not. See [Machine catalog](/sidecar-expander/using/machine-catalog/).
+
+### By hand
+
+Power the Sidecar off, put its SD card in your computer and copy the `.a64.rmp` files into `/Plugins/`. They are
+checked when the Sidecar starts.
+
+The installed list shows each machine's name, version, size, fingerprint, memory, CPU (measured once it has played),
+the slots that use it, and whether it fits.
 
 ## Assign a slot
 
