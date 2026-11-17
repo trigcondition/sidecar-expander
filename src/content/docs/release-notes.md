@@ -14,10 +14,10 @@ description: "Sidecar 0.5.1 (Pi only: new themes and layouts, touch controls, th
 
 | Part | File |
 |---|---|
-| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.scu` (SHA-256 `{{SHA256 sidecar-0.5.1.scu, first 8 ... last 6}}`), for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0 |
-| SD card image (new card) | `sidecar-0.5.1-sd-800x480.img.zip` (`{{SHA256 sidecar-0.5.1-sd-800x480.img.zip, first 8 ... last 6}}`) and `sidecar-0.5.1-sd-1024x600.img.zip` (`{{SHA256 sidecar-0.5.1-sd-1024x600.img.zip, first 8 ... last 6}}`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
-| Release zip | `sidecar-0.5.1.zip` (`{{SHA256 sidecar-0.5.1.zip, first 8 ... last 6}}`): both images, the card files, the Rytm `.elemod` files (the 0.5.0 ones, no `.syx`), the manual, a quick start |
-| Card files (copy by hand) | `sidecar-pi-sd-0.5.1-{{COMMIT}}-800x480.zip` and `sidecar-pi-sd-0.5.1-{{COMMIT}}-1024x600.zip`, each with its `.sha256`, or the starter zip `sidecar-0.5.1-starter.zip`; `BUILD-INFO-pi.txt` names the commit and both kernels |
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.scu` (SHA-256 `560d9ee4...289d02`), for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0 |
+| SD card image (new card) | `sidecar-0.5.1-sd-800x480.img.zip` (`ca06d95b...25b59e`) and `sidecar-0.5.1-sd-1024x600.img.zip` (`31a2ea78...445ed6`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.zip` (`2969b56c...c7936d`): both images, the card files, the Rytm `.elemod` files (the 0.5.0 ones, no `.syx`), a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1-c31b591-800x480.zip` and `sidecar-pi-sd-0.5.1-c31b591-1024x600.zip`, each with its `.sha256`, or the starter zip `sidecar-0.5.1-starter.zip`; `BUILD-INFO-pi.txt` names the commit and both kernels |
 | User machines (Pi) | `sidecar-pi-plugins-0.5.1.zip`: the 0.5.0 set plus **BP303** |
 | Starter content | `sidecar-content-0.5.1.zip` |
 | Rytm firmware | unchanged: the 0.5.0 build (`rel0-5-0-os1.74` in the [patcher](/sidecar-expander/patcher/)) |
