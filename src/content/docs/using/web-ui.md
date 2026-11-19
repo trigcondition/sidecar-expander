@@ -49,7 +49,7 @@ On the web page, the Status tab's **Access** has **Forget this device** and **Fo
 
 ## The black box
 
-New in 0.3.1. `GET /blackbox` returns the [black box](/sidecar-expander/using/troubleshooting/#the-black-box), for paired clients only: a browser tab cannot open it, a tool sends its token in the `X-Sidecar-Auth` header. It gives up to 64 KB a request: the last 64 KB, or from byte N with `?off=N`; `?old=1` reads the older file. The first line is `SIZE FROM`: the file's size and where this piece starts. The simplest way for a report is the card: [send the black box](/sidecar-expander/using/troubleshooting/#the-black-box).
+New in 0.3.1. `GET /blackbox` returns the [black box](/sidecar-expander/using/troubleshooting/#the-black-box), for paired clients only: a browser tab cannot open it, a tool sends its token in the `X-Sidecar-Auth` header. It gives up to 64 KB a request: the last 64 KB, or from byte N with `?off=N`; `?old=1` reads the older file. The first line is `SIZE FROM`: the file's size and where this piece starts. The simplest way for a report: <span class="sc-test">New in 0.5.2</span> press **Download black box** in **Settings > About**; the card is the fallback ([send the black box](/sidecar-expander/using/troubleshooting/#the-black-box)).
 
 ## The tabs
 
