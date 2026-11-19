@@ -69,7 +69,8 @@ On a Pi 5 the Sidecar drives the fan header itself (AUTO, ON or OFF): see [The P
 <span class="sc-test">in testing</span> New in 0.3.1. The Pi writes its whole log to the card as it runs, so the last seconds before a crash, a restart or a dropped Rytm link are still there afterwards, also after a power cut (only the last seconds can be missing).
 
 - The files are **`/.rytm/blackbox.log`** and, older, **`/.rytm/blackbox.1.log`**, up to 8 MB each, about 2 hours of log a file.
-- To send it: switch the Pi off soon after the problem, take the card out and copy both files on a computer (the `.rytm` folder is hidden: show hidden files). Attach them to your report, zipped if they are too large, and say at about what time it happened.
+- **Download it from the web page** (easiest): open **Settings > About** and press **Download black box**. It saves one text file, `sidecar-blackbox-YYYYMMDD-HHMM.txt`, with the Sidecar version, the board and the time of the download, then the last crash's note (if there is one), `blackbox.1.log` and `blackbox.log`. It works over the USB-C cable and over Wi-Fi; a large file takes a little while and the button shows how far it is. The page must be paired with the Sidecar (**Settings > Access**). Passwords, Wi-Fi keys and pairing codes are blanked in the file. Send it when you report a problem, and save it before you restart the Sidecar.
+- **From the SD card** (when the web page does not answer): switch the Pi off soon after the problem, take the card out and copy `.rytm/blackbox.log` and `.rytm/blackbox.1.log` on a computer (the `.rytm` folder is hidden: show hidden files). Attach them to your report, zipped if they are too large, and say at about what time it happened.
 - It holds the log's lines (project and sample names can be in it), never a password or a pairing code.
 - Tools paired with the Sidecar can read it over the network: [`GET /blackbox`](/sidecar-expander/using/web-ui/#the-black-box).
 
