@@ -82,9 +82,7 @@ New in 0.5.2. Pads, knobs or the screen answer late while the Sidecar is attache
 3. **Get the black box before you restart.** Take the card out and copy `/.rytm/blackbox.log` and `/.rytm/blackbox.1.log` ([the black box](#the-black-box)). The web page cannot download it yet.
 4. **Send it** with a note: roughly what time it happened (the markers use the Sidecar's uptime, so say about how long after switching on), what was playing, and whether stopping playback cleared it.
 
-The black box holds the last hour or two of log. Copy it soon after the problem.
-
-**The Rytm stuck on its logo after a restart with the Sidecar attached:** unplug the Sidecar's USB cable from the Rytm, then restart the Rytm.
+The black box holds roughly the last 1.5 to 3 hours of log, in two files. Copy it soon after the problem.
 
 ## Known issues
 
