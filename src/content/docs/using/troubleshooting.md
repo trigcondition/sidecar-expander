@@ -73,6 +73,17 @@ On a Pi 5 the Sidecar drives the fan header itself (AUTO, ON or OFF): see [The P
 - It holds the log's lines (project and sample names can be in it), never a password or a pairing code.
 - Tools paired with the Sidecar can read it over the network: [`GET /blackbox`](/sidecar-expander/using/web-ui/#the-black-box).
 
+## The Rytm feels slow or laggy
+
+New in 0.5.2. Pads, knobs or the screen answer late while the Sidecar is attached. The black box can show why, if it has a marker at that time.
+
+1. **Press Lag now** when it happens: top of every page of `sidecar.local`, or Settings > About ([Lag now](/sidecar-expander/using/web-ui/#lag-now)). Press it again if it gets worse. Several markers are fine.
+2. **Stop playback for a minute** and note whether the lag clears.
+3. **Get the black box before you restart.** Take the card out and copy `/.rytm/blackbox.log` and `/.rytm/blackbox.1.log` ([the black box](#the-black-box)). The web page cannot download it yet.
+4. **Send it** with a note: roughly what time it happened (the markers use the Sidecar's uptime, so say about how long after switching on), what was playing, and whether stopping playback cleared it.
+
+The black box holds roughly the last 1.5 to 3 hours of log, in two files. Copy it soon after the problem.
+
 ## Known issues
 
 The releases' own lists are in the release notes: [0.4.4](/sidecar-expander/release-notes/#known-issues-in-044), [0.4.3](/sidecar-expander/release-notes/#known-issues-in-043), [0.4.2](/sidecar-expander/release-notes/#known-issues-in-042), [0.4.1](/sidecar-expander/release-notes/#known-issues-in-041), [0.4.0](/sidecar-expander/release-notes/#known-issues-in-040), [0.3.2](/sidecar-expander/release-notes/#known-issues-in-032), [0.3.1](/sidecar-expander/release-notes/#known-issues-in-031), [0.3.0](/sidecar-expander/release-notes/#known-issues-in-030).
