@@ -123,7 +123,7 @@ New in 0.5.2. **Lag now** is a button at the top of every page, next to the conn
 - It changes no setting and costs nothing until you press it.
 - The button is greyed out when it cannot work. The label says why: **offline** (the page has no connection to the Sidecar) or **pair first** ([pair the browser](#pairing-a-browser)).
 
-To send the markers, send the black box: see [The Rytm feels slow or laggy](/sidecar-expander/using/troubleshooting/#the-rytm-feels-slow-or-laggy). The page has no black box download yet.
+To send the markers, send the black box: press **Download black box** in **Settings > About**, or see [The Rytm feels slow or laggy](/sidecar-expander/using/troubleshooting/#the-rytm-feels-slow-or-laggy).
 
 ## Updating from the web page (0.5.0)
 

@@ -80,7 +80,7 @@ New in 0.5.2. Pads, knobs or the screen answer late while the Sidecar is attache
 
 1. **Press Lag now** when it happens: top of every page of `sidecar.local`, or Settings > About ([Lag now](/sidecar-expander/using/web-ui/#lag-now)). Press it again if it gets worse. Several markers are fine.
 2. **Stop playback for a minute** and note whether the lag clears.
-3. **Get the black box before you restart.** Take the card out and copy `/.rytm/blackbox.log` and `/.rytm/blackbox.1.log` ([the black box](#the-black-box)). The web page cannot download it yet.
+3. **Get the black box before you restart.** Press **Download black box** in **Settings > About** ([the black box](#the-black-box)). If the page does not answer, take the card out and copy `/.rytm/blackbox.log` and `/.rytm/blackbox.1.log`.
 4. **Send it** with a note: roughly what time it happened (the markers use the Sidecar's uptime, so say about how long after switching on), what was playing, and whether stopping playback cleared it.
 
 The black box holds roughly the last 1.5 to 3 hours of log, in two files. Copy it soon after the problem.
