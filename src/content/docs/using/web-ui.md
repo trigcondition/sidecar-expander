@@ -114,6 +114,17 @@ In **Settings > Storage**:
 
 <span class="sc-test">in testing</span>. **Settings > Wi-Fi**: on / off, a network list from a scan (signal, a lock for secured networks, the band), "Other network…", a password field (never pre-filled), **Connect and save**, **Forget network**, and the current connection. Sidecar uses one network at a time, so **Connect and save restarts the Pi** and tries the new network at that boot. If it is not up within 90 seconds (a wrong password, no address, not found), the previous setting comes back and the Pi restarts on it, so a typo cannot lock you out. The password is stored only as the network's key, never shown again. Wi-Fi stays off in the SD card package; turning it on here works over Ethernet. Only a [paired browser](#pairing-a-browser) can change these settings. With no cable at all, use the card-root file instead: see [Wi-Fi without a cable: sidecar-wifi.txt](/sidecar-expander/using/wifi/#wi-fi-without-a-cable-sidecar-wifitxt).
 
+### Lag now
+
+New in 0.5.2. **Lag now** is a button at the top of every page, next to the connection status, and in **Settings > About**. Press it at the moment the Rytm feels slow or laggy while the Sidecar is attached.
+
+- The Sidecar writes a marker with the time into its [black box](/sidecar-expander/using/troubleshooting/#the-black-box), together with its counters of that second. The log can then be read around that moment.
+- The page shows "Lag marked". One marker a second at most: a double tap is one marker.
+- It changes no setting and costs nothing until you press it.
+- The button is greyed out when it cannot work. The label says why: **offline** (the page has no connection to the Sidecar) or **pair first** ([pair the browser](#pairing-a-browser)).
+
+To send the markers, send the black box: see [The Rytm feels slow or laggy](/sidecar-expander/using/troubleshooting/#the-rytm-feels-slow-or-laggy). The page has no black box download yet.
+
 ## Updating from the web page (0.5.0)
 
 Upgrading from 0.4.4, which cannot update itself, is done by card: [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/).
