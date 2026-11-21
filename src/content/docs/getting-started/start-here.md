@@ -7,7 +7,7 @@ sidebar:
 
 Prefer to do it step by step on one page, with the patcher and the downloads in it? Use [Set up Sidecar](/sidecar-expander/getting-started/setup/). This page is the same route as text.
 
-The one route for a new setup: an Analog Rytm MKII, a Raspberry Pi 4B or Pi 5, Sidecar 0.5.1 (on the Pi) with the Rytm firmware 0.5.0 (on the Rytm, OS 1.74; 0.5.1 brings no new Rytm firmware). Each step links to the full page if you need more. Prefer paper? The whole manual is a PDF: [Sidecar-0.5.0-User-Manual.pdf](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.5.0/Sidecar-0.4.4-User-Manual.pdf).
+The one route for a new setup: an Analog Rytm MKII, a Raspberry Pi 4B or Pi 5, Sidecar 0.5.1 (on the Pi) with the Rytm firmware 0.5.0 (on the Rytm, OS 1.74; 0.5.1 brings no new Rytm firmware). Each step links to the full page if you need more. Prefer paper? The whole manual is a PDF: [Sidecar-0.5.0-User-Manual.pdf](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.5.0/Sidecar-0.5.0-User-Manual.pdf).
 
 New to Sidecar? The [introduction video](https://www.youtube.com/watch?v=b10zwIORtgU) shows the workflow and the features of 0.4.4 (an earlier release) in about 20 minutes.
 
