@@ -2,6 +2,77 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.5.1.1
+
+**The fixes release between 0.5.1 and 0.5.2.** It fixes a handful of bugs found since 0.5.1, adds the black box download and audio previews in the catalog, and comes with two small Rytm files for a smoother Rytm. **The Pi update is the easy part and works on its own: the Pi 0.5.1.1 also runs with the Rytm still on 0.5.0.** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
+
+### Good to know
+
+- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE still come in 0.5.2.** 0.5.1.1 keeps the 0.5.0 WAVETABLE.
+- **Versions may have a fourth number** (0.5.1 < 0.5.1.1 < 0.5.2). A Sidecar that runs 0.5.1 or 0.5.0 cannot compare such a version, so the first update to 0.5.1.1 needs **"Install it anyway"** ticked once (below). From 0.5.1.1 on, updates offer themselves without the box.
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.1.scu` (SHA-256 `a44091de...57b86a`), with its `.sha256`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0 or 0.5.1 |
+| SD card image (new card) | `sidecar-0.5.1.1-sd-800x480.img.zip` (`4d1082d8...cbdfb2`) and `sidecar-0.5.1.1-sd-1024x600.img.zip` (`6c155970...f0d6cf`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.1.zip` (`d77db1c7...bc8fc1`): both images, the card files for both sizes, the two Rytm `.elemod` files (no `.syx`), a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1.1-9e80f4e-800x480.zip` (`b767fd6f...5e42fa`) and `sidecar-pi-sd-0.5.1.1-9e80f4e-1024x600.zip` (`f9f49f01...0af88a`), each with its `.sha256`, or the starter zip `sidecar-0.5.1.1-starter.zip` (`5aee3ee5...434103`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.1.zip` (`479ebda2...1aee58`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.1.1.zip` |
+| Rytm firmware, OS 1.74 only (optional) | `rytm-sidecar-0.5.1.1-os1.74.elemod` (SHA-256 `5edea14a5d5fd0af5b944d1f257e9b62468a23dc1f64a9d5d96756ab9926edf0`) with `core-0.1-os1.74.elemod` (unchanged, SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-1-1-os1.74` in the [patcher](https://trigcondition.github.io/sidecar-expander/patcher/) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.1.1 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1.1) (the Pi side, the images, the release zip) and the [sidecar-mods 0.5.1.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.1.1) (the two Rytm `.elemod` files).
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/upgrading/).
+
+**The Pi (from 0.5.1 or 0.5.0), three steps:**
+
+1. Download `sidecar-0.5.1.1.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file. **Tick "Install it anyway" once:** a Sidecar that runs 0.5.1 or 0.5.0 cannot compare a version with four numbers ("The versions cannot be compared"); the file is still checked completely.
+3. Wait for the trial boot: the page follows it, and after about 20 seconds it says the update is permanent (nothing to confirm).
+
+If the Sidecar does not come back, power it off and on: it runs your old version again. Your projects, samples, `/Plugins` and settings stay.
+
+**The Rytm part, when you want it (two files, a flash, OS 1.74 only):** back up your projects first (never flash without a backup), then add both files in the web flasher with your own stock OS 1.74: `rytm-sidecar-0.5.1.1-os1.74.elemod` and `core-0.1-os1.74.elemod`; or patch your stock file in the [browser patcher](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/) (build `rel0-5-1-1-os1.74`). Without it the Pi works with the Rytm firmware 0.5.0 as before, only without the four things below.
+
+**From 0.4.x:** flash the Rytm firmware (0.5.1.1 or 0.5.0) if it is not on the Rytm yet (OS 1.74), then copy the 0.5.1.1 card files over the card, or write the 0.5.1.1 SD card image to a new card, as for 0.5.0.
+
+### New in 0.5.1.1
+
+**The Rytm part (optional)**
+
+- **No stray samples under Sidecar machines.** A track on a Sidecar machine (SAMPLER, PLAITS, ...) no longer plays the Rytm sample its SMP points to.
+- **Smooth scrolling in the machine list.**
+- **A little CPU back** on the Rytm.
+- **The SMPL key fix:** the key never shows the waveform sub-page of a Sidecar machine.
+
+**Other**
+
+- **Download the black box** from Settings > About: one file to send with a bug report (the pairing code, passwords and tokens are masked).
+- **Audio previews in the catalog:** listen before you install (Voices > User machines; your browser streams them, the Sidecar stays offline).
+- **Lag diagnostics:** a "Lag now" marker and the Rytm's report timing in the black box.
+- **For plugin authors:** API 2 `pool_info` / `pool_read` now take the SAMPLES list code (`bank * 128 + row`, banks A..H) as well as bank A's slot 1..127. Slot values 128..1016 used to mean the host's internal line and now mean the list code (128 is bank B's OFF); no known plugin used them. The SDK has `rmp_pool_code` and `rmp_pool_code_of_knob`. Plugins and the catalog keep three version numbers; existing plugins load as before.
+
+### Fixed in 0.5.1.1
+
+- **PLAITS SPEECH** no longer drones after stop when HARM moves into a word bank.
+- **UP + T5** opens the FX page (Send FX), as the sidebar's FX key does.
+- **POOL** opened from a PRESET page no longer loops forever, and DONE returns to where it came from.
+- **FILL** undo and the pattern writer survive the Rytm repeating its project report.
+- **SPACE** has no runaway hiss before the tape has heard a signal.
+- **The Rytm's machine list** no longer gets SRC frames from the remote UI while it covers the view.
+- **The sample library walk** no longer writes past its table 12 folders deep.
+- Loading a project no longer holds the control pass for 10 ms.
+
+### Known issues (still open)
+
+- After a rollback to an older Sidecar build the LFOs show OFF (the older build does not read the new LFO files; going back to 0.5.0 brings them back).
+- The CHOP editor's audition ignores GATE (trigs and pads obey it).
+- SONG Restore still uses the old write: a fill that a SONG Restore removed comes back after a power-off.
+
 ## Sidecar 0.5.1
 
 **New touchscreen themes and layouts, touch controls on the Pi's screen, a catalog of community machines in the web page, the BP303 bass machine, and a fix for a USB-C cable pulled in the middle of traffic.** This is a **Pi-only update. The Rytm stays on the Rytm firmware 0.5.0: no flash.** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
