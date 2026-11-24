@@ -20,12 +20,12 @@ description: "Sidecar 0.5.1.2 (a small Pi-only fix: FILL and the hello-gated key
 
 | Part | File |
 |---|---|
-| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.2.scu` (SHA-256 `{{SHA256 sidecar-0.5.1.2.scu, first 8 ... last 6}}`), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1 or 0.5.1.1 |
-| SD card image (new card) | `sidecar-0.5.1.2-sd-800x480.img.zip` (`{{SHA256 sidecar-0.5.1.2-sd-800x480.img.zip, first 8 ... last 6}}`) and `sidecar-0.5.1.2-sd-1024x600.img.zip` (`{{SHA256 sidecar-0.5.1.2-sd-1024x600.img.zip, first 8 ... last 6}}`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
-| Release zip | `sidecar-0.5.1.2.zip` (`{{SHA256 sidecar-0.5.1.2.zip, first 8 ... last 6}}`): both images, the card files for both sizes, a quick start |
-| Card files (copy by hand) | `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-800x480.zip` (`{{SHA256 sidecar-pi-sd-0.5.1.2-COMMIT-800x480.zip, first 8 ... last 6}}`) and `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-1024x600.zip` (`{{SHA256 sidecar-pi-sd-0.5.1.2-COMMIT-1024x600.zip, first 8 ... last 6}}`), each with its `.sha256`, or the starter zip `sidecar-0.5.1.2-starter.zip` (`{{SHA256 sidecar-0.5.1.2-starter.zip, first 8 ... last 6}}`); `BUILD-INFO-pi.txt` names the commit and both kernels |
-| User machines (Pi) | `sidecar-pi-plugins-0.5.1.2.zip` (`{{SHA256 sidecar-pi-plugins-0.5.1.2.zip, first 8 ... last 6}}`): the user machines and effects |
-| Starter content | `sidecar-content-0.5.1.2.zip` (`{{SHA256 sidecar-content-0.5.1.2.zip, first 8 ... last 6}}`) |
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.2.scu` (SHA-256 `ba9025f7...982bef`), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1 or 0.5.1.1 |
+| SD card image (new card) | `sidecar-0.5.1.2-sd-800x480.img.zip` (`384d685a...086699`) and `sidecar-0.5.1.2-sd-1024x600.img.zip` (`abcb1739...325b4f`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.2.zip` (`34613313...e60a96`): both images, the card files for both sizes, a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1.2-f75a950-800x480.zip` (`ab682a0d...221168`) and `sidecar-pi-sd-0.5.1.2-f75a950-1024x600.zip` (`a046541b...aefe04`), each with its `.sha256`, or the starter zip `sidecar-0.5.1.2-starter.zip` (`5b5991b0...3f2ae5`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.2.zip` (`691d02da...b08e1d`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.1.2.zip` (`20ffeaea...36cabb`) |
 | Rytm firmware, OS 1.74 only (unchanged, optional) | the 0.5.1.1 files: `rytm-sidecar-0.5.1.1-os1.74.elemod` (SHA-256 `5edea14a5d5fd0af5b944d1f257e9b62468a23dc1f64a9d5d96756ab9926edf0`) with `core-0.1-os1.74.elemod` (SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-1-1-os1.74` in the [patcher](/sidecar-expander/patcher/) |
 | Checksums | `SHA256SUMS` on the release page |
 

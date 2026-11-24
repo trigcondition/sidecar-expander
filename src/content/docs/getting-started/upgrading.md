@@ -25,7 +25,7 @@ The new touchscreen themes are not switched on by the update: the display stays 
 
 1. **Back up the Rytm's projects** with Transfer. The Rytm must run **OS 1.74**. If it runs an older OS, install Elektron's stock OS 1.74 first ([Recovery to stock](/sidecar-expander/getting-started/recovery/) has the stock files).
 2. **Flash the Rytm firmware** (0.5.1.1, or 0.5.0 if you prefer: both work with the 0.5.1.2 card) with the patcher ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
-3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.1.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-800x480.zip` and `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-1024x600.zip`; the release zip `sidecar-0.5.1.2.zip` holds them too, under "Card files".
+3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.1.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.1.2-f75a950-800x480.zip` and `sidecar-pi-sd-0.5.1.2-f75a950-1024x600.zip`; the release zip `sidecar-0.5.1.2.zip` holds them too, under "Card files".
 4. **Switch the Pi off, put its SD card in your computer, unzip the card files and copy everything over the card's top level, replacing files.**
    - This includes the **hidden folder `.rytm`**. The Mac's Finder hides it: press Cmd+Shift+. to show it. On Windows turn on "Hidden items" in the Explorer's View menu.
    - Your samples, recordings, `/Plugins/` and the settings in `/.rytm` stay. The new `/.rytm/www-next` folder (the new web page) is added.
