@@ -10,8 +10,8 @@ import ConfigEditor from './ConfigEditor.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const RELEASE = {
   repo: 'https://github.com/trigcondition/sidecar-firmware/releases',
-  tag: 'v0.5.1.1',
-  version: '0.5.1.1',
+  tag: 'v0.5.1.2',
+  version: '0.5.1.2',
 };
 const image = (res: string) => `sidecar-${RELEASE.version}-sd-${res}.img.zip`;
 const imageUrl = (res: string) => `${RELEASE.repo}/download/${RELEASE.tag}/${image(res)}`;
@@ -34,7 +34,7 @@ const docs = (p: string) => `${base}/${p}`;
 
 <div class="sg not-content" id="sg" data-steps={STEPS.length} data-step-text={JSON.stringify(STEPS.map((s) => ({ t: s.t, d: s.d })))}>
   <header class="sg-head">
-    <p class="sg-label">Sidecar 0.5.1.1 · Analog Rytm MKII + Raspberry Pi 4B / 5</p>
+    <p class="sg-label">Sidecar 0.5.1.2 · Analog Rytm MKII + Raspberry Pi 4B / 5</p>
     <p class="sg-title">Set up Sidecar in seven steps</p>
     <p class="sg-sub">From a stock Rytm to playing Sidecar machines: patch and flash the Rytm, write the Pi's SD card, connect, play. Prefer text? <a href={docs('getting-started/start-here/')}>Start here</a> has the same steps.</p>
   </header>
@@ -126,7 +126,7 @@ const docs = (p: string) => `${base}/${p}`;
                 <rect x="208" y="172" width="70" height="40" rx="4" fill="var(--bg)" stroke="var(--border)"></rect>
                 <text x="243" y="188" fill="var(--label)">STORAGE</text><text x="243" y="203" fill="var(--text)" font-weight="700">SD card</text>
               </g>
-              <text x="66" y="230" class="ui sg-img" font-size="8.5" fill="var(--text)" id="sg-scene-img">sidecar-0.5.1.1-sd-800x480.img.zip</text>
+              <text x="66" y="230" class="ui sg-img" font-size="8.5" fill="var(--text)" id="sg-scene-img">sidecar-0.5.1.2-sd-800x480.img.zip</text>
               <text x="66" y="246" class="ui" font-size="9.5" fill="var(--label)">Customisation? <tspan fill="var(--text)" font-weight="700">No</tspan></text>
               <rect x="66" y="254" width="208" height="6" rx="3" fill="var(--border)"></rect>
               <rect x="66" y="254" width="208" height="6" rx="3" fill="var(--sd)"></rect>

@@ -1,13 +1,13 @@
 ---
 title: Start here
-description: "The short way to a working Sidecar 0.5.1.1: patch Elektron's stock OS 1.74 in the browser, flash it with Transfer, make the Pi's SD card, connect and play."
+description: "The short way to a working Sidecar 0.5.1.2: patch Elektron's stock OS 1.74 in the browser, flash it with Transfer, make the Pi's SD card, connect and play."
 sidebar:
   order: 1
 ---
 
 Prefer to do it step by step on one page, with the patcher and the downloads in it? Use [Set up Sidecar](/sidecar-expander/getting-started/setup/). This page is the same route as text.
 
-The one route for a new setup: an Analog Rytm MKII, a Raspberry Pi 4B or Pi 5, Sidecar 0.5.1.1 (on the Pi) with the Rytm firmware 0.5.1.1 (on the Rytm, OS 1.74 only; the Rytm part is optional for an existing setup, the 0.5.0 firmware works with the Pi 0.5.1.1 too). Each step links to the full page if you need more. Prefer paper? The whole manual is a PDF: [Sidecar-0.5.0-User-Manual.pdf](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.5.0/Sidecar-0.5.0-User-Manual.pdf).
+The one route for a new setup: an Analog Rytm MKII, a Raspberry Pi 4B or Pi 5, Sidecar 0.5.1.2 (on the Pi) with the Rytm firmware 0.5.1.1 (on the Rytm, OS 1.74 only; the Rytm part is optional for an existing setup, the 0.5.0 firmware works with the Pi 0.5.1.2 too). Each step links to the full page if you need more. Prefer paper? The whole manual is a PDF: [Sidecar-0.5.0-User-Manual.pdf](https://github.com/trigcondition/sidecar-firmware/releases/download/v0.5.0/Sidecar-0.5.0-User-Manual.pdf).
 
 New to Sidecar? The [introduction video](https://www.youtube.com/watch?v=b10zwIORtgU) shows the workflow and the features of 0.4.4 (an earlier release) in about 20 minutes.
 

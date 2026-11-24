@@ -2,6 +2,56 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.5.1.2
+
+**A small Pi-only fix release after 0.5.1.1: two fixes. The Rytm needs no flash: the Rytm firmware stays 0.5.1.1 (the 0.5.0 firmware works too).** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. Everyone on the Pi with 0.5.1.1 or an earlier 0.5.x should update.
+
+### Fixed in 0.5.1.2
+
+- **FILL and the keys that wait for the Rytm's hello now work when the Pi starts or updates while the Rytm is already on.** The Rytm says hello only when its USB port comes up, so a Pi that started after it never heard one, and the features that depend on it stayed off (a quick UP + RIGHT for FILL, among others). The Pi now claims FILL on the first Rytm message it hears and again about every 2 s; the first hello, if one comes, decides as before. A box other than the Rytm is not affected.
+- **The CONNECTED screen no longer stays up or comes back** after the Rytm connects.
+- **/status** shows `hellos` (how many hellos the Pi has heard) and `capsKnown` (whether the Pi knows the Rytm's capabilities); the log says once per link when they are unknown.
+
+### Good to know
+
+- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE still come in 0.5.2.** 0.5.1.2 keeps the 0.5.0 WAVETABLE.
+- **Updating from 0.5.1 or 0.5.0:** the web page says "The versions cannot be compared" once: tick **"Install it anyway"**. From 0.5.1.1 on, updates offer themselves without the box.
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.2.scu` (SHA-256 `{{SHA256 sidecar-0.5.1.2.scu, first 8 ... last 6}}`), with its `.sha256`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1 or 0.5.1.1 |
+| SD card image (new card) | `sidecar-0.5.1.2-sd-800x480.img.zip` (`{{SHA256 sidecar-0.5.1.2-sd-800x480.img.zip, first 8 ... last 6}}`) and `sidecar-0.5.1.2-sd-1024x600.img.zip` (`{{SHA256 sidecar-0.5.1.2-sd-1024x600.img.zip, first 8 ... last 6}}`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.2.zip` (`{{SHA256 sidecar-0.5.1.2.zip, first 8 ... last 6}}`): both images, the card files for both sizes, a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-800x480.zip` (`{{SHA256 sidecar-pi-sd-0.5.1.2-COMMIT-800x480.zip, first 8 ... last 6}}`) and `sidecar-pi-sd-0.5.1.2-{{COMMIT}}-1024x600.zip` (`{{SHA256 sidecar-pi-sd-0.5.1.2-COMMIT-1024x600.zip, first 8 ... last 6}}`), each with its `.sha256`, or the starter zip `sidecar-0.5.1.2-starter.zip` (`{{SHA256 sidecar-0.5.1.2-starter.zip, first 8 ... last 6}}`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.2.zip` (`{{SHA256 sidecar-pi-plugins-0.5.1.2.zip, first 8 ... last 6}}`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.1.2.zip` (`{{SHA256 sidecar-content-0.5.1.2.zip, first 8 ... last 6}}`) |
+| Rytm firmware, OS 1.74 only (unchanged, optional) | the 0.5.1.1 files: `rytm-sidecar-0.5.1.1-os1.74.elemod` (SHA-256 `5edea14a5d5fd0af5b944d1f257e9b62468a23dc1f64a9d5d96756ab9926edf0`) with `core-0.1-os1.74.elemod` (SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-1-1-os1.74` in the [patcher](https://trigcondition.github.io/sidecar-expander/patcher/) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.1.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1.2) (the Pi side, the images, the release zip) and, for the Rytm part, the [sidecar-mods 0.5.1.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.1.1) (the two `.elemod` files; there is no 0.5.1.2 mods release).
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/upgrading/).
+
+**The Pi (from 0.5.1.1, 0.5.1 or 0.5.0), three steps:**
+
+1. Download `sidecar-0.5.1.2.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file. On 0.5.1 or 0.5.0, **tick "Install it anyway" once** (a version with four numbers cannot be compared there); the file is still checked completely.
+3. Wait for the trial boot: the page follows it, and after about 20 seconds it says the update is permanent (nothing to confirm).
+
+If the Sidecar does not come back, power it off and on: it runs your old version again. Your projects, samples, `/Plugins` and settings stay.
+
+**The Rytm: no flash.** The Rytm firmware is the one from 0.5.1.1 (or 0.5.0). If you have not flashed 0.5.1.1 yet and want its smoother Rytm, see [Patch and flash](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/); it is optional.
+
+**From 0.4.x:** flash the Rytm firmware (0.5.1.1 or 0.5.0) if it is not on the Rytm yet (OS 1.74), then copy the 0.5.1.2 card files over the card, or write the 0.5.1.2 SD card image to a new card, as for 0.5.0.
+
+### Known issues (still open)
+
+- After a rollback to an older Sidecar build the LFOs show OFF (the older build does not read the new LFO files; going back to 0.5.0 brings them back).
+- The CHOP editor's audition ignores GATE (trigs and pads obey it).
+- SONG Restore still uses the old write: a fill that a SONG Restore removed comes back after a power-off.
+
 ## Sidecar 0.5.1.1
 
 **The fixes release between 0.5.1 and 0.5.2.** It fixes a handful of bugs found since 0.5.1, adds the black box download and audio previews in the catalog, and comes with two small Rytm files for a smoother Rytm. **The Pi update is the easy part and works on its own: the Pi 0.5.1.1 also runs with the Rytm still on 0.5.0.** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged.
