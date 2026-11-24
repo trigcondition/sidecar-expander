@@ -1,7 +1,57 @@
 ---
 title: Release notes
-description: "Sidecar 0.5.1.1 (a fixes release: the black box download, audio previews in the catalog, fixes, and an optional smoother Rytm firmware), Sidecar 0.5.1 (Pi only: new themes and layouts, touch controls, the community machine catalog, BP303, the USB unplug fix), Sidecar 0.5.0 (the SAMPLER machine, a better CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, user effects with NIMBUS and GALACTIC, the web update, voices 9 dB lower), 0.4.4 (a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, the CONNECTED screen at the Rytm's boot; the Rytm firmware 0.4.4), 0.4.3 (CHRO pad fixes on poly tracks: the first hit, JUNO and the other machines, PAD OCT; fewer Rytm screen redraws), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
+description: "Sidecar 0.5.1.2 (a small Pi-only fix: FILL and the hello-gated keys when the Pi starts with the Rytm already on, the CONNECTED screen), Sidecar 0.5.1.1 (a fixes release: the black box download, audio previews in the catalog, fixes, and an optional smoother Rytm firmware), Sidecar 0.5.1 (Pi only: new themes and layouts, touch controls, the community machine catalog, BP303, the USB unplug fix), Sidecar 0.5.0 (the SAMPLER machine, a better CHOP, SAMPLE EDIT, FILL, MIST, the Rytm's own parameters on the XY pad and MIDI learn, user effects with NIMBUS and GALACTIC, the web update, voices 9 dB lower), 0.4.4 (a held step's values on the SRC view, the pads' octave keys on the SEQ and ARP pages, one NO to leave a page, the CONNECTED screen at the Rytm's boot; the Rytm firmware 0.4.4), 0.4.3 (CHRO pad fixes on poly tracks: the first hit, JUNO and the other machines, PAD OCT; fewer Rytm screen redraws), 0.4.2 (Overbridge passthrough on the Pi 5 too), 0.4.1 (Overbridge passthrough on the Pi 4, the USB-C mode switch, USB dropout and replug fixes, MODEL E), 0.4.0 (master FX, SAT, arp locks, the USER SLOTS page, SOPHIE, Analog Four MKII support, Rytm and Pi fixes), 0.3.2 (experimental Digitakt support, device profiles, Touch Display 2 on the Pi 5, a Pi 5 fix), 0.3.1 (fixes), 0.3.0 (an early-tester release: poly tracks, projects by slot, the pairing code and more), 0.2.0 (one card for the Pi 4B and the Pi 5) and 0.1.0: what is in them, the known issues, how to report, and the versioning scheme."
 ---
+
+## Sidecar 0.5.1.2
+
+**A small Pi-only fix release after 0.5.1.1: two fixes. The Rytm needs no flash: the Rytm firmware stays 0.5.1.1 (the 0.5.0 firmware works too).** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. Everyone on the Pi with 0.5.1.1 or an earlier 0.5.x should update.
+
+### Fixed in 0.5.1.2
+
+- **FILL and the keys that wait for the Rytm's hello now work when the Pi starts or updates while the Rytm is already on.** The Rytm says hello only when its USB port comes up, so a Pi that started after it never heard one, and the features that depend on it stayed off (a quick UP + RIGHT for FILL, among others). The Pi now claims FILL on the first Rytm message it hears and again about every 2 s; the first hello, if one comes, decides as before. A box other than the Rytm is not affected.
+- **The CONNECTED screen no longer stays up or comes back** after the Rytm connects.
+- **/status** shows `hellos` (how many hellos the Pi has heard) and `capsKnown` (whether the Pi knows the Rytm's capabilities); the log says once per link when they are unknown.
+
+### Good to know
+
+- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE still come in 0.5.2.** 0.5.1.2 keeps the 0.5.0 WAVETABLE.
+- **Updating from 0.5.1 or 0.5.0:** the web page says "The versions cannot be compared" once: tick **"Install it anyway"**. From 0.5.1.1 on, updates offer themselves without the box.
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.1.2.scu` (SHA-256 `ba9025f7...982bef`), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1 or 0.5.1.1 |
+| SD card image (new card) | `sidecar-0.5.1.2-sd-800x480.img.zip` (`384d685a...086699`) and `sidecar-0.5.1.2-sd-1024x600.img.zip` (`abcb1739...325b4f`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.1.2.zip` (`34613313...e60a96`): both images, the card files for both sizes, a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.1.2-f75a950-800x480.zip` (`ab682a0d...221168`) and `sidecar-pi-sd-0.5.1.2-f75a950-1024x600.zip` (`a046541b...aefe04`), each with its `.sha256`, or the starter zip `sidecar-0.5.1.2-starter.zip` (`5b5991b0...3f2ae5`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.1.2.zip` (`691d02da...b08e1d`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.1.2.zip` (`20ffeaea...36cabb`) |
+| Rytm firmware, OS 1.74 only (unchanged, optional) | the 0.5.1.1 files: `rytm-sidecar-0.5.1.1-os1.74.elemod` (SHA-256 `5edea14a5d5fd0af5b944d1f257e9b62468a23dc1f64a9d5d96756ab9926edf0`) with `core-0.1-os1.74.elemod` (SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-1-1-os1.74` in the [patcher](/sidecar-expander/patcher/) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.1.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1.2) (the Pi side, the images, the release zip) and, for the Rytm part, the [sidecar-mods 0.5.1.1 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.1.1) (the two `.elemod` files; there is no 0.5.1.2 mods release).
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgrading/).
+
+**The Pi (from 0.5.1.1, 0.5.1 or 0.5.0), three steps:**
+
+1. Download `sidecar-0.5.1.2.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file. On 0.5.1 or 0.5.0, **tick "Install it anyway" once** (a version with four numbers cannot be compared there); the file is still checked completely.
+3. Wait for the trial boot: the page follows it, and after about 20 seconds it says the update is permanent (nothing to confirm).
+
+If the Sidecar does not come back, power it off and on: it runs your old version again. Your projects, samples, `/Plugins` and settings stay.
+
+**The Rytm: no flash.** The Rytm firmware is the one from 0.5.1.1 (or 0.5.0). If you have not flashed 0.5.1.1 yet and want its smoother Rytm, see [Patch and flash](/sidecar-expander/getting-started/patch-and-flash/); it is optional.
+
+**From 0.4.x:** flash the Rytm firmware (0.5.1.1 or 0.5.0) if it is not on the Rytm yet (OS 1.74), then copy the 0.5.1.2 card files over the card, or write the 0.5.1.2 SD card image to a new card, as for 0.5.0.
+
+### Known issues (still open)
+
+- After a rollback to an older Sidecar build the LFOs show OFF (the older build does not read the new LFO files; going back to 0.5.0 brings them back).
+- The CHOP editor's audition ignores GATE (trigs and pads obey it).
+- SONG Restore still uses the old write: a fill that a SONG Restore removed comes back after a power-off.
 
 ## Sidecar 0.5.1.1
 
