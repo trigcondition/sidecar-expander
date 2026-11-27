@@ -195,7 +195,7 @@ Pi only: no Rytm flash needed, no change for Rytm users.
 
 ## New in 0.3.0
 
-Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on the Rytm's screen too. Most of it is built and tested in the emulator and in the emulator; the sequencer, NOTE EDIT, poly tracks per pattern, the RAM store and the touchscreen's OLED theme have been used on a real Rytm with a Pi 4. The newest parts are being checked with the 0.3.0 release.
+Sidecar (Pi) only. A touchscreen is optional for all of it: the pages open on the Rytm's screen too. Most of it is built and tested in the emulator; the sequencer, NOTE EDIT, poly tracks per pattern, the RAM store and the touchscreen's OLED theme have been used on a real Rytm with a Pi 4. The newest parts are being checked with the 0.3.0 release.
 
 | Feature | Status |
 |---|---|
