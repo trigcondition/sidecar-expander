@@ -7,7 +7,7 @@ sidebar:
 
 This page is for a Sidecar that already runs. For a new one, use [Set up Sidecar](/sidecar-expander/getting-started/setup/).
 
-**Sidecar 0.5.2 is a Pi and Rytm release: update the Pi first, then flash the Rytm's two 0.5.2 files** ([below](#then-the-rytm-flash-the-052-files)). The Pi update works on its own. Pi 0.5.2 with Rytm 0.5.2 is the tested pair. The Pi 0.5.2 is built to keep working with a Rytm still on 0.5.1.1 (what worked keeps working), but that pair was not tested on hardware, and the new Rytm-side parts need the 0.5.2 files: scene edit on the Rytm's own pages (PAGE + T15 / T16 and the knob press), the Rytm-side morph, table B's pool browser, the Rytm's answer to the re-hello and the new labels for WAVETABLE's P13..P16.
+**Sidecar 0.5.2 is a Pi and Rytm release: update the Pi first, then update the Rytm with the web flasher** ([below](#then-the-rytm-with-the-web-flasher)). The Pi update works on its own. Pi 0.5.2 with Rytm 0.5.2 is the tested pair. The Pi 0.5.2 is built to keep working with a Rytm still on 0.5.1.1 (what worked keeps working), but that pair was not tested on hardware, and the new Rytm-side parts need the 0.5.2 files: scene edit on the Rytm's own pages (PAGE + T15 / T16 and the knob press), the Rytm-side morph, table B's pool browser, the Rytm's answer to the re-hello and the new labels for WAVETABLE's P13..P16.
 
 ## From 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 to 0.5.2 (the easy way)
 
@@ -38,9 +38,9 @@ An alternative: write the 0.5.2 **SD card image** to a **new** card with Raspber
 
 A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.2 card, without what needs the new Rytm firmware: see [Upgrading from 0.4.4](/sidecar-expander/release-notes/#upgrading-from-044) in the release notes.
 
-## Then: the Rytm, flash the 0.5.2 files
+## Then: the Rytm, with the web flasher
 
-The Rytm firmware 0.5.2 (OS 1.74 only) is 0.5.1.1 plus the Rytm side of MORPH (scene edit on the stock pages, the knob press that removes a lock, the QUICK PERF scene morph), the full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. To flash it: **back up your projects first** (never flash without a backup), then add both files in the web flasher with your own stock OS 1.74, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)): `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`. A Rytm that is on 0.5.1.1 should keep working with the Pi 0.5.2 until you do (untested); 0.5.0 is untested too.
+The Rytm firmware 0.5.2 (OS 1.74 only) is 0.5.1.1 plus the Rytm side of MORPH (scene edit on the stock pages, the knob press that removes a lock, the QUICK PERF scene morph), the full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. To flash it: **back up your projects first** (never flash without a backup), then open the [web flasher](/sidecar-expander/patcher/), drop in your own stock OS 1.74 file, press **Patch**, then **Save .syx**, and send it to the Rytm ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/) has every step). A Rytm that is on 0.5.1.1 should keep working with the Pi 0.5.2 until you do (untested); 0.5.0 is untested too.
 
 ## From 0.5.2 onward
 
