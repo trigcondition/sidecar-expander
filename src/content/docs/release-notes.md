@@ -5,7 +5,7 @@ description: "Sidecar 0.5.2 (MORPH with scene edit on the Rytm's own pages, the 
 
 ## Sidecar 0.5.2
 
-**The feature release after 0.5.1.2: MORPH, the sidechain, WAVETABLE v2 and more.** The Pi update comes first and works on its own; the Rytm part (two files, a flash) completes it. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. **The looper is not in 0.5.2:** it is switched off in this build and comes back redesigned in a later release.
+**The feature release after 0.5.1.2: MORPH, the sidechain, WAVETABLE v2 and more.** The Pi update comes first and works on its own; the Rytm update (in the web flasher) completes it. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. **The looper is not in 0.5.2:** it is switched off in this build and comes back redesigned in a later release.
 
 ### What's new
 
@@ -40,14 +40,14 @@ The Rytm firmware 0.5.2 is 0.5.1.1 plus the Rytm side of MORPH and a few more th
 |---|---|
 | Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.2.scu` (SHA-256 `d9a5e88e...8a0fa3`), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 |
 | SD card image (new card) | `sidecar-0.5.2-sd-800x480.img.zip` (`4fe9cd29...e2d4a4`) and `sidecar-0.5.2-sd-1024x600.img.zip` (`f17b6cc7...7694a4`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
-| Release zip | `sidecar-0.5.2.zip` (`4c1d27c6...adb6f9`): both images, the card files for both sizes, the two Rytm `.elemod` files (no `.syx`), a quick start |
+| Release zip | `sidecar-0.5.2.zip` (`4c1d27c6...adb6f9`): both images, the card files for both sizes, a quick start |
 | Card files (copy by hand) | `sidecar-pi-sd-0.5.2-eb7517e-800x480.zip` (`39726f95...1da57b`) and `sidecar-pi-sd-0.5.2-eb7517e-1024x600.zip` (`1c7edf06...c837c3`), each with its `.sha256`, or the starter zip `sidecar-0.5.2-starter.zip` (`5979f83e...ce7394`); `BUILD-INFO-pi.txt` names the commit and both kernels |
 | User machines (Pi) | `sidecar-pi-plugins-0.5.2.zip` (`7c35460b...a742b9`): the user machines and effects |
 | Starter content | `sidecar-content-0.5.2.zip` (`634dcc01...5cf233`) |
-| Rytm firmware, OS 1.74 only | `rytm-sidecar-0.5.2-os1.74.elemod` (SHA-256 `105391f18f6cd548a94d0c2ea65f3177a804f4b20ec3dfa2c7eecd0f03ad6600`) with `core-0.1-os1.74.elemod` (unchanged, SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-2-os1.74` in the [patcher](/sidecar-expander/patcher/) (its `.syx`: `2e4ffe079b3723c26ece4406d85c8ff94045020dcaff5f99f849dd1d1b4d1966`) |
+| Rytm firmware, OS 1.74 only | the [web flasher](/sidecar-expander/patcher/) (build `rel0-5-2-os1.74`) makes it from your stock OS 1.74 file; the result's SHA-256 is `2e4ffe079b3723c26ece4406d85c8ff94045020dcaff5f99f849dd1d1b4d1966` |
 | Checksums | `SHA256SUMS` on the release page |
 
-Downloads: the [sidecar-firmware 0.5.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.2) (the Pi side, the images, the release zip) and the [sidecar-mods 0.5.2 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.2) (the two Rytm `.elemod` files). We ship no `.syx`: you build it from your own stock OS.
+Downloads: the [sidecar-firmware 0.5.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.2) (the Pi side, the images, the release zip) and the [sidecar-mods 0.5.2 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.2) (the Rytm firmware's source files, for developers). We ship no `.syx`: the web flasher makes it from your own stock OS.
 
 ### Upgrading
 
@@ -61,7 +61,7 @@ Full steps: [Upgrade an existing Sidecar](/sidecar-expander/getting-started/upgr
 
 If the Sidecar does not come back, power it off and on: it runs your old version again. Your projects, samples, `/Plugins` and settings stay.
 
-**Then the Rytm: two files, a flash.** Back up your projects first (never flash without a backup). Add both files in the web flasher with your own stock OS 1.74: `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/)). Never share the `.syx` you build: it holds Elektron's firmware.
+**Then the Rytm.** Back up your projects first (never flash without a backup), then open the [web flasher](/sidecar-expander/patcher/), drop in your own stock OS 1.74 file, press **Patch**, then **Save .syx**, and send it to the Rytm ([Patch and flash](/sidecar-expander/getting-started/patch-and-flash/) has every step). Never share the `.syx` you build: it holds Elektron's firmware.
 
 **From 0.4.x:** flash the Rytm firmware 0.5.2 (OS 1.74), then copy the 0.5.2 card files over the card, or write the 0.5.2 SD card image to a new card, as for 0.5.0.
 
