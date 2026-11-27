@@ -50,7 +50,7 @@ The result is bit-identical to the elekloader build we tested ([below](#advanced
 
 ## Advanced: build it with elekloader
 
-You do not need this: the patcher above makes the same file. If you would rather build it yourself, the 0.5.2 Rytm firmware also comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS 1.74 file. The result is one `.syx` that you flash like any OS update. It is made for the Sidecar 0.5.2 card (the tested pair); it also works with the 0.5.1.2, 0.5.1.1, 0.5.1 and 0.5.0 cards, without what needs the new files.
+You do not need this: the patcher above makes the same file. If you would rather build it yourself, the 0.5.2 Rytm firmware also comes as an [elekloader](https://github.com/irpina/elekloader) **bundle**: two module files that elekloader's web page (or its command line) puts into your stock OS 1.74 file. The result is one `.syx` that you flash like any OS update. It is made for the Sidecar 0.5.2 card (the tested pair); it should also work with the 0.5.1.2, 0.5.1.1, 0.5.1 and 0.5.0 cards (untested), without what needs the new files.
 
 ### What you need
 

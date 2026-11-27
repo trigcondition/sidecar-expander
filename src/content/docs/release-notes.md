@@ -33,17 +33,17 @@ The Rytm firmware 0.5.2 is 0.5.1.1 plus the Rytm side of MORPH and a few more th
 
 - **The looper is not in 0.5.2** (no LOOP page, nothing recorded or played; a `loop.txt` on the card is left alone). The LFO and MIDI-learn target lists still show LOOP:BAL and LOOP:LEV: they do nothing. The next release hides them.
 - **WAVETABLE sounds different in old projects:** WARP settings above 14 map to the new warps, and chords are gone (a sound with a chord plays its root). P13..P16 are TBL B / POS B / MIX / FTYPE now, so a p-lock on them locks those. See [WAVETABLE](/sidecar-expander/using/poly-machines/#wavetable).
-- The sidechain's DUCK keys are band-passed now (KBAS, KWID); a trial card from an earlier 0.5.2 build loads as the nearest values.
+- The sidechain's DUCK keys are band-passed now (KBAS, KWID).
 - **No "Install it anyway":** 0.5.2 has a three-number version, so the update offers itself on every earlier 0.5.x.
 
 | Part | File |
 |---|---|
-| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.2.scu` (SHA-256 {{SHA256 sidecar-0.5.2.scu, first 8 ... last 6}}), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 |
-| SD card image (new card) | `sidecar-0.5.2-sd-800x480.img.zip` ({{SHA256 sidecar-0.5.2-sd-800x480.img.zip, first 8 ... last 6}}) and `sidecar-0.5.2-sd-1024x600.img.zip` ({{SHA256 sidecar-0.5.2-sd-1024x600.img.zip, first 8 ... last 6}}), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
-| Release zip | `sidecar-0.5.2.zip` ({{SHA256 sidecar-0.5.2.zip, first 8 ... last 6}}): both images, the card files for both sizes, the two Rytm `.elemod` files (no `.syx`), a quick start |
-| Card files (copy by hand) | `sidecar-pi-sd-0.5.2-{{COMMIT}}-800x480.zip` ({{SHA256 sidecar-pi-sd-0.5.2-COMMIT-800x480.zip, first 8 ... last 6}}) and `sidecar-pi-sd-0.5.2-{{COMMIT}}-1024x600.zip` ({{SHA256 sidecar-pi-sd-0.5.2-COMMIT-1024x600.zip, first 8 ... last 6}}), each with its `.sha256`, or the starter zip `sidecar-0.5.2-starter.zip` ({{SHA256 sidecar-0.5.2-starter.zip, first 8 ... last 6}}); `BUILD-INFO-pi.txt` names the commit and both kernels |
-| User machines (Pi) | `sidecar-pi-plugins-0.5.2.zip` ({{SHA256 sidecar-pi-plugins-0.5.2.zip, first 8 ... last 6}}): the user machines and effects |
-| Starter content | `sidecar-content-0.5.2.zip` ({{SHA256 sidecar-content-0.5.2.zip, first 8 ... last 6}}) |
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.2.scu` (SHA-256 `d9a5e88e...8a0fa3`), with its `.sha256`, for [Settings > Update](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 |
+| SD card image (new card) | `sidecar-0.5.2-sd-800x480.img.zip` (`4fe9cd29...e2d4a4`) and `sidecar-0.5.2-sd-1024x600.img.zip` (`f17b6cc7...7694a4`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.2.zip` (`4c1d27c6...adb6f9`): both images, the card files for both sizes, the two Rytm `.elemod` files (no `.syx`), a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.2-eb7517e-800x480.zip` (`39726f95...1da57b`) and `sidecar-pi-sd-0.5.2-eb7517e-1024x600.zip` (`1c7edf06...c837c3`), each with its `.sha256`, or the starter zip `sidecar-0.5.2-starter.zip` (`5979f83e...ce7394`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.2.zip` (`7c35460b...a742b9`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.2.zip` (`634dcc01...5cf233`) |
 | Rytm firmware, OS 1.74 only | `rytm-sidecar-0.5.2-os1.74.elemod` (SHA-256 `105391f18f6cd548a94d0c2ea65f3177a804f4b20ec3dfa2c7eecd0f03ad6600`) with `core-0.1-os1.74.elemod` (unchanged, SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-2-os1.74` in the [patcher](/sidecar-expander/patcher/) (its `.syx`: `2e4ffe079b3723c26ece4406d85c8ff94045020dcaff5f99f849dd1d1b4d1966`) |
 | Checksums | `SHA256SUMS` on the release page |
 
@@ -65,7 +65,7 @@ If the Sidecar does not come back, power it off and on: it runs your old version
 
 **From 0.4.x:** flash the Rytm firmware 0.5.2 (OS 1.74), then copy the 0.5.2 card files over the card, or write the 0.5.2 SD card image to a new card, as for 0.5.0.
 
-**New card: the easy way.** Write `sidecar-0.5.2-sd-800x480.img.zip` (an 800x480 HDMI display, a DSI display or none) or `sidecar-0.5.2-sd-1024x600.img.zip` (a 1024x600 HDMI display) to a microSD card of 4 GB or more with Raspberry Pi Imager or balenaEtcher, without unzipping. One card boots the Pi 4B and the Pi 5 ([Set up Sidecar](/sidecar-expander/getting-started/setup/)). A new card needs the Rytm files above to get everything; the Pi also runs with 0.5.1.1 or 0.5.0.
+**New card: the easy way.** Write `sidecar-0.5.2-sd-800x480.img.zip` (an 800x480 HDMI display, a DSI display or none) or `sidecar-0.5.2-sd-1024x600.img.zip` (a 1024x600 HDMI display) to a microSD card of 4 GB or more with Raspberry Pi Imager or balenaEtcher, without unzipping. One card boots the Pi 4B and the Pi 5 ([Set up Sidecar](/sidecar-expander/getting-started/setup/)). A new card needs the Rytm files above to get everything; the Pi should also run with 0.5.1.1 (untested) or 0.5.0 (untested).
 
 ### Known issues (still open)
 

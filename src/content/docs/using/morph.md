@@ -66,7 +66,7 @@ The list's last row is **ADD**: scrolled to the top, knob **B** picks the track 
 
 ## Scene edit: PAGE + T15 / T16
 
-On any Sidecar page (a voice's page, an INSERT or the master page) and on the Rytm's own pages, **hold PAGE and then T15 for scene A, or T16 for scene B, and turn a knob**: the scene locks that parameter at the value you turn to. Every page's header says `EDIT A` or `EDIT B` while you hold it, and the footer says `SET A: T1-12`: while you hold, **T1..T12** picks the scene that side edits. Let go of T15 / T16 and the edit ends. Nothing is locked until you turn a knob. A side needs a scene first: without one the readout says `SET A FIRST`.
+On any Sidecar page (a voice's page, an INSERT or the master page) and on the Rytm's own pages, **hold PAGE and then T15 for scene A, or T16 for scene B, and turn a knob**: the scene locks that parameter at the value you turn to. Every page's header says `EDIT A` or `EDIT B` while you hold it, and the footer says `SET A: T1-12`: while you hold, **T1..T12** picks the scene that side edits. Let go of T15 / T16 and the edit ends. Nothing is locked until you turn a knob. A side needs a scene first: without one the Rytm's own pages show `SET A FIRST` and the Sidecar pages' footer shows `SET A: T1-12`.
 
 **On the Rytm's own pages, press the knob to remove the lock.** While PAGE + T15 / T16 is held, pressing a knob removes that parameter's lock from the scene. The readout says `A FRQ CLR`, or `A FRQ NONE` when the scene had no lock on it. The press does not do the Rytm's own thing (stock's trig-held knob press clears a p-lock): under a held side it is only the scene edit's.
 

@@ -25,7 +25,7 @@ The new touchscreen themes are not switched on by the update: the display stays 
 
 1. **Back up the Rytm's projects** with Transfer. The Rytm must run **OS 1.74**. If it runs an older OS, install Elektron's stock OS 1.74 first ([Recovery to stock](/sidecar-expander/getting-started/recovery/) has the stock files).
 2. **Flash the Rytm firmware 0.5.2** with the patcher ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
-3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.2-{{COMMIT}}-800x480.zip` and `sidecar-pi-sd-0.5.2-{{COMMIT}}-1024x600.zip`; the release zip `sidecar-0.5.2.zip` holds them too, under "Card files".
+3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.2-eb7517e-800x480.zip` and `sidecar-pi-sd-0.5.2-eb7517e-1024x600.zip`; the release zip `sidecar-0.5.2.zip` holds them too, under "Card files".
 4. **Switch the Pi off, put its SD card in your computer, unzip the card files and copy everything over the card's top level, replacing files.**
    - This includes the **hidden folder `.rytm`**. The Mac's Finder hides it: press Cmd+Shift+. to show it. On Windows turn on "Hidden items" in the Explorer's View menu.
    - Your samples, recordings, `/Plugins/` and the settings in `/.rytm` stay. The new `/.rytm/www-next` folder (the new web page) is added.
@@ -40,7 +40,7 @@ A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.2 card, without 
 
 ## Then: the Rytm, flash the 0.5.2 files
 
-The Rytm firmware 0.5.2 (OS 1.74 only) is 0.5.1.1 plus the Rytm side of MORPH (scene edit on the stock pages, the knob press that removes a lock, the QUICK PERF scene morph), the full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. To flash it: **back up your projects first** (never flash without a backup), then add both files in the web flasher with your own stock OS 1.74, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)): `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`. A Rytm that is on 0.5.1.1 or 0.5.0 keeps working with the Pi 0.5.2 until you do.
+The Rytm firmware 0.5.2 (OS 1.74 only) is 0.5.1.1 plus the Rytm side of MORPH (scene edit on the stock pages, the knob press that removes a lock, the QUICK PERF scene morph), the full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. To flash it: **back up your projects first** (never flash without a backup), then add both files in the web flasher with your own stock OS 1.74, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)): `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`. A Rytm that is on 0.5.1.1 should keep working with the Pi 0.5.2 until you do (untested); 0.5.0 is untested too.
 
 ## From 0.5.2 onward
 

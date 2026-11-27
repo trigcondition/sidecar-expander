@@ -112,7 +112,7 @@ New in 0.5.2. One more stage on every insert chain (V1..V8, B1..B3 and the maste
 
 **On the Rytm:** open INSERT (UP + FX) or the MASTER page, press **RIGHT** for the EQ view, then **DOWN**: the SIDECHAIN view (A MODE, B SRC, C..H the knobs; **YES** steps voice, bus 1, 2, 3; **T1** toggles MON on a DUCK stage; LEFT, DOWN or NO go back). **On the web page:** Mix > Sidechain. The touchscreen's INSERT FX page has no dials for it.
 
-Settings are saved per kit with the chain's other insert settings. A trial card from an earlier 0.5.2 development build loads as the nearest values; a Sidecar older than 0.5.2 counts a DUCK line from 0.5.2 as unreadable and keeps the file.
+Settings are saved per kit with the chain's other insert settings. A Sidecar older than 0.5.2 counts a DUCK line from 0.5.2 as unreadable and keeps the file.
 
 ## Editing
 
