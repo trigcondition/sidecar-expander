@@ -45,7 +45,7 @@ More engine work, or a small change to the A4 mod (a flash).
 A design conversation first, or a larger change.
 
 13. **Sample machines on the A4.** They need the pools and a way to pick and slice a sample on the A4: which knobs, how a sample is picked per step, memory per project. Best designed together with live sampling.
-14. **Live sampling and the looper** (planned for 0.5.2). The A4's inputs and voices are in its stream, so the Pi can record them. The design should cover both boxes from the start. With 4 voices, a looper's playback takes a voice's channel or the main output.
+14. **Live sampling and the looper** (the looper is not in 0.5.2: it comes back redesigned in a later release). The A4's inputs and voices are in its stream, so the Pi can record them. The design should cover both boxes from the start. With 4 voices, a looper's playback takes a voice's channel or the main output.
 15. **Scenes** (planned for 0.5.2). Morphing the Sidecar's parameters: follow the A4's own performance macros, or live on the Sidecar's pages only.
 16. **The Sidecar sequencer and arp locks on the A4.** The A4 stores its patterns differently from the Rytm, so this is a large job, and only worth it with a clear use.
 17. **The A4's own font on the Sidecar's pages.** Today the pages use the Sidecar's font.

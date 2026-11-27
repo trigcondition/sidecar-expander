@@ -61,7 +61,15 @@ Each function works on the region (start to end), except TRIM, which looks at th
 | GAIN +3 | +3 dB |
 | GAIN -3 | -3 dB |
 
+The functions above run on the region with **YES**. **MAKE WT** is a save choice, not a function: see below.
+
 The editor works in floating point, so a gain over full level does not clip while you edit. Clipping happens only when the file is written and in the play buffers. There is **one level of undo**: NO (UNDO on the touchscreen) takes back the last function, and after that there is nothing to undo until the next one (`NOTHING TO UNDO`). While a function runs, a long sample takes a moment, and apply, undo, save and play say `BUSY`. Markers and zoom still work.
+
+## MAKE WT: a sample region as a wavetable (0.5.2)
+
+New in 0.5.2, for the [WAVETABLE](/sidecar-expander/using/poly-machines/#wavetable) machine. On a WAVETABLE track's SRC view, **push knob B** (POS) to open SAMPLE EDIT: on table A's file when it is a card file, otherwise on the POOL page's SAMPLES list, where you pick a sample first (`PICK A SAMPLE, YES: EDIT`). On the touchscreen the machine view's **EDIT** key does the same.
+
+Set the region, press **FUNC + YES** and choose **MAKE WT**; knob B sets the number of frames (16 to 256, 64 is the default). The region (with the functions applied) becomes a wavetable: for a pitched sample the frames are found from the pitch and phase-aligned to each other, for noise and hits the windows are made periodic (the screen says `PITCHED` or `SPECTRAL`). The file goes to `/WAVETABLES/<name>-wt<N>.wav` on the card, into the WAVETABLES pool list and onto the track's TBL, and the page goes back to the SRC view. The original sample is not changed.
 
 ## Live play
 

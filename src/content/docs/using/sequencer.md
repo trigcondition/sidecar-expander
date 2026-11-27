@@ -95,11 +95,13 @@ Each poly track has a **POLY CONFIG**, named and modelled after the Analog Four 
 | **E** SPRD | **SPREAD**: the stack across the stereo field | 0..127 (needs the voice on OUT [PRE / POST](/sidecar-expander/using/stereo-out/); FUNC: by 8) |
 | **F** GRP | **GROUP** | OFF, 1..4: stored, not played yet |
 | **G** OCT | **PAD OCT** (0.4.0): the CHRO pads' octave on this track | -3..3: each step moves what the pads play by 12 semitones, so they reach 0..119 |
+| **H** CHRD | **CHORD REC** (0.5.2): what live recording writes | OFF (the default), ON |
 
 - The line under the title says what the config resolves to now: `4 NOTES 4 INST 2.92%` (notes, instances, their share of a core), with `CUT` when the budget or the machine's maximum cut it.
 - 6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR allocate from their own pools: they take **VOICES** only, B..E read `-`.
 - On a Sidecar track that is no poly track yet, the page says so and **YES** makes it one. On an analog track it explains that the Rytm's voice is mono.
 - **PAD OCT** shifts the pads and the Rytm's pad notes on this track only. Recorded steps hold the shifted pitch, the one you hear. A keyboard on the Pi and the sequencer's own playback are not shifted, and steps already recorded stay where they are when OCT changes. <span class="sc-test">in testing</span>
+- **CHORD REC** (new in 0.5.2) changes what live recording (REC + PLAY) writes; playing is poly as ever (the pads and a MIDI keyboard sound every held note either way). **OFF:** a mono line, last note wins, as when you record a mono synth: a note pressed while another is held ends that note's recorded length there, and two notes on one step leave only the later one. **ON:** every held note is recorded with its own length (chords, overlapping lengths). Step entry of several notes on a step and chords already in the pattern are not affected. The Rytm-sequenced tracks are not covered. It is stored in the pattern's poly block with the rest of the config (written only when ON; an older pattern reads as OFF), and it is reached from the console as `seq=poly:T:chord=0|1`.
 - **NO** goes back to the Rytm's own screen.
 - **Where it is stored:** in the pattern, and as the track's default in the project. A track plays its pattern's config, else its default (the last one set on it), so a track keeps its voicing across patterns, and a pattern may still differ.
 - The same config is on the touchscreen's SEQ page (the **POLY** tool), the web page (**Sound > Poly tracks**) and the console (`seq=poly:T:voices=4,alloc=rotate,unison=2,detune=30,spread=64`).

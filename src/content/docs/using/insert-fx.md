@@ -96,6 +96,24 @@ MODL's text shows on the Rytm's INSERT page and on the touchscreen's INSERT FX p
 
 **Where and how much:** on the voices' chains only (not on the buses). AMP is mono: on a stereo voice (OUT PRE / POST) it plays the sum on both sides. **At most 6 AMP slots play at once**: one costs about 4 % of a Pi 4 core (measured by the boot bench); a seventh shows `MAX 6` and plays dry.
 
+## Sidechain (0.5.2)
+
+New in 0.5.2. One more stage on every insert chain (V1..V8, B1..B3 and the master's M1 and M2), after the two slots and before the chain's POST EQ. It is **off** by default, and an off stage costs nothing and changes nothing. It has two modes:
+
+| MODE | knobs (C..H of the page) |
+|---|---|
+| **PUMP** | DPTH, ATT, HOLD, REL, SHAP, THR |
+| **DUCK** | THR, RAT, ATT, REL, KBAS, KWID |
+
+- **PUMP** is a gain dip on every trig of the source: down by DPTH (127 is silence) over ATT, held for HOLD, back over REL; SHAP bends the way back. It is sample-exact from the trig. A Rytm track as the source needs no audio stem: it runs on the track's MIDI trigs. For AUDIO IN, THR sets the level that counts as a trig.
+- **DUCK** is the INSERT COMP, but keyed by the source instead of the chain's own signal: THR, RAT, ATT and REL as on the compressor. **KBAS** (a high pass on the key, 18 dB per octave, OFF or 20 Hz to 19.6 kHz) and **KWID** (a low pass, KWID octaves above KBAS) pick the band of the key that counts, on the key only, never on the sound. A kick-keyed duck that ignores the hi-hats: KBAS 60 Hz, KWID 3 octaves. **MON** plays the key as the detector hears it, in place of the chain's output, so you can set KBAS and KWID by ear. MON is not saved and ends by itself when you change mode, source, chain, page or kit.
+- **The source (SRC):** a Rytm track BD..CB, AUDIO IN (L, R or L+R) or a Sidecar voice V1..V8. DUCK listening to a Rytm track or AUDIO IN needs Overbridge mode (the Rytm's stems); without it the page says `NO STEMS` or `NO AUDIO IN`. On B1 and B2 the sidechain also needs the send effect on (`SEND FX OFF` otherwise).
+- **Control:** the six knobs take LFOs and scenes (their targets are `I3:S1`..`S6`, `B1:S1`, `M2:S6`). Mode and source are lists and are not modulated. There are no p-locks on the sidechain.
+
+**On the Rytm:** open INSERT (UP + FX) or the MASTER page, press **RIGHT** for the EQ view, then **DOWN**: the SIDECHAIN view (A MODE, B SRC, C..H the knobs; **YES** steps voice, bus 1, 2, 3; **T1** toggles MON on a DUCK stage; LEFT, DOWN or NO go back). **On the web page:** Mix > Sidechain. The touchscreen's INSERT FX page has no dials for it.
+
+Settings are saved per kit with the chain's other insert settings. A trial card from an earlier 0.5.2 development build loads as the nearest values; a Sidecar older than 0.5.2 counts a DUCK line from 0.5.2 as unreadable and keeps the file.
+
 ## Editing
 
 - **On the Rytm:** **UP + FX** opens the remote page **INSERT** (or INSERT FX in the SIDECAR MENU). The TRACK view shows the selected track's voice: a strip `[A TYPE] > [B TYPE] > [OUT]`, A..D the slot's P1..P4, E SLOT, F TYPE, G BUS, H SEND. FUNC + G picks another track. **YES**: the BUS view (A..D, E SLOT, F TYPE, G BUS 1..3, H ROUTE for bus 3); **YES** again: the OUT view (A OUT, B LEV, C PAN, D WID, E DEC); NO goes back. **UP + AMP** opens the page straight on the selected track's OUT view. **RIGHT**, from any of its views, opens the **EQ view**: a post EQ after the two slots, A HPF, B LPF, C LOW, D HIGH (LEFT or NO goes back; YES swaps between the voice's EQ and its bus's). The EQ has no p-locks.
