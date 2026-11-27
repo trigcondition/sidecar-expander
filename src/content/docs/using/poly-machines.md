@@ -5,11 +5,11 @@ sidebar:
   order: 3.1
 ---
 
-Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig, and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
+Three new machines join the machine list on every track, after DSP SAMPLE: **WAVETABLE**, **GRANULAR** and **MULTISAMPLE**. All three are polyphonic, play chords from one trig (WAVETABLE only from a poly track since 0.5.2), and can be [poly tracks](/sidecar-expander/using/sequencer/). Like every Sidecar machine, they play through the track's analog filter and amp. <span class="sc-test">in testing</span>
 
 ## Chords on page 2
 
-6-OP FM, MULTISAMPLE, WAVETABLE and GRANULAR share four chord knobs on the SMPL page, E..H:
+6-OP FM, MULTISAMPLE and GRANULAR share four chord knobs on the SMPL page, E..H (**WAVETABLE has none since 0.5.2**: its SMPL page E..H are TBL B, POS B, MIX and FTYPE, [below](#wavetable); chords come from a poly track):
 
 | Knob | Values |
 |---|---|
@@ -18,7 +18,7 @@ Three new machines join the machine list on every track, after DSP SAMPLE: **WAV
 | SPR | SPR0..SPR2: the voicing opened over 1..3 octaves |
 | VOI | AUTO, 1..6: the number of notes (more repeat the chord an octave up) |
 
-Each can be p-locked per step on the Rytm, so a normal Rytm track can play a chord per step. On 6-OP FM, E..H were unused before, so old kits play as they did.
+Each can be p-locked per step on the Rytm, so a normal Rytm track can play a chord per step. On 6-OP FM, E..H were unused before, so old kits play as they did. On WAVETABLE the old CHD knob now reads as a TBL B row (see below): a sound with a chord plays its root.
 
 Live chords: with CHRO on, chords played on the pads sound at once; with RECORD + PLAY each chord is written to its step as the NOTE plus CHD / INV / SPR / VOI locks.
 
@@ -53,15 +53,20 @@ A multisampled instrument player. Instruments are **SFZ** files (a subset of the
 
 ## WAVETABLE
 
-A band-limited wavetable synth: no audible aliasing at any pitch.
+A band-limited wavetable synth: no audible aliasing at any pitch. **Version 2 is new in 0.5.2:** a second table, nine warps and eight filter types. Chords no longer come from the machine: a WAVETABLE trig is one note, and a chord comes from a [poly track](/sidecar-expander/using/sequencer/) (its notes, the live pads, a keyboard).
 
 | Knob | SRC page (A..H) | SMPL page (A..H) |
 |---|---|---|
-| A..D | TBL (the table), POS (the frame position), WARP (OFF SYNC PWM FM), AMT (the warp's amount) | ATK, DEC (also the release), SUS, ENV (the mod envelope onto POS) |
-| E..H | UNI (unison: up to 7 oscillators, detuned), SUB (a sine an octave down), CUT (low-pass below 64, open at 64, high-pass above), RES (resonance and drive) | CHD, INV, SPR, VOI |
+| A..D | TBL (table A), POS (its frame position), WARP (OFF SYNC PWM FM FORMANT QUANT BEND SQUEEZE RM), AMT (the warp's amount) | ATK, DEC (also the release), SUS, ENV (the mod envelope onto POS and POS B) |
+| E..H | UNI (unison: up to 7 oscillators, detuned), SUB (a sine an octave down), CUT (the filter's cutoff), RES (resonance and drive) | **TBLB** (table B), **POSB** (its frame position), **MIX** (A against B), **FTYP** (the filter type) |
 
-- Tables: TBL picks a row of the project's **WAVETABLES** [POOL](/sidecar-expander/using/pools/): the six built-ins (BASIC PWM VOCAL ORGAN FM SYNC, 64 frames each, in A001..A006 of a new project) or any WAV or AIFF on the card, in the format Serum, Vital and others write (frames of 2048 samples, or the size in the file's `clm ` chunk, or 1024 / 512 / 256, or one single cycle). Up to 256 frames, 8 MB a file.
+- **Two tables.** TBL B is a row of the same WAVETABLES list; row 000 (OFF, the default) is no table B. MIX fades from only A to only B. Both play in every unison lane. With table B on, the warp acts on both, except FM and RM: there table B is the modulator of A.
+- **Nine warps** (OFF, SYNC, PWM, FM, FORMANT, QUANT, BEND, SQUEEZE, RM) and **eight filters** (FTYP: DJ, LP12, LP24, BP12, BP24, HP12, HP24, LADDER). DJ is the filter of 0.5.1: low-pass below CUT 64, open at 64, high-pass above.
+- Tables: TBL picks a row of the project's **WAVETABLES** [POOL](/sidecar-expander/using/pools/): the six built-ins (BASIC PWM VOCAL ORGAN FM SYNC, 64 frames each, in A001..A006 of a new project) or any WAV or AIFF on the card, in the format Serum, Vital and others write (frames of 2048 samples, or the size in the file's `clm ` chunk, or 1024 / 512 / 256, or one single cycle). Up to 256 frames, 8 MB a file. **Table B has its own pool browser:** on the SMPL page, knob E (needs the Rytm firmware 0.5.2).
+- **MAKE WT** turns a sample into a table: [SAMPLE EDIT](/sidecar-expander/using/sample-edit/#make-wt-a-sample-region-as-a-wavetable-052).
 - The SRC page on the Rytm draws the frame at POS and the table's frames; the touchscreen draws the table as a stack of frames.
+
+**Old projects sound different.** WARP values above 14 map to the new warps (WARP 0..14 is still OFF; SYNC, PWM and FM keep their amounts); chords are gone, so a sound with a chord plays its root; and P13..P16 are TBL B / POS B / MIX / FTYPE now, so a p-lock on them locks those. A chord value in an old project reads as a TBL B row at MIX 0: nothing audible until MIX moves. Until you flash the Rytm firmware 0.5.2 the Rytm shows the old labels (CHD INV SPR VOI) for these four knobs.
 
 ![WAVETABLE's SRC page on the Rytm: BASIC, the frame at POS and the table's frames as ticks, TBL POS WARP AMT / UNI SUB CUT RES](../../../assets/rytm/sc-wavetable.png)
 ![The touchscreen's WAVETABLE view: the table as a stack of frames, the frame at POS in the accent colour](../../../assets/touch/oled-mach-wavetable.png)

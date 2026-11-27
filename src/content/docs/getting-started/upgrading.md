@@ -1,31 +1,31 @@
 ---
 title: Upgrade an existing Sidecar
-description: "How to upgrade a Sidecar that already runs: from 0.5.0 or 0.5.1 to 0.5.1.2 with the web update (the easy way), from 0.4.x by SD card (the Rytm firmware 0.5.0, the card files and the new web page), how the web page itself is upgraded, and how to go back."
+description: "How to upgrade a Sidecar that already runs: from 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 to 0.5.2 with the web update (the easy way) and then the Rytm firmware 0.5.2, from 0.4.x by SD card (the Rytm firmware, the card files and the new web page), how the web page itself is upgraded, and how to go back."
 sidebar:
   order: 3.5
 ---
 
 This page is for a Sidecar that already runs. For a new one, use [Set up Sidecar](/sidecar-expander/getting-started/setup/).
 
-**Sidecar 0.5.1.2 is a small Pi-only fix release. The Rytm needs no flash: the Rytm firmware stays 0.5.1.1 (the 0.5.0 firmware works too).** If your Rytm already has the 0.5.1.1 firmware, the Pi update is all you do. The Rytm part (two files, a flash, OS 1.74 only) stays optional: [below](#the-rytm-part-optional).
+**Sidecar 0.5.2 is a Pi and Rytm release: update the Pi first, then flash the Rytm's two 0.5.2 files** ([below](#then-the-rytm-flash-the-052-files)). The Pi update works on its own. Pi 0.5.2 with Rytm 0.5.2 is the tested pair. The Pi 0.5.2 is built to keep working with a Rytm still on 0.5.1.1 (what worked keeps working), but that pair was not tested on hardware, and the new Rytm-side parts need the 0.5.2 files: scene edit on the Rytm's own pages (PAGE + T15 / T16 and the knob press), the Rytm-side morph, table B's pool browser, the Rytm's answer to the re-hello and the new labels for WAVETABLE's P13..P16.
 
-## From 0.5.0, 0.5.1 or 0.5.1.1 to 0.5.1.2 (the easy way)
+## From 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 to 0.5.2 (the easy way)
 
-1. Download `sidecar-0.5.1.2.scu` from the [Sidecar 0.5.1.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.1.2) (one file for the Pi 4 and the Pi 5; check it against its `.sha256`).
-2. Open the Sidecar's web page, **Settings > Update**, and pick the file. **On 0.5.1 or 0.5.0, tick "Install it anyway" once** (on 0.5.1.1 the page offers the update without it): a Sidecar that runs 0.5.1 or 0.5.0 cannot compare a version with four numbers and says "The versions cannot be compared"; the file is still checked completely. From 0.5.1.1 on, updates offer themselves without the box. It updates the firmware and the web page together ([Updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
-3. Press **Install** and wait for the **trial boot**. Audio stops for about a minute; keep the Sidecar switched on. The page follows the trial ("Trying 0.5.1.2 ... permanent in 20 s"), then says "Updated to 0.5.1.2". Reload the page: the update brings its own web app.
+1. Download `sidecar-0.5.2.scu` from the [Sidecar 0.5.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.2) (one file for the Pi 4 and the Pi 5; check it against its `.sha256`).
+2. Open the Sidecar's web page, **Settings > Update**, and pick the file. 0.5.2 has a three-number version, so the update offers itself on every earlier 0.5.x **without** the "Install it anyway" box (0.5.1.1 and 0.5.1.2 had a fourth number, which 0.5.1 and 0.5.0 cannot compare; 0.5.2 has none). It updates the firmware and the web page together ([Updating from the web page](/sidecar-expander/using/web-ui/#updating-from-the-web-page-050)).
+3. Press **Install** and wait for the **trial boot**. Audio stops for about a minute; keep the Sidecar switched on. The page follows the trial ("Trying 0.5.2 ... permanent in 20 s"), then says "Updated to 0.5.2". Reload the page: the update brings its own web app.
 
 **If the Sidecar does not come back,** switch it off and on. It runs your old version again, by itself. Your projects, samples, `/Plugins` and settings stay. The **Back to** button on the Update card returns to the version before the update later, if you want to.
 
 The new touchscreen themes are not switched on by the update: the display stays as it was. Choose one in **Settings > Display > UI style** ([The display](/sidecar-expander/using/display/#themes-and-looks)).
 
-## From 0.4.x to 0.5.1.2 (by SD card)
+## From 0.4.x to 0.5.2 (by SD card)
 
-0.4.x cannot update itself from its web page, so the first step to 0.5.1.2 is by SD card.
+0.4.x cannot update itself from its web page, so the first step to 0.5.2 is by SD card.
 
 1. **Back up the Rytm's projects** with Transfer. The Rytm must run **OS 1.74**. If it runs an older OS, install Elektron's stock OS 1.74 first ([Recovery to stock](/sidecar-expander/getting-started/recovery/) has the stock files).
-2. **Flash the Rytm firmware** (0.5.1.1, or 0.5.0 if you prefer: both work with the 0.5.1.2 card) with the patcher ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
-3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.1.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.1.2-f75a950-800x480.zip` and `sidecar-pi-sd-0.5.1.2-f75a950-1024x600.zip`; the release zip `sidecar-0.5.1.2.zip` holds them too, under "Card files".
+2. **Flash the Rytm firmware 0.5.2** with the patcher ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)).
+3. **Download the card files for your screen size** (800x480 or 1024x600) from the Sidecar 0.5.2 release, and check them against their `.sha256`. The card files are `sidecar-pi-sd-0.5.2-eb7517e-800x480.zip` and `sidecar-pi-sd-0.5.2-eb7517e-1024x600.zip`; the release zip `sidecar-0.5.2.zip` holds them too, under "Card files".
 4. **Switch the Pi off, put its SD card in your computer, unzip the card files and copy everything over the card's top level, replacing files.**
    - This includes the **hidden folder `.rytm`**. The Mac's Finder hides it: press Cmd+Shift+. to show it. On Windows turn on "Hidden items" in the Explorer's View menu.
    - Your samples, recordings, `/Plugins/` and the settings in `/.rytm` stay. The new `/.rytm/www-next` folder (the new web page) is added.
@@ -34,17 +34,17 @@ The new touchscreen themes are not switched on by the update: the display stays 
 6. **If the classic page still comes up,** the `www-next` folder did not get copied. Repeat step 4 with hidden files shown.
 7. **If a touch lands in the wrong place** on the touchscreen after the upgrade, calibrate it: on the touchscreen open **Settings > Display > Touch: Calibrate** and touch the four crosses as they appear, one at each corner. The calibration is kept on the card ([Touch](/sidecar-expander/using/display/#touch)). If you cannot reach the button, set `touchcal=off` from the web page's console and try again.
 
-An alternative: write the 0.5.1.2 **SD card image** to a **new** card with Raspberry Pi Imager ([Set up Sidecar](/sidecar-expander/getting-started/setup/), step 5). It erases that card, so copy your samples and `/Plugins/` over from the old card first.
+An alternative: write the 0.5.2 **SD card image** to a **new** card with Raspberry Pi Imager ([Set up Sidecar](/sidecar-expander/getting-started/setup/), step 5). It erases that card, so copy your samples and `/Plugins/` over from the old card first.
 
-A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.1.2 card, without what needs the new Rytm firmware: see [Upgrading from 0.4.4](/sidecar-expander/release-notes/#upgrading-from-044) in the release notes.
+A Rytm that stays on the Rytm firmware 0.4.4 works with the 0.5.2 card, without what needs the new Rytm firmware: see [Upgrading from 0.4.4](/sidecar-expander/release-notes/#upgrading-from-044) in the release notes.
 
-## The Rytm part (optional)
+## Then: the Rytm, flash the 0.5.2 files
 
-The Rytm firmware 0.5.1.1 (OS 1.74 only; 0.5.1.2 brings no new one) gives a smoother Rytm: no stray samples under Sidecar machines, smooth scrolling in the machine list, a little CPU back and the SMPL key fix. Without it the Pi 0.5.1.2 works with the Rytm firmware 0.5.0 as before, only without these four things. To flash it: **back up your projects first**, then add both files in the web flasher with your own stock OS 1.74, or use the browser patcher build `rel0-5-1-1-os1.74` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)): `rytm-sidecar-0.5.1.1-os1.74.elemod` and `core-0.1-os1.74.elemod`.
+The Rytm firmware 0.5.2 (OS 1.74 only) is 0.5.1.1 plus the Rytm side of MORPH (scene edit on the stock pages, the knob press that removes a lock, the QUICK PERF scene morph), the full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. To flash it: **back up your projects first** (never flash without a backup), then add both files in the web flasher with your own stock OS 1.74, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash the Rytm](/sidecar-expander/getting-started/patch-and-flash/)): `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`. A Rytm that is on 0.5.1.1 should keep working with the Pi 0.5.2 until you do (untested); 0.5.0 is untested too.
 
-## From 0.5.1.1 onward
+## From 0.5.2 onward
 
-The same steps: download the release's `.scu` update file, **Settings > Update**, pick the file, wait for the trial boot. From 0.5.1.1 on the page compares versions with four numbers itself, so the "Install it anyway" box is not needed. The Rytm firmware needs a new flash only when the release notes say so.
+The same steps: download the release's `.scu` update file, **Settings > Update**, pick the file, wait for the trial boot. The "Install it anyway" box is needed only when a version cannot be compared (a version with four numbers on a Sidecar older than 0.5.1.1). The Rytm firmware needs a new flash only when the release notes say so.
 
 ## The web page
 

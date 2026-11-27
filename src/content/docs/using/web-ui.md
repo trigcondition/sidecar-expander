@@ -75,11 +75,9 @@ A banner says so when the page is from a newer release than the Sidecar it talks
 
 <small>Screenshots: the 0.5.0 web page (`web-next`) running against the development mock server: the tracks, takes, files and levels are made-up data.</small>
 
-### Morph (coming in 0.5.2)
+### Morph
 
-:::caution[Morph is not in 0.5.0]
-The Morph tab of the page is **hidden in 0.5.0**: the scene morph and its fader arrive in **0.5.2**, together with a new version of morph. Nothing on the page works as morph yet. A project that uses the Sidecar's morph keeps its settings. See [MORPH](/sidecar-expander/using/morph/).
-:::
+New in 0.5.2. The **Morph** tab: the fader between scene A and scene B (a percentage, and which source moved it last), the twelve scenes as pads (the number of locks, the badge A or B), **Scene n on A / on B** keys, the selected scene's locks with a slider and a Remove key each, an **Add the lock** form (track, page, parameter, value), and Copy and Clear. On the Rytm, hold PAGE + T15 (scene A) or PAGE + T16 (scene B) and turn a knob to lock a parameter; the tab shows when that is held. See [MORPH](/sidecar-expander/using/morph/).
 
 ### Poly tracks
 

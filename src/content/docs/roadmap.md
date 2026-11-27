@@ -84,6 +84,16 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 
 A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes](/sidecar-expander/release-notes/#sidecar-043)): the **CHRO pads play from the first hit** on a selected poly track.
 
+## Released: 0.5.2
+
+([Release notes](/sidecar-expander/release-notes/#sidecar-052)) With the Rytm firmware 0.5.2 (OS 1.74 only):
+
+- **MORPH:** scenes A and B and the fader between them, scene edit on the Rytm's own pages (PAGE + T15 / T16, the knob press removes a lock), on the Rytm, the touchscreen and the web page ([MORPH](/sidecar-expander/using/morph/)). The QUICK PERF knob, the XY pad, an LFO and a MIDI controller can move the fader.
+- **Sidechain:** PUMP and DUCK on every insert chain ([Insert FX](/sidecar-expander/using/insert-fx/#sidechain-052)).
+- **WAVETABLE v2:** a second table, nine warps, eight filter types, MAKE WT and table B's pool browser ([Poly machines](/sidecar-expander/using/poly-machines/#wavetable)).
+- **The learn rows on the MIDI page:** LEARN FADER, LEARN SCENE A and LEARN SCENE B.
+- **CHORD REC:** live recording is mono by default; a per-track setting records chords.
+
 ## Released: 0.5.1
 
 ([Release notes](/sidecar-expander/release-notes/#sidecar-051)) A Pi-only update; the Rytm stays on the Rytm firmware 0.5.0:
@@ -105,15 +115,11 @@ A fix release for the Pi; the Rytm keeps the Rytm firmware 0.4.0 ([Release notes
 - **A new look and feel:** the SIDECAR theme on the touchscreen and the same look on the web page ([Touchscreen](/sidecar-expander/using/touchscreen/)), knobs that snap to their centre, bigger steps with FUNC, [MIDI settings](/sidecar-expander/using/midi-settings/) and the [Pi 5's fan](/sidecar-expander/using/pi5-fan/).
 - **Fixes:** Sidecar voices no longer clip (about 9 dB lower, with a soft limit), and more ([Fixed in 0.5.0](/sidecar-expander/release-notes/)).
 
-## Next: 0.5.2
+## Next
 
-Planned for 0.5.2 (they were announced for 0.5.1, which became a smaller Pi-only update). They moved out of 0.5.0 so that 0.5.0 could ship sooner. Nothing here is a promise of a date:
+Not in 0.5.2, nothing here is a promise of a date:
 
-- **A new WAVETABLE machine** (the Vital-style version; 0.5.1 keeps the 0.5.0 one).
-- **The looper:** a master looper for the Octatrack-style transition trick, with live sampling.
-- **Sidechain:** PUMP and DUCK, the Sidecar's sidechain effects.
-- **Morph v2, and the morph fader back.** The MORPH page (UP + T14), its scenes and the crossfader are hidden in 0.5.0. Projects that use them keep their settings. Morph v2 adds the Rytm's PERF macros and scenes on Sidecar, sequencer and master FX parameters.
-- **The learn rows on the MIDI page:** learn the morph fader and scenes from a MIDI controller.
+- **The looper:** a master looper for the Octatrack-style transition trick, with live sampling. It was switched off for 0.5.2 and comes back redesigned in a later release.
 - **Poly tracks up to 16 bars** (8 today).
 - **Encoder sensitivity:** a share of a turn per value, and slower 0..127 knobs, as on the Rytm's own.
 - **BASE and WIDTH drawn like the stock send FX's filter graphic** on the Rytm's screen.

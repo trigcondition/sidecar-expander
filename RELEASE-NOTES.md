@@ -2,6 +2,76 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/release-notes/>
 
+## Sidecar 0.5.2
+
+**The feature release after 0.5.1.2: MORPH, the sidechain, WAVETABLE v2 and more.** The Pi update comes first and works on its own; the Rytm part (two files, a flash) completes it. The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. **The looper is not in 0.5.2:** it is switched off in this build and comes back redesigned in a later release.
+
+### What's new
+
+- **[MORPH](https://trigcondition.github.io/sidecar-expander/using/morph/):** scenes A and B and the fader that morphs between them, from the QUICK PERF pot, the XY pad, the MIDI page's learn rows or the MORPH page (the Rytm, the touchscreen and the web page). A scene holds up to 64 locks; there are 12 scenes for each kit.
+- **SIDECHAIN** on every insert chain: PUMP from the trigs, DUCK from a source, with the key's band (KBAS, KWID) and MON to hear the key. On the Rytm: INSERT / MASTER FX, RIGHT for the EQ view, then DOWN. On the web page: Mix > Sidechain ([Insert FX](https://trigcondition.github.io/sidecar-expander/using/insert-fx/#sidechain-052)).
+- **[WAVETABLE v2](https://trigcondition.github.io/sidecar-expander/using/poly-machines/#wavetable):** a second table (TBL B, POS B, MIX), nine warps, eight filter types; **MAKE WT** turns a sample region into a wavetable in [SAMPLE EDIT](https://trigcondition.github.io/sidecar-expander/using/sample-edit/#make-wt-a-sample-region-as-a-wavetable-052); table B has its own pool browser.
+- **[MIDI page](https://trigcondition.github.io/sidecar-expander/using/midi-settings/):** LEARN FADER, LEARN SCENE A and LEARN SCENE B.
+- **[CHORD REC](https://trigcondition.github.io/sidecar-expander/using/sequencer/#poly-config):** live recording is mono by default; a per-track setting records chords.
+- **Themes:** the pixel font as an accent in the SIDECAR contrasts, and a header status strip with the Rytm's pattern and tempo.
+- **Connect:** FILL (a quick UP + RIGHT) claims its keys even when the Pi missed the Rytm's hello (the 0.5.1.2 fix), and the Pi now asks the Rytm for a new hello.
+
+### The Rytm part (the Rytm firmware 0.5.2, OS 1.74 only)
+
+The Rytm firmware 0.5.2 is 0.5.1.1 plus the Rytm side of MORPH and a few more things:
+
+- **MORPH on the Rytm:** the QUICK PERF pot's scene morph, and **scene edit on the Rytm's own pages**: hold PAGE + T15 / T16 and turn a knob to lock that parameter in scene A / B; **press the knob to remove that lock.** A Send FX lock that the pattern save would drop is refused with the Rytm's own `LOCK MEM FULL!` message.
+- **On a Sidecar machine's SRC page** the source (the sample, table or preset knob) is **not lockable** under a side: the knob shows `NOT LOCKABLE` and opens no pool list, and FUNC + YES does nothing there while PAGE + T15 / T16 is held. The readout shows over the view.
+- **Full effect names** and further SEND FX pages for a user effect's parameters.
+- **WAVETABLE labels** (TBLB, POSB, MIX, FTYP) and table B's pool browser (the SMPL page's knob E).
+- **Re-hello:** a Sidecar that missed the Rytm's hello can ask for a new one.
+
+**Flash the Rytm's 0.5.2 files too.** Pi 0.5.2 with Rytm 0.5.2 is the tested pair. The Pi 0.5.2 is built to keep working with a Rytm still on 0.5.1.1 (what worked with 0.5.1.1 keeps working), but that pair was not tested on hardware. The new Rytm-side parts need the 0.5.2 files: scene edit on the Rytm's own pages (PAGE + T15 / T16 and the knob press), the Rytm-side morph, table B's pool browser, the Rytm's answer to the re-hello, and the new labels for WAVETABLE's P13..P16.
+
+### Good to know
+
+- **The looper is not in 0.5.2** (no LOOP page, nothing recorded or played; a `loop.txt` on the card is left alone). The LFO and MIDI-learn target lists still show LOOP:BAL and LOOP:LEV: they do nothing. The next release hides them.
+- **WAVETABLE sounds different in old projects:** WARP settings above 14 map to the new warps, and chords are gone (a sound with a chord plays its root). P13..P16 are TBL B / POS B / MIX / FTYPE now, so a p-lock on them locks those. See [WAVETABLE](https://trigcondition.github.io/sidecar-expander/using/poly-machines/#wavetable).
+- The sidechain's DUCK keys are band-passed now (KBAS, KWID).
+- **No "Install it anyway":** 0.5.2 has a three-number version, so the update offers itself on every earlier 0.5.x.
+
+| Part | File |
+|---|---|
+| Update file (Pi 4 and Pi 5, the web app included) | `sidecar-0.5.2.scu` (SHA-256 `d9a5e88e...8a0fa3`), with its `.sha256`, for [Settings > Update](https://trigcondition.github.io/sidecar-expander/using/web-ui/#updating-from-the-web-page-050) on a Pi that runs 0.5.0, 0.5.1, 0.5.1.1 or 0.5.1.2 |
+| SD card image (new card) | `sidecar-0.5.2-sd-800x480.img.zip` (`4fe9cd29...e2d4a4`) and `sidecar-0.5.2-sd-1024x600.img.zip` (`f17b6cc7...7694a4`), each with its `.sha256`: write one with Raspberry Pi Imager or balenaEtcher, without unzipping ([Install](https://trigcondition.github.io/sidecar-expander/getting-started/install-pi/)) |
+| Release zip | `sidecar-0.5.2.zip` (`4c1d27c6...adb6f9`): both images, the card files for both sizes, the two Rytm `.elemod` files (no `.syx`), a quick start |
+| Card files (copy by hand) | `sidecar-pi-sd-0.5.2-eb7517e-800x480.zip` (`39726f95...1da57b`) and `sidecar-pi-sd-0.5.2-eb7517e-1024x600.zip` (`1c7edf06...c837c3`), each with its `.sha256`, or the starter zip `sidecar-0.5.2-starter.zip` (`5979f83e...ce7394`); `BUILD-INFO-pi.txt` names the commit and both kernels |
+| User machines (Pi) | `sidecar-pi-plugins-0.5.2.zip` (`7c35460b...a742b9`): the user machines and effects |
+| Starter content | `sidecar-content-0.5.2.zip` (`634dcc01...5cf233`) |
+| Rytm firmware, OS 1.74 only | `rytm-sidecar-0.5.2-os1.74.elemod` (SHA-256 `105391f18f6cd548a94d0c2ea65f3177a804f4b20ec3dfa2c7eecd0f03ad6600`) with `core-0.1-os1.74.elemod` (unchanged, SHA-256 `89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a`), or the build `rel0-5-2-os1.74` in the [patcher](https://trigcondition.github.io/sidecar-expander/patcher/) (its `.syx`: `2e4ffe079b3723c26ece4406d85c8ff94045020dcaff5f99f849dd1d1b4d1966`) |
+| Checksums | `SHA256SUMS` on the release page |
+
+Downloads: the [sidecar-firmware 0.5.2 release](https://github.com/trigcondition/sidecar-firmware/releases/tag/v0.5.2) (the Pi side, the images, the release zip) and the [sidecar-mods 0.5.2 release](https://github.com/trigcondition/sidecar-mods/releases/tag/v0.5.2) (the two Rytm `.elemod` files). We ship no `.syx`: you build it from your own stock OS.
+
+### Upgrading
+
+Full steps: [Upgrade an existing Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/upgrading/).
+
+**The Pi first (from 0.5.1.2, 0.5.1.1, 0.5.1 or 0.5.0), three steps:**
+
+1. Download `sidecar-0.5.2.scu`.
+2. Open the Sidecar's web page: **Settings > Update**, pick the file. The update offers itself without the "Install it anyway" box.
+3. Wait for the trial boot: the page follows it, and after about 20 seconds it says the update is permanent (nothing to confirm).
+
+If the Sidecar does not come back, power it off and on: it runs your old version again. Your projects, samples, `/Plugins` and settings stay.
+
+**Then the Rytm: two files, a flash.** Back up your projects first (never flash without a backup). Add both files in the web flasher with your own stock OS 1.74: `rytm-sidecar-0.5.2-os1.74.elemod` and `core-0.1-os1.74.elemod`, or use the browser patcher build `rel0-5-2-os1.74` ([Patch and flash](https://trigcondition.github.io/sidecar-expander/getting-started/patch-and-flash/)). Never share the `.syx` you build: it holds Elektron's firmware.
+
+**From 0.4.x:** flash the Rytm firmware 0.5.2 (OS 1.74), then copy the 0.5.2 card files over the card, or write the 0.5.2 SD card image to a new card, as for 0.5.0.
+
+**New card: the easy way.** Write `sidecar-0.5.2-sd-800x480.img.zip` (an 800x480 HDMI display, a DSI display or none) or `sidecar-0.5.2-sd-1024x600.img.zip` (a 1024x600 HDMI display) to a microSD card of 4 GB or more with Raspberry Pi Imager or balenaEtcher, without unzipping. One card boots the Pi 4B and the Pi 5 ([Set up Sidecar](https://trigcondition.github.io/sidecar-expander/getting-started/setup/)). A new card needs the Rytm files above to get everything; the Pi should also run with 0.5.1.1 (untested) or 0.5.0 (untested).
+
+### Known issues (still open)
+
+- After a rollback to an older Sidecar build the LFOs show OFF (going back to 0.5.0 brings them back).
+- The CHOP editor's audition ignores GATE (trigs and pads obey it).
+- SONG Restore still uses the old write: a fill that a SONG Restore removed comes back after a power-off.
+
 ## Sidecar 0.5.1.2
 
 **A small Pi-only fix release after 0.5.1.1: two fixes. The Rytm needs no flash: the Rytm firmware stays 0.5.1.1 (the 0.5.0 firmware works too).** The A4 mod (0.12) and Sidecar Mini (0.1.0) are unchanged. Everyone on the Pi with 0.5.1.1 or an earlier 0.5.x should update.
@@ -14,7 +84,7 @@
 
 ### Good to know
 
-- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE still come in 0.5.2.** 0.5.1.2 keeps the 0.5.0 WAVETABLE.
+- **MORPH, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE came in 0.5.2.** 0.5.1.2 keeps the 0.5.0 WAVETABLE. (The looper did not make 0.5.2: it comes in a later release.)
 - **Updating from 0.5.1 or 0.5.0:** the web page says "The versions cannot be compared" once: tick **"Install it anyway"**. From 0.5.1.1 on, updates offer themselves without the box.
 
 | Part | File |
@@ -58,7 +128,7 @@ If the Sidecar does not come back, power it off and on: it runs your old version
 
 ### Good to know
 
-- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE still come in 0.5.2.** 0.5.1.1 keeps the 0.5.0 WAVETABLE.
+- **MORPH, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE came in 0.5.2.** 0.5.1.1 keeps the 0.5.0 WAVETABLE. (The looper did not make 0.5.2: it comes in a later release.)
 - **Versions may have a fourth number** (0.5.1 < 0.5.1.1 < 0.5.2). A Sidecar that runs 0.5.1 or 0.5.0 cannot compare such a version, so the first update to 0.5.1.1 needs **"Install it anyway"** ticked once (below). From 0.5.1.1 on, updates offer themselves without the box.
 
 | Part | File |
@@ -129,7 +199,7 @@ If the Sidecar does not come back, power it off and on: it runs your old version
 
 ### Good to know
 
-- **MORPH, the looper, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE come in 0.5.2.** 0.5.0 said 0.5.1; they moved. 0.5.1 keeps the 0.5.0 WAVETABLE. UP + T14 still shows "MORPH: 0.5.1" on a 0.5.0 build; on 0.5.1 it says 0.5.2. A project that uses the Sidecar's morph keeps its settings.
+- **MORPH, sidechain (PUMP and DUCK), the MIDI page's learn rows and the new WAVETABLE came in 0.5.2** (the looper did not: it comes in a later release). 0.5.0 said 0.5.1; they moved. 0.5.1 keeps the 0.5.0 WAVETABLE. UP + T14 still shows "MORPH: 0.5.1" on a 0.5.0 build; on 0.5.1 it says 0.5.2. A project that uses the Sidecar's morph keeps its settings.
 - **The new themes are chosen in Settings > Display (UI style).** The default stays what you know (OLED).
 
 | Part | File |

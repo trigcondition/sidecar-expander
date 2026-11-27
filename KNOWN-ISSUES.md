@@ -2,7 +2,17 @@
 
 > Also on the documentation site: <https://trigcondition.github.io/sidecar-expander/>
 
-Sidecar 0.5.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.5.0, built with elekloader on OS 1.74 only; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.5 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+Sidecar 0.5.2 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.5.2, built with elekloader on OS 1.74 only; the A4 mod 0.12 on an Analog Four MKII, OS 1.56; Sidecar Mini stays at 0.1.0). 0.5 is an early-tester line. Please report anything not listed here, using the Tester report form under Issues: the steps, a saved `http://sidecar.local/status` and `/log`, and after an unexpected restart `/.rytm/prevboot.txt` from the card.
+
+## New in 0.5.2
+
+- **The looper is not in 0.5.2** (no LOOP page, nothing recorded or played; a `loop.txt` on the card is left alone). The LFO and MIDI-learn target lists still show LOOP:BAL and LOOP:LEV: they do nothing. The next release hides them.
+- **WAVETABLE sounds different in old projects:** WARP settings above 14 map to the new warps, and chords are gone (a sound with a chord plays its root). P13..P16 are TBL B / POS B / MIX / FTYPE now, so a p-lock on them locks those.
+- **Pi 0.5.2 with Rytm 0.5.2 is the tested pair.** The Pi 0.5.2 should keep working with a Rytm still on 0.5.1.1 or 0.5.0, untested on hardware; the new Rytm-side parts need the 0.5.2 files.
+- After a rollback to an older Sidecar build the LFOs show OFF (going back to 0.5.0 brings them back).
+- The CHOP editor's audition ignores GATE (trigs and pads obey it).
+- SONG Restore still uses the old write: a fill that a SONG Restore removed comes back after a power-off.
+- The 0.5.0 items below still apply, except the MORPH one.
 
 ## New in 0.5.0
 
@@ -10,7 +20,7 @@ Sidecar 0.5.0 (Raspberry Pi 4B and Pi 5; the Rytm firmware 0.5.0, built with ele
 - **The CHOP editor's audition ignores GATE:** YES in the editor plays the selected slice to its end. Trigs and pads obey GATE.
 - **SONG Restore still uses the old write** until a later release. A fill that a SONG Restore removed comes back after a power-off. FILL does not write while the pattern is changing.
 - **The Rytm firmware 0.5.0 is for OS 1.74 only.** A Rytm on OS 1.73 needs Elektron's stock OS 1.74 first, or stays on the Rytm firmware 0.4.4 (the 0.5.0 card works with it, without what needs the Rytm firmware 0.5.0).
-- **MORPH, the looper, sidechain and the MIDI page's learn rows** come in 0.5.1: UP + T14 shows "MORPH: 0.5.1". A project's morph settings stay in its files.
+- **MORPH, sidechain and the MIDI page's learn rows** came in 0.5.2 (the looper did not). A project's morph settings stay in its files.
 - The 0.4.4 items below still apply.
 
 ## New in 0.4.4

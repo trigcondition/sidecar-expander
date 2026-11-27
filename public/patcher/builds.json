@@ -3,9 +3,20 @@
   "stock_name": "Analog-Rytm_MKII_OS1.73.syx",
   "builds": [
     {
+      "tag": "rel0-5-2-os1.74",
+      "title": "rel0-5-2-os1.74: Sidecar 0.5.2 mods, OS 1.74 (default, recommended)",
+      "description": "The Rytm firmware 0.5.2, for OS 1.74 only: drop the stock Analog-Rytm_MKII_OS1.74.syx (a Rytm on OS 1.73 needs Elektron's OS 1.74 first). The 0.5.1.1 mods plus the Rytm side of MORPH: the QUICK PERF knob's scene morph and scene edit on the Rytm's own pages (PAGE + T15 / T16 held, a turn locks the parameter, a knob press removes the lock), full effect names and further SEND FX pages for a user effect's parameters, the WAVETABLE labels (TBLB, POSB, MIX, FTYP) and table B's pool browser, and an answer to the Pi's re-hello. Pi 0.5.2 with Rytm 0.5.2 is the tested pair; the Pi 0.5.2 is built to keep working with the Rytm firmware 0.5.1.1, untested. Recovery is the stock OS file. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.5.2-os1.74.elemod with version 1.74 (sha256 2e4ffe07...d1966). Goes with Sidecar 0.5.2 on the Pi.",
+      "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
+      "built": "Analog-Rytm_MKII_OS1.74_rel0-5-2.syx",
+      "elemods": {
+        "core-0.1-os1.74.elemod": "89c00065e8f83ce839978c45a32200e09879682b8b95cbff0bdb71ca09dc3c8a",
+        "rytm-sidecar-0.5.2-os1.74.elemod": "105391f18f6cd548a94d0c2ea65f3177a804f4b20ec3dfa2c7eecd0f03ad6600"
+      }
+    },
+    {
       "tag": "rel0-5-1-1-os1.74",
-      "title": "rel0-5-1-1-os1.74: Sidecar 0.5.1.1 mods, OS 1.74 (default, recommended)",
-      "description": "The Rytm firmware 0.5.1.1, for OS 1.74 only: drop the stock Analog-Rytm_MKII_OS1.74.syx (a Rytm on OS 1.73 needs Elektron's OS 1.74 first). The 0.5.0 mods plus two fixes: no stray Rytm sample under a Sidecar machine (the stock sample player skips the voices under a Sidecar machine, which also gives smooth scrolling in the machine list and a little Rytm CPU back), and the SMPL key no longer shows the waveform sub-page of a Sidecar machine. Optional: the Pi 0.5.1.1 also runs with the Rytm firmware 0.5.0. Recovery is the stock OS file. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.5.1.1-os1.74.elemod with version 1.74 (sha256 108c4749...e1f2c). Goes with Sidecar 0.5.1.1 on the Pi.",
+      "title": "rel0-5-1-1-os1.74: Sidecar 0.5.1.1 mods, OS 1.74 (older)",
+      "description": "The Rytm firmware 0.5.1.1, for OS 1.74 only: drop the stock Analog-Rytm_MKII_OS1.74.syx (a Rytm on OS 1.73 needs Elektron's OS 1.74 first). The 0.5.0 mods plus two fixes: no stray Rytm sample under a Sidecar machine (the stock sample player skips the voices under a Sidecar machine, which also gives smooth scrolling in the machine list and a little Rytm CPU back), and the SMPL key no longer shows the waveform sub-page of a Sidecar machine. Optional: the Pi 0.5.1.1 also runs with the Rytm firmware 0.5.0. Recovery is the stock OS file. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.5.1.1-os1.74.elemod with version 1.74 (sha256 108c4749...e1f2c). Goes with Sidecar 0.5.1.1 and 0.5.1.2 on the Pi. The Rytm firmware 0.5.2 is the newer build.",
       "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
       "built": "Analog-Rytm_MKII_OS1.74_rel0-5-1-1.syx",
       "elemods": {
@@ -16,7 +27,7 @@
     {
       "tag": "rel0-5-0-os1.74",
       "title": "rel0-5-0-os1.74: Sidecar 0.5.0 mods, OS 1.74 (older)",
-      "description": "The Rytm firmware 0.5.0, for OS 1.74 only: drop the stock Analog-Rytm_MKII_OS1.74.syx (a Rytm on OS 1.73 needs Elektron's OS 1.74 first). Adds the Rytm side of the SAMPLER machine, the Rytm's own parameters on the XY pad, MIDI learn and poly-track p-locks, UP + RIGHT for FILL, the sample browser's preview, quick load and file menu, and send FX BASE and WIDTH. Has run on a real Rytm. Recovery is the stock OS file. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.5.0-os1.74.elemod with version 1.74 (sha256 17bcca01...49514). Goes with Sidecar 0.5.0 and 0.5.1 on the Pi (0.5.1 is Pi only: this stays the Rytm firmware). The Rytm firmware 0.5.1.1 is the newer build.",
+      "description": "The Rytm firmware 0.5.0, for OS 1.74 only: drop the stock Analog-Rytm_MKII_OS1.74.syx (a Rytm on OS 1.73 needs Elektron's OS 1.74 first). Adds the Rytm side of the SAMPLER machine, the Rytm's own parameters on the XY pad, MIDI learn and poly-track p-locks, UP + RIGHT for FILL, the sample browser's preview, quick load and file menu, and send FX BASE and WIDTH. Has run on a real Rytm. Recovery is the stock OS file. Back up every project first. The same file elekloader builds from core-0.1-os1.74.elemod + rytm-sidecar-0.5.0-os1.74.elemod with version 1.74 (sha256 17bcca01...49514). Goes with Sidecar 0.5.0 and 0.5.1 on the Pi (0.5.1 is Pi only: this stays the Rytm firmware). The Rytm firmware 0.5.2 is the newer build.",
       "stock_name": "Analog-Rytm_MKII_OS1.74.syx",
       "built": "Analog-Rytm_MKII_OS1.74_rel0-5-0.syx",
       "elemods": {

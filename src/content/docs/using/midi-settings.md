@@ -37,6 +37,6 @@ The Rytm's MIDI page has three more rows:
 | **USB-A** | the first device in the Pi's USB-A ports by name, and `+N` for more. Read only |
 | **LAST** | the way the last key went, for example `MPKMINI > SD POLY`. Read only |
 
-The touchscreen's **In now** panel lists every USB-A device by name, the last key and the number of MIDI-learn routes. Arming a learn is a console command (`learn=NAME`, with an optional depth after a colon), not a button. The learn rows for the MORPH fader and scenes on the MIDI page come in 0.5.1.
+The touchscreen's **In now** panel lists every USB-A device by name, the last key and the number of MIDI-learn routes. Arming a learn is a console command (`learn=NAME`, with an optional depth after a colon), not a button. Learn rows for the morph, new in 0.5.2: **LEARN FADER**, **LEARN SCENE A** and **LEARN SCENE B**. Press YES on a row, then move a control: the next CC heard drives the [MORPH](/sidecar-expander/using/morph/#learn-rows-on-the-midi-page) fader or picks scene A or B. A **QPERF FADER** row (MUTED ONLY, OFF or ALWAYS) sets when the Rytm's QUICK PERF knob moves the fader.
 
 The USB-C mode stays in Settings > Sound and the SIDECAR MENU's USB-C row.
